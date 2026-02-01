@@ -1,0 +1,655 @@
+[
+  {
+    "name": "天喜",
+    "jiXiong": "吉",
+    "descriptionList": ["主喜庆、恩泽、官迁、财喜"],
+    "type": "季煞",
+    "locationMapper": {
+      "春": "戌",
+      "夏": "丑",
+      "秋": "辰",
+      "冬": "未"
+    },
+    "locationDescriptionList": ["春戌夏丑秋辰冬未"]
+  },
+  {
+    "name": "孤辰",
+    "jiXiong": "凶",
+    "descriptionList": ["主孤独、婚失"],
+    "type": "季煞",
+    "locationMapper": {
+      "春": "巳",
+      "夏": "申",
+      "秋": "亥",
+      "冬": "寅"
+    },
+    "locationDescriptionList": ["春起巳，顺四孟，四季之病地也，即春巳夏申秋亥冬寅"]
+  },
+  {
+    "name": "寡宿",
+    "jiXiong": "凶",
+    "descriptionList": ["义同孤辰", "春起丑，顺四库，四季之冠带也"],
+    "type": "季煞",
+    "locationMapper": {
+      "春": "丑",
+      "夏": "辰",
+      "秋": "未",
+      "冬": "戌"
+    },
+    "locationDescriptionList": ["春起丑，顺四库，四季之冠带也，即春丑夏辰秋未冬戌"]
+  },
+  {
+    "name": "关神",
+    "otherNameList":["关官"],
+    "jiXiong": "凶",
+    "descriptionList": ["占讼有拘幽"],
+    "type": "季煞",
+    "locationMapper": {
+      "春": "丑",
+      "夏": "辰",
+      "秋": "未",
+      "冬": "戌"
+    },
+    "locationDescriptionList": ["春起丑，顺四库，四季之冠带也，即春丑夏辰秋未冬戌"]
+  },
+  {
+    "name": "三丘",
+    "jiXiong": "凶",
+    "descriptionList": ["主坟墓事，占病主死丧之象"],
+    "type": "季煞",
+    "locationMapper": {
+      "春": "丑",
+      "夏": "辰",
+      "秋": "未",
+      "冬": "戌"
+    },
+    "locationDescriptionList": ["春起丑，顺四库，四季之冠带也，即春丑夏辰秋未冬戌"]
+  },
+    {
+    "name": "死别",
+    "jiXiong": "凶",
+    "descriptionList": [""],
+    "type": "季煞",
+    "locationMapper": {
+      "春": "戌",
+      "夏": "酉",
+      "秋": "申",
+      "冬": "未"
+    },
+    "locationDescriptionList": ["「春戌逆回为死别」"]
+  },
+  {
+    "name": "天车",
+    "jiXiong": "凶",
+    "descriptionList": ["天车煞不宜出行，主损蹄轮,不宜出兵"],
+    "type": "季煞",
+    "locationMapper": {
+      "春": "丑",
+      "夏": "辰",
+      "秋": "未",
+      "冬": "戌"
+    },
+    "locationDescriptionList": ["春起丑，顺四库，四季之冠带也，即春丑夏辰秋未冬戌"]
+  },
+  
+   {
+    "name": "天车2",
+    "jiXiong": "凶",
+    "descriptionList": ["天车煞不宜出行，主损蹄轮"],
+    "type": "季煞",
+    "locationMapper": {
+      "春": "巳",
+      "夏": "辰",
+      "秋": "未",
+      "冬": "酉"
+    },
+    "locationDescriptionList": ["「巳辰未酉天车惊」"]
+  },
+    {
+    "name": "泰神",
+    "jiXiong": "吉",
+    "descriptionList": ["占信用"],
+    "type": "季煞",
+    "locationMapper": {
+      "春": "丑",
+      "夏": "子",
+      "秋": "戌",
+      "冬": "亥"
+    },
+    "locationDescriptionList": ["「丑子戌亥忧泰决」"]
+  },
+      {
+    "name": "忧神",
+    "jiXiong": "凶",
+    "descriptionList": ["占信用"],
+    "type": "季煞",
+    "locationMapper": {
+      "春": "丑",
+      "夏": "子",
+      "秋": "戌",
+      "冬": "亥"
+    },
+    "locationDescriptionList": ["「丑子戌亥忧泰决」"]
+  },
+  {
+    "name": "五墓",
+    "jiXiong": "凶",
+    "descriptionList": ["五墓、哭神主坟墓，占病主死"],
+    "type": "季煞",
+    "locationMapper": {
+      "春": "未",
+      "夏": "戌",
+      "秋": "丑",
+      "冬": "辰"
+    },
+    "locationDescriptionList": ["三丘之对冲，春起未，顺四库，四季之墓地也，即春未夏戌秋丑冬辰"]
+  },
+  {
+    "name": "墓神",
+    "jiXiong": "凶",
+    "descriptionList": ["五墓、哭神主坟墓，占病主死"],
+    "type": "季煞",
+    "locationMapper": {
+      "春": "未",
+      "夏": "戌",
+      "秋": "丑",
+      "冬": "辰"
+    },
+    "locationDescriptionList": ["三丘之对冲，春起未，顺四库，四季之墓地也，即春未夏戌秋丑冬辰"]
+  },
+  {
+    "name": "哭神",
+    "jiXiong": "凶",
+    "descriptionList": ["五墓、哭神主坟墓，占病主死"],
+    "type": "季煞",
+    "locationMapper": {
+      "春": "未",
+      "夏": "戌",
+      "秋": "丑",
+      "冬": "辰"
+    },
+    "locationDescriptionList": ["三丘之对冲，春起未，顺四库，四季之墓地也，即春未夏戌秋丑冬辰"]
+  },
+  {
+    "name": "皇书",
+    "jiXiong": "吉",
+    "descriptionList": ["主科名，功名、词讼喜之"],
+    "type": "季煞",
+    "locationMapper": {
+      "春": "寅",
+      "夏": "巳",
+      "秋": "申",
+      "冬": "亥"
+    },
+    "locationDescriptionList": ["春起寅，顺四孟，四季之禄神也，即春寅夏巳秋申冬亥"]
+  },
+  {
+    "name": "皇诏",
+    "jiXiong": "吉",
+    "descriptionList": ["主科名，功名、词讼喜之"],
+    "type": "季煞",
+    "locationMapper": {
+      "春": "寅",
+      "夏": "巳",
+      "秋": "申",
+      "冬": "亥"
+    },
+    "locationDescriptionList": ["春起寅，顺四孟，四季之禄神也，即春寅夏巳秋申冬亥"]
+  },
+  {
+    "name": "战雄",
+    "jiXiong": "吉",
+    "descriptionList": ["主战胜"],
+    "type": "季煞",
+    "locationMapper": {
+      "春": "寅",
+      "夏": "巳",
+      "秋": "申",
+      "冬": "亥"
+    },
+    "locationDescriptionList": ["春起寅，顺四孟，四季之禄神也，即春寅夏巳秋申冬亥"]
+  },
+  {
+    "name": "孤雄",
+    "jiXiong": "吉",
+    "descriptionList": ["主战胜"],
+    "type": "季煞",
+    "locationMapper": {
+      "春": "寅",
+      "夏": "巳",
+      "秋": "申",
+      "冬": "亥"
+    },
+    "locationDescriptionList": ["春起寅，顺四孟，四季之禄神也，即春寅夏巳秋申冬亥"]
+  },
+  {
+    "name": "九天",
+    "jiXiong": "吉",
+    "descriptionList": ["主战胜"],
+    "type": "季煞",
+    "locationMapper": {
+      "春": "寅",
+      "夏": "巳",
+      "秋": "申",
+      "冬": "亥"
+    },
+    "locationDescriptionList": ["春起寅，顺四孟，四季之禄神也，即春寅夏巳秋申冬亥"]
+  },
+  {
+    "name": "战雌",
+    "jiXiong": "凶",
+    "descriptionList": ["主战败"],
+    "type": "季煞",
+    "locationMapper": {
+      "春": "申",
+      "夏": "亥",
+      "秋": "寅",
+      "冬": "巳"
+    },
+    "locationDescriptionList": ["战雄之对冲，春起申，顺四孟，四季之绝地也，即春申夏亥秋寅冬巳"]
+  },
+  {
+    "name": "天目",
+    "jiXiong": "凶",
+    "descriptionList": ["占宅主家中有鬼祟，多用于捕盗、寻人","主怪异，占宅有鬼，有伏尸"],
+    "type": "季煞",
+    "locationMapper": {
+      "春": "辰",
+      "夏": "未",
+      "秋": "戌",
+      "冬": "丑"
+    },
+    "locationDescriptionList": ["春起辰，顺四库，四季之衰地也，即春辰夏未秋戌冬丑"]
+  },
+  {
+    "name": "浴盆",
+    "jiXiong": "凶",
+    "descriptionList": ["占病凶，不逢水者吉","小儿占病忌之（占病忌见水，地盘浴盆上见亥、子，天盘浴盆上见天后、玄武）"],
+    "type": "季煞",
+    "locationMapper": {
+      "春": "辰",
+      "夏": "未",
+      "秋": "戌",
+      "冬": "丑"
+    },
+    "locationDescriptionList": ["春起辰，顺四库，四季之衰地也，即春辰夏未秋戌冬丑"]
+  },
+    {
+    "name": "钥神",
+    "jiXiong": "吉",
+    "descriptionList": ["主释放"],
+    "type": "季煞",
+    "locationMapper": {
+      "春": "辰",
+      "夏": "未",
+      "秋": "戌",
+      "冬": "丑"
+    },
+    "locationDescriptionList": ["春起辰，顺四库，四季之衰地也，即春辰夏未秋戌冬丑"]
+  },
+  {
+    "name": "天耳",
+    "jiXiong": "吉",
+    "descriptionList": ["同天目论，为耳目视听之神,所临之方宜查探、追捕"],
+    "type": "季煞",
+    "locationMapper": {
+      "春": "戌",
+      "夏": "丑",
+      "秋": "辰",
+      "冬": "未"
+    },
+    "locationDescriptionList": ["天目对冲之辰，春起戌，顺四库，四季之养神也，即春戌夏丑秋辰冬未"]
+  },
+  {
+    "name": "丧车",
+    "jiXiong": "凶",
+    "descriptionList": ["丧车克日主病死"],
+    "type": "季煞",
+    "locationMapper": {
+      "春": "酉",
+      "夏": "子",
+      "秋": "卯",
+      "冬": "午"
+    },
+    "locationDescriptionList": ["春起酉，顺四仲，四季之胎神也，即春酉夏子秋卯冬午"]
+  },
+  {
+    "name": "四废",
+    "jiXiong": "凶",
+    "descriptionList": ["主百事无成"],
+    "type": "季煞",
+    "locationMapper": {
+      "春": "酉",
+      "夏": "子",
+      "秋": "卯",
+      "冬": "午"
+    },
+    "locationDescriptionList": ["春起酉，顺四仲，四季之胎神也，即春酉夏子秋卯冬午"]
+  },
+  {
+    "name": "火鬼",
+    "jiXiong": "凶",
+    "descriptionList": ["火鬼乘蛇雀主火厄"],
+    "otherNameList":["火煞"],
+    "type": "季煞",
+    "locationMapper": {
+      "春": "午",
+      "夏": "酉",
+      "秋": "子",
+      "冬": "卯"
+    },
+    "locationDescriptionList": ["春起午，顺四仲，四季之死地也，即春午夏酉秋子冬卯"]
+  },
+  {
+    "name": "返魂",
+    "jiXiong": "吉",
+    "descriptionList": ["占病死而复生"],
+    "type": "季煞",
+    "locationMapper": {
+      "春": "亥子",
+      "夏": "寅卯",
+      "秋": "巳午",
+      "冬": "申酉"
+    },
+    "locationDescriptionList": ["四季之长生与败神也，即春亥子，夏寅卯，秋巳午，冬申酉"]
+  },
+  {
+    "name": "迷惑",
+    "jiXiong": "凶",
+    "descriptionList": ["主痴迷走失"],
+    "type": "季煞",
+    "locationMapper": {
+      "春": "丑",
+      "夏": "戌",
+      "秋": "未",
+      "冬": "辰"
+    },
+    "locationDescriptionList": ["春起丑，逆四库，即春丑夏戌秋未冬辰"]
+  },
+  {
+    "name": "游神",
+    "jiXiong": "中性",
+    "descriptionList": ["为动神，在家想出，在外想回"],
+    "type": "季煞",
+    "locationMapper": {
+      "春": "丑",
+      "夏": "子",
+      "秋": "亥",
+      "冬": "戌"
+    },
+    "locationDescriptionList": ["春起丑，逆四辰，即春丑，夏子，秋亥，冬戌"]
+  },
+  {
+    "name": "戏神",
+    "jiXiong": "中性",
+    "descriptionList": ["同游神"],
+    "type": "季煞",
+    "locationMapper": {
+      "春": "巳",
+      "夏": "子",
+      "秋": "酉",
+      "冬": "辰"
+    },
+    "locationDescriptionList": ["春巳，夏子，秋酉，冬辰"]
+  },
+    {
+    "name": "大德",
+    "jiXiong": "吉",
+    "descriptionList": ["官迁，谋望大吉"],
+    "type": "季煞",
+    "locationMapper": {
+      "春": "午",
+      "夏": "辰",
+      "秋": "子",
+      "冬": "寅"
+    },
+    "locationDescriptionList": ["大德午辰子寅"]
+  },
+  {
+    "name": "时盗",
+    "jiXiong": "凶",
+    "descriptionList": ["主奸私盗贼"],
+    "type": "季煞",
+    "locationMapper": {
+      "春": "卯",
+      "夏": "巳",
+      "秋": "申",
+      "冬": "子"
+    },
+    "locationDescriptionList": ["春卯、夏巳、秋申、冬子"]
+  },
+  {
+    "name": "贼神",
+    "jiXiong": "凶",
+    "descriptionList": ["主奸私盗贼"],
+    "type": "季煞",
+    "locationMapper": {
+      "春": "卯",
+      "夏": "巳",
+      "秋": "申",
+      "冬": "子"
+    },
+    "locationDescriptionList": ["春卯、夏巳、秋申、冬子"]
+  },
+  {
+    "name": "贼符",
+    "jiXiong": "凶",
+    "descriptionList": ["主奸私盗贼"],
+    "type": "季煞",
+    "locationMapper": {
+      "春": "卯",
+      "夏": "巳",
+      "秋": "申",
+      "冬": "子"
+    },
+    "locationDescriptionList": ["春卯、夏巳、秋申、冬子"]
+  },
+  {
+    "name": "奸神",
+    "jiXiong": "凶",
+    "descriptionList": ["主奸私盗贼"],
+    "type": "季煞",
+    "locationMapper": {
+      "春": "卯",
+      "夏": "巳",
+      "秋": "申",
+      "冬": "子"
+    },
+    "locationDescriptionList": ["春卯、夏巳、秋申、冬子"]
+  },
+  {
+    "name": "丝麻",
+    "jiXiong": "凶",
+    "descriptionList": ["主奸私盗贼"],
+    "type": "季煞",
+    "locationMapper": {
+      "春": "卯",
+      "夏": "巳",
+      "秋": "申",
+      "冬": "子"
+    },
+    "locationDescriptionList": ["春卯、夏巳、秋申、冬子"]
+  },
+  {
+    "name": "天赦",
+    "jiXiong": "大吉",
+    "descriptionList": ["主恩赦人情，官讼喜见", "天之生育甲与戊，地之成立子午寅申，故以甲戊配成天赦"],
+    "type": "季煞",
+    "locationMapper": {
+      "春": "戊寅",
+      "夏": "甲午",
+      "秋": "戊申",
+      "冬": "甲子"
+    },
+    "locationDescriptionList": ["春戊寅、夏甲午、秋戊申、冬甲子也。以《指南》课例观之，春遇寅，夏遇午，秋遇申，冬遇子，亦可做天赦看"]
+  },
+    {
+    "name": "四煞",
+    "jiXiong": "凶",
+    "descriptionList": ["主四时凶煞，易犯灾祸、凶祸"],
+    "type": "季煞",
+    "locationMapper": {
+      "春": "巳",
+      "夏": "申",
+      "秋": "亥",
+      "冬": "寅"
+    },
+    "locationDescriptionList": ["春煞在巳，夏煞在申，秋煞在亥，冬煞在寅，每季需避对应方位"]
+  },
+      {
+    "name": "天城",
+    "jiXiong": "吉",
+    "descriptionList": ["主四时凶煞，易犯灾祸、凶祸"],
+    "type": "季煞",
+    "locationMapper": {
+      "春": "申",
+      "夏": "申",
+      "秋": "申",
+      "冬": "申"
+    },
+    "locationDescriptionList": []
+  },
+        {
+    "name": "天吏",
+    "jiXiong": "吉",
+    "descriptionList": ["求官吉，占讼词乘吉将者吉。乘勾、武、虎、蛇、雀者，主追呼"],
+    "type": "季煞",
+    "locationMapper": {
+      "春": "寅",
+      "夏": "寅",
+      "秋": "寅",
+      "冬": "寅"
+    },
+    "locationDescriptionList": []
+  },
+          {
+    "name": "飞祸",
+    "jiXiong": "吉",
+    "descriptionList": ["刑四孟之神，主横祸"],
+    "type": "季煞",
+    "locationMapper": {
+      "春": "申",
+      "夏": "寅",
+      "秋": "巳",
+      "冬": "亥"
+    },
+    "locationDescriptionList": []
+  },
+  {
+    "name": "天盗",
+    "jiXiong": "凶",
+    "descriptionList": [""],
+    "type": "季煞",
+    "locationMapper": {
+      "春": "卯",
+      "夏": "午",
+      "秋": "酉",
+      "冬": "子"
+    },
+    "locationDescriptionList": []
+  },
+    {
+    "name": "转煞",
+    "jiXiong": "凶",
+    "descriptionList": ["四季之旺神，物极必反，凡占皆有凶灾"],
+    "type": "季煞",
+    "locationMapper": {
+      "春": "卯",
+      "夏": "午",
+      "秋": "酉",
+      "冬": "子"
+    },
+    "locationDescriptionList": []
+  },
+      {
+    "name": "飞魂",
+    "jiXiong": "凶",
+    "descriptionList": ["主鬼祟相侵，夜梦不祥，占宅有怪"],
+    "type": "季煞",
+    "locationMapper": {
+      "春": "子",
+      "夏": "卯",
+      "秋": "午",
+      "冬": "酉"
+    },
+    "locationDescriptionList": []
+  },
+  {
+    "name": "奸神2",
+    "jiXiong": "凶",
+    "descriptionList": ["主奸私盗贼"],
+    "type": "季煞",
+    "locationMapper": {
+      "春": "卯",
+      "夏": "巳",
+      "秋": "申",
+      "冬": "子"
+    },
+    "locationDescriptionList": ["春卯、夏巳、秋申、冬子，基于四季旺支（卯为春旺、巳为夏旺、申为秋旺、子为冬旺）推导，以旺气过盛为奸盗之因"]
+  },
+  {
+    "name": "奸神1",
+    "jiXiong": "凶",
+    "descriptionList": ["主奸私盗贼"],
+    "type": "季煞",
+    "locationMapper": {
+      "春": "寅",
+      "夏": "亥",
+      "秋": "申",
+      "冬": "巳"
+    },
+    "locationDescriptionList": ["春寅、夏亥、秋申、冬巳，基于地支刑冲关系（寅申冲、巳亥冲）推导，以冲克为是非奸盗之因，秋申与冬巳为固定位"]
+  },
+  {
+    "name": "钥神1",
+    "jiXiong": "吉",
+    "descriptionList": ["主释放"],
+    "type": "季煞",
+    "locationMapper": {
+      "春": "辰",
+      "夏": "未",
+      "秋": "戌",
+      "冬": "丑"
+    },
+    "locationDescriptionList": ["春起辰，顺四库，四季之衰地也，即春辰夏未秋戌冬丑，以四季土库（辰、未、戌、丑）为核心，取“库藏解锁”之意"]
+  },
+  {
+    "name": "钥神2",
+    "jiXiong": "吉",
+    "descriptionList": ["主释放"],
+    "type": "季煞",
+    "locationMapper": {
+      "春": "巳",
+      "夏": "申",
+      "秋": "亥",
+      "冬": "寅"
+    },
+    "locationDescriptionList": ["春起辰，顺四库，四季之衰地也，即春辰夏未秋戌冬丑（记载矛盾），实际基于四生之地（巳、申、亥、寅）推导，取“生气萌发而释放”之意"]
+  },
+  {
+    "name": "天盗1",
+    "jiXiong": "凶",
+    "descriptionList": [""],
+    "type": "季煞",
+    "locationMapper": {
+      "春": "卯",
+      "夏": "午",
+      "秋": "酉",
+      "冬": "子"
+    },
+    "locationDescriptionList": ["春卯、夏午、秋酉、冬子，基于四正位（卯、午、酉、子为东南西北正位）推导，以“正位气纯而易生盗乱”为因"]
+  },
+  {
+    "name": "天盗2",
+    "jiXiong": "凶",
+    "descriptionList": [""],
+    "type": "季煞",
+    "locationMapper": {
+      "春": "酉",
+      "夏": "午",
+      "秋": "卯",
+      "冬": "子"
+    },
+    "locationDescriptionList": ["春酉、夏午、秋卯、冬子，基于对冲关系（酉冲卯、卯冲酉）推导，以“冲克破局”为盗乱之因，夏午、冬子为固定位"]
+  }
+]

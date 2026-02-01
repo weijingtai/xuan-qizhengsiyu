@@ -1,0 +1,71 @@
+{
+      "systemType": "赤道制",
+      "constellationSystemType": "古宿制",
+      "starInnSystem": "恒星制",
+      "epochCorrection": "元·授时历",
+      "totalDegree": 365.25,
+      "gongDegreeSeq": [
+        {"gong":"子","degree": 30.438},
+        {"gong":"丑","degree": 30.438},
+        {"gong":"寅","degree": 30.438},
+        {"gong":"卯","degree": 30.438},
+        {"gong":"辰","degree": 30.438},
+        {"gong":"巳","degree": 30.438},
+        {"gong":"午","degree": 30.438},
+        {"gong":"未","degree": 30.438},
+        {"gong":"申","degree": 30.438},
+        {"gong":"酉","degree": 30.438},
+        {"gong":"戌","degree": 30.438},
+        {"gong":"亥","degree": 30.438}
+      ],
+    "starInnDegreeSeq": [
+{"constellation":"角","degree":12},
+{"constellation":"亢","degree":9},
+{"constellation":"氐","degree":15},
+{"constellation":"房","degree":5},
+{"constellation":"心","degree":5},
+{"constellation":"尾","degree":18},
+{"constellation":"箕","degree":11},
+
+{"constellation":"斗","degree":26.25},
+{"constellation":"牛","degree":8},
+{"constellation":"女","degree":12},
+{"constellation":"虚","degree":10},
+{"constellation":"危","degree":17},
+{"constellation":"室","degree":16},
+{"constellation":"壁","degree":9},
+
+{"constellation":"奎","degree":16},
+{"constellation":"娄","degree":12},
+{"constellation":"胃","degree":14},
+{"constellation":"昴","degree":11},
+{"constellation":"毕","degree":16},
+{"constellation":"觜","degree":2},
+{"constellation":"参","degree":9},
+
+{"constellation":"井","degree":33},
+{"constellation":"鬼","degree":4},
+{"constellation":"柳","degree":15},
+{"constellation":"星","degree":7},
+{"constellation":"张","degree":18},
+{"constellation":"翼","degree":18},
+{"constellation":"轸","degree":17}
+    ],
+    "alignmentPointAtStarInn": {
+      "starInn": "女宿",
+      "degree": 2.1
+    },
+    "alignmentPointAtGong": {
+      "gong": "子",
+      "degree": 0
+    },
+      "zeroPointJieQi": "冬至",
+      "zeroPointAtStarInn": {"starInn": "虚宿", "degree": 6},
+      "zeroPointAtGong": {"gong": "子宫", "degree": 15.0},
+      "celestialLongitude": 270.0,
+      "rightAscension": 240.5,
+      "zeroPointOffsetToNow": 28.0,
+      "specificationList":[
+        "元朝七政四余，使用的赤道恒星制，女宿2.1°子宫零度,365.25°，等宫制"
+      ]
+  }

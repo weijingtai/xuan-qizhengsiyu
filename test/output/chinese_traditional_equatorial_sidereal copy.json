@@ -1,0 +1,415 @@
+{"name":"传统赤道恒星制",
+"calenderName":"《郑氏星案》",
+"features":"依据传统古宿度，即周天为365.25度。",
+"coordinateSystem":"赤道",
+"starInnSystem":"恒星制",
+"starInnType":"古宿制",
+"originPoint":{
+  "enteredGong":"子",
+  "enteredGongDegree":15,
+  "enteredStarInn":"虚",
+  "enteredStarInnDegree":6
+},
+"originPointJieQi":"春分",
+"descriptionList":[
+
+  "1. 以赤道平面为基准： 元朝将命盘投影平面从黄道改为赤道坐标系，十二宫按赤道划分，确保“虚六子宫中”的符号化逻辑（虚宿6度对应子宫中点），宫位与地理方位严格绑定（如子宫中点指向正北）。",
+"2. 宿度固定且符号化：二十八宿的赤道宿度被设定为恒古不变（总365.25度），与岁差完全脱钩，例如觜宿仅0.5度、井宿30.25度等，直接继承《汉书·律历志》的赤道数据，形成符号化天区体系。",
+"3. 地支与五行的强制融合：元朝将地支（子、丑、寅等）与阴阳五行绑定，例如子宫属水、虚宿属日，但宿度五行与宫位五行常冲突（如子宫包含虚宿属日、危宿属月），导致生克关系混乱。",
+"4. 忽略岁差的符号化体系：命盘中的宿度位置固定，实际星体因岁差产生的位移被完全忽略。例如虚宿在现代天文学中已偏离原赤道位置约30度，但命盘仍沿用古宿划分。"
+],
+"starInnGongDegreeMap":{
+  "角": {
+    "starType": "黄道恒星制",
+    "starXiu": "角",
+    "totalDegree": 11.0,
+    "degreeStartAt": 134.0,
+    "startAtGongDegree": {
+      "gong": "巳",
+      "degree": 14.0
+    },
+    "endAtGongDegree": {
+      "gong": "午",
+      "degree": 5.0
+    }
+  },
+  "亢": {
+    "starType": "黄道恒星制",
+    "starXiu": "亢",
+    "totalDegree": 11.0,
+    "degreeStartAt": 145.0,
+    "startAtGongDegree": {
+      "gong": "午",
+      "degree": 5.0
+    },
+    "endAtGongDegree": {
+      "gong": "午",
+      "degree": 16.0
+    }
+  },
+  "氐": {
+    "starType": "黄道恒星制",
+    "starXiu": "氐",
+    "totalDegree": 18.0,
+    "degreeStartAt": 156.0,
+    "startAtGongDegree": {
+      "gong": "午",
+      "degree": 16.0
+    },
+    "endAtGongDegree": {
+      "gong": "未",
+      "degree": 4.0
+    }
+  },
+  "房": {
+    "starType": "黄道恒星制",
+    "starXiu": "房",
+    "totalDegree": 5.0,
+    "degreeStartAt": 174.0,
+    "startAtGongDegree": {
+      "gong": "未",
+      "degree": 4.0
+    },
+    "endAtGongDegree": {
+      "gong": "未",
+      "degree": 9.0
+    }
+  },
+  "心": {
+    "starType": "黄道恒星制",
+    "starXiu": "心",
+    "totalDegree": 8.0,
+    "degreeStartAt": 179.0,
+    "startAtGongDegree": {
+      "gong": "未",
+      "degree": 9.0
+    },
+    "endAtGongDegree": {
+      "gong": "未",
+      "degree": 17.0
+    }
+  },
+  "尾": {
+    "starType": "黄道恒星制",
+    "starXiu": "尾",
+    "totalDegree": 15.0,
+    "degreeStartAt": 187.0,
+    "startAtGongDegree": {
+      "gong": "未",
+      "degree": 17.0
+    },
+    "endAtGongDegree": {
+      "gong": "申",
+      "degree": 2.0
+    }
+  },
+  "箕": {
+    "starType": "黄道恒星制",
+    "starXiu": "箕",
+    "totalDegree": 9.0,
+    "degreeStartAt": 202.0,
+    "startAtGongDegree": {
+      "gong": "申",
+      "degree": 2.0
+    },
+    "endAtGongDegree": {
+      "gong": "申",
+      "degree": 11.0
+    }
+  },
+  "斗": {
+    "starType": "黄道恒星制",
+    "starXiu": "斗",
+    "totalDegree": 24.0,
+    "degreeStartAt": 211.0,
+    "startAtGongDegree": {
+      "gong": "申",
+      "degree": 11.0
+    },
+    "endAtGongDegree": {
+      "gong": "酉",
+      "degree": 5.0
+    }
+  },
+  "牛": {
+    "starType": "黄道恒星制",
+    "starXiu": "牛",
+    "totalDegree": 8.0,
+    "degreeStartAt": 235.0,
+    "startAtGongDegree": {
+      "gong": "酉",
+      "degree": 5.0
+    },
+    "endAtGongDegree": {
+      "gong": "酉",
+      "degree": 13.0
+    }
+  },
+  "女": {
+    "starType": "黄道恒星制",
+    "starXiu": "女",
+    "totalDegree": 11.0,
+    "degreeStartAt": 243.0,
+    "startAtGongDegree": {
+      "gong": "酉",
+      "degree": 13.0
+    },
+    "endAtGongDegree": {
+      "gong": "酉",
+      "degree": 24.0
+    }
+  },
+  "虚": {
+    "starType": "黄道恒星制",
+    "starXiu": "虚",
+    "totalDegree": 10.0,
+    "degreeStartAt": 254.0,
+    "startAtGongDegree": {
+      "gong": "酉",
+      "degree": 24.0
+    },
+    "endAtGongDegree": {
+      "gong": "酉",
+      "degree": 34.0
+    }
+  },
+  "危": {
+    "starType": "黄道恒星制",
+    "starXiu": "危",
+    "totalDegree": 20.0,
+    "degreeStartAt": 270.0,
+    "startAtGongDegree": {
+      "gong": "子",
+      "degree": 0.0
+    },
+    "endAtGongDegree": {
+      "gong": "子",
+      "degree": 20.0
+    }
+  },
+  "室": {
+    "starType": "黄道恒星制",
+    "starXiu": "室",
+    "totalDegree": 16.0,
+    "degreeStartAt": 290.0,
+    "startAtGongDegree": {
+      "gong": "子",
+      "degree": 20.0
+    },
+    "endAtGongDegree": {
+      "gong": "丑",
+      "degree": 6.0
+    }
+  },
+  "壁": {
+    "starType": "黄道恒星制",
+    "starXiu": "壁",
+    "totalDegree": 13.0,
+    "degreeStartAt": 306.0,
+    "startAtGongDegree": {
+      "gong": "丑",
+      "degree": 6.0
+    },
+    "endAtGongDegree": {
+      "gong": "丑",
+      "degree": 19.0
+    }
+  },
+  "奎": {
+    "starType": "黄道恒星制",
+    "starXiu": "奎",
+    "totalDegree": 11.0,
+    "degreeStartAt": 319.0,
+    "startAtGongDegree": {
+      "gong": "丑",
+      "degree": 19.0
+    },
+    "endAtGongDegree": {
+      "gong": "寅",
+      "degree": 0.0
+    }
+  },
+    "娄": {
+      "starType": "黄道恒星制",
+      "starXiu": "娄",
+      "totalDegree": 13.0,
+      "degreeStartAt": 330.0,
+      "startAtGongDegree": {
+        "gong": "寅",
+        "degree": 0.0
+      },
+      "endAtGongDegree": {
+        "gong": "寅",
+        "degree": 13.0
+      }
+    },
+    "胃": {
+      "starType": "黄道恒星制",
+      "starXiu": "胃",
+      "totalDegree": 12.0,
+      "degreeStartAt": 343.0,
+      "startAtGongDegree": {
+        "gong": "寅",
+        "degree": 13.0
+      },
+      "endAtGongDegree": {
+        "gong": "卯",
+        "degree": 5.0
+      }
+    },
+    "昴": {
+      "starType": "黄道恒星制",
+      "starXiu": "昴",
+      "totalDegree": 9.0,
+      "degreeStartAt": 355.0,
+      "startAtGongDegree": {
+        "gong": "卯",
+        "degree": 5.0
+      },
+      "endAtGongDegree": {
+        "gong": "卯",
+        "degree": 14.0
+      }
+    },
+    "毕": {
+      "starType": "黄道恒星制",
+      "starXiu": "毕",
+      "totalDegree": 15.0,
+      "degreeStartAt": 4.0,
+      "startAtGongDegree": {
+        "gong": "卯",
+        "degree": 14.0
+      },
+      "endAtGongDegree": {
+        "gong": "辰",
+        "degree": 9.0
+      }
+    },
+    "觜": {
+      "starType": "黄道恒星制",
+      "starXiu": "觜",
+      "totalDegree": 1.0,
+      "degreeStartAt": 19.0,
+      "startAtGongDegree": {
+        "gong": "辰",
+        "degree": 9.0
+      },
+      "endAtGongDegree": {
+        "gong": "辰",
+        "degree": 10.0
+      }
+    },
+    "参": {
+      "starType": "黄道恒星制",
+      "starXiu": "参",
+      "totalDegree": 11.0,
+      "degreeStartAt": 20.0,
+      "startAtGongDegree": {
+        "gong": "辰",
+        "degree": 10.0
+      },
+      "endAtGongDegree": {
+        "gong": "辰",
+        "degree": 21.0
+      }
+    },
+    "井": {
+      "starType": "黄道恒星制",
+      "starXiu": "井",
+      "totalDegree": 31.0,
+      "degreeStartAt": 31.0,
+      "startAtGongDegree": {
+        "gong": "辰",
+        "degree": 21.0
+      },
+      "endAtGongDegree": {
+        "gong": "巳",
+        "degree": 22.0
+      }
+    },
+    "鬼": {
+      "starType": "黄道恒星制",
+      "starXiu": "鬼",
+      "totalDegree": 5.0,
+      "degreeStartAt": 62.0,
+      "startAtGongDegree": {
+        "gong": "巳",
+        "degree": 22.0
+      },
+      "endAtGongDegree": {
+        "gong": "巳",
+        "degree": 27.0
+      }
+    },
+    "柳": {
+      "starType": "黄道恒星制",
+      "starXiu": "柳",
+      "totalDegree": 17.0,
+      "degreeStartAt": 67.0,
+      "startAtGongDegree": {
+        "gong": "巳",
+        "degree": 27.0
+      },
+      "endAtGongDegree": {
+        "gong": "午",
+        "degree": 14.0
+      }
+    },
+    "星": {
+      "starType": "黄道恒星制",
+      "starXiu": "星",
+      "totalDegree": 8.0,
+      "degreeStartAt": 84.0,
+      "startAtGongDegree": {
+        "gong": "午",
+        "degree": 14.0
+      },
+      "endAtGongDegree": {
+        "gong": "午",
+        "degree": 22.0
+      }
+    },
+    "张": {
+      "starType": "黄道恒星制",
+      "starXiu": "张",
+      "totalDegree": 18.0,
+      "degreeStartAt": 92.0,
+      "startAtGongDegree": {
+        "gong": "午",
+        "degree": 22.0
+      },
+      "endAtGongDegree": {
+        "gong": "未",
+        "degree": 10.0
+      }
+    },
+    "翼": {
+      "starType": "黄道恒星制",
+      "starXiu": "翼",
+      "totalDegree": 17.0,
+      "degreeStartAt": 110.0,
+      "startAtGongDegree": {
+        "gong": "未",
+        "degree": 10.0
+      },
+      "endAtGongDegree": {
+        "gong": "未",
+        "degree": 27.0
+      }
+    },
+    "轸": {
+      "starType": "黄道恒星制",
+      "starXiu": "轸",
+      "totalDegree": 13.0,
+      "degreeStartAt": 127.0,
+      "startAtGongDegree": {
+        "gong": "未",
+        "degree": 27.0
+      },
+      "endAtGongDegree": {
+        "gong": "申",
+        "degree": 10.0
+      }
+    }
+  }
+}

@@ -1,0 +1,71 @@
+{
+      "systemType": "似黄道恒星制",
+      "constellationSystemType": "古宿制",
+      "panelSystemType": "恒星制",
+      "epochCorrection": "郑氏星案",
+      "totalDegree": 360.00,
+      "gongOrder":[
+        "子","亥","戌","酉","申","未","午","巳","辰","卯","寅","丑"
+      ],
+      "gongDegreeSeq": [
+        {"gong":"亥","degree": 30.0},
+        {"gong":"戌","degree": 30.0},
+        {"gong":"酉","degree": 30.0},
+        {"gong":"申","degree": 30.0},
+        {"gong":"未","degree": 30.0},
+        {"gong":"午","degree": 30.0},
+        {"gong":"巳","degree": 30.0},
+        {"gong":"辰","degree": 30.0},
+        {"gong":"卯","degree": 30.0},
+        {"gong":"寅","degree": 30.0},
+        {"gong":"丑","degree": 30.0},
+        {"gong":"子","degree": 30.0}
+      ],
+      "starInnOrder":[
+        "女","虚","危","室","壁","奎","娄","胃","昴","毕","觜","参","井","鬼","柳","星","张","翼","轸","角","亢","氐","房","心","尾","箕","斗","牛"
+      ],
+    "starInnDegreeSeq": [
+      {"constellation":"危","degree":20.07},
+      {"constellation":"室","degree":16.75},
+      {"constellation":"壁","degree":12.22},
+      {"constellation":"奎","degree":11.52},
+      {"constellation":"娄","degree":12.97},
+      {"constellation":"胃","degree":12.48},
+      {"constellation":"昴","degree":9.05},
+      {"constellation":"毕","degree":15.2},
+      {"constellation":"觜","degree":1},
+      {"constellation":"参","degree":10.62},
+      {"constellation":"井","degree":30.45},
+      {"constellation":"鬼","degree":4.99},
+      {"constellation":"柳","degree":15.98},
+      {"constellation":"星","degree":7.99},
+      {"constellation":"张","degree":19.07},
+      {"constellation":"翼","degree":16.93},
+      {"constellation":"轸","degree":12.81},
+      {"constellation":"角","degree":10.99},
+      {"constellation":"亢","degree":10.59},
+      {"constellation":"氐","degree":17.85},
+      {"constellation":"房","degree":4.85},
+      {"constellation":"心","degree":8.25},
+      {"constellation":"尾","degree":15.20},
+      {"constellation":"箕","degree":8.94},
+      {"constellation":"斗","degree":23.92},
+      {"constellation":"牛","degree":7.67},
+      {"constellation":"女","degree":11.67},
+      {"constellation":"虚","degree":9.97}
+    ],
+    "alignmentPointAtConstellation": {"constellation":"虚","degree": 6.0},
+    "alignmentPointAtGong": {
+      "gong": "子",
+      "degree": 15.0
+    },
+      "zeroPointJieQi": "立春",
+      "zeroPointAtConstellation": {"constellation":"女","degree": 2.1},
+      "zeroPointAtGong": {"gong": "子", "degree": 0.0},
+      "celestialLongitude": 0.0,
+      "rightAscension": 0.0,
+      "zeroPointOffsetToNow": 0.0,
+      "specificationList":[
+        "来自moira, 郑氏星案"
+      ]
+  }

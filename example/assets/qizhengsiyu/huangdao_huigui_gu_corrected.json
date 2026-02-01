@@ -1,0 +1,45 @@
+{
+      "systemType": "黄道",
+      "starInnType": "古宿矫正",
+      "starInnSystem": "回归制",
+      "epochCorrection": "开禧历",
+      "totalDegree": 360.00,
+      "twelvGongDegreeMap": {
+        "子": 30.0,
+        "丑": 30.0,
+        "寅": 30.0,
+        "卯": 30.0,
+        "辰": 30.0,
+        "巳": 30.0,
+        "午": 30.0,
+        "未": 30.0,
+        "申": 30.0,
+        "酉": 30.0,
+        "戌": 30.0,
+        "亥": 30.0
+    },
+    "starInnDegreeMap": {
+      "危": 15.3, "室": 15.8, "壁": 8.9, "奎": 17.6, "娄": 10.4,
+      "胃": 14.8, "昴": 12.1, "毕": 15.8, "觜": 1, "参": 11.8,
+      "井": 30.5, "鬼": 2.9, "柳": 15.3, "星": 5.9, "张": 15.0,
+      "翼": 18.7, "轸": 17.1, "角": 12.8, "亢": 8.9, "氐": 16.3,
+      "房": 5.4, "心": 6.4, "尾": 18.6, "箕": 10.7, "斗": 23.8,
+      "牛": 7.9, "女": 10.9, "虚": 9.4
+    },
+    "alignmentPointAtStarInn": {
+      "starInn": "室宿",
+      "degree": 12.7
+    },
+    "alignmentPointAtGong": {
+      "gong": "戌",
+      "degree": 0.0
+    },
+      "zeroPointJieQi": "春分",
+      "zeroPointAtStarInn": {"starInn": "室宿", "degree": 12.7},
+      "zeroPointAtGong": {"gong": "戌宫", "degree": 0.0},
+      "celestialLongitude": 0.0,
+      "zeroPointOffsetToNow": 0.0,
+      "specificationList":[
+        "来自moira, 室宿12.7° 戌白羊0° 春分点, 黄经0°，岁差为0°已矫正"
+      ]
+  }

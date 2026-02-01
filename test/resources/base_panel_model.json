@@ -1,0 +1,3277 @@
+{
+    "starAngleMapper": {
+      "日": {
+        "angle": 68.11559655258611,
+        "speed": 0.959826407841934
+      },
+      "月": {
+        "angle": 97.28650958052862,
+        "speed": 14.451425331661754
+      },
+      "木": {
+        "angle": 87.38147139488123,
+        "speed": 0.22264454248178192
+      },
+      "土": {
+        "angle": 0.29706096084105676,
+        "speed": 0.07010272268326567
+      },
+      "火": {
+        "angle": 139.59021526779216,
+        "speed": 0.5276752850781726
+      },
+      "水": {
+        "angle": 66.94650674224269,
+        "speed": 2.1955616584416826
+      },
+      "金": {
+        "angle": 22.29727672112876,
+        "speed": 0.9402402756971094
+      },
+      "孛": {
+        "angle": 217.03227132540593,
+        "speed": 0.11142161679826283
+      },
+      "计": {
+        "angle": 353.6482363481214,
+        "speed": -0.052899414402162545
+      },
+      "罗": {
+        "angle": 173.64823634812137,
+        "speed": -0.052899414402162545
+      },
+      "炁": {
+        "angle": 156.05712222222223,
+        "speed": 0.0352
+      }
+    },
+    "enteredGongMapper": {
+      "日": {
+        "originalStar": {
+          "star": "日",
+          "degree": 68.11559655258611
+        },
+        "enterGongInfo": {
+          "gong": "申",
+          "degree": 8.116
+        },
+        "enterInnInfo": {
+          "constellation": "毕",
+          "degree": 14.916
+        }
+      },
+      "月": {
+        "originalStar": {
+          "star": "月",
+          "degree": 97.28650958052862
+        },
+        "enterGongInfo": {
+          "gong": "未",
+          "degree": 7.287
+        },
+        "enterInnInfo": {
+          "constellation": "井",
+          "degree": 15.487
+        }
+      },
+      "木": {
+        "originalStar": {
+          "star": "木",
+          "degree": 87.38147139488123
+        },
+        "enterGongInfo": {
+          "gong": "申",
+          "degree": 27.381
+        },
+        "enterInnInfo": {
+          "constellation": "井",
+          "degree": 5.581
+        }
+      },
+      "土": {
+        "originalStar": {
+          "star": "土",
+          "degree": 0.29706096084105676
+        },
+        "enterGongInfo": {
+          "gong": "戌",
+          "degree": 0.297
+        },
+        "enterInnInfo": {
+          "constellation": "奎",
+          "degree": 1.997
+        }
+      },
+      "火": {
+        "originalStar": {
+          "star": "火",
+          "degree": 139.59021526779216
+        },
+        "enterGongInfo": {
+          "gong": "午",
+          "degree": 19.59
+        },
+        "enterInnInfo": {
+          "constellation": "张",
+          "degree": 3.19
+        }
+      },
+      "水": {
+        "originalStar": {
+          "star": "水",
+          "degree": 66.94650674224269
+        },
+        "enterGongInfo": {
+          "gong": "申",
+          "degree": 6.947
+        },
+        "enterInnInfo": {
+          "constellation": "毕",
+          "degree": 13.747
+        }
+      },
+      "金": {
+        "originalStar": {
+          "star": "金",
+          "degree": 22.29727672112876
+        },
+        "enterGongInfo": {
+          "gong": "戌",
+          "degree": 22.297
+        },
+        "enterInnInfo": {
+          "constellation": "娄",
+          "degree": 6.397
+        }
+      },
+      "孛": {
+        "originalStar": {
+          "star": "孛",
+          "degree": 217.03227132540593
+        },
+        "enterGongInfo": {
+          "gong": "卯",
+          "degree": 7.032
+        },
+        "enterInnInfo": {
+          "constellation": "氐",
+          "degree": 8.132
+        }
+      },
+      "计": {
+        "originalStar": {
+          "star": "计",
+          "degree": 353.6482363481214
+        },
+        "enterGongInfo": {
+          "gong": "亥",
+          "degree": 23.648
+        },
+        "enterInnInfo": {
+          "constellation": "壁",
+          "degree": 4.248
+        }
+      },
+      "罗": {
+        "originalStar": {
+          "star": "罗",
+          "degree": 173.64823634812137
+        },
+        "enterGongInfo": {
+          "gong": "巳",
+          "degree": 23.648
+        },
+        "enterInnInfo": {
+          "constellation": "轸",
+          "degree": 3.548
+        }
+      },
+      "炁": {
+        "originalStar": {
+          "star": "炁",
+          "degree": 156.05712222222223
+        },
+        "enterGongInfo": {
+          "gong": "巳",
+          "degree": 6.057
+        },
+        "enterInnInfo": {
+          "constellation": "翼",
+          "degree": 4.657
+        }
+      }
+    },
+    "fiveStarWalkingTypeMapper": {
+      "木": {
+        "star": "木",
+        "speed": 0.22264454248178192,
+        "walkingType": "常",
+        "threshold": {
+          "star": "木",
+          "thresholdName": "moira",
+          "maxSpeed": 0.236,
+          "maxRetrogradeThreshold": -0.134,
+          "retrogradeThreshold": 0.022,
+          "stayThreshold": 0.011,
+          "fastThreshold": 0.23,
+          "slowThreshold": 0.048
+        }
+      },
+      "土": {
+        "star": "土",
+        "speed": 0.07010272268326567,
+        "walkingType": "常",
+        "threshold": {
+          "star": "土",
+          "thresholdName": "moira",
+          "maxSpeed": 0.122,
+          "maxRetrogradeThreshold": -0.075,
+          "retrogradeThreshold": -0.012,
+          "stayThreshold": 0.019,
+          "fastThreshold": null,
+          "slowThreshold": null
+        }
+      },
+      "火": {
+        "star": "火",
+        "speed": 0.5276752850781726,
+        "walkingType": "常",
+        "threshold": {
+          "star": "火",
+          "thresholdName": "moira",
+          "maxSpeed": 0.778,
+          "maxRetrogradeThreshold": -0.386,
+          "retrogradeThreshold": -0.077,
+          "stayThreshold": 0.074,
+          "fastThreshold": 0.706,
+          "slowThreshold": 0.409
+        }
+      },
+      "水": {
+        "star": "水",
+        "speed": 2.1955616584416826,
+        "walkingType": "速",
+        "threshold": {
+          "star": "水",
+          "thresholdName": "moira",
+          "maxSpeed": 2.2,
+          "maxRetrogradeThreshold": -1.348,
+          "retrogradeThreshold": -0.089,
+          "stayThreshold": 0.129,
+          "fastThreshold": 1.499,
+          "slowThreshold": 0.868
+        }
+      },
+      "金": {
+        "star": "金",
+        "speed": 0.9402402756971094,
+        "walkingType": "常",
+        "threshold": {
+          "star": "金",
+          "thresholdName": "moira",
+          "maxSpeed": 1.238,
+          "maxRetrogradeThreshold": -0.613,
+          "retrogradeThreshold": -0.115,
+          "stayThreshold": 0.103,
+          "fastThreshold": null,
+          "slowThreshold": 0.709
+        }
+      }
+    },
+    "bodyLifeModel": {
+      "lifeGongInfo": {
+        "gong": "子",
+        "degree": 8.116
+      },
+      "lifeConstellationInfo": {
+        "constellation": "毕",
+        "degree": 14.916
+      },
+      "bodyGongInfo": {
+        "gong": "未",
+        "degree": 7.287
+      },
+      "bodyConstellationInfo": {
+        "constellation": "井",
+        "degree": 15.487
+      }
+    },
+    "twelveGongMapper": {
+      "子": "命宫",
+      "亥": "财帛",
+      "戌": "兄弟",
+      "酉": "田宅",
+      "申": "男女",
+      "未": "奴仆",
+      "午": "夫妻",
+      "巳": "疾厄",
+      "辰": "迁移",
+      "卯": "官禄",
+      "寅": "福德",
+      "丑": "相貌"
+    },
+    "shenShaMapper": {
+      "子": [
+        {
+          "name": "胎",
+          "jiXiong": "平",
+          "descriptionList": null,
+          "locationDescriptionList": null
+        },
+        {
+          "type": "驾前",
+          "name": "龙德",
+          "jiXiong": "吉",
+          "offset": 7,
+          "descriptionList": [
+            "主贵人扶持，事业突破"
+          ],
+          "locationDescriptionList": null
+        },
+        {
+          "type": "驾前",
+          "name": "紫薇",
+          "jiXiong": "大吉",
+          "offset": 7,
+          "descriptionList": [
+            "帝王之星，主权柄尊贵"
+          ],
+          "locationDescriptionList": null
+        },
+        {
+          "type": "驾前",
+          "name": "暴败",
+          "jiXiong": "大凶",
+          "offset": 7,
+          "descriptionList": [
+            "主突然失败，名誉扫地"
+          ],
+          "locationDescriptionList": null
+        },
+        {
+          "type": "驾前",
+          "name": "天厄",
+          "jiXiong": "凶",
+          "offset": 7,
+          "descriptionList": [
+            "主天降灾厄，自然灾害"
+          ],
+          "locationDescriptionList": null
+        },
+        {
+          "type": "马前",
+          "name": "六厄",
+          "jiXiong": "大凶",
+          "offset": 1,
+          "descriptionList": [
+            "五行死绝之地，主困顿灾厄",
+            "申子辰厄在卯，寅午戌厄在酉，主刑狱损伤",
+            "克身则灾重，易遭小人暗算"
+          ],
+          "locationDescriptionList": null
+        },
+        {
+          "name": "玉贵",
+          "jiXiong": "吉",
+          "descriptionList": null,
+          "locationDescriptionList": null,
+          "locationMapper": {
+            "甲": "丑",
+            "乙": "子",
+            "丙": "亥",
+            "丁": "酉",
+            "戊": "未",
+            "己": "申",
+            "庚": "未",
+            "辛": "午",
+            "壬": "巳",
+            "癸": "卯"
+          }
+        }
+      ],
+      "丑": [
+        {
+          "name": "养",
+          "jiXiong": "平",
+          "descriptionList": null,
+          "locationDescriptionList": null
+        },
+        {
+          "name": "游奕",
+          "jiXiong": "平",
+          "descriptionList": null,
+          "locationDescriptionList": [
+            "甲子、庚午、乙亥、辛巳、丙戌、壬辰、丁酉、戊申、癸丑、己未；子",
+            "己巳、甲戌、庚辰、乙酉、辛卯、丙辰、壬寅、丁未、戊午、癸亥；卯",
+            "庚寅、辛丑，壬子；辰",
+            "戊辰、癸酉、己卯、甲申、乙未、丙午、丁巳；巳",
+            "己丑、庚子、辛亥、壬戌、戊寅；午",
+            "乙巳、丁卯、甲午、丙戌、癸未；未",
+            "丙寅、壬申、丁丑、戊子、己亥、庚戌、辛酉；申",
+            "乙卯、甲辰、癸巳；酉",
+            "乙丑、辛未、丙子、壬午、丁亥、戊戌、己酉、甲寅、庚申；戌",
+            "癸卯；亥"
+          ],
+          "locationMapper": {
+            "午": [
+              "甲子",
+              "庚午",
+              "乙亥",
+              "辛巳",
+              "丙戌",
+              "壬辰",
+              "丁酉",
+              "戊申",
+              "癸丑",
+              "己未"
+            ],
+            "酉": [
+              "己巳",
+              "甲戌",
+              "庚辰",
+              "乙酉",
+              "辛卯",
+              "丙辰",
+              "壬寅",
+              "丁未",
+              "戊午",
+              "癸亥"
+            ],
+            "戌": [
+              "庚寅",
+              "辛丑",
+              "壬子"
+            ],
+            "亥": [
+              "戊辰",
+              "癸酉",
+              "己卯",
+              "甲申",
+              "乙未",
+              "丙午",
+              "丁巳"
+            ],
+            "子": [
+              "己丑",
+              "庚子",
+              "辛亥",
+              "壬戌",
+              "戊寅"
+            ],
+            "丑": [
+              "乙巳",
+              "丁卯",
+              "甲午",
+              "丙戌",
+              "癸未"
+            ],
+            "寅": [
+              "丙寅",
+              "壬申",
+              "丁丑",
+              "戊子",
+              "己亥",
+              "庚戌",
+              "辛酉"
+            ],
+            "卯": [
+              "乙卯",
+              "甲辰",
+              "癸巳"
+            ],
+            "辰": [
+              "乙丑",
+              "辛未",
+              "丙子",
+              "壬午",
+              "丁亥",
+              "戊戌",
+              "己酉",
+              "甲寅",
+              "庚申"
+            ],
+            "巳": [
+              "癸卯"
+            ]
+          }
+        },
+        {
+          "type": "驾前",
+          "name": "天雄",
+          "jiXiong": "凶",
+          "offset": 8,
+          "descriptionList": [
+            "主争斗血光，暴力冲突"
+          ],
+          "locationDescriptionList": null
+        },
+        {
+          "type": "驾前",
+          "name": "白虎",
+          "jiXiong": "大凶",
+          "offset": 8,
+          "descriptionList": [
+            "主血光刑伤，女性产难"
+          ],
+          "locationDescriptionList": null
+        },
+        {
+          "type": "驾后",
+          "name": "天哭",
+          "jiXiong": "大凶",
+          "offset": 3,
+          "descriptionList": [
+            "主悲伤，哭泣",
+            "主六亲刑克、忧伤孤独，流年逢之易有丧事或精神抑郁",
+            "查法：午位起子逆行（子年午，丑年巳，寅年辰类推）",
+            "与丧门、吊客同现时，需防重孝临门"
+          ],
+          "locationDescriptionList": null
+        },
+        {
+          "type": "马前",
+          "name": "华盖",
+          "jiXiong": "大吉",
+          "offset": 2,
+          "descriptionList": [
+            "福地之星，主文章艺术、宗教智慧",
+            "寅午戌见戌，申子辰见辰，与禄库同位主贵",
+            "女命逢之多主贵气，男命逢之显科名"
+          ],
+          "locationDescriptionList": null
+        },
+        {
+          "name": "福贵",
+          "jiXiong": "吉",
+          "descriptionList": null,
+          "locationDescriptionList": null,
+          "locationMapper": {
+            "甲": "寅",
+            "乙": "丑",
+            "丙": "子",
+            "丁": "亥",
+            "戊": "申",
+            "己": "未",
+            "庚": "午",
+            "辛": "巳",
+            "壬": "辰",
+            "癸": "丑"
+          }
+        },
+        {
+          "name": "黄旛",
+          "jiXiong": "凶",
+          "descriptionList": [
+            "命限忌"
+          ],
+          "locationDescriptionList": [],
+          "locationMapper": {
+            "子": "辰",
+            "丑": "丑",
+            "寅": "未",
+            "卯": "戌",
+            "辰": "辰",
+            "巳": "丑",
+            "午": "未",
+            "未": "戌",
+            "申": "辰",
+            "酉": "丑",
+            "戌": "未",
+            "亥": "戌"
+          }
+        }
+      ],
+      "寅": [
+        {
+          "name": "长生",
+          "jiXiong": "平",
+          "descriptionList": null,
+          "locationDescriptionList": null
+        },
+        {
+          "type": "驾前",
+          "name": "天德",
+          "jiXiong": "大吉",
+          "offset": 9,
+          "descriptionList": [
+            "天赐福德，消灾解厄"
+          ],
+          "locationDescriptionList": null
+        },
+        {
+          "type": "驾前",
+          "name": "卷舌",
+          "jiXiong": "凶",
+          "offset": 9,
+          "descriptionList": [
+            "主口舌是非，言论招祸"
+          ],
+          "locationDescriptionList": null
+        },
+        {
+          "type": "驾前",
+          "name": "绞杀",
+          "jiXiong": "大凶",
+          "offset": 9,
+          "descriptionList": [
+            "主极端意外，绳索类伤害"
+          ],
+          "locationDescriptionList": null
+        },
+        {
+          "type": "马前",
+          "name": "劫杀",
+          "jiXiong": "凶",
+          "offset": 3,
+          "descriptionList": [
+            "主劫破",
+            "至凶之神，主权柄与灾祸并存",
+            "主建节掌兵权，克身则血光横祸",
+            "申子辰劫在巳，寅午戌劫在亥"
+          ],
+          "locationDescriptionList": null
+        },
+        {
+          "name": "六害",
+          "jiXiong": "凶",
+          "descriptionList": [
+            "主克害"
+          ],
+          "locationDescriptionList": [],
+          "locationMapper": {
+            "子": "未",
+            "丑": "午",
+            "寅": "巳",
+            "卯": "辰",
+            "辰": "卯",
+            "巳": "寅",
+            "午": "丑",
+            "未": "子",
+            "申": "亥",
+            "酉": "戌",
+            "戌": "酉",
+            "亥": "申"
+          }
+        },
+        {
+          "name": "披麻",
+          "jiXiong": "凶",
+          "descriptionList": [
+            "主丧事、悲痛之事，有不吉、哀伤的寓意，预示着命主或其六亲可能会遭遇与死亡、丧葬相关的事情，或者在生活中会经历一些悲伤、痛苦的事件，如亲人离世、家庭变故等，给命主的精神和生活带来沉重的打击。"
+          ],
+          "locationDescriptionList": [],
+          "locationMapper": {
+            "子": "酉",
+            "丑": "戌",
+            "寅": "亥",
+            "卯": "子",
+            "辰": "丑",
+            "巳": "寅",
+            "午": "卯",
+            "未": "辰",
+            "申": "巳",
+            "酉": "午",
+            "戌": "未",
+            "亥": "申"
+          }
+        },
+        {
+          "name": "钓煞",
+          "jiXiong": "凶",
+          "descriptionList": [
+            "主招盗贼、失脱等事，孛星同炤命，忌外出"
+          ],
+          "locationDescriptionList": [],
+          "locationMapper": {
+            "子": "巳",
+            "丑": "寅",
+            "寅": "亥",
+            "卯": "申",
+            "辰": "巳",
+            "巳": "寅",
+            "午": "亥",
+            "未": "申",
+            "申": "巳",
+            "酉": "寅",
+            "戌": "亥",
+            "亥": "申"
+          }
+        }
+      ],
+      "卯": [
+        {
+          "name": "沐浴",
+          "jiXiong": "平",
+          "descriptionList": null,
+          "locationDescriptionList": null
+        },
+        {
+          "name": "空亡",
+          "jiXiong": "平",
+          "descriptionList": null,
+          "locationDescriptionList": [
+            "甲子、丙寅、戊辰、庚午、壬申；戌",
+            "乙丑、丁卯、己巳、辛未、癸酉；亥",
+            "甲戌、丙子、戊寅、庚辰、壬午；申",
+            "乙亥、丁丑、己卯、辛巳、癸未；酉",
+            "甲申、丙子、戊寅、庚辰、壬午；午",
+            "乙酉、丁亥、己丑、辛卯、癸巳；未",
+            "甲午、丙申、戊戌、庚子、壬寅；辰",
+            "乙未、丁酉、己亥、辛丑、癸卯；巳",
+            "甲辰、丙午、戊申、庚戌、壬子；寅",
+            "乙巳、丁未、己酉、辛亥、癸丑；卯",
+            "甲寅、丙辰、戊午、庚申、壬戌；子",
+            "乙卯、丁巳、己未、辛酉、癸亥；丑"
+          ],
+          "locationMapper": {
+            "戌": [
+              "甲子",
+              "丙寅",
+              "戊辰",
+              "庚午",
+              "壬申"
+            ],
+            "亥": [
+              "乙丑",
+              "丁卯",
+              "己巳",
+              "辛未",
+              "癸酉"
+            ],
+            "申": [
+              "甲戌",
+              "丙子",
+              "戊寅",
+              "庚辰",
+              "壬午"
+            ],
+            "酉": [
+              "乙亥",
+              "丁丑",
+              "己卯",
+              "辛巳",
+              "癸未"
+            ],
+            "午": [
+              "甲申",
+              "丙子",
+              "戊寅",
+              "庚辰",
+              "壬午"
+            ],
+            "未": [
+              "乙酉",
+              "丁亥",
+              "己丑",
+              "辛卯",
+              "癸巳"
+            ],
+            "辰": [
+              "甲午",
+              "丙申",
+              "戊戌",
+              "庚子",
+              "壬寅"
+            ],
+            "巳": [
+              "乙未",
+              "丁酉",
+              "己亥",
+              "辛丑",
+              "癸卯"
+            ],
+            "寅": [
+              "甲辰",
+              "丙午",
+              "戊申",
+              "庚戌",
+              "壬子"
+            ],
+            "卯": [
+              "乙巳",
+              "丁未",
+              "己酉",
+              "辛亥",
+              "癸丑"
+            ],
+            "子": [
+              "甲寅",
+              "丙辰",
+              "戊午",
+              "庚申",
+              "壬戌"
+            ],
+            "丑": [
+              "乙卯",
+              "丁巳",
+              "己未",
+              "辛酉",
+              "癸亥"
+            ]
+          }
+        },
+        {
+          "type": "驾前",
+          "name": "天狗",
+          "jiXiong": "大凶",
+          "offset": 10,
+          "descriptionList": [
+            "主破相血光，小儿面伤"
+          ],
+          "locationDescriptionList": null
+        },
+        {
+          "type": "驾前",
+          "name": "吊客",
+          "jiXiong": "大凶",
+          "offset": 10,
+          "descriptionList": [
+            "主丧事吊唁，外亲灾祸"
+          ],
+          "locationDescriptionList": null
+        },
+        {
+          "type": "马前",
+          "name": "灾杀",
+          "jiXiong": "大凶",
+          "offset": 4,
+          "descriptionList": [
+            "劫杀前一辰，主兵刑丧服",
+            "流年逢之防兄弟夭亡，帝旺方逢可转凶为吉",
+            "申子辰灾在午，寅午戌灾在子"
+          ],
+          "locationDescriptionList": null
+        },
+        {
+          "name": "禄勋",
+          "jiXiong": "吉",
+          "descriptionList": null,
+          "locationDescriptionList": null,
+          "locationMapper": {
+            "甲": "寅",
+            "乙": "卯",
+            "丙": "巳",
+            "丁": "午",
+            "戊": "巳",
+            "己": "午",
+            "庚": "申",
+            "辛": "酉",
+            "壬": "亥",
+            "癸": "子"
+          }
+        },
+        {
+          "name": "吞陷",
+          "jiXiong": "凶",
+          "descriptionList": [
+            "象征陷入困境、被侵害、被吞噬，有危险和不利寓意。"
+          ],
+          "locationDescriptionList": [],
+          "locationMapper": {
+            "子": "戌",
+            "丑": "寅",
+            "寅": "丑",
+            "卯": "戌",
+            "辰": "辰",
+            "巳": "卯",
+            "午": "寅",
+            "未": "寅",
+            "申": "戌",
+            "酉": "戌",
+            "戌": "寅",
+            "亥": "寅"
+          }
+        },
+        {
+          "name": "飞廉",
+          "jiXiong": "平",
+          "descriptionList": [
+            "象征着变动、灾祸、意外、是非，预示着命主在流年中可能会有较多的变动和突发之事，这些变动可能是工作上的变动、居住地的变动等，同时也可能伴随着一些灾祸和是非，如工作变动导致收入减少、居住地变动带来生活不便、遇到一些口舌是非等。"
+          ],
+          "locationDescriptionList": [],
+          "locationMapper": {
+            "子": "戌",
+            "丑": "巳",
+            "寅": "午",
+            "卯": "未",
+            "辰": "寅",
+            "巳": "卯",
+            "午": "辰",
+            "未": "巳",
+            "申": "申",
+            "酉": "戌",
+            "戌": "亥",
+            "亥": "子"
+          }
+        },
+        {
+          "name": "囚狱",
+          "jiXiong": "凶",
+          "descriptionList": [
+            "牢灾祸行动受限"
+          ],
+          "locationDescriptionList": [],
+          "locationMapper": {
+            "子": "午",
+            "丑": "卯",
+            "寅": "子",
+            "卯": "酉",
+            "辰": "午",
+            "巳": "卯",
+            "午": "子",
+            "未": "酉",
+            "申": "午",
+            "酉": "卯",
+            "戌": "子",
+            "亥": "酉"
+          }
+        },
+        {
+          "name": "八座",
+          "jiXiong": "吉",
+          "descriptionList": [
+            "代表地位、权力、尊贵，有荣耀和受尊崇之意，象征命主在社会和事业方面可能拥有较高地位和权力，受到他人敬重和仰慕，也可能会获得一些荣誉和奖励。",
+            "若八座在命主的官禄宫位置良好，可能预示在事业上有较高地位和权力。"
+          ],
+          "locationDescriptionList": [],
+          "locationMapper": {
+            "子": "戌",
+            "丑": "亥",
+            "寅": "子",
+            "卯": "丑",
+            "辰": "寅",
+            "巳": "卯",
+            "午": "辰",
+            "未": "巳",
+            "申": "午",
+            "酉": "未",
+            "戌": "申",
+            "亥": "酉"
+          }
+        },
+        {
+          "name": "地耗",
+          "jiXiong": "凶",
+          "descriptionList": [
+            "同天耗，易受他人、他物伤害"
+          ],
+          "locationDescriptionList": [],
+          "locationMapper": {
+            "寅": "酉",
+            "卯": "亥",
+            "辰": "丑",
+            "巳": "卯",
+            "午": "巳",
+            "未": "未",
+            "申": "酉",
+            "酉": "亥",
+            "戌": "丑",
+            "亥": "卯",
+            "子": "巳",
+            "丑": "未"
+          }
+        }
+      ],
+      "辰": [
+        {
+          "name": "冠带",
+          "jiXiong": "平",
+          "descriptionList": null,
+          "locationDescriptionList": null
+        },
+        {
+          "type": "驾前",
+          "name": "病符",
+          "jiXiong": "凶",
+          "offset": 11,
+          "descriptionList": [
+            "主疾病缠身，慢性病恶化"
+          ],
+          "locationDescriptionList": null
+        },
+        {
+          "type": "驾前",
+          "name": "蓦越",
+          "jiXiong": "凶",
+          "offset": 11,
+          "descriptionList": [
+            "主突发变故，被迫迁徙"
+          ],
+          "locationDescriptionList": null
+        },
+        {
+          "type": "驾后",
+          "name": "天喜",
+          "jiXiong": "吉",
+          "offset": 6,
+          "descriptionList": [
+            "同红鸾主喜事",
+            "主福禄添喜、出行顺遂，对冲红鸾星显贵气",
+            "查法：红鸾对宫（子年红鸾在卯，则天喜在酉）",
+            "与红鸾同现时，可化解部分凶煞影响"
+          ],
+          "locationDescriptionList": null
+        },
+        {
+          "type": "马前",
+          "name": "天杀",
+          "jiXiong": "凶",
+          "offset": 5,
+          "descriptionList": [
+            "主权柄与意外灾殃",
+            "主掌兵权者显贵，常人逢之防横祸",
+            "申子辰天在未，寅午戌天在丑"
+          ],
+          "locationDescriptionList": null
+        },
+        {
+          "name": "阳刃",
+          "jiXiong": "凶",
+          "descriptionList": null,
+          "locationDescriptionList": null,
+          "locationMapper": {
+            "甲": "卯",
+            "乙": "辰",
+            "丙": "午",
+            "丁": "未",
+            "戊": "午",
+            "己": "未",
+            "庚": "酉",
+            "辛": "戌",
+            "壬": "子",
+            "癸": "丑"
+          }
+        },
+        {
+          "name": "寡宿",
+          "jiXiong": "凶",
+          "descriptionList": [
+            "主寡居",
+            "刑害兼损六亲，男遇孤辰多切忌，女逢寡宿独厉眠"
+          ],
+          "locationDescriptionList": [],
+          "locationMapper": {
+            "子": "戌",
+            "丑": "戌",
+            "寅": "丑",
+            "卯": "丑",
+            "辰": "丑",
+            "巳": "辰",
+            "午": "辰",
+            "未": "辰",
+            "申": "未",
+            "酉": "未",
+            "戌": "未",
+            "亥": "戌"
+          }
+        }
+      ],
+      "巳": [
+        {
+          "name": "临官",
+          "jiXiong": "平",
+          "descriptionList": null,
+          "locationDescriptionList": null
+        },
+        {
+          "name": "禄卦",
+          "jiXiong": "吉",
+          "descriptionList": null,
+          "locationDescriptionList": [
+            "年干卦气逆回轮，日月住处定阳阳。昼生日止夜生月，论干得禄取宫神。"
+          ]
+        },
+        {
+          "type": "驾前",
+          "name": "剑锋",
+          "jiXiong": "大凶",
+          "offset": 0,
+          "descriptionList": [
+            "主刀兵血光之灾，手术意外或暴力事件"
+          ],
+          "locationDescriptionList": null
+        },
+        {
+          "type": "驾前",
+          "name": "伏尸",
+          "jiXiong": "大凶",
+          "offset": 0,
+          "descriptionList": [
+            "主阴邪隐疾，暗藏致命危机"
+          ],
+          "locationDescriptionList": null
+        },
+        {
+          "type": "驾前",
+          "name": "岁驾",
+          "jiXiong": "平",
+          "offset": 0,
+          "descriptionList": [
+            "太岁本位，吉凶依主星庙旺而定"
+          ],
+          "locationDescriptionList": null
+        },
+        {
+          "type": "驾后",
+          "name": "血刃",
+          "jiXiong": "大凶",
+          "offset": 7,
+          "descriptionList": [
+            "主血光刑伤，尤防手术、产厄或意外流血事件",
+            "查法：戌位起子逆行（子年戌，丑年酉，寅年申类推）",
+            "女命日柱逢之需防大出血，男命逢之忌酒色风险"
+          ],
+          "locationDescriptionList": null
+        },
+        {
+          "type": "驾后",
+          "name": "浮沉",
+          "jiXiong": "凶",
+          "offset": 7,
+          "descriptionList": [
+            "主没溺",
+            "主事业财运波动不定，易有投资失利或职位不稳",
+            "与血刃、解神同查（戌位起子逆行）",
+            "逢吉星可转危为安，逢凶星则雪上加霜"
+          ],
+          "locationDescriptionList": null
+        },
+        {
+          "type": "驾后",
+          "name": "解神",
+          "jiXiong": "平",
+          "offset": 7,
+          "descriptionList": [
+            "化险为夷之神，若命局成格可转凶为吉",
+            "查法同血刃、浮沉（戌位起子逆行）",
+            "与天德、月德同宫时，消灾效果倍增"
+          ],
+          "locationDescriptionList": null
+        },
+        {
+          "type": "马前",
+          "name": "地杀",
+          "jiXiong": "凶",
+          "offset": 6,
+          "descriptionList": [
+            "五行初生之地，主无目的奔波",
+            "寅午戌地在寅，申子辰地在申，与日柱合则行为不定",
+            "月支空亡者主离乡发展"
+          ],
+          "locationDescriptionList": null
+        },
+        {
+          "name": "金舆",
+          "jiXiong": "大吉",
+          "descriptionList": null,
+          "locationDescriptionList": null,
+          "locationMapper": {
+            "甲": "辰",
+            "乙": "巳",
+            "丙": "未",
+            "丁": "申",
+            "戊": "未",
+            "己": "申",
+            "庚": "戌",
+            "辛": "亥",
+            "壬": "丑",
+            "癸": "寅"
+          }
+        },
+        {
+          "name": "天解",
+          "jiXiong": "吉",
+          "descriptionList": [
+            "主解难"
+          ],
+          "locationDescriptionList": [],
+          "locationMapper": {
+            "子": "戌",
+            "丑": "酉",
+            "寅": "申",
+            "卯": "未",
+            "辰": "午",
+            "巳": "巳",
+            "午": "辰",
+            "未": "卯",
+            "申": "寅",
+            "酉": "丑",
+            "戌": "子",
+            "亥": "亥"
+          }
+        },
+        {
+          "name": "指背",
+          "jiXiong": "凶",
+          "descriptionList": [
+            "主招人嫉妒，为人无功。亲友反背，与人不睦"
+          ],
+          "locationDescriptionList": [],
+          "locationMapper": {
+            "子": "申",
+            "丑": "巳",
+            "寅": "寅",
+            "卯": "亥",
+            "辰": "申",
+            "巳": "巳",
+            "午": "寅",
+            "未": "亥",
+            "申": "申",
+            "酉": "巳",
+            "戌": "寅",
+            "亥": "亥"
+          }
+        }
+      ],
+      "午": [
+        {
+          "name": "帝旺",
+          "jiXiong": "平",
+          "descriptionList": null,
+          "locationDescriptionList": null
+        },
+        {
+          "name": "斗杓",
+          "jiXiong": "吉",
+          "descriptionList": [
+            "象征着运势的引导、变化和机遇，预示着命主在相应月份可能会有一些新的机遇和变化，这些变化可能是好的，也可能是具有挑战性的，需要命主根据具体情况做出相应的调整和应对。",
+            "斗杓者北斗之柄也，命无斗杓，为人不被尊重",
+            "酉：命主身星斗柄宫，忌临杀位怕逢空。宜居禄贵并生旺，补哀终当立大宫"
+          ],
+          "locationDescriptionList": []
+        },
+        {
+          "name": "岁殿",
+          "jiXiong": "吉",
+          "descriptionList": null,
+          "locationDescriptionList": [
+            "命天元干神宫主是，且如丙辰生人，从辰上起甲，数至午，见丙便是岁殿也，余仿此。"
+          ]
+        },
+        {
+          "type": "驾前",
+          "name": "天空",
+          "jiXiong": "凶",
+          "offset": 1,
+          "descriptionList": [
+            "主虚耗空亡，钱财不聚"
+          ],
+          "locationDescriptionList": null
+        },
+        {
+          "type": "驾前",
+          "name": "太阳",
+          "jiXiong": "大吉",
+          "offset": 1,
+          "descriptionList": [
+            "光明权威，化解灾厄，增贵人运"
+          ],
+          "locationDescriptionList": null
+        },
+        {
+          "type": "马前",
+          "name": "年杀",
+          "jiXiong": "凶",
+          "offset": 7,
+          "descriptionList": [
+            "主根基动荡，六亲缘薄",
+            "申子辰年在酉，寅午戌年在卯",
+            "防祖业破败，婚姻反复"
+          ],
+          "locationDescriptionList": null
+        },
+        {
+          "name": "文昌",
+          "jiXiong": "吉",
+          "descriptionList": null,
+          "locationDescriptionList": null,
+          "locationMapper": {
+            "甲": "巳",
+            "乙": "午",
+            "丙": "申",
+            "丁": "酉",
+            "戊": "申",
+            "己": "酉",
+            "庚": "亥",
+            "辛": "戌",
+            "壬": "寅",
+            "癸": "卯"
+          }
+        },
+        {
+          "name": "天厨",
+          "jiXiong": "吉",
+          "descriptionList": null,
+          "locationDescriptionList": null,
+          "locationMapper": {
+            "甲": "巳",
+            "乙": "午",
+            "丙": "子",
+            "丁": "巳",
+            "戊": "午",
+            "己": "申",
+            "庚": "寅",
+            "辛": "午",
+            "壬": "酉",
+            "癸": "亥"
+          }
+        },
+        {
+          "name": "学堂",
+          "jiXiong": "大吉",
+          "descriptionList": null,
+          "locationDescriptionList": null,
+          "locationMapper": {
+            "甲": "亥",
+            "乙": "午",
+            "丙": "寅",
+            "丁": "酉",
+            "戊": "寅",
+            "己": "酉",
+            "庚": "巳",
+            "辛": "子",
+            "壬": "申",
+            "癸": "卯"
+          }
+        },
+        {
+          "name": "咸池",
+          "jiXiong": "凶",
+          "descriptionList": [
+            "主色欲"
+          ],
+          "locationDescriptionList": [],
+          "locationMapper": {
+            "子": "酉",
+            "丑": "午",
+            "寅": "卯",
+            "卯": "子",
+            "辰": "酉",
+            "巳": "午",
+            "午": "卯",
+            "未": "子",
+            "申": "酉",
+            "酉": "午",
+            "戌": "卯",
+            "亥": "子"
+          }
+        },
+        {
+          "name": "桃花",
+          "jiXiong": "凶",
+          "descriptionList": [
+            "主淫泆"
+          ],
+          "locationDescriptionList": [],
+          "locationMapper": {
+            "子": "酉",
+            "丑": "午",
+            "寅": "卯",
+            "卯": "子",
+            "辰": "酉",
+            "巳": "午",
+            "午": "卯",
+            "未": "子",
+            "申": "酉",
+            "酉": "午",
+            "戌": "卯",
+            "亥": "子"
+          }
+        },
+        {
+          "name": "天耗",
+          "jiXiong": "凶",
+          "descriptionList": [
+            "易受他人、他物伤害"
+          ],
+          "locationDescriptionList": [],
+          "locationMapper": {
+            "寅": "子",
+            "卯": "寅",
+            "辰": "辰",
+            "巳": "午",
+            "午": "申",
+            "未": "戌",
+            "申": "子",
+            "酉": "寅",
+            "戌": "辰",
+            "亥": "午",
+            "子": "申",
+            "丑": "戌"
+          }
+        }
+      ],
+      "未": [
+        {
+          "name": "衰",
+          "jiXiong": "平",
+          "descriptionList": null,
+          "locationDescriptionList": null
+        },
+        {
+          "name": "擎天",
+          "jiXiong": "平",
+          "descriptionList": null,
+          "locationDescriptionList": [
+            "甲子、庚午、乙亥、辛巳、丙戌、壬辰、丁酉、戊申、癸丑、己未；子",
+            "己巳、甲戌、庚辰、乙酉、辛卯、丙辰、壬寅、丁未、戊午、癸亥；卯",
+            "庚寅、辛丑，壬子；辰",
+            "戊辰、癸酉、己卯、甲申、乙未、丙午、丁巳；巳",
+            "己丑、庚子、辛亥、壬戌、戊寅；午",
+            "乙巳、丁卯、甲午、丙戌、癸未；未",
+            "丙寅、壬申、丁丑、戊子、己亥、庚戌、辛酉；申",
+            "乙卯、甲辰、癸巳；酉",
+            "乙丑、辛未、丙子、壬午、丁亥、戊戌、己酉、甲寅、庚申；戌",
+            "癸卯；亥"
+          ],
+          "locationMapper": {
+            "子": [
+              "甲子",
+              "庚午",
+              "乙亥",
+              "辛巳",
+              "丙戌",
+              "壬辰",
+              "丁酉",
+              "戊申",
+              "癸丑",
+              "己未"
+            ],
+            "卯": [
+              "己巳",
+              "甲戌",
+              "庚辰",
+              "乙酉",
+              "辛卯",
+              "丙辰",
+              "壬寅",
+              "丁未",
+              "戊午",
+              "癸亥"
+            ],
+            "辰": [
+              "庚寅",
+              "辛丑",
+              "壬子"
+            ],
+            "巳": [
+              "戊辰",
+              "癸酉",
+              "己卯",
+              "甲申",
+              "乙未",
+              "丙午",
+              "丁巳"
+            ],
+            "午": [
+              "己丑",
+              "庚子",
+              "辛亥",
+              "壬戌",
+              "戊寅"
+            ],
+            "未": [
+              "乙巳",
+              "丁卯",
+              "甲午",
+              "丙戌",
+              "癸未"
+            ],
+            "申": [
+              "丙寅",
+              "壬申",
+              "丁丑",
+              "戊子",
+              "己亥",
+              "庚戌",
+              "辛酉"
+            ],
+            "酉": [
+              "乙卯",
+              "甲辰",
+              "癸巳"
+            ],
+            "戌": [
+              "乙丑",
+              "辛未",
+              "丙子",
+              "壬午",
+              "丁亥",
+              "戊戌",
+              "己酉",
+              "甲寅",
+              "庚申"
+            ],
+            "亥": [
+              "癸卯"
+            ]
+          }
+        },
+        {
+          "type": "驾前",
+          "name": "地雌",
+          "jiXiong": "凶",
+          "offset": 2,
+          "descriptionList": [
+            "主女性灾厄，家庭不和或妇科病"
+          ],
+          "locationDescriptionList": null
+        },
+        {
+          "type": "驾前",
+          "name": "丧门",
+          "jiXiong": "大凶",
+          "offset": 2,
+          "descriptionList": [
+            "主丧事哭泣，亲人离丧"
+          ],
+          "locationDescriptionList": null
+        },
+        {
+          "type": "驾前",
+          "name": "地丧",
+          "jiXiong": "大凶",
+          "offset": 2,
+          "descriptionList": [
+            "与丧门并称双煞，主家宅不安"
+          ],
+          "locationDescriptionList": null
+        },
+        {
+          "type": "马前",
+          "name": "月杀",
+          "jiXiong": "平",
+          "offset": 8,
+          "descriptionList": [
+            "半吉半凶，主才华与孤克并存",
+            "申子辰月在戌，寅午戌月在辰",
+            "常人逢之宜修佛道，贵人逢之显侍从之贵"
+          ],
+          "locationDescriptionList": null
+        },
+        {
+          "name": "豹尾",
+          "jiXiong": "凶",
+          "descriptionList": [
+            "同黄旛命限忌"
+          ],
+          "locationDescriptionList": [],
+          "locationMapper": {
+            "子": "戌",
+            "丑": "未",
+            "寅": "辰",
+            "卯": "丑",
+            "辰": "戌",
+            "巳": "未",
+            "午": "辰",
+            "未": "丑",
+            "申": "戌",
+            "酉": "未",
+            "戌": "辰",
+            "亥": "丑"
+          }
+        },
+        {
+          "name": "大杀",
+          "jiXiong": "凶",
+          "descriptionList": [
+            "主横祸"
+          ],
+          "locationDescriptionList": [],
+          "locationMapper": {
+            "子": "申",
+            "丑": "酉",
+            "寅": "戌",
+            "卯": "巳",
+            "辰": "午",
+            "巳": "未",
+            "午": "寅",
+            "未": "卯",
+            "申": "辰",
+            "酉": "亥",
+            "戌": "子",
+            "亥": "丑"
+          }
+        },
+        {
+          "name": "月煞",
+          "jiXiong": "凶",
+          "descriptionList": [
+            "会使人遭受刑害，与月廉的推断方法相同"
+          ],
+          "locationDescriptionList": [],
+          "locationMapper": {
+            "寅": "戌",
+            "卯": "巳",
+            "辰": "午",
+            "巳": "未",
+            "午": "寅",
+            "未": "卯",
+            "申": "辰",
+            "酉": "亥",
+            "戌": "子",
+            "亥": "丑",
+            "子": "申",
+            "丑": "酉"
+          }
+        },
+        {
+          "name": "晦气",
+          "jiXiong": "凶",
+          "descriptionList": [
+            "象征着倒霉、不顺、运气不佳，预示着命主在相应月份可能会遇到各种不顺心的事情，如工作中容易出错、人际关系紧张、财运不佳、身体小恙等，给命主带来一些烦恼和困扰。"
+          ],
+          "locationDescriptionList": [],
+          "locationMapper": {
+            "子": "子",
+            "丑": "亥",
+            "寅": "戌",
+            "卯": "酉",
+            "辰": "申",
+            "巳": "未",
+            "午": "午",
+            "未": "巳",
+            "申": "辰",
+            "酉": "卯",
+            "戌": "寅",
+            "亥": "丑"
+          }
+        }
+      ],
+      "申": [
+        {
+          "name": "病",
+          "jiXiong": "平",
+          "descriptionList": null,
+          "locationDescriptionList": null
+        },
+        {
+          "name": "卦气",
+          "jiXiong": "吉",
+          "descriptionList": null,
+          "locationDescriptionList": [
+            "以年干为主，且如壬、甲生人，从亥上起壬，即是卦气之位，甲生人亥上，即是卦气宫也，余防此例。"
+          ]
+        },
+        {
+          "type": "驾前",
+          "name": "太阴",
+          "jiXiong": "平",
+          "offset": 3,
+          "descriptionList": [
+            "月曜之精，吉凶依相位而定"
+          ],
+          "locationDescriptionList": null
+        },
+        {
+          "type": "驾前",
+          "name": "勾神",
+          "jiXiong": "凶",
+          "offset": 3,
+          "descriptionList": [
+            "主纠缠拖延，官司纠纷"
+          ],
+          "locationDescriptionList": null
+        },
+        {
+          "type": "驾前",
+          "name": "贯索",
+          "jiXiong": "凶",
+          "offset": 3,
+          "descriptionList": [
+            "主牢狱束缚，法律纠纷"
+          ],
+          "locationDescriptionList": null
+        },
+        {
+          "type": "马前",
+          "name": "亡神",
+          "jiXiong": "大凶",
+          "offset": 9,
+          "descriptionList": [
+            "劫杀前六辰，主权柄与暴毙",
+            "主兵刑之灾，克身则大凶",
+            "申子辰亡在亥，寅午戌亡在巳"
+          ],
+          "locationDescriptionList": null
+        },
+        {
+          "name": "天乙",
+          "jiXiong": "吉",
+          "descriptionList": null,
+          "locationDescriptionList": null,
+          "locationMapper": {
+            "甲": "未",
+            "乙": "申",
+            "丙": "酉",
+            "丁": "亥",
+            "戊": "丑",
+            "己": "子",
+            "庚": "丑",
+            "辛": "寅",
+            "壬": "卯",
+            "癸": "巳"
+          }
+        },
+        {
+          "name": "官贵",
+          "jiXiong": "吉",
+          "descriptionList": null,
+          "locationDescriptionList": null,
+          "locationMapper": {
+            "甲": "酉",
+            "乙": "申",
+            "丙": "子",
+            "丁": "亥",
+            "戊": "卯",
+            "己": "寅",
+            "庚": "午",
+            "辛": "巳",
+            "壬": "午",
+            "癸": "巳"
+          }
+        },
+        {
+          "name": "红艳",
+          "jiXiong": "凶",
+          "descriptionList": null,
+          "locationDescriptionList": null,
+          "locationMapper": {
+            "甲": "午",
+            "乙": "申",
+            "丙": "寅",
+            "丁": "未",
+            "戊": "辰",
+            "己": "辰",
+            "庚": "戌",
+            "辛": "酉",
+            "壬": "子",
+            "癸": "申"
+          }
+        },
+        {
+          "name": "孤辰",
+          "jiXiong": "凶",
+          "descriptionList": [
+            "主孤克",
+            "刑害兼损六亲，男遇孤辰多切忌，女逢寡宿独厉眠"
+          ],
+          "locationDescriptionList": [],
+          "locationMapper": {
+            "子": "寅",
+            "丑": "寅",
+            "寅": "巳",
+            "卯": "巳",
+            "辰": "巳",
+            "巳": "申",
+            "午": "申",
+            "未": "申",
+            "申": "亥",
+            "酉": "亥",
+            "戌": "亥",
+            "亥": "寅"
+          }
+        },
+        {
+          "name": "三刑",
+          "jiXiong": "凶",
+          "descriptionList": [
+            "主刑伤"
+          ],
+          "locationDescriptionList": [],
+          "locationMapper": {
+            "子": "卯",
+            "丑": "戌",
+            "寅": "巳",
+            "卯": "午",
+            "辰": "辰",
+            "巳": "申",
+            "午": "午",
+            "未": "丑",
+            "申": "寅",
+            "酉": "酉",
+            "戌": "未",
+            "亥": "亥"
+          }
+        },
+        {
+          "name": "岁合",
+          "jiXiong": "平",
+          "descriptionList": [
+            "合吉则吉，合凶则凶。"
+          ],
+          "locationDescriptionList": [],
+          "locationMapper": {
+            "子": "丑",
+            "丑": "子",
+            "寅": "亥",
+            "卯": "戌",
+            "辰": "酉",
+            "巳": "申",
+            "午": "未",
+            "未": "午",
+            "申": "巳",
+            "酉": "辰",
+            "戌": "卯",
+            "亥": "寅"
+          }
+        },
+        {
+          "name": "卒暴",
+          "jiXiong": "凶",
+          "descriptionList": [
+            "入命限，主人凶恶。主宰，吉多无害"
+          ],
+          "locationDescriptionList": [],
+          "locationMapper": {
+            "子": "卯",
+            "丑": "辰",
+            "寅": "巳",
+            "卯": "午",
+            "辰": "未",
+            "巳": "申",
+            "午": "酉",
+            "未": "戌",
+            "申": "亥",
+            "酉": "子",
+            "戌": "丑",
+            "亥": "寅"
+          }
+        },
+        {
+          "name": "天官符",
+          "jiXiong": "凶",
+          "descriptionList": [
+            ""
+          ],
+          "locationDescriptionList": [],
+          "locationMapper": {
+            "子": "亥",
+            "丑": "申",
+            "寅": "巳",
+            "卯": "寅",
+            "辰": "亥",
+            "巳": "申",
+            "午": "巳",
+            "未": "寅",
+            "申": "亥",
+            "酉": "申",
+            "戌": "巳",
+            "亥": "寅"
+          }
+        },
+        {
+          "name": "月符",
+          "jiXiong": "吉",
+          "descriptionList": [
+            "象征着运势的变化、特殊事件、意外之事，预示着命主在相应月份可能会有一些意想不到的事情发生，这些事情可能是好事，也可能是坏事，具有不确定性和突发性。例如，可能会突然获得一笔财富、遇到一个重要的贵人、遭遇一场意外的疾病等。"
+          ],
+          "locationDescriptionList": [],
+          "locationMapper": {
+            "子": "丑",
+            "丑": "子",
+            "寅": "亥",
+            "卯": "戌",
+            "辰": "酉",
+            "巳": "申",
+            "午": "未",
+            "未": "午",
+            "申": "巳",
+            "酉": "辰",
+            "戌": "卯",
+            "亥": "寅"
+          }
+        }
+      ],
+      "酉": [
+        {
+          "name": "死",
+          "jiXiong": "平",
+          "descriptionList": null,
+          "locationDescriptionList": null
+        },
+        {
+          "name": "孤虚",
+          "jiXiong": "平",
+          "descriptionList": null,
+          "locationDescriptionList": [
+            "甲子、丙寅、戊辰、庚午、壬申；辰",
+            "乙丑、丁卯、己巳、辛未、癸酉；巳",
+            "甲戌、丙子、戊寅、庚辰、壬午；寅",
+            "乙亥、丁丑、己卯、辛巳、癸未；卯",
+            "甲申、丙子、戊寅、庚辰、壬午；子",
+            "乙酉、丁亥、己丑、辛卯、癸巳；丑",
+            "甲午、丙申、戊戌、庚子、壬寅；戌",
+            "乙未、丁酉、己亥、辛丑、癸卯；亥",
+            "甲辰、丙午、戊申、庚戌、壬子；申",
+            "乙巳、丁未、己酉、辛亥、癸丑；酉",
+            "甲寅、丙辰、戊午、庚申、壬戌；午",
+            "乙卯、丁巳、己未、辛酉、癸亥；未"
+          ],
+          "locationMapper": {
+            "辰": [
+              "甲子",
+              "丙寅",
+              "戊辰",
+              "庚午",
+              "壬申"
+            ],
+            "巳": [
+              "乙丑",
+              "丁卯",
+              "己巳",
+              "辛未",
+              "癸酉"
+            ],
+            "寅": [
+              "甲戌",
+              "丙子",
+              "戊寅",
+              "庚辰",
+              "壬午"
+            ],
+            "卯": [
+              "乙亥",
+              "丁丑",
+              "己卯",
+              "辛巳",
+              "癸未"
+            ],
+            "子": [
+              "甲申",
+              "丙子",
+              "戊寅",
+              "庚辰",
+              "壬午"
+            ],
+            "丑": [
+              "乙酉",
+              "丁亥",
+              "己丑",
+              "辛卯",
+              "癸巳"
+            ],
+            "戌": [
+              "甲午",
+              "丙申",
+              "戊戌",
+              "庚子",
+              "壬寅"
+            ],
+            "亥": [
+              "乙未",
+              "丁酉",
+              "己亥",
+              "辛丑",
+              "癸卯"
+            ],
+            "申": [
+              "甲辰",
+              "丙午",
+              "戊申",
+              "庚戌",
+              "壬子"
+            ],
+            "酉": [
+              "乙巳",
+              "丁未",
+              "己酉",
+              "辛亥",
+              "癸丑"
+            ],
+            "午": [
+              "甲寅",
+              "丙辰",
+              "戊午",
+              "庚申",
+              "壬戌"
+            ],
+            "未": [
+              "乙卯",
+              "丁巳",
+              "己未",
+              "辛酉",
+              "癸亥"
+            ]
+          }
+        },
+        {
+          "type": "驾前",
+          "name": "官符",
+          "jiXiong": "凶",
+          "offset": 4,
+          "descriptionList": [
+            "主官非诉讼，公门冲突"
+          ],
+          "locationDescriptionList": null
+        },
+        {
+          "type": "驾前",
+          "name": "飞符",
+          "jiXiong": "凶",
+          "offset": 4,
+          "descriptionList": [
+            "主突发灾祸，意外伤害"
+          ],
+          "locationDescriptionList": null
+        },
+        {
+          "type": "驾前",
+          "name": "年符",
+          "jiXiong": "凶",
+          "offset": 4,
+          "descriptionList": [
+            "流年凶煞，主全年受阻"
+          ],
+          "locationDescriptionList": null
+        },
+        {
+          "type": "驾前",
+          "name": "五鬼",
+          "jiXiong": "大凶",
+          "offset": 4,
+          "descriptionList": [
+            "主小人暗害，盗窃破财"
+          ],
+          "locationDescriptionList": null
+        },
+        {
+          "type": "马前",
+          "name": "将星",
+          "jiXiong": "吉",
+          "offset": 10,
+          "descriptionList": [
+            "主权柄与功名，文武皆宜",
+            "申子辰将在子，寅午戌将在午",
+            "与天德同宫主位列三公"
+          ],
+          "locationDescriptionList": null
+        },
+        {
+          "name": "的杀",
+          "jiXiong": "凶",
+          "descriptionList": [
+            "主破败"
+          ],
+          "locationDescriptionList": [],
+          "locationMapper": {
+            "子": "巳",
+            "丑": "丑",
+            "寅": "酉",
+            "卯": "巳",
+            "辰": "丑",
+            "巳": "酉",
+            "午": "巳",
+            "未": "丑",
+            "申": "酉",
+            "酉": "巳",
+            "戌": "丑",
+            "亥": "酉"
+          }
+        },
+        {
+          "name": "地解",
+          "jiXiong": "吉",
+          "descriptionList": [
+            "主释凶"
+          ],
+          "locationDescriptionList": [],
+          "locationMapper": {
+            "子": "未",
+            "丑": "未",
+            "寅": "申",
+            "卯": "申",
+            "辰": "酉",
+            "巳": "酉",
+            "午": "戌",
+            "未": "戌",
+            "申": "亥",
+            "酉": "亥",
+            "戌": "午",
+            "亥": "午"
+          }
+        },
+        {
+          "name": "破碎",
+          "jiXiong": "凶",
+          "descriptionList": [
+            "主破败"
+          ],
+          "locationDescriptionList": [],
+          "locationMapper": {
+            "子": "巳",
+            "丑": "丑",
+            "寅": "酉",
+            "卯": "巳",
+            "辰": "丑",
+            "巳": "酉",
+            "午": "巳",
+            "未": "丑",
+            "申": "酉",
+            "酉": "巳",
+            "戌": "丑",
+            "亥": "酉"
+          }
+        },
+        {
+          "name": "三台",
+          "jiXiong": "吉",
+          "descriptionList": [
+            "分年挨定，尚需參詳。但大拜諸公，非三台貫命、三台貫度，即行三台度高遷，姑存之以待用。"
+          ],
+          "locationDescriptionList": [],
+          "locationMapper": {
+            "子": "辰",
+            "丑": "巳",
+            "寅": "午",
+            "卯": "未",
+            "辰": "申",
+            "巳": "酉",
+            "午": "戌",
+            "未": "亥",
+            "申": "子",
+            "酉": "丑",
+            "戌": "寅",
+            "亥": "卯"
+          }
+        },
+        {
+          "name": "注受",
+          "jiXiong": "吉",
+          "descriptionList": [
+            "主其吉，为荣富之星",
+            "问对云：阴注阳受，身命守之，则可化凶为吉，更兼吉曜，乃是名利之人。"
+          ],
+          "locationDescriptionList": [
+            "正七子垣逢，二六三五亥戌同。八与腊月丑上立，九寅子月在寅宫。四酉十卯为截法，身命逢之定富荣。"
+          ],
+          "locationMapper": {
+            "子": "寅",
+            "丑": "丑",
+            "寅": "子",
+            "卯": "亥",
+            "辰": "戌",
+            "巳": "酉",
+            "午": "戌",
+            "未": "亥",
+            "申": "子",
+            "酉": "丑",
+            "戌": "寅",
+            "亥": "卯"
+          }
+        }
+      ],
+      "戌": [
+        {
+          "name": "墓",
+          "jiXiong": "平",
+          "descriptionList": null,
+          "locationDescriptionList": null
+        },
+        {
+          "type": "驾前",
+          "name": "月德",
+          "jiXiong": "大吉",
+          "offset": 5,
+          "descriptionList": [
+            "福德之星，化解阴煞"
+          ],
+          "locationDescriptionList": null
+        },
+        {
+          "type": "驾前",
+          "name": "死符",
+          "jiXiong": "大凶",
+          "offset": 5,
+          "descriptionList": [
+            "主死亡关联事件，重病风险"
+          ],
+          "locationDescriptionList": null
+        },
+        {
+          "type": "驾前",
+          "name": "小耗",
+          "jiXiong": "凶",
+          "offset": 5,
+          "descriptionList": [
+            "主小规模破财，开支失控"
+          ],
+          "locationDescriptionList": null
+        },
+        {
+          "type": "驾后",
+          "name": "红鸾",
+          "jiXiong": "吉",
+          "offset": 0,
+          "descriptionList": [
+            "主喜事",
+            "主婚姻喜庆、贵人扶持，流年逢之易有婚嫁或添丁之喜",
+            "查法：以年支为基准，从卯位起子逆数至生年支（如子年红鸾在卯，丑年红鸾在寅）",
+            "与天喜星互为对宫，青年逢之尤利婚恋，老年需防桃花劫"
+          ],
+          "locationDescriptionList": null
+        },
+        {
+          "type": "马前",
+          "name": "攀鞍",
+          "jiXiong": "吉",
+          "offset": 11,
+          "descriptionList": [
+            "主贵人提携与安逸富贵",
+            "申子辰鞍在丑，寅午戌鞍在未",
+            "男逢不忧衣食，女逢奴婢成行"
+          ],
+          "locationDescriptionList": null
+        },
+        {
+          "name": "飞刃",
+          "jiXiong": "凶",
+          "descriptionList": null,
+          "locationDescriptionList": null,
+          "locationMapper": {
+            "甲": "酉",
+            "乙": "戌",
+            "丙": "子",
+            "丁": "丑",
+            "戊": "子",
+            "己": "丑",
+            "庚": "卯",
+            "辛": "辰",
+            "壬": "午",
+            "癸": "未"
+          }
+        },
+        {
+          "name": "唐符",
+          "jiXiong": "吉",
+          "descriptionList": null,
+          "locationDescriptionList": null,
+          "locationMapper": {
+            "甲": "酉",
+            "乙": "戌",
+            "丙": "子",
+            "丁": "丑",
+            "戊": "子",
+            "己": "丑",
+            "庚": "卯",
+            "辛": "辰",
+            "壬": "午",
+            "癸": "未"
+          }
+        },
+        {
+          "name": "流霞",
+          "jiXiong": "凶",
+          "descriptionList": null,
+          "locationDescriptionList": null,
+          "locationMapper": {
+            "甲": "酉",
+            "乙": "戌",
+            "丙": "未",
+            "丁": "申",
+            "戊": "巳",
+            "己": "午",
+            "庚": "辰",
+            "辛": "寅",
+            "壬": "亥",
+            "癸": "寅"
+          }
+        },
+        {
+          "name": "阴煞",
+          "jiXiong": "凶",
+          "descriptionList": [
+            "命限值之，官灾横事。小破财，暗耗之事"
+          ],
+          "locationDescriptionList": [],
+          "locationMapper": {
+            "子": "丑",
+            "丑": "戌",
+            "寅": "未",
+            "卯": "辰",
+            "辰": "丑",
+            "巳": "戌",
+            "午": "未",
+            "未": "辰",
+            "申": "丑",
+            "酉": "戌",
+            "戌": "未",
+            "亥": "辰"
+          }
+        }
+      ],
+      "亥": [
+        {
+          "name": "绝",
+          "jiXiong": "平",
+          "descriptionList": null,
+          "locationDescriptionList": null
+        },
+        {
+          "name": "月廉",
+          "jiXiong": "吉",
+          "descriptionList": null,
+          "locationDescriptionList": [
+            "以出生月份为基准，正月起于 ​申宫，顺行黄道十二宫至出生月对应的宫位。"
+          ]
+        },
+        {
+          "type": "驾前",
+          "name": "大耗",
+          "jiXiong": "大凶",
+          "offset": 6,
+          "descriptionList": [
+            "主重大财物损失，破产被盗"
+          ],
+          "locationDescriptionList": null
+        },
+        {
+          "type": "驾前",
+          "name": "岁破",
+          "jiXiong": "大凶",
+          "offset": 6,
+          "descriptionList": [
+            "太岁对冲，主全年动荡不安"
+          ],
+          "locationDescriptionList": null
+        },
+        {
+          "type": "驾前",
+          "name": "阑干",
+          "jiXiong": "凶",
+          "offset": 6,
+          "descriptionList": [
+            "主障碍阻隔，计划中断"
+          ],
+          "locationDescriptionList": null
+        },
+        {
+          "type": "驾后",
+          "name": "披头",
+          "jiXiong": "凶",
+          "offset": 1,
+          "descriptionList": [
+            "主丧服之灾，多应长辈病伤或家宅不安",
+            "查法：辰位起子逆行（子年辰，丑年卯，寅年寅类推）",
+            "与披麻、丧门并称‘索命三煞’，原局带之先天不利六亲"
+          ],
+          "locationDescriptionList": null
+        },
+        {
+          "type": "马前",
+          "name": "驿马",
+          "jiXiong": "吉",
+          "offset": 0,
+          "descriptionList": [
+            "喻人乘马而致远，主变动、远行及事业发展",
+            "长生临官马主贵，病绝马主祸，申子辰马在寅，寅午戌马在申",
+            "君子逢之官禄显达，庶民得之财利丰盈",
+            "主奔波、走动、迁移等。吉则有外出发展机遇，凶则奔波劳苦多是非"
+          ],
+          "locationDescriptionList": null
+        },
+        {
+          "name": "国印",
+          "jiXiong": "吉",
+          "descriptionList": null,
+          "locationDescriptionList": null,
+          "locationMapper": {
+            "甲": "戌",
+            "乙": "亥",
+            "丙": "丑",
+            "丁": "寅",
+            "戊": "丑",
+            "己": "寅",
+            "庚": "辰",
+            "辛": "巳",
+            "壬": "未",
+            "癸": "申"
+          }
+        }
+      ]
+    },
+    "huaYaoStarPairList": [
+      {
+        "huaYao": {
+          "name": "天禄",
+          "jiXiong": "吉",
+          "descriptionList": null,
+          "locationDescriptionList": [
+            "甲火乙孛丙属木，丁金戊土己月星，庚水辛炁壬计宿，癸罗禄曜显其荣"
+          ],
+          "type": "果老",
+          "locationMapper": {
+            "甲": "火",
+            "乙": "孛",
+            "丙": "木",
+            "丁": "金",
+            "戊": "土",
+            "己": "月",
+            "庚": "水",
+            "辛": "炁",
+            "壬": "计",
+            "癸": "罗"
+          }
+        },
+        "star": "孛"
+      },
+      {
+        "huaYao": {
+          "name": "天暗",
+          "jiXiong": "凶",
+          "descriptionList": null,
+          "locationDescriptionList": [
+            "甲孛乙木丙金居，丁土戊月己水渠，庚炁辛计壬罗火，癸火暗曜需慎趋"
+          ],
+          "type": "果老",
+          "locationMapper": {
+            "甲": "孛",
+            "乙": "木",
+            "丙": "金",
+            "丁": "土",
+            "戊": "月",
+            "己": "水",
+            "庚": "炁",
+            "辛": "计",
+            "壬": "罗",
+            "癸": "火"
+          }
+        },
+        "star": "木"
+      },
+      {
+        "huaYao": {
+          "name": "天福",
+          "jiXiong": "吉",
+          "descriptionList": null,
+          "locationDescriptionList": [
+            "甲木乙金丙土精，丁月戊水己炁清，庚计辛罗壬火耀，癸孛福星照命庭"
+          ],
+          "type": "果老",
+          "locationMapper": {
+            "甲": "木",
+            "乙": "金",
+            "丙": "土",
+            "丁": "月",
+            "戊": "水",
+            "己": "炁",
+            "庚": "计",
+            "辛": "罗",
+            "壬": "火",
+            "癸": "孛"
+          }
+        },
+        "star": "金"
+      },
+      {
+        "huaYao": {
+          "name": "天耗",
+          "jiXiong": "凶",
+          "descriptionList": null,
+          "locationDescriptionList": [
+            "甲金乙土丙月明，丁水戊炁己计灵，庚罗辛火壬孛木，癸木耗星慎经营"
+          ],
+          "type": "果老",
+          "locationMapper": {
+            "甲": "金",
+            "乙": "土",
+            "丙": "月",
+            "丁": "水",
+            "戊": "炁",
+            "己": "计",
+            "庚": "罗",
+            "辛": "火",
+            "壬": "孛",
+            "癸": "木"
+          }
+        },
+        "star": "土"
+      },
+      {
+        "huaYao": {
+          "name": "天荫",
+          "jiXiong": "吉",
+          "descriptionList": null,
+          "locationDescriptionList": [
+            "甲土乙月丙水清，丁炁戊计己罗星，庚火辛孛壬木秀，癸金荫曜保康宁"
+          ],
+          "type": "果老",
+          "locationMapper": {
+            "甲": "土",
+            "乙": "月",
+            "丙": "水",
+            "丁": "炁",
+            "戊": "计",
+            "己": "罗",
+            "庚": "火",
+            "辛": "孛",
+            "壬": "木",
+            "癸": "金"
+          }
+        },
+        "star": "月"
+      },
+      {
+        "huaYao": {
+          "name": "天贵",
+          "jiXiong": "吉",
+          "descriptionList": null,
+          "locationDescriptionList": [
+            "甲月乙水丙炁临，丁计戊罗己火星，庚孛辛木壬金贵，癸土贵人助功名"
+          ],
+          "type": "果老",
+          "locationMapper": {
+            "甲": "月",
+            "乙": "水",
+            "丙": "炁",
+            "丁": "计",
+            "戊": "罗",
+            "己": "火",
+            "庚": "孛",
+            "辛": "木",
+            "壬": "金",
+            "癸": "土"
+          }
+        },
+        "star": "水"
+      },
+      {
+        "huaYao": {
+          "name": "天刑",
+          "jiXiong": "凶",
+          "descriptionList": null,
+          "locationDescriptionList": [
+            "甲水乙炁丙计凶，丁罗戊火己孛逢，庚木辛金壬土刑，癸月刑星需避冲"
+          ],
+          "type": "果老",
+          "locationMapper": {
+            "甲": "水",
+            "乙": "炁",
+            "丙": "计",
+            "丁": "罗",
+            "戊": "火",
+            "己": "孛",
+            "庚": "木",
+            "辛": "金",
+            "壬": "土",
+            "癸": "月"
+          }
+        },
+        "star": "炁"
+      },
+      {
+        "huaYao": {
+          "name": "天印",
+          "jiXiong": "吉",
+          "descriptionList": null,
+          "locationDescriptionList": [
+            "甲炁乙计丙罗星，丁火戊孛己木青，庚金辛土壬月印，癸水印绶掌权柄"
+          ],
+          "type": "果老",
+          "locationMapper": {
+            "甲": "炁",
+            "乙": "计",
+            "丙": "罗",
+            "丁": "火",
+            "戊": "孛",
+            "己": "木",
+            "庚": "金",
+            "辛": "土",
+            "壬": "月",
+            "癸": "水"
+          }
+        },
+        "star": "计"
+      },
+      {
+        "huaYao": {
+          "name": "天囚",
+          "jiXiong": "凶",
+          "descriptionList": null,
+          "locationDescriptionList": [
+            "甲计乙罗丙火星，丁孛戊木己金刑，庚土辛月壬水困，癸炁囚星阻前程"
+          ],
+          "type": "果老",
+          "locationMapper": {
+            "甲": "计",
+            "乙": "罗",
+            "丙": "火",
+            "丁": "孛",
+            "戊": "木",
+            "己": "金",
+            "庚": "土",
+            "辛": "月",
+            "壬": "水",
+            "癸": "炁"
+          }
+        },
+        "star": "罗"
+      },
+      {
+        "huaYao": {
+          "name": "天权",
+          "jiXiong": "吉",
+          "descriptionList": null,
+          "locationDescriptionList": [
+            "甲罗乙火丙孛权，丁木戊金己土全，庚月辛水壬炁贵，癸计权星掌大权"
+          ],
+          "type": "果老",
+          "locationMapper": {
+            "甲": "罗",
+            "乙": "火",
+            "丙": "孛",
+            "丁": "木",
+            "戊": "金",
+            "己": "土",
+            "庚": "月",
+            "辛": "水",
+            "壬": "炁",
+            "癸": "计"
+          }
+        },
+        "star": "火"
+      },
+      {
+        "huaYao": {
+          "name": "天嗣",
+          "jiXiong": "平",
+          "descriptionList": null,
+          "locationDescriptionList": [
+            "甲月乙水丙炁余，丁计戊罗己火居，庚孛辛木壬金宿，癸人见土是天嗣"
+          ],
+          "type": "天干",
+          "locationMapper": {
+            "甲": "月",
+            "乙": "水",
+            "丙": "炁",
+            "丁": "计",
+            "戊": "罗",
+            "己": "火",
+            "庚": "孛",
+            "辛": "木",
+            "壬": "金",
+            "癸": "土"
+          }
+        },
+        "star": "水"
+      },
+      {
+        "huaYao": {
+          "name": "文星",
+          "jiXiong": "平",
+          "descriptionList": null,
+          "locationDescriptionList": [
+            "甲罗乙计丙戊金，丁火己炁庚木星，辛人见土壬逢日，癸人见月定昌荣"
+          ],
+          "type": "天干",
+          "locationMapper": {
+            "甲": "罗",
+            "乙": "计",
+            "丙": "金",
+            "戊": "金",
+            "丁": "火",
+            "己": "炁",
+            "庚": "木",
+            "辛": "土",
+            "壬": "日",
+            "癸": "月"
+          }
+        },
+        "star": "计"
+      },
+      {
+        "huaYao": {
+          "name": "魁星",
+          "jiXiong": "平",
+          "descriptionList": null,
+          "locationDescriptionList": [
+            "甲用太阴乙太阳，丙罗丁计戊炎方,己金庚水辛逢孛，壬炁癸水号魁光"
+          ],
+          "type": "天干",
+          "locationMapper": {
+            "甲": "月",
+            "乙": "日",
+            "丙": "罗",
+            "戊": "火",
+            "丁": "计",
+            "己": "金",
+            "庚": "木",
+            "辛": "孛",
+            "壬": "炁",
+            "癸": "水"
+          }
+        },
+        "star": "日"
+      },
+      {
+        "huaYao": {
+          "name": "官星",
+          "jiXiong": "平",
+          "descriptionList": null,
+          "locationDescriptionList": [
+            "甲炁乙水是官星，丙罗丁计戊孛成，己土庚金辛见木，壬阴癸土定功名"
+          ],
+          "type": "天干",
+          "locationMapper": {
+            "甲": "炁",
+            "乙": "水",
+            "丙": "罗",
+            "丁": "计",
+            "戊": "孛",
+            "己": "土",
+            "庚": "金",
+            "辛": "木",
+            "壬": "月",
+            "癸": "土"
+          }
+        },
+        "star": "水"
+      },
+      {
+        "huaYao": {
+          "name": "印星",
+          "jiXiong": "平",
+          "descriptionList": null,
+          "locationDescriptionList": [
+            "甲木乙日丙是荧，丁月戊土己罗辰，庚金辛计壬逢水，癸人见孛是印星"
+          ],
+          "type": "天干",
+          "locationMapper": {
+            "甲": "木",
+            "乙": "日",
+            "丙": "火",
+            "丁": "月",
+            "戊": "土",
+            "己": "罗",
+            "庚": "金",
+            "辛": "计",
+            "壬": "水",
+            "癸": "孛"
+          }
+        },
+        "star": "日"
+      },
+      {
+        "huaYao": {
+          "name": "催官",
+          "jiXiong": "平",
+          "descriptionList": null,
+          "locationDescriptionList": [
+            "甲金乙水丙日宣，丁罗戊木见为欢，己炁庚孛辛土宿，壬月癸计是催官"
+          ],
+          "type": "天干",
+          "locationMapper": {
+            "甲": "金",
+            "乙": "水",
+            "丙": "日",
+            "丁": "罗",
+            "戊": "木",
+            "己": "炁",
+            "庚": "孛",
+            "辛": "土",
+            "壬": "月",
+            "癸": "计"
+          }
+        },
+        "star": "水"
+      },
+      {
+        "huaYao": {
+          "name": "禄神",
+          "jiXiong": "平",
+          "descriptionList": null,
+          "locationDescriptionList": [
+            "甲兼木孛乙水星，丙计丁罗戊土居，己火庚金辛紫炁，壬日癸月是禄神"
+          ],
+          "type": "天干",
+          "locationMapper": {
+            "甲": "木",
+            "乙": "水",
+            "丙": "计",
+            "丁": "罗",
+            "戊": "土",
+            "己": "火",
+            "庚": "金",
+            "辛": "炁",
+            "壬": "日",
+            "癸": "月"
+          }
+        },
+        "star": "水"
+      },
+      {
+        "huaYao": {
+          "name": "禄元",
+          "jiXiong": "平",
+          "descriptionList": null,
+          "locationDescriptionList": [],
+          "type": "天干",
+          "locationMapper": {
+            "甲": "木",
+            "乙": "火",
+            "丙": "水",
+            "丁": "日",
+            "戊": "水",
+            "己": "日",
+            "庚": "水",
+            "辛": "金",
+            "壬": "木",
+            "癸": "土"
+          }
+        },
+        "star": "火"
+      },
+      {
+        "huaYao": {
+          "name": "仁元",
+          "jiXiong": "平",
+          "descriptionList": null,
+          "locationDescriptionList": [],
+          "type": "天干",
+          "locationMapper": {
+            "甲": "木",
+            "乙": "木",
+            "丙": "火",
+            "丁": "日",
+            "戊": "土",
+            "己": "土",
+            "庚": "金",
+            "辛": "金",
+            "壬": "水",
+            "癸": "水"
+          }
+        },
+        "star": "木"
+      },
+      {
+        "huaYao": {
+          "name": "喜神",
+          "jiXiong": "平",
+          "descriptionList": null,
+          "locationDescriptionList": [
+            "甲罗乙计丙炁星，丁水戊月是喜神，己土庚金辛见水，壬孛癸火最堪亲"
+          ],
+          "type": "天干",
+          "locationMapper": {
+            "甲": "罗",
+            "乙": "计",
+            "丙": "炁",
+            "丁": "水",
+            "戊": "月",
+            "己": "土",
+            "庚": "金",
+            "辛": "水",
+            "壬": "孛",
+            "癸": "火"
+          }
+        },
+        "star": "计"
+      },
+      {
+        "huaYao": {
+          "name": "生官",
+          "jiXiong": "平",
+          "descriptionList": null,
+          "locationDescriptionList": [],
+          "type": "天干",
+          "locationMapper": {
+            "甲": "月",
+            "乙": "土",
+            "丙": "炁",
+            "丁": "水",
+            "戊": "罗",
+            "己": "计",
+            "庚": "孛",
+            "辛": "火",
+            "壬": "金",
+            "癸": "木"
+          }
+        },
+        "star": "土"
+      },
+      {
+        "huaYao": {
+          "name": "伤官",
+          "jiXiong": "平",
+          "descriptionList": null,
+          "locationDescriptionList": [],
+          "type": "天干",
+          "locationMapper": {
+            "甲": "金",
+            "乙": "木",
+            "丙": "月",
+            "丁": "土",
+            "戊": "炁",
+            "己": "水",
+            "庚": "罗",
+            "辛": "计",
+            "壬": "孛",
+            "癸": "火"
+          }
+        },
+        "star": "木"
+      },
+      {
+        "huaYao": {
+          "name": "科名",
+          "jiXiong": "吉",
+          "descriptionList": null,
+          "locationDescriptionList": [
+            "甲乙生人木向容，丙丁火宿定科名。庚辛金兮戊己土，壬癸生人是水星"
+          ],
+          "type": "天干",
+          "locationMapper": {
+            "甲": "木",
+            "壬": "水",
+            "乙": "木",
+            "癸": "水",
+            "戊": "土",
+            "丙": "火",
+            "庚": "金",
+            "辛": "金",
+            "己": "土",
+            "丁": "火"
+          }
+        },
+        "star": "木"
+      },
+      {
+        "huaYao": {
+          "name": "天官",
+          "jiXiong": "吉",
+          "descriptionList": null,
+          "locationDescriptionList": null,
+          "type": "天干",
+          "locationMapper": {
+            "甲": "炁",
+            "乙": "水",
+            "丙": "罗",
+            "丁": "计",
+            "戊": "孛",
+            "己": "土",
+            "庚": "金",
+            "辛": "木",
+            "壬": "月",
+            "癸": "土"
+          }
+        },
+        "star": "水"
+      },
+      {
+        "huaYao": {
+          "name": "爵神",
+          "jiXiong": "平",
+          "descriptionList": null,
+          "locationDescriptionList": [
+            "子申爵神土中藏，亥未火位午丑水，卯寅炁木巳酉金，辰宫见孛定荣昌"
+          ],
+          "type": "年地支",
+          "locationMapper": {
+            "子": "土",
+            "申": "土",
+            "亥": "火",
+            "未": "火",
+            "午": "水",
+            "丑": "水",
+            "卯": "炁",
+            "寅": "木",
+            "巳": "木",
+            "酉": "金",
+            "戌": "金",
+            "辰": "孛"
+          }
+        },
+        "star": "木"
+      },
+      {
+        "huaYao": {
+          "name": "天马",
+          "jiXiong": "平",
+          "descriptionList": null,
+          "locationDescriptionList": [
+            "子申辰马火方行，亥卯宫未木位生，寅午戌位水为地，酉巳丑计驿马程"
+          ],
+          "type": "年地支",
+          "locationMapper": {
+            "子": "火",
+            "申": "火",
+            "辰": "火",
+            "亥": "木",
+            "未": "木",
+            "卯": "木",
+            "午": "水",
+            "寅": "水",
+            "戌": "水",
+            "巳": "计",
+            "酉": "计",
+            "丑": "计"
+          }
+        },
+        "star": "计"
+      },
+      {
+        "huaYao": {
+          "name": "地驿",
+          "jiXiong": "平",
+          "descriptionList": null,
+          "locationDescriptionList": [],
+          "type": "年地支",
+          "locationMapper": {
+            "子": "木",
+            "丑": "水",
+            "寅": "金",
+            "卯": "火",
+            "辰": "木",
+            "巳": "水",
+            "午": "金",
+            "未": "火",
+            "申": "木",
+            "酉": "水",
+            "戌": "金",
+            "亥": "火"
+          }
+        },
+        "star": "水"
+      },
+      {
+        "huaYao": {
+          "name": "血支",
+          "jiXiong": "平",
+          "descriptionList": null,
+          "locationDescriptionList": [],
+          "type": "年地支",
+          "locationMapper": {
+            "子": "木",
+            "丑": "土",
+            "寅": "土",
+            "卯": "木",
+            "辰": "火",
+            "巳": "金",
+            "午": "水",
+            "未": "日",
+            "申": "月",
+            "酉": "水",
+            "戌": "金",
+            "亥": "火"
+          }
+        },
+        "star": "金"
+      },
+      {
+        "huaYao": {
+          "name": "血忌",
+          "jiXiong": "平",
+          "descriptionList": null,
+          "locationDescriptionList": [],
+          "type": "年地支",
+          "locationMapper": {
+            "子": "日",
+            "丑": "土",
+            "寅": "土",
+            "卯": "日",
+            "辰": "木",
+            "巳": "水",
+            "午": "火",
+            "未": "金",
+            "申": "金",
+            "酉": "火",
+            "戌": "水",
+            "亥": "木"
+          }
+        },
+        "star": "水"
+      },
+      {
+        "huaYao": {
+          "name": "产星",
+          "jiXiong": "平",
+          "descriptionList": null,
+          "locationDescriptionList": [],
+          "type": "年地支",
+          "locationMapper": {
+            "子": "金",
+            "丑": "水",
+            "寅": "木",
+            "卯": "火",
+            "辰": "金",
+            "巳": "水",
+            "午": "木",
+            "未": "火",
+            "申": "金",
+            "酉": "水",
+            "戌": "木",
+            "亥": "火"
+          }
+        },
+        "star": "水"
+      },
+      {
+        "huaYao": {
+          "name": "值难",
+          "jiXiong": "平",
+          "descriptionList": null,
+          "locationDescriptionList": [],
+          "type": "月地支",
+          "locationMapper": {
+            "寅": "日",
+            "卯": "日",
+            "辰": "月",
+            "巳": "月",
+            "午": "火",
+            "未": "罗",
+            "申": "水",
+            "酉": "孛",
+            "戌": "木",
+            "亥": "炁",
+            "子": "金",
+            "丑": "金"
+          }
+        },
+        "star": "月"
+      },
+      {
+        "huaYao": {
+          "name": "科甲",
+          "jiXiong": "吉",
+          "descriptionList": null,
+          "locationDescriptionList": [
+            "官禄宫、福德宫",
+            "日居午未庙旺时能量最强"
+          ],
+          "type": "命宫"
+        },
+        "star": "日"
+      },
+      {
+        "huaYao": {
+          "name": "天经",
+          "jiXiong": "平",
+          "descriptionList": null,
+          "locationDescriptionList": [
+            "命度所在黄道经线",
+            "日月行度交汇点"
+          ],
+          "type": "其他"
+        },
+        "star": "土"
+      },
+      {
+        "huaYao": {
+          "name": "地纬",
+          "jiXiong": "平",
+          "descriptionList": null,
+          "locationDescriptionList": [
+            "计都南交点纬度",
+            "太阴远地点轨迹"
+          ],
+          "type": "其他"
+        },
+        "star": "水"
+      },
+      {
+        "huaYao": {
+          "name": "天元禄",
+          "jiXiong": "吉",
+          "descriptionList": null,
+          "locationDescriptionList": [
+            "官禄宫",
+            "年干起五虎遁至命宫取曜"
+          ],
+          "type": "其他"
+        },
+        "star": "土"
+      },
+      {
+        "huaYao": {
+          "name": "人元禄",
+          "jiXiong": "大吉",
+          "descriptionList": null,
+          "locationDescriptionList": [
+            "命宫、福德宫",
+            "五虎遁至生月取天干定位"
+          ],
+          "type": "命宫"
+        },
+        "star": "木"
+      },
+      {
+        "huaYao": {
+          "name": "地元禄",
+          "jiXiong": "吉",
+          "descriptionList": null,
+          "locationDescriptionList": [
+            "田宅宫、财帛宫",
+            "卦气起点逆推三宫"
+          ],
+          "type": "命宫"
+        },
+        "star": "水"
+      },
+      {
+        "huaYao": {
+          "name": "职元",
+          "jiXiong": "吉",
+          "descriptionList": null,
+          "locationDescriptionList": [
+            "命宫、官禄宫",
+            "年干顺行至卦气宫取曜"
+          ],
+          "type": "命宫"
+        },
+        "star": "月"
+      },
+      {
+        "huaYao": {
+          "name": "局主",
+          "jiXiong": "平",
+          "descriptionList": null,
+          "locationDescriptionList": [
+            "命宫、卦气宫",
+            "十干化曜表六合位取星"
+          ],
+          "type": "命宫"
+        },
+        "star": "火"
+      },
+      {
+        "huaYao": {
+          "name": "马元",
+          "jiXiong": "平",
+          "descriptionList": null,
+          "locationDescriptionList": [
+            "三合局对冲宫",
+            "年支定驿马方位"
+          ],
+          "type": "其他"
+        },
+        "star": "木"
+      },
+      {
+        "huaYao": {
+          "name": "寿元",
+          "jiXiong": "吉",
+          "descriptionList": null,
+          "locationDescriptionList": [
+            "疾厄宫、命宫",
+            "太阴行度与福德宫联动"
+          ],
+          "type": "纳音"
+        },
+        "star": "火"
+      }
+    ],
+    "twelveZhangShengGongMapper": {
+      "寅": "长生",
+      "卯": "沐浴",
+      "辰": "冠带",
+      "巳": "临官",
+      "午": "帝旺",
+      "未": "衰",
+      "申": "病",
+      "酉": "死",
+      "戌": "墓",
+      "亥": "绝",
+      "子": "胎",
+      "丑": "养"
+    }
+  }

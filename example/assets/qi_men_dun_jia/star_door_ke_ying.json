@@ -1,0 +1,308 @@
+{
+    "天蓬": {
+        "休门": {
+            "description": "披枷戴锁，锒铛入狱",
+            "jiXiong": "小凶"
+        },
+        "生门": {
+            "description": "纵欲无度，尽兴不返",
+            "jiXiong": "大吉"
+        },
+        "伤门": {
+            "description": "大难临头，六宅不安",
+            "jiXiong": "小凶"
+        },
+        "杜门": {
+            "description": "十年寒窗，不得一举",
+            "jiXiong": "小凶"
+        },
+        "景门": {
+            "description": "万事具备，只欠东风",
+            "jiXiong": "小凶"
+        },
+        "死门": {
+            "description": "夺戒口食，剥戒身衣",
+            "jiXiong": "小凶"
+        },
+        "惊门": {
+            "description": "别生枝节，何所取义",
+            "jiXiong": "小凶"
+        },
+        "开门": {
+            "description": "三年不鸣，一鸣惊人",
+            "jiXiong": "大吉"
+        }
+    },
+    "天任": {
+        "休门": {
+            "description": "因材施教，青出于蓝",
+            "jiXiong": "大吉"
+        },
+        "生门": {
+            "description": "前山后海，进退两难",
+            "jiXiong": "小凶"
+        },
+        "伤门": {
+            "description": "饥不择食，饮鸩止渴",
+            "jiXiong": "小凶"
+        },
+        "杜门": {
+            "description": "积劳成疾，病入膏肓",
+            "jiXiong": "小凶"
+        },
+        "景门": {
+            "description": "衣暖食饱，琼楼玉宇",
+            "jiXiong": "小吉"
+        },
+        "死门": {
+            "description": "明目张胆，坐地分赃",
+            "jiXiong": "大凶"
+        },
+        "惊门": {
+            "description": "一无所得，人财两空",
+            "jiXiong": "小凶"
+        },
+        "开门": {
+            "description": "仓斗库实，有备无患",
+            "jiXiong": "大吉"
+        }
+    },
+    "天冲": {
+        "休门": {
+            "description": "履险如夷，转危为安",
+            "jiXiong": "大吉"
+        },
+        "生门": {
+            "description": "塞翁失马，安之非福",
+            "jiXiong": "大吉"
+        },
+        "伤门": {
+            "description": "遍体鳞伤，痛入骨髓",
+            "jiXiong": "大凶"
+        },
+        "杜门": {
+            "description": "墨守成规，不知改变",
+            "jiXiong": "小凶"
+        },
+        "景门": {
+            "description": "车载斗量，指不胜屈",
+            "jiXiong": "小吉"
+        },
+        "死门": {
+            "description": "刀光剑影，枕戈待旦",
+            "jiXiong": "小凶"
+        },
+        "惊门": {
+            "description": "遇人不淑，劳燕分飞",
+            "jiXiong": "大凶"
+        },
+        "开门": {
+            "description": "力行不怠，一曰千重",
+            "jiXiong": "大吉"
+        }
+    },
+    "天辅": {
+        "休门": {
+            "description": "雾消云散，重见光明",
+            "jiXiong": "大吉"
+        },
+        "生门": {
+            "description": "心心相印，海誓山盟",
+            "jiXiong": "大吉"
+        },
+        "伤门": {
+            "description": "先天不足，后天未补",
+            "jiXiong": "小凶"
+        },
+        "杜门": {
+            "description": "七颠八倒，自相矛盾",
+            "jiXiong": "大凶"
+        },
+        "景门": {
+            "description": "春风一度，始乱终弃",
+            "jiXiong": "小吉"
+        },
+        "死门": {
+            "description": "花天酒地，玩物丧志",
+            "jiXiong": "小凶"
+        },
+        "惊门": {
+            "description": "天罗地网，插翅难飞",
+            "jiXiong": "小凶"
+        },
+        "开门": {
+            "description": "字无分文，牛衣对泣",
+            "jiXiong": "小凶"
+        }
+    },
+    "天芮": {
+        "休门": {
+            "description": "一以当千，南争北战",
+            "jiXiong": "大吉"
+        },
+        "生门": {
+            "description": "力不从心，望尘莫及",
+            "jiXiong": "小凶"
+        },
+        "伤门": {
+            "description": "七窃生烟，九世之仇",
+            "jiXiong": "小凶"
+        },
+        "杜门": {
+            "description": "安生而食，用钱如水",
+            "jiXiong": "小凶"
+        },
+        "景门": {
+            "description": "才情卓越，大智若愚",
+            "jiXiong": "小吉"
+        },
+        "死门": {
+            "description": "曰落西山，旦不保夕",
+            "jiXiong": "大凶"
+        },
+        "惊门": {
+            "description": "风吹草动，一夕数惊",
+            "jiXiong": "小凶"
+        },
+        "开门": {
+            "description": "堆金积玉，安富尊荣",
+            "jiXiong": "大吉"
+        }
+    },
+    "天禽": {
+        "休门": {
+            "description": "披枷戴锁，锒铛入狱",
+            "jiXiong": "小凶"
+        },
+        "生门": {
+            "description": "前山后海，进退两难",
+            "jiXiong": "小凶"
+        },
+        "伤门": {
+            "description": "遍体鳞伤，痛入骨髓",
+            "jiXiong": "大凶"
+        },
+        "杜门": {
+            "description": "七颠八倒，自相矛盾",
+            "jiXiong": "大凶"
+        },
+        "景门": {
+            "description": "春风一度，始乱终弃",
+            "jiXiong": "小凶"
+        },
+        "死门": {
+            "description": "曰落西山，旦不保夕",
+            "jiXiong": "大凶"
+        },
+        "惊门": {
+            "description": "投机取巧，惟利是图",
+            "jiXiong": "大凶"
+        },
+        "开门": {
+            "description": "四海漂泊，何处是家",
+            "jiXiong": "小凶"
+        }
+    },
+    "天心": {
+        "休门": {
+            "description": "官明如镜，吏清如水",
+            "jiXiong": "大吉"
+        },
+        "生门": {
+            "description": "六根清净，山林隐逸",
+            "jiXiong": "大吉"
+        },
+        "伤门": {
+            "description": "飞来横祸，轩然大波",
+            "jiXiong": "小凶"
+        },
+        "杜门": {
+            "description": "山穷水尽，千辛万苦",
+            "jiXiong": "大凶"
+        },
+        "景门": {
+            "description": "相见恨晚，握手言欢",
+            "jiXiong": "小吉"
+        },
+        "死门": {
+            "description": "生死有命，回天乏术",
+            "jiXiong": "小凶"
+        },
+        "惊门": {
+            "description": "千变万化，不可捉摸",
+            "jiXiong": "小凶"
+        },
+        "开门": {
+            "description": "四海漂泊，何处是家",
+            "jiXiong": "小凶"
+        }
+    },
+    "天柱": {
+        "休门": {
+            "description": "孤云野鹤，枕流漱石",
+            "jiXiong": "大吉"
+        },
+        "生门": {
+            "description": "怜我怜卿，鸾凤和鸣",
+            "jiXiong": "大吉"
+        },
+        "伤门": {
+            "description": "上下其手，一手遮天",
+            "jiXiong": "大凶"
+        },
+        "杜门": {
+            "description": "七颠八倒，自相矛盾",
+            "jiXiong": "大凶"
+        },
+        "景门": {
+            "description": "先著祖鞭，长治久安",
+            "jiXiong": "小吉"
+        },
+        "死门": {
+            "description": "引狼入室，虎视耽耽",
+            "jiXiong": "小凶"
+        },
+        "惊门": {
+            "description": "投机取巧，惟利是图",
+            "jiXiong": "大凶"
+        },
+        "开门": {
+            "description": "有勇有谋，果决前进",
+            "jiXiong": "大吉"
+        }
+    },
+    "天英": {
+        "休门": {
+            "description": "寸进尺退，一事无成",
+            "jiXiong": "小凶"
+        },
+        "生门": {
+            "description": "游山玩水，走遍天下",
+            "jiXiong": "大吉"
+        },
+        "伤门": {
+            "description": "龙争虎斗，两败俱伤",
+            "jiXiong": "小凶"
+        },
+        "杜门": {
+            "description": "倚官仗势，作威作福",
+            "jiXiong": "小凶"
+        },
+        "景门": {
+            "description": "春风一度，始乱终弃",
+            "jiXiong": "小凶"
+        },
+        "死门": {
+            "description": "连年征战，劳民伤财",
+            "jiXiong": "小凶"
+        },
+        "惊门": {
+            "description": "目瞪口呆，方寸已乱",
+            "jiXiong": "小凶"
+        },
+        "开门": {
+            "description": "金碧辉煌，前呼后拥",
+            "jiXiong": "大吉"
+        }
+    }
+}

@@ -1,0 +1,49 @@
+{
+  "name": "太玄四柱（示例）",
+  "version": "1.0.0",
+  "description": "这是一个用于演示的示例算法流程。",
+  "createdAt": "2023-01-01T12:00:00.000Z",
+  "updatedAt": "2023-01-01T12:00:00.000Z",
+  "globalConfig": {},
+  "ruleSets": [],
+  "steps": [
+    {
+      "id": "step_1",
+      "name": "获取四柱",
+      "description": "从输入信息获取四柱",
+      "operationId": "get_four_pillars",
+      "config": {},
+      "inputs": {
+        "birthInfo": "input.birthInfo"
+      },
+      "outputs": {
+        "fourPillars": "intermediate.four_pillars_data"
+      },
+      "required": true,
+      "timeoutMs": 5000,
+      "retryCount": 0,
+      "dependencies": [],
+      "isOptional": false
+    },
+    {
+      "id": "step_2",
+      "name": "干支化数",
+      "description": "将年柱天干转换为数字",
+      "operationId": "convert_stem_to_number",
+      "config": {
+        "ruleSetId": "taixuan"
+      },
+      "inputs": {
+        "stem": "intermediate.four_pillars_data.year.stem"
+      },
+      "outputs": {
+        "number": "output.final_number"
+      },
+      "required": true,
+      "timeoutMs": 5000,
+      "retryCount": 0,
+      "dependencies": ["step_1"],
+      "isOptional": false
+    }
+  ]
+}

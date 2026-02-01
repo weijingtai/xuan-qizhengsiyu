@@ -1,0 +1,754 @@
+[
+	{
+	"id":1,
+	"className": "果老",
+	"star": "日",
+	"starPositionStatusType": "庙",
+	"positionList": ["戌"]
+	},
+	{
+	"id":2,
+	"className": "果老",
+	"star": "月",
+	"starPositionStatusType": "庙",
+	"positionList": ["戌"]
+	},
+	{
+	"id":3,
+	"className": "果老",
+	"star": "土",
+	"starPositionStatusType": "庙",
+	"positionList": ["丑"]
+	},
+	{
+	"id":4,
+	"className": "果老",
+	"star": "罗",
+	"starPositionStatusType": "庙",
+	"positionList": ["寅","午"]
+	},
+	{
+	"id":5,
+	"className": "果老",
+	"star": "火",
+	"starPositionStatusType": "庙",
+	"positionList": ["卯"]
+	},
+	{
+	"id":6,
+	"className": "果老",
+	"star": "金",
+	"starPositionStatusType": "庙",
+	"positionList": ["辰"]
+	},
+	{
+	"id":7,
+	"className": "果老",
+	"star": "计",
+	"starPositionStatusType": "庙",
+	"positionList": ["巳","亥"]
+	},	{
+	"id":8,
+	"className": "果老",
+	"star": "木",
+	"starPositionStatusType": "庙",
+	"positionList": ["亥"]
+	},
+	{
+	"id":9,
+	"className": "果老",
+	"star": "水",
+	"starPositionStatusType": "庙",
+	"positionList": ["午"]
+	},
+
+	{
+	"id":10,
+	"className": "果老",
+	"star": "孛",
+	"starPositionStatusType": "庙",
+	"positionList": ["未"]
+	},
+	{
+	"id":11,
+	"className": "果老",
+	"star": "炁",
+	"starPositionStatusType": "庙",
+	"positionList": ["申"]
+	},
+
+	{
+	"id":12,
+	"className": "果老",
+	"star": "土",
+	"starPositionStatusType": "旺",
+	"positionList": ["卯"]
+	},
+	{
+	"id":13,
+	"className": "果老",
+	"star": "火",
+	"starPositionStatusType": "旺",
+	"positionList": ["丑"]
+	},
+	{
+	"id":14,
+	"className": "果老",
+	"star": "金",
+	"starPositionStatusType": "旺",
+	"positionList": ["午","亥"]
+	},
+	{
+	"id":15,
+	"className": "果老",
+	"star": "水",
+	"starPositionStatusType": "旺",
+	"positionList": ["子","巳"]
+	},	
+	{
+	"id":16,
+	"className": "果老",
+	"star": "木",
+	"starPositionStatusType": "旺",
+	"positionList": ["未","亥"]
+	},
+	{
+	"id":17,
+	"className": "果老",
+	"star": "日",
+	"starPositionStatusType": "旺",
+	"positionList": ["巳"]
+	},
+	{
+	"id":18,
+	"className": "果老",
+	"star": "月",
+	"starPositionStatusType": "旺",
+	"positionList": ["酉"]
+	},
+
+	{
+	"id":19,
+	"className": "果老",
+	"star": "罗",
+	"starPositionStatusType": "旺",
+	"positionList": ["卯"]
+	},
+
+	{
+	"id":20,
+	"className": "果老",
+	"star": "计",
+	"starPositionStatusType": "旺",
+	"positionList": ["卯","戌"]
+	},
+	{
+	"id":21,
+	"className": "果老",
+	"star": "孛",
+	"starPositionStatusType": "旺",
+	"positionList": ["寅"]
+	},
+	{
+	"id":22,
+	"className": "果老",
+	"star": "炁",
+	"starPositionStatusType": "旺",
+	"positionList": ["亥"]
+	},
+
+	{
+	"id":23,
+	"className": "果老",
+	"star": "土",
+	"starPositionStatusType": "乐",
+	"positionList": ["子","丑"]
+	},
+	{
+	"id":24,
+	"className": "果老",
+	"star": "火",
+	"starPositionStatusType": "乐",
+	"positionList": ["卯","戌"]
+	},
+	{
+	"id":25,
+	"className": "果老",
+	"star": "金",
+	"starPositionStatusType": "乐",
+	"positionList": ["辰","酉"]
+	},
+	{
+	"id":26,
+	"className": "果老",
+	"star": "水",
+	"starPositionStatusType": "乐",
+	"positionList": ["申","巳"]
+	},	
+	{
+	"id":27,
+	"className": "果老",
+	"star": "木",
+	"starPositionStatusType": "乐",
+	"positionList": ["寅","亥"]
+	},
+	{
+	"id":28,
+	"className": "果老",
+	"star": "日",
+	"starPositionStatusType": "乐",
+	"positionList": ["午"]
+	},
+	{
+	"id":29,
+	"className": "果老",
+	"star": "月",
+	"starPositionStatusType": "乐",
+	"positionList": ["未"]
+	},
+
+	{
+	"id":30,
+	"className": "果老",
+	"star": "罗",
+	"starPositionStatusType": "乐",
+	"positionList": ["午"]
+	},
+
+	{
+	"id":31,
+	"className": "果老",
+	"star": "计",
+	"starPositionStatusType": "乐",
+	"positionList": ["子"]
+	},
+	{
+	"id":32,
+	"className": "果老",
+	"star": "孛",
+	"starPositionStatusType": "乐",
+	"positionList": ["辰"]
+	},
+	{
+	"id":33,
+	"className": "果老",
+	"star": "炁",
+	"starPositionStatusType": "乐",
+	"positionList": ["戌"]
+	},
+	{
+	"id":34,
+	"className": "果老",
+	"star": "土",
+	"starPositionStatusType": "喜",
+	"positionList": ["午"]
+	},
+	{
+	"id":35,
+	"className": "果老",
+	"star": "火",
+	"starPositionStatusType": "喜",
+	"positionList": ["申"]
+	},
+	{
+	"id":36,
+	"className": "果老",
+	"star": "水",
+	"starPositionStatusType": "喜",
+	"positionList": ["辰"]
+	},	
+	{
+	"id":37,
+	"className": "果老",
+	"star": "木",
+	"starPositionStatusType": "喜",
+	"positionList": ["未"]
+	},
+	{
+	"id":38,
+	"className": "果老",
+	"star": "日",
+	"starPositionStatusType": "喜",
+	"positionList": ["寅"]
+	},
+	{
+	"id":39,
+	"className": "果老",
+	"star": "月",
+	"starPositionStatusType": "喜",
+	"positionList": ["亥"]
+	},
+
+	{
+	"id":40,
+	"className": "果老",
+	"star": "罗",
+	"starPositionStatusType": "喜",
+	"positionList": ["戌"]
+	},
+	{
+	"id":41,
+	"className": "果老",
+	"star": "孛",
+	"starPositionStatusType": "喜",
+	"positionList": ["辰"]
+	},{
+	"id":42,
+	"className": "星学大成",
+	"star": "土",
+	"starPositionStatusType": "正",
+	"positionList": ["丑"]
+	},
+		{
+	"id":43,
+	"className": "星学大成",
+	"star": "土",
+	"starPositionStatusType": "偏",
+	"positionList": ["子"]
+	},
+		{
+	"id":44,
+	"className": "星学大成",
+	"star": "木",
+	"starPositionStatusType": "正",
+	"positionList": ["亥"]
+	},
+		{
+	"id":45,
+	"className": "星学大成",
+	"star": "木",
+	"starPositionStatusType": "偏",
+	"positionList": ["寅"]
+	},
+
+	{
+	"id":46,
+	"className": "星学大成",
+	"star": "火",
+	"starPositionStatusType": "正",
+	"positionList": ["卯"]
+	},
+		{
+	"id":47,
+	"className": "星学大成",
+	"star": "火",
+	"starPositionStatusType": "偏",
+	"positionList": ["戌"]
+	},
+
+	{
+	"id":48,
+	"className": "星学大成",
+	"star": "金",
+	"starPositionStatusType": "正",
+	"positionList": ["辰"]
+	},
+		{
+	"id":49,
+	"className": "星学大成",
+	"star": "金",
+	"starPositionStatusType": "偏",
+	"positionList": ["酉"]
+	},
+
+	{
+	"id":50,
+	"className": "星学大成",
+	"star": "水",
+	"starPositionStatusType": "正",
+	"positionList": ["巳"]
+	},
+		{
+	"id":51,
+	"className": "星学大成",
+	"star": "水",
+	"starPositionStatusType": "偏",
+	"positionList": ["申"]
+	},	
+
+	{
+	"id":52,
+	"className": "果老",
+	"star": "日",
+	"starPositionStatusType": "正",
+	"positionList": ["午"]
+	},
+	{
+	"id":53,
+	"className": "果老",
+	"star": "月",
+	"starPositionStatusType": "正",
+	"positionList": ["未"]
+	},
+		{
+	"id":54,
+	"className": "果老",
+	"star": "土",
+	"starPositionStatusType": "怒",
+	"positionList": ["巳"],
+	"geJuList":["土埋双女"]
+	},
+	{
+	"id":55,
+	"className": "果老",
+	"star": "火",
+	"starPositionStatusType": "怒",
+	"positionList": ["酉"],
+	"descriptionList":["“火烧牛角”，“火入金乡”，尤防木至"],
+	"geJuList":["火触牛角","火入金乡"]
+	},
+	{
+	"id":56,
+	"className": "果老",
+	"star": "木",
+	"starPositionStatusType": "怒",
+	"positionList": ["子"],
+		"geJuList":["木打宝瓶"]
+	},
+		{
+	"id":57,
+	"className": "果老",
+	"star": "水",
+	"starPositionStatusType": "怒",
+	"positionList": ["戌"],
+	"descriptionList":["“水乘火位”，又怕逢金，“金忌白羊”"],
+		"geJuList":["水乘火位","金忌白羊"]
+	},
+			{
+	"id":58,
+	"className": "果老",
+	"star": "金",
+	"starPositionStatusType": "怒",
+	"positionList": ["寅"],
+		"geJuList":["金骑人马"]
+	},
+
+	{
+	"id":59,
+	"className": "果老",
+	"star": "土",
+	"starPositionStatusType": "殿",
+	"positionList": ["柳","女","胃","氐"]
+	},
+		{
+	"id":60,
+	"className": "果老",
+	"star": "木",
+	"starPositionStatusType": "殿",
+	"positionList": ["奎","角","斗","井"]
+	},
+
+	{
+	"id":61,
+	"className": "果老",
+	"star": "火",
+	"starPositionStatusType": "殿",
+	"positionList": ["翼","尾","室","觜"]
+	},
+
+	{
+	"id":62,
+	"className": "果老",
+	"star": "金",
+	"starPositionStatusType": "殿",
+	"positionList": ["牛","亢","娄","鬼"]
+	},
+
+	{
+	"id":63,
+	"className": "果老",
+	"star": "水",
+	"starPositionStatusType": "殿",
+	"positionList": ["箕","轸","参","壁"]
+	},
+
+	{
+	"id":64,
+	"className": "果老",
+	"star": "日",
+	"starPositionStatusType": "殿",
+	"positionList": ["虚","房","昴","星"]
+	},
+	{
+	"id":65,
+	"className": "果老",
+	"star": "月",
+	"starPositionStatusType": "殿",
+	"positionList": ["毕","危","张","心"]
+	},
+
+		{
+	"id":66,
+	"className": "果老",
+	"star": "土",
+	"starPositionStatusType": "凶",
+	"positionList": ["巳"]
+	},
+	{
+	"id":67,
+	"className": "果老",
+	"star": "火",
+	"starPositionStatusType": "凶",
+	"positionList": ["酉"]
+	},
+	{
+	"id":68,
+	"className": "果老",
+	"star": "金",
+	"starPositionStatusType": "凶",
+	"positionList": ["卯"]
+	},
+	{
+	"id":69,
+	"className": "果老",
+	"star": "水",
+	"starPositionStatusType": "凶",
+	"positionList": ["戌"]
+	},	
+
+	{
+	"id":70,
+	"className": "果老",
+	"star": "日",
+	"starPositionStatusType": "凶",
+	"positionList": ["子"]
+	},
+
+	{
+	"id":71,
+	"className": "果老",
+	"star": "罗",
+	"starPositionStatusType": "凶",
+	"positionList": ["子"]
+	},
+
+	{
+	"id":72,
+	"className": "果老",
+	"star": "计",
+	"starPositionStatusType": "凶",
+	"positionList": ["亥"]
+	},
+
+
+	{
+	"id":73,
+	"className": "果老",
+	"star": "土",
+	"starPositionStatusType": "贵",
+	"positionList": ["斗"],
+	"descriptionList":["其人富贵荣华兼长寿"]
+	},
+
+
+
+
+	{
+	"id":74,
+	"className": "果老",
+	"star": "火",
+	"starPositionStatusType": "贵",
+	"positionList": ["心"],
+	"descriptionList":["其人高级武职官"]
+	},
+	{
+	"id":75,
+	"className": "果老",
+	"star": "火",
+	"starPositionStatusType": "贵",
+	"positionList": ["氐"],
+	"descriptionList":["上将封侯十万户"]
+	},
+	{
+	"id":76,
+	"className": "果老",
+	"star": "火",
+	"starPositionStatusType": "贵",
+	"positionList": ["角"],
+	"descriptionList":["其人将有苏秦一样的成就，六国相印"]
+	},
+	{
+	"id":77,
+	"className": "果老",
+	"star": "火",
+	"starPositionStatusType": "贵",
+	"positionList": ["斗"],
+	"descriptionList":["其人为国宝大英雄"]
+	},
+	{
+	"id":78,
+	"className": "果老",
+	"star": "火",
+	"starPositionStatusType": "贵",
+	"positionList": ["娄"],
+	"descriptionList":["为乐庙，其人将成为官高职重的封疆大吏"]
+	},
+
+
+
+
+
+
+
+
+	{
+	"id":79,
+	"className": "果老",
+	"star": "金",
+	"starPositionStatusType": "贵",
+	"positionList": ["箕"],
+	"descriptionList":["其人功盖诸侯做大官"]
+	},
+	{
+	"id":80,
+	"className": "果老",
+	"star": "金",
+	"starPositionStatusType": "贵",
+	"positionList": ["胃"],
+	"descriptionList":["那颉星（金星）至胃宿为庙功，其人做到尊贵的辅弼官员"]
+	},
+		{
+	"id":81,
+	"className": "果老",
+	"star": "木",
+	"starPositionStatusType": "贵",
+	"positionList": ["参"],
+	"descriptionList":["木星、月孛至参宿不失位，主其人做到持节钺的贵官"]
+	},
+		{
+	"id":82,
+	"className": "果老",
+	"star": "日",
+	"starPositionStatusType": "贵",
+	"positionList": ["奎"],
+
+	"descriptionList":["太阳至奎宿为旺度，其人为官而名望颇佳"]
+	},
+
+
+
+
+	{
+	"id":83,
+	"className": "果老",
+	"star": "水",
+	"starPositionStatusType": "贵",
+	"positionList": ["星"],
+	"descriptionList":["水星至星宿，其人将为经邦论道的文臣"]
+	},	
+
+		{
+	"id":84,
+	"className": "果老",
+	"star": "月",
+	"starPositionStatusType": "贵",
+	"positionList": ["牛"],
+	"descriptionList":["其人做到极品大官"]
+	},	
+			{
+	"id":85,
+	"className": "果老",
+	"star": "月",
+	"starPositionStatusType": "贵",
+	"positionList": ["鬼"],
+	"descriptionList":["月亮至鬼宿为本庙，其人世代为显官"]
+	},	
+
+	{
+	"id":86,
+	"className": "果老",
+	"star": "炁",
+	"starPositionStatusType": "贵",
+	"positionList": ["觜"],
+	"descriptionList":["此人做到极品官勋"]
+	},
+		{
+	"id":87,
+	"className": "果老",
+	"star": "炁",
+	"starPositionStatusType": "贵",
+	"positionList": ["角","亢"],
+	"descriptionList":["天乙星（紫炁）之角宿和亢宿，将带来吉兆"]
+	},	
+	{
+	"id":88,
+	"className": "果老",
+	"star": "炁",
+	"starPositionStatusType": "贵",
+	"positionList": ["斗"],
+	"descriptionList":["天乙星（紫炁）如降临南斗，其人大富至尺璧寸珠不足为宝"]
+	},	
+
+	{
+	"id":89,
+	"className": "果老",
+	"star": "罗",
+	"starPositionStatusType": "贵",
+	"positionList": ["房"],
+	"descriptionList":["罗睺至房宿，或为边将，或为宰辅"]
+	},
+		{
+	"id":90,
+	"className": "果老",
+	"star": "罗",
+	"starPositionStatusType": "贵",
+	"positionList": ["卯"],
+	"descriptionList":["罗睺至昴宿，其人将会成为樊哙、霍光一类的功臣"]
+	},	
+	{
+	"id":91,
+	"className": "果老",
+	"star": "罗",
+	"starPositionStatusType": "贵",
+	"positionList": ["张"],
+	"descriptionList":["罗睺至张宿为本庙，主其人成为英声阃外的将军"]
+	},
+
+		{
+	"id":92,
+	"className": "果老",
+	"star": "计",
+	"starPositionStatusType": "贵",
+	"positionList": ["箕"],
+	"descriptionList":["彗星（计都）至箕宿，君王近侍重臣"]
+	},
+		{
+	"id":93,
+	"className": "果老",
+	"star": "计",
+	"starPositionStatusType": "贵",
+	"positionList": ["危"],
+	"descriptionList":["天尾星（计都）至危宿，其人福厚，能够保护皇祚安全不倾危"]
+	},
+			{
+	"id":94,
+	"className": "果老",
+	"star": "计",
+	"starPositionStatusType": "贵",
+	"positionList": ["奎"],
+	"descriptionList":["计都至奎宿，其人将成为开疆拓土的功臣"]
+	},		{
+	"id":95,
+	"className": "果老",
+	"star": "计",
+	"starPositionStatusType": "贵",
+	"positionList": ["胃"],
+	"descriptionList":["计都至胃宿，其人会成为诛除僭伪、秉钺分符的重臣"]
+	},
+	{
+	"id":96,
+	"className": "果老",
+	"star": "孛",
+	"starPositionStatusType": "贵",
+	"positionList": ["井"],
+	"descriptionList":["攙抢（月孛）至井宿，其人福饶，可以依为边塞藩垣重臣"]
+	},
+	{
+	"id":97,
+	"className": "果老",
+	"star": "计",
+	"starPositionStatusType": "贵",
+	"positionList": ["柳"],
+	"descriptionList":["月孛至柳宿，其人荣昌富贵福"]
+	}
+]

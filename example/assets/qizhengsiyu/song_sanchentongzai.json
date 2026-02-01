@@ -1,0 +1,46 @@
+{
+      "systemType": "黄道制",
+      "starInnType": "古宿",
+      "starInnSystem": "推黄术",
+      "epochCorrection": "宋·开禧历",
+      "totalDegree": 360.0,
+      "twelvGongDegreeMap": {
+        "子": 30.0,
+        "丑": 30.0,
+        "寅": 30.0,
+        "卯": 30.0,
+        "辰": 30.0,
+        "巳": 30.0,
+        "午": 30.0,
+        "未": 30.0,
+        "申": 30.0,
+        "酉": 30.0,
+        "戌": 30.0,
+        "亥": 30.0
+    },
+    "starInnDegreeMap": {
+      "角":11,"亢":11,"氐":18,"房":5,"心":8,"尾":15,"箕":9,
+      "斗":24,"牛":8,"女":11,"虚":10,"危":20,"室":16,"壁":13,
+      "奎":11,"娄":13,"胃":12,"昴":9,"毕":15,"觜":1,"参":11,
+      "井":31,"鬼":5,"柳":17,"星":8,"张":18,"翼":17,"轸":13
+    },
+    "alignmentPointAtStarInn": {
+      "starInn": "危宿",
+      "degree": 0.0
+    },
+    "alignmentPointAtGong": {
+      "gong": "子",
+      "degree": 0.0
+    },
+      "zeroPointJieQi": "立春",
+      "zeroPointAtStarInn": {"starInn": "危宿", "degree": 0.0},
+      "zeroPointAtGong": {"gong": "子宫", "degree": 0.0},
+      "celestialLongitude": 0.0,
+      "rightAscension": 240.5,
+      "zeroPointOffsetToNow": 28.0,
+      "注释": [
+        "历法参数依据《汉书·律历志》核心数据：日法81、闰法19、统法1539[2,6](@ref)",
+        "周天度数采用'周天五十六万二千一百二十'换算为365.25°[6,8](@ref)",
+        "宿度划分遵循'四象-七政'体系：东方苍龙属木、北方玄武属水等[1,7](@ref)"
+      ]
+    }

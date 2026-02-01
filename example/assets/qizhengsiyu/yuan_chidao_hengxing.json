@@ -1,0 +1,68 @@
+{
+      "systemType": "赤道制",
+      "starInnType": "古宿",
+      "starInnSystem": "恒星制",
+      "epochCorrection": "元·授时历",
+      "totalDegree": 365.25,
+      "twelvGongDegreeMap": {
+        "子": 30.438,
+        "丑": 30.438,
+        "寅": 30.438,
+        "卯": 30.438,
+        "辰": 30.438,
+        "巳": 30.438,
+        "午": 30.438,
+        "未": 30.438,
+        "申": 30.438,
+        "酉": 30.438,
+        "戌": 30.438,
+        "亥": 30.438
+    },
+    "starInnDegreeMap": {
+"角":12,
+"亢":9,
+"氐":15,
+"房":5,
+"心":5,
+"尾":18,
+"箕":11,
+
+"斗":26.25,
+"牛":8,
+"女":12,
+"虚":10,
+"危":17,
+"室":16,
+"壁":9,
+
+"奎":16,
+"娄":12,
+"胃":14,
+"昴":11,
+"毕":16,
+"觜":2,
+"参":9,
+
+"井":33,
+"鬼":4,
+"柳":15,
+"星":7,
+"张":18,
+"翼":18,
+"轸":17
+    },
+    "alignmentPointAtStarInn": {
+      "starInn": "女宿",
+      "degree": 2.1
+    },
+    "alignmentPointAtGong": {
+      "gong": "子",
+      "degree": 0
+    },
+      "zeroPointJieQi": "冬至",
+      "zeroPointAtStarInn": {"starInn": "虚宿", "degree": 6},
+      "zeroPointAtGong": {"gong": "子宫", "degree": 15.0},
+      "celestialLongitude": 270.0,
+      "rightAscension": 240.5,
+      "zeroPointOffsetToNow": 28.0
+  }

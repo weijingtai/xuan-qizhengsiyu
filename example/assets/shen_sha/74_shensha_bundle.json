@@ -1,0 +1,455 @@
+[
+    {
+        "name": "剑锋",
+        "jiXiong": "大凶",
+        "type": "驾前",
+        "offset": 0,
+        "descriptionList": ["主刀兵血光之灾，手术意外或暴力事件"]
+    },
+    {
+        "name": "伏尸",
+        "jiXiong": "大凶",
+        "type": "驾前",
+        "offset": 0,
+        "descriptionList": ["主阴邪隐疾，暗藏致命危机"]
+    },
+    {
+        "name": "岁驾",
+        "jiXiong": "平",
+        "type": "驾前",
+        "offset": 0,
+        "descriptionList": ["太岁本位，吉凶依主星庙旺而定"]
+    },
+    {
+        "name": "天空",
+        "jiXiong": "凶",
+        "type": "驾前",
+        "offset": 1,
+        "descriptionList": ["主虚耗空亡，钱财不聚"]
+    },
+    {
+        "name": "太阳",
+        "jiXiong": "大吉",
+        "type": "驾前",
+        "offset": 1,
+        "descriptionList": ["光明权威，化解灾厄，增贵人运"]
+    },
+    {
+        "name": "地雌",
+        "jiXiong": "凶",
+        "type": "驾前",
+        "offset": 2,
+        "descriptionList": ["主女性灾厄，家庭不和或妇科病"]
+    },
+    {
+        "name": "丧门",
+        "jiXiong": "大凶",
+        "type": "驾前",
+        "offset": 2,
+        "descriptionList": ["主丧事哭泣，亲人离丧"]
+    },
+    {
+        "name": "地丧",
+        "jiXiong": "大凶",
+        "type": "驾前",
+        "offset": 2,
+        "descriptionList": ["与丧门并称双煞，主家宅不安"]
+    },
+    {
+        "name": "太阴",
+        "jiXiong": "平",
+        "type": "驾前",
+        "offset": 3,
+        "descriptionList": ["月曜之精，吉凶依相位而定"]
+    },
+    {
+        "name": "勾神",
+        "jiXiong": "凶",
+        "type": "驾前",
+        "offset": 3,
+        "descriptionList": ["主纠缠拖延，官司纠纷"]
+    },
+    {
+        "name": "贯索",
+        "jiXiong": "凶",
+        "type": "驾前",
+        "offset": 3,
+        "descriptionList": ["主牢狱束缚，法律纠纷"]
+    },
+    {
+        "name": "官符",
+        "jiXiong": "凶",
+        "type": "驾前",
+        "offset": 4,
+        "descriptionList": ["主官非诉讼，公门冲突"]
+    },
+    {
+        "name": "飞符",
+        "jiXiong": "凶",
+        "type": "驾前",
+        "offset": 4,
+        "descriptionList": ["主突发灾祸，意外伤害"]
+    },
+    {
+        "name": "年符",
+        "jiXiong": "凶",
+        "type": "驾前",
+        "offset": 4,
+        "descriptionList": ["流年凶煞，主全年受阻"]
+    },
+    {
+        "name": "五鬼",
+        "jiXiong": "大凶",
+        "type": "驾前",
+        "offset": 4,
+        "descriptionList": ["主小人暗害，盗窃破财"]
+    },
+    {
+        "name": "月德",
+        "jiXiong": "大吉",
+        "type": "驾前",
+        "offset": 5,
+        "descriptionList": ["福德之星，化解阴煞"]
+    },
+    {
+        "name": "死符",
+        "jiXiong": "大凶",
+        "type": "驾前",
+        "offset": 5,
+        "descriptionList": ["主死亡关联事件，重病风险"]
+    },
+    {
+        "name": "小耗",
+        "jiXiong": "凶",
+        "type": "驾前",
+        "offset": 5,
+        "descriptionList": ["主小规模破财，开支失控"]
+    },
+    {
+        "name": "大耗",
+        "jiXiong": "大凶",
+        "type": "驾前",
+        "offset": 6,
+        "descriptionList": ["主重大财物损失，破产被盗"]
+    },
+    {
+        "name": "岁破",
+        "jiXiong": "大凶",
+        "type": "驾前",
+        "offset": 6,
+        "descriptionList": ["太岁对冲，主全年动荡不安"]
+    },
+    {
+        "name": "阑干",
+        "jiXiong": "凶",
+        "type": "驾前",
+        "offset": 6,
+        "descriptionList": ["主障碍阻隔，计划中断"]
+    },
+    {
+        "name": "龙德",
+        "jiXiong": "吉",
+        "type": "驾前",
+        "offset": 7,
+        "descriptionList": ["主贵人扶持，事业突破"]
+    },
+    {
+        "name": "紫薇",
+        "jiXiong": "大吉",
+        "type": "驾前",
+        "offset": 7,
+        "descriptionList": ["帝王之星，主权柄尊贵"]
+    },
+    {
+        "name": "暴败",
+        "jiXiong": "大凶",
+        "type": "驾前",
+        "offset": 7,
+        "descriptionList": ["主突然失败，名誉扫地"]
+    },
+    {
+        "name": "天厄",
+        "jiXiong": "凶",
+        "type": "驾前",
+        "offset": 7,
+        "descriptionList": ["主天降灾厄，自然灾害"]
+    },
+    {
+        "name": "天雄",
+        "jiXiong": "凶",
+        "type": "驾前",
+        "offset": 8,
+        "descriptionList": ["主争斗血光，暴力冲突"]
+    },
+    {
+        "name": "白虎",
+        "jiXiong": "大凶",
+        "type": "驾前",
+        "offset": 8,
+        "descriptionList": ["主血光刑伤，女性产难"]
+    },
+    {
+        "name": "天德",
+        "jiXiong": "大吉",
+        "type": "驾前",
+        "offset": 9,
+        "descriptionList": ["天赐福德，消灾解厄"]
+    },
+    {
+        "name": "卷舌",
+        "jiXiong": "凶",
+        "type": "驾前",
+        "offset": 9,
+        "descriptionList": ["主口舌是非，言论招祸"]
+    },
+    {
+        "name": "绞杀",
+        "jiXiong": "大凶",
+        "type": "驾前",
+        "offset": 9,
+        "descriptionList": ["主极端意外，绳索类伤害"]
+    },
+    {
+        "name": "天狗",
+        "jiXiong": "大凶",
+        "type": "驾前",
+        "offset": 10,
+        "descriptionList": ["主破相血光，小儿面伤"]
+    },
+    {
+        "name": "吊客",
+        "jiXiong": "大凶",
+        "type": "驾前",
+        "offset": 10,
+        "descriptionList": ["主丧事吊唁，外亲灾祸"]
+    },
+    {
+        "name": "病符",
+        "jiXiong": "凶",
+        "type": "驾前",
+        "offset": 11,
+        "descriptionList": ["主疾病缠身，慢性病恶化"]
+    },
+    {
+        "name": "蓦越",
+        "jiXiong": "凶",
+        "type": "驾前",
+        "offset": 11,
+        "descriptionList": ["主突发变故，被迫迁徙"]
+    },
+    {
+        "name": "驿马",
+        "jiXiong": "吉",
+        "type": "马前",
+        "offset": 0,
+        "descriptionList": [
+            "喻人乘马而致远，主变动、远行及事业发展",
+            "长生临官马主贵，病绝马主祸，申子辰马在寅，寅午戌马在申",
+            "君子逢之官禄显达，庶民得之财利丰盈",
+            "主奔波、走动、迁移等。吉则有外出发展机遇，凶则奔波劳苦多是非"
+        ]
+    },
+    {
+        "name": "六厄",
+        "jiXiong": "大凶",
+        "type": "马前",
+        "offset": 1,
+        "descriptionList": [
+            "五行死绝之地，主困顿灾厄",
+            "申子辰厄在卯，寅午戌厄在酉，主刑狱损伤",
+            "克身则灾重，易遭小人暗算"
+        ]
+    },
+    {
+        "name": "华盖",
+        "jiXiong": "大吉",
+        "type": "马前",
+        "offset": 2,
+        "descriptionList": [
+            "福地之星，主文章艺术、宗教智慧",
+            "寅午戌见戌，申子辰见辰，与禄库同位主贵",
+            "女命逢之多主贵气，男命逢之显科名"
+        ]
+    },
+    {
+        "name": "劫杀",
+        "jiXiong": "凶",
+        "type": "马前",
+        "offset": 3,
+        "descriptionList": [
+            "主劫破",
+            "至凶之神，主权柄与灾祸并存",
+            "主建节掌兵权，克身则血光横祸",
+            "申子辰劫在巳，寅午戌劫在亥"
+        ]
+    },
+    {
+        "name": "灾杀",
+        "jiXiong": "大凶",
+        "type": "马前",
+        "offset": 4,
+        "descriptionList": [
+            "劫杀前一辰，主兵刑丧服",
+            "流年逢之防兄弟夭亡，帝旺方逢可转凶为吉",
+            "申子辰灾在午，寅午戌灾在子"
+        ]
+    },
+    {
+        "name": "天杀",
+        "jiXiong": "凶",
+        "type": "马前",
+        "offset": 5,
+        "descriptionList": [
+            "主权柄与意外灾殃",
+            "主掌兵权者显贵，常人逢之防横祸",
+            "申子辰天在未，寅午戌天在丑"
+        ]
+    },
+    {
+        "name": "地杀",
+        "jiXiong": "凶",
+        "type": "马前",
+        "offset": 6,
+        "descriptionList": [
+            "五行初生之地，主无目的奔波",
+            "寅午戌地在寅，申子辰地在申，与日柱合则行为不定",
+            "月支空亡者主离乡发展"
+        ]
+    },
+    {
+        "name": "年杀",
+        "jiXiong": "凶",
+        "type": "马前",
+        "offset": 7,
+        "descriptionList": [
+            "主根基动荡，六亲缘薄",
+            "申子辰年在酉，寅午戌年在卯",
+            "防祖业破败，婚姻反复"
+        ]
+    },
+    {
+        "name": "月杀",
+        "jiXiong": "平",
+        "type": "马前",
+        "offset": 8,
+        "descriptionList": [
+            "半吉半凶，主才华与孤克并存",
+            "申子辰月在戌，寅午戌月在辰",
+            "常人逢之宜修佛道，贵人逢之显侍从之贵"
+        ]
+    },
+    {
+        "name": "亡神",
+        "jiXiong": "大凶",
+        "type": "马前",
+        "offset": 9,
+        "descriptionList": [
+            "劫杀前六辰，主权柄与暴毙",
+            "主兵刑之灾，克身则大凶",
+            "申子辰亡在亥，寅午戌亡在巳"
+        ]
+    },
+    {
+        "name": "将星",
+        "jiXiong": "吉",
+        "type": "马前",
+        "offset": 10,
+        "descriptionList": [
+            "主权柄与功名，文武皆宜",
+            "申子辰将在子，寅午戌将在午",
+            "与天德同宫主位列三公"
+        ]
+    },
+    {
+        "name": "攀鞍",
+        "jiXiong": "吉",
+        "type": "马前",
+        "offset": 11,
+        "descriptionList": [
+            "主贵人提携与安逸富贵",
+            "申子辰鞍在丑，寅午戌鞍在未",
+            "男逢不忧衣食，女逢奴婢成行"
+        ]
+    },
+    {
+        "name": "红鸾",
+        "jiXiong": "吉",
+        "type": "驾后",
+        "offset": 0,
+        "descriptionList": [
+            "主喜事",
+            "主婚姻喜庆、贵人扶持，流年逢之易有婚嫁或添丁之喜",
+            "查法：以年支为基准，从卯位起子逆数至生年支（如子年红鸾在卯，丑年红鸾在寅）",
+            "与天喜星互为对宫，青年逢之尤利婚恋，老年需防桃花劫"
+        ]
+    },
+    {
+        "name": "天喜",
+        "jiXiong": "吉",
+        "type": "驾后",
+        "offset": 6,
+        "descriptionList": [
+            "同红鸾主喜事",
+            "主福禄添喜、出行顺遂，对冲红鸾星显贵气",
+            "查法：红鸾对宫（子年红鸾在卯，则天喜在酉）",
+            "与红鸾同现时，可化解部分凶煞影响"
+        ]
+    },
+    {
+        "name": "血刃",
+        "jiXiong": "大凶",
+        "type": "驾后",
+        "offset": 7,
+        "descriptionList": [
+            "主血光刑伤，尤防手术、产厄或意外流血事件",
+            "查法：戌位起子逆行（子年戌，丑年酉，寅年申类推）",
+            "女命日柱逢之需防大出血，男命逢之忌酒色风险"
+        ]
+    },
+    {
+        "name": "浮沉",
+        "jiXiong": "凶",
+        "type": "驾后",
+        "offset": 7,
+        "descriptionList": [
+            "主没溺",
+            "主事业财运波动不定，易有投资失利或职位不稳",
+            "与血刃、解神同查（戌位起子逆行）",
+            "逢吉星可转危为安，逢凶星则雪上加霜"
+        ]
+    },
+    {
+        "name": "解神",
+        "jiXiong": "平",
+        "type": "驾后",
+        "offset": 7,
+        "descriptionList": [
+            "化险为夷之神，若命局成格可转凶为吉",
+            "查法同血刃、浮沉（戌位起子逆行）",
+            "与天德、月德同宫时，消灾效果倍增"
+        ]
+    },
+    {
+        "name": "天哭",
+        "jiXiong": "大凶",
+        "type": "驾后",
+        "offset": 3,
+        "descriptionList": [
+            "主悲伤，哭泣",
+            "主六亲刑克、忧伤孤独，流年逢之易有丧事或精神抑郁",
+            "查法：午位起子逆行（子年午，丑年巳，寅年辰类推）",
+            "与丧门、吊客同现时，需防重孝临门"
+        ]
+    },
+    {
+        "name": "披头",
+        "jiXiong": "凶",
+        "type": "驾后",
+        "offset": 1,
+        "descriptionList": [
+            "主丧服之灾，多应长辈病伤或家宅不安",
+            "查法：辰位起子逆行（子年辰，丑年卯，寅年寅类推）",
+            "与披麻、丧门并称‘索命三煞’，原局带之先天不利六亲"
+        ]
+    }
+]

@@ -1,0 +1,94 @@
+name: example
+description: "A development and example project for qizhengsiyu."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.1.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  logger: ^2.6.2
+  tuple: ^2.0.2
+  tyme: ^1.4.1
+  intl: ^0.20.2
+  meta: 1.18.1
+  collection: ^1.19.1
+  google_fonts: ^8.0.0
+  fpdart: ^2.0.0-dev.3
+  json_serializable: ^6.12.0
+  json_annotation: ^4.10.0
+  lottie: ^3.3.2
+  board_datetime_picker: 2.8.5
+  sliding_switch: ^1.1.0
+  slide_switcher: ^1.1.2
+  animated_custom_dropdown: ^3.1.1
+  flutter_shakemywidget: ^1.0.5+1
+  aura_box: ^1.0.2
+  responsive_framework: ^1.5.1
+  url_strategy: ^0.3.0
+  animations: ^2.1.1
+  provider: ^6.1.5+1
+  sweph: ^3.2.1+2.10.3
+  flutter_city_picker: ^2.2.0
+  flutter_timezone: ^5.0.1
+  flutter_switch: ^0.3.2
+  http: ^1.6.0
+  path_provider: ^2.1.5
+
+  dotted_border: ^3.1.0
+  common:
+    path: ../../common
+
+  qizhengsiyu:
+    path: ../
+
+  cupertino_icons: ^1.0.8
+  dotlottie_loader: ^0.0.5
+  auto_size_text: ^3.0.0
+  flutter_sliding_toast: ^1.5.3
+  flutter_animate: 4.5.2
+  timezone: ^0.11.0
+  lat_lng_to_timezone: ^0.2.0
+  el_tooltip: ^2.2.1
+  equatable: ^2.0.8
+  flutter_map: ^8.2.2
+  dio: ^5.9.1
+  geolocator: ^14.0.2
+  geojson_vi: ^2.2.5
+  flutter_map_cancellable_tile_provider: ^3.1.1
+  uuid: 4.5.2
+
+  animated_read_more_text: ^0.0.6
+  drift: ^2.30.1
+  sqlite3_flutter_libs: ^0.5.41
+  drift_flutter: ^0.2.8
+  decimal: ^3.2.4
+  protobuf: ^6.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  build_runner: ^2.10.5
+  drift_dev: ^2.30.1
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/icons/
+    - assets/planets/
+    - assets/da_liu_ren/
+    - assets/qi_men_dun_jia/
+    - assets/lotties/
+    - assets/gifs/
+    - assets/backgrounds/
+    - assets/ephe/
+    - assets/
+    - assets/dataset/
+    - assets/dataset/geo/
+    - assets/sql/
+    - assets/shen_sha/
+    - assets/qizhengsiyu/
