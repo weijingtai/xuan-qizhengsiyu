@@ -28,7 +28,7 @@ dependencies:
   #  chinese_lunar_calendar: ^0.0.13
   tyme: ^1.4.1
   intl: ^0.20.2
-  meta: 1.18.1
+  meta: ^1.17.0
   collection: ^1.19.1
   aura_box: ^1.0.2
   google_fonts: ^8.0.0

@@ -14,7 +14,7 @@ dependencies:
   tuple: ^2.0.2
   tyme: ^1.4.1
   intl: ^0.20.2
-  meta: 1.18.1
+  meta: ^1.17.0
   collection: ^1.19.1
   google_fonts: ^8.0.0
   fpdart: ^2.0.0-dev.3
