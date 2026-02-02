@@ -29,7 +29,7 @@ class StarInGongCondition extends GeJuCondition {
 
   @override
   String describe() {
-    return "${star.singleName}入${gongs.join("/")}宫";
+    return "${star.singleName}入${gongs.map((e) => TwelveGongSystem.resolve(e)?.name ?? e).join("/")}宫";
   }
 
   factory StarInGongCondition.fromJson(Map<String, dynamic> json) {

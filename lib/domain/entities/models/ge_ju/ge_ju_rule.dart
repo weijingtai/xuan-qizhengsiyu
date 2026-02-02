@@ -93,9 +93,14 @@ class GeJuRule extends GeJuModel {
 }
 
 const _$JiXiongEnumEnumMap = {
+  JiXiongEnum.DA_JI: '大吉',
   JiXiongEnum.JI: '吉',
-  JiXiongEnum.XIONG: '凶',
+  JiXiongEnum.XIAO_JI: '小吉',
   JiXiongEnum.PING: '平',
+  JiXiongEnum.XIAO_XIONG: '小凶',
+  JiXiongEnum.XIONG: '凶',
+  JiXiongEnum.DA_XIONG: '大凶',
+  JiXiongEnum.WEI_ZHI: '未知',
 };
 
 const _$GeJuTypeEnumMap = {

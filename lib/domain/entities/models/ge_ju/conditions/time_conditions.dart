@@ -108,8 +108,13 @@ class MonthIsCondition extends GeJuCondition {
   }
 
   factory MonthIsCondition.fromJson(Map<String, dynamic> json) {
-    return MonthIsCondition(
-        (json['months'] as List).map((e) => DiZhi.getFromValue(e)!).toList());
+    return MonthIsCondition((json['months'] as List).map((e) {
+      final fromValue = DiZhi.getFromValue(e);
+      if (fromValue != null) return fromValue;
+      return DiZhi.values.firstWhere((v) =>
+          v.name == e ||
+          v.toString().split('.').last.toLowerCase() == e.toLowerCase());
+    }).toList());
   }
 
   @override

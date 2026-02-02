@@ -95,6 +95,15 @@ class TwelveGongSystem {
       // ... 其他可能有繁体的词
     }
 
+    // 5. 尝试直接匹配 EnumTwelveGong (支持 English Key, e.g. "Zi")
+    try {
+      return EnumTwelveGong.values.firstWhere(
+        (e) =>
+            e.name == name ||
+            e.toString().split('.').last.toLowerCase() == name.toLowerCase(),
+      );
+    } catch (_) {}
+
     return null;
   }
 }

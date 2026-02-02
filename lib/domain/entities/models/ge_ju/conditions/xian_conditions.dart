@@ -23,7 +23,7 @@ class XianAtGongCondition extends GeJuCondition {
 
   @override
   String describe() {
-    return "行限在${gongs.join("/")}";
+    return "行限在${gongs.map((e) => TwelveGongSystem.resolve(e)?.name ?? e).join("/")}";
   }
 
   factory XianAtGongCondition.fromJson(Map<String, dynamic> json) {

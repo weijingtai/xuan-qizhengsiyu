@@ -73,7 +73,10 @@ class GongHasShenShaCondition extends GeJuCondition {
   String describe() {
     final gongName = gongIdentifier == "lifeGong"
         ? "命宫"
-        : (gongIdentifier == "bodyGong" ? "身宫" : gongIdentifier);
+        : (gongIdentifier == "bodyGong"
+            ? "身宫"
+            : (TwelveGongSystem.resolve(gongIdentifier)?.name ??
+                gongIdentifier));
     return "$gongName带${shenShaNames.join("/")}";
   }
 

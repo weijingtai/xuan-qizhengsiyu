@@ -22,7 +22,7 @@ class LifeGongAtCondition extends GeJuCondition {
 
   @override
   String describe() {
-    return "命宫在${gongs.join("/")}";
+    return "命宫在${gongs.map((e) => TwelveGongSystem.resolve(e)?.name ?? e).join("/")}";
   }
 
   factory LifeGongAtCondition.fromJson(Map<String, dynamic> json) {
@@ -125,8 +125,9 @@ class StarInDestinyGongCondition extends GeJuCondition {
     final star = EnumStars.getBySingleName(json['star']) ??
         EnumStars.values.byName(json['star']);
     final destinyGongName = json['destinyGong'];
-    final destinyGong = EnumDestinyTwelveGong.values
-        .firstWhere((e) => e.name == destinyGongName);
+    final destinyGong = EnumDestinyTwelveGong.values.firstWhere((e) =>
+        e.toString().split('.').last == destinyGongName ||
+        e.name == destinyGongName);
     return StarInDestinyGongCondition(star, destinyGong);
   }
   @override
