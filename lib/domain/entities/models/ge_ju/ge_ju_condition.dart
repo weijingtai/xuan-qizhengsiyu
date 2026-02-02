@@ -1,4 +1,3 @@
-import 'package:json_annotation/json_annotation.dart';
 import 'ge_ju_input.dart';
 import 'conditions/position_conditions.dart';
 import 'conditions/relationship_conditions.dart';

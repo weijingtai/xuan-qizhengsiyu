@@ -14,6 +14,7 @@ import 'package:qizhengsiyu/enums/enum_qi_zheng.dart';
 import 'package:qizhengsiyu/enums/enum_twelve_gong.dart';
 import 'package:qizhengsiyu/enums/enum_stars_four_type.dart';
 import 'package:qizhengsiyu/enums/enum_panel_system_type.dart';
+import 'package:qizhengsiyu/enums/enum_star_position_status.dart';
 
 import '../star_to_star_relationship_model.dart';
 
@@ -82,6 +83,11 @@ class GeJuInput {
   /// 行限宫内的星曜
   final List<EnumStars>? xianPalaceStars;
 
+  // ========== 星曜状态（可选） ==========
+  /// 星曜的庙旺陷等状态映射
+  /// key: 星曜, value: 该星曜在当前宫位的状态列表
+  final Map<EnumStars, List<EnumStarGongPositionStatusType>>? starGongStatusMapper;
+
   GeJuInput({
     required this.coordinateSystem,
     required this.starsSet,
@@ -101,6 +107,7 @@ class GeJuInput {
     this.currentXianGong,
     this.currentXianConstellation,
     this.xianPalaceStars,
+    this.starGongStatusMapper,
   });
 
   // ========== 便捷查询方法 ==========
@@ -176,5 +183,25 @@ class GeJuInput {
     // JiaZiShenSha.getKongWangAtDiZhi returns Set<DiZhi>?
     Set<DiZhi>? kongWang = JiaZiShenSha.getKongWangAtDiZhi(yearJiaZi);
     return kongWang?.contains(gong.zhi) ?? false;
+  }
+
+  /// 获取星曜在当前宫位的状态列表
+  List<EnumStarGongPositionStatusType> getStarGongStatus(EnumStars star) {
+    if (starGongStatusMapper == null) return [];
+    return starGongStatusMapper![star] ?? [];
+  }
+
+  /// 判断星曜是否处于指定状态
+  bool hasStarGongStatus(EnumStars star, EnumStarGongPositionStatusType status) {
+    return getStarGongStatus(star).contains(status);
+  }
+
+  /// 判断星曜是否处于任一指定状态
+  bool hasAnyStarGongStatus(EnumStars star, List<EnumStarGongPositionStatusType> statuses) {
+    final currentStatuses = getStarGongStatus(star);
+    for (var status in statuses) {
+      if (currentStatuses.contains(status)) return true;
+    }
+    return false;
   }
 }

@@ -1,0 +1,120 @@
+[
+  {
+    "id": "common_001_ri_yue_jia_ming",
+    "name": "日月夹命",
+    "className": "通用格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·星格贵贱总赋》",
+    "description": "日月夹命格，主大贵。太阳太阴分居命宫两侧。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": null
+  },
+  {
+    "id": "common_002_ri_yue_tong_gong",
+    "name": "日月同宫",
+    "className": "通用格局",
+    "books": "果老星宗",
+    "source": "《果老星宗》",
+    "description": "日月同宫，阴阳交泰。",
+    "jiXiong": "平",
+    "geJuType": "富",
+    "scope": "natal",
+    "conditions": {
+      "type": "sameGong",
+      "stars": ["Sun", "Moon"]
+    }
+  },
+  {
+    "id": "common_003_wu_xing_ju_quan",
+    "name": "五星聚全",
+    "className": "通用格局",
+    "books": "果老星宗",
+    "source": "《果老星宗》",
+    "description": "五星聚全于三方，主大贵。木火土金水五星皆在三方之内。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "trineGong",
+      "stars": ["Jupiter", "Mars", "Saturn", "Venus", "Mercury"]
+    }
+  },
+  {
+    "id": "huo_001_huo_luo_jia_ming",
+    "name": "火罗夹命",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗》",
+    "description": "火罗夹命，主凶。火星与罗睺分居命宫两侧。",
+    "jiXiong": "凶",
+    "geJuType": "夭",
+    "scope": "natal",
+    "conditions": null
+  },
+  {
+    "id": "jin_001_tai_bai_shou_ming",
+    "name": "太白守命",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗》",
+    "description": "太白金星在命宫，入庙为贵。",
+    "jiXiong": "吉",
+    "geJuType": "富",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starGuardLife",
+          "star": "Venus"
+        },
+        {
+          "type": "starGongStatus",
+          "star": "Venus",
+          "statuses": ["Miao", "Wang"]
+        }
+      ]
+    }
+  },
+  {
+    "id": "xian_001_xian_yu_ji",
+    "name": "限遇计都",
+    "className": "行限格局",
+    "books": "果老星宗",
+    "source": "《果老星宗》",
+    "description": "行限遇计都，主有灾祸。",
+    "jiXiong": "凶",
+    "geJuType": "夭",
+    "scope": "xingxian",
+    "conditions": {
+      "type": "xianMeetStar",
+      "stars": ["Ji"]
+    }
+  },
+  {
+    "id": "time_001_zhou_sheng_ri_li",
+    "name": "昼生日立命",
+    "className": "时间格局",
+    "books": "果老星宗",
+    "source": "《果老星宗》",
+    "description": "昼生人，太阳守命为吉格。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "isDayBirth",
+          "isDay": true
+        },
+        {
+          "type": "starGuardLife",
+          "star": "Sun"
+        }
+      ]
+    }
+  }
+]

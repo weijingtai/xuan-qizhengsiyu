@@ -1,0 +1,116 @@
+[
+  {
+    "id": "mu_001_ri_bian_hong_xing",
+    "name": "日边红杏",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·星格贵贱总赋》",
+    "description": "日邊紅杏，早占鰲頭。[紅杏者木星也，木為官、恩、命、令等用者，與太陽同行。]",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": ["Jupiter", "Sun"]
+        },
+        {
+          "type": "or",
+          "conditions": [
+            {
+              "type": "starIsSiZhu",
+              "star": "Jupiter",
+              "roles": ["lifeGongMaster", "lifeConstellationMaster"]
+            },
+            {
+              "type": "starFourType",
+              "star": "Jupiter",
+              "target": "Jupiter",
+              "types": ["En"]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_002_mu_ru_dou_niu",
+    "name": "木入斗牛",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗》",
+    "description": "木入斗牛，衣紫腰金。[木星躔入斗宿或牛宿，主贵显。]",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInConstellation",
+      "star": "Jupiter",
+      "constellations": ["斗", "牛"]
+    }
+  },
+  {
+    "id": "mu_003_sui_xing_ru_miao",
+    "name": "岁星入庙",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗》",
+    "description": "木星入庙（在戌宫），为贵格。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starGongStatus",
+          "star": "Jupiter",
+          "statuses": ["Miao"]
+        },
+        {
+          "type": "starGuardLife",
+          "star": "Jupiter"
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_004_huo_mu_jia_ming",
+    "name": "火木夹命",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗》",
+    "description": "火木夹命，主贵。[火星与木星分居命宫两侧。]",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": null
+  },
+  {
+    "id": "mu_005_mu_xing_ni_xing",
+    "name": "木星逆行守命",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗》",
+    "description": "木星逆行在命宫，主不利。",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starGuardLife",
+          "star": "Jupiter"
+        },
+        {
+          "type": "starWalkingState",
+          "star": "Jupiter",
+          "states": ["Retrograde"]
+        }
+      ]
+    }
+  }
+]
