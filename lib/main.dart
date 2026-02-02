@@ -36,8 +36,7 @@ void main() {
       ),
       Provider<SaveCalculatedPanelUseCase>(
           create: (ctx) => SaveCalculatedPanelUseCase(
-              qiZhengSiYuPanRepository:
-                  ctx.read<IQiZhengSiYuPanRepository>())),
+              qiZhengSiYuPanRepository: ctx.read<IQiZhengSiYuPanRepository>())),
       ChangeNotifierProvider<BeautyPageViewModel>(
           create: (ctx) => BeautyPageViewModel(
               calculateFateDongWeiUseCase: CalculateFateDongWeiUseCase(),
@@ -279,14 +278,14 @@ class _MyHomePageState extends State<MyHomePage> {
                                 Text("命", style: textStyle),
                                 Text("度", style: textStyle),
                                 Text(
-                                    bodyLifeModel.lifeConstellatioin.sevenZheng
+                                    bodyLifeModel.lifeConstellation.sevenZheng
                                         .singleName,
                                     style: starTextStyle.copyWith(
                                         color: QiZhengSiYuUIConstantResources
                                                 .zhengColorMap[
-                                            bodyLifeModel.lifeConstellatioin
+                                            bodyLifeModel.lifeConstellation
                                                 .sevenZheng])),
-                                Text(bodyLifeModel.lifeConstellatioin.name,
+                                Text(bodyLifeModel.lifeConstellation.name,
                                     style: textStyle),
                                 Text(lifeConstellationTuple.item1,
                                     style: textStyle),

@@ -954,9 +954,11 @@ packages:
   persistence_core:
     dependency: transitive
     description:
-      path: "../../persistence_core"
-      relative: true
-    source: path
+      path: core
+      ref: HEAD
+      resolved-ref: c8671bbc9e4c0cb27941d592dfde3a1cfc794714
+      url: "https://github.com/weijingtai/xuan-storage.git"
+    source: git
     version: "0.0.1"
   petitparser:
     dependency: transitive

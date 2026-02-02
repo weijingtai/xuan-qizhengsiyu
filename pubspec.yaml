@@ -50,9 +50,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
   common:
-    git:
-      url: https://github.com/weijingtai/xuan-common.git
-      ref: main
+    path: ../common
   decimal: ^3.2.4
   drift: ^2.30.1
   sqlite3_flutter_libs: ^0.5.41

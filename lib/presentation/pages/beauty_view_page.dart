@@ -529,11 +529,10 @@ class _BeautyViewPageState extends State<BeautyViewPage>
               ])),
               Text.rich(TextSpan(text: "度主:", style: titleTextStyle, children: [
                 TextSpan(
-                    text:
-                        bodyLifeModel.lifeConstellatioin.sevenZheng.singleName,
+                    text: bodyLifeModel.lifeConstellation.sevenZheng.singleName,
                     style: infoTextStyle.copyWith(
                         color: QiZhengSiYuUIConstantResources.zhengColorMap[
-                            bodyLifeModel.lifeConstellatioin.sevenZheng]))
+                            bodyLifeModel.lifeConstellation.sevenZheng]))
               ])),
             ]),
         SizedBox(

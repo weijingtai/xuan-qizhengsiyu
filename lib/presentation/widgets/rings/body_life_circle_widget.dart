@@ -150,14 +150,14 @@ class BodyLifeCircleWidget extends StatelessWidget {
                                 Text("命", style: defaultTextStyle),
                                 Text("度", style: defaultTextStyle),
                                 Text(
-                                    bodyLifeModel.lifeConstellatioin.sevenZheng
+                                    bodyLifeModel.lifeConstellation.sevenZheng
                                         .singleName,
                                     style: defaultStarTextStyle.copyWith(
                                         color: QiZhengSiYuUIConstantResources
                                                 .zhengColorMap[
-                                            bodyLifeModel.lifeConstellatioin
+                                            bodyLifeModel.lifeConstellation
                                                 .sevenZheng])),
-                                Text(bodyLifeModel.lifeConstellatioin.name,
+                                Text(bodyLifeModel.lifeConstellation.name,
                                     style: defaultTextStyle),
                                 Text(lifeConstellationTuple.item1,
                                     style: defaultTextStyle),

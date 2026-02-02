@@ -23,7 +23,7 @@ class BodyLifeModel {
   double get lifeDegree => lifeGongInfo.degree;
 
   /// 命度
-  Enum28Constellations get lifeConstellatioin =>
+  Enum28Constellations get lifeConstellation =>
       lifeConstellationInfo.constellation;
   double get lifeConstellationDegree => lifeConstellationInfo.degree;
 

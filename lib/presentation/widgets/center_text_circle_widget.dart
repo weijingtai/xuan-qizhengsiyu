@@ -115,14 +115,14 @@ class CenterTextCircleWidget extends StatelessWidget {
                                 Text("命", style: textStyle),
                                 Text("度", style: textStyle),
                                 Text(
-                                    bodyLifeModel.lifeConstellatioin.sevenZheng
+                                    bodyLifeModel.lifeConstellation.sevenZheng
                                         .singleName,
                                     style: starTextStyle.copyWith(
                                         color: QiZhengSiYuUIConstantResources
                                                 .zhengColorMap[
-                                            bodyLifeModel.lifeConstellatioin
+                                            bodyLifeModel.lifeConstellation
                                                 .sevenZheng])),
-                                Text(bodyLifeModel.lifeConstellatioin.name,
+                                Text(bodyLifeModel.lifeConstellation.name,
                                     style: textStyle),
                                 Text(lifeConstellationTuple.item1,
                                     style: textStyle),
