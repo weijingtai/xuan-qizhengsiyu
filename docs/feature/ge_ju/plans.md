@@ -588,37 +588,51 @@ class GeJuInputBuilder {
 
 ## 六、实现步骤
 
-### 第一阶段：基础框架
-1. [ ] 创建 `ge_ju_input.dart` - GeJuInput 类
-2. [ ] 创建 `ge_ju_rule.dart` - GeJuRule 类（扩展 GeJuModel）
-3. [ ] 创建 `ge_ju_condition.dart` - 条件基类和逻辑组合类
-4. [ ] 创建 `ge_ju_rule_parser.dart` - JSON 解析器
+### 第一阶段：基础框架 ✅ 已完成
+1. [x] 创建 `ge_ju_input.dart` - GeJuInput 类
+2. [x] 创建 `ge_ju_rule.dart` - GeJuRule 类（扩展 GeJuModel）
+3. [x] 创建 `ge_ju_condition.dart` - 条件基类和逻辑组合类
+4. [x] 创建 `ge_ju_rule_parser.dart` - JSON 解析器
+5. [x] 创建 `twelve_gong_system.dart` - 十二次/黄道别名映射
 
-### 第二阶段：条件实现
-5. [ ] 实现星曜位置条件（StarInGongCondition, StarInConstellationCondition, StarWalkingStateCondition, StarInKongWangCondition）
-6. [ ] 实现星曜关系条件（SameGongCondition, SameConstellationCondition, OppositeGongCondition, TrineGongCondition, SquareGongCondition）
-7. [ ] 实现命盘结构条件（LifeGongAtCondition, LifeConstellationAtCondition, StarGuardLifeCondition, StarInDestinyGongCondition）
-8. [ ] 实现用神条件（StarIsSiZhuCondition, StarFourTypeCondition, StarHasHuaYaoCondition）
-9. [ ] 实现时间条件（SeasonIsCondition, IsDayBirthCondition, MoonPhaseIsCondition, MonthIsCondition）
-10. [ ] 实现神煞条件（StarWithShenShaCondition, GongHasShenShaCondition）
-11. [ ] 实现行限条件（XianAtGongCondition, XianMeetStarCondition）
+### 第二阶段：条件实现 ✅ 已完成
+6. [x] 实现星曜位置条件（StarInGongCondition, StarInConstellationCondition, StarWalkingStateCondition, StarInKongWangCondition）
+7. [x] 实现星曜关系条件（SameGongCondition, SameConstellationCondition, OppositeGongCondition, TrineGongCondition, SquareGongCondition, SameJingCondition, SameLuoCondition）
+8. [x] 实现命盘结构条件（LifeGongAtCondition, LifeConstellationAtCondition, StarGuardLifeCondition, StarInDestinyGongCondition）
+9. [x] 实现用神条件（StarIsSiZhuCondition, StarFourTypeCondition, StarHasHuaYaoCondition）
+10. [x] 实现时间条件（SeasonIsCondition, IsDayBirthCondition, MoonPhaseIsCondition, MonthIsCondition）
+11. [x] 实现神煞条件（StarWithShenShaCondition, GongHasShenShaCondition）
+12. [x] 实现行限条件（XianAtGongCondition, XianAtConstellationCondition, XianMeetStarCondition）
+13. [ ] **待修复**: StarGongStatusCondition（需要 GeJuInput 扩展星曜庙旺状态）
 
-### 第三阶段：规则数据
-12. [ ] 将 ge_ju_1.txt 中的木星格局转换为 JSON
-13. [ ] 转换火星格局
-14. [ ] 转换土星格局
-15. [ ] 转换金星格局
-16. [ ] 转换水星格局
+### 第三阶段：文本解析器 ⚠️ 部分完成
+14. [x] 创建 `ge_ju_text_constants.dart` - 关键词映射表
+15. [ ] **待完善**: `GeJuTextParser._extractConditions()` - 补充更多正则模式：
+    - [ ] 对照/对宫（OppositeGongCondition）
+    - [ ] 三合/三方（TrineGongCondition）
+    - [ ] 四正（SquareGongCondition）
+    - [ ] 季节（SeasonIsCondition）
+    - [ ] 昼夜（IsDayBirthCondition）
+    - [ ] 用神/四主（StarIsSiZhuCondition）
+    - [ ] 恩难仇用（StarFourTypeCondition）
+    - [ ] 化曜（StarHasHuaYaoCondition）
 
-### 第四阶段：管理器与集成
-17. [ ] 创建 `ge_ju_input_builder.dart`
-18. [ ] 创建 `ge_ju_manager.dart`
-19. [ ] 创建 `ge_ju_result.dart`
-20. [ ] 集成到命盘计算流程
+### 第四阶段：规则数据 ❌ 未开始
+16. [ ] 将 ge_ju_1.txt 中的木星格局转换为 JSON
+17. [ ] 转换火星格局
+18. [ ] 转换土星格局
+19. [ ] 转换金星格局
+20. [ ] 转换水星格局
 
-### 第五阶段：用户自定义
-21. [ ] 支持从文件系统加载自定义规则
-22. [ ] 规则的增删改查接口
+### 第五阶段：管理器与集成 ❌ 未开始
+21. [ ] 创建 `ge_ju_input_builder.dart`
+22. [ ] 创建 `ge_ju_manager.dart`
+23. [ ] 创建 `ge_ju_result.dart`
+24. [ ] 集成到命盘计算流程
+
+### 第六阶段：用户自定义 ❌ 未开始
+25. [ ] 支持从文件系统加载自定义规则
+26. [ ] 规则的增删改查接口
 
 ---
 
