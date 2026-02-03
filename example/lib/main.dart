@@ -112,7 +112,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueGrey),
         useMaterial3: true,
       ),
-      initialRoute: '/qizhengsiyu/panel',
+      initialRoute: '/qizhengsiyu/home',
       onGenerateRoute: qizhengsiyu_nav.NavigatorGenerator.generateRoute,
     );
   }

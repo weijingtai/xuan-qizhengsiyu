@@ -1,0 +1,2704 @@
+[
+  {
+    "id": "jin_001_jun_chen_qing_hui",
+    "name": "君臣庆会",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·星格贵贱总赋》",
+    "description": "君臣庆会，钟鸣鼎食之家。金水为官福恩令命元，朝辅太阳者是。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Venus",
+            "Mercury"
+          ]
+        },
+        {
+          "type": "starGuardLife",
+          "star": "Sun"
+        }
+      ]
+    }
+  },
+  {
+    "id": "jin_002_shan_xiao_cheng_bao",
+    "name": "山啸呈宝",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·星格贵贱总赋》",
+    "description": "土金同落空亡。山啸呈宝，殿前作赋声摩空。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Saturn",
+            "Venus"
+          ]
+        },
+        {
+          "type": "starInKongWang",
+          "star": "Saturn"
+        },
+        {
+          "type": "starInKongWang",
+          "star": "Venus"
+        }
+      ]
+    }
+  },
+  {
+    "id": "jin_003_shi_li_jian_feng",
+    "name": "石砺剑锋",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·星格贵贱总赋》",
+    "description": "石砺剑锋，塞上封侯建功节。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": null
+  },
+  {
+    "id": "jin_004_zhu_cang_yuan_hai",
+    "name": "珠藏渊海",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·星格贵贱总赋》",
+    "description": "珠藏渊海，万人头上之英雄。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": null
+  },
+  {
+    "id": "jin_005_hu_ju_long_pan",
+    "name": "虎踞龙蟠",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·星格贵贱总赋》",
+    "description": "金果为龙虎之星，各得其用，而照守命宫者，佳。虎踞龙蟠，当朝之士。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starGuardLife",
+          "star": "Venus"
+        },
+        {
+          "type": "starGuardLife",
+          "star": "Jupiter"
+        }
+      ]
+    }
+  },
+  {
+    "id": "jin_006_yun_jian_yue_zhuo",
+    "name": "云间鸑鷟",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·星格贵贱总赋》",
+    "description": "云间鸑鷟，当为邸省之贤。午宫坐命，金气二星入宫坐命。",
+    "jiXiong": "吉",
+    "geJuType": "贤",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInGong",
+          "star": "Venus",
+          "gongs": [
+            "Wu"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Qi",
+          "gongs": [
+            "Wu"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "jin_007_tian_shang_qi_lin",
+    "name": "天上麒麟",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·星格贵贱总赋》",
+    "description": "天上麒麟，定数东宫之贵。金果辰，木在卯，而在卯辰坐命者是。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInGong",
+          "star": "Venus",
+          "gongs": [
+            "Chen"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Jupiter",
+          "gongs": [
+            "Chen"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Jupiter",
+          "gongs": [
+            "Mao"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "jin_008_jin_guan_ding_cui",
+    "name": "金冠顶翠",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·星格贵贱总赋》",
+    "description": "金冠顶翠，紫诰金花。金冠指金也，顶翠指木也，金宫会木以合此格也。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "sameGong",
+      "stars": [
+        "Venus",
+        "Jupiter"
+      ]
+    }
+  },
+  {
+    "id": "jin_009_yu_chu_kun_gang",
+    "name": "玉出昆冈",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·星格贵贱总赋》",
+    "description": "玉出昆冈，罗帏绣幕。玉指金也，昆冈指土也，金土斗度逢空为合格。",
+    "jiXiong": "吉",
+    "geJuType": "富",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Venus",
+            "Saturn"
+          ]
+        },
+        {
+          "type": "starInKongWang",
+          "star": "Venus"
+        },
+        {
+          "type": "starInKongWang",
+          "star": "Saturn"
+        }
+      ]
+    }
+  },
+  {
+    "id": "jin_010_luan_yu_nan_xing",
+    "name": "鸾轝南幸",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·星格贵贱总赋》",
+    "description": "金果拱日，在星房度。水南幸，人主之尊。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInConstellation",
+          "star": "Venus",
+          "constellations": [
+            "星",
+            "房"
+          ]
+        },
+        {
+          "type": "starInConstellation",
+          "star": "Jupiter",
+          "constellations": [
+            "星",
+            "房"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "jin_011_feng_jia_bei_gui",
+    "name": "凤驾北归",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·星格贵贱总赋》",
+    "description": "凤驾北归，帝王之象。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": null
+  },
+  {
+    "id": "jin_012_yi_gan_jiu_shi",
+    "name": "移干就湿",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·星格贵贱总赋》",
+    "description": "移干就湿，必主贫寒。",
+    "jiXiong": "凶",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": null
+  },
+  {
+    "id": "jin_013_jin_wu_cheng_rui",
+    "name": "金乌呈瑞",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·星格贵贱总赋》",
+    "description": "金乌呈瑞，富贵两全。",
+    "jiXiong": "吉",
+    "geJuType": "富",
+    "scope": "natal",
+    "conditions": null
+  },
+  {
+    "id": "jin_014_feng_yu_zuo_lin",
+    "name": "风雨作霖",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·星格贵贱总赋》",
+    "description": "风雨作霖，有济世安民之略。果风毕雨，金水太阳躔毕箕度是也。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInConstellation",
+          "star": "Venus",
+          "constellations": [
+            "毕",
+            "箕"
+          ]
+        },
+        {
+          "type": "starInConstellation",
+          "star": "Mercury",
+          "constellations": [
+            "毕",
+            "箕"
+          ]
+        },
+        {
+          "type": "starInConstellation",
+          "star": "Sun",
+          "constellations": [
+            "毕",
+            "箕"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "jin_015_lao_bang_han_zhu",
+    "name": "老蚌含珠",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·星格贵贱总赋》",
+    "description": "老蚌含珠，乡闾望重。土金在亥子和辰巳宫，须金土为用神者。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Saturn",
+            "Venus"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Saturn",
+          "gongs": [
+            "Hai",
+            "Zi",
+            "Chen",
+            "Si"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Venus",
+          "gongs": [
+            "Hai",
+            "Zi",
+            "Chen",
+            "Si"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "jin_016_su_yue_liu_tian",
+    "name": "素月流天",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·星格贵贱总赋》",
+    "description": "素月流天见金，而官居极品。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "sameGong",
+      "stars": [
+        "Moon",
+        "Venus"
+      ]
+    }
+  },
+  {
+    "id": "jin_017_jin_shui_bei_chi",
+    "name": "金水背驰",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·八格赋》",
+    "description": "金宝退留，用而无用，来而不来。愚格。",
+    "jiXiong": "凶",
+    "geJuType": "愚",
+    "scope": "natal",
+    "conditions": null
+  },
+  {
+    "id": "jin_018_jin_shui_fen_ming",
+    "name": "金水分明",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·论诸星总断》",
+    "description": "金水分明，水前金后，不宜混失退逆。贵。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": null
+  },
+  {
+    "id": "jin_019_jin_shui_hui_yuan",
+    "name": "金水会垣",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·论诸星总断》",
+    "description": "金水会垣，水忌退于金后。水在金前，水受金生。贵。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "sameGong",
+      "stars": [
+        "Venus",
+        "Mercury"
+      ]
+    }
+  },
+  {
+    "id": "jin_020_jin_han_shui_leng",
+    "name": "金寒水冷",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·论诸星总断》",
+    "description": "冬生金寒，水冷，未免孤寒之苦。",
+    "jiXiong": "凶",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "WINTER"
+          ]
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Venus",
+            "Mercury"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "jin_021_jin_shui_wei_shi",
+    "name": "金水为仕",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·论诸星总断》",
+    "description": "金水躔奎壁，奎壁乃贵人星，文薮星。当云：五星连壁，五星聚奎，此乃文地。金躔参壁度，曰：金生水。水躔奎斗度曰：水生木，相生之德不混，为文人贵士也。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInConstellation",
+          "star": "Venus",
+          "constellations": [
+            "奎",
+            "壁"
+          ]
+        },
+        {
+          "type": "starInConstellation",
+          "star": "Mercury",
+          "constellations": [
+            "奎",
+            "壁"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "jin_022_jin_shui_hu_yuan",
+    "name": "金水互垣",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·论诸星总断》",
+    "description": "水居金垣，金入水垣，乃大吉也。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInGong",
+          "star": "Mercury",
+          "gongs": [
+            "Chen",
+            "You"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Venus",
+          "gongs": [
+            "Hai",
+            "Zi"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "jin_023_jin_bei_qi_ma",
+    "name": "金孛骑马",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·论诸星总断》",
+    "description": "金孛入驿马桃花宫上，必放荡淫邪。",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "sameGong",
+      "stars": [
+        "Venus",
+        "Bei"
+      ]
+    }
+  },
+  {
+    "id": "jin_024_jin_huo_yi_yuan",
+    "name": "金火易垣",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·论诸星总断》",
+    "description": "火金不可易垣。火不可入金垣，金不可入火垣，疑其相攻相克也。",
+    "jiXiong": "凶",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": {
+      "type": "or",
+      "conditions": [
+        {
+          "type": "starInGong",
+          "star": "Mars",
+          "gongs": [
+            "Chen",
+            "You"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Venus",
+          "gongs": [
+            "Yin",
+            "Mao",
+            "Si",
+            "Wu"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "jin_025_jin_shui_gong_cheng",
+    "name": "金水功成",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·论诸星总断》",
+    "description": "金水生助命位，益佐官禄，其功名可遂也。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starGuardLife",
+          "star": "Venus"
+        },
+        {
+          "type": "starGuardLife",
+          "star": "Mercury"
+        }
+      ]
+    }
+  },
+  {
+    "id": "jin_026_jin_bei_lin_shen",
+    "name": "金孛临身",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·女命格》",
+    "description": "金孛匪宜临身。金孛同入命，则主淫冶好事。",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starGuardLife",
+          "star": "Venus"
+        },
+        {
+          "type": "starGuardLife",
+          "star": "Bei"
+        }
+      ]
+    }
+  },
+  {
+    "id": "jin_027_qing_ji_huo_yuan",
+    "name": "庆基获源",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·躔度赋》",
+    "description": "庆金因为辰的意思。繇，因为的意思。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInGong",
+      "star": "Venus",
+      "gongs": [
+        "Chen"
+      ]
+    }
+  },
+  {
+    "id": "jin_028_jin_shui_hui_she",
+    "name": "金水会蛇",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·躔度赋》",
+    "description": "金水凑于蛇穴，岂惟鹤发而休（金水会蛇在巳）",
+    "jiXiong": "吉",
+    "geJuType": "寿",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInGong",
+          "star": "Venus",
+          "gongs": [
+            "Si"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Mercury",
+          "gongs": [
+            "Si"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "jin_029_jin_ju_wei_fen",
+    "name": "金居卫分",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·躔度赋》《果老星宗·历象赋》",
+    "description": "金照卫而主寿（金在亥宫）。西方太白向卫分，益寿延年（金星居亥）。",
+    "jiXiong": "吉",
+    "geJuType": "寿",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInGong",
+      "star": "Venus",
+      "gongs": [
+        "Hai"
+      ]
+    }
+  },
+  {
+    "id": "jin_030_jin_yu_ying_huo",
+    "name": "金遇荧惑",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·躔度赋》",
+    "description": "金照卫而主寿（金在亥宫），遇荧惑而夭天年（火必克金）",
+    "jiXiong": "凶",
+    "geJuType": "夭",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInGong",
+          "star": "Venus",
+          "gongs": [
+            "Hai"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Mars",
+          "gongs": [
+            "Hai"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "jin_031_jin_ju_kang_wei",
+    "name": "金居亢位",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·历象赋》",
+    "description": "欲问荣华，大抵抗金居亢位（金星在辰）",
+    "jiXiong": "吉",
+    "geJuType": "富",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInGong",
+      "star": "Venus",
+      "gongs": [
+        "Chen"
+      ]
+    }
+  },
+  {
+    "id": "jin_032_jin_mu_zhao_shu_niu",
+    "name": "金木照于鼠牛",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·历象赋》",
+    "description": "先吉后凶，金木照于鼠牛之地（金木居子居丑）",
+    "jiXiong": "平",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInGong",
+          "star": "Venus",
+          "gongs": [
+            "Zi",
+            "Chou"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Jupiter",
+          "gongs": [
+            "Zi",
+            "Chou"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "jin_033_jin_cheng_huo_wei",
+    "name": "金乘火位",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·历象赋》《果老星宗·通微赋》",
+    "description": "金乘火位，其人少失双亲（金忌居卯戌宫）。金乘火位，在西北则轻。[戌土遇金]",
+    "jiXiong": "凶",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInGong",
+      "star": "Venus",
+      "gongs": [
+        "Mao",
+        "Xu"
+      ]
+    }
+  },
+  {
+    "id": "jin_034_mu_jin_hui_tian",
+    "name": "木金会田",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·历象赋》",
+    "description": "多荣产业，木金会于田园（金木妙居田宅）",
+    "jiXiong": "吉",
+    "geJuType": "富",
+    "scope": "natal",
+    "conditions": {
+      "type": "sameGong",
+      "stars": [
+        "Jupiter",
+        "Venus"
+      ]
+    }
+  },
+  {
+    "id": "jin_035_san_ri_feng_jin",
+    "name": "三日逢金",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·历象赋》",
+    "description": "年年获福，皆因三日逢金（太阴泊处前后宫共四十五度，谓三日宫）",
+    "jiXiong": "吉",
+    "geJuType": "富",
+    "scope": "natal",
+    "conditions": {
+      "type": "sameGong",
+      "stars": [
+        "Moon",
+        "Venus"
+      ]
+    }
+  },
+  {
+    "id": "jin_036_tai_bai_shuang_tai",
+    "name": "太白双胎",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·元通赋》",
+    "description": "亥为登明，巳为太乙。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInGong",
+      "star": "Venus",
+      "gongs": [
+        "Hai",
+        "Si"
+      ]
+    }
+  },
+  {
+    "id": "jin_037_huo_jin_zi_wei",
+    "name": "火金子位",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·通微赋》",
+    "description": "如此者非贫即夭。",
+    "jiXiong": "凶",
+    "geJuType": "夭",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInGong",
+          "star": "Mars",
+          "gongs": [
+            "Zi"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Venus",
+          "gongs": [
+            "Zi"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "jin_038_jin_shui_wen_zhi",
+    "name": "金水文智",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·通微赋》",
+    "description": "金水文辞为智巧。[金水在命]",
+    "jiXiong": "吉",
+    "geJuType": "贤",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starGuardLife",
+          "star": "Venus"
+        },
+        {
+          "type": "starGuardLife",
+          "star": "Mercury"
+        }
+      ]
+    }
+  },
+  {
+    "id": "jin_039_gang_rou_xiang_ji",
+    "name": "刚柔相济",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·通微赋》",
+    "description": "金曜本性最无情，见木刚柔须相济[金木宜同行]",
+    "jiXiong": "吉",
+    "geJuType": "贤",
+    "scope": "natal",
+    "conditions": {
+      "type": "sameGong",
+      "stars": [
+        "Venus",
+        "Jupiter"
+      ]
+    }
+  },
+  {
+    "id": "jin_040_jin_xing_shou_ming",
+    "name": "金星守命",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·玉衡经》",
+    "description": "金星守命，好色而主清高。[金之色美，人皆好之，故乡]",
+    "jiXiong": "平",
+    "geJuType": "贤",
+    "scope": "natal",
+    "conditions": {
+      "type": "starGuardLife",
+      "star": "Venus"
+    }
+  },
+  {
+    "id": "jin_041_jin_huo_zhan_chen_you",
+    "name": "金火战辰酉",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·玉衡经》",
+    "description": "金火战于辰酉，肺心咳嗽[火主心金主肺]",
+    "jiXiong": "凶",
+    "geJuType": "夭",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInGong",
+          "star": "Venus",
+          "gongs": [
+            "Chen",
+            "You"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Mars",
+          "gongs": [
+            "Chen",
+            "You"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "jin_042_tu_hui_jin_mai",
+    "name": "土晦金埋",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·四时赋》",
+    "description": "金埋土而反晦[秋金土重反晦]",
+    "jiXiong": "凶",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "AUTUMN"
+          ]
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Venus",
+            "Saturn"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "jin_043_chun_jin_jian_yue",
+    "name": "春金见月",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·四时赋》",
+    "description": "春金见月，淡薄无成[金未成不能助月]",
+    "jiXiong": "凶",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "SPRING"
+          ]
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Venus",
+            "Moon"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "jin_044_dong_yue_yu_jin",
+    "name": "冬月遇金",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·四时赋》",
+    "description": "冬月遇金，饥寒刺骨[寒月不宜傍金星]",
+    "jiXiong": "凶",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "WINTER"
+          ]
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Moon",
+            "Venus"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "jin_045_jin_de_huo_ming",
+    "name": "金得火明",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·四时赋》",
+    "description": "金得火明而焕发[秋金见火为奇]",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "AUTUMN"
+          ]
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Venus",
+            "Mars"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "jin_046_xia_jin_xiao_shuo",
+    "name": "夏金销铄",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·四时赋》",
+    "description": "夏金遇日销铄无聊[夏金与日同躔必镕]",
+    "jiXiong": "凶",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "SUMMER"
+          ]
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Venus",
+            "Sun"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "jin_047_shui_dong_jin_han",
+    "name": "水冻金寒",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·四时赋》",
+    "description": "水冻金寒，纵相生而不发",
+    "jiXiong": "凶",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "WINTER"
+          ]
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Venus",
+            "Mercury"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "jin_048_tai_bai_ju_yuan",
+    "name": "太白居垣",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "太白居垣：金在辰酉二宫。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInGong",
+      "star": "Venus",
+      "gongs": [
+        "Chen",
+        "You"
+      ]
+    }
+  },
+  {
+    "id": "jin_049_jin_xing_sheng_dian",
+    "name": "金星升殿",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "金星升殿：金躔亢牛娄鬼四宿。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInConstellation",
+      "star": "Venus",
+      "constellations": [
+        "亢",
+        "牛",
+        "娄",
+        "鬼"
+      ]
+    }
+  },
+  {
+    "id": "jin_050_jin_zhu_yue_hua",
+    "name": "金助月华",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "金助月华",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "sameGong",
+      "stars": [
+        "Venus",
+        "Moon"
+      ]
+    }
+  },
+  {
+    "id": "jin_051_tu_jin_zao_shou",
+    "name": "土金遭受",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "土金坚实：秋冬土埋金寒，余月皆妙。",
+    "jiXiong": "平",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Venus",
+            "Saturn"
+          ]
+        },
+        {
+          "type": "not",
+          "condition": {
+            "type": "seasonIs",
+            "seasons": [
+              "AUTUMN",
+              "WINTER"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "jin_052_jin_shui_xiang_han",
+    "name": "金水相涵",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "金水相涵：冬生金寒水冷，余时昼夜皆吉。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Venus",
+            "Mercury"
+          ]
+        },
+        {
+          "type": "not",
+          "condition": {
+            "type": "seasonIs",
+            "seasons": [
+              "WINTER"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "jin_053_bai_hu_cong_jia",
+    "name": "白虎从驾",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "金为白虎星。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": null
+  },
+  {
+    "id": "jin_054_jin_cheng_huo_wei",
+    "name": "金乘火位",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "金乘火位：金在卯戌二宫。",
+    "jiXiong": "平",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInGong",
+      "star": "Venus",
+      "gongs": [
+        "Mao",
+        "Xu"
+      ]
+    }
+  },
+  {
+    "id": "jin_055_jin_zai_mu_gong",
+    "name": "金在木宫",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "金在木宫：金在寅亥二宫。",
+    "jiXiong": "平",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInGong",
+      "star": "Venus",
+      "gongs": [
+        "Yin",
+        "Hai"
+      ]
+    }
+  },
+  {
+    "id": "jin_056_jin_mu_gong_chan",
+    "name": "金木共躔",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "金木共躔：金木相克。",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "sameGong",
+      "stars": [
+        "Venus",
+        "Jupiter"
+      ]
+    }
+  },
+  {
+    "id": "jin_057_huo_jin_jiao_zhan",
+    "name": "火金交战",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "火金交战：火金相克。",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "sameGong",
+      "stars": [
+        "Venus",
+        "Mars"
+      ]
+    }
+  },
+  {
+    "id": "jin_058_jin_ji_tong_yuan",
+    "name": "金计同垣",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "金计同垣：金为用神，居垣庙吉，冬生减力。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Venus",
+            "Ji"
+          ]
+        },
+        {
+          "type": "starGongStatus",
+          "star": "Venus",
+          "statuses": [
+            "Yuan",
+            "Miao"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "jin_059_jin_shui_cong_yang",
+    "name": "金水从阳",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "金水从阳：金水掌吉神，居垣殿，昼生者奇。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Venus",
+            "Mercury"
+          ]
+        },
+        {
+          "type": "starGongStatus",
+          "star": "Venus",
+          "statuses": [
+            "Yuan",
+            "Dian"
+          ]
+        },
+        {
+          "type": "isDayBirth",
+          "isDay": true
+        }
+      ]
+    }
+  },
+  {
+    "id": "jin_060_huo_jin_shi_yue",
+    "name": "火金侍月",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "火金侍月：火金为用神，临垣庙，夜生者妙。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Venus",
+            "Mars",
+            "Moon"
+          ]
+        },
+        {
+          "type": "starGongStatus",
+          "star": "Venus",
+          "statuses": [
+            "Yuan",
+            "Miao"
+          ]
+        },
+        {
+          "type": "isDayBirth",
+          "isDay": false
+        }
+      ]
+    }
+  },
+  {
+    "id": "jin_061_san_tai_he_ge",
+    "name": "三台合格",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "三台合格：午巳卯宫得日金水同行。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Sun",
+            "Venus",
+            "Mercury"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Venus",
+          "gongs": [
+            "Wu",
+            "Si",
+            "Mao"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "jin_062_chu_gan_ru_kun",
+    "name": "出干入坤",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "出干入坤。",
+    "jiXiong": "未知",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": null
+  },
+  {
+    "id": "jin_063_shan_ze_tong_qi",
+    "name": "山泽通气",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "山泽通气：木寅金酉，命坐酉寅，兼格高贵。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInGong",
+          "star": "Jupiter",
+          "gongs": [
+            "Yin"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Venus",
+          "gongs": [
+            "You"
+          ]
+        },
+        {
+          "type": "lifeGongAt",
+          "gongs": [
+            "You",
+            "Yin"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "jin_064_jin_luo_tong_ke",
+    "name": "金罗同克",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "金罗同克：金为用神则坏矣。",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "sameGong",
+      "stars": [
+        "Venus",
+        "Luo"
+      ]
+    }
+  },
+  {
+    "id": "jin_065_qian_kun_pi_se",
+    "name": "乾坤否塞",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "乾坤否塞：亥命金罗，申命土计。",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "or",
+      "conditions": [
+        {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "lifeGongAt",
+              "gongs": [
+                "Hai"
+              ]
+            },
+            {
+              "type": "sameGong",
+              "stars": [
+                "Venus",
+                "Luo"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "lifeGongAt",
+              "gongs": [
+                "Shen"
+              ]
+            },
+            {
+              "type": "sameGong",
+              "stars": [
+                "Saturn",
+                "Ji"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "jin_066_shan_ze_chen_mai",
+    "name": "山泽沉埋",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "山泽沉埋。",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": null
+  },
+  {
+    "id": "jin_067_long_yue_tian_chi",
+    "name": "龙跃天池",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "龙跃天池：亢进金龙立命，金亥从日月。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInConstellation",
+          "star": "Venus",
+          "constellations": [
+            "亢"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Venus",
+          "gongs": [
+            "Hai"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "jin_068_cang_long_ru_jing",
+    "name": "苍龙入井",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "苍龙入井。",
+    "jiXiong": "未知",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": null
+  },
+  {
+    "id": "jin_069_jin_ying_su_liu",
+    "name": "金莺宿柳",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "金莺宿柳：金同命躔柳，近太阳尤妙。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInConstellation",
+          "star": "Venus",
+          "constellations": [
+            "柳"
+          ]
+        },
+        {
+          "type": "starGuardLife",
+          "star": "Venus"
+        }
+      ]
+    }
+  },
+  {
+    "id": "jin_070_ba_sha_chao_tian",
+    "name": "八杀朝天",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "八杀朝天：如戌命火，又未命土，或辰命金。此三星独占天门，得时为上。惟金火尤重，夜生显贵之人也。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "or",
+          "conditions": [
+            {
+              "type": "and",
+              "conditions": [
+                {
+                  "type": "lifeGongAt",
+                  "gongs": [
+                    "Chen"
+                  ]
+                },
+                {
+                  "type": "starGuardLife",
+                  "star": "Venus"
+                }
+              ]
+            },
+            {
+              "type": "and",
+              "conditions": [
+                {
+                  "type": "lifeGongAt",
+                  "gongs": [
+                    "Xu"
+                  ]
+                },
+                {
+                  "type": "starGuardLife",
+                  "star": "Mars"
+                }
+              ]
+            },
+            {
+              "type": "and",
+              "conditions": [
+                {
+                  "type": "lifeGongAt",
+                  "gongs": [
+                    "Wei"
+                  ]
+                },
+                {
+                  "type": "starGuardLife",
+                  "star": "Saturn"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "isDayBirth",
+          "isDay": false
+        }
+      ]
+    }
+  },
+  {
+    "id": "jin_071_chang_geng_ru_ming",
+    "name": "长庚入命",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·灵台星格》",
+    "description": "长庚入命：东有启明乃水星之象，西有长庚乃太白之象。昔李太白母梦长庚星入怀，盖月乃母道也，身之所从出也，夜生金月同在酉，乃合此格。李白母梦长庚入怀，觉而有忧虑，及生李白，命其名曰白，字太白，诗才冠天下，则知长庚入命，必主产不世之奇才也。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Venus",
+            "Moon"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Venus",
+          "gongs": [
+            "You"
+          ]
+        },
+        {
+          "type": "isDayBirth",
+          "isDay": false
+        }
+      ]
+    }
+  },
+  {
+    "id": "jin_072_bai_hu_dang_quan",
+    "name": "白虎当权",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·灵台星格》",
+    "description": "秋生人见金星，在申酉安命，乃白虎当权。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "AUTUMN"
+          ]
+        },
+        {
+          "type": "lifeGongAt",
+          "gongs": [
+            "Shen",
+            "You"
+          ]
+        },
+        {
+          "type": "starGuardLife",
+          "star": "Venus"
+        }
+      ]
+    }
+  },
+  {
+    "id": "jin_073_hu_ju_long_pan",
+    "name": "虎踞龙盘",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·灵台星格》",
+    "description": "虎踞龙盘：木星乃东方之苍龙，金星乃西方之白虎，金在命木正照，夜生乃龙盘虎踞。金木同居于命，又为龙虎交驰，更在辰寅二宫坐命者尤妙。盖命宫居于子午，金星在酉，木星在卯，四正得之，正合此格。盖木为青龙在东方，金为白虎在西方，又在前四宫与后四宫拱照，岂得不为贵命。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "or",
+          "conditions": [
+            {
+              "type": "sameGong",
+              "stars": [
+                "Venus",
+                "Jupiter"
+              ]
+            },
+            {
+              "type": "and",
+              "conditions": [
+                {
+                  "type": "lifeGongAt",
+                  "gongs": [
+                    "Zi",
+                    "Wu"
+                  ]
+                },
+                {
+                  "type": "starInGong",
+                  "star": "Venus",
+                  "gongs": [
+                    "You"
+                  ]
+                },
+                {
+                  "type": "starInGong",
+                  "star": "Jupiter",
+                  "gongs": [
+                    "Mao"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "isDayBirth",
+          "isDay": false
+        }
+      ]
+    }
+  },
+  {
+    "id": "jin_074_yue_hua_jin_que",
+    "name": "月华金阙",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·灵台星格》",
+    "description": "月华金阙：金星在亥，与太阴同宫；金星在辰，与太阴同宫，皆谓之月华金阙。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Venus",
+            "Moon"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Venus",
+          "gongs": [
+            "Hai",
+            "Chen"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "jin_075_ri_hua_jin_que",
+    "name": "日华金阙",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·灵台星格》",
+    "description": "若金星在亥、辰，与太阳同宫者，谓之日华金阙，主富贵。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Venus",
+            "Sun"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Venus",
+          "gongs": [
+            "Hai",
+            "Chen"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "jin_076_jin_ju_gan_wei",
+    "name": "金居干位",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·灵台星格》",
+    "description": "金居干位：亥上乃西北，干位干宫为金，而金星亦居亥上，乃据格。未生与申生人，得金居干位最佳。盖未属井鬼，其分野则在秦；申属觜参，其分野则在晋，得金水正气，又与木日同居于亥，乃金居干位，若无火计罗孛入，皆为贵命。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInGong",
+          "star": "Venus",
+          "gongs": [
+            "Hai"
+          ]
+        },
+        {
+          "type": "not",
+          "condition": {
+            "type": "or",
+            "conditions": [
+              {
+                "type": "starInGong",
+                "star": "Mars",
+                "gongs": [
+                  "Hai"
+                ]
+              },
+              {
+                "type": "starInGong",
+                "star": "Ji",
+                "gongs": [
+                  "Hai"
+                ]
+              },
+              {
+                "type": "starInGong",
+                "star": "Luo",
+                "gongs": [
+                  "Hai"
+                ]
+              },
+              {
+                "type": "starInGong",
+                "star": "Bei",
+                "gongs": [
+                  "Hai"
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "jin_077_jin_qi_ren_ma",
+    "name": "金骑人马",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·灵台星格》",
+    "description": "金骑人马：命立寅宫尾度，金星相会，又是寅年岁驾，谓曰金骑人马。我骑他，盖岁驾有侍从之义，主人禄享千钟，不可概以为不吉也。若罗星来犯，多有为人仆从，妻子早离。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "lifeGongAt",
+          "gongs": [
+            "Yin"
+          ]
+        },
+        {
+          "type": "starInConstellation",
+          "star": "Venus",
+          "constellations": [
+            "尾"
+          ]
+        },
+        {
+          "type": "starGuardLife",
+          "star": "Venus"
+        }
+      ]
+    }
+  },
+  {
+    "id": "jin_078_jin_shen_chi_ren",
+    "name": "金神持刃",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·灵台星格》",
+    "description": "金神持刃：命立辰宫亢金度乃是，乙年刃在辰，却见金星亢度躔之，官封上将，镇守边庭，行限至午，而遇火临柳土，发财可比陶朱，若未限，见土躔井木生秋冬尚可，生于春夏，非夭则残疾。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "lifeGongAt",
+          "gongs": [
+            "Chen"
+          ]
+        },
+        {
+          "type": "starInConstellation",
+          "star": "Venus",
+          "constellations": [
+            "亢"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "jin_079_jin_xing_ru_dou",
+    "name": "金星入斗",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·布局补遗》",
+    "description": "金星入斗：酉宫立命主，金飞入丑宫斗度，凡人命得此一星，主人才华，俊秀，早步青云，行寅限尾度，见火星，定主刑宪血疾，若在角度，反凶作吉，大主发福寿命延长。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "lifeGongAt",
+          "gongs": [
+            "You"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Venus",
+          "gongs": [
+            "Chou"
+          ]
+        },
+        {
+          "type": "starInConstellation",
+          "star": "Venus",
+          "constellations": [
+            "斗"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "jin_080_jin_mu_hai_shi",
+    "name": "金木亥室",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·指迷歌》",
+    "description": "金木亥室：金星与木室相逢，官职荣迁至上公。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInGong",
+          "star": "Venus",
+          "gongs": [
+            "Hai"
+          ]
+        },
+        {
+          "type": "starInConstellation",
+          "star": "Jupiter",
+          "constellations": [
+            "室"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "jin_081_jin_shui_xing_qiao",
+    "name": "金水性巧",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·金箱歌》",
+    "description": "金水性巧：金水主人多精彩，自然巧劣心中藏。",
+    "jiXiong": "吉",
+    "geJuType": "贤",
+    "scope": "natal",
+    "conditions": {
+      "type": "sameGong",
+      "stars": [
+        "Venus",
+        "Mercury"
+      ]
+    }
+  },
+  {
+    "id": "jin_082_jin_bei_yin_lao",
+    "name": "金孛淫痨",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·金箱歌》",
+    "description": "金孛淫痨：金孛交会为人淫，必主痨病及其身。",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "sameGong",
+      "stars": [
+        "Venus",
+        "Bei"
+      ]
+    }
+  },
+  {
+    "id": "jin_083_jin_shui_bei_xian",
+    "name": "金水孛咸",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·帘幕歌·论女命》",
+    "description": "金水孛咸：妇人若见金水孛，三改嫁兮有何说。咸池带水与孛星，朝云暮雨情不歇。",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "sameGong",
+      "stars": [
+        "Venus",
+        "Mercury",
+        "Bei"
+      ]
+    }
+  },
+  {
+    "id": "jin_084_jin_shui_bei_mu",
+    "name": "金水孛沐",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·帘幕歌·论女命》",
+    "description": "金水孛沐：妇人金水孛星迎，身命同临性偏淫。更兼沐浴在其间，离居奔走落风尘。",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "sameGong",
+      "stars": [
+        "Venus",
+        "Mercury",
+        "Bei"
+      ]
+    }
+  },
+  {
+    "id": "jin_085_jin_xiao_tian_xie",
+    "name": "金销天蝎",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·观星要诀》",
+    "description": "金销天蝎（房度）。断躔，忌。",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInConstellation",
+      "star": "Venus",
+      "constellations": [
+        "房"
+      ]
+    }
+  },
+  {
+    "id": "jin_086_jin_xiao_bai_yang",
+    "name": "金销白羊",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·观星要诀》",
+    "description": "金销白羊（奎度）。断躔，忌。",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInConstellation",
+      "star": "Venus",
+      "constellations": [
+        "奎"
+      ]
+    }
+  },
+  {
+    "id": "jin_087_chang_geng_chao_dou",
+    "name": "长庚朝斗",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·元妙经解》",
+    "description": "金星丑宫斗木度。贵格。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInGong",
+          "star": "Venus",
+          "gongs": [
+            "Chou"
+          ]
+        },
+        {
+          "type": "starInConstellation",
+          "star": "Venus",
+          "constellations": [
+            "斗"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "jin_088_jin_mu_feng_long",
+    "name": "金木逢龙",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·元妙经解》",
+    "description": "金木辰宫，贵格。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInGong",
+          "star": "Venus",
+          "gongs": [
+            "Chen"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Jupiter",
+          "gongs": [
+            "Chen"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "jin_089_shui_run_jin_ming",
+    "name": "水润金明",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·元妙经解》",
+    "description": "水金辰宫，贵格。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInGong",
+          "star": "Venus",
+          "gongs": [
+            "Chen"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Mercury",
+          "gongs": [
+            "Chen"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "jin_090_jin_hao_tai_chang",
+    "name": "金号太常",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·元妙经解》",
+    "description": "金辰宫，贵格。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInGong",
+      "star": "Venus",
+      "gongs": [
+        "Chen"
+      ]
+    }
+  },
+  {
+    "id": "jin_091_jin_chan_gui_su",
+    "name": "金躔鬼宿",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·元妙经解》",
+    "description": "金星未宫鬼宿。贵格。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInGong",
+          "star": "Venus",
+          "gongs": [
+            "Wei"
+          ]
+        },
+        {
+          "type": "starInConstellation",
+          "star": "Venus",
+          "constellations": [
+            "鬼"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "jin_092_jin_xing_zhu_yue",
+    "name": "金星助月",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·元妙经解》",
+    "description": "金星助月。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "sameGong",
+      "stars": [
+        "Venus",
+        "Moon"
+      ]
+    }
+  },
+  {
+    "id": "jin_093_jin_zhu_yue_hua",
+    "name": "金助月华",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·元妙经解》",
+    "description": "金月酉宫。贵格。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Venus",
+            "Moon"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Venus",
+          "gongs": [
+            "You"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "jin_094_jin_zhang_ren_feng",
+    "name": "金掌刃锋",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·谈星奥论》",
+    "description": "金怕掌刃锋廉的耗符等煞，木命限人尤凶。",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "xingxian",
+    "conditions": null
+  },
+  {
+    "id": "jin_095_lan_fu_xiu_zhen",
+    "name": "烂斧绣针",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·玄玄妙论》",
+    "description": "金星落空谓之烂斧绣针，则是常用之物，又主利名有成。",
+    "jiXiong": "平",
+    "geJuType": "富",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInKongWang",
+      "star": "Venus"
+    }
+  },
+  {
+    "id": "jin_096_lian_jin_cheng_qi",
+    "name": "炼金成器",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·七政四时论》",
+    "description": "春令之金不怕火罗，借火罗以温助，谓之炼金成器，变化气质。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "SPRING"
+          ]
+        },
+        {
+          "type": "or",
+          "conditions": [
+            {
+              "type": "sameGong",
+              "stars": [
+                "Venus",
+                "Mars"
+              ]
+            },
+            {
+              "type": "sameGong",
+              "stars": [
+                "Venus",
+                "Luo"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "jin_097_chun_jin_ji_shui",
+    "name": "春金忌水",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·七政四时论》",
+    "description": "春令之金，不宜与水孛同行，春初生者，凝寒冻未退，无火日温之，极主贫寒。春月之金性柔体弱。",
+    "jiXiong": "凶",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "SPRING"
+          ]
+        },
+        {
+          "type": "or",
+          "conditions": [
+            {
+              "type": "sameGong",
+              "stars": [
+                "Venus",
+                "Mercury"
+              ]
+            },
+            {
+              "type": "sameGong",
+              "stars": [
+                "Venus",
+                "Bei"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "jin_098_shuo_shi_feng_yuan",
+    "name": "烁石逢源",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·七政四时论》",
+    "description": "夏令之金，不宜生水，就赖水以制其刚，烁石逢源，主利名显达。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "SUMMER"
+          ]
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Venus",
+            "Mercury"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "jin_099_xia_jin_feng_huo",
+    "name": "夏金逢火",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·七政四时论》",
+    "description": "夏令罗火何以相逢，冬月如斯自能发福。",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "SUMMER"
+          ]
+        },
+        {
+          "type": "or",
+          "conditions": [
+            {
+              "type": "sameGong",
+              "stars": [
+                "Venus",
+                "Mars"
+              ]
+            },
+            {
+              "type": "sameGong",
+              "stars": [
+                "Venus",
+                "Luo"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "jin_100_jin_bai_shui_qing",
+    "name": "金白水清",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·七政四时论》",
+    "description": "秋令之金乃白帝司权，金神用事不怕火罗而克，不喜土计而生，借水映色正此谓也。金白水清最喜秋生者，贵。若金水朝拱太阳，最高奇特。经曰：金坚而无火锻炼，终见凶顽。盖火尚杀伐，水尚澄清，文武皆沾，刚柔相济，名扬四海。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "AUTUMN"
+          ]
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Venus",
+            "Mercury"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "jin_101_dong_jin_xi_nuan",
+    "name": "冬金喜暖",
+    "className": "金星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·七政四时论》",
+    "description": "冬令之金，斯时寒凝冻结，昼喜日光而温之，夜喜火罗而照之，定主文职蒙恩，不宜与水孛相互作用，极主贫寒，水冷故也。最妙昼土逢阳，以温其土，可助其金，主威武之职。又逢火罗拱互降祥，正所谓金罗相会，阃外司权。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "WINTER"
+          ]
+        },
+        {
+          "type": "or",
+          "conditions": [
+            {
+              "type": "and",
+              "conditions": [
+                {
+                  "type": "isDayBirth",
+                  "isDay": true
+                },
+                {
+                  "type": "sameGong",
+                  "stars": [
+                    "Venus",
+                    "Sun"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "and",
+              "conditions": [
+                {
+                  "type": "isDayBirth",
+                  "isDay": false
+                },
+                {
+                  "type": "or",
+                  "conditions": [
+                    {
+                      "type": "sameGong",
+                      "stars": [
+                        "Venus",
+                        "Mars"
+                      ]
+                    },
+                    {
+                      "type": "sameGong",
+                      "stars": [
+                        "Venus",
+                        "Luo"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+]

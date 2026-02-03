@@ -1,0 +1,1855 @@
+[
+  {
+    "id": "tu_001_gou_chen_zhen_dian",
+    "name": "勾陈镇殿",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·星格贵贱总赋》",
+    "description": "勾陈镇殿，珮玉腰金。土掌官恩，命令，同太阳躔虚星房，昴日度。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Saturn",
+            "Sun"
+          ]
+        },
+        {
+          "type": "starInConstellation",
+          "star": "Saturn",
+          "constellations": [
+            "虚",
+            "房",
+            "昴"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "tu_002_shan_xiao_cheng_bao",
+    "name": "山啸呈宝",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·星格贵贱总赋》《果老星宗·玄玄妙论》",
+    "description": "山啸呈宝，殿前作赋声摩空。土星落空谓之土陷山崩，必主退败可畏，如有恶星降夹逼迫，多见气蹙噎吃之疾，必主倒限。如金会谓之山啸呈宝，又主名利发达。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInKongWang",
+          "star": "Saturn"
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Saturn",
+            "Venus"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "tu_003_shi_li_jian_feng",
+    "name": "石砺剑锋",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·星格贵贱总赋》",
+    "description": "石砺剑锋，塞上封侯建功节。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": null
+  },
+  {
+    "id": "tu_004_zhu_cang_yuan_hai",
+    "name": "珠藏渊海",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·星格贵贱总赋》",
+    "description": "珠藏渊海，万人头上之英雄。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": null
+  },
+  {
+    "id": "tu_005_lao_bang_han_zhu",
+    "name": "老蚌含珠",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·星格贵贱总赋》",
+    "description": "老蚌含珠，乡闾望重。土金在亥子和辰巳宫，须金土为用神者。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Saturn",
+            "Venus"
+          ]
+        },
+        {
+          "type": "or",
+          "conditions": [
+            {
+              "type": "starInGong",
+              "star": "Saturn",
+              "gongs": [
+                "Hai",
+                "Zi"
+              ]
+            },
+            {
+              "type": "starInGong",
+              "star": "Saturn",
+              "gongs": [
+                "Chen",
+                "Si"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "tu_006_han_yun_chu_xiu",
+    "name": "寒云出岫",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·星格贵贱总赋》",
+    "description": "寒云出岫遇土，而身隐空山。",
+    "jiXiong": "平",
+    "geJuType": "贤",
+    "scope": "natal",
+    "conditions": null
+  },
+  {
+    "id": "tu_007_tu_bei_chan",
+    "name": "土孛掺",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·八格赋》",
+    "description": "土孛相战，星辰崩溃。愚格。",
+    "jiXiong": "凶",
+    "geJuType": "愚",
+    "scope": "natal",
+    "conditions": {
+      "type": "sameGong",
+      "stars": [
+        "Saturn",
+        "Bei"
+      ]
+    }
+  },
+  {
+    "id": "tu_008_zhou_huo_ye_tu",
+    "name": "昼火夜土",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·论诸星总断》",
+    "description": "火土分昼夜之忌。昼生忌火罗，夜生忌土计。",
+    "jiXiong": "凶",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": {
+      "type": "or",
+      "conditions": [
+        {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "isDayBirth",
+              "isDay": true
+            },
+            {
+              "type": "sameGong",
+              "stars": [
+                "Mars",
+                "Luo"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "isDayBirth",
+              "isDay": false
+            },
+            {
+              "type": "sameGong",
+              "stars": [
+                "Saturn",
+                "Ji"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "tu_009_ye_tu_jie_yue",
+    "name": "夜土截月",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·论诸星总断》",
+    "description": "土化刑，夜生嫌与月同行。",
+    "jiXiong": "凶",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "isDayBirth",
+          "isDay": false
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Saturn",
+            "Moon"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "tu_010_tu_bei_po_guan",
+    "name": "土孛破官",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·论诸星总断》",
+    "description": "土孛破官，徒向仕途奔走。官星被土孛伤破，可为医，卜，吏，书，卒难成名。九流者，土计孛同于官禄。土孛计会于官禄，宜是九流人也。",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInDestinyGong",
+          "star": "Saturn",
+          "destinyGong": "GuanLu"
+        },
+        {
+          "type": "starInDestinyGong",
+          "star": "Bei",
+          "destinyGong": "GuanLu"
+        }
+      ]
+    }
+  },
+  {
+    "id": "tu_011_huo_tu_ba_sha",
+    "name": "火土八杀",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·论诸星总断》",
+    "description": "残疾者，火罗土杂于难宫。火罗土聚于八杀宫，必然残疾也。",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": null
+  },
+  {
+    "id": "tu_012_tu_zai_qi_wu",
+    "name": "土在齐吴",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·躔度赋》",
+    "description": "原夫土在齐吴，虽夜生而福尤昌炽（土居子丑）。",
+    "jiXiong": "吉",
+    "geJuType": "富",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInGong",
+          "star": "Saturn",
+          "gongs": [
+            "Zi",
+            "Chou"
+          ]
+        },
+        {
+          "type": "isDayBirth",
+          "isDay": false
+        }
+      ]
+    }
+  },
+  {
+    "id": "tu_013_huo_tu_de_niu",
+    "name": "火土得牛",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·躔度赋》",
+    "description": "火土会于牛宫，不独龟龄而已（火土会牛在丑）。",
+    "jiXiong": "吉",
+    "geJuType": "寿",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Mars",
+            "Saturn"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Saturn",
+          "gongs": [
+            "Chou"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "tu_014_tu_ju_zheng_guo",
+    "name": "土居郑国",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·历象赋》",
+    "description": "土居郑国好亢，而正庙秤宫（土星在辰）。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInGong",
+      "star": "Saturn",
+      "gongs": [
+        "Chen"
+      ]
+    }
+  },
+  {
+    "id": "tu_015_tu_hao_bao_ping",
+    "name": "土好宝瓶",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·历象赋》",
+    "description": "参政学士，盖缘土好宝瓶（土星在子）。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInGong",
+      "star": "Saturn",
+      "gongs": [
+        "Zi"
+      ]
+    }
+  },
+  {
+    "id": "tu_016_tu_mai_shuang_nv",
+    "name": "土埋双女",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·历象赋》",
+    "description": "要知浅薄，无过土埋双女（土星在巳）。",
+    "jiXiong": "凶",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInGong",
+      "star": "Saturn",
+      "gongs": [
+        "Si"
+      ]
+    }
+  },
+  {
+    "id": "tu_017_jin_tu_xiang_feng",
+    "name": "金土相逢",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·历象赋》",
+    "description": "金土相逢，此辈盖能修合（金土指道门修合）。",
+    "jiXiong": "吉",
+    "geJuType": "贤",
+    "scope": "natal",
+    "conditions": {
+      "type": "sameGong",
+      "stars": [
+        "Venus",
+        "Saturn"
+      ]
+    }
+  },
+  {
+    "id": "tu_018_tu_hao_tai_chang",
+    "name": "土号太常",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗》",
+    "description": "斗牛之次，土德庙地。土号太常。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInConstellation",
+      "star": "Saturn",
+      "constellations": [
+        "斗",
+        "牛"
+      ]
+    }
+  },
+  {
+    "id": "tu_019_tu_luo_qian_yi",
+    "name": "土罗迁移",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗》",
+    "description": "迁移犯土罗，男有旅亡之兆。土罗居迁移宫。",
+    "jiXiong": "凶",
+    "geJuType": "夭",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInDestinyGong",
+          "star": "Saturn",
+          "destinyGong": "QianYi"
+        },
+        {
+          "type": "starInDestinyGong",
+          "star": "Luo",
+          "destinyGong": "QianYi"
+        }
+      ]
+    }
+  },
+  {
+    "id": "tu_020_tu_bei_si_gong",
+    "name": "土孛巳宫",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗》",
+    "description": "火金子位，土孛巳宫，两相克战，切忌坐命。如此者非贫即夭。",
+    "jiXiong": "凶",
+    "geJuType": "夭",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Saturn",
+            "Bei"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Saturn",
+          "gongs": [
+            "Si"
+          ]
+        },
+        {
+          "type": "starGuardLife",
+          "star": "Saturn"
+        }
+      ]
+    }
+  },
+  {
+    "id": "tu_021_tu_xing_ru_ming",
+    "name": "土星入命",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·玉衡经》",
+    "description": "沉谋熟虑，为缘土入命宫。土主信，主人沉重敦厚。",
+    "jiXiong": "吉",
+    "geJuType": "贤",
+    "scope": "natal",
+    "conditions": {
+      "type": "starGuardLife",
+      "star": "Saturn"
+    }
+  },
+  {
+    "id": "tu_022_tu_ji_ju_chen",
+    "name": "土计居辰",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·玉衡经》",
+    "description": "脸面委黄，土计而居辰位。辰酉属胸膈。",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Saturn",
+            "Ji"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Saturn",
+          "gongs": [
+            "Chen"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "tu_023_huo_yan_tu_zao",
+    "name": "火炎土燥",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·四时赋》",
+    "description": "九夏之土逢火而燥。夏火太旺，生土反燥。",
+    "jiXiong": "凶",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "SUMMER"
+          ]
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Saturn",
+            "Mars"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "tu_024_tu_hui_jin_mai",
+    "name": "土晦金埋",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·四时赋》",
+    "description": "金埋土而反晦。秋金土重反晦。",
+    "jiXiong": "凶",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "AUTUMN"
+          ]
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Venus",
+            "Saturn"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "tu_025_tu_hun_shui_zhuo",
+    "name": "土混水浊",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·四时赋》",
+    "description": "土混水而致浊。冬水冰结土混不清。",
+    "jiXiong": "凶",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "WINTER"
+          ]
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Saturn",
+            "Mercury"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "tu_026_shui_fan_tu_beng",
+    "name": "水泛土崩",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·四时赋》",
+    "description": "受制之土见猛水，而崩溃四出。春夏生物之土乃为受制，遇水反崩溃。",
+    "jiXiong": "凶",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "SPRING",
+            "SUMMER"
+          ]
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Saturn",
+            "Mercury"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "tu_027_dong_tu_hui_huo",
+    "name": "冻土会火",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·四时赋》",
+    "description": "冰冻之土会火，始能发用。",
+    "jiXiong": "吉",
+    "geJuType": "富",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "WINTER"
+          ]
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Saturn",
+            "Mars"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "tu_028_han_tu_feng_jin",
+    "name": "寒土逢金",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·四时赋》",
+    "description": "寒土何生金之有。所谓土寒者，不生之故。",
+    "jiXiong": "凶",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "WINTER"
+          ]
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Saturn",
+            "Venus"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "tu_029_tu_mu_zhu_yue",
+    "name": "土母助月",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·四时赋》",
+    "description": "辰酉坐命，土犯月而尤佳。金命喜土为母。",
+    "jiXiong": "吉",
+    "geJuType": "富",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "lifeGongAt",
+          "gongs": [
+            "Chen",
+            "You"
+          ]
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Saturn",
+            "Moon"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "tu_030_shui_run_zao_tu",
+    "name": "水润燥土",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·四时赋》",
+    "description": "刚燥之土遇水滋润。夏土干燥，爱水滋润。",
+    "jiXiong": "吉",
+    "geJuType": "富",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "SUMMER"
+          ]
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Saturn",
+            "Mercury"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "tu_031_zhen_xing_ju_yuan",
+    "name": "镇星居垣",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "镇星居垣：土在子丑二宫。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInGong",
+      "star": "Saturn",
+      "gongs": [
+        "Zi",
+        "Chou"
+      ]
+    }
+  },
+  {
+    "id": "tu_032_tu_xing_sheng_dian",
+    "name": "土星升殿",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "土星升殿：土躔女胃柳氐四宿。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInConstellation",
+      "star": "Saturn",
+      "constellations": [
+        "女",
+        "胃",
+        "柳",
+        "氐"
+      ]
+    }
+  },
+  {
+    "id": "tu_033_huo_tu_gao_qiang",
+    "name": "火土高强",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "火土高强：夏生火炎土燥，余月昼夜皆吉。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Mars",
+            "Saturn"
+          ]
+        },
+        {
+          "type": "not",
+          "condition": {
+            "type": "seasonIs",
+            "seasons": [
+              "SUMMER"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "tu_034_tu_jin_jian_shi",
+    "name": "土金坚实",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "土金坚实：秋冬土埋金寒，余月皆妙。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Saturn",
+            "Venus"
+          ]
+        },
+        {
+          "type": "not",
+          "condition": {
+            "type": "seasonIs",
+            "seasons": [
+              "AUTUMN",
+              "WINTER"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "tu_035_gou_chen_zhen_dian_2",
+    "name": "勾陈镇殿",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "勾陈镇殿：辰戌丑未月土，日同宫。土为勾陈星。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "monthIs",
+          "months": [
+            "Chen",
+            "Xu",
+            "Chou",
+            "Wei"
+          ]
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Saturn",
+            "Sun"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "tu_036_tu_zai_mu_gong",
+    "name": "土在木宫",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "土在木宫：土在寅亥二宫。",
+    "jiXiong": "凶",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInGong",
+      "star": "Saturn",
+      "gongs": [
+        "Yin",
+        "Hai"
+      ]
+    }
+  },
+  {
+    "id": "tu_037_tu_ju_shui_di",
+    "name": "土居水地",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "土居水地：土在巳申二宫。",
+    "jiXiong": "凶",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInGong",
+      "star": "Saturn",
+      "gongs": [
+        "Si",
+        "Shen"
+      ]
+    }
+  },
+  {
+    "id": "tu_038_mu_tu_xiang_ke",
+    "name": "木土相克",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "木土相克：木遇土而克。",
+    "jiXiong": "凶",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": {
+      "type": "sameGong",
+      "stars": [
+        "Jupiter",
+        "Saturn"
+      ]
+    }
+  },
+  {
+    "id": "tu_039_tu_shui_xiang_ji",
+    "name": "土水相激",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "土水相激：土克水之故。",
+    "jiXiong": "凶",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": {
+      "type": "sameGong",
+      "stars": [
+        "Saturn",
+        "Mercury"
+      ]
+    }
+  },
+  {
+    "id": "tu_040_tu_luo_xiang_hui",
+    "name": "土罗相会",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "土罗相会：土为用神，居庙旺奇，夏生大燥。",
+    "jiXiong": "平",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Saturn",
+            "Luo"
+          ]
+        },
+        {
+          "type": "not",
+          "condition": {
+            "type": "seasonIs",
+            "seasons": [
+              "SUMMER"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "tu_041_tu_ji_yan_yue",
+    "name": "土计掩月",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "土计掩月：夜月忌土计同宫，掌杀刃尤甚。",
+    "jiXiong": "凶",
+    "geJuType": "夭",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "isDayBirth",
+          "isDay": false
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Saturn",
+            "Ji",
+            "Moon"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "tu_042_tu_bei_hun_za",
+    "name": "土孛混杂",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "土孛混杂：土为用神则力轻忌格。",
+    "jiXiong": "凶",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": {
+      "type": "sameGong",
+      "stars": [
+        "Saturn",
+        "Bei"
+      ]
+    }
+  },
+  {
+    "id": "tu_043_qian_kun_pi_se",
+    "name": "乾坤否塞",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "乾坤否塞：亥命金罗，申命土计。",
+    "jiXiong": "凶",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": {
+      "type": "or",
+      "conditions": [
+        {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "lifeGongAt",
+              "gongs": [
+                "Hai"
+              ]
+            },
+            {
+              "type": "sameGong",
+              "stars": [
+                "Venus",
+                "Luo"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "lifeGongAt",
+              "gongs": [
+                "Shen"
+              ]
+            },
+            {
+              "type": "sameGong",
+              "stars": [
+                "Saturn",
+                "Ji"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "tu_044_ba_sha_chao_tian",
+    "name": "八杀朝天",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "八杀朝天：如戌命火，又未命土，或辰命金。此三星独占天门，得时为上。惟金火尤重，夜生显贵之人也。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "or",
+      "conditions": [
+        {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "lifeGongAt",
+              "gongs": [
+                "Xu"
+              ]
+            },
+            {
+              "type": "starGuardLife",
+              "star": "Mars"
+            }
+          ]
+        },
+        {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "lifeGongAt",
+              "gongs": [
+                "Wei"
+              ]
+            },
+            {
+              "type": "starGuardLife",
+              "star": "Saturn"
+            }
+          ]
+        },
+        {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "lifeGongAt",
+              "gongs": [
+                "Chen"
+              ]
+            },
+            {
+              "type": "starGuardLife",
+              "star": "Venus"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "tu_045_gou_chen_de_wei",
+    "name": "勾陈得位",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "四土星在辰戌丑未安命，乃勾陈得位。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "lifeGongAt",
+          "gongs": [
+            "Chen",
+            "Xu",
+            "Chou",
+            "Wei"
+          ]
+        },
+        {
+          "type": "starGuardLife",
+          "star": "Saturn"
+        }
+      ]
+    }
+  },
+  {
+    "id": "tu_046_shui_tu_zao_xing",
+    "name": "水土遭刑",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·布局补遗》",
+    "description": "水木遭刑：歌云：申宫立命水为主，限戌恩金在奎度。金木相刑恩受制，反吉为凶横死鬼。限行亥宫见土星，土入江湖壁水度。也教富贵一时来，一十五年花锦丽。脱土半百危十五，溺死官刑骨肉忌。行奎度，在火宫则金受制，行亥见土，则能生金，金生水则发，到危则被土克。",
+    "jiXiong": "凶",
+    "geJuType": "夭",
+    "scope": "xingxian",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "lifeGongAt",
+          "gongs": [
+            "Shen"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Saturn",
+          "gongs": [
+            "Hai"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "tu_047_tu_xing_fei_da",
+    "name": "土星肥大",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·金箱歌》",
+    "description": "土星肥大：土星主人体重肥，为人禀性迟而愚。",
+    "jiXiong": "平",
+    "geJuType": "愚",
+    "scope": "natal",
+    "conditions": {
+      "type": "starGuardLife",
+      "star": "Saturn"
+    }
+  },
+  {
+    "id": "tu_048_tu_ming_ji_mu",
+    "name": "土命忌木",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·金箱歌》",
+    "description": "土命忌木：木星刚健若无杀，土命嫌之有破克。",
+    "jiXiong": "凶",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starIsSiZhu",
+          "star": "Saturn",
+          "roles": [
+            "lifeGongMaster"
+          ]
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Saturn",
+            "Jupiter"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "tu_049_tu_ke_rou_chuang",
+    "name": "土咳肉疮",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·金箱歌》",
+    "description": "土主咳嗽肉疮：土星为病必咳嗽，皮肉受病多生疮。",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": null
+  },
+  {
+    "id": "tu_050_tu_zou_shuang_yu",
+    "name": "土走双鱼",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·观星要诀》",
+    "description": "土走双鱼（翼度）。断躔，忌。",
+    "jiXiong": "凶",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInConstellation",
+      "star": "Saturn",
+      "constellations": [
+        "翼"
+      ]
+    }
+  },
+  {
+    "id": "tu_051_tu_zou_ren_ma",
+    "name": "土走人马",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·观星要诀》",
+    "description": "土走人马位（尾度）断躔，忌。",
+    "jiXiong": "凶",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInConstellation",
+      "star": "Saturn",
+      "constellations": [
+        "尾"
+      ]
+    }
+  },
+  {
+    "id": "tu_052_tu_hao_tai_chang_2",
+    "name": "土好太常",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·元妙经解》",
+    "description": "土星丑宫，贵格。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInGong",
+      "star": "Saturn",
+      "gongs": [
+        "Chou"
+      ]
+    }
+  },
+  {
+    "id": "tu_053_tu_luo_xiang_hui_2",
+    "name": "土罗相会",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·元妙经解》",
+    "description": "土罗辰宫，贵格。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Saturn",
+            "Luo"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Saturn",
+          "gongs": [
+            "Chen"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "tu_054_mu_tu_xiang_hui",
+    "name": "木土相会",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·元妙经解》",
+    "description": "木土申宫，贵格。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Jupiter",
+            "Saturn"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Saturn",
+          "gongs": [
+            "Shen"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "tu_055_tu_ri_he_zhao",
+    "name": "土日合照",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·元妙经解》",
+    "description": "土日戌宫。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Saturn",
+            "Sun"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Saturn",
+          "gongs": [
+            "Xu"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "tu_056_tu_ji_ren_xiong",
+    "name": "土计刃雄",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·谈星奥论》",
+    "description": "土计怕怒，忌掌刃雄廉耗等煞，水命限人尤凶。",
+    "jiXiong": "凶",
+    "geJuType": "夭",
+    "scope": "both",
+    "conditions": {
+      "type": "sameGong",
+      "stars": [
+        "Saturn",
+        "Ji"
+      ]
+    }
+  },
+  {
+    "id": "tu_057_tu_xian_shan_beng",
+    "name": "土陷山崩",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·玄玄妙论》",
+    "description": "土星落空谓之土陷山崩，必主退败可畏，如有恶星降夹逼迫，多见气蹙噎吃之疾，必主倒限。",
+    "jiXiong": "凶",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInKongWang",
+      "star": "Saturn"
+    }
+  },
+  {
+    "id": "tu_058_tian_ao_bu_que",
+    "name": "填凹补缺",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·玄玄妙论》",
+    "description": "土星落空谓之土陷山崩，必主退败可畏，如有恶星降夹逼迫，多见气蹙噎吃之疾，必主倒限。如火会，谓之填凹补缺，又主名利发达。",
+    "jiXiong": "吉",
+    "geJuType": "富",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInKongWang",
+          "star": "Saturn"
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Saturn",
+            "Mars"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "tu_059_tian_di_jie_chun",
+    "name": "天地皆春",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·七政四时论》",
+    "description": "春令之土昼生与太阳交会，盖是阳和一点天地皆春，若有官令禄印爵魁佐之，主守成富贵，夜生最喜火照。土德朝拱太阳，盖火土俱名精彩，代日行权用事北方生者一人之下，万人之上，忠臣良将。土有生万物之功，其德至大，故得阳数五，三才五行皆不可失。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "SPRING"
+          ]
+        },
+        {
+          "type": "isDayBirth",
+          "isDay": true
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Saturn",
+            "Sun"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "tu_060_ni_feng_fan_hua",
+    "name": "泥逢泛滑",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·七政四时论》",
+    "description": "春初生者，土计不宜与水孛交会，谓之泥逢泛滑。",
+    "jiXiong": "凶",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "SPRING"
+          ]
+        },
+        {
+          "type": "or",
+          "conditions": [
+            {
+              "type": "sameGong",
+              "stars": [
+                "Saturn",
+                "Mercury"
+              ]
+            },
+            {
+              "type": "sameGong",
+              "stars": [
+                "Saturn",
+                "Bei"
+              ]
+            },
+            {
+              "type": "sameGong",
+              "stars": [
+                "Ji",
+                "Mercury"
+              ]
+            },
+            {
+              "type": "sameGong",
+              "stars": [
+                "Ji",
+                "Bei"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "tu_061_tu_xian_shan_beng_2",
+    "name": "土陷山崩",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·七政四时论》",
+    "description": "如土躔四水之度，又逢水孛，春末夏初生者，谓之土陷山崩，皆非好格，盖春初生者，土计不宜与水孛交会，谓之泥逢泛滑。四五月间洪水滔天，斯时土之气脉虚矣。",
+    "jiXiong": "凶",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "or",
+          "conditions": [
+            {
+              "type": "seasonIs",
+              "seasons": [
+                "SPRING"
+              ]
+            },
+            {
+              "type": "monthIs",
+              "months": [
+                "Si"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Saturn",
+            "Mercury",
+            "Bei"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "tu_062_tu_feng_shui_run",
+    "name": "土逢水润",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·七政四时论》",
+    "description": "夏令之土最喜水孛，若得同宫以润土之精神，斯时也，万物长养结实。遇水发生，清源可爱，富贵无言。",
+    "jiXiong": "吉",
+    "geJuType": "富",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "SUMMER"
+          ]
+        },
+        {
+          "type": "or",
+          "conditions": [
+            {
+              "type": "sameGong",
+              "stars": [
+                "Saturn",
+                "Mercury"
+              ]
+            },
+            {
+              "type": "sameGong",
+              "stars": [
+                "Saturn",
+                "Bei"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "tu_063_huo_zao_tu_lie",
+    "name": "火燥土烈",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·七政四时论》",
+    "description": "夏末初秋之土，不宜与罗火交会，谓之火燥土烈，无水孛济，润万物摧枯，一落千丈，昼生土与太阳交辉，亦为日烈土焦。",
+    "jiXiong": "凶",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "monthIs",
+          "months": [
+            "Wei",
+            "Shen"
+          ]
+        },
+        {
+          "type": "or",
+          "conditions": [
+            {
+              "type": "sameGong",
+              "stars": [
+                "Saturn",
+                "Luo"
+              ]
+            },
+            {
+              "type": "sameGong",
+              "stars": [
+                "Saturn",
+                "Mars"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "tu_064_ri_lie_tu_jiao",
+    "name": "日烈土焦",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·七政四时论》",
+    "description": "夏末初秋之土，昼生土与太阳交辉，亦为日烈土焦。",
+    "jiXiong": "凶",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "monthIs",
+          "months": [
+            "Wei",
+            "Shen"
+          ]
+        },
+        {
+          "type": "isDayBirth",
+          "isDay": true
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Saturn",
+            "Sun"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "tu_065_shang_sheng_xia_run",
+    "name": "上生下润",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·七政四时论》",
+    "description": "夏末初秋之土，不宜与罗火交会，谓之火燥土烈，无水孛济，润万物捣烂，一落千丈，昼生土与太阳交辉，亦为日烈土焦，如逢水孛，此谓上生下润，土之精彩，万物秀丽，大降吉祥。",
+    "jiXiong": "吉",
+    "geJuType": "富",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "monthIs",
+          "months": [
+            "Wei",
+            "Shen"
+          ]
+        },
+        {
+          "type": "or",
+          "conditions": [
+            {
+              "type": "sameGong",
+              "stars": [
+                "Saturn",
+                "Mercury"
+              ]
+            },
+            {
+              "type": "sameGong",
+              "stars": [
+                "Saturn",
+                "Bei"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "tu_066_ri_wen_tu_hua",
+    "name": "日温土化",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·七政四时论》",
+    "description": "冬令之土最喜日温，自能变化。",
+    "jiXiong": "吉",
+    "geJuType": "富",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "WINTER"
+          ]
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Saturn",
+            "Sun"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "tu_067_huo_luo_zhu_tu",
+    "name": "火罗助土",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·七政四时论》",
+    "description": "冬令之土，夜生木气火罗，佐助土之精神光彩，朝拱太阳皆主文武富贵，倘与水孛同躔极主贫寒，若得一木飞来泄水之气而又遇火飞来，合度此谓精神展转为妙。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "WINTER"
+          ]
+        },
+        {
+          "type": "isDayBirth",
+          "isDay": false
+        },
+        {
+          "type": "or",
+          "conditions": [
+            {
+              "type": "sameGong",
+              "stars": [
+                "Saturn",
+                "Mars"
+              ]
+            },
+            {
+              "type": "sameGong",
+              "stars": [
+                "Saturn",
+                "Luo"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "tu_068_tu_wei_zai_huan",
+    "name": "土为灾缓",
+    "className": "土星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·续论七政四余分布宜忌及入格真伪》",
+    "description": "土星为灾至缓，主病堆积滞难痊，使人晦涩，作事有头无尾，或出一月方发。土星行最迟二十九年一周天，故主疾淹滞。",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "both",
+    "conditions": null
+  }
+]

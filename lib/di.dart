@@ -13,6 +13,14 @@ import 'package:qizhengsiyu/domain/managers/shen_sha_manager.dart';
 import 'package:qizhengsiyu/domain/managers/hua_yao_manager.dart';
 import 'package:qizhengsiyu/presentation/viewmodels/qi_zheng_si_yu_viewmodel.dart';
 
+// GeJu 相关导入
+import 'package:qizhengsiyu/data/datasources/local/ge_ju_local_data_source.dart';
+import 'package:qizhengsiyu/data/repositories/ge_ju_repository_impl.dart';
+import 'package:qizhengsiyu/domain/repositories/ge_ju_repository.dart';
+import 'package:qizhengsiyu/domain/services/ge_ju_crud_service.dart';
+import 'package:qizhengsiyu/presentation/viewmodels/ge_ju_list_viewmodel.dart';
+import 'package:qizhengsiyu/presentation/viewmodels/ge_ju_editor_viewmodel.dart';
+
 List<SingleChildWidget> createProviders() {
   return [
     // Data Sources
@@ -68,6 +76,39 @@ List<SingleChildWidget> createProviders() {
         shenShaManager: context.read<ShenShaManager>(),
         huaYaoManager: context.read<HuaYaoManager>(),
         zhouTianModelManager: context.read<ZhouTianModelManager>(),
+      ),
+    ),
+
+    // ============ GeJu 格局管理 ============
+
+    // GeJu DataSource
+    Provider<GeJuLocalDataSource>(
+      create: (_) => GeJuLocalDataSourceImpl(),
+    ),
+
+    // GeJu Repository
+    Provider<IGeJuRepository>(
+      create: (context) => GeJuRepositoryImpl(
+        localDataSource: context.read<GeJuLocalDataSource>(),
+      ),
+    ),
+
+    // GeJu CRUD Service
+    Provider<GeJuCrudService>(
+      create: (context) => GeJuCrudService(
+        repository: context.read<IGeJuRepository>(),
+      ),
+    ),
+
+    // GeJu ViewModels
+    ChangeNotifierProvider<GeJuListViewModel>(
+      create: (context) => GeJuListViewModel(
+        crudService: context.read<GeJuCrudService>(),
+      ),
+    ),
+    ChangeNotifierProvider<GeJuEditorViewModel>(
+      create: (context) => GeJuEditorViewModel(
+        crudService: context.read<GeJuCrudService>(),
       ),
     ),
   ];

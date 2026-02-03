@@ -1,0 +1,2314 @@
+[
+  {
+    "id": "shui_001_jun_chen_qing_hui",
+    "name": "君臣庆会",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·星格贵贱总赋》",
+    "description": "君臣庆会，钟鸣鼎食之家。金水为官福恩令命元，朝辅太阳者是。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "sameGong",
+      "stars": [
+        "Mercury",
+        "Venus",
+        "Sun"
+      ]
+    }
+  },
+  {
+    "id": "shui_002_shui_cou_tian_chi",
+    "name": "水凑天池",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·星格贵贱总赋》",
+    "description": "水凑天池，三峡词源之豪迈。春生水为用神，躔壁度，以亥为天池。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "SPRING"
+          ]
+        },
+        {
+          "type": "starInConstellation",
+          "star": "Mercury",
+          "constellations": [
+            "壁"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Mercury",
+          "gongs": [
+            "Hai"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "shui_003_gan_xuan_kun_zhuan",
+    "name": "干旋坤转",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·星格贵贱总赋》",
+    "description": "干旋坤转，有庆之人。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": null
+  },
+  {
+    "id": "shui_004_luan_yu_nan_xing",
+    "name": "鸾轝南幸",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·星格贵贱总赋》",
+    "description": "金果拱日，在星房度。水南幸，人主之尊。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInConstellation",
+      "star": "Mercury",
+      "constellations": [
+        "星",
+        "房"
+      ]
+    }
+  },
+  {
+    "id": "shui_005_feng_jia_bei_gui",
+    "name": "凤驾北归",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·星格贵贱总赋》",
+    "description": "凤驾北归，帝王之象。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": null
+  },
+  {
+    "id": "shui_006_yi_gan_jiu_shi",
+    "name": "移干就湿",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·星格贵贱总赋》",
+    "description": "移干就湿，必主贫寒。",
+    "jiXiong": "凶",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": null
+  },
+  {
+    "id": "shui_007_feng_yu_zuo_lin",
+    "name": "风雨作霖",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·星格贵贱总赋》",
+    "description": "风雨作霖，有济世安民之略。果风毕雨，金水太阳躔毕箕度是也。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Mercury",
+            "Venus",
+            "Sun"
+          ]
+        },
+        {
+          "type": "or",
+          "conditions": [
+            {
+              "type": "starInConstellation",
+              "star": "Mercury",
+              "constellations": [
+                "毕",
+                "箕"
+              ]
+            },
+            {
+              "type": "starInConstellation",
+              "star": "Venus",
+              "constellations": [
+                "毕",
+                "箕"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "shui_008_jin_shui_bei_chi",
+    "name": "金水背驰",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·八格赋》",
+    "description": "金宝退留，用而无用，来而不来。愚格。",
+    "jiXiong": "凶",
+    "geJuType": "愚",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starWalkingState",
+          "star": "Venus",
+          "states": [
+            "Retrograde",
+            "Stay"
+          ]
+        },
+        {
+          "type": "starWalkingState",
+          "star": "Mercury",
+          "states": [
+            "Retrograde",
+            "Stay"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "shui_009_jin_shui_fen_ming",
+    "name": "金水分明",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·论诸星总断》",
+    "description": "金水分明，水前金后，不宜混失退逆。贵。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "not",
+          "condition": {
+            "type": "starWalkingState",
+            "star": "Mercury",
+            "states": [
+              "Retrograde"
+            ]
+          }
+        },
+        {
+          "type": "not",
+          "condition": {
+            "type": "starWalkingState",
+            "star": "Venus",
+            "states": [
+              "Retrograde"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "shui_010_jin_shui_hui_yuan",
+    "name": "金水会垣",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·论诸星总断》",
+    "description": "金水会垣，水忌退于金后。水在金前，水受金生。贵。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "sameGong",
+      "stars": [
+        "Mercury",
+        "Venus"
+      ]
+    }
+  },
+  {
+    "id": "shui_011_jin_han_shui_leng",
+    "name": "金寒水冷",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·论诸星总断》",
+    "description": "冬生金寒，水冷，未免孤寒之苦。",
+    "jiXiong": "凶",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "WINTER"
+          ]
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Mercury",
+            "Venus"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "shui_012_jin_shui_wei_shi",
+    "name": "金水为仕",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·论诸星总断》",
+    "description": "金水躔奎壁，无例外必为仕人。金水躔奎壁，奎壁乃贵人星，文薮星。当云：五星连壁，五星聚奎，此乃文地。金躔参壁度，曰：金生水。水躔奎斗度曰：水生木，相生之德不混，为文人贵士也。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInConstellation",
+          "star": "Mercury",
+          "constellations": [
+            "奎",
+            "壁"
+          ]
+        },
+        {
+          "type": "starInConstellation",
+          "star": "Venus",
+          "constellations": [
+            "奎",
+            "壁"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "shui_013_jin_shui_hu_yuan",
+    "name": "金水互垣",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·论诸星总断》",
+    "description": "金居互济，终身而有庆。水居金垣，金入水垣，乃大吉也。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": null
+  },
+  {
+    "id": "shui_014_jin_shui_gong_cheng",
+    "name": "金水功成",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·论诸星总断》",
+    "description": "金水生命中位，益佐官禄，其功名可遂也。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starGuardLife",
+          "star": "Mercury"
+        },
+        {
+          "type": "starGuardLife",
+          "star": "Venus"
+        }
+      ]
+    }
+  },
+  {
+    "id": "shui_015_shui_an_tian_zhai",
+    "name": "水暗田宅",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·论诸星总断》",
+    "description": "水星本无定性，飘流之星也，况又化暗守田宅，主祖业无依。",
+    "jiXiong": "凶",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInDestinyGong",
+      "star": "Mercury",
+      "destinyGong": "TianZhai"
+    }
+  },
+  {
+    "id": "shui_016_shui_zhi_si_shen",
+    "name": "水至巳申",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·论诸星总断》",
+    "description": "水至巳申诚入局，气象俱新（水在巳申）",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInGong",
+      "star": "Mercury",
+      "gongs": [
+        "Si",
+        "Shen"
+      ]
+    }
+  },
+  {
+    "id": "shui_017_shui_ri_tong_zhou",
+    "name": "水日同周",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·论诸星总断》",
+    "description": "水日合星张之位，陛庭补衮赞皇明（水日在午）",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Mercury",
+            "Sun"
+          ]
+        },
+        {
+          "type": "starInConstellation",
+          "star": "Mercury",
+          "constellations": [
+            "星",
+            "张"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Mercury",
+          "gongs": [
+            "Wu"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "shui_018_jin_shui_hui_she",
+    "name": "金水会蛇",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·躔度赋》",
+    "description": "金水凑于蛇穴，岂惟鹤发而休（金水会蛇在巳）",
+    "jiXiong": "吉",
+    "geJuType": "寿",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Mercury",
+            "Venus"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Mercury",
+          "gongs": [
+            "Si"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "shui_019_shui_liu_an_chun_wei",
+    "name": "水流鹌鹑尾",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·躔度赋》",
+    "description": "水流鹌鹑尾，巧计千般（水星在巳）",
+    "jiXiong": "平",
+    "geJuType": "贤",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInGong",
+      "star": "Mercury",
+      "gongs": [
+        "Si"
+      ]
+    }
+  },
+  {
+    "id": "shui_020_shui_hui_ji_du",
+    "name": "水会计都",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·躔度赋》",
+    "description": "掠他人之物以利己，盖缘水会计都（水主智谋，计好狡猾）",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "sameGong",
+      "stars": [
+        "Mercury",
+        "Ji"
+      ]
+    }
+  },
+  {
+    "id": "shui_021_shui_huo_xiang_zhan",
+    "name": "水火相战",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·躔度赋》",
+    "description": "一身迍蹇，火星怕与水星交战",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "sameGong",
+      "stars": [
+        "Mercury",
+        "Mars"
+      ]
+    }
+  },
+  {
+    "id": "shui_022_shui_liu_yang_zhou",
+    "name": "水流扬州",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·躔度赋》",
+    "description": "眉颦常不足，只嫌水到扬州（水星在丑宫）",
+    "jiXiong": "凶",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInGong",
+      "star": "Mercury",
+      "gongs": [
+        "Chou"
+      ]
+    }
+  },
+  {
+    "id": "shui_023_shui_lin_shuang_nv",
+    "name": "水临双女",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·历象赋》",
+    "description": "给谏功臣，定是水临双女（水星在巳）",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInGong",
+      "star": "Mercury",
+      "gongs": [
+        "Si"
+      ]
+    }
+  },
+  {
+    "id": "shui_024_jin_huo_tong_cai",
+    "name": "金火同财",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·历象赋》",
+    "description": "少失资财，金火同居财位（金火忌守财宫）",
+    "jiXiong": "凶",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInDestinyGong",
+          "star": "Venus",
+          "destinyGong": "CaiBo"
+        },
+        {
+          "type": "starInDestinyGong",
+          "star": "Mars",
+          "destinyGong": "CaiBo"
+        }
+      ]
+    }
+  },
+  {
+    "id": "shui_025_shui_huo_ju_tian",
+    "name": "水火居田",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·历象赋》",
+    "description": "水火并居田宅，破家荡产（水火忌居田宅）。祖财困辱田宅，火被水来侵。",
+    "jiXiong": "凶",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInDestinyGong",
+          "star": "Mercury",
+          "destinyGong": "TianZhai"
+        },
+        {
+          "type": "starInDestinyGong",
+          "star": "Mars",
+          "destinyGong": "TianZhai"
+        }
+      ]
+    }
+  },
+  {
+    "id": "shui_026_shui_su_lin_cai",
+    "name": "水宿临财",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·历象赋》",
+    "description": "财帛衰退，被水宿加临（水星忌居财宫）",
+    "jiXiong": "凶",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInDestinyGong",
+      "star": "Mercury",
+      "destinyGong": "CaiBo"
+    }
+  },
+  {
+    "id": "shui_027_shui_mu_chong_lin",
+    "name": "水木重临",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·元通赋》",
+    "description": "水木重临，文章秀丽。[水木相逢]",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "sameGong",
+      "stars": [
+        "Mercury",
+        "Jupiter"
+      ]
+    }
+  },
+  {
+    "id": "shui_028_shui_jin_tong_chou",
+    "name": "水金同丑",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·通微赋》",
+    "description": "泉枯牛荒，须凭金曜生成。[水金同丑]",
+    "jiXiong": "平",
+    "geJuType": "富",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Mercury",
+            "Venus"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Mercury",
+          "gongs": [
+            "Chou"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "shui_029_shui_bei_tong_du",
+    "name": "水孛同度",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·通微赋》",
+    "description": "水孛同度性偏淫。[水孛照身命]",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Mercury",
+            "Bei"
+          ]
+        },
+        {
+          "type": "or",
+          "conditions": [
+            {
+              "type": "starGuardLife",
+              "star": "Mercury"
+            },
+            {
+              "type": "starGuardLife",
+              "star": "Bei"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "shui_030_chao_yun_mu_yu",
+    "name": "朝云暮雨",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·通微赋》",
+    "description": "朝云，暮雨，水孛俱坐迁移。[水孛淫荡星也]",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInDestinyGong",
+          "star": "Mercury",
+          "destinyGong": "QianYi"
+        },
+        {
+          "type": "starInDestinyGong",
+          "star": "Bei",
+          "destinyGong": "QianYi"
+        }
+      ]
+    }
+  },
+  {
+    "id": "shui_031_shui_su_ju_qiang",
+    "name": "水宿居强",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·通微赋》",
+    "description": "水星无心常好动，向昼楚晋郑为强[水宜巳申辰宫]",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "isDayBirth",
+          "isDay": true
+        },
+        {
+          "type": "starInGong",
+          "star": "Mercury",
+          "gongs": [
+            "Si",
+            "Shen",
+            "Chen"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "shui_032_shui_xing_shou_ming",
+    "name": "水星守命",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·玉衡经》",
+    "description": "水如守命，多学少成。[水主智刚无常性]",
+    "jiXiong": "平",
+    "geJuType": "贤",
+    "scope": "natal",
+    "conditions": {
+      "type": "starGuardLife",
+      "star": "Mercury"
+    }
+  },
+  {
+    "id": "shui_033_shui_bei_tian_cai",
+    "name": "水孛田财",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·玉衡经》",
+    "description": "水孛如守田财，难招祖业[水孛漂流无定]",
+    "jiXiong": "凶",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "or",
+          "conditions": [
+            {
+              "type": "starInDestinyGong",
+              "star": "Mercury",
+              "destinyGong": "TianZhai"
+            },
+            {
+              "type": "starInDestinyGong",
+              "star": "Mercury",
+              "destinyGong": "CaiBo"
+            }
+          ]
+        },
+        {
+          "type": "or",
+          "conditions": [
+            {
+              "type": "starInDestinyGong",
+              "star": "Bei",
+              "destinyGong": "TianZhai"
+            },
+            {
+              "type": "starInDestinyGong",
+              "star": "Bei",
+              "destinyGong": "CaiBo"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "shui_034_shui_ji_xiang_xing",
+    "name": "水计相刑",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·玉衡经》",
+    "description": "水计相刑，怕居巳位[巳乃三刑之地]",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Mercury",
+            "Ji"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Mercury",
+          "gongs": [
+            "Si"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "shui_035_shui_ru_yin_gong",
+    "name": "水入寅宫",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·玉衡经》",
+    "description": "水入寅宫，喉喉壅塞[寅乃喉舌之府]",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInGong",
+      "star": "Mercury",
+      "gongs": [
+        "Yin"
+      ]
+    }
+  },
+  {
+    "id": "shui_036_tu_hun_shui_zhuo",
+    "name": "土混水浊",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·四时赋》",
+    "description": "土混水而致浊[ 冬水冰结土混不清]",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "WINTER"
+          ]
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Mercury",
+            "Saturn"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "shui_037_shui_fan_tu_beng",
+    "name": "水泛土崩",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·四时赋》",
+    "description": "受制之土见猛水，而崩溃四出[ 春夏生物之土乃为受制，遇水反崩溃]",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "SPRING",
+            "SUMMER"
+          ]
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Mercury",
+            "Saturn"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "shui_038_xia_shui_ku_he",
+    "name": "夏水枯涸",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·四时赋》",
+    "description": "六月之水最怕火日枯涸[六月水主辅阳，反为不美]",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "SUMMER"
+          ]
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Mercury",
+            "Mars"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "shui_039_dong_shui_nan_ben",
+    "name": "冬水南奔",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·四时赋》",
+    "description": "冬水喜于南奔，戌火忌于发露[居娄宿则吉，微弱宜藏]",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "WINTER"
+          ]
+        },
+        {
+          "type": "starInConstellation",
+          "star": "Mercury",
+          "constellations": [
+            "娄"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "shui_040_shui_dong_jin_han",
+    "name": "水冻金寒",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·四时赋》",
+    "description": "水冻金寒，纵相生而不发",
+    "jiXiong": "凶",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "WINTER"
+          ]
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Mercury",
+            "Venus"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "shui_041_shui_run_zao_tu",
+    "name": "水润燥土",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·四时赋》",
+    "description": "刚燥之土遇水滋润[ 夏土干燥，爱水滋润]",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "SUMMER"
+          ]
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Mercury",
+            "Saturn"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "shui_042_chen_xing_ju_yuan",
+    "name": "辰星居垣",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "辰星居垣，水星入本垣为贵格。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "starGongStatus",
+      "star": "Mercury",
+      "statuses": [
+        "Yuan"
+      ]
+    }
+  },
+  {
+    "id": "shui_043_shui_xing_sheng_dian",
+    "name": "水星升殿",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "水星升殿：水躔箕壁参轸四宿。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInConstellation",
+      "star": "Mercury",
+      "constellations": [
+        "箕",
+        "壁",
+        "参",
+        "轸"
+      ]
+    }
+  },
+  {
+    "id": "shui_044_shui_han_chan_po",
+    "name": "水涵蟾魄",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "水涵蟾魄：月寒水冷何益，望前，望后尤佳。",
+    "jiXiong": "平",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "sameGong",
+      "stars": [
+        "Mercury",
+        "Moon"
+      ]
+    }
+  },
+  {
+    "id": "shui_045_jin_shui_xiang_han",
+    "name": "金水相涵",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "金水相涵：冬生金寒水冷，余时昼夜皆吉。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Mercury",
+            "Venus"
+          ]
+        },
+        {
+          "type": "not",
+          "condition": {
+            "type": "seasonIs",
+            "seasons": [
+              "WINTER"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "shui_046_yuan_wu_chi_jing",
+    "name": "元武持旌",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "元为元武星。水星持旌为贵格。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": null
+  },
+  {
+    "id": "shui_047_shui_ju_tu_shi",
+    "name": "水居土室",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "水居土室：水在子丑二宫。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInGong",
+      "star": "Mercury",
+      "gongs": [
+        "Zi",
+        "Chou"
+      ]
+    }
+  },
+  {
+    "id": "shui_048_shui_cheng_huo_wei",
+    "name": "水乘火位",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "水乘火位，水星入火位，水火相济。",
+    "jiXiong": "平",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInGong",
+      "star": "Mercury",
+      "gongs": [
+        "Wu",
+        "Si"
+      ]
+    }
+  },
+  {
+    "id": "shui_049_jin_shui_cong_yang",
+    "name": "金水从阳",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "金水从阳：金水掌吉神，居垣殿，昼生者奇。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "isDayBirth",
+          "isDay": true
+        },
+        {
+          "type": "starGongStatus",
+          "star": "Mercury",
+          "statuses": [
+            "Yuan",
+            "Dian"
+          ]
+        },
+        {
+          "type": "starGongStatus",
+          "star": "Venus",
+          "statuses": [
+            "Yuan",
+            "Dian"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "shui_050_san_tai_he_ge",
+    "name": "三台合格",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "三台合格：午巳卯宫得日金水同行。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Sun",
+            "Venus",
+            "Mercury"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Sun",
+          "gongs": [
+            "Wu",
+            "Si",
+            "Mao"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "shui_051_tian_di_kai_ming",
+    "name": "天地开明",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "天地开明：水申木亥，命安申亥，罗计子午。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInGong",
+          "star": "Mercury",
+          "gongs": [
+            "Shen"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Jupiter",
+          "gongs": [
+            "Hai"
+          ]
+        },
+        {
+          "type": "lifeGongAt",
+          "gongs": [
+            "Shen",
+            "Hai"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Luo",
+          "gongs": [
+            "Zi",
+            "Wu"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Ji",
+          "gongs": [
+            "Zi",
+            "Wu"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "shui_052_shui_huo_ji_ji",
+    "name": "水火既济",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "水火既济：水子火午，命坐子午。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInGong",
+          "star": "Mercury",
+          "gongs": [
+            "Zi"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Mars",
+          "gongs": [
+            "Wu"
+          ]
+        },
+        {
+          "type": "lifeGongAt",
+          "gongs": [
+            "Zi",
+            "Wu"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "shui_053_feng_lei_gu_wu",
+    "name": "风雷鼓舞",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "风雷鼓舞：水巳火卯，命辰合格。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInGong",
+          "star": "Mercury",
+          "gongs": [
+            "Si"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Mars",
+          "gongs": [
+            "Mao"
+          ]
+        },
+        {
+          "type": "lifeGongAt",
+          "gongs": [
+            "Chen"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "shui_054_feng_lei_xiang_bo",
+    "name": "风雷相薄",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "风雷相薄，水火交激之象。",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": null
+  },
+  {
+    "id": "shui_055_shui_huo_xiang_she",
+    "name": "水火相射",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "水火相射：水午火子，或木卯戌，或火巳申。",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "or",
+      "conditions": [
+        {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "starInGong",
+              "star": "Mercury",
+              "gongs": [
+                "Wu"
+              ]
+            },
+            {
+              "type": "starInGong",
+              "star": "Mars",
+              "gongs": [
+                "Zi"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "starInGong",
+              "star": "Jupiter",
+              "gongs": [
+                "Mao"
+              ]
+            },
+            {
+              "type": "starInGong",
+              "star": "Saturn",
+              "gongs": [
+                "Xu"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "starInGong",
+              "star": "Mars",
+              "gongs": [
+                "Si"
+              ]
+            },
+            {
+              "type": "starInGong",
+              "star": "Mercury",
+              "gongs": [
+                "Shen"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "shui_056_yu_yuan_shou_kun",
+    "name": "玉猿守昆",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "玉猿守昆：水躔参度会日，命安水度者贵。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInConstellation",
+          "star": "Mercury",
+          "constellations": [
+            "参"
+          ]
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Mercury",
+            "Sun"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "shui_057_shuang_yu_xi_shui",
+    "name": "双鱼戏水",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "双鱼戏水，水星入亥宫为贵格。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInGong",
+      "star": "Mercury",
+      "gongs": [
+        "Hai"
+      ]
+    }
+  },
+  {
+    "id": "shui_058_yu_nv_chang_e",
+    "name": "玉女嫦娥",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "玉女嫦娥：水轸月张，命箕主贵，女貌倾国。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInConstellation",
+          "star": "Mercury",
+          "constellations": [
+            "轸"
+          ]
+        },
+        {
+          "type": "starInConstellation",
+          "star": "Moon",
+          "constellations": [
+            "张"
+          ]
+        },
+        {
+          "type": "lifeConstellationAt",
+          "constellations": [
+            "箕"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "shui_059_yuan_wu_dang_quan",
+    "name": "元武当权",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·灵台星格》",
+    "description": "冬生人见水星，在亥子安命，乃元武当权。元武当台：歌云：巳宫立命水在轸，元武升垣诸杀顺。又兼一点太白来，富贵绵绵应不降低。若还中限见土星，重整门庭兴进永。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "WINTER"
+          ]
+        },
+        {
+          "type": "lifeGongAt",
+          "gongs": [
+            "Hai",
+            "Zi"
+          ]
+        },
+        {
+          "type": "starGuardLife",
+          "star": "Mercury"
+        }
+      ]
+    }
+  },
+  {
+    "id": "shui_060_li_kan_jiao_hui",
+    "name": "离坎交会",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·灵台星格》",
+    "description": "离坎交会：水星禀北方坎宫之气，火星禀南方离宫之气，夜生人火星在命中，水星正照，乃合此格，此格最主为人气概精神，法能剸裁繁剧，禄位优厚。若水火二星同守命宫，则是煎熬星矣，反主灾祸。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "isDayBirth",
+          "isDay": false
+        },
+        {
+          "type": "starGuardLife",
+          "star": "Mars"
+        }
+      ]
+    }
+  },
+  {
+    "id": "shui_061_zi_xing_fu_zheng",
+    "name": "子行父政",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·灵台星格》",
+    "description": "子行父政：太阴为水之副，月为母，水为子也。太阴之庙在未，太阴居之当然也，今则太阴却居丑，水星却在未，又于未上安命，亦亦行行父政之说也。此格主人艰难于始，逸乐于终，以其干蛊之早也。谓且父之创制，子当继之，父之德政，予当行之。此谓人有贤子而继父志，不亦善乎！",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInGong",
+          "star": "Moon",
+          "gongs": [
+            "Chou"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Mercury",
+          "gongs": [
+            "Wei"
+          ]
+        },
+        {
+          "type": "lifeGongAt",
+          "gongs": [
+            "Wei"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "shui_062_shui_zhu_dong_nan",
+    "name": "水注东南",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·灵台星格》",
+    "description": "水注东南：巽居巳位东南之地也，四方之水则皆会之于箕，虽北有溟浡，南有大海，西有流沙，而水之倾注则归于东海，以势不满于东南也。水星在巳，而木星与命宫在寅，乃合此格。酉生人与寅生人，得水星在巳，木星与命在寅是也。盖寅属尾，尾巴在燕，酉属毕，毕分在赵，独得水正气，而流入于巽，是水有所归，况与木命同在寅，或木命与寅生同在酉，得水日在四正之宫，则又为水归地户格。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInGong",
+          "star": "Mercury",
+          "gongs": [
+            "Si"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Jupiter",
+          "gongs": [
+            "Yin"
+          ]
+        },
+        {
+          "type": "lifeGongAt",
+          "gongs": [
+            "Yin"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "shui_063_huo_shui_wei_ji",
+    "name": "火水未济",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·灵台星格》",
+    "description": "火水未济：火先入宫，水后入宫，同居一宫，以照命者是也。盖火自上炎，水自下注，相违而不相向，安得能和而能济。曰：未济男之穷也。格中带此者，主贫贱。此系忌格。",
+    "jiXiong": "凶",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": {
+      "type": "sameGong",
+      "stars": [
+        "Mercury",
+        "Mars"
+      ]
+    }
+  },
+  {
+    "id": "shui_064_shui_huo_ji_ji_2",
+    "name": "水火既济",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·灵台星格》",
+    "description": "水火既济：水先入宫，火后入宫，同居一位以照命者是也。盖水性润下，火性炎上，上下相得，而不相违，切嫌一二凶星入侵，则反生祸。更若水星为宫主，为命主，为禄主，则福最厚，富贵双全之命也。",
+    "jiXiong": "吉",
+    "geJuType": "富",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Mercury",
+            "Mars"
+          ]
+        },
+        {
+          "type": "starIsSiZhu",
+          "star": "Mercury",
+          "roles": [
+            "lifeGongMaster",
+            "lifeConstellationMaster"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "shui_065_shui_huo_xiang_xing",
+    "name": "水火相刑",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·布局补遗》",
+    "description": "水火相刑：歌曰：命立卯宫在房度，生于夏令主炎库。行限午宫见水星，水入午宫宜柳土。反凶为吉福无边，金玉争光敌国富。若教脱水鬼门关，五十三四归泉路。",
+    "jiXiong": "平",
+    "geJuType": "富",
+    "scope": "xingxian",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "lifeGongAt",
+          "gongs": [
+            "Mao"
+          ]
+        },
+        {
+          "type": "lifeConstellationAt",
+          "constellations": [
+            "房"
+          ]
+        },
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "SUMMER"
+          ]
+        },
+        {
+          "type": "xianAtGong",
+          "gongs": [
+            "Wu"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Mercury",
+          "gongs": [
+            "Wu"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "shui_066_shui_tu_zao_xing",
+    "name": "水土遭刑",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·布局补遗》",
+    "description": "水木遭刑：歌云：申宫立命水为主，限戌恩金在奎度。金木相刑恩受制，反吉为凶横死鬼。限行亥宫见土星，土入江湖壁水度。也教富贵一时来，一十五年花锦丽。脱土半百危十五，溺死官刑骨肉忌。行奎度，在火宫则金受制，行亥见土，则能生金，金生水则发，到危则被土克。",
+    "jiXiong": "凶",
+    "geJuType": "夭",
+    "scope": "xingxian",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "lifeGongAt",
+          "gongs": [
+            "Shen"
+          ]
+        },
+        {
+          "type": "starIsSiZhu",
+          "star": "Mercury",
+          "roles": [
+            "lifeGongMaster"
+          ]
+        },
+        {
+          "type": "xianAtGong",
+          "gongs": [
+            "Xu"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "shui_067_jin_shui_xing_qiao",
+    "name": "金水性巧",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·金箱歌》",
+    "description": "金水巧：金水主人多精彩，自然巧劣心中藏。",
+    "jiXiong": "吉",
+    "geJuType": "贤",
+    "scope": "natal",
+    "conditions": {
+      "type": "sameGong",
+      "stars": [
+        "Mercury",
+        "Venus"
+      ]
+    }
+  },
+  {
+    "id": "shui_068_shui_bei_chang_you",
+    "name": "水孛倡优",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·金箱歌》",
+    "description": "水孛倡优：女逢水孛是娼优，不是娼优缁素娘。",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "sameGong",
+      "stars": [
+        "Mercury",
+        "Bei"
+      ]
+    }
+  },
+  {
+    "id": "shui_069_jin_shui_bei_xian",
+    "name": "金水孛咸",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·帘幕歌，论女命》",
+    "description": "金池孛咸：妇人若见金水孛，三改嫁兮有何说。咸池带水与孛星，朝云暮雨情不歇。",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "sameGong",
+      "stars": [
+        "Mercury",
+        "Venus",
+        "Bei"
+      ]
+    }
+  },
+  {
+    "id": "shui_070_jin_shui_bei_mu",
+    "name": "金水孛沐",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·帘幕歌，论女命》",
+    "description": "金水孛沐：妇人金水孛星迎，身命同临性偏偏淫。更兼沐浴在其间，离居奔走落风尘。",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Mercury",
+            "Venus",
+            "Bei"
+          ]
+        },
+        {
+          "type": "or",
+          "conditions": [
+            {
+              "type": "starGuardLife",
+              "star": "Mercury"
+            },
+            {
+              "type": "starGuardLife",
+              "star": "Venus"
+            },
+            {
+              "type": "starGuardLife",
+              "star": "Bei"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "shui_071_shui_piao_yang_jiao",
+    "name": "水漂羊角",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·观星要诀》",
+    "description": "水漂羊角（娄度）。断躔，忌。",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInConstellation",
+      "star": "Mercury",
+      "constellations": [
+        "娄"
+      ]
+    }
+  },
+  {
+    "id": "shui_072_shui_liu_ju_xie",
+    "name": "水流巨蟹",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·观星要诀》",
+    "description": "水流巨蟹（柳度）。断躔，忌。",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInConstellation",
+      "star": "Mercury",
+      "constellations": [
+        "柳"
+      ]
+    }
+  },
+  {
+    "id": "shui_073_shui_qing_bao_ping",
+    "name": "水清宝瓶",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·元妙经解》",
+    "description": "子宫：水清宝瓶，得局贵格。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInGong",
+      "star": "Mercury",
+      "gongs": [
+        "Zi"
+      ]
+    }
+  },
+  {
+    "id": "shui_074_shui_run_jin_ming",
+    "name": "水润金明",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·元妙经解》",
+    "description": "水金辰宫，贵格。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Mercury",
+            "Venus"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Mercury",
+          "gongs": [
+            "Chen"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "shui_075_ri_shui_cheng_wang",
+    "name": "日水乘旺",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·元妙经解》",
+    "description": "日水巳宫，贵格。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Mercury",
+            "Sun"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Mercury",
+          "gongs": [
+            "Si"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "shui_076_shui_yang_xiang_hui",
+    "name": "水阳相会",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·元妙经解》",
+    "description": "水太阳在午宫。贵格。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Mercury",
+            "Sun"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Mercury",
+          "gongs": [
+            "Wu"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "shui_077_shui_ming_rong_xian",
+    "name": "水名荣显",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·元妙经解》",
+    "description": "水午宫。贵格。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInGong",
+      "star": "Mercury",
+      "gongs": [
+        "Wu"
+      ]
+    }
+  },
+  {
+    "id": "shui_078_shui_bei_fu_chen",
+    "name": "水孛浮沉",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·元妙经解》",
+    "description": "水孛怕尾，忌带浮沉亡劫的耗等煞，火命限人尤畏。",
+    "jiXiong": "凶",
+    "geJuType": "夭",
+    "scope": "both",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Mercury",
+            "Bei"
+          ]
+        },
+        {
+          "type": "starInConstellation",
+          "star": "Mercury",
+          "constellations": [
+            "尾"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "shui_079_chang_jiang_hao_dang",
+    "name": "长江浩荡",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·玄玄妙论》",
+    "description": "水星落空谓之长江浩荡，退败无余。",
+    "jiXiong": "凶",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInKongWang",
+      "star": "Mercury"
+    }
+  },
+  {
+    "id": "shui_080_hong_shui_tao_tian",
+    "name": "洪水滔天",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·玄玄妙论》",
+    "description": "水星落空谓之长江浩荡，退败无余，如金会则洪水滔天，常有不测之灾。",
+    "jiXiong": "凶",
+    "geJuType": "夭",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInKongWang",
+          "star": "Mercury"
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Mercury",
+            "Venus"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "shui_081_guang_ji_cheng_che",
+    "name": "光霁澄彻",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·七政四时论》",
+    "description": "春令之水，斯时冰霜冻冷，借木气火罗温之，自能变化，昼生水孛太阳同行名曰\"光霁澄彻\"谓之\"冰霜冻解\"心宇清吉，作事整肃，政令威仪，当主台省扬名。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "SPRING"
+          ]
+        },
+        {
+          "type": "isDayBirth",
+          "isDay": true
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Mercury",
+            "Bei",
+            "Sun"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "shui_082_chun_shui_ji_jin",
+    "name": "春水忌金",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·七政四时论》",
+    "description": "春令之水，斯时冰霜冻冷，所忌金星相互作用。昼生为妙，夜生贫寒。",
+    "jiXiong": "凶",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "SPRING"
+          ]
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Mercury",
+            "Venus"
+          ]
+        },
+        {
+          "type": "isDayBirth",
+          "isDay": false
+        }
+      ]
+    }
+  },
+  {
+    "id": "shui_083_xia_shui_feng_di",
+    "name": "夏水逢堤",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·七政四时论》",
+    "description": "经云：水盛而无土，堤防，遂归虚浊。若有土旺不以为倒限，论反主名利发达。惟六月之水最",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "SUMMER"
+          ]
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Mercury",
+            "Saturn"
+          ]
+        },
+        {
+          "type": "starGongStatus",
+          "star": "Saturn",
+          "statuses": [
+            "Wang"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "shui_084_qiu_shui_qing_yuan",
+    "name": "秋水清源",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·七政四时论》",
+    "description": "秋令之水，七八月间既济万物，不宜受克，既能借土堤防而不泛滥，又能润土，结实万物，清源可爱，富贵荣华。若水受克泄者，皆水之气脉虚矣，却不为福。",
+    "jiXiong": "吉",
+    "geJuType": "富",
+    "scope": "natal",
+    "conditions": {
+      "type": "seasonIs",
+      "seasons": [
+        "AUTUMN"
+      ]
+    }
+  },
+  {
+    "id": "shui_085_dong_shui_san_ling",
+    "name": "冬水三令",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·七政四时论》",
+    "description": "斯时点水成冰，冻结寒滞，不能变化。得火为上令，得土为次令，得太阳佐之方可言令也。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "WINTER"
+          ]
+        },
+        {
+          "type": "or",
+          "conditions": [
+            {
+              "type": "sameGong",
+              "stars": [
+                "Mercury",
+                "Mars"
+              ]
+            },
+            {
+              "type": "sameGong",
+              "stars": [
+                "Mercury",
+                "Saturn"
+              ]
+            },
+            {
+              "type": "sameGong",
+              "stars": [
+                "Mercury",
+                "Sun"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "shui_086_dong_jin_wu_yi",
+    "name": "冬金无义",
+    "className": "水星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·七政四时论》",
+    "description": "然冬水自得其时，不用金生，使之见金，反为无义，乃曰：道义相忘唯喜在于火木也。",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "WINTER"
+          ]
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Mercury",
+            "Venus"
+          ]
+        }
+      ]
+    }
+  }
+]

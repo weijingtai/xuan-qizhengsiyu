@@ -4,6 +4,11 @@ import 'package:provider/provider.dart';
 
 import 'package:qizhengsiyu/presentation/pages/beauty_view_page.dart';
 import 'package:qizhengsiyu/presentation/pages/primary_page.dart';
+import 'package:qizhengsiyu/presentation/pages/ge_ju/ge_ju_list_page.dart';
+import 'package:qizhengsiyu/presentation/pages/ge_ju/ge_ju_detail_page.dart';
+import 'package:qizhengsiyu/presentation/pages/ge_ju/ge_ju_editor_page.dart';
+import 'package:qizhengsiyu/presentation/pages/qizhengsiyu_home_page.dart';
+import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_rule.dart';
 
 import 'data/datasources/local/app_database.dart';
 import 'data/repositories/interfaces/i_qizhengsiyu_pan_repository.dart';
@@ -40,7 +45,58 @@ class NavigatorGenerator {
                   qiZhengSiYuPanRepository:
                       ctx.read<IQiZhengSiYuPanRepository>())),
         ], child: const BeautyViewPage() // ⭐ 使用 const 构造
-            )
+            ),
+
+    // ============ 七政四余首页 ============
+    "/qizhengsiyu/home": (context, {arguments}) => const QiZhengSiYuHomePage(),
+
+    // ============ 格局管理路由 ============
+    "/qizhengsiyu/ge_ju/list": (context, {arguments}) => MultiProvider(
+          providers: createProviders(),
+          child: const GeJuListPage(),
+        ),
+
+    "/qizhengsiyu/ge_ju/detail": (context, {arguments}) {
+      // arguments 可以是 GeJuRule 对象
+      if (arguments is GeJuRule) {
+        return MultiProvider(
+          providers: createProviders(),
+          child: GeJuDetailPage(
+            rule: arguments,
+            isBuiltIn: true, // 默认，详情页会重新判断
+          ),
+        );
+      }
+      // 或者传入 Map 带 rule 和 isBuiltIn
+      if (arguments is Map) {
+        final rule = arguments['rule'] as GeJuRule;
+        final isBuiltIn = arguments['isBuiltIn'] as bool? ?? false;
+        return MultiProvider(
+          providers: createProviders(),
+          child: GeJuDetailPage(rule: rule, isBuiltIn: isBuiltIn),
+        );
+      }
+      return const Scaffold(body: Center(child: Text('参数错误')));
+    },
+
+    "/qizhengsiyu/ge_ju/create": (context, {arguments}) {
+      String? duplicateFromId;
+      if (arguments is Map && arguments['duplicate'] != null) {
+        duplicateFromId = arguments['duplicate'] as String;
+      }
+      return MultiProvider(
+        providers: createProviders(),
+        child: GeJuEditorPage(duplicateFromId: duplicateFromId),
+      );
+    },
+
+    "/qizhengsiyu/ge_ju/edit": (context, {arguments}) {
+      final ruleId = arguments as String?;
+      return MultiProvider(
+        providers: createProviders(),
+        child: GeJuEditorPage(ruleId: ruleId),
+      );
+    },
   };
 
   static Route<dynamic> generateRoute(RouteSettings settings) {

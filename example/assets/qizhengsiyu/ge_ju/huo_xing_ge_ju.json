@@ -1,0 +1,2318 @@
+[
+  {
+    "id": "huo_001_zhu_yi_chi_ri",
+    "name": "朱衣驰日",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·星格贵贱总赋》",
+    "description": "朱衣驰日，朝廷宣使奏差。火会日，与马元同行。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Mars",
+            "Sun"
+          ]
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Mars",
+            "Qi"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "huo_002_bei_hai_tiao_deng",
+    "name": "北海挑灯",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·星格贵贱总赋》",
+    "description": "北海挑灯，位居宰辅。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInGong",
+      "star": "Mars",
+      "gongs": [
+        "Hai"
+      ]
+    }
+  },
+  {
+    "id": "huo_003_bei_yuan_hui_chun",
+    "name": "北苑回春",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·星格贵贱总赋》",
+    "description": "北苑回春，状元及第。北子位苑，指火也，冬火为用，星居子照，值命身与太阳。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInGong",
+          "star": "Mars",
+          "gongs": [
+            "Zi"
+          ]
+        },
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "WINTER"
+          ]
+        },
+        {
+          "type": "starGuardLife",
+          "star": "Mars"
+        }
+      ]
+    }
+  },
+  {
+    "id": "huo_004_chang_hong_guan_ri",
+    "name": "长虹贯日",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·星格贵贱总赋》",
+    "description": "长虹贯日，早冠判臣。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "sameGong",
+      "stars": [
+        "Mars",
+        "Sun"
+      ]
+    }
+  },
+  {
+    "id": "huo_005_zhou_huo_ye_tu",
+    "name": "昼火夜土",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·论诸星总断》",
+    "description": "火土分昼夜之忌。昼生忌火罗，夜生忌土计。",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "or",
+      "conditions": [
+        {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "isDayBirth",
+              "isDay": true
+            },
+            {
+              "type": "or",
+              "conditions": [
+                {
+                  "type": "starGuardLife",
+                  "star": "Mars"
+                },
+                {
+                  "type": "starGuardLife",
+                  "star": "Luo"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "isDayBirth",
+              "isDay": false
+            },
+            {
+              "type": "or",
+              "conditions": [
+                {
+                  "type": "starGuardLife",
+                  "star": "Saturn"
+                },
+                {
+                  "type": "starGuardLife",
+                  "star": "Ji"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "huo_006_huo_luo_xia_hui",
+    "name": "火罗夏会",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·论诸星总断》",
+    "description": "火罗夏会，多招哭泣之灾。夏生遇火罗，有刑伤哭泣之灾。",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "SUMMER"
+          ]
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Mars",
+            "Luo"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "huo_007_jin_huo_yi_yuan",
+    "name": "金火易垣",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·论诸星总断》",
+    "description": "火金不可易垣。火不可入金垣，金不可入火垣，疑其相攻相克也。",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "or",
+      "conditions": [
+        {
+          "type": "starGongStatus",
+          "star": "Mars",
+          "statuses": [
+            "Yuan"
+          ]
+        },
+        {
+          "type": "starGongStatus",
+          "star": "Venus",
+          "statuses": [
+            "Yuan"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "huo_008_zhou_huo_fan_ri",
+    "name": "昼火犯日",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·论诸星总断》",
+    "description": "火化暗，昼生忌与太阳同躔。",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "isDayBirth",
+          "isDay": true
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Mars",
+            "Sun"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "huo_009_huo_tu_ba_sha",
+    "name": "火土八杀",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·论诸星总断》",
+    "description": "残疾者，火罗土杂于难宫。火罗土聚于八杀宫，必然残疾也。",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "sameGong",
+      "stars": [
+        "Mars",
+        "Luo",
+        "Saturn"
+      ]
+    }
+  },
+  {
+    "id": "huo_010_huo_luo_ru_ji",
+    "name": "火罗入疾",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·论诸星总断》",
+    "description": "火罗不宜入疾厄，如此者，男有暴病，女多产难，若非自灾必伤骨肉。",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInDestinyGong",
+          "star": "Mars",
+          "destinyGong": "JiE"
+        },
+        {
+          "type": "starInDestinyGong",
+          "star": "Luo",
+          "destinyGong": "JiE"
+        }
+      ]
+    }
+  },
+  {
+    "id": "huo_011_huo_ju_song_lu",
+    "name": "火居宋鲁",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·躔度赋》",
+    "description": "火居宋鲁，纵日诞而禄自盈余（火在卯戌）。",
+    "jiXiong": "吉",
+    "geJuType": "富",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInGong",
+      "star": "Mars",
+      "gongs": [
+        "Mao",
+        "Xu"
+      ]
+    }
+  },
+  {
+    "id": "huo_012_huo_tu_de_niu",
+    "name": "火土得牛",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·躔度赋》",
+    "description": "火土会于牛宫，不独龟龄而已（火土会牛在丑）。",
+    "jiXiong": "吉",
+    "geJuType": "寿",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInGong",
+          "star": "Mars",
+          "gongs": [
+            "Chou"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Saturn",
+          "gongs": [
+            "Chou"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "huo_013_zhu_que_fan_shen",
+    "name": "朱雀犯身",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·躔度赋》",
+    "description": "多招横祸，火罗犯于身命之中（火罗朱雀星也）。",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInDestinyGong",
+          "star": "Mars",
+          "destinyGong": "Ming"
+        },
+        {
+          "type": "starInDestinyGong",
+          "star": "Luo",
+          "destinyGong": "Ming"
+        }
+      ]
+    }
+  },
+  {
+    "id": "huo_014_huo_zai_ba_gong",
+    "name": "火在八宫",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·躔度赋》",
+    "description": "求医何数？火在八宫（火主血光）。日日有灾，盖谓八宫见火（疾厄宫，怕见火罗）。疾厄遇火孛，女多产死之因。",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInDestinyGong",
+      "star": "Mars",
+      "destinyGong": "JiE"
+    }
+  },
+  {
+    "id": "huo_015_shui_huo_xiang_zhan",
+    "name": "水火相战",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·躔度赋》",
+    "description": "一身迍蹇，火星怕与水星交战。水火同临寿必损。[水火守身命]",
+    "jiXiong": "凶",
+    "geJuType": "夭",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Mars",
+            "Mercury"
+          ]
+        },
+        {
+          "type": "starInDestinyGong",
+          "star": "Mars",
+          "destinyGong": "Ming"
+        }
+      ]
+    }
+  },
+  {
+    "id": "huo_016_huo_lin_yan_di",
+    "name": "火临燕地",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·躔度赋》",
+    "description": "性逸素无拘，盖喜火临燕地（火星在寅宫）。",
+    "jiXiong": "吉",
+    "geJuType": "贤",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInGong",
+      "star": "Mars",
+      "gongs": [
+        "Yin"
+      ]
+    }
+  },
+  {
+    "id": "huo_017_huo_song_wei_rong",
+    "name": "火宋为荣",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·躔度赋》",
+    "description": "火躔宋以为荣（火居卯位）。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInGong",
+      "star": "Mars",
+      "gongs": [
+        "Mao"
+      ]
+    }
+  },
+  {
+    "id": "huo_018_huo_feng_tai_yi",
+    "name": "火逢太乙",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·躔度赋》",
+    "description": "火躔宋以为荣（火居卯位），见太乙则早归泉路（孛必克火）。",
+    "jiXiong": "凶",
+    "geJuType": "夭",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInGong",
+          "star": "Mars",
+          "gongs": [
+            "Mao"
+          ]
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Mars",
+            "Bei"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "huo_019_huo_wu_feng_mu",
+    "name": "火五逢木",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·躔度赋》",
+    "description": "火临五位见木，方显儿孙（火木相生临儿）。",
+    "jiXiong": "吉",
+    "geJuType": "贤",
+    "scope": "natal",
+    "conditions": null
+  },
+  {
+    "id": "huo_020_ying_huo_zai_mao",
+    "name": "荧惑在卯",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·历象赋》",
+    "description": "南方荧惑在卯宫，贵饶衣食（火星居卯）。",
+    "jiXiong": "吉",
+    "geJuType": "富",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInGong",
+      "star": "Mars",
+      "gongs": [
+        "Mao"
+      ]
+    }
+  },
+  {
+    "id": "huo_021_huo_bei_shen_you",
+    "name": "火孛申酉",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·历象赋》",
+    "description": "中年命蹇，火孛而守申酉（火孛同申或酉）。",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Mars",
+            "Bei"
+          ]
+        },
+        {
+          "type": "or",
+          "conditions": [
+            {
+              "type": "starInGong",
+              "star": "Mars",
+              "gongs": [
+                "Shen"
+              ]
+            },
+            {
+              "type": "starInGong",
+              "star": "Mars",
+              "gongs": [
+                "You"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "huo_022_huo_ru_jin_xiang",
+    "name": "火入金乡",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·历象赋》",
+    "description": "火入金乡，此命早抛兄弟（火怕辰酉位）。",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInGong",
+      "star": "Mars",
+      "gongs": [
+        "Chen",
+        "You"
+      ]
+    }
+  },
+  {
+    "id": "huo_023_jin_huo_tong_cai",
+    "name": "金火同财",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·历象赋》",
+    "description": "少失资财，金火同居财位（金火忌守财宫）。",
+    "jiXiong": "凶",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInDestinyGong",
+          "star": "Mars",
+          "destinyGong": "CaiBo"
+        },
+        {
+          "type": "starInDestinyGong",
+          "star": "Venus",
+          "destinyGong": "CaiBo"
+        }
+      ]
+    }
+  },
+  {
+    "id": "huo_024_shui_huo_ju_tian",
+    "name": "水火居田",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·历象赋》",
+    "description": "水火并居田宅，破家荡产（水火忌居田宅）。祖财困辱田宅，火被水来侵。[水火会田宅]",
+    "jiXiong": "凶",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInDestinyGong",
+          "star": "Mars",
+          "destinyGong": "TianZhai"
+        },
+        {
+          "type": "starInDestinyGong",
+          "star": "Mercury",
+          "destinyGong": "TianZhai"
+        }
+      ]
+    }
+  },
+  {
+    "id": "huo_025_huo_ming_chong_kui",
+    "name": "火明冲魁",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·元通赋》",
+    "description": "卯为太冲，戌为河魁，火星临此二宫，兵将之权。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInGong",
+      "star": "Mars",
+      "gongs": [
+        "Mao",
+        "Xu"
+      ]
+    }
+  },
+  {
+    "id": "huo_026_huo_yao_lin_yang",
+    "name": "火曜临阳",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·通微赋》",
+    "description": "一天黯淡，只缘火曜临阳。[火日同宫]",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "sameGong",
+      "stars": [
+        "Mars",
+        "Sun"
+      ]
+    }
+  },
+  {
+    "id": "huo_027_huo_jin_zi_wei",
+    "name": "火金子位",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·通微赋》",
+    "description": "火金子位，如此者非贫即夭。",
+    "jiXiong": "凶",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInGong",
+          "star": "Mars",
+          "gongs": [
+            "Zi"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Venus",
+          "gongs": [
+            "Zi"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "huo_028_huo_luo_chan_ming",
+    "name": "火罗躔命",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·通微赋》",
+    "description": "性躁，猖狂，火罗同躔命度。[火罗刚暴星也]",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInDestinyGong",
+          "star": "Mars",
+          "destinyGong": "Ming"
+        },
+        {
+          "type": "starInDestinyGong",
+          "star": "Luo",
+          "destinyGong": "Ming"
+        }
+      ]
+    }
+  },
+  {
+    "id": "huo_029_huo_xing_nan_lv",
+    "name": "火行南律",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·通微赋》",
+    "description": "性敏巧明，火行南律。[火星得局也]",
+    "jiXiong": "吉",
+    "geJuType": "贤",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInGong",
+      "star": "Mars",
+      "gongs": [
+        "Si",
+        "Wu",
+        "Wei"
+      ]
+    }
+  },
+  {
+    "id": "huo_030_huo_bei_tong_ming",
+    "name": "火孛通明",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·通微赋》",
+    "description": "火孛通明必外迁。[火孛在命]",
+    "jiXiong": "平",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInDestinyGong",
+          "star": "Mars",
+          "destinyGong": "Ming"
+        },
+        {
+          "type": "starInDestinyGong",
+          "star": "Bei",
+          "destinyGong": "Ming"
+        }
+      ]
+    }
+  },
+  {
+    "id": "huo_031_huo_yao_dang_quan",
+    "name": "火曜当权",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·玉衡经》",
+    "description": "火若当权，恣行酷毒。[火性烈燥急]",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "starGuardLife",
+      "star": "Mars"
+    }
+  },
+  {
+    "id": "huo_032_huo_luo_lin_fu",
+    "name": "火罗临父",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·玉衡经》",
+    "description": "火罗若临父母，幼失慈亲。[火罗炎威酷毒]",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": null
+  },
+  {
+    "id": "huo_033_huo_bei_lin_kun",
+    "name": "火孛临坤",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·玉衡经》",
+    "description": "火孛临坤，未免腰背屈曲。[火孛临申]",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInGong",
+          "star": "Mars",
+          "gongs": [
+            "Shen"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Bei",
+          "gongs": [
+            "Shen"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "huo_034_jin_huo_zhan_chen_you",
+    "name": "金火战辰酉",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·玉衡经》",
+    "description": "金火战于辰酉，肺心咳嗽。[火主心金主肺]",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Mars",
+            "Venus"
+          ]
+        },
+        {
+          "type": "or",
+          "conditions": [
+            {
+              "type": "starInGong",
+              "star": "Mars",
+              "gongs": [
+                "Chen"
+              ]
+            },
+            {
+              "type": "starInGong",
+              "star": "Mars",
+              "gongs": [
+                "You"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "huo_035_huo_xing_tui_liu",
+    "name": "火星退留",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·玉衡经》",
+    "description": "火若退而迟留，难堪酒糟。[必患酒糟]",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "starWalkingState",
+      "star": "Mars",
+      "states": [
+        "Stay",
+        "Slow"
+      ]
+    }
+  },
+  {
+    "id": "huo_036_huo_yue_zheng_guang",
+    "name": "火月争光",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·四时赋》",
+    "description": "火逢月朗而无权。望夜火月争光。月圆火焰，奈争斗而无成。上弦后，下弦前，夜月忌火罗。",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "isDayBirth",
+          "isDay": false
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Mars",
+            "Moon"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "huo_037_jin_de_huo_ming",
+    "name": "金得火明",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·四时赋》",
+    "description": "金得火明而焕发。[秋金见火为奇]",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "AUTUMN"
+          ]
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Venus",
+            "Mars"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "huo_038_xia_huo_jian_yue",
+    "name": "夏火见月",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·四时赋》",
+    "description": "夏火不妨见月。[夏火本炎，遇太阴以解酷热，火得令能助月]",
+    "jiXiong": "吉",
+    "geJuType": "贤",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "SUMMER"
+          ]
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Mars",
+            "Moon"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "huo_039_xia_huo_feng_qi",
+    "name": "夏火逢气",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·四时赋》",
+    "description": "盛夏之火何，须木气生扶。[木至六月则绝而不旺，见火反干]",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "SUMMER"
+          ]
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Mars",
+            "Jupiter"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "huo_040_dong_tu_hui_huo",
+    "name": "冻土会火",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·四时赋》",
+    "description": "冰冻之土会火，始能发用。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "WINTER"
+          ]
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Saturn",
+            "Mars"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "huo_041_huo_yue_tong_xiao",
+    "name": "火月同宵",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·四时赋》",
+    "description": "残晦之月，见火增辉。[初八以前，二十以后，三方对照得火相助]",
+    "jiXiong": "吉",
+    "geJuType": "贤",
+    "scope": "natal",
+    "conditions": {
+      "type": "sameGong",
+      "stars": [
+        "Mars",
+        "Moon"
+      ]
+    }
+  },
+  {
+    "id": "huo_042_ying_huo_ju_yuan",
+    "name": "荧惑居垣",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "荧惑居垣。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "starGongStatus",
+      "star": "Mars",
+      "statuses": [
+        "Yuan"
+      ]
+    }
+  },
+  {
+    "id": "huo_043_huo_xing_sheng_dian",
+    "name": "火星升殿",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "火星升殿：火躔尾室觜翼四宿。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInConstellation",
+      "star": "Mars",
+      "constellations": [
+        "尾",
+        "室",
+        "觜",
+        "翼"
+      ]
+    }
+  },
+  {
+    "id": "huo_044_mu_huo_wen_ming",
+    "name": "木火文明",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "木火文明：冬春月生，无分昼夜为妙。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Jupiter",
+            "Mars"
+          ]
+        },
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "WINTER",
+            "SPRING"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "huo_045_huo_tu_gao_qiang",
+    "name": "火土高强",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "火土高强：夏生火炎土燥，余月昼夜皆吉。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Mars",
+            "Saturn"
+          ]
+        },
+        {
+          "type": "not",
+          "condition": {
+            "type": "seasonIs",
+            "seasons": [
+              "SUMMER"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "huo_046_zhu_que_yu_fu",
+    "name": "朱雀御符",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "朱雀御符：巳午月生，火日同宫。火为朱雀星。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "monthIs",
+          "months": [
+            "Si",
+            "Wu"
+          ]
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Mars",
+            "Sun"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "huo_047_huo_ju_shui_di",
+    "name": "火居水地",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "火居水地：火在巳申二宫。",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInGong",
+      "star": "Mars",
+      "gongs": [
+        "Si",
+        "Shen"
+      ]
+    }
+  },
+  {
+    "id": "huo_048_huo_dao_jin_xiang",
+    "name": "火到金乡",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "火到金乡：火居辰酉二宫。",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInGong",
+      "star": "Mars",
+      "gongs": [
+        "Chen",
+        "You"
+      ]
+    }
+  },
+  {
+    "id": "huo_049_shui_huo_tong_bu",
+    "name": "水火同步",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "水火同步：水火相克。",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": null
+  },
+  {
+    "id": "huo_050_huo_jin_jiao_zhan",
+    "name": "火金交战",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "火金交战：火金相克。",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": null
+  },
+  {
+    "id": "huo_051_huo_qi_zhi_quan",
+    "name": "火气职权",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "火气职权：火为用神，入庙旺宫合格。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "starGongStatus",
+      "star": "Mars",
+      "statuses": [
+        "Miao",
+        "Wang"
+      ]
+    }
+  },
+  {
+    "id": "huo_052_huo_jin_shi_yue",
+    "name": "火金侍月",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "火金侍月：火金为用神，临垣庙，夜生者妙。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starGongStatus",
+          "star": "Mars",
+          "statuses": [
+            "Miao",
+            "Wang"
+          ]
+        },
+        {
+          "type": "starGongStatus",
+          "star": "Venus",
+          "statuses": [
+            "Miao",
+            "Wang"
+          ]
+        },
+        {
+          "type": "isDayBirth",
+          "isDay": false
+        }
+      ]
+    }
+  },
+  {
+    "id": "huo_053_chu_gan_ru_kun",
+    "name": "出干入坤",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "出干入坤。",
+    "jiXiong": "未知",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": null
+  },
+  {
+    "id": "huo_054_shui_huo_ji_ji",
+    "name": "水火既济",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "水火既济：水子火午，命坐子午。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInGong",
+          "star": "Mercury",
+          "gongs": [
+            "Zi"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Mars",
+          "gongs": [
+            "Wu"
+          ]
+        },
+        {
+          "type": "lifeGongAt",
+          "gongs": [
+            "Zi",
+            "Wu"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "huo_055_feng_lei_gu_wu",
+    "name": "风雷鼓舞",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "风雷鼓舞：水巳火卯，命辰合格。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInGong",
+          "star": "Mercury",
+          "gongs": [
+            "Si"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Mars",
+          "gongs": [
+            "Mao"
+          ]
+        },
+        {
+          "type": "lifeGongAt",
+          "gongs": [
+            "Chen"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "huo_056_huo_luo_fan_ri",
+    "name": "火罗犯日",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "火罗犯日：昼日怕火罗同宫，掌刃雄尤忌。",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "isDayBirth",
+          "isDay": true
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Mars",
+            "Luo"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "huo_057_huo_bei_gong_zhan",
+    "name": "火孛共战",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "火孛共战：火为用神则损矣。",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "sameGong",
+      "stars": [
+        "Mars",
+        "Bei"
+      ]
+    }
+  },
+  {
+    "id": "huo_058_feng_lei_xiang_bo",
+    "name": "风雷相薄",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "风雷相薄。",
+    "jiXiong": "未知",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": null
+  },
+  {
+    "id": "huo_059_shui_huo_xiang_she",
+    "name": "水火相射",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "水火相射：水午火子，或木卯戌，或火巳申。",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "or",
+      "conditions": [
+        {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "starInGong",
+              "star": "Mercury",
+              "gongs": [
+                "Wu"
+              ]
+            },
+            {
+              "type": "starInGong",
+              "star": "Mars",
+              "gongs": [
+                "Zi"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "starInGong",
+              "star": "Jupiter",
+              "gongs": [
+                "Mao"
+              ]
+            },
+            {
+              "type": "starInGong",
+              "star": "Mars",
+              "gongs": [
+                "Xu"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "starInGong",
+              "star": "Mars",
+              "gongs": [
+                "Si"
+              ]
+            },
+            {
+              "type": "starInGong",
+              "star": "Mercury",
+              "gongs": [
+                "Shen"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "huo_060_yu_hou_xiao_yue",
+    "name": "玉猴啸月",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "玉猴啸月：火觜月毕，坐命火月度，夜生贵。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInConstellation",
+          "star": "Mars",
+          "constellations": [
+            "觜"
+          ]
+        },
+        {
+          "type": "starInConstellation",
+          "star": "Moon",
+          "constellations": [
+            "毕"
+          ]
+        },
+        {
+          "type": "isDayBirth",
+          "isDay": false
+        }
+      ]
+    }
+  },
+  {
+    "id": "huo_061_hu_xiao_yuan_yin",
+    "name": "虎啸猿吟",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "虎啸猿吟：木尾火觜，亥命大贵，巳命大富。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInConstellation",
+          "star": "Jupiter",
+          "constellations": [
+            "尾"
+          ]
+        },
+        {
+          "type": "starInConstellation",
+          "star": "Mars",
+          "constellations": [
+            "觜"
+          ]
+        },
+        {
+          "type": "lifeGongAt",
+          "gongs": [
+            "Hai",
+            "Si"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "huo_062_huo_bei_qing_tian",
+    "name": "火孛擎天",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "火孛擎天：火室孛壁，水轸火翼，皆主富贵。",
+    "jiXiong": "吉",
+    "geJuType": "富",
+    "scope": "natal",
+    "conditions": {
+      "type": "or",
+      "conditions": [
+        {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "starInConstellation",
+              "star": "Mars",
+              "constellations": [
+                "室"
+              ]
+            },
+            {
+              "type": "starInConstellation",
+              "star": "Bei",
+              "constellations": [
+                "壁"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "starInConstellation",
+              "star": "Mercury",
+              "constellations": [
+                "轸"
+              ]
+            },
+            {
+              "type": "starInConstellation",
+              "star": "Mars",
+              "constellations": [
+                "翼"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "huo_063_ba_sha_chao_tian",
+    "name": "八杀朝天",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "八千朝天：如戌命火，又未命土，或辰命金。此三星独占天门，得时为上。惟金火尤重，夜生显贵之人也。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "or",
+      "conditions": [
+        {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "lifeGongAt",
+              "gongs": [
+                "Xu"
+              ]
+            },
+            {
+              "type": "starInGong",
+              "star": "Mars",
+              "gongs": [
+                "Xu"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "lifeGongAt",
+              "gongs": [
+                "Wei"
+              ]
+            },
+            {
+              "type": "starInGong",
+              "star": "Saturn",
+              "gongs": [
+                "Wei"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "lifeGongAt",
+              "gongs": [
+                "Chen"
+              ]
+            },
+            {
+              "type": "starInGong",
+              "star": "Venus",
+              "gongs": [
+                "Chen"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "huo_064_zhu_que_dang_quan",
+    "name": "朱雀当权",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·灵台星格》",
+    "description": "夏生人见火星在巳午安命，乃朱雀当权。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "SUMMER"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Mars",
+          "gongs": [
+            "Si",
+            "Wu"
+          ]
+        },
+        {
+          "type": "lifeGongAt",
+          "gongs": [
+            "Si",
+            "Wu"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "huo_065_li_kan_jiao_hui",
+    "name": "离坎交会",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·灵台星格》",
+    "description": "离坎交会：水星禀北方坎宫之气，火星禀南方离宫之气，夜生人火星在命中，水星正照，乃合此格，此格最主为人气概精神，法能剸裁繁剧，禄位优厚。若水火二星同守命宫，则是煎熬星矣，反主灾祸。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "isDayBirth",
+          "isDay": false
+        },
+        {
+          "type": "starGuardLife",
+          "star": "Mars"
+        }
+      ]
+    }
+  },
+  {
+    "id": "huo_066_zi_xing_fu_zheng",
+    "name": "子行父政",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·灵台星格》",
+    "description": "子行父政：太阳乃火之精，太阴为水之副，故日为父，火为子。且太阳之庙在午，太阳居之当然也，今则太阳却居子，火星却在午，又于午上安命，是父之政子乃行也；此格主人艰难于始，逸乐于终，以其干蛊之早也。谓且父之创制，子当继之，父之德政，予当行之。此谓人有贤子而继父志，不亦善乎！另有子承父位：午宫星度立命，火星入命，以占父位，太阳飞入卯宫房度，卯乃子位，父居之，必主父子不和，兄弟失伦，行限见木，非犯刑而死，定主恶疾而亡。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInGong",
+          "star": "Sun",
+          "gongs": [
+            "Zi"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Mars",
+          "gongs": [
+            "Wu"
+          ]
+        },
+        {
+          "type": "lifeGongAt",
+          "gongs": [
+            "Wu"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "huo_067_huo_shui_wei_ji",
+    "name": "火水未济",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·灵台星格》",
+    "description": "火水未济：火先入宫，水后入宫，同居一宫，以照命者是也。盖火自上炎，水自下注，相违而不相向，安得能和而能济。曰：未济男之穷也。格中带此者，主贫贱。此系忌格。",
+    "jiXiong": "凶",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": {
+      "type": "sameGong",
+      "stars": [
+        "Mars",
+        "Mercury"
+      ]
+    }
+  },
+  {
+    "id": "huo_068_shui_huo_ji_ji_2",
+    "name": "水火既济",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·灵台星格》",
+    "description": "水火既济：水先入宫，火后入宫，同居一位以照命者是也。盖水性润下，火性炎上，上下相得，而不相违，切嫌一二凶星入侵，则反生祸。更若水星为宫主，为命主，为禄主，则福最厚，富贵双全之命也。",
+    "jiXiong": "吉",
+    "geJuType": "富",
+    "scope": "natal",
+    "conditions": {
+      "type": "sameGong",
+      "stars": [
+        "Mercury",
+        "Mars"
+      ]
+    }
+  },
+  {
+    "id": "huo_069_shui_huo_xiang_xing",
+    "name": "水火相刑",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·布局补遗》",
+    "description": "水火相刑：歌曰：命立卯宫在房度，生于夏令主炎库。行限午宫见水星，水入午宫宜柳土。反凶为吉福无边，金玉争光敌国富。若教脱水鬼门关，五十三四归泉路。",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "both",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "lifeGongAt",
+          "gongs": [
+            "Mao"
+          ]
+        },
+        {
+          "type": "starInConstellation",
+          "star": "Mars",
+          "constellations": [
+            "房"
+          ]
+        },
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "SUMMER"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "huo_070_nv_huo_wei_fu",
+    "name": "女火为夫",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·金箱歌》",
+    "description": "女火为夫：妇人只要看火荧，火是夫星为正宗。",
+    "jiXiong": "平",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": null
+  },
+  {
+    "id": "huo_071_huo_luo_nong_xue",
+    "name": "火罗脓血",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·金箱歌》",
+    "description": "火罗脓血：火罗为性多毒恶，脓血夭亡灾不薄。",
+    "jiXiong": "凶",
+    "geJuType": "夭",
+    "scope": "natal",
+    "conditions": {
+      "type": "sameGong",
+      "stars": [
+        "Mars",
+        "Luo"
+      ]
+    }
+  },
+  {
+    "id": "huo_072_huo_ming_tian_shi",
+    "name": "火明天市",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·元妙经解》",
+    "description": "火星卯宫，贵格。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInGong",
+      "star": "Mars",
+      "gongs": [
+        "Mao"
+      ]
+    }
+  },
+  {
+    "id": "huo_073_huo_hao_wen_chang",
+    "name": "火号文昌",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·元妙经解》",
+    "description": "火在未宫，贵格。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInGong",
+      "star": "Mars",
+      "gongs": [
+        "Wei"
+      ]
+    }
+  },
+  {
+    "id": "huo_074_huo_gui_kun_di",
+    "name": "火归坤地",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·元妙经解》",
+    "description": "火申宫，贵格。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInGong",
+      "star": "Mars",
+      "gongs": [
+        "Shen"
+      ]
+    }
+  },
+  {
+    "id": "huo_075_huo_ju_lou_su",
+    "name": "火居娄宿",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·元妙经解》",
+    "description": "火白羊娄宿。贵格。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInConstellation",
+      "star": "Mars",
+      "constellations": [
+        "娄"
+      ]
+    }
+  },
+  {
+    "id": "huo_076_jin_huo_tong_zhou",
+    "name": "金火同周",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·元妙经解》",
+    "description": "金火午宫，贱格。",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInGong",
+          "star": "Venus",
+          "gongs": [
+            "Wu"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Mars",
+          "gongs": [
+            "Wu"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "huo_077_yi_yang_lai_fu",
+    "name": "一阳来复",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·谈星奥论》",
+    "description": "夜生人独火居子，为一阳来复，女土安命尤奇。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "isDayBirth",
+          "isDay": false
+        },
+        {
+          "type": "starInGong",
+          "star": "Mars",
+          "gongs": [
+            "Zi"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "huo_078_huo_luo_feng_sha",
+    "name": "火罗逢煞",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·谈星奥论》",
+    "description": "火罗怕头，更带刃雄，廉锋，耗符等煞，金命限人愈甚。",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "both",
+    "conditions": {
+      "type": "sameGong",
+      "stars": [
+        "Mars",
+        "Luo"
+      ]
+    }
+  },
+  {
+    "id": "huo_079_jue_huo_da_ming",
+    "name": "爝火大明",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·玄玄妙论》",
+    "description": "火星落空谓之爝火大明，乃是离中火虚，反主发达，夜生尤妙，盖火遇夜则明故也。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInKongWang",
+          "star": "Mars"
+        },
+        {
+          "type": "isDayBirth",
+          "isDay": false
+        }
+      ]
+    }
+  },
+  {
+    "id": "huo_080_huo_de_mu_ji",
+    "name": "火得木济",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·七政四时论》",
+    "description": "春令之火，正二月之时寒气未消，最喜火罗木气互度，见太阴，夜生光彩，文武富贵。火本酷烈，逢木慈仁，以善化恶，以刚制柔，刚柔相济，贵而能决，威福权衡。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "SPRING"
+          ]
+        },
+        {
+          "type": "isDayBirth",
+          "isDay": false
+        }
+      ]
+    }
+  },
+  {
+    "id": "huo_081_tao_hua_gun_lang",
+    "name": "桃花滚浪",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·七政四时论》",
+    "description": "春末夏初之际，火入水宫，水入火地，叫做桃花滚浪，水暖花红，名利双清。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInGong",
+          "star": "Mars",
+          "gongs": [
+            "Zi",
+            "Hai"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Mercury",
+          "gongs": [
+            "Wu",
+            "Si"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "huo_082_zi_lai_jiu_mu",
+    "name": "子来救母",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·七政四时论》",
+    "description": "春末夏初之际，火入水宫，水入火地，称为桃花滚浪，水暖花红，名利双清。但火不宜与水孛同行，谓之受克。逢土有救，能破水孛之气，名曰：子来救母，禄自丰盈。见金为党鬼，独火之气脉虚也。",
+    "jiXiong": "吉",
+    "geJuType": "富",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Mars",
+            "Mercury"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Saturn",
+          "gongs": [
+            "Zi",
+            "Hai",
+            "Wu",
+            "Si"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "huo_083_wan_wu_cui_ku",
+    "name": "万物摧枯",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·七政四时论》",
+    "description": "夏末秋初之火，斯时秋阳杲杲，借水以济其盛，乃刚柔变化，最不宜与木气同照，火罗朝拱，太阳无水济润，迎照度限，万物破坏。",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "both",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Mars",
+            "Luo"
+          ]
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Mars",
+            "Sun"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "huo_084_yi_bei_ji_huo",
+    "name": "一孛济火",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·七政四时论》",
+    "description": "夏末秋初之火，斯时秋阳杲杲，借水以济其盛，乃刚柔变化，最不宜与木气同照。火罗朝拱，太阳无水济润，迎照度限，万物破坏。经云：火焰而无水淘溶，纵发而早年夭折。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "both",
+    "conditions": null
+  },
+  {
+    "id": "huo_085_gao_miao_de_yu",
+    "name": "稿苗得雨",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·七政四时论》",
+    "description": "夏末秋初之火，斯时秋阳杲杲，借水以济其盛，乃刚柔变化，最不宜与木气同照。火罗朝拱，太阳无水济润，迎照度限，万物破坏枯，一陷千丈，如有一水贯日，一孛济火，为之淋漓普济苍生，万物苏茂精神宛转富贵。经云：火焰而无水淘溶，纵发而早年夭折。又有先见火日，后见水孛，此谓之久旱干焦，稿苗得雨，先主艰难而后快活。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "xingxian",
+    "conditions": null
+  },
+  {
+    "id": "huo_086_jiu_yu_feng_qing",
+    "name": "久雨逢晴",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·七政四时论》",
+    "description": "夏末秋初之火，斯时秋阳杲杲，借水以济其盛，乃刚柔变化，最不宜与木气同照。火罗朝拱，太阳无水济润，迎照度限，万物破坏枯，一陷千丈，如有一水贯日，一孛济火，为之淋漓普济苍生，万物苏茂精神宛转富贵。经云：火焰而无水淘溶，纵发而早年夭折。又有先见水，后见火日，谓之久雨逢晴，先主快活而后艰辛。",
+    "jiXiong": "平",
+    "geJuType": "贵",
+    "scope": "xingxian",
+    "conditions": null
+  },
+  {
+    "id": "huo_087_mu_qi_fu_huo",
+    "name": "木气扶火",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·七政四时论》",
+    "description": "冬令之火，斯时黑帝司权，水德用事而火失时，最喜木气相扶。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "seasonIs",
+      "seasons": [
+        "WINTER"
+      ]
+    }
+  },
+  {
+    "id": "huo_088_ye_huo_guan_ri",
+    "name": "夜火贯日",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·七政四时论》",
+    "description": "冬令之火，斯时黑帝司权，水德用事而火失时，若夜火贯日，纳入禄印爵贵佐之，反能富贵名扬天下之人也。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "WINTER"
+          ]
+        },
+        {
+          "type": "isDayBirth",
+          "isDay": false
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Mars",
+            "Sun"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "huo_089_huo_qi_mai_xu",
+    "name": "火气脉虚",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·七政四时论》",
+    "description": "冬令之火，斯时黑帝司权，水德用事而火失时，其火最忌水孛土计罗喉相互作用，火之气脉虚矣。",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "WINTER"
+          ]
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Mars",
+            "Mercury"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "huo_090_jing_shen_yun_zhuan",
+    "name": "精神运转",
+    "className": "火星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·七政四时论》",
+    "description": "冬令之火，斯时黑帝司权，水德用事而火失时，其火最忌水孛土计罗喉相互作用，火之气脉虚矣。如有一木飞来泄水之气，助火出色，所谓水生木，木生火，命脉健矣。此乃精神转运，合为贵论。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "seasonIs",
+      "seasons": [
+        "WINTER"
+      ]
+    }
+  }
+]

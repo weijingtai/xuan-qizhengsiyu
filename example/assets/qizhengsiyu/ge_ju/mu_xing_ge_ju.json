@@ -14,7 +14,10 @@
       "conditions": [
         {
           "type": "sameGong",
-          "stars": ["Jupiter", "Sun"]
+          "stars": [
+            "Jupiter",
+            "Sun"
+          ]
         },
         {
           "type": "or",
@@ -22,13 +25,18 @@
             {
               "type": "starIsSiZhu",
               "star": "Jupiter",
-              "roles": ["lifeGongMaster", "lifeConstellationMaster"]
+              "roles": [
+                "lifeGongMaster",
+                "lifeConstellationMaster"
+              ]
             },
             {
               "type": "starFourType",
               "star": "Jupiter",
               "target": "Jupiter",
-              "types": ["En"]
+              "types": [
+                "En"
+              ]
             }
           ]
         }
@@ -36,38 +44,56 @@
     }
   },
   {
-    "id": "mu_002_mu_ru_dou_niu",
-    "name": "木入斗牛",
+    "id": "mu_002_xue_ya_han_mei",
+    "name": "雪压寒梅",
     "className": "木星格局",
     "books": "果老星宗",
-    "source": "《果老星宗》",
-    "description": "木入斗牛，衣紫腰金。[木星躔入斗宿或牛宿，主贵显。]",
-    "jiXiong": "吉",
-    "geJuType": "贵",
-    "scope": "natal",
-    "conditions": {
-      "type": "starInConstellation",
-      "star": "Jupiter",
-      "constellations": ["斗", "牛"]
-    }
-  },
-  {
-    "id": "mu_003_sui_xing_ru_miao",
-    "name": "岁星入庙",
-    "className": "木星格局",
-    "books": "果老星宗",
-    "source": "《果老星宗》",
-    "description": "木星入庙（在戌宫），为贵格。",
-    "jiXiong": "吉",
-    "geJuType": "贵",
+    "source": "《果老星宗·星格贵贱总赋》",
+    "description": "雪壓寒梅，終身餓莩。[寒梅者木星也，木水同躔，夜生冬值，倘或在子丑地及水宮、水度者亦是。]",
+    "jiXiong": "凶",
+    "geJuType": "贫",
     "scope": "natal",
     "conditions": {
       "type": "and",
       "conditions": [
         {
-          "type": "starGongStatus",
-          "star": "Jupiter",
-          "statuses": ["Miao"]
+          "type": "sameGong",
+          "stars": [
+            "Jupiter",
+            "Mercury"
+          ]
+        },
+        {
+          "type": "isDayBirth",
+          "isDay": false
+        },
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "WINTER"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_003_qi_cha_han_mei",
+    "name": "齐插寒梅",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·星格补遗》",
+    "description": "命立子宮度，木為福德、財帛二主，飛入命位，是乃謂財福剋命，不可概以木打寶瓶論也。若木遇形剋之星，財福減半；倘命主衰弱，反不能勝矣。經云：安命子宮，木入齊瓶。若非李郭之榮，必有陶朱之富。",
+    "jiXiong": "吉",
+    "geJuType": "富",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "lifeGongAt",
+          "gongs": [
+            "Zi"
+          ]
         },
         {
           "type": "starGuardLife",
@@ -77,26 +103,658 @@
     }
   },
   {
-    "id": "mu_004_huo_mu_jia_ming",
-    "name": "火木夹命",
+    "id": "mu_004_xiang_yang_hua_mu",
+    "name": "向阳花木",
     "className": "木星格局",
     "books": "果老星宗",
-    "source": "《果老星宗》",
-    "description": "火木夹命，主贵。[火星与木星分居命宫两侧。]",
+    "source": "《果老星宗·星格贵贱总赋》",
+    "description": "向陽花木，三台八座之榮。[木為官恩命令順行，見日晝生春夏者佳。]",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Jupiter",
+            "Sun"
+          ]
+        },
+        {
+          "type": "isDayBirth",
+          "isDay": true
+        },
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "SPRING",
+            "SUMMER"
+          ]
+        },
+        {
+          "type": "not",
+          "condition": {
+            "type": "starWalkingState",
+            "star": "Jupiter",
+            "states": [
+              "Retrograde"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_005_zhao_shui_mei_hua",
+    "name": "照水梅花",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·星格贵贱总赋》",
+    "description": "照水梅花，萬軸五車之學。[木在巳申，冬生逢晝，為美。]",
+    "jiXiong": "吉",
+    "geJuType": "贤",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInGong",
+          "star": "Jupiter",
+          "gongs": [
+            "Si",
+            "Shen"
+          ]
+        },
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "WINTER"
+          ]
+        },
+        {
+          "type": "isDayBirth",
+          "isDay": true
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_006_chun_sheng_yang_liu",
+    "name": "春生杨柳",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·星格贵贱总赋》",
+    "description": "春生楊柳，合作妓娼。[楊柳喻木也，春生木躔箕度]",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "SPRING"
+          ]
+        },
+        {
+          "type": "starInConstellation",
+          "star": "Jupiter",
+          "constellations": [
+            "箕"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_007_qiu_ri_wu_tong",
+    "name": "秋日梧桐",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·星格贵贱总赋》",
+    "description": "秋日梧桐，堪為僧道。[梧桐喻木也，秋生木遇孤寡羊刃。]",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "AUTUMN"
+          ]
+        },
+        {
+          "type": "starWithShenSha",
+          "star": "Jupiter",
+          "shenShaNames": [
+            "孤辰",
+            "寡宿",
+            "羊刃"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_008_yue_zhong_xian_gui",
+    "name": "月中仙桂",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·星格贵贱总赋》",
+    "description": "月中仙桂，少年平步青雲。[木躔心、張、危、畢月度，或秋生木月同宮亦是]",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "or",
+      "conditions": [
+        {
+          "type": "starInConstellation",
+          "star": "Jupiter",
+          "constellations": [
+            "心",
+            "张",
+            "危",
+            "毕"
+          ]
+        },
+        {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "seasonIs",
+              "seasons": [
+                "AUTUMN"
+              ]
+            },
+            {
+              "type": "sameGong",
+              "stars": [
+                "Jupiter",
+                "Moon"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_009_ri_shai_hua_zhi",
+    "name": "日晒花枝",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·星格贵贱总赋》",
+    "description": "日曬花枝，壯歲趨朝丹闕。[木臨星虛房、昴日度、或春生木日同宮皆是。]",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "or",
+      "conditions": [
+        {
+          "type": "starInConstellation",
+          "star": "Jupiter",
+          "constellations": [
+            "星",
+            "虚",
+            "房",
+            "昴"
+          ]
+        },
+        {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "seasonIs",
+              "seasons": [
+                "SPRING"
+              ]
+            },
+            {
+              "type": "sameGong",
+              "stars": [
+                "Jupiter",
+                "Sun"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_010_mei_shao_heng_yue",
+    "name": "梅梢横月",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·星格贵贱总赋》",
+    "description": "梅梢橫月，簞瓢陋巷之人。[木月會子宮，生於秋冬。]",
+    "jiXiong": "凶",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Jupiter",
+            "Moon"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Jupiter",
+          "gongs": [
+            "Zi"
+          ]
+        },
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "AUTUMN",
+            "WINTER"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_011_liu_xu_sui_feng",
+    "name": "柳絮随风",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·星格贵贱总赋》",
+    "description": "柳絮隨風，萍水他鄉之客。[木星秉令躔箕度，或在巳宮巽地。]",
+    "jiXiong": "凶",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": {
+      "type": "or",
+      "conditions": [
+        {
+          "type": "starInConstellation",
+          "star": "Jupiter",
+          "constellations": [
+            "箕"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Jupiter",
+          "gongs": [
+            "Si"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_012_yu_zhou_hua_can",
+    "name": "雨骤花残",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·星格贵贱总赋》",
+    "description": "雨驟花殘，窮愁萬種。[春生木躔畢度，蓋畢宿好雨故也。]",
+    "jiXiong": "凶",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "SPRING"
+          ]
+        },
+        {
+          "type": "starInConstellation",
+          "star": "Jupiter",
+          "constellations": [
+            "毕"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_013_feng_yao_ye_luo",
+    "name": "风摇叶落",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·星格贵贱总赋》",
+    "description": "風搖葉落，辛苦無閑。[秋生木躔箕度，蓋箕好風故耳。]",
+    "jiXiong": "凶",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "AUTUMN"
+          ]
+        },
+        {
+          "type": "starInConstellation",
+          "star": "Jupiter",
+          "constellations": [
+            "箕"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_014_an_che_pu_lun",
+    "name": "安车蒲轮",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·星格贵贱总赋》",
+    "description": "安車蒲輪，翰苑編修集撰。[安車即木也，木會日與馬元同宮。]",
     "jiXiong": "吉",
     "geJuType": "贵",
     "scope": "natal",
     "conditions": null
   },
   {
-    "id": "mu_005_mu_xing_ni_xing",
-    "name": "木星逆行守命",
+    "id": "mu_015_mei_ying_heng_chuang",
+    "name": "梅影横窗",
     "className": "木星格局",
     "books": "果老星宗",
-    "source": "《果老星宗》",
-    "description": "木星逆行在命宫，主不利。",
+    "source": "《果老星宗·星格贵贱总赋》",
+    "description": "梅影橫窗，一生清貴。[梅影喻木也，木月冬生，同在壁府。]",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameConstellation",
+          "stars": [
+            "Jupiter",
+            "Moon"
+          ]
+        },
+        {
+          "type": "starInConstellation",
+          "star": "Jupiter",
+          "constellations": [
+            "壁"
+          ]
+        },
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "WINTER"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_016_tao_hua_lang_nuan",
+    "name": "桃花浪暖",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·星格贵贱总赋》",
+    "description": "桃花浪暖，昭代文章。[桃花譬木也，木水會命，在奎度尢妙。]",
+    "jiXiong": "吉",
+    "geJuType": "贤",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Jupiter",
+            "Mercury"
+          ]
+        },
+        {
+          "type": "starInConstellation",
+          "star": "Jupiter",
+          "constellations": [
+            "奎"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_017_hua_li_ting_can",
+    "name": "花里停骖",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·星格贵贱总赋》",
+    "description": "花裏停驂，封侯列仕。[木為命、恩、令同太陰與馬元在張、心、危、畢月度。]",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Jupiter",
+            "Moon"
+          ]
+        },
+        {
+          "type": "starInConstellation",
+          "star": "Jupiter",
+          "constellations": [
+            "张",
+            "心",
+            "危",
+            "毕"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_018_dan_gui_piao_xiang",
+    "name": "丹桂飘香",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·星格贵贱总赋》",
+    "description": "丹桂飄香，或貧寒尤當食祿。[秋木為用神，在巽巳地。]",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "AUTUMN"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Jupiter",
+          "gongs": [
+            "Si"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_019_li_hua_dai_yu",
+    "name": "梨花带雨",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·星格贵贱总赋》",
+    "description": "梨花帶雨，縱富貴亦主重夫。[女人之命，春木為夫元、命主，在酉申畢度。]",
     "jiXiong": "凶",
     "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "SPRING"
+          ]
+        },
+        {
+          "type": "or",
+          "conditions": [
+            {
+              "type": "starInGong",
+              "star": "Jupiter",
+              "gongs": [
+                "You",
+                "Shen"
+              ]
+            },
+            {
+              "type": "starInConstellation",
+              "star": "Jupiter",
+              "constellations": [
+                "毕"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_020_nan_zhi_xiang_nuan",
+    "name": "南枝向暖",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·星格贵贱总赋》",
+    "description": "南枝向煖，相國經邦。[南乃午宮，枝言木也，冬木為用神，喜居午上，或太陽合格。]",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "WINTER"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Jupiter",
+          "gongs": [
+            "Wu"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_021_san_tai_he_ge",
+    "name": "三台合格",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·八格赋》",
+    "description": "或木星在午[木為歲星君象也，得金水巳未，或寅戌二方拱合，亦曰三奇，此木所主，惟春夏得用，秋冬不取。]双鱼按：三台合格的格局不只一种，此处之论木星成格。木星在午，对于狮子座来说是不利的，但是午狮子之位在上天紫微垣乃帝座鶉火之位，而木星又为岁星，太岁乃君象，木星临午则有君临帝座的意味。此格貌似于\"南枝向暖\"格局有些相似之处，但是区别是：1南枝向暖是冬木为用神，喜居午上，取调侯的意思。而木星的三台合格是春夏得用，秋冬不取2木星三台合格须有金水的夹拱辅弼。而南枝向暖无其它附加条件。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInGong",
+          "star": "Jupiter",
+          "gongs": [
+            "Wu"
+          ]
+        },
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "SPRING",
+            "SUMMER"
+          ]
+        },
+        {
+          "type": "or",
+          "conditions": [
+            {
+              "type": "starInGong",
+              "star": "Venus",
+              "gongs": [
+                "Si",
+                "Wei"
+              ]
+            },
+            {
+              "type": "starInGong",
+              "star": "Mercury",
+              "gongs": [
+                "Si",
+                "Wei"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_022_mu_qi_fu_shen",
+    "name": "木气扶身",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·八格赋》",
+    "description": "木氣星同太陰，必賢達者，或老成功而能設策、處公道之人也。",
+    "jiXiong": "吉",
+    "geJuType": "贤",
+    "scope": "natal",
+    "conditions": {
+      "type": "sameGong",
+      "stars": [
+        "Jupiter",
+        "Qi",
+        "Moon"
+      ]
+    }
+  },
+  {
+    "id": "mu_023_mu_qi_jia_ming",
+    "name": "木气夹命",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·八格赋》",
+    "description": "木氣拱身夾命，必有壽而聰明。[木氣清高善曜、文學之星，守命臨身，必主聰明清秀，或泊孤寡主有壽孤剋也。]",
+    "jiXiong": "吉",
+    "geJuType": "寿",
+    "scope": "natal",
+    "conditions": null
+  },
+  {
+    "id": "mu_024_mu_qi_guan_ming",
+    "name": "木气贯命",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·八格赋》",
+    "description": "木氣貫命，多於林下逍遙。[木氣二星貫守命度，多宜林下。]",
+    "jiXiong": "平",
+    "geJuType": "贤",
     "scope": "natal",
     "conditions": {
       "type": "and",
@@ -106,9 +764,2045 @@
           "star": "Jupiter"
         },
         {
+          "type": "starGuardLife",
+          "star": "Qi"
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_025_mu_xing_zhao_lin",
+    "name": "木星照临",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·八格赋》",
+    "description": "木星照臨，主人技藝學、術亦是文人才士。",
+    "jiXiong": "吉",
+    "geJuType": "贤",
+    "scope": "natal",
+    "conditions": {
+      "type": "starGuardLife",
+      "star": "Jupiter"
+    }
+  },
+  {
+    "id": "mu_026_mu_lin_zhen_yuan",
+    "name": "木临真垣",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·躔度赋》",
+    "description": "木臨寅亥是真垣，精神百倍（木居寅亥）。《玉衡经》：木德臨垣，剛毅而懷惻隱。[木主仁好善]",
+    "jiXiong": "吉",
+    "geJuType": "贤",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInGong",
+      "star": "Jupiter",
+      "gongs": [
+        "Yin",
+        "Hai"
+      ]
+    }
+  },
+  {
+    "id": "mu_027_sun_ji_ji_ren",
+    "name": "损己济人",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·躔度赋》",
+    "description": "捐自己之財以濟人，必是木同紫氣(木主剛毅，氣為慈祥)",
+    "jiXiong": "吉",
+    "geJuType": "贤",
+    "scope": "natal",
+    "conditions": {
+      "type": "sameGong",
+      "stars": [
+        "Jupiter",
+        "Qi"
+      ]
+    }
+  },
+  {
+    "id": "mu_028_mu_ru_qin_zhou",
+    "name": "木入秦州",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·历象赋》",
+    "description": "木入秦州旺鬼，而初歸巨蟹(木星在未)。《元通赋》：歲居蟹鬼，而順將逆相。（木入秦川）。双鱼按：巨蟹、鬼宿的分野在秦，木到巨蟹入旺，成贵格。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInGong",
+      "star": "Jupiter",
+      "gongs": [
+        "Wei"
+      ]
+    }
+  },
+  {
+    "id": "mu_029_sui_ju_xie_gui",
+    "name": "岁居蟹鬼",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·元通赋》",
+    "description": "同\"木入秦州\"。歲居蟹鬼，而順將逆相。（木入秦川）",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInGong",
+      "star": "Jupiter",
+      "gongs": [
+        "Wei"
+      ]
+    }
+  },
+  {
+    "id": "mu_030_shui_mu_chong_lin",
+    "name": "水木重临",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·元通赋》",
+    "description": "水木重臨，文章秀麗.[水木相逢]",
+    "jiXiong": "吉",
+    "geJuType": "贤",
+    "scope": "natal",
+    "conditions": {
+      "type": "sameGong",
+      "stars": [
+        "Jupiter",
+        "Mercury"
+      ]
+    }
+  },
+  {
+    "id": "mu_031_mu_xian_kan_wei",
+    "name": "木嫌坎位",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·通微赋》",
+    "description": "木嫌坎位. [木打寶瓶]。双鱼按：坎位即是宝瓶座，宝瓶属土，木星临此为怒地，不吉。若宝瓶立命，木为福德、财帛主，福财克命反吉。",
+    "jiXiong": "凶",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInGong",
+      "star": "Jupiter",
+      "gongs": [
+        "Zi"
+      ]
+    }
+  },
+  {
+    "id": "mu_032_mu_da_bao_ping",
+    "name": "木打宝瓶",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·通微赋》",
+    "description": "同\"木嫌坎位\"。木打寶瓶，木星临宝瓶（子宫）为怒地，不吉。",
+    "jiXiong": "凶",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInGong",
+      "star": "Jupiter",
+      "gongs": [
+        "Zi"
+      ]
+    }
+  },
+  {
+    "id": "mu_033_mu_luo_dong_jing",
+    "name": "木罗东井",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·通微赋》",
+    "description": "木臨東井，要神首以加臨. [木羅同未井度]",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Jupiter",
+            "Luo"
+          ]
+        },
+        {
+          "type": "starInConstellation",
+          "star": "Jupiter",
+          "constellations": [
+            "井"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Jupiter",
+          "gongs": [
+            "Wei"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_034_mu_zheng_dong_fang",
+    "name": "木正东方",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·通微赋》",
+    "description": "仁慈聰俊，木正東方. [木星得位]。双鱼按：东方为木旺之地，卯天蝎是木帝旺之乡，木星临此是背中反旺之格，贵。",
+    "jiXiong": "吉",
+    "geJuType": "贤",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInGong",
+      "star": "Jupiter",
+      "gongs": [
+        "Mao"
+      ]
+    }
+  },
+  {
+    "id": "mu_035_mu_yang_zhao_qian",
+    "name": "木阳照迁",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·通微赋》",
+    "description": "人事和同遷移，木得陽臨照. [木日同遷移]",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Jupiter",
+            "Sun"
+          ]
+        },
+        {
+          "type": "starInDestinyGong",
+          "star": "Jupiter",
+          "destinyGong": "QianYi"
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_036_mu_de_lin_yuan",
+    "name": "木德临垣",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·玉衡经》",
+    "description": "同\"木临真垣\"。《玉衡经》：木德臨垣，剛毅而懷惻隱。[木主仁好善]。《躔度赋》：木臨寅亥是真垣，精神百倍（木居寅亥）",
+    "jiXiong": "吉",
+    "geJuType": "贤",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInGong",
+      "star": "Jupiter",
+      "gongs": [
+        "Yin",
+        "Hai"
+      ]
+    }
+  },
+  {
+    "id": "mu_037_nv_chan_mu_xian",
+    "name": "女缠木限",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·玉衡经》",
+    "description": "女命限到木躔防夫害子[木氣乃孤剋之宿]。双鱼按：男人限到金月则招妻纳妾，女人限到木缠，不利于姻缘仔细，因为木气常带孤劫等不利姻缘的神煞。",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "xingxian",
+    "conditions": {
+      "type": "xianMeetStar",
+      "stars": [
+        "Jupiter"
+      ]
+    }
+  },
+  {
+    "id": "mu_038_tu_mu_xi_zheng",
+    "name": "土木息争",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·玉衡经》",
+    "description": "木土偏愛陽宮，雖戰而無損[土木在寅]。",
+    "jiXiong": "平",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Jupiter",
+            "Saturn"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Jupiter",
+          "gongs": [
+            "Yin"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_039_mu_bu_nan_ben",
+    "name": "木不南奔",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·玉衡经》",
+    "description": "木居獅子，居官不能享官[木不南奔午宮也]",
+    "jiXiong": "凶",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInGong",
+      "star": "Jupiter",
+      "gongs": [
+        "Wu"
+      ]
+    }
+  },
+  {
+    "id": "mu_040_mu_luo_hui_she",
+    "name": "木罗会舍",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·玉衡经》",
+    "description": "木羅會舍，喜入寅宮[木入垣羅入廟]。《十一曜定格》：木為用神冬春生，躔廟旺宮佳。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Jupiter",
+            "Luo"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Jupiter",
+          "gongs": [
+            "Yin"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_041_shui_fan_mu_piao",
+    "name": "水泛木漂",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·四时赋》",
+    "description": "無根之木遇惡水，而飄泛東西[木躔金度或與金同，夏月水勢盛反被漂流]",
+    "jiXiong": "凶",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Jupiter",
+            "Venus"
+          ]
+        },
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "SUMMER"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_042_han_mu_xiang_yang",
+    "name": "寒木向阳",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·四时赋》",
+    "description": "冬春之木見日，則謂向陽",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Jupiter",
+            "Sun"
+          ]
+        },
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "WINTER",
+            "SPRING"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_043_qiu_shui_nan_zi",
+    "name": "秋水难滋",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·四时赋》",
+    "description": "秋水非滋木之時[秋木凋零，不能足水之滋]",
+    "jiXiong": "凶",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Jupiter",
+            "Mercury"
+          ]
+        },
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "AUTUMN"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_044_mu_tu_xiang_an",
+    "name": "木土相安",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·四时赋》",
+    "description": "土在子，木在午，似有衝而無害[子命]。双鱼按：子命土为命主，木为福元，看似对冲，实则福元克命，无害也。",
+    "jiXiong": "平",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "lifeGongAt",
+          "gongs": [
+            "Zi"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Saturn",
+          "gongs": [
+            "Zi"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Jupiter",
+          "gongs": [
+            "Wu"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_045_lin_quan_gao_zhi",
+    "name": "林泉高致",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·广寒赋》",
+    "description": "如逢木氣，山間林下作生涯[月逢木氣]",
+    "jiXiong": "平",
+    "geJuType": "贤",
+    "scope": "natal",
+    "conditions": {
+      "type": "sameGong",
+      "stars": [
+        "Moon",
+        "Jupiter",
+        "Qi"
+      ]
+    }
+  },
+  {
+    "id": "mu_046_mu_qi_fan_yue",
+    "name": "木气犯月",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·广寒赋》",
+    "description": "木氣犯月,命居於鶉火之位。双鱼按：鶉火之位为狮子，立命在此，木气为难，伴月则安身傍难，忌格。",
+    "jiXiong": "凶",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "lifeGongAt",
+          "gongs": [
+            "Wu"
+          ]
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Jupiter",
+            "Qi",
+            "Moon"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_047_yi_xing_ban_yue",
+    "name": "一星伴月",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·广寒赋》",
+    "description": "木星伴月朝東井[未命]。双鱼按：一星伴月的格局不只此一种，《李橙问答》中说一星是指水星，但是在《广寒赋》中却列出了四种一星伴月格，除土星外，其他四星皆可成一星伴月之格：凡金星伴月以躔亢[辰命]；水星伴月而入軫[巳命]；火星伴月向南斗[丑命]；木星伴月朝東井[未命]。雖然一星伴月，自古宜有,不如眾星朗朗,孤月獨明。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "lifeGongAt",
+          "gongs": [
+            "Wei"
+          ]
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Jupiter",
+            "Moon"
+          ]
+        },
+        {
+          "type": "starInConstellation",
+          "star": "Jupiter",
+          "constellations": [
+            "井"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_048_tian_di_kai_ming",
+    "name": "天地开明",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·通元赋》",
+    "description": "天地開明[水居申，木居亥，又於此二宮安命，是有開明之義，而得羅計在子午攔截為合格，若羅計在辰戌中攔為破格。]",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInGong",
+          "star": "Mercury",
+          "gongs": [
+            "Shen"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Jupiter",
+          "gongs": [
+            "Hai"
+          ]
+        },
+        {
+          "type": "lifeGongAt",
+          "gongs": [
+            "Shen",
+            "Hai"
+          ]
+        },
+        {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "starInGong",
+              "star": "Luo",
+              "gongs": [
+                "Zi",
+                "Wu"
+              ]
+            },
+            {
+              "type": "starInGong",
+              "star": "Ji",
+              "gongs": [
+                "Zi",
+                "Wu"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_049_shan_ze_tong_qi",
+    "name": "山泽通气",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·通元赋》",
+    "description": "山澤通氣[艮為山，木星居之，兌為澤，金星居之，二星得所，為通氣。]",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInGong",
+          "star": "Jupiter",
+          "gongs": [
+            "Chou"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Venus",
+          "gongs": [
+            "You"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_050_shan_ze_chen_mai",
+    "name": "山泽沉埋",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·通元赋》",
+    "description": "山澤沉埋[金入寅而體絕，木至酉而受傷，乃沉埋之象。]（双鱼按：\"木\"原文作\"水\"，疑误，故改之）",
+    "jiXiong": "凶",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInGong",
+          "star": "Venus",
+          "gongs": [
+            "Yin"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Jupiter",
+          "gongs": [
+            "You"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_051_jie_mu_xing_zai",
+    "name": "劫木兴灾",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·通元赋》",
+    "description": "劫木為災難避。[木星如梃杖之屬，掌劫亦能害人命限，切忌逢之，寅亥二宮，犯劫是也。]",
+    "jiXiong": "凶",
+    "geJuType": "夭",
+    "scope": "both",
+    "conditions": {
+      "type": "starInGong",
+      "star": "Jupiter",
+      "gongs": [
+        "Yin",
+        "Hai"
+      ]
+    }
+  },
+  {
+    "id": "mu_052_long_hu_feng_yun_hui",
+    "name": "龙虎风云会",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·通元赋》",
+    "description": "官魁夾命帶龍虎，則廊廟良材。[如命安在卯，而木金化為官魁，在寅辰歸垣夾命，乃龍虎慶會風雲，必主圭璋美玉。]",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "lifeGongAt",
+          "gongs": [
+            "Mao"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Jupiter",
+          "gongs": [
+            "Yin",
+            "Chen"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Venus",
+          "gongs": [
+            "Yin",
+            "Chen"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_053_mu_xing_sheng_dian",
+    "name": "木星升殿",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "木躔角斗奎井四宿。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInConstellation",
+      "star": "Jupiter",
+      "constellations": [
+        "角",
+        "斗",
+        "奎",
+        "井"
+      ]
+    }
+  },
+  {
+    "id": "mu_054_mu_yue_qing_gui",
+    "name": "木月清贵",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "弦朢夜生合格，月晦、寒天不取。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Jupiter",
+            "Moon"
+          ]
+        },
+        {
+          "type": "isDayBirth",
+          "isDay": false
+        },
+        {
+          "type": "moonPhaseIs",
+          "phases": [
+            "Shang_Xian",
+            "Full",
+            "Xia_Xian"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_055_mu_huo_wen_ming",
+    "name": "木火文明",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "冬春月生，無分晝夜為妙。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Jupiter",
+            "Mars"
+          ]
+        },
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "WINTER",
+            "SPRING"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_056_qing_long_fu_yan",
+    "name": "青龙扶砚",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "寅卯月生，木日同宮。木為青龍星。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "monthIs",
+          "months": [
+            "Yin",
+            "Mao"
+          ]
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Jupiter",
+            "Sun"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_057_mu_ru_jin_xiang",
+    "name": "木入金乡",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "木在辰酉二宮。忌格。",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInGong",
+      "star": "Jupiter",
+      "gongs": [
+        "Chen",
+        "You"
+      ]
+    }
+  },
+  {
+    "id": "mu_058_mu_ru_tu_shi",
+    "name": "木入土室",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "木居子丑二宮。忌格。",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInGong",
+      "star": "Jupiter",
+      "gongs": [
+        "Zi",
+        "Chou"
+      ]
+    }
+  },
+  {
+    "id": "mu_059_mu_tu_xiang_ke",
+    "name": "木土相剋",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "木遇土而剋。",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "sameGong",
+      "stars": [
+        "Jupiter",
+        "Saturn"
+      ]
+    }
+  },
+  {
+    "id": "mu_060_mu_bei_fu_yin",
+    "name": "木孛符印",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "木為用神，臨廟旺吉。冬生無力。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Jupiter",
+            "Bei"
+          ]
+        },
+        {
+          "type": "starGongStatus",
+          "star": "Jupiter",
+          "statuses": [
+            "Miao",
+            "Wang"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_061_mu_bi_yang_guang",
+    "name": "木蔽阳光",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "晝生忌木氣掩，夜生宜火羅助。",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "isDayBirth",
+          "isDay": true
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Jupiter",
+            "Sun"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_062_mu_qi_lian_zhi",
+    "name": "木气联枝",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "木氣孛在寅亥，命宮官祿合格。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Jupiter",
+            "Qi",
+            "Bei"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Jupiter",
+          "gongs": [
+            "Yin",
+            "Hai"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_063_hu_xiao_yuan_yin",
+    "name": "虎啸猿吟",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·十一曜定格》",
+    "description": "木尾火觜，亥命大貴，巳命大富。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInConstellation",
+          "star": "Jupiter",
+          "constellations": [
+            "尾",
+            "觜"
+          ]
+        },
+        {
+          "type": "lifeGongAt",
+          "gongs": [
+            "Hai",
+            "Si"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_064_hu_ju_long_pan",
+    "name": "虎踞龙盘",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·灵台星格》",
+    "description": "木星乃東方之蒼龍，金星乃西方之白虎，金在命木正照，夜生乃龍盤虎踞。⊙金木同居於命，又為龍虎交馳，更在辰寅二宮坐命者尤妙。⊙命宮居於子午，金星在酉，木星在卯，四正得之，正合此格。蓋木為青龍在東方，金為白虎在西方，又在前四宮與後四宮拱照，豈得不為貴命。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "or",
+      "conditions": [
+        {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "starGuardLife",
+              "star": "Venus"
+            },
+            {
+              "type": "oppositeGong",
+              "stars": [
+                "Venus",
+                "Jupiter"
+              ]
+            },
+            {
+              "type": "isDayBirth",
+              "isDay": false
+            }
+          ]
+        },
+        {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "sameGong",
+              "stars": [
+                "Jupiter",
+                "Venus"
+              ]
+            },
+            {
+              "type": "starGuardLife",
+              "star": "Jupiter"
+            }
+          ]
+        },
+        {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "lifeGongAt",
+              "gongs": [
+                "Zi",
+                "Wu"
+              ]
+            },
+            {
+              "type": "starInGong",
+              "star": "Venus",
+              "gongs": [
+                "You"
+              ]
+            },
+            {
+              "type": "starInGong",
+              "star": "Jupiter",
+              "gongs": [
+                "Mao"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_065_qing_long_dang_quan",
+    "name": "青龙当权",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·灵台星格》",
+    "description": "春生人見木星，在寅卯安命，乃青龍用事。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "SPRING"
+          ]
+        },
+        {
+          "type": "lifeGongAt",
+          "gongs": [
+            "Yin",
+            "Mao"
+          ]
+        },
+        {
+          "type": "starGuardLife",
+          "star": "Jupiter"
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_066_ao_tou_du_bu",
+    "name": "鳌头独步",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·灵台星格》",
+    "description": "三春生人在寅卯二宮安命，而寅卯上見木星也，此得時得位得用鰲頭，自當獨步也，前格所謂青龍當權，亦此義耳。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "SPRING"
+          ]
+        },
+        {
+          "type": "lifeGongAt",
+          "gongs": [
+            "Yin",
+            "Mao"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Jupiter",
+          "gongs": [
+            "Yin",
+            "Mao"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_067_mu_shang_shui_jing",
+    "name": "木上水井",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·灵台星格》",
+    "description": "水先入宮，木後入宮，或木星先入，水星後入，皆為井象，更得在東井未上，又在未上安命，必主道心員融，有常德以食天祿也。⊙井居其所而不遷，地之德也，而木居水上，有養而不窮之義。⊙或人命得木同居於未，而水星對照於亥，此亦得木上水井格。蓋亥居下而有井之象也，然在天之井，則異於是，以井而居河漢之中，其為度，則三十，視其他度數最長，半次實沈、半次鶉首，在實沈者，水為樂宮，在鶉首者，水為入廟，此亦養而不窮之義。",
+    "jiXiong": "吉",
+    "geJuType": "贤",
+    "scope": "natal",
+    "conditions": {
+      "type": "or",
+      "conditions": [
+        {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "sameGong",
+              "stars": [
+                "Jupiter",
+                "Mercury"
+              ]
+            },
+            {
+              "type": "lifeGongAt",
+              "gongs": [
+                "Wei"
+              ]
+            },
+            {
+              "type": "starInConstellation",
+              "star": "Jupiter",
+              "constellations": [
+                "井"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "starInGong",
+              "star": "Jupiter",
+              "gongs": [
+                "Wei"
+              ]
+            },
+            {
+              "type": "starInGong",
+              "star": "Mercury",
+              "gongs": [
+                "Hai"
+              ]
+            },
+            {
+              "type": "lifeGongAt",
+              "gongs": [
+                "Wei"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_068_jiao_mu_duan_chan",
+    "name": "角木断躔",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·格居补遗》",
+    "description": "立命丑宮斗木度，土躔斗度，行限辰宮，木星又躔角度，故曰：角木斷躔，必然主死於非命，定因親族相累，禍起於蕭牆。又云：木度立命，見木帶煞，乃自家殺自家。",
+    "jiXiong": "凶",
+    "geJuType": "夭",
+    "scope": "xingxian",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "lifeGongAt",
+          "gongs": [
+            "Chou"
+          ]
+        },
+        {
+          "type": "lifeConstellationAt",
+          "constellations": [
+            "斗"
+          ]
+        },
+        {
+          "type": "starInConstellation",
+          "star": "Saturn",
+          "constellations": [
+            "斗"
+          ]
+        },
+        {
+          "type": "xianAtGong",
+          "gongs": [
+            "Chen"
+          ]
+        },
+        {
+          "type": "starInConstellation",
+          "star": "Jupiter",
+          "constellations": [
+            "角"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_069_ji_feng_dou_kou",
+    "name": "箕风斗口",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·格居补遗》",
+    "description": "命立亥，行寅限而遇木星在箕度，箕星好風原，主風搖葉落，行限重見箕度，或斗度，故曰：箕風斗口見之，家破身亡，不然水火而終。",
+    "jiXiong": "凶",
+    "geJuType": "夭",
+    "scope": "xingxian",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "lifeGongAt",
+          "gongs": [
+            "Hai"
+          ]
+        },
+        {
+          "type": "xianAtGong",
+          "gongs": [
+            "Yin"
+          ]
+        },
+        {
+          "type": "starInConstellation",
+          "star": "Jupiter",
+          "constellations": [
+            "箕"
+          ]
+        },
+        {
+          "type": "xianAtConstellation",
+          "constellations": [
+            "箕",
+            "斗"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_070_jin_mu_hai_shi",
+    "name": "金木亥室",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·指迷歌》",
+    "description": "金星與木室相逢，官職榮遷至上公。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "sameGong",
+          "stars": [
+            "Venus",
+            "Jupiter"
+          ]
+        },
+        {
+          "type": "starInConstellation",
+          "star": "Jupiter",
+          "constellations": [
+            "室"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_080_jiao_ji_feng_chang",
+    "name": "脚疾风肠",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·金箱歌》",
+    "description": "木星為病有一方，必主腳疾及風腸。",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": null
+  },
+  {
+    "id": "mu_081_mu_ji_tong_yin",
+    "name": "木计同寅",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·玄妙经解》",
+    "description": "分布得經、俱是十二宮星辰得局貴格。寅宫：木计同寅。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInGong",
+          "star": "Jupiter",
+          "gongs": [
+            "Yin"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Ji",
+          "gongs": [
+            "Yin"
+          ]
+        },
+        {
+          "type": "lifeGongAt",
+          "gongs": [
+            "Yin"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_082_jin_mu_feng_long",
+    "name": "金木逢龙",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·玄妙经解》",
+    "description": "分布得經、俱是十二宮星辰得局貴格。辰宮：金木逢龍。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInGong",
+          "star": "Jupiter",
+          "gongs": [
+            "Chen"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Venus",
+          "gongs": [
+            "Chen"
+          ]
+        },
+        {
+          "type": "lifeGongAt",
+          "gongs": [
+            "Chen"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_083_mu_chan_jiao_dao",
+    "name": "木躔角道",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·玄妙经解》",
+    "description": "分布得經、俱是十二宮星辰得局貴格。辰宮：木躔角道。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInConstellation",
+          "star": "Jupiter",
+          "constellations": [
+            "角"
+          ]
+        },
+        {
+          "type": "lifeGongAt",
+          "gongs": [
+            "Chen"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_084_mu_tu_xiang_hui",
+    "name": "木土相会",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·玄妙经解》",
+    "description": "分布得經、俱是十二宮星辰得局貴格。申宮：木土相會。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInGong",
+          "star": "Jupiter",
+          "gongs": [
+            "Shen"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Saturn",
+          "gongs": [
+            "Shen"
+          ]
+        },
+        {
+          "type": "lifeGongAt",
+          "gongs": [
+            "Shen"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_085_jin_mu_cheng_wang",
+    "name": "金木乘旺",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·玄妙经解》",
+    "description": "分布得經、俱是十二宮星辰得局貴格。亥宫：金木乘旺。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInGong",
+          "star": "Jupiter",
+          "gongs": [
+            "Hai"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Venus",
+          "gongs": [
+            "Hai"
+          ]
+        },
+        {
+          "type": "lifeGongAt",
+          "gongs": [
+            "Hai"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_086_mu_lin_ying_shi",
+    "name": "木临营室",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·玄妙经解》",
+    "description": "分布得經、俱是十二宮星辰得局貴格。亥宫：木臨熒室。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInConstellation",
+          "star": "Jupiter",
+          "constellations": [
+            "室"
+          ]
+        },
+        {
+          "type": "lifeGongAt",
+          "gongs": [
+            "Hai"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_087_mu_ji_feng_yu",
+    "name": "木计逢鱼",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·玄妙经解》",
+    "description": "分布得經、俱是十二宮星辰得局貴格。亥宫：木计逢鱼。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInGong",
+          "star": "Jupiter",
+          "gongs": [
+            "Hai"
+          ]
+        },
+        {
+          "type": "starInGong",
+          "star": "Ji",
+          "gongs": [
+            "Hai"
+          ]
+        },
+        {
+          "type": "lifeGongAt",
+          "gongs": [
+            "Hai"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_088_mu_chu_jin_long",
+    "name": "木触金龙",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗》",
+    "description": "木在辰宫，参考\"木入金乡\"。",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInGong",
+      "star": "Jupiter",
+      "gongs": [
+        "Chen"
+      ]
+    }
+  },
+  {
+    "id": "mu_089_chun_mu_ge",
+    "name": "纯木格",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·谈星奥论》",
+    "description": "天元星最要緊，或守命得令相資，或是身命主聰明，加生旺貴祿為奇。[天元者，如甲天元屬木，而木星守命，或命度純木尤奇。]",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starGuardLife",
+          "star": "Jupiter"
+        },
+        {
+          "type": "starGongStatus",
+          "star": "Jupiter",
+          "statuses": [
+            "Miao",
+            "Wang"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_090_mu_tu_hui_ji",
+    "name": "木土会吉",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·谈星奥论》",
+    "description": "四木安命，木土同度得躔，又得生旺財帛擁進，更財福二宮有吉星扶為上格。[四木者，斗木獬、奎木狼、井木犴、角木蛟之類。]",
+    "jiXiong": "吉",
+    "geJuType": "富",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "lifeConstellationAt",
+          "constellations": [
+            "斗",
+            "奎",
+            "井",
+            "角"
+          ]
+        },
+        {
+          "type": "sameConstellation",
+          "stars": [
+            "Jupiter",
+            "Saturn"
+          ]
+        },
+        {
+          "type": "starGongStatus",
+          "star": "Jupiter",
+          "statuses": [
+            "Miao",
+            "Wang"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_091_ru_miao_tui_xing",
+    "name": "入庙退行",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·谈星奥论》",
+    "description": "木躔斗入廟而退行，得失相伴。",
+    "jiXiong": "平",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInConstellation",
+          "star": "Jupiter",
+          "constellations": [
+            "斗"
+          ]
+        },
+        {
+          "type": "starGongStatus",
+          "star": "Jupiter",
+          "statuses": [
+            "Miao"
+          ]
+        },
+        {
           "type": "starWalkingState",
           "star": "Jupiter",
-          "states": ["Retrograde"]
+          "states": [
+            "Retrograde"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_092_ku_zhi_bai_ye",
+    "name": "枯枝败叶",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·玄玄妙论》",
+    "description": "木星落空謂之枯枝敗葉。",
+    "jiXiong": "凶",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": {
+      "type": "starInKongWang",
+      "star": "Jupiter"
+    }
+  },
+  {
+    "id": "mu_093_zhuo_xiao_cheng_cai",
+    "name": "琢削成材",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·玄玄妙论》",
+    "description": "木星落空謂之枯枝敗葉，如金會則琢削成材。",
+    "jiXiong": "平",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInKongWang",
+          "star": "Jupiter"
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Jupiter",
+            "Venus"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_094_fen_zhe_hui_mie",
+    "name": "焚折灰灭",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·玄玄妙论》",
+    "description": "木星落空謂之枯枝敗葉，火會則焚折灰滅。",
+    "jiXiong": "凶",
+    "geJuType": "夭",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInKongWang",
+          "star": "Jupiter"
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Jupiter",
+            "Mars"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_095_piao_cha_fan_fa",
+    "name": "漂槎泛筏",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·玄玄妙论》",
+    "description": "木星落空謂之枯枝敗葉，水會則漂槎泛筏，不免流蕩。",
+    "jiXiong": "凶",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "starInKongWang",
+          "star": "Jupiter"
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Jupiter",
+            "Mercury"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_096_ri_lie_mu_jiao",
+    "name": "日烈木焦",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·七政四时论》",
+    "description": "夏末秋初之木，斯時氣脈虛矣，晝生忌躔四火之度。又不宜與太陽交互，蓋是日烈木焦不足論也。",
+    "jiXiong": "凶",
+    "geJuType": "贱",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "SUMMER",
+            "AUTUMN"
+          ]
+        },
+        {
+          "type": "isDayBirth",
+          "isDay": true
+        },
+        {
+          "type": "starInConstellation",
+          "star": "Jupiter",
+          "constellations": [
+            "尾",
+            "室",
+            "觜",
+            "星"
+          ]
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Jupiter",
+            "Sun"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_097_shang_xia_ji_run",
+    "name": "上下济润",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·七政四时论》",
+    "description": "夏末秋初之木，斯時氣脈虛矣，晝生忌躔四火之度。又不宜與太陽交互，蓋是日烈木焦不足論也。晝生木躔四水之度而與太陽交光，此是上下濟潤不可以木焦日烈而論，乃水之秀麗，枝葉繁茂，精神富貴。",
+    "jiXiong": "吉",
+    "geJuType": "富",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "SUMMER",
+            "AUTUMN"
+          ]
+        },
+        {
+          "type": "isDayBirth",
+          "isDay": true
+        },
+        {
+          "type": "starInConstellation",
+          "star": "Jupiter",
+          "constellations": [
+            "箕",
+            "壁",
+            "参",
+            "轸"
+          ]
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Jupiter",
+            "Sun"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_098_bu_zhan_xian_kui",
+    "name": "布占先魁",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·七政四时论》",
+    "description": "冬令之木，斯時萬物蕭疏。如晝生與太陽交光謂之，日邊紅杏、布占先魁，遇此造化，豈不美哉！兼能有幹，文才清高。",
+    "jiXiong": "吉",
+    "geJuType": "贵",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "WINTER"
+          ]
+        },
+        {
+          "type": "isDayBirth",
+          "isDay": true
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Jupiter",
+            "Sun"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_099_han_gu_hui_chun",
+    "name": "寒谷回春",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·七政四时论》",
+    "description": "冬令之木，斯時萬物蕭疏。如日生遇火羅，謂之寒谷回春，富貴雙全。如無太陽火羅同宮，得生巳午未之時，借日光霽，冰霜凍解，猶可舒暢，或木躔四火之度，又與太陽交輝，可作十全之福也。",
+    "jiXiong": "吉",
+    "geJuType": "富",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "WINTER"
+          ]
+        },
+        {
+          "type": "isDayBirth",
+          "isDay": true
+        },
+        {
+          "type": "or",
+          "conditions": [
+            {
+              "type": "sameGong",
+              "stars": [
+                "Jupiter",
+                "Mars",
+                "Luo"
+              ]
+            },
+            {
+              "type": "sameGong",
+              "stars": [
+                "Jupiter",
+                "Mars"
+              ]
+            },
+            {
+              "type": "sameGong",
+              "stars": [
+                "Jupiter",
+                "Luo"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "mu_100_shui_bei_dong_zhe",
+    "name": "水孛冻折",
+    "className": "木星格局",
+    "books": "果老星宗",
+    "source": "《果老星宗·七政四时论》",
+    "description": "冬令之木，斯時萬物蕭疏。如遇夜生木躔四土之度，又逢水孛凍折，窮之極矣。",
+    "jiXiong": "凶",
+    "geJuType": "贫",
+    "scope": "natal",
+    "conditions": {
+      "type": "and",
+      "conditions": [
+        {
+          "type": "seasonIs",
+          "seasons": [
+            "WINTER"
+          ]
+        },
+        {
+          "type": "isDayBirth",
+          "isDay": false
+        },
+        {
+          "type": "starInConstellation",
+          "star": "Jupiter",
+          "constellations": [
+            "牛",
+            "娄",
+            "鬼",
+            "亢"
+          ]
+        },
+        {
+          "type": "sameGong",
+          "stars": [
+            "Jupiter",
+            "Mercury",
+            "Bei"
+          ]
         }
       ]
     }
