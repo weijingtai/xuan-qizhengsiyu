@@ -1,15 +1,15 @@
-import 'dart:io';
 import 'package:common/models/divination_datetime.dart';
 import 'package:drift/drift.dart';
 import 'package:drift_flutter/drift_flutter.dart';
-import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 
 import '../../../domain/entities/models/base_panel_model.dart';
 import '../../../domain/entities/models/pan_entity.dart';
 import '../../../domain/entities/models/panel_config.dart';
 import 'daos/qizhengsiyu_pan_dao.dart';
+import 'daos/ge_ju_dao.dart';
 import 'tables/qizhengsiyu_pan_table.dart';
+import 'tables/ge_ju_tables.dart';
 import '../../models/converters/divination_datetime_converter.dart';
 import '../../models/converters/panel_config_converter.dart';
 import '../../models/converters/panel_model_converter.dart';
@@ -17,8 +17,15 @@ import '../../models/converters/panel_model_converter.dart';
 part 'app_database.g.dart';
 
 @DriftDatabase(
-  tables: [QizhengsiyuPanTable],
-  daos: [QiZhengSiYuPanDao],
+  tables: [
+    QizhengsiyuPanTable,
+    GeJuRulesTable,
+    GeJuAnnotationsTable,
+    GeJuConditionSetsTable,
+    GeJuUserPreferencesTable,
+    GeJuDeletionRecordsTable,
+  ],
+  daos: [QiZhengSiYuPanDao, GeJuDao],
 )
 class AppDatabase extends _$AppDatabase {
   AppDatabase([QueryExecutor? e])
@@ -45,7 +52,7 @@ class AppDatabase extends _$AppDatabase {
         );
 
   @override
-  int get schemaVersion => 1;
+  int get schemaVersion => 2;
 
   @override
   MigrationStrategy get migration {
@@ -54,10 +61,13 @@ class AppDatabase extends _$AppDatabase {
         await m.createAll();
       },
       onUpgrade: (Migrator m, int from, int to) async {
-        // 处理数据库升级逻辑
         if (from < 2) {
-          // 示例：添加新字段的迁移
-          // await m.addColumn(qizhengsiyuPanTable, qizhengsiyuPanTable.newField);
+          // v2: Add GeJu tables
+          await m.createTable(geJuRulesTable);
+          await m.createTable(geJuAnnotationsTable);
+          await m.createTable(geJuConditionSetsTable);
+          await m.createTable(geJuUserPreferencesTable);
+          await m.createTable(geJuDeletionRecordsTable);
         }
       },
     );
@@ -72,14 +82,4 @@ class AppDatabase extends _$AppDatabase {
       return false;
     }
   }
-
-  // 获取数据库大小
-  // Future<int> getDatabaseSize() async {
-  //   final dbFolder = await getApplicationDocumentsDirectory();
-  //   final file = File(.join(dbFolder.path, 'qizhengsiyu_app.db'));
-  //   if (await file.exists()) {
-  //     return await file.length();
-  //   }
-  //   return 0;
-  // }
 }

@@ -26,8 +26,6 @@ Map<String, dynamic> _$MonthDiZhiShenShaToJson(MonthDiZhiShenSha instance) =>
     <String, dynamic>{
       'name': instance.name,
       'jiXiong': _$JiXiongEnumEnumMap[instance.jiXiong]!,
-      'descriptionList': instance.descriptionList,
-      'locationDescriptionList': instance.locationDescriptionList,
       'locationMapper': instance.locationMapper
           .map((k, e) => MapEntry(_$DiZhiEnumMap[k]!, _$DiZhiEnumMap[e]!)),
     };
@@ -78,8 +76,6 @@ Map<String, dynamic> _$YearDiZhiShenShaToJson(YearDiZhiShenSha instance) =>
     <String, dynamic>{
       'name': instance.name,
       'jiXiong': _$JiXiongEnumEnumMap[instance.jiXiong]!,
-      'descriptionList': instance.descriptionList,
-      'locationDescriptionList': instance.locationDescriptionList,
       'locationMapper': instance.locationMapper
           .map((k, e) => MapEntry(_$DiZhiEnumMap[k]!, _$DiZhiEnumMap[e]!)),
     };
@@ -106,8 +102,6 @@ Map<String, dynamic> _$JiaZiShenShaToJson(JiaZiShenSha instance) =>
     <String, dynamic>{
       'name': instance.name,
       'jiXiong': _$JiXiongEnumEnumMap[instance.jiXiong]!,
-      'descriptionList': instance.descriptionList,
-      'locationDescriptionList': instance.locationDescriptionList,
       'locationMapper': instance.locationMapper.map((k, e) => MapEntry(
           _$JiaZiEnumMap[k]!, e.map((e) => _$DiZhiEnumMap[e]!).toList())),
     };

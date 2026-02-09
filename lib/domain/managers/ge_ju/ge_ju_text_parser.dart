@@ -4,6 +4,7 @@ import 'package:qizhengsiyu/domain/entities/models/ge_ju/conditions/relationship
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/conditions/structure_conditions.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_condition.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_rule.dart';
+import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_variant.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju_model.dart';
 import 'package:qizhengsiyu/domain/managers/ge_ju/ge_ju_text_constants.dart';
 import 'package:uuid/uuid.dart';
@@ -62,7 +63,8 @@ class GeJuTextParser {
     return rules;
   }
 
-  static GeJuRule _buildRule(String name, String rawText) {
+  static GeJuRule _buildRule(String name, String rawText,
+      {List<String> schools = const ["guolao"]}) {
     // 提取出处
     // 格式： 《出处》：描述...
     String? source;
@@ -77,21 +79,26 @@ class GeJuTextParser {
 
     final conditions = _extractConditions(name, description);
 
-    return GeJuRule(
-      id: _uuid.v4(),
-      name: name,
-      className: "总汇", // 默认为总汇，后续可根据 Section Title 区分
-      books: source ?? "未知",
+    final variant = GeJuVariant(
       source: source ?? "",
       description: description,
-      jiXiong: _guessJiXiong(description), // 简单推断
-      geJuType: GeJuType.pin, // 默认，需后续分析
-      scope: GeJuScope.natal,
       conditions: conditions.isNotEmpty
           ? (conditions.length == 1
               ? conditions.first
               : AndCondition(conditions))
           : null,
+      books: source ?? "未知",
+      className: "总汇", // 默认为总汇
+      jiXiong: _guessJiXiong(description),
+      geJuType: GeJuType.pin,
+      schools: schools,
+    );
+
+    return GeJuRule(
+      id: _uuid.v4(),
+      name: name,
+      variants: [variant],
+      scope: GeJuScope.natal,
       coordinateSystem: null,
     );
   }

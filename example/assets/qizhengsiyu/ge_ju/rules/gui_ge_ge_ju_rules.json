@@ -1,0 +1,34 @@
+[
+  {
+    "id": "guige_001_gui_ge",
+    "name": "贵格",
+    "variants": [
+      {
+        "conditions": {
+          "type": "officialStarPatterns"
+        }
+      }
+    ]
+  },
+  {
+    "id": "guige_002_jian_ge",
+    "name": "贱格",
+    "variants": [
+      {}
+    ]
+  },
+  {
+    "id": "guige_003_pin_ge",
+    "name": "贫格",
+    "variants": [
+      {}
+    ]
+  },
+  {
+    "id": "guige_004_ji_ge",
+    "name": "疾格",
+    "variants": [
+      {}
+    ]
+  }
+]

@@ -86,7 +86,8 @@ class GeJuInput {
   // ========== 星曜状态（可选） ==========
   /// 星曜的庙旺陷等状态映射
   /// key: 星曜, value: 该星曜在当前宫位的状态列表
-  final Map<EnumStars, List<EnumStarGongPositionStatusType>>? starGongStatusMapper;
+  final Map<EnumStars, List<EnumStarGongPositionStatusType>>?
+      starGongStatusMapper;
 
   GeJuInput({
     required this.coordinateSystem,
@@ -108,7 +109,13 @@ class GeJuInput {
     this.currentXianConstellation,
     this.xianPalaceStars,
     this.starGongStatusMapper,
+    this.preferredSchools = const {'guolao'},
   });
+
+  // ========== 上下文偏好 ==========
+  /// 用户偏好的流派ID集合
+  /// 默认为 {'guolao'}。如果为空，计算引擎可能会使用默认值或返回所有。
+  final Set<String> preferredSchools;
 
   // ========== 便捷查询方法 ==========
 
@@ -192,12 +199,14 @@ class GeJuInput {
   }
 
   /// 判断星曜是否处于指定状态
-  bool hasStarGongStatus(EnumStars star, EnumStarGongPositionStatusType status) {
+  bool hasStarGongStatus(
+      EnumStars star, EnumStarGongPositionStatusType status) {
     return getStarGongStatus(star).contains(status);
   }
 
   /// 判断星曜是否处于任一指定状态
-  bool hasAnyStarGongStatus(EnumStars star, List<EnumStarGongPositionStatusType> statuses) {
+  bool hasAnyStarGongStatus(
+      EnumStars star, List<EnumStarGongPositionStatusType> statuses) {
     final currentStatuses = getStarGongStatus(star);
     for (var status in statuses) {
       if (currentStatuses.contains(status)) return true;

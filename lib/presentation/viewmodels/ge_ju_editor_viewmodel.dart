@@ -1,6 +1,9 @@
 import 'package:common/enums.dart';
 import 'package:flutter/foundation.dart';
+import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_alias.dart';
+import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_annotation.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_condition.dart';
+import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_condition_set.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_rule.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju_model.dart';
 import 'package:qizhengsiyu/domain/errors/ge_ju_errors.dart';
@@ -8,9 +11,32 @@ import 'package:qizhengsiyu/domain/services/ge_ju_crud_service.dart';
 import 'package:qizhengsiyu/domain/services/ge_ju_validation.dart';
 import 'package:qizhengsiyu/presentation/models/condition_editor_node.dart';
 
-/// 格局编辑器 ViewModel
+/// 编辑器模式
+enum EditorMode {
+  create,
+  edit,
+  duplicate,
+  saveAs,
+}
+
+/// 保存结果
+class SaveResult {
+  final bool success;
+  final String? ruleId;
+  final String? errorMessage;
+
+  const SaveResult({required this.success, this.ruleId, this.errorMessage});
+
+  factory SaveResult.ok(String ruleId) =>
+      SaveResult(success: true, ruleId: ruleId);
+
+  factory SaveResult.error(String message) =>
+      SaveResult(success: false, errorMessage: message);
+}
+
+/// 格局编辑器 ViewModel（三实体模型）
 ///
-/// 管理格局编辑器的状态，包括表单字段、条件树、验证等
+/// 以"格局"为单位操作，内部管理 Rule + Annotation + ConditionSet 三个实体的字段
 class GeJuEditorViewModel extends ChangeNotifier {
   final GeJuCrudService _crudService;
 
@@ -19,89 +45,104 @@ class GeJuEditorViewModel extends ChangeNotifier {
 
   // ========== 模式与原始数据 ==========
 
-  /// 是否为创建模式（否则为编辑模式）
-  bool _isCreateMode = true;
-
-  /// 正在编辑的规则 ID（编辑模式时有值）
+  EditorMode _mode = EditorMode.create;
   String? _editingRuleId;
-
-  /// 原始规则（编辑模式时保存原始数据，用于检测变更）
   GeJuRule? _originalRule;
+  GeJuAnnotation? _originalAnnotation;
+  GeJuConditionSet? _originalConditionSet;
 
-  // ========== 表单状态 ==========
-
+  // ═══ Rule 字段 ═══
   String _name = '';
-  String _className = '自定义';
-  String _books = '';
+  List<GeJuAlias> _aliases = [];
+  String? _disambiguationNote;
+  GeJuScope _scope = GeJuScope.both;
+
+  // ═══ Annotation 字段 ═══
   String _description = '';
-  String _source = '';
   JiXiongEnum _jiXiong = JiXiongEnum.PING;
   GeJuType _geJuType = GeJuType.pin;
-  GeJuScope _scope = GeJuScope.natal;
+  String _className = '';
+  String _books = '';
+  String? _sourceSection;
 
-  /// 条件树根节点
+  // ═══ ConditionSet 字段 ═══
+  String _csLabel = '';
+  String? _changeNote;
   ConditionEditorNode? _rootConditionNode;
+  String? _derivedFrom;
 
-  // ========== UI 状态 ==========
-
-  /// 验证结果
+  // ═══ UI 状态 ═══
   ValidationResult? _validationResult;
-
-  /// 是否有未保存的修改
   bool _hasUnsavedChanges = false;
-
-  /// 保存中状态
   bool _isSaving = false;
-
-  /// 保存错误信息
   String? _saveError;
 
   // ========== Getters ==========
 
-  bool get isCreateMode => _isCreateMode;
+  EditorMode get mode => _mode;
   String? get editingRuleId => _editingRuleId;
   bool get isBuiltIn =>
       _editingRuleId != null && _crudService.isBuiltInRule(_editingRuleId!);
+  bool get isReadOnly => isBuiltIn;
 
+  // Rule fields
   String get name => _name;
-  String get className => _className;
-  String get books => _books;
+  List<GeJuAlias> get aliases => _aliases;
+  String? get disambiguationNote => _disambiguationNote;
+  GeJuScope get scope => _scope;
+
+  // Annotation fields
   String get description => _description;
-  String get source => _source;
   JiXiongEnum get jiXiong => _jiXiong;
   GeJuType get geJuType => _geJuType;
-  GeJuScope get scope => _scope;
-  ConditionEditorNode? get rootConditionNode => _rootConditionNode;
+  String get className => _className;
+  String get books => _books;
+  String? get sourceSection => _sourceSection;
 
+  // ConditionSet fields
+  String get csLabel => _csLabel;
+  String? get changeNote => _changeNote;
+  ConditionEditorNode? get rootConditionNode => _rootConditionNode;
+  String? get derivedFrom => _derivedFrom;
+
+  // UI state
   ValidationResult? get validationResult => _validationResult;
   bool get hasUnsavedChanges => _hasUnsavedChanges;
   bool get isSaving => _isSaving;
   String? get saveError => _saveError;
 
-  /// 是否可以保存
   bool get canSave {
     if (_isSaving) return false;
-    if (isBuiltIn) return false; // 内置规则不可编辑
+    if (isReadOnly) return false;
     final validation = validate();
     return validation.isValid;
   }
 
-  /// 页面标题
   String get pageTitle {
-    if (_isCreateMode) return '新建格局';
-    if (isBuiltIn) return '查看格局';
-    return '编辑格局';
+    switch (_mode) {
+      case EditorMode.create:
+        return '新建格局';
+      case EditorMode.edit:
+        return isBuiltIn ? '查看格局' : '编辑格局';
+      case EditorMode.duplicate:
+        return '复制格局';
+      case EditorMode.saveAs:
+        return '另存为';
+    }
   }
 
   // ========== 初始化方法 ==========
 
   /// 初始化为创建模式
-  void initForCreate() {
-    _isCreateMode = true;
+  Future<bool> initForCreate() async {
+    _mode = EditorMode.create;
     _editingRuleId = null;
     _originalRule = null;
+    _originalAnnotation = null;
+    _originalConditionSet = null;
     _resetForm();
     notifyListeners();
+    return true;
   }
 
   /// 初始化为编辑模式
@@ -114,10 +155,18 @@ class GeJuEditorViewModel extends ChangeNotifier {
         return false;
       }
 
-      _isCreateMode = false;
+      _mode = EditorMode.edit;
       _editingRuleId = ruleId;
       _originalRule = rule;
-      _loadFromRule(rule);
+
+      // Load associated annotation and condition set
+      final annotations = await _crudService.getAnnotationsForRule(ruleId);
+      final conditionSets = await _crudService.getConditionSetsForRule(ruleId);
+
+      _originalAnnotation = annotations.isNotEmpty ? annotations.first : null;
+      _originalConditionSet = conditionSets.isNotEmpty ? conditionSets.first : null;
+
+      _loadFromEntities(rule, _originalAnnotation, _originalConditionSet);
       _hasUnsavedChanges = false;
       _validationResult = null;
       _saveError = null;
@@ -130,7 +179,7 @@ class GeJuEditorViewModel extends ChangeNotifier {
     }
   }
 
-  /// 基于现有规则初始化为创建模式（复制）
+  /// 基于现有规则初始化为复制模式
   Future<bool> initFromDuplicate(String ruleId) async {
     try {
       final rule = await _crudService.getRule(ruleId);
@@ -140,10 +189,20 @@ class GeJuEditorViewModel extends ChangeNotifier {
         return false;
       }
 
-      _isCreateMode = true;
+      _mode = EditorMode.duplicate;
       _editingRuleId = null;
       _originalRule = null;
-      _loadFromRule(rule);
+      _originalAnnotation = null;
+      _originalConditionSet = null;
+
+      final annotations = await _crudService.getAnnotationsForRule(ruleId);
+      final conditionSets = await _crudService.getConditionSetsForRule(ruleId);
+
+      _loadFromEntities(
+        rule,
+        annotations.isNotEmpty ? annotations.first : null,
+        conditionSets.isNotEmpty ? conditionSets.first : null,
+      );
       _name = '${rule.name} (副本)';
       _hasUnsavedChanges = true;
       _validationResult = null;
@@ -157,7 +216,43 @@ class GeJuEditorViewModel extends ChangeNotifier {
     }
   }
 
-  // ========== 表单更新方法 ==========
+  /// 基于当前编辑状态初始化为另存为模式
+  Future<bool> initForSaveAs(String ruleId) async {
+    try {
+      final rule = await _crudService.getRule(ruleId);
+      if (rule == null) {
+        _saveError = '格局不存在';
+        notifyListeners();
+        return false;
+      }
+
+      _mode = EditorMode.saveAs;
+      _editingRuleId = null;
+      _originalRule = null;
+      _originalAnnotation = null;
+      _originalConditionSet = null;
+
+      final annotations = await _crudService.getAnnotationsForRule(ruleId);
+      final conditionSets = await _crudService.getConditionSetsForRule(ruleId);
+
+      _loadFromEntities(
+        rule,
+        annotations.isNotEmpty ? annotations.first : null,
+        conditionSets.isNotEmpty ? conditionSets.first : null,
+      );
+      _hasUnsavedChanges = true;
+      _validationResult = null;
+      _saveError = null;
+      notifyListeners();
+      return true;
+    } catch (e) {
+      _saveError = '加载格局失败: $e';
+      notifyListeners();
+      return false;
+    }
+  }
+
+  // ========== Rule 字段更新 ==========
 
   void updateName(String value) {
     if (_name != value) {
@@ -166,30 +261,42 @@ class GeJuEditorViewModel extends ChangeNotifier {
     }
   }
 
-  void updateClassName(String value) {
-    if (_className != value) {
-      _className = value;
+  void updateScope(GeJuScope value) {
+    if (_scope != value) {
+      _scope = value;
       _markChanged();
     }
   }
 
-  void updateBooks(String value) {
-    if (_books != value) {
-      _books = value;
+  void updateDisambiguationNote(String? value) {
+    if (_disambiguationNote != value) {
+      _disambiguationNote = value;
       _markChanged();
     }
   }
+
+  void updateAliases(List<GeJuAlias> value) {
+    _aliases = value;
+    _markChanged();
+  }
+
+  void addAlias(GeJuAlias alias) {
+    _aliases = [..._aliases, alias];
+    _markChanged();
+  }
+
+  void removeAlias(int index) {
+    if (index >= 0 && index < _aliases.length) {
+      _aliases = List.from(_aliases)..removeAt(index);
+      _markChanged();
+    }
+  }
+
+  // ========== Annotation 字段更新 ==========
 
   void updateDescription(String value) {
     if (_description != value) {
       _description = value;
-      _markChanged();
-    }
-  }
-
-  void updateSource(String value) {
-    if (_source != value) {
-      _source = value;
       _markChanged();
     }
   }
@@ -208,22 +315,50 @@ class GeJuEditorViewModel extends ChangeNotifier {
     }
   }
 
-  void updateScope(GeJuScope value) {
-    if (_scope != value) {
-      _scope = value;
+  void updateClassName(String value) {
+    if (_className != value) {
+      _className = value;
       _markChanged();
     }
   }
 
-  // ========== 条件树操作方法 ==========
+  void updateBooks(String value) {
+    if (_books != value) {
+      _books = value;
+      _markChanged();
+    }
+  }
 
-  /// 设置根条件
+  void updateSourceSection(String? value) {
+    if (_sourceSection != value) {
+      _sourceSection = value;
+      _markChanged();
+    }
+  }
+
+  // ========== ConditionSet 字段更新 ==========
+
+  void updateCsLabel(String value) {
+    if (_csLabel != value) {
+      _csLabel = value;
+      _markChanged();
+    }
+  }
+
+  void updateChangeNote(String? value) {
+    if (_changeNote != value) {
+      _changeNote = value;
+      _markChanged();
+    }
+  }
+
+  // ========== 条件树操作（只读展示，保留接口以备未来编辑） ==========
+
   void setRootCondition(ConditionEditorNode? node) {
     _rootConditionNode = node;
     _markChanged();
   }
 
-  /// 向逻辑组添加子条件
   void addConditionToGroup(String groupId, ConditionEditorNode child) {
     final group = _rootConditionNode?.findChild(groupId);
     if (group != null && group.isLogic) {
@@ -232,17 +367,13 @@ class GeJuEditorViewModel extends ChangeNotifier {
     }
   }
 
-  /// 移除条件节点
   void removeConditionNode(String nodeId) {
     if (_rootConditionNode == null) return;
-
     if (_rootConditionNode!.id == nodeId) {
       _rootConditionNode = null;
       _markChanged();
       return;
     }
-
-    // 递归查找并移除
     _removeNodeRecursive(_rootConditionNode!, nodeId);
     _markChanged();
   }
@@ -254,32 +385,26 @@ class GeJuEditorViewModel extends ChangeNotifier {
     }
   }
 
-  /// 更新条件节点
   void updateConditionNode(String nodeId, ConditionEditorNode updated) {
     if (_rootConditionNode == null) return;
-
     if (_rootConditionNode!.id == nodeId) {
       _rootConditionNode = updated;
       _markChanged();
       return;
     }
-
     _rootConditionNode!.replaceChild(nodeId, updated);
     _markChanged();
   }
 
-  /// 将节点包装为逻辑组
   void wrapInLogicGroup(String nodeId, String logicType) {
     if (_rootConditionNode == null) return;
-
     if (_rootConditionNode!.id == nodeId) {
       final original = _rootConditionNode!;
-      _rootConditionNode = ConditionEditorNode.logic(logicType, children: [original]);
+      _rootConditionNode =
+          ConditionEditorNode.logic(logicType, children: [original]);
       _markChanged();
       return;
     }
-
-    // 查找父节点并替换
     _wrapNodeRecursive(_rootConditionNode!, nodeId, logicType);
     _markChanged();
   }
@@ -299,27 +424,18 @@ class GeJuEditorViewModel extends ChangeNotifier {
 
   // ========== 验证与保存 ==========
 
-  /// 验证所有字段
   ValidationResult validate() {
     final errors = <String>[];
     final warnings = <String>[];
 
-    // 名称不为空
     if (_name.trim().isEmpty) {
       errors.add('格局名称不能为空');
     }
 
-    // 分类不为空
-    if (_className.trim().isEmpty) {
-      errors.add('格局分类不能为空');
-    }
-
-    // 描述建议
     if (_description.trim().isEmpty) {
       warnings.add('建议填写格局描述');
     }
 
-    // 条件树验证
     if (_rootConditionNode == null) {
       warnings.add('未设置判断条件，该格局将无法进行匹配');
     } else {
@@ -367,9 +483,11 @@ class GeJuEditorViewModel extends ChangeNotifier {
         : ValidationResult.invalid(errors: errors, warnings: warnings);
   }
 
-  /// 保存规则
-  Future<bool> save() async {
-    if (!canSave) return false;
+  /// 保存
+  Future<SaveResult> save() async {
+    if (!canSave) {
+      return SaveResult.error('无法保存');
+    }
 
     _isSaving = true;
     _saveError = null;
@@ -381,60 +499,141 @@ class GeJuEditorViewModel extends ChangeNotifier {
         condition = _rootConditionNode!.toCondition();
       }
 
-      if (_isCreateMode) {
-        final params = GeJuRuleCreateParams(
-          name: _name.trim(),
-          className: _className.trim(),
-          books: _books.trim(),
-          description: _description.trim(),
-          source: _source.trim(),
-          jiXiong: _jiXiong,
-          geJuType: _geJuType,
-          scope: _scope,
-          conditions: condition,
-        );
-        final newRule = await _crudService.createRule(params);
-        _editingRuleId = newRule.id;
-        _originalRule = newRule;
-        _isCreateMode = false;
-      } else {
-        final updatedRule = GeJuRule(
-          id: _editingRuleId!,
-          name: _name.trim(),
-          className: _className.trim(),
-          books: _books.trim(),
-          description: _description.trim(),
-          source: _source.trim(),
-          jiXiong: _jiXiong,
-          geJuType: _geJuType,
-          scope: _scope,
-          conditions: condition,
-        );
-        await _crudService.updateRule(updatedRule);
-        _originalRule = updatedRule;
+      String resultRuleId;
+
+      switch (_mode) {
+        case EditorMode.create:
+        case EditorMode.duplicate:
+          // 使用 saveRuleAs 一次创建三个实体
+          final rule = await _crudService.saveRuleAs(GeJuRuleSaveAsParams(
+            name: _name.trim(),
+            scope: _scope,
+            disambiguationNote: _disambiguationNote,
+            description: _description.trim(),
+            jiXiong: _jiXiong,
+            geJuType: _geJuType,
+            className: _className.trim(),
+            books: _books.trim().isNotEmpty ? _books.trim() : null,
+            sourceSection: _sourceSection,
+            csLabel: _csLabel.trim().isNotEmpty ? _csLabel.trim() : _name.trim(),
+            conditions: condition,
+            changeNote: _changeNote,
+            derivedFrom: _derivedFrom,
+          ));
+          resultRuleId = rule.id;
+          _editingRuleId = rule.id;
+          _originalRule = rule;
+          _mode = EditorMode.edit;
+          break;
+
+        case EditorMode.edit:
+          // Update existing entities
+          final updatedRule = _originalRule!.copyWith(
+            name: _name.trim(),
+            scope: _scope,
+            disambiguationNote: _disambiguationNote,
+            updatedAt: DateTime.now(),
+          );
+          await _crudService.updateRule(updatedRule);
+          _originalRule = updatedRule;
+
+          // Update annotation if exists
+          if (_originalAnnotation != null && _originalAnnotation!.isUser) {
+            final updatedAnn = _originalAnnotation!.copyWith(
+              description: _description.trim(),
+              jiXiong: _jiXiong,
+              geJuType: _geJuType,
+              className: _className.trim(),
+              updatedAt: DateTime.now(),
+            );
+            await _crudService.updateAnnotation(updatedAnn);
+            _originalAnnotation = updatedAnn;
+          } else if (_originalAnnotation == null) {
+            // Create new annotation for user rule
+            final ann = await _crudService.createAnnotation(
+              AnnotationCreateParams(
+                ruleId: _editingRuleId!,
+                description: _description.trim(),
+                jiXiong: _jiXiong,
+                geJuType: _geJuType,
+                className: _className.trim(),
+                books: _books.trim().isNotEmpty ? _books.trim() : null,
+                sourceSection: _sourceSection,
+              ),
+            );
+            _originalAnnotation = ann;
+          }
+
+          // Update condition set if exists
+          if (_originalConditionSet != null && _originalConditionSet!.isUser) {
+            final updatedCs = _originalConditionSet!.copyWith(
+              label: _csLabel.trim().isNotEmpty ? _csLabel.trim() : _name.trim(),
+              conditions: condition,
+              changeNote: _changeNote,
+              updatedAt: DateTime.now(),
+            );
+            await _crudService.updateConditionSet(updatedCs);
+            _originalConditionSet = updatedCs;
+          } else if (_originalConditionSet == null && condition != null) {
+            // Create new condition set for user rule
+            final cs = await _crudService.createConditionSet(
+              ConditionSetCreateParams(
+                ruleId: _editingRuleId!,
+                label: _csLabel.trim().isNotEmpty ? _csLabel.trim() : _name.trim(),
+                conditions: condition,
+                changeNote: _changeNote,
+              ),
+            );
+            _originalConditionSet = cs;
+          }
+
+          resultRuleId = _editingRuleId!;
+          break;
+
+        case EditorMode.saveAs:
+          final rule = await _crudService.saveRuleAs(GeJuRuleSaveAsParams(
+            name: _name.trim(),
+            scope: _scope,
+            disambiguationNote: _disambiguationNote,
+            description: _description.trim(),
+            jiXiong: _jiXiong,
+            geJuType: _geJuType,
+            className: _className.trim(),
+            books: _books.trim().isNotEmpty ? _books.trim() : null,
+            sourceSection: _sourceSection,
+            csLabel: _csLabel.trim().isNotEmpty ? _csLabel.trim() : _name.trim(),
+            conditions: condition,
+            changeNote: _changeNote,
+            derivedFrom: _derivedFrom,
+          ));
+          resultRuleId = rule.id;
+          _editingRuleId = rule.id;
+          _originalRule = rule;
+          _mode = EditorMode.edit;
+          break;
       }
 
       _hasUnsavedChanges = false;
       _isSaving = false;
       notifyListeners();
-      return true;
+      return SaveResult.ok(resultRuleId);
     } on RuleValidationError catch (e) {
       _saveError = e.errors.join('\n');
       _isSaving = false;
       notifyListeners();
-      return false;
+      return SaveResult.error(_saveError!);
     } catch (e) {
       _saveError = '保存失败: $e';
       _isSaving = false;
       notifyListeners();
-      return false;
+      return SaveResult.error(_saveError!);
     }
   }
 
   /// 重置表单到初始状态
   void reset() {
     if (_originalRule != null) {
-      _loadFromRule(_originalRule!);
+      _loadFromEntities(_originalRule!, _originalAnnotation, _originalConditionSet);
     } else {
       _resetForm();
     }
@@ -444,7 +643,6 @@ class GeJuEditorViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  /// 清除错误信息
   void clearError() {
     _saveError = null;
     notifyListeners();
@@ -454,36 +652,55 @@ class GeJuEditorViewModel extends ChangeNotifier {
 
   void _resetForm() {
     _name = '';
-    _className = '自定义';
-    _books = '';
+    _aliases = [];
+    _disambiguationNote = null;
+    _scope = GeJuScope.both;
     _description = '';
-    _source = '';
     _jiXiong = JiXiongEnum.PING;
     _geJuType = GeJuType.pin;
-    _scope = GeJuScope.natal;
+    _className = '';
+    _books = '';
+    _sourceSection = null;
+    _csLabel = '';
+    _changeNote = null;
     _rootConditionNode = null;
+    _derivedFrom = null;
     _hasUnsavedChanges = false;
     _validationResult = null;
     _saveError = null;
   }
 
-  void _loadFromRule(GeJuRule rule) {
+  void _loadFromEntities(
+    GeJuRule rule,
+    GeJuAnnotation? annotation,
+    GeJuConditionSet? conditionSet,
+  ) {
+    // Rule fields
     _name = rule.name;
-    _className = rule.className;
-    _books = rule.books;
-    _description = rule.description;
-    _source = rule.source;
-    _jiXiong = rule.jiXiong;
-    _geJuType = rule.geJuType;
+    _aliases = List.from(rule.aliases);
+    _disambiguationNote = rule.disambiguationNote;
     _scope = rule.scope;
-    _rootConditionNode = rule.conditions != null
-        ? ConditionEditorNode.fromCondition(rule.conditions!)
+
+    // Annotation fields
+    _description = annotation?.description ?? '';
+    _jiXiong = annotation?.jiXiong ?? JiXiongEnum.PING;
+    _geJuType = annotation?.geJuType ?? GeJuType.pin;
+    _className = annotation?.className ?? '';
+    _books = annotation?.source?.bookName ?? '';
+    _sourceSection = annotation?.source?.section;
+
+    // ConditionSet fields
+    _csLabel = conditionSet?.label ?? '';
+    _changeNote = conditionSet?.changeNote;
+    _derivedFrom = conditionSet?.derivedFrom;
+    _rootConditionNode = conditionSet?.conditions != null
+        ? ConditionEditorNode.fromCondition(conditionSet!.conditions!)
         : null;
   }
 
   void _markChanged() {
     _hasUnsavedChanges = true;
-    _validationResult = null; // 清除之前的验证结果
+    _validationResult = null;
     notifyListeners();
   }
 }

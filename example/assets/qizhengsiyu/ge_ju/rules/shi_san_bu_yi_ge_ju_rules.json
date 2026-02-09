@@ -1,0 +1,199 @@
+[
+  {
+    "id": "shisanceng_001_qi_cha_sai_mei",
+    "name": "齐插塞梅",
+    "variants": [
+      {
+        "conditions": {
+          "type": "starGuardLife",
+          "star": "Jupiter",
+          "gong": "Life"
+        }
+      }
+    ]
+  },
+  {
+    "id": "shisanceng_002_jiao_mu_duan_chan",
+    "name": "角木断躔",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "starInGong",
+              "star": "Saturn",
+              "gong": "Life",
+              "degree": "斗度"
+            },
+            {
+              "type": "xianMeetStar",
+              "stars": [
+                "Jupiter"
+              ],
+              "gong": "Travel",
+              "degree": "角度"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shisanceng_003_jin_qi_ren_ma",
+    "name": "金骑人马",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "gongDegree",
+              "gong": "Life",
+              "degree": "尾度"
+            },
+            {
+              "type": "starInGong",
+              "star": "Venus",
+              "gong": "Life"
+            },
+            {
+              "type": "yearBranch",
+              "branch": "寅"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shisanceng_004_shui_huo_xiang_xing",
+    "name": "水火相刑",
+    "variants": [
+      {}
+    ]
+  },
+  {
+    "id": "shisanceng_005_jin_shen_chi_ren",
+    "name": "金神持刃",
+    "variants": [
+      {}
+    ]
+  },
+  {
+    "id": "shisanceng_006_xuan_wu_dang_tai",
+    "name": "元武当台",
+    "variants": [
+      {}
+    ]
+  },
+  {
+    "id": "shisanceng_007_zi_cheng_fu_wei",
+    "name": "子承父位",
+    "variants": [
+      {}
+    ]
+  },
+  {
+    "id": "shisanceng_008_yue_ming_dou_fu",
+    "name": "月明斗府",
+    "variants": [
+      {}
+    ]
+  },
+  {
+    "id": "shisanceng_009_xiang_yun_peng_yue",
+    "name": "祥云捧月",
+    "variants": [
+      {}
+    ]
+  },
+  {
+    "id": "shisanceng_010_tai_yi_bao_chan",
+    "name": "太乙抱蟾",
+    "variants": [
+      {},
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "sameGong",
+              "stars": [
+                "Moon",
+                "YueBo"
+              ],
+              "gong": "Travel"
+            },
+            {
+              "type": "gongDegree",
+              "gong": "Travel",
+              "degree": "未宫"
+            }
+          ]
+        }
+      },
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "sameGong",
+              "stars": [
+                "Moon",
+                "YueBo"
+              ],
+              "gong": "Travel"
+            },
+            {
+              "type": "gongDegree",
+              "gong": "Travel",
+              "degree": "未宫"
+            }
+          ]
+        }
+      },
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "sameGong",
+              "stars": [
+                "Moon",
+                "YueBo"
+              ],
+              "gong": "Travel"
+            },
+            {
+              "type": "gongDegree",
+              "gong": "Travel",
+              "degree": "未宫"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shisanceng_011_shui_shi_zao_xing",
+    "name": "水士遭刑",
+    "variants": [
+      {}
+    ]
+  },
+  {
+    "id": "shisanceng_012_jin_xing_ru_dou",
+    "name": "金星入斗",
+    "variants": [
+      {}
+    ]
+  },
+  {
+    "id": "shisanceng_013_ji_feng_dou_kou",
+    "name": "箕风斗口",
+    "variants": [
+      {}
+    ]
+  }
+]

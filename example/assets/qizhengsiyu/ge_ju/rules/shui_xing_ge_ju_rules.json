@@ -1,0 +1,2110 @@
+[
+  {
+    "id": "shui_001_jun_chen_qing_hui",
+    "name": "君臣庆会",
+    "variants": [
+      {
+        "conditions": {
+          "type": "sameGong",
+          "stars": [
+            "Mercury",
+            "Venus",
+            "Sun"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_002_shui_cou_tian_chi",
+    "name": "水凑天池",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "seasonIs",
+              "seasons": [
+                "SPRING"
+              ]
+            },
+            {
+              "type": "starInConstellation",
+              "star": "Mercury",
+              "constellations": [
+                "壁"
+              ]
+            },
+            {
+              "type": "starInGong",
+              "star": "Mercury",
+              "gongs": [
+                "Hai"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_003_gan_xuan_kun_zhuan",
+    "name": "干旋坤转",
+    "variants": [
+      {
+        "conditions": null
+      }
+    ]
+  },
+  {
+    "id": "shui_004_luan_yu_nan_xing",
+    "name": "鸾轝南幸",
+    "variants": [
+      {
+        "conditions": {
+          "type": "starInConstellation",
+          "star": "Mercury",
+          "constellations": [
+            "星",
+            "房"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_005_feng_jia_bei_gui",
+    "name": "凤驾北归",
+    "variants": [
+      {
+        "conditions": null
+      }
+    ]
+  },
+  {
+    "id": "shui_006_yi_gan_jiu_shi",
+    "name": "移干就湿",
+    "variants": [
+      {
+        "conditions": null
+      }
+    ]
+  },
+  {
+    "id": "shui_007_feng_yu_zuo_lin",
+    "name": "风雨作霖",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "sameGong",
+              "stars": [
+                "Mercury",
+                "Venus",
+                "Sun"
+              ]
+            },
+            {
+              "type": "or",
+              "conditions": [
+                {
+                  "type": "starInConstellation",
+                  "star": "Mercury",
+                  "constellations": [
+                    "毕",
+                    "箕"
+                  ]
+                },
+                {
+                  "type": "starInConstellation",
+                  "star": "Venus",
+                  "constellations": [
+                    "毕",
+                    "箕"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_008_jin_shui_bei_chi",
+    "name": "金水背驰",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "starWalkingState",
+              "star": "Venus",
+              "states": [
+                "Retrograde",
+                "Stay"
+              ]
+            },
+            {
+              "type": "starWalkingState",
+              "star": "Mercury",
+              "states": [
+                "Retrograde",
+                "Stay"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_009_jin_shui_fen_ming",
+    "name": "金水分明",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "not",
+              "condition": {
+                "type": "starWalkingState",
+                "star": "Mercury",
+                "states": [
+                  "Retrograde"
+                ]
+              }
+            },
+            {
+              "type": "not",
+              "condition": {
+                "type": "starWalkingState",
+                "star": "Venus",
+                "states": [
+                  "Retrograde"
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_010_jin_shui_hui_yuan",
+    "name": "金水会垣",
+    "variants": [
+      {
+        "conditions": {
+          "type": "sameGong",
+          "stars": [
+            "Mercury",
+            "Venus"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_011_jin_han_shui_leng",
+    "name": "金寒水冷",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "seasonIs",
+              "seasons": [
+                "WINTER"
+              ]
+            },
+            {
+              "type": "sameGong",
+              "stars": [
+                "Mercury",
+                "Venus"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_012_jin_shui_wei_shi",
+    "name": "金水为仕",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "starInConstellation",
+              "star": "Mercury",
+              "constellations": [
+                "奎",
+                "壁"
+              ]
+            },
+            {
+              "type": "starInConstellation",
+              "star": "Venus",
+              "constellations": [
+                "奎",
+                "壁"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_013_jin_shui_hu_yuan",
+    "name": "金水互垣",
+    "variants": [
+      {
+        "conditions": null
+      }
+    ]
+  },
+  {
+    "id": "shui_014_jin_shui_gong_cheng",
+    "name": "金水功成",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "starGuardLife",
+              "star": "Mercury"
+            },
+            {
+              "type": "starGuardLife",
+              "star": "Venus"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_015_shui_an_tian_zhai",
+    "name": "水暗田宅",
+    "variants": [
+      {
+        "conditions": {
+          "type": "starInDestinyGong",
+          "star": "Mercury",
+          "destinyGong": "TianZhai"
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_016_shui_zhi_si_shen",
+    "name": "水至巳申",
+    "variants": [
+      {
+        "conditions": {
+          "type": "starInGong",
+          "star": "Mercury",
+          "gongs": [
+            "Si",
+            "Shen"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_017_shui_ri_tong_zhou",
+    "name": "水日同周",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "sameGong",
+              "stars": [
+                "Mercury",
+                "Sun"
+              ]
+            },
+            {
+              "type": "starInConstellation",
+              "star": "Mercury",
+              "constellations": [
+                "星",
+                "张"
+              ]
+            },
+            {
+              "type": "starInGong",
+              "star": "Mercury",
+              "gongs": [
+                "Wu"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_018_jin_shui_hui_she",
+    "name": "金水会蛇",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "sameGong",
+              "stars": [
+                "Mercury",
+                "Venus"
+              ]
+            },
+            {
+              "type": "starInGong",
+              "star": "Mercury",
+              "gongs": [
+                "Si"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_019_shui_liu_an_chun_wei",
+    "name": "水流鹌鹑尾",
+    "variants": [
+      {
+        "conditions": {
+          "type": "starInGong",
+          "star": "Mercury",
+          "gongs": [
+            "Si"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_020_shui_hui_ji_du",
+    "name": "水会计都",
+    "variants": [
+      {
+        "conditions": {
+          "type": "sameGong",
+          "stars": [
+            "Mercury",
+            "Ji"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_021_shui_huo_xiang_zhan",
+    "name": "水火相战",
+    "variants": [
+      {
+        "conditions": {
+          "type": "sameGong",
+          "stars": [
+            "Mercury",
+            "Mars"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_022_shui_liu_yang_zhou",
+    "name": "水流扬州",
+    "variants": [
+      {
+        "conditions": {
+          "type": "starInGong",
+          "star": "Mercury",
+          "gongs": [
+            "Chou"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_023_shui_lin_shuang_nv",
+    "name": "水临双女",
+    "variants": [
+      {
+        "conditions": {
+          "type": "starInGong",
+          "star": "Mercury",
+          "gongs": [
+            "Si"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_024_jin_huo_tong_cai",
+    "name": "金火同财",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "starInDestinyGong",
+              "star": "Venus",
+              "destinyGong": "CaiBo"
+            },
+            {
+              "type": "starInDestinyGong",
+              "star": "Mars",
+              "destinyGong": "CaiBo"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_025_shui_huo_ju_tian",
+    "name": "水火居田",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "starInDestinyGong",
+              "star": "Mercury",
+              "destinyGong": "TianZhai"
+            },
+            {
+              "type": "starInDestinyGong",
+              "star": "Mars",
+              "destinyGong": "TianZhai"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_026_shui_su_lin_cai",
+    "name": "水宿临财",
+    "variants": [
+      {
+        "conditions": {
+          "type": "starInDestinyGong",
+          "star": "Mercury",
+          "destinyGong": "CaiBo"
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_027_shui_mu_chong_lin",
+    "name": "水木重临",
+    "variants": [
+      {
+        "conditions": {
+          "type": "sameGong",
+          "stars": [
+            "Mercury",
+            "Jupiter"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_028_shui_jin_tong_chou",
+    "name": "水金同丑",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "sameGong",
+              "stars": [
+                "Mercury",
+                "Venus"
+              ]
+            },
+            {
+              "type": "starInGong",
+              "star": "Mercury",
+              "gongs": [
+                "Chou"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_029_shui_bei_tong_du",
+    "name": "水孛同度",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "sameGong",
+              "stars": [
+                "Mercury",
+                "Bei"
+              ]
+            },
+            {
+              "type": "or",
+              "conditions": [
+                {
+                  "type": "starGuardLife",
+                  "star": "Mercury"
+                },
+                {
+                  "type": "starGuardLife",
+                  "star": "Bei"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_030_chao_yun_mu_yu",
+    "name": "朝云暮雨",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "starInDestinyGong",
+              "star": "Mercury",
+              "destinyGong": "QianYi"
+            },
+            {
+              "type": "starInDestinyGong",
+              "star": "Bei",
+              "destinyGong": "QianYi"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_031_shui_su_ju_qiang",
+    "name": "水宿居强",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "isDayBirth",
+              "isDay": true
+            },
+            {
+              "type": "starInGong",
+              "star": "Mercury",
+              "gongs": [
+                "Si",
+                "Shen",
+                "Chen"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_032_shui_xing_shou_ming",
+    "name": "水星守命",
+    "variants": [
+      {
+        "conditions": {
+          "type": "starGuardLife",
+          "star": "Mercury"
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_033_shui_bei_tian_cai",
+    "name": "水孛田财",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "or",
+              "conditions": [
+                {
+                  "type": "starInDestinyGong",
+                  "star": "Mercury",
+                  "destinyGong": "TianZhai"
+                },
+                {
+                  "type": "starInDestinyGong",
+                  "star": "Mercury",
+                  "destinyGong": "CaiBo"
+                }
+              ]
+            },
+            {
+              "type": "or",
+              "conditions": [
+                {
+                  "type": "starInDestinyGong",
+                  "star": "Bei",
+                  "destinyGong": "TianZhai"
+                },
+                {
+                  "type": "starInDestinyGong",
+                  "star": "Bei",
+                  "destinyGong": "CaiBo"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_034_shui_ji_xiang_xing",
+    "name": "水计相刑",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "sameGong",
+              "stars": [
+                "Mercury",
+                "Ji"
+              ]
+            },
+            {
+              "type": "starInGong",
+              "star": "Mercury",
+              "gongs": [
+                "Si"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_035_shui_ru_yin_gong",
+    "name": "水入寅宫",
+    "variants": [
+      {
+        "conditions": {
+          "type": "starInGong",
+          "star": "Mercury",
+          "gongs": [
+            "Yin"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_036_tu_hun_shui_zhuo",
+    "name": "土混水浊",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "seasonIs",
+              "seasons": [
+                "WINTER"
+              ]
+            },
+            {
+              "type": "sameGong",
+              "stars": [
+                "Mercury",
+                "Saturn"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_037_shui_fan_tu_beng",
+    "name": "水泛土崩",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "seasonIs",
+              "seasons": [
+                "SPRING",
+                "SUMMER"
+              ]
+            },
+            {
+              "type": "sameGong",
+              "stars": [
+                "Mercury",
+                "Saturn"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_038_xia_shui_ku_he",
+    "name": "夏水枯涸",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "seasonIs",
+              "seasons": [
+                "SUMMER"
+              ]
+            },
+            {
+              "type": "sameGong",
+              "stars": [
+                "Mercury",
+                "Mars"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_039_dong_shui_nan_ben",
+    "name": "冬水南奔",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "seasonIs",
+              "seasons": [
+                "WINTER"
+              ]
+            },
+            {
+              "type": "starInConstellation",
+              "star": "Mercury",
+              "constellations": [
+                "娄"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_040_shui_dong_jin_han",
+    "name": "水冻金寒",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "seasonIs",
+              "seasons": [
+                "WINTER"
+              ]
+            },
+            {
+              "type": "sameGong",
+              "stars": [
+                "Mercury",
+                "Venus"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_041_shui_run_zao_tu",
+    "name": "水润燥土",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "seasonIs",
+              "seasons": [
+                "SUMMER"
+              ]
+            },
+            {
+              "type": "sameGong",
+              "stars": [
+                "Mercury",
+                "Saturn"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_042_chen_xing_ju_yuan",
+    "name": "辰星居垣",
+    "variants": [
+      {
+        "conditions": {
+          "type": "starGongStatus",
+          "star": "Mercury",
+          "statuses": [
+            "Yuan"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_043_shui_xing_sheng_dian",
+    "name": "水星升殿",
+    "variants": [
+      {
+        "conditions": {
+          "type": "starInConstellation",
+          "star": "Mercury",
+          "constellations": [
+            "箕",
+            "壁",
+            "参",
+            "轸"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_044_shui_han_chan_po",
+    "name": "水涵蟾魄",
+    "variants": [
+      {
+        "conditions": {
+          "type": "sameGong",
+          "stars": [
+            "Mercury",
+            "Moon"
+          ]
+        }
+      },
+      {},
+      {},
+      {}
+    ]
+  },
+  {
+    "id": "shui_045_jin_shui_xiang_han",
+    "name": "金水相涵",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "sameGong",
+              "stars": [
+                "Mercury",
+                "Venus"
+              ]
+            },
+            {
+              "type": "not",
+              "condition": {
+                "type": "seasonIs",
+                "seasons": [
+                  "WINTER"
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_046_yuan_wu_chi_jing",
+    "name": "元武持旌",
+    "variants": [
+      {
+        "conditions": null
+      },
+      {},
+      {},
+      {}
+    ]
+  },
+  {
+    "id": "shui_047_shui_ju_tu_shi",
+    "name": "水居土室",
+    "variants": [
+      {
+        "conditions": {
+          "type": "starInGong",
+          "star": "Mercury",
+          "gongs": [
+            "Zi",
+            "Chou"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_048_shui_cheng_huo_wei",
+    "name": "水乘火位",
+    "variants": [
+      {
+        "conditions": {
+          "type": "starInGong",
+          "star": "Mercury",
+          "gongs": [
+            "Wu",
+            "Si"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_049_jin_shui_cong_yang",
+    "name": "金水从阳",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "isDayBirth",
+              "isDay": true
+            },
+            {
+              "type": "starGongStatus",
+              "star": "Mercury",
+              "statuses": [
+                "Yuan",
+                "Dian"
+              ]
+            },
+            {
+              "type": "starGongStatus",
+              "star": "Venus",
+              "statuses": [
+                "Yuan",
+                "Dian"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_050_san_tai_he_ge",
+    "name": "三台合格",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "sameGong",
+              "stars": [
+                "Sun",
+                "Venus",
+                "Mercury"
+              ]
+            },
+            {
+              "type": "starInGong",
+              "star": "Sun",
+              "gongs": [
+                "Wu",
+                "Si",
+                "Mao"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_051_tian_di_kai_ming",
+    "name": "天地开明",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "starInGong",
+              "star": "Mercury",
+              "gongs": [
+                "Shen"
+              ]
+            },
+            {
+              "type": "starInGong",
+              "star": "Jupiter",
+              "gongs": [
+                "Hai"
+              ]
+            },
+            {
+              "type": "lifeGongAt",
+              "gongs": [
+                "Shen",
+                "Hai"
+              ]
+            },
+            {
+              "type": "starInGong",
+              "star": "Luo",
+              "gongs": [
+                "Zi",
+                "Wu"
+              ]
+            },
+            {
+              "type": "starInGong",
+              "star": "Ji",
+              "gongs": [
+                "Zi",
+                "Wu"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_052_shui_huo_ji_ji",
+    "name": "水火既济",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "starInGong",
+              "star": "Mercury",
+              "gongs": [
+                "Zi"
+              ]
+            },
+            {
+              "type": "starInGong",
+              "star": "Mars",
+              "gongs": [
+                "Wu"
+              ]
+            },
+            {
+              "type": "lifeGongAt",
+              "gongs": [
+                "Zi",
+                "Wu"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "sameGong",
+              "stars": [
+                "Mercury",
+                "Mars"
+              ]
+            },
+            {
+              "type": "starIsSiZhu",
+              "star": "Mercury",
+              "roles": [
+                "lifeGongMaster",
+                "lifeConstellationMaster"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "sameGong",
+              "stars": [
+                "Mars",
+                "Mercury"
+              ]
+            },
+            {
+              "type": "waterFireBalance"
+            }
+          ]
+        }
+      },
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "sameGong",
+              "stars": [
+                "Mars",
+                "Mercury"
+              ]
+            },
+            {
+              "type": "waterFireBalance"
+            }
+          ]
+        }
+      },
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "sameGong",
+              "stars": [
+                "Mars",
+                "Mercury"
+              ]
+            },
+            {
+              "type": "waterFireBalance"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_053_feng_lei_gu_wu",
+    "name": "风雷鼓舞",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "starInGong",
+              "star": "Mercury",
+              "gongs": [
+                "Si"
+              ]
+            },
+            {
+              "type": "starInGong",
+              "star": "Mars",
+              "gongs": [
+                "Mao"
+              ]
+            },
+            {
+              "type": "lifeGongAt",
+              "gongs": [
+                "Chen"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_054_feng_lei_xiang_bo",
+    "name": "风雷相薄",
+    "variants": [
+      {
+        "conditions": null
+      }
+    ]
+  },
+  {
+    "id": "shui_055_shui_huo_xiang_she",
+    "name": "水火相射",
+    "variants": [
+      {
+        "conditions": {
+          "type": "or",
+          "conditions": [
+            {
+              "type": "and",
+              "conditions": [
+                {
+                  "type": "starInGong",
+                  "star": "Mercury",
+                  "gongs": [
+                    "Wu"
+                  ]
+                },
+                {
+                  "type": "starInGong",
+                  "star": "Mars",
+                  "gongs": [
+                    "Zi"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "and",
+              "conditions": [
+                {
+                  "type": "starInGong",
+                  "star": "Jupiter",
+                  "gongs": [
+                    "Mao"
+                  ]
+                },
+                {
+                  "type": "starInGong",
+                  "star": "Saturn",
+                  "gongs": [
+                    "Xu"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "and",
+              "conditions": [
+                {
+                  "type": "starInGong",
+                  "star": "Mars",
+                  "gongs": [
+                    "Si"
+                  ]
+                },
+                {
+                  "type": "starInGong",
+                  "star": "Mercury",
+                  "gongs": [
+                    "Shen"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_056_yu_yuan_shou_kun",
+    "name": "玉猿守昆",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "starInConstellation",
+              "star": "Mercury",
+              "constellations": [
+                "参"
+              ]
+            },
+            {
+              "type": "sameGong",
+              "stars": [
+                "Mercury",
+                "Sun"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_057_shuang_yu_xi_shui",
+    "name": "双鱼戏水",
+    "variants": [
+      {
+        "conditions": {
+          "type": "starInGong",
+          "star": "Mercury",
+          "gongs": [
+            "Hai"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_058_yu_nv_chang_e",
+    "name": "玉女嫦娥",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "starInConstellation",
+              "star": "Mercury",
+              "constellations": [
+                "轸"
+              ]
+            },
+            {
+              "type": "starInConstellation",
+              "star": "Moon",
+              "constellations": [
+                "张"
+              ]
+            },
+            {
+              "type": "lifeConstellationAt",
+              "constellations": [
+                "箕"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_059_yuan_wu_dang_quan",
+    "name": "元武当权",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "seasonIs",
+              "seasons": [
+                "WINTER"
+              ]
+            },
+            {
+              "type": "lifeGongAt",
+              "gongs": [
+                "Hai",
+                "Zi"
+              ]
+            },
+            {
+              "type": "starGuardLife",
+              "star": "Mercury"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_060_li_kan_jiao_hui",
+    "name": "离坎交会",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "isDayBirth",
+              "isDay": false
+            },
+            {
+              "type": "starGuardLife",
+              "star": "Mars"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_061_zi_xing_fu_zheng",
+    "name": "子行父政",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "starInGong",
+              "star": "Moon",
+              "gongs": [
+                "Chou"
+              ]
+            },
+            {
+              "type": "starInGong",
+              "star": "Mercury",
+              "gongs": [
+                "Wei"
+              ]
+            },
+            {
+              "type": "lifeGongAt",
+              "gongs": [
+                "Wei"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_062_shui_zhu_dong_nan",
+    "name": "水注东南",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "starInGong",
+              "star": "Mercury",
+              "gongs": [
+                "Si"
+              ]
+            },
+            {
+              "type": "starInGong",
+              "star": "Jupiter",
+              "gongs": [
+                "Yin"
+              ]
+            },
+            {
+              "type": "lifeGongAt",
+              "gongs": [
+                "Yin"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_063_huo_shui_wei_ji",
+    "name": "火水未济",
+    "variants": [
+      {
+        "conditions": {
+          "type": "sameGong",
+          "stars": [
+            "Mercury",
+            "Mars"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_065_shui_huo_xiang_xing",
+    "name": "水火相刑",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "lifeGongAt",
+              "gongs": [
+                "Mao"
+              ]
+            },
+            {
+              "type": "lifeConstellationAt",
+              "constellations": [
+                "房"
+              ]
+            },
+            {
+              "type": "seasonIs",
+              "seasons": [
+                "SUMMER"
+              ]
+            },
+            {
+              "type": "xianAtGong",
+              "gongs": [
+                "Wu"
+              ]
+            },
+            {
+              "type": "starInGong",
+              "star": "Mercury",
+              "gongs": [
+                "Wu"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_066_shui_tu_zao_xing",
+    "name": "水土遭刑",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "lifeGongAt",
+              "gongs": [
+                "Shen"
+              ]
+            },
+            {
+              "type": "starIsSiZhu",
+              "star": "Mercury",
+              "roles": [
+                "lifeGongMaster"
+              ]
+            },
+            {
+              "type": "xianAtGong",
+              "gongs": [
+                "Xu"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_067_jin_shui_xing_qiao",
+    "name": "金水性巧",
+    "variants": [
+      {
+        "conditions": {
+          "type": "sameGong",
+          "stars": [
+            "Mercury",
+            "Venus"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_068_shui_bei_chang_you",
+    "name": "水孛倡优",
+    "variants": [
+      {
+        "conditions": {
+          "type": "sameGong",
+          "stars": [
+            "Mercury",
+            "Bei"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_069_jin_shui_bei_xian",
+    "name": "金水孛咸",
+    "variants": [
+      {
+        "conditions": {
+          "type": "sameGong",
+          "stars": [
+            "Mercury",
+            "Venus",
+            "Bei"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_070_jin_shui_bei_mu",
+    "name": "金水孛沐",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "sameGong",
+              "stars": [
+                "Mercury",
+                "Venus",
+                "Bei"
+              ]
+            },
+            {
+              "type": "or",
+              "conditions": [
+                {
+                  "type": "starGuardLife",
+                  "star": "Mercury"
+                },
+                {
+                  "type": "starGuardLife",
+                  "star": "Venus"
+                },
+                {
+                  "type": "starGuardLife",
+                  "star": "Bei"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_071_shui_piao_yang_jiao",
+    "name": "水漂羊角",
+    "variants": [
+      {
+        "conditions": {
+          "type": "starInConstellation",
+          "star": "Mercury",
+          "constellations": [
+            "娄"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_072_shui_liu_ju_xie",
+    "name": "水流巨蟹",
+    "variants": [
+      {
+        "conditions": {
+          "type": "starInConstellation",
+          "star": "Mercury",
+          "constellations": [
+            "柳"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_073_shui_qing_bao_ping",
+    "name": "水清宝瓶",
+    "variants": [
+      {
+        "conditions": {
+          "type": "starInGong",
+          "star": "Mercury",
+          "gongs": [
+            "Zi"
+          ]
+        }
+      },
+      {},
+      {},
+      {}
+    ]
+  },
+  {
+    "id": "shui_074_shui_run_jin_ming",
+    "name": "水润金明",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "sameGong",
+              "stars": [
+                "Mercury",
+                "Venus"
+              ]
+            },
+            {
+              "type": "starInGong",
+              "star": "Mercury",
+              "gongs": [
+                "Chen"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_075_ri_shui_cheng_wang",
+    "name": "日水乘旺",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "sameGong",
+              "stars": [
+                "Mercury",
+                "Sun"
+              ]
+            },
+            {
+              "type": "starInGong",
+              "star": "Mercury",
+              "gongs": [
+                "Si"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_076_shui_yang_xiang_hui",
+    "name": "水阳相会",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "sameGong",
+              "stars": [
+                "Mercury",
+                "Sun"
+              ]
+            },
+            {
+              "type": "starInGong",
+              "star": "Mercury",
+              "gongs": [
+                "Wu"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_077_shui_ming_rong_xian",
+    "name": "水名荣显",
+    "variants": [
+      {
+        "conditions": {
+          "type": "starInGong",
+          "star": "Mercury",
+          "gongs": [
+            "Wu"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_078_shui_bei_fu_chen",
+    "name": "水孛浮沉",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "sameGong",
+              "stars": [
+                "Mercury",
+                "Bei"
+              ]
+            },
+            {
+              "type": "starInConstellation",
+              "star": "Mercury",
+              "constellations": [
+                "尾"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_079_chang_jiang_hao_dang",
+    "name": "长江浩荡",
+    "variants": [
+      {
+        "conditions": {
+          "type": "starInKongWang",
+          "star": "Mercury"
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_080_hong_shui_tao_tian",
+    "name": "洪水滔天",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "starInKongWang",
+              "star": "Mercury"
+            },
+            {
+              "type": "sameGong",
+              "stars": [
+                "Mercury",
+                "Venus"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_081_guang_ji_cheng_che",
+    "name": "光霁澄彻",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "seasonIs",
+              "seasons": [
+                "SPRING"
+              ]
+            },
+            {
+              "type": "isDayBirth",
+              "isDay": true
+            },
+            {
+              "type": "sameGong",
+              "stars": [
+                "Mercury",
+                "Bei",
+                "Sun"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_082_chun_shui_ji_jin",
+    "name": "春水忌金",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "seasonIs",
+              "seasons": [
+                "SPRING"
+              ]
+            },
+            {
+              "type": "sameGong",
+              "stars": [
+                "Mercury",
+                "Venus"
+              ]
+            },
+            {
+              "type": "isDayBirth",
+              "isDay": false
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_083_xia_shui_feng_di",
+    "name": "夏水逢堤",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "seasonIs",
+              "seasons": [
+                "SUMMER"
+              ]
+            },
+            {
+              "type": "sameGong",
+              "stars": [
+                "Mercury",
+                "Saturn"
+              ]
+            },
+            {
+              "type": "starGongStatus",
+              "star": "Saturn",
+              "statuses": [
+                "Wang"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_084_qiu_shui_qing_yuan",
+    "name": "秋水清源",
+    "variants": [
+      {
+        "conditions": {
+          "type": "seasonIs",
+          "seasons": [
+            "AUTUMN"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_085_dong_shui_san_ling",
+    "name": "冬水三令",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "seasonIs",
+              "seasons": [
+                "WINTER"
+              ]
+            },
+            {
+              "type": "or",
+              "conditions": [
+                {
+                  "type": "sameGong",
+                  "stars": [
+                    "Mercury",
+                    "Mars"
+                  ]
+                },
+                {
+                  "type": "sameGong",
+                  "stars": [
+                    "Mercury",
+                    "Saturn"
+                  ]
+                },
+                {
+                  "type": "sameGong",
+                  "stars": [
+                    "Mercury",
+                    "Sun"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "shui_086_dong_jin_wu_yi",
+    "name": "冬金无义",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "seasonIs",
+              "seasons": [
+                "WINTER"
+              ]
+            },
+            {
+              "type": "sameGong",
+              "stars": [
+                "Mercury",
+                "Venus"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

@@ -46,6 +46,7 @@ app.*.map.json
 
 # Custom
 assets/tmp
+.chrome-profile/
 
 
 

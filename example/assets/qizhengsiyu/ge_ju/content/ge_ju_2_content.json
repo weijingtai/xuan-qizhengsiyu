@@ -1,0 +1,1838 @@
+[
+  {
+    "id": "geju2_9acefcb7",
+    "name": "计罗截断",
+    "variants": [
+      {
+        "source": "《格局2》",
+        "description": "計羅截斷者，漏出有用之星辰，晝東南而夜西北，皆主於貴。凡人有晝生夜生會之者，皆主富貴，要兼身主旺而後貴也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "富"
+      },
+      {
+        "source": "《格局2》",
+        "description": "計羅截斷者，漏出有用之星辰，晝東南而夜西北，皆主於貴。凡人有晝生夜生會之者，皆主富貴，要兼身主旺而後貴也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "富",
+        "schoolId": "guolao"
+      },
+      {
+        "source": "《格局2》",
+        "description": "計羅截斷者，漏出有用之星辰，晝東南而夜西北，皆主於貴。凡人有晝生夜生會之者，皆主富貴，要兼身主旺而後貴也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "富",
+        "schools": [
+          "guolao"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "geju2_90e13704",
+    "name": "身居闲极",
+    "variants": [
+      {
+        "source": "《格局2》",
+        "description": "身者，身主星也。人命以逢卯安命，遇酉安身。今人不知安身之法，只以太陰為身主者，謬也。閑極宮者，兄弟宮也。乃命宮逆至第三宮也。如身主星居之，主有清閑富貴。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "富"
+      },
+      {
+        "source": "《格局2》",
+        "description": "身者，身主星也。人命以逢卯安命，遇酉安身。今人不知安身之法，只以太陰為身主者，謬也。閑極宮者，兄弟宮也。乃命宮逆至第三宮也。如身主星居之，主有清閑富貴。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "富",
+        "schoolId": "guolao"
+      },
+      {
+        "source": "《格局2》",
+        "description": "身者，身主星也。人命以逢卯安命，遇酉安身。今人不知安身之法，只以太陰為身主者，謬也。閑極宮者，兄弟宮也。乃命宮逆至第三宮也。如身主星居之，主有清閑富貴。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "富",
+        "schools": [
+          "guolao"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "geju2_d5f1bf68",
+    "name": "二主临财",
+    "variants": [
+      {
+        "source": "《格局2》",
+        "description": "身主星與命主星同入財帛宮者，其人主富厚，財帛宮，命宮第二宮也。喜坐實，忌空亡，干犯之主消敗也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "凶",
+        "geJuType": "富"
+      },
+      {
+        "source": "《格局2》",
+        "description": "身主星與命主星同入財帛宮者，其人主富厚，財帛宮，命宮第二宮也。喜坐實，忌空亡，干犯之主消敗也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "凶",
+        "geJuType": "富",
+        "schoolId": "guolao"
+      },
+      {
+        "source": "《格局2》",
+        "description": "身主星與命主星同入財帛宮者，其人主富厚，財帛宮，命宮第二宮也。喜坐實，忌空亡，干犯之主消敗也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "凶",
+        "geJuType": "富",
+        "schools": [
+          "guolao"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "geju2_826fec08",
+    "name": "官福居垣",
+    "variants": [
+      {
+        "source": "《格局2》",
+        "description": "官祿星，福德星二星，吉星也。凡官祿福德二宮，此星各守一宮。本位者，主貴也。子命以卯為官祿，寅為福德，火木二星是也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      },
+      {
+        "source": "《格局2》",
+        "description": "官祿星，福德星二星，吉星也。凡官祿福德二宮，此星各守一宮。本位者，主貴也。子命以卯為官祿，寅為福德，火木二星是也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵",
+        "schoolId": "guolao"
+      },
+      {
+        "source": "《格局2》",
+        "description": "官祿星，福德星二星，吉星也。凡官祿福德二宮，此星各守一宮。本位者，主貴也。子命以卯為官祿，寅為福德，火木二星是也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵",
+        "schools": [
+          "guolao"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "geju2_3b4be61c",
+    "name": "日月守照",
+    "variants": [
+      {
+        "source": "《格局2》",
+        "description": "日乃太陽星也。月乃太陰星也。凡人身命二宮，或日月守之，或對宮照之，皆吉而貴也。凶星不敢犯，更主其人少病也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "凶",
+        "geJuType": "夭"
+      },
+      {
+        "source": "《格局2》",
+        "description": "日乃太陽星也。月乃太陰星也。凡人身命二宮，或日月守之，或對宮照之，皆吉而貴也。凶星不敢犯，更主其人少病也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "凶",
+        "geJuType": "夭",
+        "schoolId": "guolao"
+      },
+      {
+        "source": "《格局2》",
+        "description": "日乃太陽星也。月乃太陰星也。凡人身命二宮，或日月守之，或對宮照之，皆吉而貴也。凶星不敢犯，更主其人少病也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "凶",
+        "geJuType": "夭",
+        "schools": [
+          "guolao"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "geju2_ee7c2184",
+    "name": "二曜朝阳",
+    "variants": [
+      {
+        "source": "《格局2》",
+        "description": "二曜，火星也。水數一，火數二，故曰：二曜與太陽同居午位，謂之朝陽。身命二宮逢之，主貴。更豐榮為官，當居顯秩之職。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      },
+      {
+        "source": "《格局2》",
+        "description": "二曜，火星也。水數一，火數二，故曰：二曜與太陽同居午位，謂之朝陽。身命二宮逢之，主貴。更豐榮為官，當居顯秩之職。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵",
+        "schoolId": "guolao"
+      },
+      {
+        "source": "《格局2》",
+        "description": "二曜，火星也。水數一，火數二，故曰：二曜與太陽同居午位，謂之朝陽。身命二宮逢之，主貴。更豐榮為官，當居顯秩之職。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵",
+        "schools": [
+          "guolao"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "geju2_4530977a",
+    "name": "官福互垣",
+    "variants": [
+      {
+        "source": "《格局2》",
+        "description": "官祿宮，福德宮主星，或官祿宮主星。入福德宮，福德宮主星。入官祿宮，二星相互，謂之官祿互垣。要本主生旺，則主大貴。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      },
+      {
+        "source": "《格局2》",
+        "description": "官祿宮，福德宮主星，或官祿宮主星。入福德宮，福德宮主星。入官祿宮，二星相互，謂之官祿互垣。要本主生旺，則主大貴。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵",
+        "schoolId": "guolao"
+      },
+      {
+        "source": "《格局2》",
+        "description": "官祿宮，福德宮主星，或官祿宮主星。入福德宮，福德宮主星。入官祿宮，二星相互，謂之官祿互垣。要本主生旺，則主大貴。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵",
+        "schools": [
+          "guolao"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "geju2_6f932e9d",
+    "name": "官福夹拱",
+    "variants": [
+      {
+        "source": "《格局2》",
+        "description": "官福二星與命主身主二主星相夾拱者，主人有貴。如子命人官福二星，在亥，在丑為夾拱也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      },
+      {
+        "source": "《格局2》",
+        "description": "官福二星與命主身主二主星相夾拱者，主人有貴。如子命人官福二星，在亥，在丑為夾拱也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵",
+        "schoolId": "guolao"
+      },
+      {
+        "source": "《格局2》",
+        "description": "官福二星與命主身主二主星相夾拱者，主人有貴。如子命人官福二星，在亥，在丑為夾拱也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵",
+        "schools": [
+          "guolao"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "geju2_92f54ec4",
+    "name": "福德引援",
+    "variants": [
+      {
+        "source": "《格局2》",
+        "description": "官福二主星或在身命二宮。前為引援，在身命二宮。後為擁從，主人大貴要。或在命主身主星前後，亦是不拘身命宮也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      },
+      {
+        "source": "《格局2》",
+        "description": "官福二主星或在身命二宮。前為引援，在身命二宮。後為擁從，主人大貴要。或在命主身主星前後，亦是不拘身命宮也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵",
+        "schoolId": "guolao"
+      },
+      {
+        "source": "《格局2》",
+        "description": "官福二主星或在身命二宮。前為引援，在身命二宮。後為擁從，主人大貴要。或在命主身主星前後，亦是不拘身命宮也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵",
+        "schools": [
+          "guolao"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "geju2_25835c8f",
+    "name": "身命坐贵",
+    "variants": [
+      {
+        "source": "《格局2》",
+        "description": "身命主星或身命宮在貴人之地，謂之身命坐貴。如甲戊庚牛羊丑未，即貴人之地，或立命安身在丑未者，主大富貴也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "富"
+      },
+      {
+        "source": "《格局2》",
+        "description": "身命主星或身命宮在貴人之地，謂之身命坐貴。如甲戊庚牛羊丑未，即貴人之地，或立命安身在丑未者，主大富貴也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "富",
+        "schoolId": "guolao"
+      },
+      {
+        "source": "《格局2》",
+        "description": "身命主星或身命宮在貴人之地，謂之身命坐貴。如甲戊庚牛羊丑未，即貴人之地，或立命安身在丑未者，主大富貴也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "富",
+        "schools": [
+          "guolao"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "geju2_68c76b99",
+    "name": "文魁拱命",
+    "variants": [
+      {
+        "source": "《格局2》",
+        "description": "文魁二星者，主文章科甲也。在三方拱命，主人登上第也。如甲生人，文在羅 喉 ，魁在太陰，或子上安命，文魁在辰申是也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "嗣"
+      },
+      {
+        "source": "《格局2》",
+        "description": "文魁二星者，主文章科甲也。在三方拱命，主人登上第也。如甲生人，文在羅 喉 ，魁在太陰，或子上安命，文魁在辰申是也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "嗣",
+        "schoolId": "guolao"
+      },
+      {
+        "source": "《格局2》",
+        "description": "文魁二星者，主文章科甲也。在三方拱命，主人登上第也。如甲生人，文在羅 喉 ，魁在太陰，或子上安命，文魁在辰申是也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "嗣",
+        "schools": [
+          "guolao"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "geju2_70d62142",
+    "name": "福禄夹身",
+    "variants": [
+      {
+        "source": "《格局2》",
+        "description": "福星者，天福。星祿乃祿神也。此二星主福祿。若人身宮遇之，左右而相夾者，主其人有大貴。如落空亡剋陷，則不為大貴。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "凶",
+        "geJuType": "夭"
+      },
+      {
+        "source": "《格局2》",
+        "description": "福星者，天福。星祿乃祿神也。此二星主福祿。若人身宮遇之，左右而相夾者，主其人有大貴。如落空亡剋陷，則不為大貴。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "凶",
+        "geJuType": "夭",
+        "schoolId": "guolao"
+      },
+      {
+        "source": "《格局2》",
+        "description": "福星者，天福。星祿乃祿神也。此二星主福祿。若人身宮遇之，左右而相夾者，主其人有大貴。如落空亡剋陷，則不為大貴。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "凶",
+        "geJuType": "夭",
+        "schools": [
+          "guolao"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "geju2_25eaf434",
+    "name": "煞前主后",
+    "variants": [
+      {
+        "source": "《格局2》",
+        "description": "主者，命主星也。煞者，剋我者。如亥命以木為主，以金為難。在戌，火為主，水為難。在子為前，在戌為後，故有前後之分也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "凶",
+        "geJuType": "富"
+      },
+      {
+        "source": "《格局2》",
+        "description": "主者，命主星也。煞者，剋我者。如亥命以木為主，以金為難。在戌，火為主，水為難。在子為前，在戌為後，故有前後之分也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "凶",
+        "geJuType": "富",
+        "schoolId": "guolao"
+      },
+      {
+        "source": "《格局2》",
+        "description": "主者，命主星也。煞者，剋我者。如亥命以木為主，以金為難。在戌，火為主，水為難。在子為前，在戌為後，故有前後之分也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "凶",
+        "geJuType": "富",
+        "schools": [
+          "guolao"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "geju2_5a7a73be",
+    "name": "身命互换",
+    "variants": [
+      {
+        "source": "《格局2》",
+        "description": "身為外臺，命為內臺，二星互換居垣者入命宮，主人富貴。如寅亥屬木，木為身命主，更得寅亥立命安身者，皆為得令。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "富"
+      },
+      {
+        "source": "《格局2》",
+        "description": "身為外臺，命為內臺，二星互換居垣者入命宮，主人富貴。如寅亥屬木，木為身命主，更得寅亥立命安身者，皆為得令。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "富",
+        "schoolId": "guolao"
+      },
+      {
+        "source": "《格局2》",
+        "description": "身為外臺，命為內臺，二星互換居垣者入命宮，主人富貴。如寅亥屬木，木為身命主，更得寅亥立命安身者，皆為得令。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "富",
+        "schools": [
+          "guolao"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "geju2_b50222c3",
+    "name": "日月趋朝",
+    "variants": [
+      {
+        "source": "《格局2》",
+        "description": "日月為太陽太陰也。亥為帝闕之地，如日在子宮，月在丑宮，謂之日月趨朝。諸星在寅卯之位，隨而從之。亥命者，大貴也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      },
+      {
+        "source": "《格局2》",
+        "description": "日月為太陽太陰也。亥為帝闕之地，如日在子宮，月在丑宮，謂之日月趨朝。諸星在寅卯之位，隨而從之。亥命者，大貴也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵",
+        "schoolId": "guolao"
+      },
+      {
+        "source": "《格局2》",
+        "description": "日月為太陽太陰也。亥為帝闕之地，如日在子宮，月在丑宮，謂之日月趨朝。諸星在寅卯之位，隨而從之。亥命者，大貴也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵",
+        "schools": [
+          "guolao"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "geju2_3dc00f52",
+    "name": "背君朝主",
+    "variants": [
+      {
+        "source": "《格局2》",
+        "description": "午者，太陽所主之宮。未者，太陰所主之宮。人命宮逢之，皆主大貴。但忌木星作殃。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "凶",
+        "geJuType": "贵"
+      },
+      {
+        "source": "《格局2》",
+        "description": "午者，太陽所主之宮。未者，太陰所主之宮。人命宮逢之，皆主大貴。但忌木星作殃。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "凶",
+        "geJuType": "贵",
+        "schoolId": "guolao"
+      },
+      {
+        "source": "《格局2》",
+        "description": "午者，太陽所主之宮。未者，太陰所主之宮。人命宮逢之，皆主大貴。但忌木星作殃。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "凶",
+        "geJuType": "贵",
+        "schools": [
+          "guolao"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "geju2_51bc149d",
+    "name": "出乾入巽",
+    "variants": [
+      {
+        "source": "《格局2》",
+        "description": "乾，亥宮也。巽巳宮也。計星在亥，羅星在巳，謂之出乾入巽。反此為乾坤定位，人命立乾巽二宮，遇此二星，皆主其貴也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      },
+      {
+        "source": "《格局2》",
+        "description": "乾，亥宮也。巽巳宮也。計星在亥，羅星在巳，謂之出乾入巽。反此為乾坤定位，人命立乾巽二宮，遇此二星，皆主其貴也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵",
+        "schoolId": "guolao"
+      },
+      {
+        "source": "《格局2》",
+        "description": "乾，亥宮也。巽巳宮也。計星在亥，羅星在巳，謂之出乾入巽。反此為乾坤定位，人命立乾巽二宮，遇此二星，皆主其貴也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵",
+        "schools": [
+          "guolao"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "geju2_ce2ced84",
+    "name": "戴天履地",
+    "variants": [
+      {
+        "source": "《格局2》",
+        "description": "以亥為天，丑為地，諸星皆在亥子丑寅之方是也。亥為天門，取天開於子，地闢於丑，人生於寅，安命於此，四宮名此格。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "嗣"
+      },
+      {
+        "source": "《格局2》",
+        "description": "以亥為天，丑為地，諸星皆在亥子丑寅之方是也。亥為天門，取天開於子，地闢於丑，人生於寅，安命於此，四宮名此格。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "嗣",
+        "schoolId": "guolao"
+      },
+      {
+        "source": "《格局2》",
+        "description": "以亥為天，丑為地，諸星皆在亥子丑寅之方是也。亥為天門，取天開於子，地闢於丑，人生於寅，安命於此，四宮名此格。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "嗣",
+        "schools": [
+          "guolao"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "geju2_d111fa22",
+    "name": "廷尉辅阳",
+    "variants": [
+      {
+        "source": "《格局2》",
+        "description": "廷尉者，水星也。陽乃太陽。如同一宮，又謂之水護陽光。若同太陽在子宮行虛度，是謂廷尉輔陽子。命人遇之，大貴也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "嗣"
+      },
+      {
+        "source": "《格局2》",
+        "description": "廷尉者，水星也。陽乃太陽。如同一宮，又謂之水護陽光。若同太陽在子宮行虛度，是謂廷尉輔陽子。命人遇之，大貴也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "嗣",
+        "schoolId": "guolao"
+      },
+      {
+        "source": "《格局2》",
+        "description": "廷尉者，水星也。陽乃太陽。如同一宮，又謂之水護陽光。若同太陽在子宮行虛度，是謂廷尉輔陽子。命人遇之，大貴也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "嗣",
+        "schools": [
+          "guolao"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "geju2_37c8230f",
+    "name": "五曜连珠",
+    "variants": [
+      {
+        "source": "《格局2》",
+        "description": "五曜者，金木水火土也。如土丑，火卯，木寅，金辰，水巳相連不間者，是也。此五星各得其所，是以為貴。只要身命逢之，為吉。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "富"
+      },
+      {
+        "source": "《格局2》",
+        "description": "五曜者，金木水火土也。如土丑，火卯，木寅，金辰，水巳相連不間者，是也。此五星各得其所，是以為貴。只要身命逢之，為吉。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "富",
+        "schoolId": "guolao"
+      },
+      {
+        "source": "《格局2》",
+        "description": "五曜者，金木水火土也。如土丑，火卯，木寅，金辰，水巳相連不間者，是也。此五星各得其所，是以為貴。只要身命逢之，為吉。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "富",
+        "schools": [
+          "guolao"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "geju2_4715a42e",
+    "name": "七政入垣",
+    "variants": [
+      {
+        "source": "《格局2》",
+        "description": "七政者，金，木，水，火，土，日，月是也。如土子，計丑，木亥，氣寅，火卯，戌羅，金辰，酉水，申巳，日午，月未，各居本位，皆為入垣，是為貴。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "富"
+      },
+      {
+        "source": "《格局2》",
+        "description": "七政者，金，木，水，火，土，日，月是也。如土子，計丑，木亥，氣寅，火卯，戌羅，金辰，酉水，申巳，日午，月未，各居本位，皆為入垣，是為貴。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "富",
+        "schoolId": "guolao"
+      },
+      {
+        "source": "《格局2》",
+        "description": "七政者，金，木，水，火，土，日，月是也。如土子，計丑，木亥，氣寅，火卯，戌羅，金辰，酉水，申巳，日午，月未，各居本位，皆為入垣，是為貴。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "富",
+        "schools": [
+          "guolao"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "geju2_501aa826",
+    "name": "用星对照",
+    "variants": [
+      {
+        "source": "《格局2》",
+        "description": "用星者，主星所生之星也。如木星為命主，木生火，火星為用星也。與命對照，能剋制難忌則大吉也。身命逢之，可以言吉。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "凶",
+        "geJuType": "福"
+      },
+      {
+        "source": "《格局2》",
+        "description": "用星者，主星所生之星也。如木星為命主，木生火，火星為用星也。與命對照，能剋制難忌則大吉也。身命逢之，可以言吉。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "凶",
+        "geJuType": "福",
+        "schoolId": "guolao"
+      },
+      {
+        "source": "《格局2》",
+        "description": "用星者，主星所生之星也。如木星為命主，木生火，火星為用星也。與命對照，能剋制難忌則大吉也。身命逢之，可以言吉。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "凶",
+        "geJuType": "福",
+        "schools": [
+          "guolao"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "geju2_ec7e1486",
+    "name": "四雄朝拱",
+    "variants": [
+      {
+        "source": "《格局2》",
+        "description": "火羅土計為四雄，在丑宮，謂之拱斗。在亥，謂之朝天。凡人命宮在亥在丑者，遇之則主大貴而無疑也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      },
+      {
+        "source": "《格局2》",
+        "description": "火羅土計為四雄，在丑宮，謂之拱斗。在亥，謂之朝天。凡人命宮在亥在丑者，遇之則主大貴而無疑也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵",
+        "schoolId": "guolao"
+      },
+      {
+        "source": "《格局2》",
+        "description": "火羅土計為四雄，在丑宮，謂之拱斗。在亥，謂之朝天。凡人命宮在亥在丑者，遇之則主大貴而無疑也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵",
+        "schools": [
+          "guolao"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "geju2_3a7c3464",
+    "name": "诸星得位",
+    "variants": [
+      {
+        "source": "《格局2》",
+        "description": "如日行奎宿之度，月行婁宿之度，羅行翼宿之度，計行軫宿之度，孛行柳宿之度，氣行斗宿之度，謂之：得位而無所雜也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      },
+      {
+        "source": "《格局2》",
+        "description": "如日行奎宿之度，月行婁宿之度，羅行翼宿之度，計行軫宿之度，孛行柳宿之度，氣行斗宿之度，謂之：得位而無所雜也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵",
+        "schoolId": "guolao"
+      },
+      {
+        "source": "《格局2》",
+        "description": "如日行奎宿之度，月行婁宿之度，羅行翼宿之度，計行軫宿之度，孛行柳宿之度，氣行斗宿之度，謂之：得位而無所雜也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵",
+        "schools": [
+          "guolao"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "geju2_634534e3",
+    "name": "诸星得经",
+    "variants": [
+      {
+        "source": "《格局2》",
+        "description": "諸星各居本宿之度，如木角，金亢，金牛，木獬，土女日馬，月鹿，火虎，水蚓之類，得其所經之宿，謂之得經而不失，皆為貴也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "富"
+      },
+      {
+        "source": "《格局2》",
+        "description": "諸星各居本宿之度，如木角，金亢，金牛，木獬，土女日馬，月鹿，火虎，水蚓之類，得其所經之宿，謂之得經而不失，皆為貴也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "富",
+        "schoolId": "guolao"
+      },
+      {
+        "source": "《格局2》",
+        "description": "諸星各居本宿之度，如木角，金亢，金牛，木獬，土女日馬，月鹿，火虎，水蚓之類，得其所經之宿，謂之得經而不失，皆為貴也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "富",
+        "schools": [
+          "guolao"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "geju2_6b8788df",
+    "name": "主星朝君",
+    "variants": [
+      {
+        "source": "《格局2》",
+        "description": "主星，命主星也。君星者，太陽星也，為君，為父，為乾，為男，為陽，為剛。凡人命主星近而傍之，謂之朝君。皆為近貴之命也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      },
+      {
+        "source": "《格局2》",
+        "description": "主星，命主星也。君星者，太陽星也，為君，為父，為乾，為男，為陽，為剛。凡人命主星近而傍之，謂之朝君。皆為近貴之命也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵",
+        "schoolId": "guolao"
+      },
+      {
+        "source": "《格局2》",
+        "description": "主星，命主星也。君星者，太陽星也，為君，為父，為乾，為男，為陽，為剛。凡人命主星近而傍之，謂之朝君。皆為近貴之命也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵",
+        "schools": [
+          "guolao"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "geju2_96d8f9d3",
+    "name": "母依日月",
+    "variants": [
+      {
+        "source": "《格局2》",
+        "description": "母星者，生我之星也。如主星屬木，水為母星也。水能生木者，是也。若得近太陽太陰之傍，是謂：依日月之光而得富貴也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "富"
+      },
+      {
+        "source": "《格局2》",
+        "description": "母星者，生我之星也。如主星屬木，水為母星也。水能生木者，是也。若得近太陽太陰之傍，是謂：依日月之光而得富貴也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "富",
+        "schoolId": "guolao"
+      },
+      {
+        "source": "《格局2》",
+        "description": "母星者，生我之星也。如主星屬木，水為母星也。水能生木者，是也。若得近太陽太陰之傍，是謂：依日月之光而得富貴也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "富",
+        "schools": [
+          "guolao"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "geju2_6fbf07c9",
+    "name": "令主得助",
+    "variants": [
+      {
+        "source": "《格局2》",
+        "description": "令主星者，領君之命而行令者是也。如生年為君為命，月建為臣為令是也。命主逢恩而得助，猶木而得水，為恩富且貴。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      },
+      {
+        "source": "《格局2》",
+        "description": "令主星者，領君之命而行令者是也。如生年為君為命，月建為臣為令是也。命主逢恩而得助，猶木而得水，為恩富且貴。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵",
+        "schoolId": "guolao"
+      },
+      {
+        "source": "《格局2》",
+        "description": "令主星者，領君之命而行令者是也。如生年為君為命，月建為臣為令是也。命主逢恩而得助，猶木而得水，為恩富且貴。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵",
+        "schools": [
+          "guolao"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "geju2_c5c1d979",
+    "name": "天元得地",
+    "variants": [
+      {
+        "source": "《格局2》",
+        "description": "天元者，天干之辰也。如甲乙天元屬木，居寅卯辰高強之宮，謂之：得地。餘皆倣此。如命主身，主亦在高強，是為此論。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      },
+      {
+        "source": "《格局2》",
+        "description": "天元者，天干之辰也。如甲乙天元屬木，居寅卯辰高強之宮，謂之：得地。餘皆倣此。如命主身，主亦在高強，是為此論。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵",
+        "schoolId": "guolao"
+      },
+      {
+        "source": "《格局2》",
+        "description": "天元者，天干之辰也。如甲乙天元屬木，居寅卯辰高強之宮，謂之：得地。餘皆倣此。如命主身，主亦在高強，是為此論。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵",
+        "schools": [
+          "guolao"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "geju2_13b0f444",
+    "name": "朱雀衔符",
+    "variants": [
+      {
+        "source": "《格局2》",
+        "description": "朱雀者，南方丙丁火也。司夏令之神，丙丁生於夏三月，與日月同宮，謂之朱雀銜符。身命主屬火，更會此局，主大富貴也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "富"
+      },
+      {
+        "source": "《格局2》",
+        "description": "朱雀者，南方丙丁火也。司夏令之神，丙丁生於夏三月，與日月同宮，謂之朱雀銜符。身命主屬火，更會此局，主大富貴也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "富",
+        "schoolId": "guolao"
+      },
+      {
+        "source": "《格局2》",
+        "description": "朱雀者，南方丙丁火也。司夏令之神，丙丁生於夏三月，與日月同宮，謂之朱雀銜符。身命主屬火，更會此局，主大富貴也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "富",
+        "schools": [
+          "guolao"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "geju2_9a6d048a",
+    "name": "拱夹端门",
+    "variants": [
+      {
+        "source": "《格局2》",
+        "description": "端門者，午宮也。天子出入之門，故為尊極。若日月殿駕及身命二星三方，左右拱夾者，謂之拱夾。端門皆為貴人之命也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "嗣"
+      },
+      {
+        "source": "《格局2》",
+        "description": "端門者，午宮也。天子出入之門，故為尊極。若日月殿駕及身命二星三方，左右拱夾者，謂之拱夾。端門皆為貴人之命也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "嗣",
+        "schoolId": "guolao"
+      },
+      {
+        "source": "《格局2》",
+        "description": "端門者，午宮也。天子出入之門，故為尊極。若日月殿駕及身命二星三方，左右拱夾者，謂之拱夾。端門皆為貴人之命也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "嗣",
+        "schools": [
+          "guolao"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "geju2_3bd9768e",
+    "name": "金木水日会毕",
+    "variants": [
+      {
+        "source": "《格局2》",
+        "description": "金星，木星，水星，與太陽星同至畢星度下，主人聰明而且富貴也。畢星在酉宮，有六度，命主酉宮合之者，主有此也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "富"
+      },
+      {
+        "source": "《格局2》",
+        "description": "金星，木星，水星，與太陽星同至畢星度下，主人聰明而且富貴也。畢星在酉宮，有六度，命主酉宮合之者，主有此也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "富",
+        "schoolId": "guolao"
+      },
+      {
+        "source": "《格局2》",
+        "description": "金星，木星，水星，與太陽星同至畢星度下，主人聰明而且富貴也。畢星在酉宮，有六度，命主酉宮合之者，主有此也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "富",
+        "schools": [
+          "guolao"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "geju2_d22a3990",
+    "name": "五星并随日月",
+    "variants": [
+      {
+        "source": "《格局2》",
+        "description": "木火土金水，五星並與日月同一宮者，主大富貴也。或人命宮，身宮二主星亦得同之，富貴無疑，亦不被剋陷也，故吉。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "凶",
+        "geJuType": "富"
+      },
+      {
+        "source": "《格局2》",
+        "description": "木火土金水，五星並與日月同一宮者，主大富貴也。或人命宮，身宮二主星亦得同之，富貴無疑，亦不被剋陷也，故吉。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "凶",
+        "geJuType": "富",
+        "schoolId": "guolao"
+      },
+      {
+        "source": "《格局2》",
+        "description": "木火土金水，五星並與日月同一宮者，主大富貴也。或人命宮，身宮二主星亦得同之，富貴無疑，亦不被剋陷也，故吉。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "凶",
+        "geJuType": "富",
+        "schools": [
+          "guolao"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "geju2_4b355835",
+    "name": "火土昼逢",
+    "variants": [
+      {
+        "source": "《格局2》",
+        "description": "火土二星喜晝而不喜夜，喜明而不喜暗。明則顯，暗則隱。惟辰酉二宮甚利，更有辰酉二宮坐命者，謂之大貴大富之人也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "富"
+      },
+      {
+        "source": "《格局2》",
+        "description": "火土二星喜晝而不喜夜，喜明而不喜暗。明則顯，暗則隱。惟辰酉二宮甚利，更有辰酉二宮坐命者，謂之大貴大富之人也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "富",
+        "schoolId": "guolao"
+      },
+      {
+        "source": "《格局2》",
+        "description": "火土二星喜晝而不喜夜，喜明而不喜暗。明則顯，暗則隱。惟辰酉二宮甚利，更有辰酉二宮坐命者，謂之大貴大富之人也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "富",
+        "schools": [
+          "guolao"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "geju2_dc8a1580",
+    "name": "拱夹帝座",
+    "variants": [
+      {
+        "source": "《格局2》",
+        "description": "帝座者，時支也。若貴人祿馬，殿駕日月，身命福德，田財處前後一合，拱而夾之，俱主富貴。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      },
+      {
+        "source": "《格局2》",
+        "description": "帝座者，時支也。若貴人祿馬，殿駕日月，身命福德，田財處前後一合，拱而夾之，俱主富貴。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵",
+        "schoolId": "guolao"
+      },
+      {
+        "source": "《格局2》",
+        "description": "帝座者，時支也。若貴人祿馬，殿駕日月，身命福德，田財處前後一合，拱而夾之，俱主富貴。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵",
+        "schools": [
+          "guolao"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "geju2_14604490",
+    "name": "日月互垣",
+    "variants": [
+      {
+        "source": "《格局2》",
+        "description": "垣者，紫微帝星居之日月，左右互之命宮。遇此者，主上貴也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      },
+      {
+        "source": "《格局2》",
+        "description": "垣者，紫微帝星居之日月，左右互之命宮。遇此者，主上貴也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵",
+        "schoolId": "guolao"
+      },
+      {
+        "source": "《格局2》",
+        "description": "垣者，紫微帝星居之日月，左右互之命宮。遇此者，主上貴也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵",
+        "schools": [
+          "guolao"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "geju2_4b8f33c7",
+    "name": "天地通关",
+    "variants": [
+      {
+        "source": "《格局2》",
+        "description": "通關者，以子通卯，丑通寅，寅關丑，卯關子，辰關亥，巳關戌，午關酉，未關申，申關未，酉關午，戌關巳，亥關辰，子卯相通，丑寅相通，辰亥相通之類。如立命在子宮，通關在卯，若卯宮有祿及殿駕貴人文昌，天廚天月，...",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "凶",
+        "geJuType": "富"
+      },
+      {
+        "source": "《格局2》",
+        "description": "通關者，以子通卯，丑通寅，寅關丑，卯關子，辰關亥，巳關戌，午關酉，未關申，申關未，酉關午，戌關巳，亥關辰，子卯相通，丑寅相通，辰亥相通之類。如立命在子宮，通關在卯，若卯宮有祿及殿駕貴人文昌，天廚天月，...",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "凶",
+        "geJuType": "富",
+        "schoolId": "guolao"
+      },
+      {
+        "source": "《格局2》",
+        "description": "通關者，以子通卯，丑通寅，寅關丑，卯關子，辰關亥，巳關戌，午關酉，未關申，申關未，酉關午，戌關巳，亥關辰，子卯相通，丑寅相通，辰亥相通之類。如立命在子宮，通關在卯，若卯宮有祿及殿駕貴人文昌，天廚天月，...",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "凶",
+        "geJuType": "富",
+        "schools": [
+          "guolao"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "geju2_c3cafd3b",
+    "name": "水孛扶印",
+    "variants": [
+      {
+        "source": "《格局2》",
+        "description": "水孛二星同宮，在未宮，謂之水孛同秦。秦地分野在未孛廟，在未立命，逢之，若帶印星，謂之水孛扶印。印乃生我恩星也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      },
+      {
+        "source": "《格局2》",
+        "description": "水孛二星同宮，在未宮，謂之水孛同秦。秦地分野在未孛廟，在未立命，逢之，若帶印星，謂之水孛扶印。印乃生我恩星也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵",
+        "schoolId": "guolao"
+      },
+      {
+        "source": "《格局2》",
+        "description": "水孛二星同宮，在未宮，謂之水孛同秦。秦地分野在未孛廟，在未立命，逢之，若帶印星，謂之水孛扶印。印乃生我恩星也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵",
+        "schools": [
+          "guolao"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "geju2_9e57e646",
+    "name": "水孛助禄",
+    "variants": [
+      {
+        "source": "《格局2》",
+        "description": "祿者，祿神也。人命有之，主有天祿而食之。如甲生人，木孛二星為祿神，木既為祿，喜水生之，謂之助祿。舉一則知其他。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "福"
+      },
+      {
+        "source": "《格局2》",
+        "description": "祿者，祿神也。人命有之，主有天祿而食之。如甲生人，木孛二星為祿神，木既為祿，喜水生之，謂之助祿。舉一則知其他。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "福",
+        "schoolId": "guolao"
+      },
+      {
+        "source": "《格局2》",
+        "description": "祿者，祿神也。人命有之，主有天祿而食之。如甲生人，木孛二星為祿神，木既為祿，喜水生之，謂之助祿。舉一則知其他。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "福",
+        "schools": [
+          "guolao"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "geju2_c6d5f844",
+    "name": "福禄随官",
+    "variants": [
+      {
+        "source": "《格局2》",
+        "description": "福者，天福貴人也。如甲生人，甲愛金雞，乙愛猴酉，為福星是也。人命逢官星，更有福祿二星隨之，主富貴雙全而無忌也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "凶",
+        "geJuType": "贵"
+      },
+      {
+        "source": "《格局2》",
+        "description": "福者，天福貴人也。如甲生人，甲愛金雞，乙愛猴酉，為福星是也。人命逢官星，更有福祿二星隨之，主富貴雙全而無忌也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "凶",
+        "geJuType": "贵",
+        "schoolId": "guolao"
+      },
+      {
+        "source": "《格局2》",
+        "description": "福者，天福貴人也。如甲生人，甲愛金雞，乙愛猴酉，為福星是也。人命逢官星，更有福祿二星隨之，主富貴雙全而無忌也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "凶",
+        "geJuType": "贵",
+        "schools": [
+          "guolao"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "geju2_ea3d2177",
+    "name": "金水辅阴",
+    "variants": [
+      {
+        "source": "《格局2》",
+        "description": "陰言太陰星也。喜居申酉戌亥之地，更得金水輔之，則吉也。辰酉二宮，金之樂地。申巳二宮，水之樂地。遇太陰而輔是也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "富"
+      },
+      {
+        "source": "《格局2》",
+        "description": "陰言太陰星也。喜居申酉戌亥之地，更得金水輔之，則吉也。辰酉二宮，金之樂地。申巳二宮，水之樂地。遇太陰而輔是也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "富",
+        "schoolId": "guolao"
+      },
+      {
+        "source": "《格局2》",
+        "description": "陰言太陰星也。喜居申酉戌亥之地，更得金水輔之，則吉也。辰酉二宮，金之樂地。申巳二宮，水之樂地。遇太陰而輔是也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "富",
+        "schools": [
+          "guolao"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "geju2_3ca57d5f",
+    "name": "火金逢月",
+    "variants": [
+      {
+        "source": "《格局2》",
+        "description": "火金二星與太陰星宮又同度，謂之火金逢月。人命宮得太陰守命，又遇火金，此作貴推之也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "富"
+      },
+      {
+        "source": "《格局2》",
+        "description": "火金二星與太陰星宮又同度，謂之火金逢月。人命宮得太陰守命，又遇火金，此作貴推之也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "富",
+        "schoolId": "guolao"
+      },
+      {
+        "source": "《格局2》",
+        "description": "火金二星與太陰星宮又同度，謂之火金逢月。人命宮得太陰守命，又遇火金，此作貴推之也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "富",
+        "schools": [
+          "guolao"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "geju2_de2e3e84",
+    "name": "金土富豪",
+    "variants": [
+      {
+        "source": "《格局2》",
+        "description": "金星若在財帛宮，土星在田宅宮，主人富豪。但人命主合之，皆為富貴之命也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "富"
+      },
+      {
+        "source": "《格局2》",
+        "description": "金星若在財帛宮，土星在田宅宮，主人富豪。但人命主合之，皆為富貴之命也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "富",
+        "schoolId": "guolao"
+      },
+      {
+        "source": "《格局2》",
+        "description": "金星若在財帛宮，土星在田宅宮，主人富豪。但人命主合之，皆為富貴之命也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "富",
+        "schools": [
+          "guolao"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "geju2_001fdbe8",
+    "name": "身命逢官",
+    "variants": [
+      {
+        "source": "《格局2》",
+        "description": "身主，命主二星若臨官貴之宮，皆主大貴。若在本命宮或對宮守臨照拱，皆為貴也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      },
+      {
+        "source": "《格局2》",
+        "description": "身主，命主二星若臨官貴之宮，皆主大貴。若在本命宮或對宮守臨照拱，皆為貴也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵",
+        "schoolId": "guolao"
+      },
+      {
+        "source": "《格局2》",
+        "description": "身主，命主二星若臨官貴之宮，皆主大貴。若在本命宮或對宮守臨照拱，皆為貴也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵",
+        "schools": [
+          "guolao"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "geju2_ee80cdd4",
+    "name": "逢生坐实",
+    "variants": [
+      {
+        "source": "《格局2》",
+        "description": "子，寅，辰，午，申，戌六位屬陽，為之實地。丑，卯，巳，未，酉，亥六位屬陰，為之虛地。經曰：逢生坐實占高強，名利兩榮昌。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "嗣"
+      },
+      {
+        "source": "《格局2》",
+        "description": "子，寅，辰，午，申，戌六位屬陽，為之實地。丑，卯，巳，未，酉，亥六位屬陰，為之虛地。經曰：逢生坐實占高強，名利兩榮昌。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "嗣",
+        "schoolId": "guolao"
+      },
+      {
+        "source": "《格局2》",
+        "description": "子，寅，辰，午，申，戌六位屬陽，為之實地。丑，卯，巳，未，酉，亥六位屬陰，為之虛地。經曰：逢生坐實占高強，名利兩榮昌。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "嗣",
+        "schools": [
+          "guolao"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "geju2_8abcd786",
+    "name": "官禄守籍",
+    "variants": [
+      {
+        "source": "《格局2》",
+        "description": "如子宮立命，歲殿登籍在子，更得官祿二星守之，是為此格。且官祿二星人人得而喜之，只要在高強無剋制者，方貴。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "凶",
+        "geJuType": "贵"
+      },
+      {
+        "source": "《格局2》",
+        "description": "如子宮立命，歲殿登籍在子，更得官祿二星守之，是為此格。且官祿二星人人得而喜之，只要在高強無剋制者，方貴。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "凶",
+        "geJuType": "贵",
+        "schoolId": "guolao"
+      },
+      {
+        "source": "《格局2》",
+        "description": "如子宮立命，歲殿登籍在子，更得官祿二星守之，是為此格。且官祿二星人人得而喜之，只要在高強無剋制者，方貴。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "凶",
+        "geJuType": "贵",
+        "schools": [
+          "guolao"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "geju2_493abbbc",
+    "name": "火气官高",
+    "variants": [
+      {
+        "source": "《格局2》",
+        "description": "氣者，木氣也，逢火星，木又生之，是為得助。官星得之，豈不為貴乎。故謂之火氣官高。身命二主逢之，拱夾照臨，皆為清貴。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      },
+      {
+        "source": "《格局2》",
+        "description": "氣者，木氣也，逢火星，木又生之，是為得助。官星得之，豈不為貴乎。故謂之火氣官高。身命二主逢之，拱夾照臨，皆為清貴。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵",
+        "schoolId": "guolao"
+      },
+      {
+        "source": "《格局2》",
+        "description": "氣者，木氣也，逢火星，木又生之，是為得助。官星得之，豈不為貴乎。故謂之火氣官高。身命二主逢之，拱夾照臨，皆為清貴。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵",
+        "schools": [
+          "guolao"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "geju2_98d7717b",
+    "name": "月挂柳梢",
+    "variants": [
+      {
+        "source": "《格局2》",
+        "description": "月，太陰星也。如太陰行度在未宮躔柳度，謂之月掛柳梢是也。但人身命二主亦在未宮，或立命在未宮，方斷有此貴也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      },
+      {
+        "source": "《格局2》",
+        "description": "月，太陰星也。如太陰行度在未宮躔柳度，謂之月掛柳梢是也。但人身命二主亦在未宮，或立命在未宮，方斷有此貴也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵",
+        "schoolId": "guolao"
+      },
+      {
+        "source": "《格局2》",
+        "description": "月，太陰星也。如太陰行度在未宮躔柳度，謂之月掛柳梢是也。但人身命二主亦在未宮，或立命在未宮，方斷有此貴也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵",
+        "schools": [
+          "guolao"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "geju2_df5db0d8",
+    "name": "孛挂朱衣",
+    "variants": [
+      {
+        "source": "《格局2》",
+        "description": "孛者，月之餘氣也。此星十二宮皆為禍，惟至亥宮，過天門，不敢為禍。謂之十二宮中皆脫裸，卻來亥上著朱衣。亥命，主貴。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      },
+      {
+        "source": "《格局2》",
+        "description": "孛者，月之餘氣也。此星十二宮皆為禍，惟至亥宮，過天門，不敢為禍。謂之十二宮中皆脫裸，卻來亥上著朱衣。亥命，主貴。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵",
+        "schoolId": "guolao"
+      },
+      {
+        "source": "《格局2》",
+        "description": "孛者，月之餘氣也。此星十二宮皆為禍，惟至亥宮，過天門，不敢為禍。謂之十二宮中皆脫裸，卻來亥上著朱衣。亥命，主貴。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵",
+        "schools": [
+          "guolao"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "geju2_4a7d55cc",
+    "name": "命坐玉堂",
+    "variants": [
+      {
+        "source": "《格局2》",
+        "description": "玉堂，二星名，左為玉，右為堂。如甲生人以丑未為玉堂，且立命在丑未二宮，謂之命坐玉堂。主人極貴，近君王之命也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      },
+      {
+        "source": "《格局2》",
+        "description": "玉堂，二星名，左為玉，右為堂。如甲生人以丑未為玉堂，且立命在丑未二宮，謂之命坐玉堂。主人極貴，近君王之命也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵",
+        "schoolId": "guolao"
+      },
+      {
+        "source": "《格局2》",
+        "description": "玉堂，二星名，左為玉，右為堂。如甲生人以丑未為玉堂，且立命在丑未二宮，謂之命坐玉堂。主人極貴，近君王之命也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵",
+        "schools": [
+          "guolao"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "geju2_1b317504",
+    "name": "文昌照命",
+    "variants": [
+      {
+        "source": "《格局2》",
+        "description": "文昌者，南斗之辰。人命逢之，主有才學過人。如甲生人，文昌在巳亥宮，立命者巳亥相照，謂之照命。餘皆並此而取貴也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      },
+      {
+        "source": "《格局2》",
+        "description": "文昌者，南斗之辰。人命逢之，主有才學過人。如甲生人，文昌在巳亥宮，立命者巳亥相照，謂之照命。餘皆並此而取貴也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵",
+        "schoolId": "guolao"
+      },
+      {
+        "source": "《格局2》",
+        "description": "文昌者，南斗之辰。人命逢之，主有才學過人。如甲生人，文昌在巳亥宮，立命者巳亥相照，謂之照命。餘皆並此而取貴也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵",
+        "schools": [
+          "guolao"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "geju2_d47d976c",
+    "name": "三台辅命",
+    "variants": [
+      {
+        "source": "《格局2》",
+        "description": "三台者，帝垣之星也。如子生人，辰為三台，戌為帝座，凡人立命在辰戌二宮者，拱臨守照，皆為吉貴也。此吉不忌剋陷。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "凶",
+        "geJuType": "贵"
+      },
+      {
+        "source": "《格局2》",
+        "description": "三台者，帝垣之星也。如子生人，辰為三台，戌為帝座，凡人立命在辰戌二宮者，拱臨守照，皆為吉貴也。此吉不忌剋陷。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "凶",
+        "geJuType": "贵",
+        "schoolId": "guolao"
+      },
+      {
+        "source": "《格局2》",
+        "description": "三台者，帝垣之星也。如子生人，辰為三台，戌為帝座，凡人立命在辰戌二宮者，拱臨守照，皆為吉貴也。此吉不忌剋陷。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "凶",
+        "geJuType": "贵",
+        "schools": [
+          "guolao"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "geju2_e8667bef",
+    "name": "禄勋坐命",
+    "variants": [
+      {
+        "source": "《格局2》",
+        "description": "祿勳者，如甲生人，以火為祿，寅為勳。如寅宮立命，又見火星入命者，謂之祿勳坐命。主食天子賜爵，其餘依流年推之，取貴。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      },
+      {
+        "source": "《格局2》",
+        "description": "祿勳者，如甲生人，以火為祿，寅為勳。如寅宮立命，又見火星入命者，謂之祿勳坐命。主食天子賜爵，其餘依流年推之，取貴。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵",
+        "schoolId": "guolao"
+      },
+      {
+        "source": "《格局2》",
+        "description": "祿勳者，如甲生人，以火為祿，寅為勳。如寅宮立命，又見火星入命者，謂之祿勳坐命。主食天子賜爵，其餘依流年推之，取貴。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵",
+        "schools": [
+          "guolao"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "geju2_586d637f",
+    "name": "日帝居阳",
+    "variants": [
+      {
+        "source": "《格局2》",
+        "description": "日者，太陽君主星也。正居，午宮諸星不敢犯之，惟忌木氣掩之而已。人命立午宮者逢之，主大貴。只恐主孤而無子也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "凶",
+        "geJuType": "贵"
+      },
+      {
+        "source": "《格局2》",
+        "description": "日者，太陽君主星也。正居，午宮諸星不敢犯之，惟忌木氣掩之而已。人命立午宮者逢之，主大貴。只恐主孤而無子也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "凶",
+        "geJuType": "贵",
+        "schoolId": "guolao"
+      },
+      {
+        "source": "《格局2》",
+        "description": "日者，太陽君主星也。正居，午宮諸星不敢犯之，惟忌木氣掩之而已。人命立午宮者逢之，主大貴。只恐主孤而無子也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "凶",
+        "geJuType": "贵",
+        "schools": [
+          "guolao"
+        ]
+      }
+    ]
+  }
+]

@@ -1,11 +1,13 @@
 import 'package:common/enums.dart';
 import 'package:flutter/material.dart';
+import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_annotation.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_rule.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju_model.dart';
 
 /// 格局列表项组件
 class GeJuListTile extends StatelessWidget {
   final GeJuRule rule;
+  final GeJuAnnotation? annotation;
   final bool isBuiltIn;
   final VoidCallback? onTap;
   final VoidCallback? onDelete;
@@ -14,6 +16,7 @@ class GeJuListTile extends StatelessWidget {
   const GeJuListTile({
     super.key,
     required this.rule,
+    this.annotation,
     required this.isBuiltIn,
     this.onTap,
     this.onDelete,
@@ -22,6 +25,12 @@ class GeJuListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final jiXiong = annotation?.jiXiong ?? JiXiongEnum.PING;
+    final geJuType = annotation?.geJuType ?? GeJuType.pin;
+    final className = annotation?.className ?? '未分类';
+    final description = annotation?.description ?? '';
+    final source = annotation?.source?.bookName ?? '';
+
     return ListTile(
       onTap: onTap,
       leading: Icon(
@@ -39,9 +48,9 @@ class GeJuListTile extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 8),
-          _buildJiXiongChip(),
+          _buildJiXiongChip(jiXiong),
           const SizedBox(width: 4),
-          _buildTypeChip(),
+          _buildTypeChip(geJuType),
         ],
       ),
       subtitle: Column(
@@ -50,12 +59,12 @@ class GeJuListTile extends StatelessWidget {
           const SizedBox(height: 4),
           Row(
             children: [
-              _buildCategoryChip(),
-              if (rule.source.isNotEmpty) ...[
+              _buildCategoryChip(className),
+              if (source.isNotEmpty) ...[
                 const SizedBox(width: 8),
                 Expanded(
                   child: Text(
-                    rule.source,
+                    source,
                     style: TextStyle(
                       fontSize: 11,
                       color: Colors.grey.shade600,
@@ -69,7 +78,7 @@ class GeJuListTile extends StatelessWidget {
           ),
           const SizedBox(height: 4),
           Text(
-            rule.description.isEmpty ? '(无描述)' : rule.description,
+            description.isEmpty ? '(无描述)' : description,
             style: TextStyle(
               fontSize: 12,
               color: Colors.grey.shade700,
@@ -119,10 +128,10 @@ class GeJuListTile extends StatelessWidget {
     );
   }
 
-  Widget _buildJiXiongChip() {
+  Widget _buildJiXiongChip(JiXiongEnum jiXiong) {
     Color color;
     String label;
-    switch (rule.jiXiong) {
+    switch (jiXiong) {
       case JiXiongEnum.DA_JI:
         color = Colors.green;
         label = '大吉';
@@ -170,8 +179,8 @@ class GeJuListTile extends StatelessWidget {
     );
   }
 
-  Widget _buildTypeChip() {
-    String label = _getGeJuTypeLabel(rule.geJuType);
+  Widget _buildTypeChip(GeJuType geJuType) {
+    String label = _getGeJuTypeLabel(geJuType);
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
       decoration: BoxDecoration(
@@ -190,7 +199,7 @@ class GeJuListTile extends StatelessWidget {
     );
   }
 
-  Widget _buildCategoryChip() {
+  Widget _buildCategoryChip(String className) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
       decoration: BoxDecoration(
@@ -198,7 +207,7 @@ class GeJuListTile extends StatelessWidget {
         borderRadius: BorderRadius.circular(4),
       ),
       child: Text(
-        rule.className,
+        className,
         style: TextStyle(fontSize: 10, color: Colors.blue.shade700),
       ),
     );

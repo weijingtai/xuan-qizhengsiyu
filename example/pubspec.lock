@@ -212,7 +212,7 @@ packages:
   common:
     dependency: "direct main"
     description:
-      path: "../../common"
+      path: "../../xuan-common"
       relative: true
     source: path
     version: "1.0.0+1"

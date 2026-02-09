@@ -1,0 +1,2549 @@
+[
+  {
+    "id": "mu_001_ri_bian_hong_xing",
+    "name": "日边红杏",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "sameGong",
+              "stars": [
+                "Jupiter",
+                "Sun"
+              ]
+            },
+            {
+              "type": "or",
+              "conditions": [
+                {
+                  "type": "starIsSiZhu",
+                  "star": "Jupiter",
+                  "roles": [
+                    "lifeGongMaster",
+                    "lifeConstellationMaster"
+                  ]
+                },
+                {
+                  "type": "starFourType",
+                  "star": "Jupiter",
+                  "target": "Jupiter",
+                  "types": [
+                    "En"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_002_xue_ya_han_mei",
+    "name": "雪压寒梅",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "sameGong",
+              "stars": [
+                "Jupiter",
+                "Mercury"
+              ]
+            },
+            {
+              "type": "isDayBirth",
+              "isDay": false
+            },
+            {
+              "type": "seasonIs",
+              "seasons": [
+                "WINTER"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_003_qi_cha_han_mei",
+    "name": "齐插寒梅",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "lifeGongAt",
+              "gongs": [
+                "Zi"
+              ]
+            },
+            {
+              "type": "starGuardLife",
+              "star": "Jupiter"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_004_xiang_yang_hua_mu",
+    "name": "向阳花木",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "sameGong",
+              "stars": [
+                "Jupiter",
+                "Sun"
+              ]
+            },
+            {
+              "type": "isDayBirth",
+              "isDay": true
+            },
+            {
+              "type": "seasonIs",
+              "seasons": [
+                "SPRING",
+                "SUMMER"
+              ]
+            },
+            {
+              "type": "not",
+              "condition": {
+                "type": "starWalkingState",
+                "star": "Jupiter",
+                "states": [
+                  "Retrograde"
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_005_zhao_shui_mei_hua",
+    "name": "照水梅花",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "starInGong",
+              "star": "Jupiter",
+              "gongs": [
+                "Si",
+                "Shen"
+              ]
+            },
+            {
+              "type": "seasonIs",
+              "seasons": [
+                "WINTER"
+              ]
+            },
+            {
+              "type": "isDayBirth",
+              "isDay": true
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_006_chun_sheng_yang_liu",
+    "name": "春生杨柳",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "seasonIs",
+              "seasons": [
+                "SPRING"
+              ]
+            },
+            {
+              "type": "starInConstellation",
+              "star": "Jupiter",
+              "constellations": [
+                "箕"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_007_qiu_ri_wu_tong",
+    "name": "秋日梧桐",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "seasonIs",
+              "seasons": [
+                "AUTUMN"
+              ]
+            },
+            {
+              "type": "starWithShenSha",
+              "star": "Jupiter",
+              "shenShaNames": [
+                "孤辰",
+                "寡宿",
+                "羊刃"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_008_yue_zhong_xian_gui",
+    "name": "月中仙桂",
+    "variants": [
+      {
+        "conditions": {
+          "type": "or",
+          "conditions": [
+            {
+              "type": "starInConstellation",
+              "star": "Jupiter",
+              "constellations": [
+                "心",
+                "张",
+                "危",
+                "毕"
+              ]
+            },
+            {
+              "type": "and",
+              "conditions": [
+                {
+                  "type": "seasonIs",
+                  "seasons": [
+                    "AUTUMN"
+                  ]
+                },
+                {
+                  "type": "sameGong",
+                  "stars": [
+                    "Jupiter",
+                    "Moon"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_009_ri_shai_hua_zhi",
+    "name": "日晒花枝",
+    "variants": [
+      {
+        "conditions": {
+          "type": "or",
+          "conditions": [
+            {
+              "type": "starInConstellation",
+              "star": "Jupiter",
+              "constellations": [
+                "星",
+                "虚",
+                "房",
+                "昴"
+              ]
+            },
+            {
+              "type": "and",
+              "conditions": [
+                {
+                  "type": "seasonIs",
+                  "seasons": [
+                    "SPRING"
+                  ]
+                },
+                {
+                  "type": "sameGong",
+                  "stars": [
+                    "Jupiter",
+                    "Sun"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_010_mei_shao_heng_yue",
+    "name": "梅梢横月",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "sameGong",
+              "stars": [
+                "Jupiter",
+                "Moon"
+              ]
+            },
+            {
+              "type": "starInGong",
+              "star": "Jupiter",
+              "gongs": [
+                "Zi"
+              ]
+            },
+            {
+              "type": "seasonIs",
+              "seasons": [
+                "AUTUMN",
+                "WINTER"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_011_liu_xu_sui_feng",
+    "name": "柳絮随风",
+    "variants": [
+      {
+        "conditions": {
+          "type": "or",
+          "conditions": [
+            {
+              "type": "starInConstellation",
+              "star": "Jupiter",
+              "constellations": [
+                "箕"
+              ]
+            },
+            {
+              "type": "starInGong",
+              "star": "Jupiter",
+              "gongs": [
+                "Si"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_012_yu_zhou_hua_can",
+    "name": "雨骤花残",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "seasonIs",
+              "seasons": [
+                "SPRING"
+              ]
+            },
+            {
+              "type": "starInConstellation",
+              "star": "Jupiter",
+              "constellations": [
+                "毕"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_013_feng_yao_ye_luo",
+    "name": "风摇叶落",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "seasonIs",
+              "seasons": [
+                "AUTUMN"
+              ]
+            },
+            {
+              "type": "starInConstellation",
+              "star": "Jupiter",
+              "constellations": [
+                "箕"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_014_an_che_pu_lun",
+    "name": "安车蒲轮",
+    "variants": [
+      {
+        "conditions": null
+      }
+    ]
+  },
+  {
+    "id": "mu_015_mei_ying_heng_chuang",
+    "name": "梅影横窗",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "sameConstellation",
+              "stars": [
+                "Jupiter",
+                "Moon"
+              ]
+            },
+            {
+              "type": "starInConstellation",
+              "star": "Jupiter",
+              "constellations": [
+                "壁"
+              ]
+            },
+            {
+              "type": "seasonIs",
+              "seasons": [
+                "WINTER"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_016_tao_hua_lang_nuan",
+    "name": "桃花浪暖",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "sameGong",
+              "stars": [
+                "Jupiter",
+                "Mercury"
+              ]
+            },
+            {
+              "type": "starInConstellation",
+              "star": "Jupiter",
+              "constellations": [
+                "奎"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_017_hua_li_ting_can",
+    "name": "花里停骖",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "sameGong",
+              "stars": [
+                "Jupiter",
+                "Moon"
+              ]
+            },
+            {
+              "type": "starInConstellation",
+              "star": "Jupiter",
+              "constellations": [
+                "张",
+                "心",
+                "危",
+                "毕"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_018_dan_gui_piao_xiang",
+    "name": "丹桂飘香",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "seasonIs",
+              "seasons": [
+                "AUTUMN"
+              ]
+            },
+            {
+              "type": "starInGong",
+              "star": "Jupiter",
+              "gongs": [
+                "Si"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_019_li_hua_dai_yu",
+    "name": "梨花带雨",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "seasonIs",
+              "seasons": [
+                "SPRING"
+              ]
+            },
+            {
+              "type": "or",
+              "conditions": [
+                {
+                  "type": "starInGong",
+                  "star": "Jupiter",
+                  "gongs": [
+                    "You",
+                    "Shen"
+                  ]
+                },
+                {
+                  "type": "starInConstellation",
+                  "star": "Jupiter",
+                  "constellations": [
+                    "毕"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_020_nan_zhi_xiang_nuan",
+    "name": "南枝向暖",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "seasonIs",
+              "seasons": [
+                "WINTER"
+              ]
+            },
+            {
+              "type": "starInGong",
+              "star": "Jupiter",
+              "gongs": [
+                "Wu"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_021_san_tai_he_ge",
+    "name": "三台合格",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "starInGong",
+              "star": "Jupiter",
+              "gongs": [
+                "Wu"
+              ]
+            },
+            {
+              "type": "seasonIs",
+              "seasons": [
+                "SPRING",
+                "SUMMER"
+              ]
+            },
+            {
+              "type": "or",
+              "conditions": [
+                {
+                  "type": "starInGong",
+                  "star": "Venus",
+                  "gongs": [
+                    "Si",
+                    "Wei"
+                  ]
+                },
+                {
+                  "type": "starInGong",
+                  "star": "Mercury",
+                  "gongs": [
+                    "Si",
+                    "Wei"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_022_mu_qi_fu_shen",
+    "name": "木气扶身",
+    "variants": [
+      {
+        "conditions": {
+          "type": "sameGong",
+          "stars": [
+            "Jupiter",
+            "Qi",
+            "Moon"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_023_mu_qi_jia_ming",
+    "name": "木气夹命",
+    "variants": [
+      {
+        "conditions": null
+      }
+    ]
+  },
+  {
+    "id": "mu_024_mu_qi_guan_ming",
+    "name": "木气贯命",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "starGuardLife",
+              "star": "Jupiter"
+            },
+            {
+              "type": "starGuardLife",
+              "star": "Qi"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_025_mu_xing_zhao_lin",
+    "name": "木星照临",
+    "variants": [
+      {
+        "conditions": {
+          "type": "starGuardLife",
+          "star": "Jupiter"
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_026_mu_lin_zhen_yuan",
+    "name": "木临真垣",
+    "variants": [
+      {
+        "conditions": {
+          "type": "starInGong",
+          "star": "Jupiter",
+          "gongs": [
+            "Yin",
+            "Hai"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_027_sun_ji_ji_ren",
+    "name": "损己济人",
+    "variants": [
+      {
+        "conditions": {
+          "type": "sameGong",
+          "stars": [
+            "Jupiter",
+            "Qi"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_028_mu_ru_qin_zhou",
+    "name": "木入秦州",
+    "variants": [
+      {
+        "conditions": {
+          "type": "starInGong",
+          "star": "Jupiter",
+          "gongs": [
+            "Wei"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_029_sui_ju_xie_gui",
+    "name": "岁居蟹鬼",
+    "variants": [
+      {
+        "conditions": {
+          "type": "starInGong",
+          "star": "Jupiter",
+          "gongs": [
+            "Wei"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_030_shui_mu_chong_lin",
+    "name": "水木重临",
+    "variants": [
+      {
+        "conditions": {
+          "type": "sameGong",
+          "stars": [
+            "Jupiter",
+            "Mercury"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_031_mu_xian_kan_wei",
+    "name": "木嫌坎位",
+    "variants": [
+      {
+        "conditions": {
+          "type": "starInGong",
+          "star": "Jupiter",
+          "gongs": [
+            "Zi"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_032_mu_da_bao_ping",
+    "name": "木打宝瓶",
+    "variants": [
+      {
+        "conditions": {
+          "type": "starInGong",
+          "star": "Jupiter",
+          "gongs": [
+            "Zi"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_033_mu_luo_dong_jing",
+    "name": "木罗东井",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "sameGong",
+              "stars": [
+                "Jupiter",
+                "Luo"
+              ]
+            },
+            {
+              "type": "starInConstellation",
+              "star": "Jupiter",
+              "constellations": [
+                "井"
+              ]
+            },
+            {
+              "type": "starInGong",
+              "star": "Jupiter",
+              "gongs": [
+                "Wei"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_034_mu_zheng_dong_fang",
+    "name": "木正东方",
+    "variants": [
+      {
+        "conditions": {
+          "type": "starInGong",
+          "star": "Jupiter",
+          "gongs": [
+            "Mao"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_035_mu_yang_zhao_qian",
+    "name": "木阳照迁",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "sameGong",
+              "stars": [
+                "Jupiter",
+                "Sun"
+              ]
+            },
+            {
+              "type": "starInDestinyGong",
+              "star": "Jupiter",
+              "destinyGong": "QianYi"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_036_mu_de_lin_yuan",
+    "name": "木德临垣",
+    "variants": [
+      {
+        "conditions": {
+          "type": "starInGong",
+          "star": "Jupiter",
+          "gongs": [
+            "Yin",
+            "Hai"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_037_nv_chan_mu_xian",
+    "name": "女缠木限",
+    "variants": [
+      {
+        "conditions": {
+          "type": "xianMeetStar",
+          "stars": [
+            "Jupiter"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_038_tu_mu_xi_zheng",
+    "name": "土木息争",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "sameGong",
+              "stars": [
+                "Jupiter",
+                "Saturn"
+              ]
+            },
+            {
+              "type": "starInGong",
+              "star": "Jupiter",
+              "gongs": [
+                "Yin"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_039_mu_bu_nan_ben",
+    "name": "木不南奔",
+    "variants": [
+      {
+        "conditions": {
+          "type": "starInGong",
+          "star": "Jupiter",
+          "gongs": [
+            "Wu"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_040_mu_luo_hui_she",
+    "name": "木罗会舍",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "sameGong",
+              "stars": [
+                "Jupiter",
+                "Luo"
+              ]
+            },
+            {
+              "type": "starInGong",
+              "star": "Jupiter",
+              "gongs": [
+                "Yin"
+              ]
+            }
+          ]
+        }
+      },
+      {},
+      {},
+      {}
+    ]
+  },
+  {
+    "id": "mu_041_shui_fan_mu_piao",
+    "name": "水泛木漂",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "sameGong",
+              "stars": [
+                "Jupiter",
+                "Venus"
+              ]
+            },
+            {
+              "type": "seasonIs",
+              "seasons": [
+                "SUMMER"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_042_han_mu_xiang_yang",
+    "name": "寒木向阳",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "sameGong",
+              "stars": [
+                "Jupiter",
+                "Sun"
+              ]
+            },
+            {
+              "type": "seasonIs",
+              "seasons": [
+                "WINTER",
+                "SPRING"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_043_qiu_shui_nan_zi",
+    "name": "秋水难滋",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "sameGong",
+              "stars": [
+                "Jupiter",
+                "Mercury"
+              ]
+            },
+            {
+              "type": "seasonIs",
+              "seasons": [
+                "AUTUMN"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_044_mu_tu_xiang_an",
+    "name": "木土相安",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "lifeGongAt",
+              "gongs": [
+                "Zi"
+              ]
+            },
+            {
+              "type": "starInGong",
+              "star": "Saturn",
+              "gongs": [
+                "Zi"
+              ]
+            },
+            {
+              "type": "starInGong",
+              "star": "Jupiter",
+              "gongs": [
+                "Wu"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_045_lin_quan_gao_zhi",
+    "name": "林泉高致",
+    "variants": [
+      {
+        "conditions": {
+          "type": "sameGong",
+          "stars": [
+            "Moon",
+            "Jupiter",
+            "Qi"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_046_mu_qi_fan_yue",
+    "name": "木气犯月",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "lifeGongAt",
+              "gongs": [
+                "Wu"
+              ]
+            },
+            {
+              "type": "sameGong",
+              "stars": [
+                "Jupiter",
+                "Qi",
+                "Moon"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_047_yi_xing_ban_yue",
+    "name": "一星伴月",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "lifeGongAt",
+              "gongs": [
+                "Wei"
+              ]
+            },
+            {
+              "type": "sameGong",
+              "stars": [
+                "Jupiter",
+                "Moon"
+              ]
+            },
+            {
+              "type": "starInConstellation",
+              "star": "Jupiter",
+              "constellations": [
+                "井"
+              ]
+            }
+          ]
+        }
+      },
+      {},
+      {},
+      {}
+    ]
+  },
+  {
+    "id": "mu_048_tian_di_kai_ming",
+    "name": "天地开明",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "starInGong",
+              "star": "Mercury",
+              "gongs": [
+                "Shen"
+              ]
+            },
+            {
+              "type": "starInGong",
+              "star": "Jupiter",
+              "gongs": [
+                "Hai"
+              ]
+            },
+            {
+              "type": "lifeGongAt",
+              "gongs": [
+                "Shen",
+                "Hai"
+              ]
+            },
+            {
+              "type": "and",
+              "conditions": [
+                {
+                  "type": "starInGong",
+                  "star": "Luo",
+                  "gongs": [
+                    "Zi",
+                    "Wu"
+                  ]
+                },
+                {
+                  "type": "starInGong",
+                  "star": "Ji",
+                  "gongs": [
+                    "Zi",
+                    "Wu"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_049_shan_ze_tong_qi",
+    "name": "山泽通气",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "starInGong",
+              "star": "Jupiter",
+              "gongs": [
+                "Chou"
+              ]
+            },
+            {
+              "type": "starInGong",
+              "star": "Venus",
+              "gongs": [
+                "You"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_050_shan_ze_chen_mai",
+    "name": "山泽沉埋",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "starInGong",
+              "star": "Venus",
+              "gongs": [
+                "Yin"
+              ]
+            },
+            {
+              "type": "starInGong",
+              "star": "Jupiter",
+              "gongs": [
+                "You"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_051_jie_mu_xing_zai",
+    "name": "劫木兴灾",
+    "variants": [
+      {
+        "conditions": {
+          "type": "starInGong",
+          "star": "Jupiter",
+          "gongs": [
+            "Yin",
+            "Hai"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_052_long_hu_feng_yun_hui",
+    "name": "龙虎风云会",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "lifeGongAt",
+              "gongs": [
+                "Mao"
+              ]
+            },
+            {
+              "type": "starInGong",
+              "star": "Jupiter",
+              "gongs": [
+                "Yin",
+                "Chen"
+              ]
+            },
+            {
+              "type": "starInGong",
+              "star": "Venus",
+              "gongs": [
+                "Yin",
+                "Chen"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_053_mu_xing_sheng_dian",
+    "name": "木星升殿",
+    "variants": [
+      {
+        "conditions": {
+          "type": "starInConstellation",
+          "star": "Jupiter",
+          "constellations": [
+            "角",
+            "斗",
+            "奎",
+            "井"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_054_mu_yue_qing_gui",
+    "name": "木月清贵",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "sameGong",
+              "stars": [
+                "Jupiter",
+                "Moon"
+              ]
+            },
+            {
+              "type": "isDayBirth",
+              "isDay": false
+            },
+            {
+              "type": "moonPhaseIs",
+              "phases": [
+                "Shang_Xian",
+                "Full",
+                "Xia_Xian"
+              ]
+            }
+          ]
+        }
+      },
+      {},
+      {},
+      {}
+    ]
+  },
+  {
+    "id": "mu_055_mu_huo_wen_ming",
+    "name": "木火文明",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "sameGong",
+              "stars": [
+                "Jupiter",
+                "Mars"
+              ]
+            },
+            {
+              "type": "seasonIs",
+              "seasons": [
+                "WINTER",
+                "SPRING"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_056_qing_long_fu_yan",
+    "name": "青龙扶砚",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "monthIs",
+              "months": [
+                "Yin",
+                "Mao"
+              ]
+            },
+            {
+              "type": "sameGong",
+              "stars": [
+                "Jupiter",
+                "Sun"
+              ]
+            }
+          ]
+        }
+      },
+      {},
+      {},
+      {}
+    ]
+  },
+  {
+    "id": "mu_057_mu_ru_jin_xiang",
+    "name": "木入金乡",
+    "variants": [
+      {
+        "conditions": {
+          "type": "starInGong",
+          "star": "Jupiter",
+          "gongs": [
+            "Chen",
+            "You"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_058_mu_ru_tu_shi",
+    "name": "木入土室",
+    "variants": [
+      {
+        "conditions": {
+          "type": "starInGong",
+          "star": "Jupiter",
+          "gongs": [
+            "Zi",
+            "Chou"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_059_mu_tu_xiang_ke",
+    "name": "木土相剋",
+    "variants": [
+      {
+        "conditions": {
+          "type": "sameGong",
+          "stars": [
+            "Jupiter",
+            "Saturn"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_060_mu_bei_fu_yin",
+    "name": "木孛符印",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "sameGong",
+              "stars": [
+                "Jupiter",
+                "Bei"
+              ]
+            },
+            {
+              "type": "starGongStatus",
+              "star": "Jupiter",
+              "statuses": [
+                "Miao",
+                "Wang"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_061_mu_bi_yang_guang",
+    "name": "木蔽阳光",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "isDayBirth",
+              "isDay": true
+            },
+            {
+              "type": "sameGong",
+              "stars": [
+                "Jupiter",
+                "Sun"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_062_mu_qi_lian_zhi",
+    "name": "木气联枝",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "sameGong",
+              "stars": [
+                "Jupiter",
+                "Qi",
+                "Bei"
+              ]
+            },
+            {
+              "type": "starInGong",
+              "star": "Jupiter",
+              "gongs": [
+                "Yin",
+                "Hai"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_063_hu_xiao_yuan_yin",
+    "name": "虎啸猿吟",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "starInConstellation",
+              "star": "Jupiter",
+              "constellations": [
+                "尾",
+                "觜"
+              ]
+            },
+            {
+              "type": "lifeGongAt",
+              "gongs": [
+                "Hai",
+                "Si"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_064_hu_ju_long_pan",
+    "name": "虎踞龙盘",
+    "variants": [
+      {
+        "conditions": {
+          "type": "or",
+          "conditions": [
+            {
+              "type": "and",
+              "conditions": [
+                {
+                  "type": "starGuardLife",
+                  "star": "Venus"
+                },
+                {
+                  "type": "oppositeGong",
+                  "stars": [
+                    "Venus",
+                    "Jupiter"
+                  ]
+                },
+                {
+                  "type": "isDayBirth",
+                  "isDay": false
+                }
+              ]
+            },
+            {
+              "type": "and",
+              "conditions": [
+                {
+                  "type": "sameGong",
+                  "stars": [
+                    "Jupiter",
+                    "Venus"
+                  ]
+                },
+                {
+                  "type": "starGuardLife",
+                  "star": "Jupiter"
+                }
+              ]
+            },
+            {
+              "type": "and",
+              "conditions": [
+                {
+                  "type": "lifeGongAt",
+                  "gongs": [
+                    "Zi",
+                    "Wu"
+                  ]
+                },
+                {
+                  "type": "starInGong",
+                  "star": "Venus",
+                  "gongs": [
+                    "You"
+                  ]
+                },
+                {
+                  "type": "starInGong",
+                  "star": "Jupiter",
+                  "gongs": [
+                    "Mao"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_065_qing_long_dang_quan",
+    "name": "青龙当权",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "seasonIs",
+              "seasons": [
+                "SPRING"
+              ]
+            },
+            {
+              "type": "lifeGongAt",
+              "gongs": [
+                "Yin",
+                "Mao"
+              ]
+            },
+            {
+              "type": "starGuardLife",
+              "star": "Jupiter"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_066_ao_tou_du_bu",
+    "name": "鳌头独步",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "seasonIs",
+              "seasons": [
+                "SPRING"
+              ]
+            },
+            {
+              "type": "lifeGongAt",
+              "gongs": [
+                "Yin",
+                "Mao"
+              ]
+            },
+            {
+              "type": "starInGong",
+              "star": "Jupiter",
+              "gongs": [
+                "Yin",
+                "Mao"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_067_mu_shang_shui_jing",
+    "name": "木上水井",
+    "variants": [
+      {
+        "conditions": {
+          "type": "or",
+          "conditions": [
+            {
+              "type": "and",
+              "conditions": [
+                {
+                  "type": "sameGong",
+                  "stars": [
+                    "Jupiter",
+                    "Mercury"
+                  ]
+                },
+                {
+                  "type": "lifeGongAt",
+                  "gongs": [
+                    "Wei"
+                  ]
+                },
+                {
+                  "type": "starInConstellation",
+                  "star": "Jupiter",
+                  "constellations": [
+                    "井"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "and",
+              "conditions": [
+                {
+                  "type": "starInGong",
+                  "star": "Jupiter",
+                  "gongs": [
+                    "Wei"
+                  ]
+                },
+                {
+                  "type": "starInGong",
+                  "star": "Mercury",
+                  "gongs": [
+                    "Hai"
+                  ]
+                },
+                {
+                  "type": "lifeGongAt",
+                  "gongs": [
+                    "Wei"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_068_jiao_mu_duan_chan",
+    "name": "角木断躔",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "lifeGongAt",
+              "gongs": [
+                "Chou"
+              ]
+            },
+            {
+              "type": "lifeConstellationAt",
+              "constellations": [
+                "斗"
+              ]
+            },
+            {
+              "type": "starInConstellation",
+              "star": "Saturn",
+              "constellations": [
+                "斗"
+              ]
+            },
+            {
+              "type": "xianAtGong",
+              "gongs": [
+                "Chen"
+              ]
+            },
+            {
+              "type": "starInConstellation",
+              "star": "Jupiter",
+              "constellations": [
+                "角"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_069_ji_feng_dou_kou",
+    "name": "箕风斗口",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "lifeGongAt",
+              "gongs": [
+                "Hai"
+              ]
+            },
+            {
+              "type": "xianAtGong",
+              "gongs": [
+                "Yin"
+              ]
+            },
+            {
+              "type": "starInConstellation",
+              "star": "Jupiter",
+              "constellations": [
+                "箕"
+              ]
+            },
+            {
+              "type": "xianAtConstellation",
+              "constellations": [
+                "箕",
+                "斗"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_070_jin_mu_hai_shi",
+    "name": "金木亥室",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "sameGong",
+              "stars": [
+                "Venus",
+                "Jupiter"
+              ]
+            },
+            {
+              "type": "starInConstellation",
+              "star": "Jupiter",
+              "constellations": [
+                "室"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_080_jiao_ji_feng_chang",
+    "name": "脚疾风肠",
+    "variants": [
+      {
+        "conditions": null
+      }
+    ]
+  },
+  {
+    "id": "mu_081_mu_ji_tong_yin",
+    "name": "木计同寅",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "starInGong",
+              "star": "Jupiter",
+              "gongs": [
+                "Yin"
+              ]
+            },
+            {
+              "type": "starInGong",
+              "star": "Ji",
+              "gongs": [
+                "Yin"
+              ]
+            },
+            {
+              "type": "lifeGongAt",
+              "gongs": [
+                "Yin"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_082_jin_mu_feng_long",
+    "name": "金木逢龙",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "starInGong",
+              "star": "Jupiter",
+              "gongs": [
+                "Chen"
+              ]
+            },
+            {
+              "type": "starInGong",
+              "star": "Venus",
+              "gongs": [
+                "Chen"
+              ]
+            },
+            {
+              "type": "lifeGongAt",
+              "gongs": [
+                "Chen"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_083_mu_chan_jiao_dao",
+    "name": "木躔角道",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "starInConstellation",
+              "star": "Jupiter",
+              "constellations": [
+                "角"
+              ]
+            },
+            {
+              "type": "lifeGongAt",
+              "gongs": [
+                "Chen"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_084_mu_tu_xiang_hui",
+    "name": "木土相会",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "starInGong",
+              "star": "Jupiter",
+              "gongs": [
+                "Shen"
+              ]
+            },
+            {
+              "type": "starInGong",
+              "star": "Saturn",
+              "gongs": [
+                "Shen"
+              ]
+            },
+            {
+              "type": "lifeGongAt",
+              "gongs": [
+                "Shen"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_085_jin_mu_cheng_wang",
+    "name": "金木乘旺",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "starInGong",
+              "star": "Jupiter",
+              "gongs": [
+                "Hai"
+              ]
+            },
+            {
+              "type": "starInGong",
+              "star": "Venus",
+              "gongs": [
+                "Hai"
+              ]
+            },
+            {
+              "type": "lifeGongAt",
+              "gongs": [
+                "Hai"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_086_mu_lin_ying_shi",
+    "name": "木临营室",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "starInConstellation",
+              "star": "Jupiter",
+              "constellations": [
+                "室"
+              ]
+            },
+            {
+              "type": "lifeGongAt",
+              "gongs": [
+                "Hai"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_087_mu_ji_feng_yu",
+    "name": "木计逢鱼",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "starInGong",
+              "star": "Jupiter",
+              "gongs": [
+                "Hai"
+              ]
+            },
+            {
+              "type": "starInGong",
+              "star": "Ji",
+              "gongs": [
+                "Hai"
+              ]
+            },
+            {
+              "type": "lifeGongAt",
+              "gongs": [
+                "Hai"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_088_mu_chu_jin_long",
+    "name": "木触金龙",
+    "variants": [
+      {
+        "conditions": {
+          "type": "starInGong",
+          "star": "Jupiter",
+          "gongs": [
+            "Chen"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_089_chun_mu_ge",
+    "name": "纯木格",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "starGuardLife",
+              "star": "Jupiter"
+            },
+            {
+              "type": "starGongStatus",
+              "star": "Jupiter",
+              "statuses": [
+                "Miao",
+                "Wang"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_090_mu_tu_hui_ji",
+    "name": "木土会吉",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "lifeConstellationAt",
+              "constellations": [
+                "斗",
+                "奎",
+                "井",
+                "角"
+              ]
+            },
+            {
+              "type": "sameConstellation",
+              "stars": [
+                "Jupiter",
+                "Saturn"
+              ]
+            },
+            {
+              "type": "starGongStatus",
+              "star": "Jupiter",
+              "statuses": [
+                "Miao",
+                "Wang"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_091_ru_miao_tui_xing",
+    "name": "入庙退行",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "starInConstellation",
+              "star": "Jupiter",
+              "constellations": [
+                "斗"
+              ]
+            },
+            {
+              "type": "starGongStatus",
+              "star": "Jupiter",
+              "statuses": [
+                "Miao"
+              ]
+            },
+            {
+              "type": "starWalkingState",
+              "star": "Jupiter",
+              "states": [
+                "Retrograde"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_092_ku_zhi_bai_ye",
+    "name": "枯枝败叶",
+    "variants": [
+      {
+        "conditions": {
+          "type": "starInKongWang",
+          "star": "Jupiter"
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_093_zhuo_xiao_cheng_cai",
+    "name": "琢削成材",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "starInKongWang",
+              "star": "Jupiter"
+            },
+            {
+              "type": "sameGong",
+              "stars": [
+                "Jupiter",
+                "Venus"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_094_fen_zhe_hui_mie",
+    "name": "焚折灰灭",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "starInKongWang",
+              "star": "Jupiter"
+            },
+            {
+              "type": "sameGong",
+              "stars": [
+                "Jupiter",
+                "Mars"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_095_piao_cha_fan_fa",
+    "name": "漂槎泛筏",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "starInKongWang",
+              "star": "Jupiter"
+            },
+            {
+              "type": "sameGong",
+              "stars": [
+                "Jupiter",
+                "Mercury"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_096_ri_lie_mu_jiao",
+    "name": "日烈木焦",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "seasonIs",
+              "seasons": [
+                "SUMMER",
+                "AUTUMN"
+              ]
+            },
+            {
+              "type": "isDayBirth",
+              "isDay": true
+            },
+            {
+              "type": "starInConstellation",
+              "star": "Jupiter",
+              "constellations": [
+                "尾",
+                "室",
+                "觜",
+                "星"
+              ]
+            },
+            {
+              "type": "sameGong",
+              "stars": [
+                "Jupiter",
+                "Sun"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_097_shang_xia_ji_run",
+    "name": "上下济润",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "seasonIs",
+              "seasons": [
+                "SUMMER",
+                "AUTUMN"
+              ]
+            },
+            {
+              "type": "isDayBirth",
+              "isDay": true
+            },
+            {
+              "type": "starInConstellation",
+              "star": "Jupiter",
+              "constellations": [
+                "箕",
+                "壁",
+                "参",
+                "轸"
+              ]
+            },
+            {
+              "type": "sameGong",
+              "stars": [
+                "Jupiter",
+                "Sun"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_098_bu_zhan_xian_kui",
+    "name": "布占先魁",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "seasonIs",
+              "seasons": [
+                "WINTER"
+              ]
+            },
+            {
+              "type": "isDayBirth",
+              "isDay": true
+            },
+            {
+              "type": "sameGong",
+              "stars": [
+                "Jupiter",
+                "Sun"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_099_han_gu_hui_chun",
+    "name": "寒谷回春",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "seasonIs",
+              "seasons": [
+                "WINTER"
+              ]
+            },
+            {
+              "type": "isDayBirth",
+              "isDay": true
+            },
+            {
+              "type": "or",
+              "conditions": [
+                {
+                  "type": "sameGong",
+                  "stars": [
+                    "Jupiter",
+                    "Mars",
+                    "Luo"
+                  ]
+                },
+                {
+                  "type": "sameGong",
+                  "stars": [
+                    "Jupiter",
+                    "Mars"
+                  ]
+                },
+                {
+                  "type": "sameGong",
+                  "stars": [
+                    "Jupiter",
+                    "Luo"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "mu_100_shui_bei_dong_zhe",
+    "name": "水孛冻折",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "seasonIs",
+              "seasons": [
+                "WINTER"
+              ]
+            },
+            {
+              "type": "isDayBirth",
+              "isDay": false
+            },
+            {
+              "type": "starInConstellation",
+              "star": "Jupiter",
+              "constellations": [
+                "牛",
+                "娄",
+                "鬼",
+                "亢"
+              ]
+            },
+            {
+              "type": "sameGong",
+              "stars": [
+                "Jupiter",
+                "Mercury",
+                "Bei"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

@@ -14,10 +14,14 @@ class GeJuEditorPage extends StatefulWidget {
   /// 复制来源规则 ID
   final String? duplicateFromId;
 
+  /// 另存为来源规则 ID
+  final String? saveAsFromId;
+
   const GeJuEditorPage({
     super.key,
     this.ruleId,
     this.duplicateFromId,
+    this.saveAsFromId,
   });
 
   @override
@@ -30,7 +34,8 @@ class _GeJuEditorPageState extends State<GeJuEditorPage> {
   final _classNameController = TextEditingController();
   final _booksController = TextEditingController();
   final _descriptionController = TextEditingController();
-  final _sourceController = TextEditingController();
+  final _csLabelController = TextEditingController();
+  final _changeNoteController = TextEditingController();
 
   bool _isInitialized = false;
 
@@ -45,10 +50,12 @@ class _GeJuEditorPageState extends State<GeJuEditorPage> {
 
     if (widget.duplicateFromId != null) {
       await viewModel.initFromDuplicate(widget.duplicateFromId!);
+    } else if (widget.saveAsFromId != null) {
+      await viewModel.initForSaveAs(widget.saveAsFromId!);
     } else if (widget.ruleId != null) {
       await viewModel.initForEdit(widget.ruleId!);
     } else {
-      viewModel.initForCreate();
+      await viewModel.initForCreate();
     }
 
     _syncControllersFromViewModel(viewModel);
@@ -60,7 +67,8 @@ class _GeJuEditorPageState extends State<GeJuEditorPage> {
     _classNameController.text = viewModel.className;
     _booksController.text = viewModel.books;
     _descriptionController.text = viewModel.description;
-    _sourceController.text = viewModel.source;
+    _csLabelController.text = viewModel.csLabel;
+    _changeNoteController.text = viewModel.changeNote ?? '';
   }
 
   @override
@@ -69,7 +77,8 @@ class _GeJuEditorPageState extends State<GeJuEditorPage> {
     _classNameController.dispose();
     _booksController.dispose();
     _descriptionController.dispose();
-    _sourceController.dispose();
+    _csLabelController.dispose();
+    _changeNoteController.dispose();
     super.dispose();
   }
 
@@ -83,13 +92,19 @@ class _GeJuEditorPageState extends State<GeJuEditorPage> {
             appBar: AppBar(
               title: Text(viewModel.pageTitle),
               actions: [
-                if (!viewModel.isBuiltIn)
+                if (!viewModel.isReadOnly) ...[
+                  if (viewModel.mode == EditorMode.edit)
+                    TextButton(
+                      onPressed: () => _saveAs(viewModel),
+                      child: const Text('另存为'),
+                    ),
                   TextButton(
                     onPressed: viewModel.canSave
                         ? () => _save(viewModel)
                         : null,
                     child: const Text('保存'),
                   ),
+                ],
               ],
             ),
             body: _buildBody(viewModel),
@@ -138,6 +153,8 @@ class _GeJuEditorPageState extends State<GeJuEditorPage> {
           const SizedBox(height: 16),
           _buildConditionSection(viewModel),
           const SizedBox(height: 16),
+          _buildConditionSetInfoSection(viewModel),
+          const SizedBox(height: 16),
           _buildValidationSection(viewModel),
           const SizedBox(height: 32),
         ],
@@ -146,7 +163,7 @@ class _GeJuEditorPageState extends State<GeJuEditorPage> {
   }
 
   Widget _buildBasicInfoSection(GeJuEditorViewModel viewModel) {
-    final isReadOnly = viewModel.isBuiltIn;
+    final isReadOnly = viewModel.isReadOnly;
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -176,40 +193,23 @@ class _GeJuEditorPageState extends State<GeJuEditorPage> {
             TextFormField(
               controller: _classNameController,
               decoration: const InputDecoration(
-                labelText: '分类 *',
+                labelText: '分类',
                 hintText: '例如：木星格局、火星格局',
                 border: OutlineInputBorder(),
               ),
               readOnly: isReadOnly,
               onChanged: viewModel.updateClassName,
-              validator: (value) {
-                if (value == null || value.trim().isEmpty) {
-                  return '分类不能为空';
-                }
-                return null;
-              },
             ),
             const SizedBox(height: 12),
             TextFormField(
               controller: _booksController,
               decoration: const InputDecoration(
-                labelText: '书籍来源',
+                labelText: '典籍来源',
                 hintText: '例如：果老星宗、天文志',
                 border: OutlineInputBorder(),
               ),
               readOnly: isReadOnly,
               onChanged: viewModel.updateBooks,
-            ),
-            const SizedBox(height: 12),
-            TextFormField(
-              controller: _sourceController,
-              decoration: const InputDecoration(
-                labelText: '出处',
-                hintText: '具体篇章或引用来源',
-                border: OutlineInputBorder(),
-              ),
-              readOnly: isReadOnly,
-              onChanged: viewModel.updateSource,
             ),
           ],
         ),
@@ -218,7 +218,7 @@ class _GeJuEditorPageState extends State<GeJuEditorPage> {
   }
 
   Widget _buildPropertiesSection(GeJuEditorViewModel viewModel) {
-    final isReadOnly = viewModel.isBuiltIn;
+    final isReadOnly = viewModel.isReadOnly;
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -309,7 +309,7 @@ class _GeJuEditorPageState extends State<GeJuEditorPage> {
   }
 
   Widget _buildDescriptionSection(GeJuEditorViewModel viewModel) {
-    final isReadOnly = viewModel.isBuiltIn;
+    final isReadOnly = viewModel.isReadOnly;
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -348,7 +348,7 @@ class _GeJuEditorPageState extends State<GeJuEditorPage> {
               children: [
                 const Text('判断条件',
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                if (!viewModel.isBuiltIn)
+                if (!viewModel.isReadOnly)
                   Text(
                     '(暂不支持编辑条件)',
                     style: TextStyle(fontSize: 12, color: Colors.grey.shade500),
@@ -375,6 +375,51 @@ class _GeJuEditorPageState extends State<GeJuEditorPage> {
                   ),
                 ),
               ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildConditionSetInfoSection(GeJuEditorViewModel viewModel) {
+    final isReadOnly = viewModel.isReadOnly;
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text('判断方案',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+            const SizedBox(height: 12),
+            TextFormField(
+              controller: _csLabelController,
+              decoration: const InputDecoration(
+                labelText: '方案名',
+                hintText: '如不填，默认使用格局名称',
+                border: OutlineInputBorder(),
+              ),
+              readOnly: isReadOnly,
+              onChanged: viewModel.updateCsLabel,
+            ),
+            const SizedBox(height: 12),
+            TextFormField(
+              controller: _changeNoteController,
+              decoration: const InputDecoration(
+                labelText: '修改说明',
+                hintText: '可选，描述本方案的改动',
+                border: OutlineInputBorder(),
+              ),
+              readOnly: isReadOnly,
+              onChanged: (v) => viewModel.updateChangeNote(v.isEmpty ? null : v),
+            ),
+            if (viewModel.derivedFrom != null) ...[
+              const SizedBox(height: 8),
+              Text(
+                '溯源: 基于「${viewModel.derivedFrom}」',
+                style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
+              ),
+            ],
           ],
         ),
       ),
@@ -451,13 +496,23 @@ class _GeJuEditorPageState extends State<GeJuEditorPage> {
       return;
     }
 
-    final success = await viewModel.save();
-    if (success && mounted) {
+    final result = await viewModel.save();
+    if (result.success && mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('保存成功')),
       );
       Navigator.pop(context, true);
     }
+  }
+
+  Future<void> _saveAs(GeJuEditorViewModel viewModel) async {
+    if (viewModel.editingRuleId == null) return;
+    // Navigate to a new editor in saveAs mode
+    Navigator.pushNamed(
+      context,
+      '/qizhengsiyu/ge_ju/create',
+      arguments: {'saveAs': viewModel.editingRuleId},
+    );
   }
 
   Future<bool> _confirmDiscard(GeJuEditorViewModel viewModel) async {

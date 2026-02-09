@@ -1,14 +1,23 @@
+import 'dart:convert';
+
 import 'package:common/enums.dart';
+import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_annotation.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_condition.dart';
+import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_condition_set.dart';
+import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_deletion_record.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_rule.dart';
+import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_source.dart';
+import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_user_preference.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju_model.dart';
 import 'package:qizhengsiyu/domain/errors/ge_ju_errors.dart';
 import 'package:qizhengsiyu/domain/repositories/ge_ju_repository.dart';
 import 'package:qizhengsiyu/domain/services/ge_ju_validation.dart';
 import 'package:uuid/uuid.dart';
 
-/// 格局 CRUD 服务
-/// 提供格局规则的创建、读取、更新、删除以及搜索、验证、导入导出功能
+/// 格局 CRUD 服务（三实体模型）
+///
+/// 提供 Rule/ConditionSet/Annotation 的创建、读取、更新、删除
+/// 以及 Fork、Duplicate、SaveAs 等复合操作
 class GeJuCrudService {
   final IGeJuRepository _repository;
   static const _uuid = Uuid();
@@ -16,25 +25,24 @@ class GeJuCrudService {
   GeJuCrudService({required IGeJuRepository repository})
       : _repository = repository;
 
-  // ========== CRUD 操作 ==========
+  // ══════════════════════════════════════════
+  // Rule CRUD
+  // ══════════════════════════════════════════
 
-  /// 创建新格局
+  /// 创建新格局（薄锚点）
   Future<GeJuRule> createRule(GeJuRuleCreateParams params) async {
+    final now = DateTime.now();
     final rule = GeJuRule(
       id: 'user_${_uuid.v4()}',
       name: params.name,
-      className: params.className,
-      books: params.books ?? '',
-      description: params.description,
-      source: params.source ?? '',
-      jiXiong: params.jiXiong,
-      geJuType: params.geJuType,
       scope: params.scope,
-      conditions: params.conditions,
+      disambiguationNote: params.disambiguationNote,
+      authorType: 'user',
+      createdAt: now,
+      updatedAt: now,
     );
 
-    // 验证
-    final validation = validateRule(rule);
+    final validation = validateRuleName(rule.name);
     if (!validation.isValid) {
       throw RuleValidationError(validation.errors);
     }
@@ -44,8 +52,8 @@ class GeJuCrudService {
   }
 
   /// 获取单个格局详情
-  Future<GeJuRule?> getRule(String ruleId) async {
-    return await _repository.getRuleById(ruleId);
+  Future<GeJuRule?> getRule(String id) async {
+    return await _repository.getRuleById(id);
   }
 
   /// 获取所有格局
@@ -53,126 +61,347 @@ class GeJuCrudService {
     return await _repository.loadAllRules();
   }
 
-  /// 获取内置格局
-  Future<List<GeJuRule>> getBuiltInRules() async {
-    return await _repository.loadBuiltInRules();
-  }
-
-  /// 获取用户格局
-  Future<List<GeJuRule>> getUserRules() async {
-    return await _repository.loadUserRules();
-  }
-
   /// 更新格局
   Future<void> updateRule(GeJuRule rule) async {
     if (_repository.isBuiltInRule(rule.id)) {
       throw BuiltInRuleModificationError(rule.id);
     }
-
-    // 验证
-    final validation = validateRule(rule);
+    final validation = validateRuleName(rule.name);
     if (!validation.isValid) {
       throw RuleValidationError(validation.errors);
     }
-
     await _repository.saveUserRule(rule);
   }
 
-  /// 删除格局
-  Future<void> deleteRule(String ruleId) async {
-    if (_repository.isBuiltInRule(ruleId)) {
-      throw BuiltInRuleModificationError(ruleId);
+  /// 删除格局（级联删除用户 CS + Ann）
+  Future<void> deleteRule(String id) async {
+    if (_repository.isBuiltInRule(id)) {
+      throw BuiltInRuleModificationError(id);
     }
-
-    await _repository.deleteUserRule(ruleId);
+    // 级联删除
+    await _repository.deleteUserConditionSetsForRule(id);
+    await _repository.deleteUserAnnotationsForRule(id);
+    await _repository.deleteUserRule(id);
   }
 
-  // ========== 查询与筛选 ==========
+  // ══════════════════════════════════════════
+  // ConditionSet 操作
+  // ══════════════════════════════════════════
 
-  /// 按关键词搜索
-  ///
-  /// 搜索 name、description、className、books 字段
-  /// 关键词不区分大小写
+  /// 创建判断方案
+  Future<GeJuConditionSet> createConditionSet(ConditionSetCreateParams params) async {
+    final now = DateTime.now();
+    final cs = GeJuConditionSet(
+      id: 'user_${_uuid.v4()}',
+      ruleId: params.ruleId,
+      label: params.label,
+      schools: params.schools,
+      authorType: 'user',
+      conditions: params.conditions,
+      changeNote: params.changeNote,
+      createdAt: now,
+      updatedAt: now,
+    );
+
+    await _repository.saveUserConditionSet(cs);
+    return cs;
+  }
+
+  /// 获取某格局的所有判断方案
+  Future<List<GeJuConditionSet>> getConditionSetsForRule(String ruleId) async {
+    return await _repository.getConditionSetsForRule(ruleId);
+  }
+
+  /// 获取某个判断方案
+  Future<GeJuConditionSet?> getConditionSetById(String id) async {
+    return await _repository.getConditionSetById(id);
+  }
+
+  /// 更新判断方案
+  Future<void> updateConditionSet(GeJuConditionSet cs) async {
+    if (cs.isBuiltIn) {
+      throw BuiltInRuleModificationError(cs.id);
+    }
+    await _repository.saveUserConditionSet(cs);
+  }
+
+  /// 删除判断方案
+  Future<void> deleteConditionSet(String id) async {
+    await _repository.deleteUserConditionSet(id);
+  }
+
+  /// Fork: 基于已有方案深拷贝创建用户自己的独立方案
+  Future<GeJuConditionSet> forkConditionSet(String originalId) async {
+    final original = await _repository.getConditionSetById(originalId);
+    if (original == null) {
+      throw ConditionSetNotFoundError(originalId);
+    }
+
+    final now = DateTime.now();
+    // Deep copy conditions by serializing/deserializing
+    GeJuCondition? copiedConditions;
+    if (original.conditions != null) {
+      final json = original.conditions!.toJson();
+      copiedConditions = GeJuCondition.fromJson(json);
+    }
+
+    final forked = GeJuConditionSet(
+      id: 'user_${_uuid.v4()}',
+      ruleId: original.ruleId,
+      label: '基于「${original.label}」的修改',
+      schools: original.schools != null ? List.from(original.schools!) : null,
+      source: original.source,
+      authorType: 'user',
+      conditions: copiedConditions,
+      derivedFrom: original.id,
+      createdAt: now,
+      updatedAt: now,
+    );
+
+    await _repository.saveUserConditionSet(forked);
+    return forked;
+  }
+
+  // ══════════════════════════════════════════
+  // Annotation 操作
+  // ══════════════════════════════════════════
+
+  /// 创建注解
+  Future<GeJuAnnotation> createAnnotation(AnnotationCreateParams params) async {
+    final now = DateTime.now();
+
+    GeJuSource? source;
+    if (params.books != null && params.books!.isNotEmpty) {
+      source = GeJuSource(
+        bookName: params.books!,
+        school: params.schools?.isNotEmpty == true ? params.schools!.first : 'user',
+        section: params.sourceSection,
+      );
+    }
+
+    final ann = GeJuAnnotation(
+      id: 'user_${_uuid.v4()}',
+      ruleId: params.ruleId,
+      schools: params.schools,
+      source: source,
+      authorType: 'user',
+      description: params.description,
+      jiXiong: params.jiXiong,
+      geJuType: params.geJuType,
+      className: params.className,
+      createdAt: now,
+      updatedAt: now,
+    );
+
+    await _repository.saveUserAnnotation(ann);
+    return ann;
+  }
+
+  /// 获取某格局的所有注解
+  Future<List<GeJuAnnotation>> getAnnotationsForRule(String ruleId) async {
+    return await _repository.getAnnotationsForRule(ruleId);
+  }
+
+  /// 更新注解
+  Future<void> updateAnnotation(GeJuAnnotation ann) async {
+    if (ann.isBuiltIn) {
+      throw BuiltInRuleModificationError(ann.id);
+    }
+    await _repository.saveUserAnnotation(ann);
+  }
+
+  /// 删除注解
+  Future<void> deleteAnnotation(String id) async {
+    await _repository.deleteUserAnnotation(id);
+  }
+
+  // ══════════════════════════════════════════
+  // 复合操作
+  // ══════════════════════════════════════════
+
+  /// 复制格局（Rule + 所有 user CS + Ann）
+  Future<GeJuRule> duplicateRule(String ruleId) async {
+    final original = await getRule(ruleId);
+    if (original == null) {
+      throw RuleNotFoundError(ruleId);
+    }
+
+    final now = DateTime.now();
+    final newRuleId = 'user_${_uuid.v4()}';
+
+    // 1. 创建新 Rule
+    final newRule = GeJuRule(
+      id: newRuleId,
+      name: '${original.name} (副本)',
+      aliases: original.aliases,
+      disambiguationNote: original.disambiguationNote,
+      scope: original.scope,
+      coordinateSystem: original.coordinateSystem,
+      authorType: 'user',
+      createdAt: now,
+      updatedAt: now,
+    );
+    await _repository.saveUserRule(newRule);
+
+    // 2. 复制 ConditionSets
+    final conditionSets = await _repository.getConditionSetsForRule(ruleId);
+    for (final cs in conditionSets) {
+      // Deep copy conditions
+      GeJuCondition? copiedConditions;
+      if (cs.conditions != null) {
+        copiedConditions = GeJuCondition.fromJson(cs.conditions!.toJson());
+      }
+
+      final newCs = GeJuConditionSet(
+        id: 'user_${_uuid.v4()}',
+        ruleId: newRuleId,
+        label: cs.label,
+        schools: cs.schools != null ? List.from(cs.schools!) : null,
+        source: cs.source,
+        authorType: 'user',
+        conditions: copiedConditions,
+        derivedFrom: cs.id,
+        createdAt: now,
+        updatedAt: now,
+      );
+      await _repository.saveUserConditionSet(newCs);
+    }
+
+    // 3. 复制 Annotations（仅 user 的，内置保留在原 rule 上）
+    final annotations = await _repository.getAnnotationsForRule(ruleId);
+    for (final ann in annotations) {
+      if (ann.isUser) {
+        final newAnn = ann.copyWith(
+          id: 'user_${_uuid.v4()}',
+          ruleId: newRuleId,
+          createdAt: now,
+          updatedAt: now,
+        );
+        await _repository.saveUserAnnotation(newAnn);
+      }
+    }
+
+    return newRule;
+  }
+
+  /// 另存为（从编辑器状态创建全新格局）
+  Future<GeJuRule> saveRuleAs(GeJuRuleSaveAsParams params) async {
+    final now = DateTime.now();
+    final newRuleId = 'user_${_uuid.v4()}';
+
+    // 1. 创建 Rule
+    final rule = GeJuRule(
+      id: newRuleId,
+      name: params.name,
+      scope: params.scope,
+      disambiguationNote: params.disambiguationNote,
+      authorType: 'user',
+      createdAt: now,
+      updatedAt: now,
+    );
+    await _repository.saveUserRule(rule);
+
+    // 2. 创建 Annotation
+    GeJuSource? source;
+    if (params.books != null && params.books!.isNotEmpty) {
+      source = GeJuSource(
+        bookName: params.books!,
+        school: 'user',
+        section: params.sourceSection,
+      );
+    }
+
+    final ann = GeJuAnnotation(
+      id: 'user_${_uuid.v4()}',
+      ruleId: newRuleId,
+      authorType: 'user',
+      description: params.description,
+      jiXiong: params.jiXiong,
+      geJuType: params.geJuType,
+      className: params.className,
+      source: source,
+      createdAt: now,
+      updatedAt: now,
+    );
+    await _repository.saveUserAnnotation(ann);
+
+    // 3. 创建 ConditionSet
+    final cs = GeJuConditionSet(
+      id: 'user_${_uuid.v4()}',
+      ruleId: newRuleId,
+      label: params.csLabel,
+      authorType: 'user',
+      conditions: params.conditions,
+      derivedFrom: params.derivedFrom,
+      changeNote: params.changeNote,
+      createdAt: now,
+      updatedAt: now,
+    );
+    await _repository.saveUserConditionSet(cs);
+
+    return rule;
+  }
+
+  // ══════════════════════════════════════════
+  // Search / Filter
+  // ══════════════════════════════════════════
+
+  /// 按关键词搜索（Rule name + aliases + Annotation description/className）
   Future<List<GeJuRule>> searchRules(String keyword) async {
     final allRules = await getAllRules();
     if (keyword.trim().isEmpty) return allRules;
 
     final lowerKeyword = keyword.toLowerCase();
     return allRules.where((rule) {
-      return rule.name.toLowerCase().contains(lowerKeyword) ||
-          rule.description.toLowerCase().contains(lowerKeyword) ||
-          rule.className.toLowerCase().contains(lowerKeyword) ||
-          rule.books.toLowerCase().contains(lowerKeyword) ||
-          rule.source.toLowerCase().contains(lowerKeyword);
+      // Search in rule name
+      if (rule.name.toLowerCase().contains(lowerKeyword)) return true;
+      // Search in aliases
+      for (final alias in rule.aliases) {
+        if (alias.name.toLowerCase().contains(lowerKeyword)) return true;
+      }
+      // Legacy: also check deprecated getters for transition period
+      // ignore: deprecated_member_use_from_same_package
+      if (rule.description.toLowerCase().contains(lowerKeyword)) return true;
+      // ignore: deprecated_member_use_from_same_package
+      if (rule.className.toLowerCase().contains(lowerKeyword)) return true;
+      return false;
     }).toList();
   }
 
   /// 按分类筛选
   Future<List<GeJuRule>> filterByCategory(String category) async {
     final allRules = await getAllRules();
-    return allRules.where((rule) => rule.className == category).toList();
+    return allRules.where((rule) {
+      // ignore: deprecated_member_use_from_same_package
+      return rule.className == category;
+    }).toList();
   }
 
-  /// 按吉凶筛选
-  Future<List<GeJuRule>> filterByJiXiong(JiXiongEnum jiXiong) async {
-    final allRules = await getAllRules();
-    return allRules.where((rule) => rule.jiXiong == jiXiong).toList();
+  // ══════════════════════════════════════════
+  // Preference
+  // ══════════════════════════════════════════
+
+  Future<GeJuUserPreference> getPreference() async {
+    return await _repository.getPreference();
   }
 
-  /// 按格局类型筛选
-  Future<List<GeJuRule>> filterByType(GeJuType type) async {
-    final allRules = await getAllRules();
-    return allRules.where((rule) => rule.geJuType == type).toList();
+  Future<void> savePreference(GeJuUserPreference pref) async {
+    await _repository.savePreference(pref);
   }
 
-  /// 按适用范围筛选
-  Future<List<GeJuRule>> filterByScope(GeJuScope scope) async {
-    final allRules = await getAllRules();
-    return allRules.where((rule) => rule.scope == scope).toList();
-  }
+  // ══════════════════════════════════════════
+  // Validation
+  // ══════════════════════════════════════════
 
-  /// 获取所有分类列表（去重）
-  Future<List<String>> getCategories() async {
-    final allRules = await getAllRules();
-    final categories = allRules.map((r) => r.className).toSet().toList();
-    categories.sort();
-    return categories;
-  }
-
-  // ========== 验证 ==========
-
-  /// 验证格局规则的有效性
-  ValidationResult validateRule(GeJuRule rule) {
+  /// 验证规则名称
+  ValidationResult validateRuleName(String name) {
     final errors = <String>[];
-    final warnings = <String>[];
-
-    // 名称不为空
-    if (rule.name.trim().isEmpty) {
+    if (name.trim().isEmpty) {
       errors.add('格局名称不能为空');
     }
-
-    // 分类不为空
-    if (rule.className.trim().isEmpty) {
-      errors.add('格局分类不能为空');
-    }
-
-    // 描述不为空
-    if (rule.description.trim().isEmpty) {
-      warnings.add('建议填写格局描述');
-    }
-
-    // 如果有条件，验证条件结构
-    if (rule.conditions != null) {
-      final conditionValidation = validateCondition(rule.conditions!);
-      errors.addAll(conditionValidation.errors);
-      warnings.addAll(conditionValidation.warnings);
-    } else {
-      warnings.add('未设置判断条件，该格局将无法进行匹配');
-    }
-
     return errors.isEmpty
-        ? ValidationResult.valid(warnings: warnings)
-        : ValidationResult.invalid(errors: errors, warnings: warnings);
+        ? ValidationResult.valid()
+        : ValidationResult.invalid(errors: errors);
   }
 
   /// 验证条件的有效性
@@ -206,106 +435,20 @@ class GeJuCrudService {
       errors.addAll(result.errors);
       warnings.addAll(result.warnings);
     }
-    // 叶子条件通过 describe() 检查，暂不做深层参数验证
 
     return errors.isEmpty
         ? ValidationResult.valid(warnings: warnings)
         : ValidationResult.invalid(errors: errors, warnings: warnings);
   }
 
-  // ========== 导入导出 ==========
+  // ══════════════════════════════════════════
+  // Utility
+  // ══════════════════════════════════════════
 
-  /// 导出选中的格局
-  Future<String> exportRules(List<String> ruleIds) async {
-    final allRules = await getAllRules();
-    final selectedRules =
-        allRules.where((rule) => ruleIds.contains(rule.id)).toList();
-
-    if (selectedRules.isEmpty) {
-      throw RuleNotFoundError(ruleIds.join(', '));
-    }
-
-    return await _repository.exportRules(selectedRules);
-  }
-
-  /// 导出全部规则
-  Future<String> exportAllRules() async {
-    final allRules = await getAllRules();
-    return await _repository.exportRules(allRules);
-  }
-
-  /// 从 JSON 导入格局
-  Future<ImportResult> importRulesFromJson(String jsonContent) async {
-    try {
-      final importedRules = await _repository.importRules(jsonContent);
-
-      int successCount = 0;
-      int failedCount = 0;
-      final savedRules = <GeJuRule>[];
-      final errors = <String>[];
-
-      for (final rule in importedRules) {
-        try {
-          final validation = validateRule(rule);
-          if (validation.isValid) {
-            await _repository.saveUserRule(rule);
-            savedRules.add(rule);
-            successCount++;
-          } else {
-            failedCount++;
-            errors.add('规则 "${rule.name}": ${validation.errors.join(", ")}');
-          }
-        } catch (e) {
-          failedCount++;
-          errors.add('规则 "${rule.name}": $e');
-        }
-      }
-
-      return ImportResult(
-        successCount: successCount,
-        failedCount: failedCount,
-        importedRules: savedRules,
-        errors: errors,
-      );
-    } catch (e) {
-      if (e is GeJuError) rethrow;
-      throw RuleImportError('导入失败', details: e.toString());
-    }
-  }
-
-  /// 复制格局
-  ///
-  /// 基于现有格局创建副本，生成新 UUID，名称加 "(副本)" 后缀
-  Future<GeJuRule> duplicateRule(String ruleId) async {
-    final original = await getRule(ruleId);
-    if (original == null) {
-      throw RuleNotFoundError(ruleId);
-    }
-
-    final duplicate = GeJuRule(
-      id: 'user_${_uuid.v4()}',
-      name: '${original.name} (副本)',
-      className: original.className,
-      books: original.books,
-      description: original.description,
-      source: original.source,
-      jiXiong: original.jiXiong,
-      geJuType: original.geJuType,
-      scope: original.scope,
-      conditions: original.conditions,
-      coordinateSystem: original.coordinateSystem,
-    );
-
-    await _repository.saveUserRule(duplicate);
-    return duplicate;
-  }
-
-  /// 判断规则是否为内置
   bool isBuiltInRule(String ruleId) {
     return _repository.isBuiltInRule(ruleId);
   }
 
-  /// 清除缓存并强制重新加载
   void clearCache() {
     _repository.clearCache();
   }

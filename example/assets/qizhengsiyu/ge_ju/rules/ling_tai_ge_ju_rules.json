@@ -1,0 +1,84 @@
+[
+  {
+    "id": "lingtaige_001_he_bi_lian_zhu",
+    "name": "合璧连珠",
+    "variants": [
+      {
+        "conditions": {
+          "type": "and",
+          "conditions": [
+            {
+              "type": "sunMoonHarmony"
+            },
+            {
+              "type": "fivePlanetsAlignment"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "lingtaige_002_ri_yue_he_bi",
+    "name": "日月合璧",
+    "variants": [
+      {}
+    ]
+  },
+  {
+    "id": "lingtaige_003_wu_xing_lian_zhu",
+    "name": "五星连珠",
+    "variants": [
+      {}
+    ]
+  },
+  {
+    "id": "lingtaige_004_dou_niu_xiu_qi",
+    "name": "斗牛秀气",
+    "variants": [
+      {}
+    ]
+  },
+  {
+    "id": "lingtaige_005_wen_zhang_mi_fu",
+    "name": "文章秘府",
+    "variants": [
+      {}
+    ]
+  },
+  {
+    "id": "lingtaige_006_wu_xing_chao_dou",
+    "name": "五星朝斗",
+    "variants": [
+      {}
+    ]
+  },
+  {
+    "id": "lingtaige_007_bo_yu_dong_jing",
+    "name": "孛于东井",
+    "variants": [
+      {}
+    ]
+  },
+  {
+    "id": "lingtaige_008_shou_xie_long_jiao",
+    "name": "首携龙角",
+    "variants": [
+      {}
+    ]
+  },
+  {
+    "id": "lingtaige_009_ji_ju_long_wei",
+    "name": "计居龙尾",
+    "variants": [
+      {}
+    ]
+  },
+  {
+    "id": "lingtaige_010_yin_yang_lei_ju",
+    "name": "阴阳类聚",
+    "variants": [
+      {}
+    ]
+  }
+]

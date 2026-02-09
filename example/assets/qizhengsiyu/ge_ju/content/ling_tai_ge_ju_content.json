@@ -1,0 +1,142 @@
+[
+  {
+    "id": "lingtaige_001_he_bi_lian_zhu",
+    "name": "合璧连珠",
+    "variants": [
+      {
+        "source": "《灵台格》",
+        "description": "大贵之象",
+        "books": "果老星宗",
+        "className": "灵台格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "lingtaige_002_ri_yue_he_bi",
+    "name": "日月合璧",
+    "variants": [
+      {
+        "source": "《灵台格》",
+        "description": "大吉之格",
+        "books": "果老星宗",
+        "className": "灵台格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "lingtaige_003_wu_xing_lian_zhu",
+    "name": "五星连珠",
+    "variants": [
+      {
+        "source": "《灵台格》",
+        "description": "有名望，居高位",
+        "books": "果老星宗",
+        "className": "灵台格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "lingtaige_004_dou_niu_xiu_qi",
+    "name": "斗牛秀气",
+    "variants": [
+      {
+        "source": "《灵台格》",
+        "description": "主人才气高，官运好",
+        "books": "果老星宗",
+        "className": "灵台格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "lingtaige_005_wen_zhang_mi_fu",
+    "name": "文章秘府",
+    "variants": [
+      {
+        "source": "《灵台格》",
+        "description": "主人满腹才华",
+        "books": "果老星宗",
+        "className": "灵台格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "lingtaige_006_wu_xing_chao_dou",
+    "name": "五星朝斗",
+    "variants": [
+      {
+        "source": "《灵台格》",
+        "description": "主人官运亨通",
+        "books": "果老星宗",
+        "className": "灵台格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "lingtaige_007_bo_yu_dong_jing",
+    "name": "孛于东井",
+    "variants": [
+      {
+        "source": "《灵台格》",
+        "description": "主人有权力",
+        "books": "果老星宗",
+        "className": "灵台格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "lingtaige_008_shou_xie_long_jiao",
+    "name": "首携龙角",
+    "variants": [
+      {
+        "source": "《灵台格》",
+        "description": "主人显贵",
+        "books": "果老星宗",
+        "className": "灵台格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "lingtaige_009_ji_ju_long_wei",
+    "name": "计居龙尾",
+    "variants": [
+      {
+        "source": "《灵台格》",
+        "description": "主人居高位",
+        "books": "果老星宗",
+        "className": "灵台格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "lingtaige_010_yin_yang_lei_ju",
+    "name": "阴阳类聚",
+    "variants": [
+      {
+        "source": "《灵台格》",
+        "description": "主人发达",
+        "books": "果老星宗",
+        "className": "灵台格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  }
+]

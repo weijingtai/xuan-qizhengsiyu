@@ -1,5 +1,6 @@
 import 'package:common/enums.dart';
 import 'package:flutter/foundation.dart';
+import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_annotation.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_rule.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju_model.dart';
 import 'package:qizhengsiyu/domain/errors/ge_ju_errors.dart';
@@ -26,6 +27,9 @@ class GeJuListViewModel extends ChangeNotifier {
 
   /// 全部规则列表
   List<GeJuRule> _allRules = [];
+
+  /// 按 ruleId 缓存的首个 Annotation（用于列表展示 jiXiong/geJuType/description 等）
+  Map<String, GeJuAnnotation?> _primaryAnnotationCache = {};
 
   /// 筛选后的规则列表
   List<GeJuRule> _filteredRules = [];
@@ -115,11 +119,17 @@ class GeJuListViewModel extends ChangeNotifier {
       _selectedScope != null ||
       _sourceFilter != null;
 
-  /// 所有分类列表（从数据中提取）
+  /// 所有分类列表（从 Annotation 数据中提取）
   List<String> get categories {
-    final cats = _allRules.map((r) => r.className).toSet().toList();
-    cats.sort();
-    return cats;
+    final cats = <String>{};
+    for (final rule in _allRules) {
+      final ann = _primaryAnnotationCache[rule.id];
+      if (ann?.className != null) {
+        cats.add(ann!.className!);
+      }
+    }
+    final sorted = cats.toList()..sort();
+    return sorted;
   }
 
   // ========== 核心方法 ==========
@@ -132,6 +142,13 @@ class GeJuListViewModel extends ChangeNotifier {
 
     try {
       _allRules = await _crudService.getAllRules();
+      // 加载每个 Rule 的首个 Annotation 用于列表展示
+      _primaryAnnotationCache = {};
+      for (final rule in _allRules) {
+        final annotations = await _crudService.getAnnotationsForRule(rule.id);
+        _primaryAnnotationCache[rule.id] =
+            annotations.isNotEmpty ? annotations.first : null;
+      }
       _applyFiltersAndSort();
     } catch (e) {
       _errorMessage = e is GeJuError ? e.message : '加载格局失败: $e';
@@ -245,6 +262,11 @@ class GeJuListViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// 获取某个 Rule 的首个 Annotation
+  GeJuAnnotation? getPrimaryAnnotation(String ruleId) {
+    return _primaryAnnotationCache[ruleId];
+  }
+
   // ========== 内部方法 ==========
 
   /// 应用筛选和排序
@@ -255,27 +277,44 @@ class GeJuListViewModel extends ChangeNotifier {
     if (_searchKeyword.isNotEmpty) {
       final lower = _searchKeyword.toLowerCase();
       result = result.where((rule) {
-        return rule.name.toLowerCase().contains(lower) ||
-            rule.description.toLowerCase().contains(lower) ||
-            rule.className.toLowerCase().contains(lower) ||
-            rule.books.toLowerCase().contains(lower) ||
-            rule.source.toLowerCase().contains(lower);
+        // Search in rule name
+        if (rule.name.toLowerCase().contains(lower)) return true;
+        // Search in aliases
+        for (final alias in rule.aliases) {
+          if (alias.name.toLowerCase().contains(lower)) return true;
+        }
+        // Search in annotation fields
+        final ann = _primaryAnnotationCache[rule.id];
+        if (ann != null) {
+          if (ann.description?.toLowerCase().contains(lower) == true) return true;
+          if (ann.className?.toLowerCase().contains(lower) == true) return true;
+        }
+        return false;
       }).toList();
     }
 
     // 分类筛选
     if (_selectedCategory != null) {
-      result = result.where((r) => r.className == _selectedCategory).toList();
+      result = result.where((r) {
+        final ann = _primaryAnnotationCache[r.id];
+        return ann?.className == _selectedCategory;
+      }).toList();
     }
 
     // 吉凶筛选
     if (_selectedJiXiong != null) {
-      result = result.where((r) => r.jiXiong == _selectedJiXiong).toList();
+      result = result.where((r) {
+        final ann = _primaryAnnotationCache[r.id];
+        return ann?.jiXiong == _selectedJiXiong;
+      }).toList();
     }
 
     // 类型筛选
     if (_selectedType != null) {
-      result = result.where((r) => r.geJuType == _selectedType).toList();
+      result = result.where((r) {
+        final ann = _primaryAnnotationCache[r.id];
+        return ann?.geJuType == _selectedType;
+      }).toList();
     }
 
     // 范围筛选
@@ -296,18 +335,20 @@ class GeJuListViewModel extends ChangeNotifier {
     // 排序
     result.sort((a, b) {
       int compare;
+      final annA = _primaryAnnotationCache[a.id];
+      final annB = _primaryAnnotationCache[b.id];
       switch (_sortField) {
         case GeJuSortField.name:
           compare = a.name.compareTo(b.name);
           break;
         case GeJuSortField.className:
-          compare = a.className.compareTo(b.className);
+          compare = (annA?.className ?? '').compareTo(annB?.className ?? '');
           break;
         case GeJuSortField.jiXiong:
-          compare = a.jiXiong.index.compareTo(b.jiXiong.index);
+          compare = (annA?.jiXiong?.index ?? 0).compareTo(annB?.jiXiong?.index ?? 0);
           break;
         case GeJuSortField.geJuType:
-          compare = a.geJuType.index.compareTo(b.geJuType.index);
+          compare = (annA?.geJuType?.index ?? 0).compareTo(annB?.geJuType?.index ?? 0);
           break;
       }
       return _sortAscending ? compare : -compare;

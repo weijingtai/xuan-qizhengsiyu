@@ -246,8 +246,10 @@ class _GeJuListPageState extends State<GeJuListPage> {
             itemBuilder: (context, index) {
               final rule = viewModel.rules[index];
               final isBuiltIn = viewModel.isBuiltIn(rule.id);
+              final annotation = viewModel.getPrimaryAnnotation(rule.id);
               return GeJuListTile(
                 rule: rule,
+                annotation: annotation,
                 isBuiltIn: isBuiltIn,
                 onTap: () => _navigateToDetail(context, rule),
                 onDelete: isBuiltIn
@@ -301,14 +303,10 @@ class _GeJuListPageState extends State<GeJuListPage> {
   }
 
   void _navigateToDetail(BuildContext context, GeJuRule rule) {
-    final viewModel = context.read<GeJuListViewModel>();
     Navigator.pushNamed(
       context,
       '/qizhengsiyu/ge_ju/detail',
-      arguments: {
-        'rule': rule,
-        'isBuiltIn': viewModel.isBuiltIn(rule.id),
-      },
+      arguments: rule.id,
     ).then((_) {
       // 返回时刷新列表
       context.read<GeJuListViewModel>().refreshRules();

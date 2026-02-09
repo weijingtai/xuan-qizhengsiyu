@@ -40,7 +40,7 @@ dependencies:
 
   dotted_border: ^3.1.0
   common:
-    path: ../../common
+    path: ../../xuan-common
 
   qizhengsiyu:
     path: ../
@@ -93,3 +93,5 @@ flutter:
     - assets/shen_sha/
     - assets/qizhengsiyu/
     - assets/qizhengsiyu/ge_ju/
+    - assets/qizhengsiyu/ge_ju/rules/
+    - assets/qizhengsiyu/ge_ju/content/

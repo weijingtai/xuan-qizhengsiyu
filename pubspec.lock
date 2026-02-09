@@ -180,7 +180,7 @@ packages:
   common:
     dependency: "direct main"
     description:
-      path: "../common"
+      path: "../xuan-common"
       relative: true
     source: path
     version: "1.0.0+1"
@@ -880,7 +880,7 @@ packages:
     source: hosted
     version: "2.3.0"
   persistence_core:
-    dependency: transitive
+    dependency: "direct main"
     description:
       path: core
       ref: HEAD

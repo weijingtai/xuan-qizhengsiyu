@@ -1,0 +1,58 @@
+[
+  {
+    "id": "guige_001_gui_ge",
+    "name": "贵格",
+    "variants": [
+      {
+        "source": "《贵格》",
+        "description": "官星格局推断",
+        "books": "果老星宗",
+        "className": "贵格格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "guige_002_jian_ge",
+    "name": "贱格",
+    "variants": [
+      {
+        "source": "《贵格》",
+        "description": "主灾祸的星格",
+        "books": "果老星宗",
+        "className": "贵格格局",
+        "jiXiong": "凶",
+        "geJuType": "贱"
+      }
+    ]
+  },
+  {
+    "id": "guige_003_pin_ge",
+    "name": "贫格",
+    "variants": [
+      {
+        "source": "《贵格》",
+        "description": "主失财凶灾的星格",
+        "books": "果老星宗",
+        "className": "贵格格局",
+        "jiXiong": "凶",
+        "geJuType": "贫"
+      }
+    ]
+  },
+  {
+    "id": "guige_004_ji_ge",
+    "name": "疾格",
+    "variants": [
+      {
+        "source": "《贵格》",
+        "description": "主疾病凶险的星格",
+        "books": "果老星宗",
+        "className": "贵格格局",
+        "jiXiong": "凶",
+        "geJuType": "疾"
+      }
+    ]
+  }
+]

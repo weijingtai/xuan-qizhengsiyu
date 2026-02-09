@@ -23,6 +23,30 @@ class RuleNotFoundError extends GeJuError {
   RuleNotFoundError(this.ruleId) : super('格局不存在: $ruleId');
 }
 
+/// 条件方案未找到错误
+class ConditionSetNotFoundError extends GeJuError {
+  final String conditionSetId;
+
+  ConditionSetNotFoundError(this.conditionSetId)
+      : super('判断方案不存在: $conditionSetId');
+}
+
+/// 注解未找到错误
+class AnnotationNotFoundError extends GeJuError {
+  final String annotationId;
+
+  AnnotationNotFoundError(this.annotationId)
+      : super('注解不存在: $annotationId');
+}
+
+/// 删除需要原因错误
+class DeletionRequiresReasonError extends GeJuError {
+  final String entityId;
+
+  DeletionRequiresReasonError(this.entityId)
+      : super('删除 $entityId 需要提供原因（存在引用关系）');
+}
+
 /// 规则验证错误
 class RuleValidationError extends GeJuError {
   final List<String> errors;

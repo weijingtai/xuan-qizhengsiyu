@@ -1,5 +1,8 @@
 import 'package:common/enums.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju_model.dart';
+import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_annotation.dart';
+import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_condition_set.dart';
+import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_variant.dart';
 import 'ge_ju_rule.dart';
 
 /// 格局判断结果模型
@@ -32,6 +35,12 @@ class GeJuResult {
   /// 匹配的条件描述列表（用于展示为什么匹配）
   final List<String> matchedConditionDescriptions;
 
+  /// 匹配的流派列表
+  final List<String> matchSchools;
+
+  /// 匹配的 ConditionSet ID（新模型）
+  final String? conditionSetId;
+
   GeJuResult({
     required this.patternId,
     required this.patternName,
@@ -42,9 +51,11 @@ class GeJuResult {
     required this.source,
     required this.scope,
     this.matchedConditionDescriptions = const [],
+    this.matchSchools = const [],
+    this.conditionSetId,
   });
 
-  /// 从 GeJuRule 和匹配状态创建结果
+  /// 从 GeJuRule 和匹配状态创建结果 (Legacy support)
   factory GeJuResult.fromRule(
     GeJuRule rule, {
     required bool matched,
@@ -54,12 +65,62 @@ class GeJuResult {
       patternId: rule.id,
       patternName: rule.name,
       matched: matched,
+      // ignore: deprecated_member_use_from_same_package
       jiXiong: rule.jiXiong,
+      // ignore: deprecated_member_use_from_same_package
       geJuType: rule.geJuType,
+      // ignore: deprecated_member_use_from_same_package
       description: rule.description,
+      // ignore: deprecated_member_use_from_same_package
       source: rule.source,
       scope: rule.scope,
       matchedConditionDescriptions: matchedConditionDescriptions,
+      matchSchools: [],
+    );
+  }
+
+  /// 从 GeJuRule + GeJuVariant 创建结果 (Legacy)
+  @Deprecated('Use GeJuResult.fromConditionSet instead')
+  factory GeJuResult.fromVariant(
+    GeJuRule rule,
+    GeJuVariant variant, {
+    required bool matched,
+    List<String> matchedConditionDescriptions = const [],
+  }) {
+    return GeJuResult(
+      patternId: rule.id,
+      patternName: rule.name,
+      matched: matched,
+      jiXiong: variant.jiXiong,
+      geJuType: variant.geJuType,
+      description: variant.description,
+      source: variant.source,
+      scope: rule.scope,
+      matchedConditionDescriptions: matchedConditionDescriptions,
+      matchSchools: variant.schools,
+    );
+  }
+
+  /// 从 GeJuRule + GeJuConditionSet + 可选 GeJuAnnotation 创建结果 (推荐)
+  factory GeJuResult.fromConditionSet(
+    GeJuRule rule,
+    GeJuConditionSet cs, {
+    GeJuAnnotation? annotation,
+    required bool matched,
+    List<String> matchedConditionDescriptions = const [],
+  }) {
+    return GeJuResult(
+      patternId: rule.id,
+      patternName: rule.name,
+      matched: matched,
+      jiXiong: annotation?.jiXiong ?? JiXiongEnum.PING,
+      geJuType: annotation?.geJuType ?? GeJuType.pin,
+      description: annotation?.description ?? '',
+      source: cs.source?.bookName ?? '',
+      scope: rule.scope,
+      matchedConditionDescriptions: matchedConditionDescriptions,
+      matchSchools: cs.schools ?? [],
+      conditionSetId: cs.id,
     );
   }
 
@@ -74,6 +135,8 @@ class GeJuResult {
       'source': source,
       'scope': scope.name,
       'matchedConditionDescriptions': matchedConditionDescriptions,
+      'matchSchools': matchSchools,
+      if (conditionSetId != null) 'conditionSetId': conditionSetId,
     };
   }
 

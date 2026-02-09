@@ -1,0 +1,240 @@
+[
+  {
+    "id": "hege_001_shen_ming_he_ge",
+    "name": "身命合格",
+    "variants": [
+      {
+        "source": "《合格》",
+        "description": "非富即贵",
+        "books": "果老星宗",
+        "className": "合格格局",
+        "jiXiong": "吉",
+        "geJuType": "富"
+      }
+    ]
+  },
+  {
+    "id": "hege_002_ming_zhu_he_ge",
+    "name": "命主合格",
+    "variants": [
+      {
+        "source": "《合格》",
+        "description": "16种吉格",
+        "books": "果老星宗",
+        "className": "合格格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "hege_003_tian_zhu_he_ge",
+    "name": "田主合格",
+    "variants": [
+      {
+        "source": "《合格》",
+        "description": "田宅丰盛",
+        "books": "果老星宗",
+        "className": "合格格局",
+        "jiXiong": "吉",
+        "geJuType": "富"
+      }
+    ]
+  },
+  {
+    "id": "hege_004_cai_xing_he_ge",
+    "name": "财星合格",
+    "variants": [
+      {
+        "source": "《合格》",
+        "description": "事业顺利",
+        "books": "果老星宗",
+        "className": "合格格局",
+        "jiXiong": "吉",
+        "geJuType": "富"
+      }
+    ]
+  },
+  {
+    "id": "hege_005_lu_zhu_he_ge",
+    "name": "禄主合格",
+    "variants": [
+      {
+        "source": "《合格》",
+        "description": "富贵有财",
+        "books": "果老星宗",
+        "className": "合格格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "hege_006_fu_xing_he_ge",
+    "name": "福星合格",
+    "variants": [
+      {
+        "source": "《合格》",
+        "description": "福气丰隆",
+        "books": "果老星宗",
+        "className": "合格格局",
+        "jiXiong": "吉",
+        "geJuType": "福"
+      }
+    ]
+  },
+  {
+    "id": "hege_007_qi_xing_he_ge",
+    "name": "妻星合格",
+    "variants": [
+      {
+        "source": "《合格》",
+        "description": "夫妻和美",
+        "books": "果老星宗",
+        "className": "合格格局",
+        "jiXiong": "吉",
+        "geJuType": "婚"
+      }
+    ]
+  },
+  {
+    "id": "hege_008_si_xing_he_ge",
+    "name": "嗣星合格",
+    "variants": [
+      {
+        "source": "《合格》",
+        "description": "儿孙兴旺",
+        "books": "果老星宗",
+        "className": "合格格局",
+        "jiXiong": "吉",
+        "geJuType": "嗣"
+      }
+    ]
+  },
+  {
+    "id": "jige_009_shen_xing_ji_ge",
+    "name": "身星忌格",
+    "variants": [
+      {
+        "source": "《合格》",
+        "description": "11种凶格",
+        "books": "果老星宗",
+        "className": "忌格格局",
+        "jiXiong": "凶",
+        "geJuType": "贱"
+      }
+    ]
+  },
+  {
+    "id": "jige_010_ming_zhu_ji_ge",
+    "name": "命主忌格",
+    "variants": [
+      {
+        "source": "《合格》",
+        "description": "命运多舛",
+        "books": "果老星宗",
+        "className": "忌格格局",
+        "jiXiong": "凶",
+        "geJuType": "贱"
+      }
+    ]
+  },
+  {
+    "id": "jige_011_tian_zhu_ji_ge",
+    "name": "田主忌格",
+    "variants": [
+      {
+        "source": "《合格》",
+        "description": "田宅衰败",
+        "books": "果老星宗",
+        "className": "忌格格局",
+        "jiXiong": "凶",
+        "geJuType": "贫"
+      }
+    ]
+  },
+  {
+    "id": "jige_012_cai_xing_ji_ge",
+    "name": "财星忌格",
+    "variants": [
+      {
+        "source": "《合格》",
+        "description": "损失钱财",
+        "books": "果老星宗",
+        "className": "忌格格局",
+        "jiXiong": "凶",
+        "geJuType": "贫"
+      }
+    ]
+  },
+  {
+    "id": "jige_013_lu_zhu_ji_ge",
+    "name": "禄主忌格",
+    "variants": [
+      {
+        "source": "《合格》",
+        "description": "官运不顺",
+        "books": "果老星宗",
+        "className": "忌格格局",
+        "jiXiong": "凶",
+        "geJuType": "贱"
+      }
+    ]
+  },
+  {
+    "id": "jige_014_fu_zhu_ji_ge",
+    "name": "福主忌格",
+    "variants": [
+      {
+        "source": "《合格》",
+        "description": "难享福气",
+        "books": "果老星宗",
+        "className": "忌格格局",
+        "jiXiong": "凶",
+        "geJuType": "贫"
+      }
+    ]
+  },
+  {
+    "id": "jige_015_qi_xing_ji_ge",
+    "name": "妻星忌格",
+    "variants": [
+      {
+        "source": "《合格》",
+        "description": "配偶不利",
+        "books": "果老星宗",
+        "className": "忌格格局",
+        "jiXiong": "凶",
+        "geJuType": "婚"
+      }
+    ]
+  },
+  {
+    "id": "jige_016_zi_xing_ji_ge",
+    "name": "子星忌格",
+    "variants": [
+      {
+        "source": "《合格》",
+        "description": "不利儿孙",
+        "books": "果老星宗",
+        "className": "忌格格局",
+        "jiXiong": "凶",
+        "geJuType": "嗣"
+      }
+    ]
+  },
+  {
+    "id": "jige_017_zhu_xing_hu_ge",
+    "name": "诸星互格",
+    "variants": [
+      {
+        "source": "《合格》",
+        "description": "星曜互垣",
+        "books": "果老星宗",
+        "className": "忌格格局",
+        "jiXiong": "凶",
+        "geJuType": "贱"
+      }
+    ]
+  }
+]

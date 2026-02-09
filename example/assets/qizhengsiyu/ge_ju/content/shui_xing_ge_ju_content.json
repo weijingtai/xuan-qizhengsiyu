@@ -1,0 +1,1312 @@
+[
+  {
+    "id": "shui_001_jun_chen_qing_hui",
+    "name": "君臣庆会",
+    "variants": [
+      {
+        "source": "《果老星宗·星格贵贱总赋》",
+        "description": "君臣庆会，钟鸣鼎食之家。金水为官福恩令命元，朝辅太阳者是。",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "shui_002_shui_cou_tian_chi",
+    "name": "水凑天池",
+    "variants": [
+      {
+        "source": "《果老星宗·星格贵贱总赋》",
+        "description": "水凑天池，三峡词源之豪迈。春生水为用神，躔壁度，以亥为天池。",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "shui_003_gan_xuan_kun_zhuan",
+    "name": "干旋坤转",
+    "variants": [
+      {
+        "source": "《果老星宗·星格贵贱总赋》",
+        "description": "干旋坤转，有庆之人。",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "shui_004_luan_yu_nan_xing",
+    "name": "鸾轝南幸",
+    "variants": [
+      {
+        "source": "《果老星宗·星格贵贱总赋》",
+        "description": "金果拱日，在星房度。水南幸，人主之尊。",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "shui_005_feng_jia_bei_gui",
+    "name": "凤驾北归",
+    "variants": [
+      {
+        "source": "《果老星宗·星格贵贱总赋》",
+        "description": "凤驾北归，帝王之象。",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "shui_006_yi_gan_jiu_shi",
+    "name": "移干就湿",
+    "variants": [
+      {
+        "source": "《果老星宗·星格贵贱总赋》",
+        "description": "移干就湿，必主贫寒。",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "凶",
+        "geJuType": "贫"
+      }
+    ]
+  },
+  {
+    "id": "shui_007_feng_yu_zuo_lin",
+    "name": "风雨作霖",
+    "variants": [
+      {
+        "source": "《果老星宗·星格贵贱总赋》",
+        "description": "风雨作霖，有济世安民之略。果风毕雨，金水太阳躔毕箕度是也。",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "shui_008_jin_shui_bei_chi",
+    "name": "金水背驰",
+    "variants": [
+      {
+        "source": "《果老星宗·八格赋》",
+        "description": "金宝退留，用而无用，来而不来。愚格。",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "凶",
+        "geJuType": "愚"
+      }
+    ]
+  },
+  {
+    "id": "shui_009_jin_shui_fen_ming",
+    "name": "金水分明",
+    "variants": [
+      {
+        "source": "《果老星宗·论诸星总断》",
+        "description": "金水分明，水前金后，不宜混失退逆。贵。",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "shui_010_jin_shui_hui_yuan",
+    "name": "金水会垣",
+    "variants": [
+      {
+        "source": "《果老星宗·论诸星总断》",
+        "description": "金水会垣，水忌退于金后。水在金前，水受金生。贵。",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "shui_011_jin_han_shui_leng",
+    "name": "金寒水冷",
+    "variants": [
+      {
+        "source": "《果老星宗·论诸星总断》",
+        "description": "冬生金寒，水冷，未免孤寒之苦。",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "凶",
+        "geJuType": "贫"
+      }
+    ]
+  },
+  {
+    "id": "shui_012_jin_shui_wei_shi",
+    "name": "金水为仕",
+    "variants": [
+      {
+        "source": "《果老星宗·论诸星总断》",
+        "description": "金水躔奎壁，无例外必为仕人。金水躔奎壁，奎壁乃贵人星，文薮星。当云：五星连壁，五星聚奎，此乃文地。金躔参壁度，曰：金生水。水躔奎斗度曰：水生木，相生之德不混，为文人贵士也。",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "shui_013_jin_shui_hu_yuan",
+    "name": "金水互垣",
+    "variants": [
+      {
+        "source": "《果老星宗·论诸星总断》",
+        "description": "金居互济，终身而有庆。水居金垣，金入水垣，乃大吉也。",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "shui_014_jin_shui_gong_cheng",
+    "name": "金水功成",
+    "variants": [
+      {
+        "source": "《果老星宗·论诸星总断》",
+        "description": "金水生命中位，益佐官禄，其功名可遂也。",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "shui_015_shui_an_tian_zhai",
+    "name": "水暗田宅",
+    "variants": [
+      {
+        "source": "《果老星宗·论诸星总断》",
+        "description": "水星本无定性，飘流之星也，况又化暗守田宅，主祖业无依。",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "凶",
+        "geJuType": "贫"
+      }
+    ]
+  },
+  {
+    "id": "shui_016_shui_zhi_si_shen",
+    "name": "水至巳申",
+    "variants": [
+      {
+        "source": "《果老星宗·论诸星总断》",
+        "description": "水至巳申诚入局，气象俱新（水在巳申）",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "shui_017_shui_ri_tong_zhou",
+    "name": "水日同周",
+    "variants": [
+      {
+        "source": "《果老星宗·论诸星总断》",
+        "description": "水日合星张之位，陛庭补衮赞皇明（水日在午）",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "shui_018_jin_shui_hui_she",
+    "name": "金水会蛇",
+    "variants": [
+      {
+        "source": "《果老星宗·躔度赋》",
+        "description": "金水凑于蛇穴，岂惟鹤发而休（金水会蛇在巳）",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "吉",
+        "geJuType": "寿"
+      }
+    ]
+  },
+  {
+    "id": "shui_019_shui_liu_an_chun_wei",
+    "name": "水流鹌鹑尾",
+    "variants": [
+      {
+        "source": "《果老星宗·躔度赋》",
+        "description": "水流鹌鹑尾，巧计千般（水星在巳）",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "平",
+        "geJuType": "贤"
+      }
+    ]
+  },
+  {
+    "id": "shui_020_shui_hui_ji_du",
+    "name": "水会计都",
+    "variants": [
+      {
+        "source": "《果老星宗·躔度赋》",
+        "description": "掠他人之物以利己，盖缘水会计都（水主智谋，计好狡猾）",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "凶",
+        "geJuType": "贱"
+      }
+    ]
+  },
+  {
+    "id": "shui_021_shui_huo_xiang_zhan",
+    "name": "水火相战",
+    "variants": [
+      {
+        "source": "《果老星宗·躔度赋》",
+        "description": "一身迍蹇，火星怕与水星交战",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "凶",
+        "geJuType": "贱"
+      }
+    ]
+  },
+  {
+    "id": "shui_022_shui_liu_yang_zhou",
+    "name": "水流扬州",
+    "variants": [
+      {
+        "source": "《果老星宗·躔度赋》",
+        "description": "眉颦常不足，只嫌水到扬州（水星在丑宫）",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "凶",
+        "geJuType": "贫"
+      }
+    ]
+  },
+  {
+    "id": "shui_023_shui_lin_shuang_nv",
+    "name": "水临双女",
+    "variants": [
+      {
+        "source": "《果老星宗·历象赋》",
+        "description": "给谏功臣，定是水临双女（水星在巳）",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "shui_024_jin_huo_tong_cai",
+    "name": "金火同财",
+    "variants": [
+      {
+        "source": "《果老星宗·历象赋》",
+        "description": "少失资财，金火同居财位（金火忌守财宫）",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "凶",
+        "geJuType": "贫"
+      }
+    ]
+  },
+  {
+    "id": "shui_025_shui_huo_ju_tian",
+    "name": "水火居田",
+    "variants": [
+      {
+        "source": "《果老星宗·历象赋》",
+        "description": "水火并居田宅，破家荡产（水火忌居田宅）。祖财困辱田宅，火被水来侵。",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "凶",
+        "geJuType": "贫"
+      }
+    ]
+  },
+  {
+    "id": "shui_026_shui_su_lin_cai",
+    "name": "水宿临财",
+    "variants": [
+      {
+        "source": "《果老星宗·历象赋》",
+        "description": "财帛衰退，被水宿加临（水星忌居财宫）",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "凶",
+        "geJuType": "贫"
+      }
+    ]
+  },
+  {
+    "id": "shui_027_shui_mu_chong_lin",
+    "name": "水木重临",
+    "variants": [
+      {
+        "source": "《果老星宗·元通赋》",
+        "description": "水木重临，文章秀丽。[水木相逢]",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "shui_028_shui_jin_tong_chou",
+    "name": "水金同丑",
+    "variants": [
+      {
+        "source": "《果老星宗·通微赋》",
+        "description": "泉枯牛荒，须凭金曜生成。[水金同丑]",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "平",
+        "geJuType": "富"
+      }
+    ]
+  },
+  {
+    "id": "shui_029_shui_bei_tong_du",
+    "name": "水孛同度",
+    "variants": [
+      {
+        "source": "《果老星宗·通微赋》",
+        "description": "水孛同度性偏淫。[水孛照身命]",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "凶",
+        "geJuType": "贱"
+      }
+    ]
+  },
+  {
+    "id": "shui_030_chao_yun_mu_yu",
+    "name": "朝云暮雨",
+    "variants": [
+      {
+        "source": "《果老星宗·通微赋》",
+        "description": "朝云，暮雨，水孛俱坐迁移。[水孛淫荡星也]",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "凶",
+        "geJuType": "贱"
+      }
+    ]
+  },
+  {
+    "id": "shui_031_shui_su_ju_qiang",
+    "name": "水宿居强",
+    "variants": [
+      {
+        "source": "《果老星宗·通微赋》",
+        "description": "水星无心常好动，向昼楚晋郑为强[水宜巳申辰宫]",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "shui_032_shui_xing_shou_ming",
+    "name": "水星守命",
+    "variants": [
+      {
+        "source": "《果老星宗·玉衡经》",
+        "description": "水如守命，多学少成。[水主智刚无常性]",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "平",
+        "geJuType": "贤"
+      }
+    ]
+  },
+  {
+    "id": "shui_033_shui_bei_tian_cai",
+    "name": "水孛田财",
+    "variants": [
+      {
+        "source": "《果老星宗·玉衡经》",
+        "description": "水孛如守田财，难招祖业[水孛漂流无定]",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "凶",
+        "geJuType": "贫"
+      }
+    ]
+  },
+  {
+    "id": "shui_034_shui_ji_xiang_xing",
+    "name": "水计相刑",
+    "variants": [
+      {
+        "source": "《果老星宗·玉衡经》",
+        "description": "水计相刑，怕居巳位[巳乃三刑之地]",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "凶",
+        "geJuType": "贱"
+      }
+    ]
+  },
+  {
+    "id": "shui_035_shui_ru_yin_gong",
+    "name": "水入寅宫",
+    "variants": [
+      {
+        "source": "《果老星宗·玉衡经》",
+        "description": "水入寅宫，喉喉壅塞[寅乃喉舌之府]",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "凶",
+        "geJuType": "贱"
+      }
+    ]
+  },
+  {
+    "id": "shui_036_tu_hun_shui_zhuo",
+    "name": "土混水浊",
+    "variants": [
+      {
+        "source": "《果老星宗·四时赋》",
+        "description": "土混水而致浊[ 冬水冰结土混不清]",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "凶",
+        "geJuType": "贱"
+      }
+    ]
+  },
+  {
+    "id": "shui_037_shui_fan_tu_beng",
+    "name": "水泛土崩",
+    "variants": [
+      {
+        "source": "《果老星宗·四时赋》",
+        "description": "受制之土见猛水，而崩溃四出[ 春夏生物之土乃为受制，遇水反崩溃]",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "凶",
+        "geJuType": "贱"
+      }
+    ]
+  },
+  {
+    "id": "shui_038_xia_shui_ku_he",
+    "name": "夏水枯涸",
+    "variants": [
+      {
+        "source": "《果老星宗·四时赋》",
+        "description": "六月之水最怕火日枯涸[六月水主辅阳，反为不美]",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "凶",
+        "geJuType": "贱"
+      }
+    ]
+  },
+  {
+    "id": "shui_039_dong_shui_nan_ben",
+    "name": "冬水南奔",
+    "variants": [
+      {
+        "source": "《果老星宗·四时赋》",
+        "description": "冬水喜于南奔，戌火忌于发露[居娄宿则吉，微弱宜藏]",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "shui_040_shui_dong_jin_han",
+    "name": "水冻金寒",
+    "variants": [
+      {
+        "source": "《果老星宗·四时赋》",
+        "description": "水冻金寒，纵相生而不发",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "凶",
+        "geJuType": "贫"
+      }
+    ]
+  },
+  {
+    "id": "shui_041_shui_run_zao_tu",
+    "name": "水润燥土",
+    "variants": [
+      {
+        "source": "《果老星宗·四时赋》",
+        "description": "刚燥之土遇水滋润[ 夏土干燥，爱水滋润]",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "shui_042_chen_xing_ju_yuan",
+    "name": "辰星居垣",
+    "variants": [
+      {
+        "source": "《果老星宗·十一曜定格》",
+        "description": "辰星居垣，水星入本垣为贵格。",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "shui_043_shui_xing_sheng_dian",
+    "name": "水星升殿",
+    "variants": [
+      {
+        "source": "《果老星宗·十一曜定格》",
+        "description": "水星升殿：水躔箕壁参轸四宿。",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "shui_044_shui_han_chan_po",
+    "name": "水涵蟾魄",
+    "variants": [
+      {
+        "source": "《果老星宗·十一曜定格》",
+        "description": "水涵蟾魄：月寒水冷何益，望前，望后尤佳。",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "平",
+        "geJuType": "贵"
+      },
+      {
+        "source": "《格局2》",
+        "description": "蟾，月宮也，未上見之。假使太陰星在未宮，又值水星同宮，謂之水涵蟾魄，極其清徹。凡人命主及命宮逢此者，貴不可言。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      },
+      {
+        "source": "《格局2》",
+        "description": "蟾，月宮也，未上見之。假使太陰星在未宮，又值水星同宮，謂之水涵蟾魄，極其清徹。凡人命主及命宮逢此者，貴不可言。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵",
+        "schoolId": "guolao"
+      },
+      {
+        "source": "《格局2》",
+        "description": "蟾，月宮也，未上見之。假使太陰星在未宮，又值水星同宮，謂之水涵蟾魄，極其清徹。凡人命主及命宮逢此者，貴不可言。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵",
+        "schools": [
+          "guolao"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "shui_045_jin_shui_xiang_han",
+    "name": "金水相涵",
+    "variants": [
+      {
+        "source": "《果老星宗·十一曜定格》",
+        "description": "金水相涵：冬生金寒水冷，余时昼夜皆吉。",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "shui_046_yuan_wu_chi_jing",
+    "name": "元武持旌",
+    "variants": [
+      {
+        "source": "《果老星宗·十一曜定格》",
+        "description": "元为元武星。水星持旌为贵格。",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      },
+      {
+        "source": "《格局2》",
+        "description": "元武者，北方壬癸水也。壬癸生於冬三月，與日月同宮，謂之：元武持旌。旌者，旗也。元武，水神也。言持旌，猶言得令也，主貴。\n祥雲拱月 [拱作扶。]\n氣星，木之餘奴也。與月同宮，謂之：拱月。氣在前，月在後，...",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贱"
+      },
+      {
+        "source": "《格局2》",
+        "description": "元武者，北方壬癸水也。壬癸生於冬三月，與日月同宮，謂之：元武持旌。旌者，旗也。元武，水神也。言持旌，猶言得令也，主貴。\n祥雲拱月 [拱作扶。]\n氣星，木之餘奴也。與月同宮，謂之：拱月。氣在前，月在後，...",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贱",
+        "schoolId": "guolao"
+      },
+      {
+        "source": "《格局2》",
+        "description": "元武者，北方壬癸水也。壬癸生於冬三月，與日月同宮，謂之：元武持旌。旌者，旗也。元武，水神也。言持旌，猶言得令也，主貴。\n祥雲拱月 [拱作扶。]\n氣星，木之餘奴也。與月同宮，謂之：拱月。氣在前，月在後，...",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贱",
+        "schools": [
+          "guolao"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "shui_047_shui_ju_tu_shi",
+    "name": "水居土室",
+    "variants": [
+      {
+        "source": "《果老星宗·十一曜定格》",
+        "description": "水居土室：水在子丑二宫。",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "shui_048_shui_cheng_huo_wei",
+    "name": "水乘火位",
+    "variants": [
+      {
+        "source": "《果老星宗·十一曜定格》",
+        "description": "水乘火位，水星入火位，水火相济。",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "平",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "shui_049_jin_shui_cong_yang",
+    "name": "金水从阳",
+    "variants": [
+      {
+        "source": "《果老星宗·十一曜定格》",
+        "description": "金水从阳：金水掌吉神，居垣殿，昼生者奇。",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "shui_050_san_tai_he_ge",
+    "name": "三台合格",
+    "variants": [
+      {
+        "source": "《果老星宗·十一曜定格》",
+        "description": "三台合格：午巳卯宫得日金水同行。",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "shui_051_tian_di_kai_ming",
+    "name": "天地开明",
+    "variants": [
+      {
+        "source": "《果老星宗·十一曜定格》",
+        "description": "天地开明：水申木亥，命安申亥，罗计子午。",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "shui_052_shui_huo_ji_ji",
+    "name": "水火既济",
+    "variants": [
+      {
+        "source": "《果老星宗·十一曜定格》",
+        "description": "水火既济：水子火午，命坐子午。",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      },
+      {
+        "source": "《果老星宗·灵台星格》",
+        "description": "水火既济：水先入宫，火后入宫，同居一位以照命者是也。盖水性润下，火性炎上，上下相得，而不相违，切嫌一二凶星入侵，则反生祸。更若水星为宫主，为命主，为禄主，则福最厚，富贵双全之命也。",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "吉",
+        "geJuType": "富"
+      },
+      {
+        "source": "《格局2》",
+        "description": "水火同宮而水居水度，火居火度，各居本度，謂之水火既濟。如在亥宮，有壁水室火，巳宮有翼火軫水，申宮觜火參水也，寅宮則尾火箕水，皆謂之既濟。身命二宮逢之，並作富貴而推。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "富"
+      },
+      {
+        "source": "《格局2》",
+        "description": "水火同宮而水居水度，火居火度，各居本度，謂之水火既濟。如在亥宮，有壁水室火，巳宮有翼火軫水，申宮觜火參水也，寅宮則尾火箕水，皆謂之既濟。身命二宮逢之，並作富貴而推。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "富",
+        "schoolId": "guolao"
+      },
+      {
+        "source": "《格局2》",
+        "description": "水火同宮而水居水度，火居火度，各居本度，謂之水火既濟。如在亥宮，有壁水室火，巳宮有翼火軫水，申宮觜火參水也，寅宮則尾火箕水，皆謂之既濟。身命二宮逢之，並作富貴而推。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "富",
+        "schools": [
+          "guolao"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "shui_053_feng_lei_gu_wu",
+    "name": "风雷鼓舞",
+    "variants": [
+      {
+        "source": "《果老星宗·十一曜定格》",
+        "description": "风雷鼓舞：水巳火卯，命辰合格。",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "shui_054_feng_lei_xiang_bo",
+    "name": "风雷相薄",
+    "variants": [
+      {
+        "source": "《果老星宗·十一曜定格》",
+        "description": "风雷相薄，水火交激之象。",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "凶",
+        "geJuType": "贱"
+      }
+    ]
+  },
+  {
+    "id": "shui_055_shui_huo_xiang_she",
+    "name": "水火相射",
+    "variants": [
+      {
+        "source": "《果老星宗·十一曜定格》",
+        "description": "水火相射：水午火子，或木卯戌，或火巳申。",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "凶",
+        "geJuType": "贱"
+      }
+    ]
+  },
+  {
+    "id": "shui_056_yu_yuan_shou_kun",
+    "name": "玉猿守昆",
+    "variants": [
+      {
+        "source": "《果老星宗·十一曜定格》",
+        "description": "玉猿守昆：水躔参度会日，命安水度者贵。",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "shui_057_shuang_yu_xi_shui",
+    "name": "双鱼戏水",
+    "variants": [
+      {
+        "source": "《果老星宗·十一曜定格》",
+        "description": "双鱼戏水，水星入亥宫为贵格。",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "shui_058_yu_nv_chang_e",
+    "name": "玉女嫦娥",
+    "variants": [
+      {
+        "source": "《果老星宗·十一曜定格》",
+        "description": "玉女嫦娥：水轸月张，命箕主贵，女貌倾国。",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "shui_059_yuan_wu_dang_quan",
+    "name": "元武当权",
+    "variants": [
+      {
+        "source": "《果老星宗·灵台星格》",
+        "description": "冬生人见水星，在亥子安命，乃元武当权。元武当台：歌云：巳宫立命水在轸，元武升垣诸杀顺。又兼一点太白来，富贵绵绵应不降低。若还中限见土星，重整门庭兴进永。",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "shui_060_li_kan_jiao_hui",
+    "name": "离坎交会",
+    "variants": [
+      {
+        "source": "《果老星宗·灵台星格》",
+        "description": "离坎交会：水星禀北方坎宫之气，火星禀南方离宫之气，夜生人火星在命中，水星正照，乃合此格，此格最主为人气概精神，法能剸裁繁剧，禄位优厚。若水火二星同守命宫，则是煎熬星矣，反主灾祸。",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "shui_061_zi_xing_fu_zheng",
+    "name": "子行父政",
+    "variants": [
+      {
+        "source": "《果老星宗·灵台星格》",
+        "description": "子行父政：太阴为水之副，月为母，水为子也。太阴之庙在未，太阴居之当然也，今则太阴却居丑，水星却在未，又于未上安命，亦亦行行父政之说也。此格主人艰难于始，逸乐于终，以其干蛊之早也。谓且父之创制，子当继之，父之德政，予当行之。此谓人有贤子而继父志，不亦善乎！",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "shui_062_shui_zhu_dong_nan",
+    "name": "水注东南",
+    "variants": [
+      {
+        "source": "《果老星宗·灵台星格》",
+        "description": "水注东南：巽居巳位东南之地也，四方之水则皆会之于箕，虽北有溟浡，南有大海，西有流沙，而水之倾注则归于东海，以势不满于东南也。水星在巳，而木星与命宫在寅，乃合此格。酉生人与寅生人，得水星在巳，木星与命在寅是也。盖寅属尾，尾巴在燕，酉属毕，毕分在赵，独得水正气，而流入于巽，是水有所归，况与木命同在寅，或木命与寅生同在酉，得水日在四正之宫，则又为水归地户格。",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "shui_063_huo_shui_wei_ji",
+    "name": "火水未济",
+    "variants": [
+      {
+        "source": "《果老星宗·灵台星格》",
+        "description": "火水未济：火先入宫，水后入宫，同居一宫，以照命者是也。盖火自上炎，水自下注，相违而不相向，安得能和而能济。曰：未济男之穷也。格中带此者，主贫贱。此系忌格。",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "凶",
+        "geJuType": "贫"
+      }
+    ]
+  },
+  {
+    "id": "shui_065_shui_huo_xiang_xing",
+    "name": "水火相刑",
+    "variants": [
+      {
+        "source": "《果老星宗·布局补遗》",
+        "description": "水火相刑：歌曰：命立卯宫在房度，生于夏令主炎库。行限午宫见水星，水入午宫宜柳土。反凶为吉福无边，金玉争光敌国富。若教脱水鬼门关，五十三四归泉路。",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "平",
+        "geJuType": "富"
+      }
+    ]
+  },
+  {
+    "id": "shui_066_shui_tu_zao_xing",
+    "name": "水土遭刑",
+    "variants": [
+      {
+        "source": "《果老星宗·布局补遗》",
+        "description": "水木遭刑：歌云：申宫立命水为主，限戌恩金在奎度。金木相刑恩受制，反吉为凶横死鬼。限行亥宫见土星，土入江湖壁水度。也教富贵一时来，一十五年花锦丽。脱土半百危十五，溺死官刑骨肉忌。行奎度，在火宫则金受制，行亥见土，则能生金，金生水则发，到危则被土克。",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "凶",
+        "geJuType": "夭"
+      }
+    ]
+  },
+  {
+    "id": "shui_067_jin_shui_xing_qiao",
+    "name": "金水性巧",
+    "variants": [
+      {
+        "source": "《果老星宗·金箱歌》",
+        "description": "金水巧：金水主人多精彩，自然巧劣心中藏。",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "吉",
+        "geJuType": "贤"
+      }
+    ]
+  },
+  {
+    "id": "shui_068_shui_bei_chang_you",
+    "name": "水孛倡优",
+    "variants": [
+      {
+        "source": "《果老星宗·金箱歌》",
+        "description": "水孛倡优：女逢水孛是娼优，不是娼优缁素娘。",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "凶",
+        "geJuType": "贱"
+      }
+    ]
+  },
+  {
+    "id": "shui_069_jin_shui_bei_xian",
+    "name": "金水孛咸",
+    "variants": [
+      {
+        "source": "《果老星宗·帘幕歌，论女命》",
+        "description": "金池孛咸：妇人若见金水孛，三改嫁兮有何说。咸池带水与孛星，朝云暮雨情不歇。",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "凶",
+        "geJuType": "贱"
+      }
+    ]
+  },
+  {
+    "id": "shui_070_jin_shui_bei_mu",
+    "name": "金水孛沐",
+    "variants": [
+      {
+        "source": "《果老星宗·帘幕歌，论女命》",
+        "description": "金水孛沐：妇人金水孛星迎，身命同临性偏偏淫。更兼沐浴在其间，离居奔走落风尘。",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "凶",
+        "geJuType": "贱"
+      }
+    ]
+  },
+  {
+    "id": "shui_071_shui_piao_yang_jiao",
+    "name": "水漂羊角",
+    "variants": [
+      {
+        "source": "《果老星宗·观星要诀》",
+        "description": "水漂羊角（娄度）。断躔，忌。",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "凶",
+        "geJuType": "贱"
+      }
+    ]
+  },
+  {
+    "id": "shui_072_shui_liu_ju_xie",
+    "name": "水流巨蟹",
+    "variants": [
+      {
+        "source": "《果老星宗·观星要诀》",
+        "description": "水流巨蟹（柳度）。断躔，忌。",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "凶",
+        "geJuType": "贱"
+      }
+    ]
+  },
+  {
+    "id": "shui_073_shui_qing_bao_ping",
+    "name": "水清宝瓶",
+    "variants": [
+      {
+        "source": "《果老星宗·元妙经解》",
+        "description": "子宫：水清宝瓶，得局贵格。",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      },
+      {
+        "source": "《格局2》",
+        "description": "寶瓶，子宮也。水星臨之，名曰水清寶瓶。但凡人命立子宮者有之。是以取貴。若得金星助合，富貴榮華，土木加之，不吉。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "凶",
+        "geJuType": "富"
+      },
+      {
+        "source": "《格局2》",
+        "description": "寶瓶，子宮也。水星臨之，名曰水清寶瓶。但凡人命立子宮者有之。是以取貴。若得金星助合，富貴榮華，土木加之，不吉。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "凶",
+        "geJuType": "富",
+        "schoolId": "guolao"
+      },
+      {
+        "source": "《格局2》",
+        "description": "寶瓶，子宮也。水星臨之，名曰水清寶瓶。但凡人命立子宮者有之。是以取貴。若得金星助合，富貴榮華，土木加之，不吉。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "凶",
+        "geJuType": "富",
+        "schools": [
+          "guolao"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "shui_074_shui_run_jin_ming",
+    "name": "水润金明",
+    "variants": [
+      {
+        "source": "《果老星宗·元妙经解》",
+        "description": "水金辰宫，贵格。",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "shui_075_ri_shui_cheng_wang",
+    "name": "日水乘旺",
+    "variants": [
+      {
+        "source": "《果老星宗·元妙经解》",
+        "description": "日水巳宫，贵格。",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "shui_076_shui_yang_xiang_hui",
+    "name": "水阳相会",
+    "variants": [
+      {
+        "source": "《果老星宗·元妙经解》",
+        "description": "水太阳在午宫。贵格。",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "shui_077_shui_ming_rong_xian",
+    "name": "水名荣显",
+    "variants": [
+      {
+        "source": "《果老星宗·元妙经解》",
+        "description": "水午宫。贵格。",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "shui_078_shui_bei_fu_chen",
+    "name": "水孛浮沉",
+    "variants": [
+      {
+        "source": "《果老星宗·元妙经解》",
+        "description": "水孛怕尾，忌带浮沉亡劫的耗等煞，火命限人尤畏。",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "凶",
+        "geJuType": "夭"
+      }
+    ]
+  },
+  {
+    "id": "shui_079_chang_jiang_hao_dang",
+    "name": "长江浩荡",
+    "variants": [
+      {
+        "source": "《果老星宗·玄玄妙论》",
+        "description": "水星落空谓之长江浩荡，退败无余。",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "凶",
+        "geJuType": "贫"
+      }
+    ]
+  },
+  {
+    "id": "shui_080_hong_shui_tao_tian",
+    "name": "洪水滔天",
+    "variants": [
+      {
+        "source": "《果老星宗·玄玄妙论》",
+        "description": "水星落空谓之长江浩荡，退败无余，如金会则洪水滔天，常有不测之灾。",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "凶",
+        "geJuType": "夭"
+      }
+    ]
+  },
+  {
+    "id": "shui_081_guang_ji_cheng_che",
+    "name": "光霁澄彻",
+    "variants": [
+      {
+        "source": "《果老星宗·七政四时论》",
+        "description": "春令之水，斯时冰霜冻冷，借木气火罗温之，自能变化，昼生水孛太阳同行名曰\"光霁澄彻\"谓之\"冰霜冻解\"心宇清吉，作事整肃，政令威仪，当主台省扬名。",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "shui_082_chun_shui_ji_jin",
+    "name": "春水忌金",
+    "variants": [
+      {
+        "source": "《果老星宗·七政四时论》",
+        "description": "春令之水，斯时冰霜冻冷，所忌金星相互作用。昼生为妙，夜生贫寒。",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "凶",
+        "geJuType": "贫"
+      }
+    ]
+  },
+  {
+    "id": "shui_083_xia_shui_feng_di",
+    "name": "夏水逢堤",
+    "variants": [
+      {
+        "source": "《果老星宗·七政四时论》",
+        "description": "经云：水盛而无土，堤防，遂归虚浊。若有土旺不以为倒限，论反主名利发达。惟六月之水最",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "shui_084_qiu_shui_qing_yuan",
+    "name": "秋水清源",
+    "variants": [
+      {
+        "source": "《果老星宗·七政四时论》",
+        "description": "秋令之水，七八月间既济万物，不宜受克，既能借土堤防而不泛滥，又能润土，结实万物，清源可爱，富贵荣华。若水受克泄者，皆水之气脉虚矣，却不为福。",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "吉",
+        "geJuType": "富"
+      }
+    ]
+  },
+  {
+    "id": "shui_085_dong_shui_san_ling",
+    "name": "冬水三令",
+    "variants": [
+      {
+        "source": "《果老星宗·七政四时论》",
+        "description": "斯时点水成冰，冻结寒滞，不能变化。得火为上令，得土为次令，得太阳佐之方可言令也。",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "shui_086_dong_jin_wu_yi",
+    "name": "冬金无义",
+    "variants": [
+      {
+        "source": "《果老星宗·七政四时论》",
+        "description": "然冬水自得其时，不用金生，使之见金，反为无义，乃曰：道义相忘唯喜在于火木也。",
+        "books": "果老星宗",
+        "className": "水星格局",
+        "jiXiong": "凶",
+        "geJuType": "贱"
+      }
+    ]
+  }
+]

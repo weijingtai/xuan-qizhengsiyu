@@ -1,0 +1,212 @@
+[
+  {
+    "id": "shisanceng_001_qi_cha_sai_mei",
+    "name": "齐插塞梅",
+    "variants": [
+      {
+        "source": "《十三层》",
+        "description": "命宫与木星的吉凶对应",
+        "books": "果老星宗",
+        "className": "十三层格局",
+        "jiXiong": "吉",
+        "geJuType": "富"
+      }
+    ]
+  },
+  {
+    "id": "shisanceng_002_jiao_mu_duan_chan",
+    "name": "角木断躔",
+    "variants": [
+      {
+        "source": "《十三层》",
+        "description": "遭受杀身之祸",
+        "books": "果老星宗",
+        "className": "十三层格局",
+        "jiXiong": "凶",
+        "geJuType": "夭"
+      }
+    ]
+  },
+  {
+    "id": "shisanceng_003_jin_qi_ren_ma",
+    "name": "金骑人马",
+    "variants": [
+      {
+        "source": "《十三层》",
+        "description": "获得福禄，遇罗睺不幸",
+        "books": "果老星宗",
+        "className": "十三层格局",
+        "jiXiong": "吉",
+        "geJuType": "富"
+      }
+    ]
+  },
+  {
+    "id": "shisanceng_004_shui_huo_xiang_xing",
+    "name": "水火相刑",
+    "variants": [
+      {
+        "source": "《十三层》",
+        "description": "没有福德",
+        "books": "果老星宗",
+        "className": "十三层格局",
+        "jiXiong": "凶",
+        "geJuType": "贫"
+      }
+    ]
+  },
+  {
+    "id": "shisanceng_005_jin_shen_chi_ren",
+    "name": "金神持刃",
+    "variants": [
+      {
+        "source": "《十三层》",
+        "description": "吉则为将军，凶则夭折",
+        "books": "果老星宗",
+        "className": "十三层格局",
+        "jiXiong": "平",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "shisanceng_006_xuan_wu_dang_tai",
+    "name": "元武当台",
+    "variants": [
+      {
+        "source": "《十三层》",
+        "description": "人富贵兴旺",
+        "books": "果老星宗",
+        "className": "十三层格局",
+        "jiXiong": "吉",
+        "geJuType": "富"
+      }
+    ]
+  },
+  {
+    "id": "shisanceng_007_zi_cheng_fu_wei",
+    "name": "子承父位",
+    "variants": [
+      {
+        "source": "《十三层》",
+        "description": "父子冲突，使人遭受刑害",
+        "books": "果老星宗",
+        "className": "十三层格局",
+        "jiXiong": "凶",
+        "geJuType": "贱"
+      }
+    ]
+  },
+  {
+    "id": "shisanceng_008_yue_ming_dou_fu",
+    "name": "月明斗府",
+    "variants": [
+      {
+        "source": "《十三层》",
+        "description": "吉凶不定",
+        "books": "果老星宗",
+        "className": "十三层格局",
+        "jiXiong": "平",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "shisanceng_009_xiang_yun_peng_yue",
+    "name": "祥云捧月",
+    "variants": [
+      {
+        "source": "《十三层》",
+        "description": "获得才华美貌",
+        "books": "果老星宗",
+        "className": "十三层格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "shisanceng_010_tai_yi_bao_chan",
+    "name": "太乙抱蟾",
+    "variants": [
+      {
+        "source": "《十三层》",
+        "description": "获得功名，遇计都有凶灾",
+        "books": "果老星宗",
+        "className": "十三层格局",
+        "jiXiong": "平",
+        "geJuType": "贵"
+      },
+      {
+        "source": "《格局2》",
+        "description": "[木 缹 之星是為太乙，又以巳為太乙。]\n未宮，月之樂宮也。月與孛同宮在未，孛入秦鬼，尤貴。謂之太乙抱蟾。未為月殿也，謂之蟾宮。凡人安命未宮者，逢此主大貴。詩曰：太陰在未號天圭，千載欣逢明聖時。月孛更...",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      },
+      {
+        "source": "《格局2》",
+        "description": "[木 缹 之星是為太乙，又以巳為太乙。]\n未宮，月之樂宮也。月與孛同宮在未，孛入秦鬼，尤貴。謂之太乙抱蟾。未為月殿也，謂之蟾宮。凡人安命未宮者，逢此主大貴。詩曰：太陰在未號天圭，千載欣逢明聖時。月孛更...",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵",
+        "schoolId": "guolao"
+      },
+      {
+        "source": "《格局2》",
+        "description": "[木 缹 之星是為太乙，又以巳為太乙。]\n未宮，月之樂宮也。月與孛同宮在未，孛入秦鬼，尤貴。謂之太乙抱蟾。未為月殿也，謂之蟾宮。凡人安命未宮者，逢此主大貴。詩曰：太陰在未號天圭，千載欣逢明聖時。月孛更...",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵",
+        "schools": [
+          "guolao"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "shisanceng_011_shui_shi_zao_xing",
+    "name": "水士遭刑",
+    "variants": [
+      {
+        "source": "《十三层》",
+        "description": "遭受凶灾",
+        "books": "果老星宗",
+        "className": "十三层格局",
+        "jiXiong": "凶",
+        "geJuType": "夭"
+      }
+    ]
+  },
+  {
+    "id": "shisanceng_012_jin_xing_ru_dou",
+    "name": "金星入斗",
+    "variants": [
+      {
+        "source": "《十三层》",
+        "description": "才华横溢，获得功名",
+        "books": "果老星宗",
+        "className": "十三层格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "shisanceng_013_ji_feng_dou_kou",
+    "name": "箕风斗口",
+    "variants": [
+      {
+        "source": "《十三层》",
+        "description": "遭受灾祸，妻离子散",
+        "books": "果老星宗",
+        "className": "十三层格局",
+        "jiXiong": "凶",
+        "geJuType": "贱"
+      }
+    ]
+  }
+]

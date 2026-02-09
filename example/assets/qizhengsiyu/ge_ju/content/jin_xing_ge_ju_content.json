@@ -1,0 +1,1488 @@
+[
+  {
+    "id": "jin_001_jun_chen_qing_hui",
+    "name": "君臣庆会",
+    "variants": [
+      {
+        "source": "《果老星宗·星格贵贱总赋》",
+        "description": "君臣庆会，钟鸣鼎食之家。金水为官福恩令命元，朝辅太阳者是。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "jin_002_shan_xiao_cheng_bao",
+    "name": "山啸呈宝",
+    "variants": [
+      {
+        "source": "《果老星宗·星格贵贱总赋》",
+        "description": "土金同落空亡。山啸呈宝，殿前作赋声摩空。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "jin_003_shi_li_jian_feng",
+    "name": "石砺剑锋",
+    "variants": [
+      {
+        "source": "《果老星宗·星格贵贱总赋》",
+        "description": "石砺剑锋，塞上封侯建功节。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "jin_004_zhu_cang_yuan_hai",
+    "name": "珠藏渊海",
+    "variants": [
+      {
+        "source": "《果老星宗·星格贵贱总赋》",
+        "description": "珠藏渊海，万人头上之英雄。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "jin_005_hu_ju_long_pan",
+    "name": "虎踞龙蟠",
+    "variants": [
+      {
+        "source": "《果老星宗·星格贵贱总赋》",
+        "description": "金果为龙虎之星，各得其用，而照守命宫者，佳。虎踞龙蟠，当朝之士。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "jin_006_yun_jian_yue_zhuo",
+    "name": "云间鸑鷟",
+    "variants": [
+      {
+        "source": "《果老星宗·星格贵贱总赋》",
+        "description": "云间鸑鷟，当为邸省之贤。午宫坐命，金气二星入宫坐命。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "贤"
+      }
+    ]
+  },
+  {
+    "id": "jin_007_tian_shang_qi_lin",
+    "name": "天上麒麟",
+    "variants": [
+      {
+        "source": "《果老星宗·星格贵贱总赋》",
+        "description": "天上麒麟，定数东宫之贵。金果辰，木在卯，而在卯辰坐命者是。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "jin_008_jin_guan_ding_cui",
+    "name": "金冠顶翠",
+    "variants": [
+      {
+        "source": "《果老星宗·星格贵贱总赋》",
+        "description": "金冠顶翠，紫诰金花。金冠指金也，顶翠指木也，金宫会木以合此格也。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "jin_009_yu_chu_kun_gang",
+    "name": "玉出昆冈",
+    "variants": [
+      {
+        "source": "《果老星宗·星格贵贱总赋》",
+        "description": "玉出昆冈，罗帏绣幕。玉指金也，昆冈指土也，金土斗度逢空为合格。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "富"
+      }
+    ]
+  },
+  {
+    "id": "jin_010_luan_yu_nan_xing",
+    "name": "鸾轝南幸",
+    "variants": [
+      {
+        "source": "《果老星宗·星格贵贱总赋》",
+        "description": "金果拱日，在星房度。水南幸，人主之尊。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "jin_011_feng_jia_bei_gui",
+    "name": "凤驾北归",
+    "variants": [
+      {
+        "source": "《果老星宗·星格贵贱总赋》",
+        "description": "凤驾北归，帝王之象。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "jin_012_yi_gan_jiu_shi",
+    "name": "移干就湿",
+    "variants": [
+      {
+        "source": "《果老星宗·星格贵贱总赋》",
+        "description": "移干就湿，必主贫寒。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "凶",
+        "geJuType": "贫"
+      }
+    ]
+  },
+  {
+    "id": "jin_013_jin_wu_cheng_rui",
+    "name": "金乌呈瑞",
+    "variants": [
+      {
+        "source": "《果老星宗·星格贵贱总赋》",
+        "description": "金乌呈瑞，富贵两全。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "富"
+      }
+    ]
+  },
+  {
+    "id": "jin_014_feng_yu_zuo_lin",
+    "name": "风雨作霖",
+    "variants": [
+      {
+        "source": "《果老星宗·星格贵贱总赋》",
+        "description": "风雨作霖，有济世安民之略。果风毕雨，金水太阳躔毕箕度是也。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "jin_015_lao_bang_han_zhu",
+    "name": "老蚌含珠",
+    "variants": [
+      {
+        "source": "《果老星宗·星格贵贱总赋》",
+        "description": "老蚌含珠，乡闾望重。土金在亥子和辰巳宫，须金土为用神者。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "jin_016_su_yue_liu_tian",
+    "name": "素月流天",
+    "variants": [
+      {
+        "source": "《果老星宗·星格贵贱总赋》",
+        "description": "素月流天见金，而官居极品。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "jin_017_jin_shui_bei_chi",
+    "name": "金水背驰",
+    "variants": [
+      {
+        "source": "《果老星宗·八格赋》",
+        "description": "金宝退留，用而无用，来而不来。愚格。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "凶",
+        "geJuType": "愚"
+      }
+    ]
+  },
+  {
+    "id": "jin_018_jin_shui_fen_ming",
+    "name": "金水分明",
+    "variants": [
+      {
+        "source": "《果老星宗·论诸星总断》",
+        "description": "金水分明，水前金后，不宜混失退逆。贵。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "jin_019_jin_shui_hui_yuan",
+    "name": "金水会垣",
+    "variants": [
+      {
+        "source": "《果老星宗·论诸星总断》",
+        "description": "金水会垣，水忌退于金后。水在金前，水受金生。贵。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "jin_020_jin_han_shui_leng",
+    "name": "金寒水冷",
+    "variants": [
+      {
+        "source": "《果老星宗·论诸星总断》",
+        "description": "冬生金寒，水冷，未免孤寒之苦。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "凶",
+        "geJuType": "贫"
+      }
+    ]
+  },
+  {
+    "id": "jin_021_jin_shui_wei_shi",
+    "name": "金水为仕",
+    "variants": [
+      {
+        "source": "《果老星宗·论诸星总断》",
+        "description": "金水躔奎壁，奎壁乃贵人星，文薮星。当云：五星连壁，五星聚奎，此乃文地。金躔参壁度，曰：金生水。水躔奎斗度曰：水生木，相生之德不混，为文人贵士也。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "jin_022_jin_shui_hu_yuan",
+    "name": "金水互垣",
+    "variants": [
+      {
+        "source": "《果老星宗·论诸星总断》",
+        "description": "水居金垣，金入水垣，乃大吉也。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "jin_023_jin_bei_qi_ma",
+    "name": "金孛骑马",
+    "variants": [
+      {
+        "source": "《果老星宗·论诸星总断》",
+        "description": "金孛入驿马桃花宫上，必放荡淫邪。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "凶",
+        "geJuType": "贱"
+      }
+    ]
+  },
+  {
+    "id": "jin_024_jin_huo_yi_yuan",
+    "name": "金火易垣",
+    "variants": [
+      {
+        "source": "《果老星宗·论诸星总断》",
+        "description": "火金不可易垣。火不可入金垣，金不可入火垣，疑其相攻相克也。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "凶",
+        "geJuType": "贫"
+      }
+    ]
+  },
+  {
+    "id": "jin_025_jin_shui_gong_cheng",
+    "name": "金水功成",
+    "variants": [
+      {
+        "source": "《果老星宗·论诸星总断》",
+        "description": "金水生助命位，益佐官禄，其功名可遂也。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "jin_026_jin_bei_lin_shen",
+    "name": "金孛临身",
+    "variants": [
+      {
+        "source": "《果老星宗·女命格》",
+        "description": "金孛匪宜临身。金孛同入命，则主淫冶好事。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "凶",
+        "geJuType": "贱"
+      }
+    ]
+  },
+  {
+    "id": "jin_027_qing_ji_huo_yuan",
+    "name": "庆基获源",
+    "variants": [
+      {
+        "source": "《果老星宗·躔度赋》",
+        "description": "庆金因为辰的意思。繇，因为的意思。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "jin_028_jin_shui_hui_she",
+    "name": "金水会蛇",
+    "variants": [
+      {
+        "source": "《果老星宗·躔度赋》",
+        "description": "金水凑于蛇穴，岂惟鹤发而休（金水会蛇在巳）",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "寿"
+      },
+      {
+        "source": "《格局2》",
+        "description": "巳宮屬蛇，金與水同會於巳宮，在軫度則貴。巳宮屬水，軫星屬水，逢金而生水，所謂金水會蛇。凡人巳宮安命及身者，逢之為貴。詩曰：巳宮太白本長生，變曜名為天祿星。與水同宮為奇特，高官厚祿佐王庭。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      },
+      {
+        "source": "《格局2》",
+        "description": "巳宮屬蛇，金與水同會於巳宮，在軫度則貴。巳宮屬水，軫星屬水，逢金而生水，所謂金水會蛇。凡人巳宮安命及身者，逢之為貴。詩曰：巳宮太白本長生，變曜名為天祿星。與水同宮為奇特，高官厚祿佐王庭。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵",
+        "schoolId": "guolao"
+      },
+      {
+        "source": "《格局2》",
+        "description": "巳宮屬蛇，金與水同會於巳宮，在軫度則貴。巳宮屬水，軫星屬水，逢金而生水，所謂金水會蛇。凡人巳宮安命及身者，逢之為貴。詩曰：巳宮太白本長生，變曜名為天祿星。與水同宮為奇特，高官厚祿佐王庭。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "贵",
+        "schools": [
+          "guolao"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "jin_029_jin_ju_wei_fen",
+    "name": "金居卫分",
+    "variants": [
+      {
+        "source": "《果老星宗·躔度赋》《果老星宗·历象赋》",
+        "description": "金照卫而主寿（金在亥宫）。西方太白向卫分，益寿延年（金星居亥）。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "寿"
+      }
+    ]
+  },
+  {
+    "id": "jin_030_jin_yu_ying_huo",
+    "name": "金遇荧惑",
+    "variants": [
+      {
+        "source": "《果老星宗·躔度赋》",
+        "description": "金照卫而主寿（金在亥宫），遇荧惑而夭天年（火必克金）",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "凶",
+        "geJuType": "夭"
+      }
+    ]
+  },
+  {
+    "id": "jin_031_jin_ju_kang_wei",
+    "name": "金居亢位",
+    "variants": [
+      {
+        "source": "《果老星宗·历象赋》",
+        "description": "欲问荣华，大抵抗金居亢位（金星在辰）",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "富"
+      }
+    ]
+  },
+  {
+    "id": "jin_032_jin_mu_zhao_shu_niu",
+    "name": "金木照于鼠牛",
+    "variants": [
+      {
+        "source": "《果老星宗·历象赋》",
+        "description": "先吉后凶，金木照于鼠牛之地（金木居子居丑）",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "平",
+        "geJuType": "贫"
+      }
+    ]
+  },
+  {
+    "id": "jin_033_jin_cheng_huo_wei",
+    "name": "金乘火位",
+    "variants": [
+      {
+        "source": "《果老星宗·历象赋》《果老星宗·通微赋》",
+        "description": "金乘火位，其人少失双亲（金忌居卯戌宫）。金乘火位，在西北则轻。[戌土遇金]",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "凶",
+        "geJuType": "贫"
+      },
+      {
+        "source": "《果老星宗·十一曜定格》",
+        "description": "金乘火位：金在卯戌二宫。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "平",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "jin_034_mu_jin_hui_tian",
+    "name": "木金会田",
+    "variants": [
+      {
+        "source": "《果老星宗·历象赋》",
+        "description": "多荣产业，木金会于田园（金木妙居田宅）",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "富"
+      }
+    ]
+  },
+  {
+    "id": "jin_035_san_ri_feng_jin",
+    "name": "三日逢金",
+    "variants": [
+      {
+        "source": "《果老星宗·历象赋》",
+        "description": "年年获福，皆因三日逢金（太阴泊处前后宫共四十五度，谓三日宫）",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "富"
+      }
+    ]
+  },
+  {
+    "id": "jin_036_tai_bai_shuang_tai",
+    "name": "太白双胎",
+    "variants": [
+      {
+        "source": "《果老星宗·元通赋》",
+        "description": "亥为登明，巳为太乙。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "jin_037_huo_jin_zi_wei",
+    "name": "火金子位",
+    "variants": [
+      {
+        "source": "《果老星宗·通微赋》",
+        "description": "如此者非贫即夭。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "凶",
+        "geJuType": "夭"
+      }
+    ]
+  },
+  {
+    "id": "jin_038_jin_shui_wen_zhi",
+    "name": "金水文智",
+    "variants": [
+      {
+        "source": "《果老星宗·通微赋》",
+        "description": "金水文辞为智巧。[金水在命]",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "贤"
+      }
+    ]
+  },
+  {
+    "id": "jin_039_gang_rou_xiang_ji",
+    "name": "刚柔相济",
+    "variants": [
+      {
+        "source": "《果老星宗·通微赋》",
+        "description": "金曜本性最无情，见木刚柔须相济[金木宜同行]",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "贤"
+      }
+    ]
+  },
+  {
+    "id": "jin_040_jin_xing_shou_ming",
+    "name": "金星守命",
+    "variants": [
+      {
+        "source": "《果老星宗·玉衡经》",
+        "description": "金星守命，好色而主清高。[金之色美，人皆好之，故乡]",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "平",
+        "geJuType": "贤"
+      }
+    ]
+  },
+  {
+    "id": "jin_041_jin_huo_zhan_chen_you",
+    "name": "金火战辰酉",
+    "variants": [
+      {
+        "source": "《果老星宗·玉衡经》",
+        "description": "金火战于辰酉，肺心咳嗽[火主心金主肺]",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "凶",
+        "geJuType": "夭"
+      }
+    ]
+  },
+  {
+    "id": "jin_042_tu_hui_jin_mai",
+    "name": "土晦金埋",
+    "variants": [
+      {
+        "source": "《果老星宗·四时赋》",
+        "description": "金埋土而反晦[秋金土重反晦]",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "凶",
+        "geJuType": "贫"
+      }
+    ]
+  },
+  {
+    "id": "jin_043_chun_jin_jian_yue",
+    "name": "春金见月",
+    "variants": [
+      {
+        "source": "《果老星宗·四时赋》",
+        "description": "春金见月，淡薄无成[金未成不能助月]",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "凶",
+        "geJuType": "贫"
+      }
+    ]
+  },
+  {
+    "id": "jin_044_dong_yue_yu_jin",
+    "name": "冬月遇金",
+    "variants": [
+      {
+        "source": "《果老星宗·四时赋》",
+        "description": "冬月遇金，饥寒刺骨[寒月不宜傍金星]",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "凶",
+        "geJuType": "贫"
+      }
+    ]
+  },
+  {
+    "id": "jin_045_jin_de_huo_ming",
+    "name": "金得火明",
+    "variants": [
+      {
+        "source": "《果老星宗·四时赋》",
+        "description": "金得火明而焕发[秋金见火为奇]",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "jin_046_xia_jin_xiao_shuo",
+    "name": "夏金销铄",
+    "variants": [
+      {
+        "source": "《果老星宗·四时赋》",
+        "description": "夏金遇日销铄无聊[夏金与日同躔必镕]",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "凶",
+        "geJuType": "贫"
+      }
+    ]
+  },
+  {
+    "id": "jin_047_shui_dong_jin_han",
+    "name": "水冻金寒",
+    "variants": [
+      {
+        "source": "《果老星宗·四时赋》",
+        "description": "水冻金寒，纵相生而不发",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "凶",
+        "geJuType": "贫"
+      }
+    ]
+  },
+  {
+    "id": "jin_048_tai_bai_ju_yuan",
+    "name": "太白居垣",
+    "variants": [
+      {
+        "source": "《果老星宗·十一曜定格》",
+        "description": "太白居垣：金在辰酉二宫。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "jin_049_jin_xing_sheng_dian",
+    "name": "金星升殿",
+    "variants": [
+      {
+        "source": "《果老星宗·十一曜定格》",
+        "description": "金星升殿：金躔亢牛娄鬼四宿。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "jin_050_jin_zhu_yue_hua",
+    "name": "金助月华",
+    "variants": [
+      {
+        "source": "《果老星宗·十一曜定格》",
+        "description": "金助月华",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      },
+      {
+        "source": "《果老星宗·元妙经解》",
+        "description": "金月酉宫。贵格。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      },
+      {
+        "source": "《格局2》",
+        "description": "未宮為月華也。金星同月居未，謂之金星助月。金與月同在巳宮，申宮，又謂之金助月華。身命更得此三宮，亦主大富貴也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "富"
+      },
+      {
+        "source": "《格局2》",
+        "description": "未宮為月華也。金星同月居未，謂之金星助月。金與月同在巳宮，申宮，又謂之金助月華。身命更得此三宮，亦主大富貴也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "富",
+        "schoolId": "guolao"
+      },
+      {
+        "source": "《格局2》",
+        "description": "未宮為月華也。金星同月居未，謂之金星助月。金與月同在巳宮，申宮，又謂之金助月華。身命更得此三宮，亦主大富貴也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "富",
+        "schools": [
+          "guolao"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "jin_051_tu_jin_zao_shou",
+    "name": "土金遭受",
+    "variants": [
+      {
+        "source": "《果老星宗·十一曜定格》",
+        "description": "土金坚实：秋冬土埋金寒，余月皆妙。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "平",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "jin_052_jin_shui_xiang_han",
+    "name": "金水相涵",
+    "variants": [
+      {
+        "source": "《果老星宗·十一曜定格》",
+        "description": "金水相涵：冬生金寒水冷，余时昼夜皆吉。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "jin_053_bai_hu_cong_jia",
+    "name": "白虎从驾",
+    "variants": [
+      {
+        "source": "《果老星宗·十一曜定格》",
+        "description": "金为白虎星。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "jin_055_jin_zai_mu_gong",
+    "name": "金在木宫",
+    "variants": [
+      {
+        "source": "《果老星宗·十一曜定格》",
+        "description": "金在木宫：金在寅亥二宫。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "平",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "jin_056_jin_mu_gong_chan",
+    "name": "金木共躔",
+    "variants": [
+      {
+        "source": "《果老星宗·十一曜定格》",
+        "description": "金木共躔：金木相克。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "凶",
+        "geJuType": "贱"
+      }
+    ]
+  },
+  {
+    "id": "jin_057_huo_jin_jiao_zhan",
+    "name": "火金交战",
+    "variants": [
+      {
+        "source": "《果老星宗·十一曜定格》",
+        "description": "火金交战：火金相克。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "凶",
+        "geJuType": "贱"
+      }
+    ]
+  },
+  {
+    "id": "jin_058_jin_ji_tong_yuan",
+    "name": "金计同垣",
+    "variants": [
+      {
+        "source": "《果老星宗·十一曜定格》",
+        "description": "金计同垣：金为用神，居垣庙吉，冬生减力。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "jin_059_jin_shui_cong_yang",
+    "name": "金水从阳",
+    "variants": [
+      {
+        "source": "《果老星宗·十一曜定格》",
+        "description": "金水从阳：金水掌吉神，居垣殿，昼生者奇。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "jin_060_huo_jin_shi_yue",
+    "name": "火金侍月",
+    "variants": [
+      {
+        "source": "《果老星宗·十一曜定格》",
+        "description": "火金侍月：火金为用神，临垣庙，夜生者妙。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "jin_061_san_tai_he_ge",
+    "name": "三台合格",
+    "variants": [
+      {
+        "source": "《果老星宗·十一曜定格》",
+        "description": "三台合格：午巳卯宫得日金水同行。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "jin_062_chu_gan_ru_kun",
+    "name": "出干入坤",
+    "variants": [
+      {
+        "source": "《果老星宗·十一曜定格》",
+        "description": "出干入坤。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "未知",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "jin_063_shan_ze_tong_qi",
+    "name": "山泽通气",
+    "variants": [
+      {
+        "source": "《果老星宗·十一曜定格》",
+        "description": "山泽通气：木寅金酉，命坐酉寅，兼格高贵。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "jin_064_jin_luo_tong_ke",
+    "name": "金罗同克",
+    "variants": [
+      {
+        "source": "《果老星宗·十一曜定格》",
+        "description": "金罗同克：金为用神则坏矣。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "凶",
+        "geJuType": "贱"
+      }
+    ]
+  },
+  {
+    "id": "jin_065_qian_kun_pi_se",
+    "name": "乾坤否塞",
+    "variants": [
+      {
+        "source": "《果老星宗·十一曜定格》",
+        "description": "乾坤否塞：亥命金罗，申命土计。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "凶",
+        "geJuType": "贱"
+      }
+    ]
+  },
+  {
+    "id": "jin_066_shan_ze_chen_mai",
+    "name": "山泽沉埋",
+    "variants": [
+      {
+        "source": "《果老星宗·十一曜定格》",
+        "description": "山泽沉埋。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "凶",
+        "geJuType": "贱"
+      }
+    ]
+  },
+  {
+    "id": "jin_067_long_yue_tian_chi",
+    "name": "龙跃天池",
+    "variants": [
+      {
+        "source": "《果老星宗·十一曜定格》",
+        "description": "龙跃天池：亢进金龙立命，金亥从日月。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "jin_068_cang_long_ru_jing",
+    "name": "苍龙入井",
+    "variants": [
+      {
+        "source": "《果老星宗·十一曜定格》",
+        "description": "苍龙入井。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "未知",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "jin_069_jin_ying_su_liu",
+    "name": "金莺宿柳",
+    "variants": [
+      {
+        "source": "《果老星宗·十一曜定格》",
+        "description": "金莺宿柳：金同命躔柳，近太阳尤妙。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "jin_070_ba_sha_chao_tian",
+    "name": "八杀朝天",
+    "variants": [
+      {
+        "source": "《果老星宗·十一曜定格》",
+        "description": "八杀朝天：如戌命火，又未命土，或辰命金。此三星独占天门，得时为上。惟金火尤重，夜生显贵之人也。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "jin_071_chang_geng_ru_ming",
+    "name": "长庚入命",
+    "variants": [
+      {
+        "source": "《果老星宗·灵台星格》",
+        "description": "长庚入命：东有启明乃水星之象，西有长庚乃太白之象。昔李太白母梦长庚星入怀，盖月乃母道也，身之所从出也，夜生金月同在酉，乃合此格。李白母梦长庚入怀，觉而有忧虑，及生李白，命其名曰白，字太白，诗才冠天下，则知长庚入命，必主产不世之奇才也。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "jin_072_bai_hu_dang_quan",
+    "name": "白虎当权",
+    "variants": [
+      {
+        "source": "《果老星宗·灵台星格》",
+        "description": "秋生人见金星，在申酉安命，乃白虎当权。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "jin_073_hu_ju_long_pan",
+    "name": "虎踞龙盘",
+    "variants": [
+      {
+        "source": "《果老星宗·灵台星格》",
+        "description": "虎踞龙盘：木星乃东方之苍龙，金星乃西方之白虎，金在命木正照，夜生乃龙盘虎踞。金木同居于命，又为龙虎交驰，更在辰寅二宫坐命者尤妙。盖命宫居于子午，金星在酉，木星在卯，四正得之，正合此格。盖木为青龙在东方，金为白虎在西方，又在前四宫与后四宫拱照，岂得不为贵命。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "jin_074_yue_hua_jin_que",
+    "name": "月华金阙",
+    "variants": [
+      {
+        "source": "《果老星宗·灵台星格》",
+        "description": "月华金阙：金星在亥，与太阴同宫；金星在辰，与太阴同宫，皆谓之月华金阙。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "jin_075_ri_hua_jin_que",
+    "name": "日华金阙",
+    "variants": [
+      {
+        "source": "《果老星宗·灵台星格》",
+        "description": "若金星在亥、辰，与太阳同宫者，谓之日华金阙，主富贵。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "jin_076_jin_ju_gan_wei",
+    "name": "金居干位",
+    "variants": [
+      {
+        "source": "《果老星宗·灵台星格》",
+        "description": "金居干位：亥上乃西北，干位干宫为金，而金星亦居亥上，乃据格。未生与申生人，得金居干位最佳。盖未属井鬼，其分野则在秦；申属觜参，其分野则在晋，得金水正气，又与木日同居于亥，乃金居干位，若无火计罗孛入，皆为贵命。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "jin_077_jin_qi_ren_ma",
+    "name": "金骑人马",
+    "variants": [
+      {
+        "source": "《果老星宗·灵台星格》",
+        "description": "金骑人马：命立寅宫尾度，金星相会，又是寅年岁驾，谓曰金骑人马。我骑他，盖岁驾有侍从之义，主人禄享千钟，不可概以为不吉也。若罗星来犯，多有为人仆从，妻子早离。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "jin_078_jin_shen_chi_ren",
+    "name": "金神持刃",
+    "variants": [
+      {
+        "source": "《果老星宗·灵台星格》",
+        "description": "金神持刃：命立辰宫亢金度乃是，乙年刃在辰，却见金星亢度躔之，官封上将，镇守边庭，行限至午，而遇火临柳土，发财可比陶朱，若未限，见土躔井木生秋冬尚可，生于春夏，非夭则残疾。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "jin_079_jin_xing_ru_dou",
+    "name": "金星入斗",
+    "variants": [
+      {
+        "source": "《果老星宗·布局补遗》",
+        "description": "金星入斗：酉宫立命主，金飞入丑宫斗度，凡人命得此一星，主人才华，俊秀，早步青云，行寅限尾度，见火星，定主刑宪血疾，若在角度，反凶作吉，大主发福寿命延长。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "jin_080_jin_mu_hai_shi",
+    "name": "金木亥室",
+    "variants": [
+      {
+        "source": "《果老星宗·指迷歌》",
+        "description": "金木亥室：金星与木室相逢，官职荣迁至上公。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "jin_081_jin_shui_xing_qiao",
+    "name": "金水性巧",
+    "variants": [
+      {
+        "source": "《果老星宗·金箱歌》",
+        "description": "金水性巧：金水主人多精彩，自然巧劣心中藏。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "贤"
+      }
+    ]
+  },
+  {
+    "id": "jin_082_jin_bei_yin_lao",
+    "name": "金孛淫痨",
+    "variants": [
+      {
+        "source": "《果老星宗·金箱歌》",
+        "description": "金孛淫痨：金孛交会为人淫，必主痨病及其身。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "凶",
+        "geJuType": "贱"
+      }
+    ]
+  },
+  {
+    "id": "jin_083_jin_shui_bei_xian",
+    "name": "金水孛咸",
+    "variants": [
+      {
+        "source": "《果老星宗·帘幕歌·论女命》",
+        "description": "金水孛咸：妇人若见金水孛，三改嫁兮有何说。咸池带水与孛星，朝云暮雨情不歇。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "凶",
+        "geJuType": "贱"
+      }
+    ]
+  },
+  {
+    "id": "jin_084_jin_shui_bei_mu",
+    "name": "金水孛沐",
+    "variants": [
+      {
+        "source": "《果老星宗·帘幕歌·论女命》",
+        "description": "金水孛沐：妇人金水孛星迎，身命同临性偏淫。更兼沐浴在其间，离居奔走落风尘。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "凶",
+        "geJuType": "贱"
+      }
+    ]
+  },
+  {
+    "id": "jin_085_jin_xiao_tian_xie",
+    "name": "金销天蝎",
+    "variants": [
+      {
+        "source": "《果老星宗·观星要诀》",
+        "description": "金销天蝎（房度）。断躔，忌。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "凶",
+        "geJuType": "贱"
+      }
+    ]
+  },
+  {
+    "id": "jin_086_jin_xiao_bai_yang",
+    "name": "金销白羊",
+    "variants": [
+      {
+        "source": "《果老星宗·观星要诀》",
+        "description": "金销白羊（奎度）。断躔，忌。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "凶",
+        "geJuType": "贱"
+      }
+    ]
+  },
+  {
+    "id": "jin_087_chang_geng_chao_dou",
+    "name": "长庚朝斗",
+    "variants": [
+      {
+        "source": "《果老星宗·元妙经解》",
+        "description": "金星丑宫斗木度。贵格。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "jin_088_jin_mu_feng_long",
+    "name": "金木逢龙",
+    "variants": [
+      {
+        "source": "《果老星宗·元妙经解》",
+        "description": "金木辰宫，贵格。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      },
+      {
+        "source": "《格局2》",
+        "description": "金木二星同入辰宮，在角在亢者，謂之角木蛟亢。金龍，辰龍之肖也。謂之金木逢龍。況金入此宮，號太常逢之，主榮遷也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "富"
+      },
+      {
+        "source": "《格局2》",
+        "description": "金木二星同入辰宮，在角在亢者，謂之角木蛟亢。金龍，辰龍之肖也。謂之金木逢龍。況金入此宮，號太常逢之，主榮遷也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "富",
+        "schoolId": "guolao"
+      },
+      {
+        "source": "《格局2》",
+        "description": "金木二星同入辰宮，在角在亢者，謂之角木蛟亢。金龍，辰龍之肖也。謂之金木逢龍。況金入此宮，號太常逢之，主榮遷也。",
+        "books": "果老星宗",
+        "className": "格局2格局",
+        "jiXiong": "吉",
+        "geJuType": "富",
+        "schools": [
+          "guolao"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "jin_089_shui_run_jin_ming",
+    "name": "水润金明",
+    "variants": [
+      {
+        "source": "《果老星宗·元妙经解》",
+        "description": "水金辰宫，贵格。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "jin_090_jin_hao_tai_chang",
+    "name": "金号太常",
+    "variants": [
+      {
+        "source": "《果老星宗·元妙经解》",
+        "description": "金辰宫，贵格。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "jin_091_jin_chan_gui_su",
+    "name": "金躔鬼宿",
+    "variants": [
+      {
+        "source": "《果老星宗·元妙经解》",
+        "description": "金星未宫鬼宿。贵格。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "jin_092_jin_xing_zhu_yue",
+    "name": "金星助月",
+    "variants": [
+      {
+        "source": "《果老星宗·元妙经解》",
+        "description": "金星助月。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "jin_094_jin_zhang_ren_feng",
+    "name": "金掌刃锋",
+    "variants": [
+      {
+        "source": "《果老星宗·谈星奥论》",
+        "description": "金怕掌刃锋廉的耗符等煞，木命限人尤凶。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "凶",
+        "geJuType": "贱"
+      }
+    ]
+  },
+  {
+    "id": "jin_095_lan_fu_xiu_zhen",
+    "name": "烂斧绣针",
+    "variants": [
+      {
+        "source": "《果老星宗·玄玄妙论》",
+        "description": "金星落空谓之烂斧绣针，则是常用之物，又主利名有成。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "平",
+        "geJuType": "富"
+      }
+    ]
+  },
+  {
+    "id": "jin_096_lian_jin_cheng_qi",
+    "name": "炼金成器",
+    "variants": [
+      {
+        "source": "《果老星宗·七政四时论》",
+        "description": "春令之金不怕火罗，借火罗以温助，谓之炼金成器，变化气质。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "jin_097_chun_jin_ji_shui",
+    "name": "春金忌水",
+    "variants": [
+      {
+        "source": "《果老星宗·七政四时论》",
+        "description": "春令之金，不宜与水孛同行，春初生者，凝寒冻未退，无火日温之，极主贫寒。春月之金性柔体弱。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "凶",
+        "geJuType": "贫"
+      }
+    ]
+  },
+  {
+    "id": "jin_098_shuo_shi_feng_yuan",
+    "name": "烁石逢源",
+    "variants": [
+      {
+        "source": "《果老星宗·七政四时论》",
+        "description": "夏令之金，不宜生水，就赖水以制其刚，烁石逢源，主利名显达。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "jin_099_xia_jin_feng_huo",
+    "name": "夏金逢火",
+    "variants": [
+      {
+        "source": "《果老星宗·七政四时论》",
+        "description": "夏令罗火何以相逢，冬月如斯自能发福。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "凶",
+        "geJuType": "贱"
+      }
+    ]
+  },
+  {
+    "id": "jin_100_jin_bai_shui_qing",
+    "name": "金白水清",
+    "variants": [
+      {
+        "source": "《果老星宗·七政四时论》",
+        "description": "秋令之金乃白帝司权，金神用事不怕火罗而克，不喜土计而生，借水映色正此谓也。金白水清最喜秋生者，贵。若金水朝拱太阳，最高奇特。经曰：金坚而无火锻炼，终见凶顽。盖火尚杀伐，水尚澄清，文武皆沾，刚柔相济，名扬四海。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  },
+  {
+    "id": "jin_101_dong_jin_xi_nuan",
+    "name": "冬金喜暖",
+    "variants": [
+      {
+        "source": "《果老星宗·七政四时论》",
+        "description": "冬令之金，斯时寒凝冻结，昼喜日光而温之，夜喜火罗而照之，定主文职蒙恩，不宜与水孛相互作用，极主贫寒，水冷故也。最妙昼土逢阳，以温其土，可助其金，主威武之职。又逢火罗拱互降祥，正所谓金罗相会，阃外司权。",
+        "books": "果老星宗",
+        "className": "金星格局",
+        "jiXiong": "吉",
+        "geJuType": "贵"
+      }
+    ]
+  }
+]

@@ -1,160 +1,84 @@
-import 'dart:convert';
-
+import 'package:flutter/foundation.dart';
+import 'package:qizhengsiyu/data/datasources/local/daos/ge_ju_dao.dart';
+import 'package:qizhengsiyu/data/datasources/local/ge_ju_legacy_migrator.dart';
 import 'package:qizhengsiyu/data/datasources/local/ge_ju_local_data_source.dart';
+import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_annotation.dart';
+import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_condition_set.dart';
+import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_deletion_record.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_rule.dart';
+import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_user_preference.dart';
 import 'package:qizhengsiyu/domain/errors/ge_ju_errors.dart';
-import 'package:qizhengsiyu/domain/managers/ge_ju/ge_ju_rule_parser.dart';
 import 'package:qizhengsiyu/domain/repositories/ge_ju_repository.dart';
-import 'package:uuid/uuid.dart';
 
-/// 格局仓库实现
+/// 格局仓库实现（三实体模型）
+///
+/// 在 Web 端，如果 Drift DB 不可用（缺少 sqlite3.wasm），
+/// 会自动降级为只读模式，仅显示内置数据。
 class GeJuRepositoryImpl implements IGeJuRepository {
-  final GeJuLocalDataSource _localDataSource;
-
-  /// 内置规则资源路径列表
-  static const List<String> _builtInAssetPaths = [
-    'assets/qizhengsiyu/ge_ju/mu_xing_ge_ju.json',
-    'assets/qizhengsiyu/ge_ju/huo_xing_ge_ju.json',
-    'assets/qizhengsiyu/ge_ju/tu_xing_ge_ju.json',
-    'assets/qizhengsiyu/ge_ju/jin_xing_ge_ju.json',
-    'assets/qizhengsiyu/ge_ju/shui_xing_ge_ju.json',
-    'assets/qizhengsiyu/ge_ju/common_ge_ju.json',
-  ];
+  final GeJuBuiltInDataSource _builtInDataSource;
+  final GeJuDao _dao;
+  final GeJuLegacyMigrator _migrator;
 
   /// 内置规则缓存
   List<GeJuRule>? _builtInRulesCache;
-
-  /// 用户规则缓存
-  List<GeJuRule>? _userRulesCache;
+  List<GeJuAnnotation>? _builtInAnnotationsCache;
+  List<GeJuConditionSet>? _builtInConditionSetsCache;
 
   /// 内置规则 ID 集合
   final Set<String> _builtInRuleIds = {};
 
-  static const _uuid = Uuid();
+  /// 是否已完成迁移检查
+  bool _migrationChecked = false;
 
-  GeJuRepositoryImpl({required GeJuLocalDataSource localDataSource})
-      : _localDataSource = localDataSource;
+  /// DB 是否可用（Web 端可能因缺少 WASM 文件而不可用）
+  bool? _dbAvailable;
 
-  @override
-  Future<List<GeJuRule>> loadBuiltInRules() async {
-    if (_builtInRulesCache != null) {
-      return _builtInRulesCache!;
-    }
+  GeJuRepositoryImpl({
+    required GeJuBuiltInDataSource builtInDataSource,
+    required GeJuDao dao,
+  })  : _builtInDataSource = builtInDataSource,
+        _dao = dao,
+        _migrator = GeJuLegacyMigrator(dao: dao);
 
-    final rules = await _localDataSource.loadFromAssets(_builtInAssetPaths);
-
-    // 记录所有内置规则的 ID
-    _builtInRuleIds.clear();
-    for (final rule in rules) {
-      _builtInRuleIds.add(rule.id);
-    }
-
-    _builtInRulesCache = rules;
-    return rules;
-  }
-
-  @override
-  Future<List<GeJuRule>> loadUserRules() async {
-    if (_userRulesCache != null) {
-      return _userRulesCache!;
-    }
-
-    final rules = await _localDataSource.loadFromUserFile();
-    _userRulesCache = rules;
-    return rules;
-  }
+  // ══════════════════════════════════════════
+  // Rule 操作
+  // ══════════════════════════════════════════
 
   @override
   Future<List<GeJuRule>> loadAllRules() async {
-    final builtIn = await loadBuiltInRules();
-    final user = await loadUserRules();
-    return [...builtIn, ...user];
+    await _ensureMigrated();
+    final builtIn = await _ensureBuiltInRulesLoaded();
+    final userRules = await _queryDb(() => _dao.getAllRules(), <GeJuRule>[]);
+    return [...builtIn, ...userRules];
+  }
+
+  @override
+  Future<GeJuRule?> getRuleById(String id) async {
+    // 先查内置
+    final builtIn = await _ensureBuiltInRulesLoaded();
+    for (final rule in builtIn) {
+      if (rule.id == id) return rule;
+    }
+    // 再查用户库
+    return await _queryDb(() => _dao.getRuleById(id), null);
   }
 
   @override
   Future<void> saveUserRule(GeJuRule rule) async {
+    _requireDb();
     if (isBuiltInRule(rule.id)) {
       throw BuiltInRuleModificationError(rule.id);
     }
-
-    // 加载现有用户规则
-    final existingRules = List<GeJuRule>.from(await loadUserRules());
-
-    // 查找是否已存在，存在则替换
-    final index = existingRules.indexWhere((r) => r.id == rule.id);
-    if (index >= 0) {
-      existingRules[index] = rule;
-    } else {
-      existingRules.add(rule);
-    }
-
-    // 保存并更新缓存
-    await _localDataSource.saveToUserFile(existingRules);
-    _userRulesCache = existingRules;
+    await _dao.insertRule(rule);
   }
 
   @override
-  Future<void> saveUserRules(List<GeJuRule> rules) async {
-    // 检查是否有内置规则
-    for (final rule in rules) {
-      if (isBuiltInRule(rule.id)) {
-        throw BuiltInRuleModificationError(rule.id);
-      }
+  Future<void> deleteUserRule(String id) async {
+    _requireDb();
+    if (isBuiltInRule(id)) {
+      throw BuiltInRuleModificationError(id);
     }
-
-    await _localDataSource.saveToUserFile(rules);
-    _userRulesCache = rules;
-  }
-
-  @override
-  Future<void> deleteUserRule(String ruleId) async {
-    if (isBuiltInRule(ruleId)) {
-      throw BuiltInRuleModificationError(ruleId);
-    }
-
-    final existingRules = List<GeJuRule>.from(await loadUserRules());
-    existingRules.removeWhere((r) => r.id == ruleId);
-
-    // 如果规则不存在（包括已被删除的情况），不需要抛异常
-    await _localDataSource.saveToUserFile(existingRules);
-    _userRulesCache = existingRules;
-  }
-
-  @override
-  Future<String> exportRules(List<GeJuRule> rules) async {
-    final jsonList = rules.map((rule) => rule.toJson()).toList();
-    return const JsonEncoder.withIndent('  ').convert(jsonList);
-  }
-
-  @override
-  Future<List<GeJuRule>> importRules(String jsonContent) async {
-    try {
-      final parsed = GeJuRuleParser.parseRules(jsonContent);
-
-      // 为每条导入的规则生成新 UUID，避免 ID 冲突
-      final importedRules = parsed.map((rule) {
-        return GeJuRule(
-          id: 'user_${_uuid.v4()}',
-          name: rule.name,
-          className: rule.className,
-          books: rule.books,
-          description: rule.description,
-          source: rule.source,
-          jiXiong: rule.jiXiong,
-          geJuType: rule.geJuType,
-          scope: rule.scope,
-          conditions: rule.conditions,
-          coordinateSystem: rule.coordinateSystem,
-        );
-      }).toList();
-
-      return importedRules;
-    } on FormatException catch (e) {
-      throw RuleImportError('JSON 格式错误', details: e.message);
-    } catch (e) {
-      if (e is GeJuError) rethrow;
-      throw RuleImportError('导入失败', details: e.toString());
-    }
+    await _dao.deleteRule(id);
   }
 
   @override
@@ -163,21 +87,213 @@ class GeJuRepositoryImpl implements IGeJuRepository {
   }
 
   @override
-  Future<GeJuRule?> getRuleById(String ruleId) async {
-    final allRules = await loadAllRules();
-    try {
-      return allRules.firstWhere((r) => r.id == ruleId);
-    } catch (_) {
-      return null;
-    }
+  Set<String> get builtInRuleIds => Set.unmodifiable(_builtInRuleIds);
+
+  // ══════════════════════════════════════════
+  // ConditionSet 操作
+  // ══════════════════════════════════════════
+
+  @override
+  Future<List<GeJuConditionSet>> getConditionSetsForRule(String ruleId) async {
+    final builtInAll = await _ensureBuiltInConditionSetsLoaded();
+    final builtIn = builtInAll.where((cs) => cs.ruleId == ruleId).toList();
+    final user = await _queryDb(
+        () => _dao.getConditionSetsForRule(ruleId), <GeJuConditionSet>[]);
+    return [...builtIn, ...user];
   }
+
+  @override
+  Future<GeJuConditionSet?> getConditionSetById(String id) async {
+    // 先查内置
+    final builtInAll = await _ensureBuiltInConditionSetsLoaded();
+    for (final cs in builtInAll) {
+      if (cs.id == id) return cs;
+    }
+    // 再查用户库
+    return await _queryDb(() => _dao.getConditionSetById(id), null);
+  }
+
+  @override
+  Future<void> saveUserConditionSet(GeJuConditionSet cs) async {
+    _requireDb();
+    if (cs.isBuiltIn) {
+      throw BuiltInRuleModificationError(cs.id);
+    }
+    await _dao.insertConditionSet(cs);
+  }
+
+  @override
+  Future<void> deleteUserConditionSet(String id) async {
+    _requireDb();
+    await _dao.deleteConditionSet(id);
+  }
+
+  @override
+  Future<void> deleteUserConditionSetsForRule(String ruleId) async {
+    _requireDb();
+    await _dao.deleteConditionSetsForRule(ruleId);
+  }
+
+  // ══════════════════════════════════════════
+  // Annotation 操作
+  // ══════════════════════════════════════════
+
+  @override
+  Future<List<GeJuAnnotation>> getAnnotationsForRule(String ruleId) async {
+    final builtInAll = await _ensureBuiltInAnnotationsLoaded();
+    final builtIn = builtInAll.where((a) => a.ruleId == ruleId).toList();
+    final user = await _queryDb(
+        () => _dao.getAnnotationsForRule(ruleId), <GeJuAnnotation>[]);
+    return [...builtIn, ...user];
+  }
+
+  @override
+  Future<GeJuAnnotation?> getAnnotationById(String id) async {
+    // 先查内置
+    final builtInAll = await _ensureBuiltInAnnotationsLoaded();
+    for (final ann in builtInAll) {
+      if (ann.id == id) return ann;
+    }
+    // 再查用户库
+    return await _queryDb(() => _dao.getAnnotationById(id), null);
+  }
+
+  @override
+  Future<void> saveUserAnnotation(GeJuAnnotation ann) async {
+    _requireDb();
+    if (ann.isBuiltIn) {
+      throw BuiltInRuleModificationError(ann.id);
+    }
+    await _dao.insertAnnotation(ann);
+  }
+
+  @override
+  Future<void> deleteUserAnnotation(String id) async {
+    _requireDb();
+    await _dao.deleteAnnotation(id);
+  }
+
+  @override
+  Future<void> deleteUserAnnotationsForRule(String ruleId) async {
+    _requireDb();
+    await _dao.deleteAnnotationsForRule(ruleId);
+  }
+
+  // ══════════════════════════════════════════
+  // Preference
+  // ══════════════════════════════════════════
+
+  @override
+  Future<GeJuUserPreference> getPreference() async {
+    return await _queryDb(
+        () => _dao.getPreference(), GeJuUserPreference.defaultPreference);
+  }
+
+  @override
+  Future<void> savePreference(GeJuUserPreference pref) async {
+    _requireDb();
+    await _dao.savePreference(pref);
+  }
+
+  // ══════════════════════════════════════════
+  // DeletionRecord
+  // ══════════════════════════════════════════
+
+  @override
+  Future<void> recordDeletion(GeJuDeletionRecord record) async {
+    _requireDb();
+    await _dao.insertDeletionRecord(record);
+  }
+
+  // ══════════════════════════════════════════
+  // Cache
+  // ══════════════════════════════════════════
 
   @override
   void clearCache() {
     _builtInRulesCache = null;
-    _userRulesCache = null;
+    _builtInAnnotationsCache = null;
+    _builtInConditionSetsCache = null;
+    if (_builtInDataSource is GeJuBuiltInDataSourceImpl) {
+      (_builtInDataSource as GeJuBuiltInDataSourceImpl).clearCache();
+    }
+  }
+
+  // ══════════════════════════════════════════
+  // Legacy 兼容
+  // ══════════════════════════════════════════
+
+  @override
+  Future<List<GeJuRule>> loadBuiltInRules() async {
+    return await _ensureBuiltInRulesLoaded();
   }
 
   @override
-  Set<String> get builtInRuleIds => Set.unmodifiable(_builtInRuleIds);
+  Future<List<GeJuRule>> loadUserRules() async {
+    return await _queryDb(() => _dao.getAllRules(), <GeJuRule>[]);
+  }
+
+  // ══════════════════════════════════════════
+  // Internal helpers
+  // ══════════════════════════════════════════
+
+  /// 安全查询 DB，如果 DB 不可用则返回 fallback
+  ///
+  /// 首次调用时会尝试一次 DB 操作来探测可用性，
+  /// 之后会缓存结果，避免重复失败。
+  Future<T> _queryDb<T>(Future<T> Function() query, T fallback) async {
+    if (_dbAvailable == false) return fallback;
+
+    try {
+      final result = await query();
+      _dbAvailable = true;
+      return result;
+    } catch (e) {
+      if (_dbAvailable == null) {
+        // 首次探测失败，标记 DB 不可用
+        _dbAvailable = false;
+        debugPrint('GeJu DB not available (read-only mode): $e');
+      }
+      return fallback;
+    }
+  }
+
+  /// 写操作前检查 DB 可用性，不可用时抛出友好错误
+  void _requireDb() {
+    if (_dbAvailable == false) {
+      throw RuleStorageError('数据库不可用，无法执行写操作',
+          details: 'Web 端需要配置 sqlite3.wasm 才能使用用户数据功能');
+    }
+  }
+
+  /// 确保旧格式用户规则已迁移到 Drift DB（首次调用时执行）
+  Future<void> _ensureMigrated() async {
+    if (_migrationChecked) return;
+    _migrationChecked = true;
+    if (_dbAvailable != false) {
+      await _migrator.migrateIfNeeded();
+    }
+  }
+
+  Future<List<GeJuRule>> _ensureBuiltInRulesLoaded() async {
+    if (_builtInRulesCache != null) return _builtInRulesCache!;
+    _builtInRulesCache = await _builtInDataSource.loadBuiltInRules();
+    _builtInRuleIds.clear();
+    for (final rule in _builtInRulesCache!) {
+      _builtInRuleIds.add(rule.id);
+    }
+    return _builtInRulesCache!;
+  }
+
+  Future<List<GeJuAnnotation>> _ensureBuiltInAnnotationsLoaded() async {
+    if (_builtInAnnotationsCache != null) return _builtInAnnotationsCache!;
+    _builtInAnnotationsCache = await _builtInDataSource.loadBuiltInAnnotations();
+    return _builtInAnnotationsCache!;
+  }
+
+  Future<List<GeJuConditionSet>> _ensureBuiltInConditionSetsLoaded() async {
+    if (_builtInConditionSetsCache != null) return _builtInConditionSetsCache!;
+    _builtInConditionSetsCache = await _builtInDataSource.loadBuiltInConditionSets();
+    return _builtInConditionSetsCache!;
+  }
 }

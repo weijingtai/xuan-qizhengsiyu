@@ -15,12 +15,10 @@ class ValidationResult {
     this.warnings = const [],
   });
 
-  /// 验证通过的结果
   factory ValidationResult.valid({List<String> warnings = const []}) {
     return ValidationResult(isValid: true, warnings: warnings);
   }
 
-  /// 验证失败的结果
   factory ValidationResult.invalid({
     required List<String> errors,
     List<String> warnings = const [],
@@ -32,7 +30,6 @@ class ValidationResult {
     );
   }
 
-  /// 合并两个验证结果
   ValidationResult merge(ValidationResult other) {
     return ValidationResult(
       isValid: isValid && other.isValid,
@@ -74,27 +71,93 @@ class ImportResult {
   }
 }
 
-/// 创建格局规则的参数
+/// 创建格局规则的参数（薄锚点）
 class GeJuRuleCreateParams {
   final String name;
-  final String className;
-  final String? books;
-  final String description;
-  final String? source;
-  final JiXiongEnum jiXiong;
-  final GeJuType geJuType;
   final GeJuScope scope;
-  final GeJuCondition? conditions;
+  final String? disambiguationNote;
 
   const GeJuRuleCreateParams({
     required this.name,
-    required this.className,
-    this.books,
-    required this.description,
-    this.source,
-    required this.jiXiong,
-    required this.geJuType,
     required this.scope,
+    this.disambiguationNote,
+  });
+}
+
+/// 创建判断方案的参数
+class ConditionSetCreateParams {
+  final String ruleId;
+  final String label;
+  final GeJuCondition? conditions;
+  final String? changeNote;
+  final List<String>? schools;
+
+  const ConditionSetCreateParams({
+    required this.ruleId,
+    required this.label,
     this.conditions,
+    this.changeNote,
+    this.schools,
+  });
+}
+
+/// 创建注解的参数
+class AnnotationCreateParams {
+  final String ruleId;
+  final String? description;
+  final JiXiongEnum? jiXiong;
+  final GeJuType? geJuType;
+  final String? className;
+  final String? books;
+  final String? sourceSection;
+  final List<String>? schools;
+
+  const AnnotationCreateParams({
+    required this.ruleId,
+    this.description,
+    this.jiXiong,
+    this.geJuType,
+    this.className,
+    this.books,
+    this.sourceSection,
+    this.schools,
+  });
+}
+
+/// "另存为"参数（包含 Rule + CS + Ann 的完整字段）
+class GeJuRuleSaveAsParams {
+  // Rule fields
+  final String name;
+  final GeJuScope scope;
+  final String? disambiguationNote;
+
+  // Annotation fields
+  final String? description;
+  final JiXiongEnum? jiXiong;
+  final GeJuType? geJuType;
+  final String? className;
+  final String? books;
+  final String? sourceSection;
+
+  // ConditionSet fields
+  final String csLabel;
+  final GeJuCondition? conditions;
+  final String? changeNote;
+  final String? derivedFrom;
+
+  const GeJuRuleSaveAsParams({
+    required this.name,
+    required this.scope,
+    this.disambiguationNote,
+    this.description,
+    this.jiXiong,
+    this.geJuType,
+    this.className,
+    this.books,
+    this.sourceSection,
+    required this.csLabel,
+    this.conditions,
+    this.changeNote,
+    this.derivedFrom,
   });
 }

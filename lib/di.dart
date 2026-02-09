@@ -15,11 +15,14 @@ import 'package:qizhengsiyu/presentation/viewmodels/qi_zheng_si_yu_viewmodel.dar
 
 // GeJu 相关导入
 import 'package:qizhengsiyu/data/datasources/local/ge_ju_local_data_source.dart';
+import 'package:qizhengsiyu/data/datasources/local/app_database.dart';
+import 'package:qizhengsiyu/data/datasources/local/daos/ge_ju_dao.dart';
 import 'package:qizhengsiyu/data/repositories/ge_ju_repository_impl.dart';
 import 'package:qizhengsiyu/domain/repositories/ge_ju_repository.dart';
 import 'package:qizhengsiyu/domain/services/ge_ju_crud_service.dart';
 import 'package:qizhengsiyu/presentation/viewmodels/ge_ju_list_viewmodel.dart';
 import 'package:qizhengsiyu/presentation/viewmodels/ge_ju_editor_viewmodel.dart';
+import 'package:qizhengsiyu/presentation/viewmodels/ge_ju_detail_viewmodel.dart';
 
 List<SingleChildWidget> createProviders() {
   return [
@@ -81,15 +84,25 @@ List<SingleChildWidget> createProviders() {
 
     // ============ GeJu 格局管理 ============
 
-    // GeJu DataSource
-    Provider<GeJuLocalDataSource>(
-      create: (_) => GeJuLocalDataSourceImpl(),
+    // GeJu Database & DAO
+    Provider<AppDatabase>(
+      create: (_) => AppDatabase(),
+      dispose: (_, db) => db.close(),
+    ),
+    Provider<GeJuDao>(
+      create: (context) => GeJuDao(context.read<AppDatabase>()),
+    ),
+
+    // GeJu Built-in DataSource
+    Provider<GeJuBuiltInDataSource>(
+      create: (_) => GeJuBuiltInDataSourceImpl(),
     ),
 
     // GeJu Repository
     Provider<IGeJuRepository>(
       create: (context) => GeJuRepositoryImpl(
-        localDataSource: context.read<GeJuLocalDataSource>(),
+        builtInDataSource: context.read<GeJuBuiltInDataSource>(),
+        dao: context.read<GeJuDao>(),
       ),
     ),
 
@@ -108,6 +121,11 @@ List<SingleChildWidget> createProviders() {
     ),
     ChangeNotifierProvider<GeJuEditorViewModel>(
       create: (context) => GeJuEditorViewModel(
+        crudService: context.read<GeJuCrudService>(),
+      ),
+    ),
+    ChangeNotifierProvider<GeJuDetailViewModel>(
+      create: (context) => GeJuDetailViewModel(
         crudService: context.read<GeJuCrudService>(),
       ),
     ),
