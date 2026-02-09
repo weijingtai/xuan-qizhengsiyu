@@ -4,7 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_rule.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju_model.dart';
 import 'package:qizhengsiyu/presentation/viewmodels/ge_ju_editor_viewmodel.dart';
-import 'package:qizhengsiyu/presentation/widgets/ge_ju/condition_tree_view.dart';
+import 'package:qizhengsiyu/presentation/widgets/ge_ju/condition_tree_editor.dart';
+import 'package:qizhengsiyu/presentation/widgets/ge_ju/ge_ju_school_selector.dart';
 
 /// 格局编辑器页面
 class GeJuEditorPage extends StatefulWidget {
@@ -148,6 +149,8 @@ class _GeJuEditorPageState extends State<GeJuEditorPage> {
           _buildBasicInfoSection(viewModel),
           const SizedBox(height: 16),
           _buildPropertiesSection(viewModel),
+          const SizedBox(height: 16),
+          _buildSchoolSection(viewModel),
           const SizedBox(height: 16),
           _buildDescriptionSection(viewModel),
           const SizedBox(height: 16),
@@ -308,6 +311,54 @@ class _GeJuEditorPageState extends State<GeJuEditorPage> {
     );
   }
 
+  Widget _buildSchoolSection(GeJuEditorViewModel viewModel) {
+    final isReadOnly = viewModel.isReadOnly;
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text('关联流派',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                TextButton(
+                  onPressed: () {
+                    Navigator.pushNamed(
+                      context,
+                      '/qizhengsiyu/ge_ju/school/list',
+                    ).then((_) => viewModel.reloadSchools());
+                  },
+                  child: const Text('管理流派'),
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            const Text('注解流派', style: TextStyle(fontSize: 13)),
+            const SizedBox(height: 4),
+            GeJuSchoolSelector(
+              allSchools: viewModel.allSchools,
+              selectedIds: viewModel.annotationSchools,
+              enabled: !isReadOnly,
+              onChanged: isReadOnly ? null : viewModel.updateAnnotationSchools,
+            ),
+            const SizedBox(height: 12),
+            const Text('方案流派', style: TextStyle(fontSize: 13)),
+            const SizedBox(height: 4),
+            GeJuSchoolSelector(
+              allSchools: viewModel.allSchools,
+              selectedIds: viewModel.conditionSetSchools,
+              enabled: !isReadOnly,
+              onChanged: isReadOnly ? null : viewModel.updateConditionSetSchools,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   Widget _buildDescriptionSection(GeJuEditorViewModel viewModel) {
     final isReadOnly = viewModel.isReadOnly;
     return Card(
@@ -343,38 +394,14 @@ class _GeJuEditorPageState extends State<GeJuEditorPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text('判断条件',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                if (!viewModel.isReadOnly)
-                  Text(
-                    '(暂不支持编辑条件)',
-                    style: TextStyle(fontSize: 12, color: Colors.grey.shade500),
-                  ),
-              ],
-            ),
+            const Text('判断条件',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
             const SizedBox(height: 12),
-            if (viewModel.rootConditionNode != null)
-              ConditionTreeView(
-                condition: viewModel.rootConditionNode!.toCondition(),
-              )
-            else
-              Container(
-                padding: const EdgeInsets.all(24),
-                decoration: BoxDecoration(
-                  color: Colors.grey.shade50,
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: Colors.grey.shade300),
-                ),
-                child: Center(
-                  child: Text(
-                    '(无判断条件)',
-                    style: TextStyle(color: Colors.grey.shade500),
-                  ),
-                ),
-              ),
+            ConditionTreeEditor(
+              rootNode: viewModel.rootConditionNode,
+              readOnly: viewModel.isReadOnly,
+              onChanged: (node) => viewModel.setRootCondition(node),
+            ),
           ],
         ),
       ),
