@@ -1,6 +1,6 @@
 # GeJu 数据模型设计文档 — 本地阶段
 
-> 版本：v1.2（本地阶段定稿）
+> 版本：v1.3（本地阶段定稿）
 > 日期：2026-02-08
 > 远期社区协作层设计见 [community.md](./community.md)
 
@@ -148,6 +148,11 @@ GeJuAnnotation:
   authorType: built-in | user        # 内置（来自典籍）还是用户创建
   authorId: String?                  # 用户 ID（内置为 null）
 
+  # ── 版本（内置注解使用） ──
+  version: String                    # "V.v" 格式，如 "1.0"、"2.1"
+                                     # 内置注解：由 APP 开发者维护
+                                     # 用户注解：固定为 "1.0"（本地阶段不对用户注解做语义版本）
+
   # ── 内容 ──
   description: String?               # 对格局含义的文字阐述
   jiXiong: EnumJiXiong?              # 吉凶判定
@@ -156,6 +161,7 @@ GeJuAnnotation:
 
   # ── 谱系 ──
   parentAnnotationId: String?        # 引用/继承自哪个注解
+  parentMajorVersion: int?           # 写注解时父注解的大版本号（如 1）
   relationToParent: RelationType?    # 与父注解的关系类型（见下方说明）
   references: [String]               # 旁引的其他注解 ID 列表
 
@@ -171,6 +177,35 @@ GeJuAnnotation:
 
 #### 设计说明
 
+**版本号 V.v 的语义**
+
+内置注解采用"大版本.小版本"（V.v）格式：
+
+- **小版本（v+1）**：文字修正、错别字、标点符号等不影响语义的修改。
+  例如 v1.0 → v1.1："太阳在东边升起b" → "太阳在东边升起。"
+  **子注解不受影响**——null 字段自动继承最新小版本的内容。
+
+- **大版本（V+1）**：涉及语义变更的修改——描述含义改变、吉凶判定修正等。
+  例如 v1.1 → v2.0："太阳在东边升起。" → "太阳在西边升起。"
+  **旧大版本下的子注解自动归档**——不再在新大版本下显示。
+
+只有当内容的**意思**发生改变时才更新大版本。纯粹的文字润色、排版调整等走小版本。
+这个判断由 APP 开发者在编辑内置数据时做出。
+
+**parentMajorVersion 的作用**
+
+用户创建子注解时，系统自动记录当前父注解的大版本号。此字段决定了子注解的**可见性范围**：
+
+```
+子注解可见条件：
+  parentMajorVersion == 父注解当前版本的大版本号
+
+示例：
+  父注解当前版本: v2.1
+  子注解 A: parentMajorVersion = 1  → 不可见（归档于 v1.* 历史）
+  子注解 B: parentMajorVersion = 2  → 可见
+```
+
 **内容字段为什么都是可空的？**
 
 当 `relationToParent` 为 `annotate`（补充型）时，子注解可以只填写自己想补充的字段，
@@ -180,7 +215,7 @@ GeJuAnnotation:
 解析 annotation.jiXiong:
   如果当前 annotation.jiXiong != null → 使用当前值
   如果当前 annotation.jiXiong == null 且有 parentAnnotationId
-    → 递归查找父注解的 jiXiong
+    → 继承父注解 **当前版本** 的 jiXiong（同一大版本内，小版本更新自动传播）
   如果到根都是 null → 该格局在此注解链中未定义吉凶
 ```
 
@@ -188,12 +223,20 @@ GeJuAnnotation:
 所有内容字段必须显式提供，不继承父注解。因为修订和反驳意味着提出不同观点，
 省略字段会造成歧义——无法区分"沿用"和"未表态"。
 
+**继承与版本化的协同**
+
+继承机制使得小版本更新（错别字修正等）能自动传播到子注解——
+子注解的 null 字段始终读取父注解的最新内容，无需任何手动操作。
+这正是选择继承而非自包含的核心理由：用户**希望**自动获得无害的文字修正，
+只是不想被语义变更（大版本更新）悄悄影响。
+版本化机制通过大版本归档精确地区分了这两种情况。
+
 **relationToParent 的四种类型**
 
 | 类型 | 含义 | 内容继承 | 典型场景 |
 |---|---|---|---|
 | `quote` | 原文引用 | 全部继承（子注解通常不修改内容） | 《星学大成》引用果老原文 |
-| `annotate` | 补充注解 | null 字段继承父注解 | 在原文基础上加自己的理解 |
+| `annotate` | 补充注解 | null 字段继承父注解当前版本 | 在原文基础上加自己的理解 |
 | `revise` | 修订 | 不继承，全部显式提供 | 认为原解释部分有误，提出修正 |
 | `contradict` | 反驳 | 不继承，全部显式提供 | 完全不同意原解释，提出对立观点 |
 
@@ -209,6 +252,31 @@ GeJuAnnotation:
 原因：在单人使用场景下，用户自己清楚注解和方案之间的关系。
 远期社区阶段引入 Link 实体后，会用 `motivates / explains / challenges / resolves`
 等关系类型取代这个简单的 ID 列表。
+
+### 3.3.1 GeJuAnnotationVersionHistory — 注解版本历史
+
+仅用于内置注解。记录每个发生过变更的内置注解的历史版本。
+
+```
+GeJuAnnotationVersionHistory:
+  annotationId: String               # 哪个内置注解
+  version: String                    # 版本号，如 "1.0"、"1.1"、"2.0"
+  changeType: initial | minor | major  # 版本类型
+  changeNote: String?                # 变更说明（如 "修正错别字"、"根据考据修正吉凶"）
+  snapshot: JSON                     # 该版本的完整内容快照
+  createdAt: DateTime                # 该版本的创建时间
+```
+
+#### 设计说明
+
+**为什么需要单独的版本历史实体？**
+
+内置注解本身只保留最新版本的内容。版本历史单独存储，用于：
+1. Switcher Widget 展示历史版本线
+2. 用户查看"原文从 v1 到 v2 改了什么"
+3. 归档在旧大版本下的子注解需要有对应的父注解内容可供展示
+
+**只记录发生过变更的注解**。从未修改过的内置注解（始终为 v1.0）不会出现在版本历史中。
 
 ---
 
@@ -394,6 +462,184 @@ UserPreference:
 2. 再排除 hiddenIds（细筛）
 3. 加入用户库中的用户内容
 ```
+
+### 4.3 内置注解的 Assets 双文件结构
+
+内置注解的 JSON assets 分为两个文件：
+
+```
+assets/qizhengsiyu/ge_ju/
+  ├── annotations_current.json        # 文件 A：所有条目的最新版本（完整集）
+  └── annotations_changelog.json      # 文件 B：仅发生过变更的条目的历史版本
+```
+
+**文件 A — 当前数据（完整集，每次 APP 发版完整替换）：**
+
+```json
+[
+  {
+    "id": "builtin_guolao_001",
+    "version": "2.0",
+    "ruleId": "rule_001",
+    "description": "太阳在西边升起。",
+    "jiXiong": "吉",
+    "schools": ["guolao"],
+    "source": { "bookName": "星学大成", "school": "guolao", "section": "卷三" }
+  },
+  {
+    "id": "builtin_guolao_002",
+    "version": "1.0",
+    "ruleId": "rule_002",
+    "description": "月亮很亮。",
+    "jiXiong": "平"
+  }
+]
+```
+
+**文件 B — 变更历史（仅包含发生过变更的条目）：**
+
+```json
+[
+  {
+    "annotationId": "builtin_guolao_001",
+    "history": [
+      {
+        "version": "1.0",
+        "changeType": "initial",
+        "changeNote": null,
+        "snapshot": { "description": "太阳在东边升起b", "jiXiong": "吉" },
+        "createdAt": "2025-11-01"
+      },
+      {
+        "version": "1.1",
+        "changeType": "minor",
+        "changeNote": "修正标点符号",
+        "snapshot": { "description": "太阳在东边升起。", "jiXiong": "吉" },
+        "createdAt": "2025-12-01"
+      },
+      {
+        "version": "2.0",
+        "changeType": "major",
+        "changeNote": "根据考据修正为西边",
+        "snapshot": { "description": "太阳在西边升起。", "jiXiong": "吉" },
+        "createdAt": "2026-01-15"
+      }
+    ]
+  }
+]
+```
+
+#### 设计说明
+
+**为什么分两个文件？**
+
+- 文件 A 是 APP 运行时的主数据源——加载快、结构简单、始终完整。
+- 文件 B 是补充数据——仅供版本历史查看功能使用，体积通常很小
+  （只有发生过变更的条目才会出现在文件 B 中）。
+- 未修改过的条目（如 `builtin_guolao_002`，始终为 v1.0）不出现在文件 B 中。
+- 两个文件独立加载：APP 启动时必须加载文件 A，文件 B 可以懒加载
+  （用户点击 Switcher Widget 查看历史时才加载）。
+
+### 4.4 注解版本可见性规则
+
+用户注解通过 `parentMajorVersion` 绑定到父注解的某个大版本。
+大版本更新后，旧大版本下的用户注解自动归档，不在新大版本下显示。
+
+**完整示例：**
+
+```
+内置注解 "001" 的版本演进：
+  v1.0: "太阳在东边升起b"
+  v1.1: "太阳在东边升起。"（minor — 修标点，语义不变）
+  v2.0: "太阳在西边升起。"（major — 语义修正）
+
+用户注解 A: "日出东方说的很妙"（parentMajorVersion = 1）
+用户注解 B: "确实是西边"（parentMajorVersion = 2）
+```
+
+各版本下的可见状态：
+
+| 内置版本 | 用户注解 A | 用户注解 B | 原因 |
+|---|---|---|---|
+| v1.0 时期 | 可见 | 不存在 | A 的 parentMajorVersion == 1 |
+| v1.1 时期 | 可见 | 不存在 | minor 更新，V 仍为 1 |
+| v2.0 时期 | **归档** | 可见 | A 属于 V=1 → 归档；B 属于 V=2 → 可见 |
+
+**渲染逻辑：**
+
+```
+显示某个内置注解下的用户注解:
+  currentMajor = 内置注解当前版本的大版本号
+
+  # 当前大版本下的可见注解
+  visibleAnnotations = 用户注解
+    .where(parentAnnotationId == 内置注解.id)
+    .where(parentMajorVersion == currentMajor)
+
+  # 归档注解（按大版本分组，供 Switcher Widget 使用）
+  archivedByVersion = 用户注解
+    .where(parentAnnotationId == 内置注解.id)
+    .where(parentMajorVersion < currentMajor)
+    .groupBy(parentMajorVersion)
+```
+
+**继承字段的版本解析：**
+
+子注解的 null 字段继承父注解**当前版本**的内容（非快照）。
+因为同一大版本内的小版本更新不改变语义，继承当前版本是安全的。
+
+```
+用户注解 A（parentMajorVersion = 1）在 v1.1 时期：
+  A.description = null → 继承父注解当前内容 → "太阳在东边升起。"（v1.1 的文字）
+  注意：不是 v1.0 的 "太阳在东边升起b"。小版本修正自动传播。
+```
+
+**大版本更新时的处理（本地阶段）：**
+
+静默归档——APP 升级后，系统自动将旧大版本下的用户注解归入历史视图。
+不做主动提醒（主动通知机制为远期 community 功能，见 [community.md](./community.md)）。
+
+### 4.5 Switcher Widget — 版本切换
+
+格局详情页的注解区域提供 Switcher Widget，让用户在不同大版本之间切换查看。
+
+```
+┌─────────────────────────────────────────────────┐
+│  内置注解 "001"                                  │
+│  当前版本: v2.0                                  │
+│  "太阳在西边升起。"                               │
+│                                                 │
+│  用户注解（v2.* 下）:                             │
+│  └── "确实是西边" — 我                           │
+│                                                 │
+│  ┌─ Switcher ────────────────────────────────┐  │
+│  │  ● v2.*（当前）  ○ v1.*                    │  │
+│  └───────────────────────────────────────────┘  │
+│                                                 │
+│  [切换到 v1.* 后]:                               │
+│  ┌───────────────────────────────────────────┐  │
+│  │  版本线:                                    │  │
+│  │  v1.0: "太阳在东边升起b"                    │  │
+│  │  v1.1: "太阳在东边升起。" ← minor 修正       │  │
+│  │                                            │  │
+│  │  v1.* 下的用户注解:                          │  │
+│  │  └── "日出东方说的很妙" — 我                 │  │
+│  └───────────────────────────────────────────┘  │
+└─────────────────────────────────────────────────┘
+```
+
+#### 设计说明
+
+**Switcher 只在有历史版本时出现。**
+如果内置注解从未发生过大版本更新（始终为 v1.*），不显示 Switcher。
+
+**版本线展示该大版本内的所有小版本变迁。**
+帮助用户理解"这段原文在 v1.* 期间经历了哪些修正"。
+数据来源为 `annotations_changelog.json`（文件 B），按需懒加载。
+
+**归档注解仍然可以编辑和删除。**
+用户可以在 v1.* 视图中管理自己的旧注解——虽然它们不再在当前版本下显示，
+但作为个人的研究记录，用户应该保留完整的管理权限。
 
 ---
 
@@ -737,3 +983,7 @@ DeletionRecord:
 | 隐藏 | Hide | 用户将不认同的内置内容从视图和评估中排除，可随时取消 |
 | Fork | Fork | 基于已有方案深拷贝创建用户自己的独立方案 |
 | 预埋 | Pre-embedded | 本地阶段不启用但为远期社区功能保留的字段 |
+| 大版本 | Major Version (V) | 语义变更——描述含义改变、吉凶修正等。旧大版本下的子注解自动归档 |
+| 小版本 | Minor Version (v) | 无害修正——错别字、标点等。子注解自动跟随，不受影响 |
+| 归档 | Archive | 大版本更新后旧注解进入历史视图，通过 Switcher Widget 可查看 |
+| 版本历史 | Version History | 内置注解的变更记录，存于 assets 双文件中的 changelog 文件 |
