@@ -1,6 +1,6 @@
 # GeJu 数据模型设计文档 — 本地阶段
 
-> 版本：v1.0（本地阶段定稿）
+> 版本：v1.2（本地阶段定稿）
 > 日期：2026-02-08
 > 远期社区协作层设计见 [community.md](./community.md)
 
@@ -319,59 +319,356 @@ GeJuSource:
 
 ---
 
-## 四、评估流程
+## 四、双库隔离架构
+
+### 4.1 存储模型
+
+本地阶段采用"内置库 + 用户库"双库隔离架构。
+这是数据层面最重要的架构决策——内置内容与用户内容物理分离，查询时合并。
 
 ```
-输入：GeJuInput（命盘数据）、用户筛选偏好
+┌──────────────────────────────┐  ┌──────────────────────────────┐
+│       内置库（只读）           │  │       用户库（读写）           │
+│                              │  │                              │
+│  GeJuRule                    │  │  GeJuRule（用户新建的格局）    │
+│  GeJuAnnotation              │  │  GeJuAnnotation              │
+│  GeJuConditionSet            │  │  GeJuConditionSet            │
+│                              │  │  UserPreference              │
+│  来源：JSON assets 加载       │  │  DeletionRecord              │
+│  生命周期：随 APP 版本更新     │  │                              │
+│  权限：运行时只读，不可修改    │  │  来源：本地 Drift DB          │
+│                              │  │  生命周期：用户完全控制        │
+│                              │  │  权限：可增删改查             │
+└──────────────────────────────┘  └──────────────────────────────┘
+```
 
-1. 加载所有 GeJuRule
-2. 对每个 Rule:
-   a. 获取其 conditionSets
-   b. 按用户偏好过滤（流派、内置/用户）
-   c. 对每个激活的 ConditionSet 独立执行 evaluate(conditions, input)
-   d. 收集结果
+#### 为什么要双库隔离？
 
-输出：并列的多套评估结果
+1. **内置数据可恢复**：内置库从 assets JSON 加载，即使 APP 升级变更了内置数据，
+   也不会影响用户库中的任何内容。用户可以随时"重置"内置数据（重新加载 assets）。
+
+2. **用户数据独立管理**：用户库可以独立备份、导出。未来社区阶段，
+   用户库中的 public 内容可直接上传到远端，无需从混合数据中挑拣。
+
+3. **不可能误改内置数据**：内置库运行时只读，从根本上杜绝了用户操作意外修改
+   典籍原文的可能。这对于严肃的命理研究至关重要——原文必须保持不变。
+
+4. **查询逻辑清晰**：所有读操作都是"内置库 + 用户库"的合并查询，
+   所有写操作都只发生在用户库。不存在"这条数据到底该写到哪里"的歧义。
+
+### 4.2 UserPreference — 用户偏好
+
+用户的筛选和隐藏操作不修改任何内容数据，而是记录在独立的偏好模型中。
+
+```
+UserPreference:
+  # ── ConditionSet 控制 ──
+  hiddenConditionSetIds: [String]    # 用户隐藏的内置方案 ID 列表
+  conditionSetSchools: [EnumSchool]? # 按流派过滤方案（null = 不过滤）
+
+  # ── Annotation 控制 ──
+  hiddenAnnotationIds: [String]      # 用户隐藏的内置注解 ID 列表
+  annotationSchools: [EnumSchool]?   # 按流派过滤注解（null = 不过滤）
+```
+
+#### 设计说明
+
+**为什么用 hiddenIds 而不是 visibleIds？**
+
+默认行为应该是"全部可见"。用户主动选择隐藏某些不认同的方案或注解。
+用 hiddenIds 实现意味着：
+- 新增的内置数据（APP 升级）自动可见，无需用户手动激活
+- 用户只需要记录"我不想看的"，而不是维护"我想看的"的完整列表
+- 列表通常较短（用户只会隐藏少数不认同的内容）
+
+**ConditionSet 和 Annotation 的过滤独立运作。**
+
+用户可以：
+- 隐藏果老派的某个判断方案，但保留果老派的注解用于阅读参考
+- 隐藏所有内置注解只看自己的笔记，但仍使用内置方案进行评估
+- 按流派级别过滤（只看琴堂派），同时额外隐藏琴堂派中某个特定方案
+
+两层过滤的执行顺序：
+```
+1. 先按 schools 过滤（粗筛）
+2. 再排除 hiddenIds（细筛）
+3. 加入用户库中的用户内容
+```
+
+---
+
+## 五、评估流程
+
+### 5.1 核心流程
+
+UI 格局列表**仅展示匹配上的格局**。未匹配的格局不显示（数量可达 400+，全部展示无意义）。
+
+```
+输入：GeJuInput（命盘数据）、UserPreference（用户偏好）
+
+evaluate(input, preference):
+  results = []
+  allRules = 内置库.rules + 用户库.rules
+
+  for rule in allRules:
+    # ── 合并两库的 ConditionSet，应用过滤 ──
+    builtInSets = 内置库.getConditionSets(rule.id)
+      .where(cs => preference.conditionSetSchools == null
+                   || cs.schools 与 preference.conditionSetSchools 有交集)
+      .where(cs => cs.id NOT IN preference.hiddenConditionSetIds)
+
+    userSets = 用户库.getConditionSets(rule.id)
+
+    activeSets = builtInSets + userSets
+
+    # ── 逐方案独立评估 ──
+    matchedSets = []
+    for cs in activeSets:
+      result = evaluateConditions(cs.conditions, input)
+      if result.matched:
+        matchedSets.add({
+          conditionSet: cs,
+          matchedConditions: result.details   # 逐条通过/未通过详情
+        })
+
+    # ── 只收集有匹配的格局 ──
+    if matchedSets.isNotEmpty:
+      results.add({ rule: rule, matches: matchedSets })
+
+  return results
+```
+
+输出示例（仅包含匹配上的格局）：
+```
 [
-  { rule: "格局A", conditionSet: "果老原始方案",  matched: false },
-  { rule: "格局A", conditionSet: "用户改进方案",  matched: true  },
-  { rule: "格局B", conditionSet: "琴堂标准方案",  matched: true  },
+  { rule: "格局A", matches: [
+      { conditionSet: "用户改进方案", matchedConditions: [...] }
+    ]
+  },
+  { rule: "格局B", matches: [
+      { conditionSet: "果老原始方案", matchedConditions: [...] },
+      { conditionSet: "琴堂标准方案", matchedConditions: [...] }
+    ]
+  },
 ]
 ```
 
-**为什么返回并列结果而不是一个结论？**
+#### 设计说明
 
-因为不同方案可能给出截然不同的判断。系统不应该替用户做"哪个方案更权威"的决定。
-用户在 UI 上看到所有激活方案的结果，自己决定采信哪个——这反映了格局研究的现实：
-不同流派之间没有绝对的对错，只有不同的视角和经验。
+**为什么一个格局可以有多个匹配的方案？**
+
+同一格局的不同方案（来自不同流派或用户）可能同时命中。
+例如果老方案和琴堂方案都判定"格局B"成立，但依据的条件不同。
+UI 并列展示所有命中的方案，用户可以查看每个方案的条件详情，
+理解"为什么不同流派都认为这个格局成立"。
+
+**未匹配的格局完全不进入结果。**
+
+格局总数可能在 400 以上，绝大多数不会匹配。
+将未匹配结果排除出返回值，避免 UI 层做大量无用渲染，也避免结果列表被噪音淹没。
+用户如果需要查看某个未匹配的格局，通过编辑模式中的搜索功能主动查找。
+
+### 5.2 ConditionSet 的创建方式
+
+用户创建自己的判断方案有两种方式。两种方式都只复制 ConditionSet，
+**不复制 Annotation**——注解和判断是独立关注点，用户修改条件不代表要改解释。
+
+**方式一：基于已有方案复制（Fork）**
+
+```
+forkConditionSet(originalId):
+  original = 加载原始方案（内置库或用户库）
+  newCs = GeJuConditionSet(
+    id: "user_" + uuid(),
+    ruleId: original.ruleId,
+    label: "基于「${original.label}」的修改",   # 用户可自行修改
+    schools: null,                               # 用户方案通常不归属流派
+    source: null,
+    authorType: user,
+    conditions: deepCopy(original.conditions),   # 深拷贝全部条件
+    derivedFrom: original.id,                    # 记录溯源
+    changeNote: null,                            # 用户后续填写
+    relatedAnnotationIds: [],                    # 可选，用户后续关联
+    visibility: private,
+  )
+  保存到用户库
+  return newCs   → 进入条件编辑器
+```
+
+**方式二：从零创建**
+
+```
+createConditionSet(ruleId):
+  newCs = GeJuConditionSet(
+    id: "user_" + uuid(),
+    ruleId: ruleId,
+    label: "我的方案",
+    authorType: user,
+    conditions: [],                              # 空条件，用户从零编写
+    derivedFrom: null,                           # 无溯源
+    ...
+  )
+  保存到用户库
+  return newCs   → 进入条件编辑器
+```
+
+#### Fork 时为什么深拷贝而不是引用？
+
+复制后的方案与原方案**完全独立**。这是"判断方案自包含"原则的直接体现：
+- 原方案后续的任何变更（内置数据随 APP 升级更新）不影响用户的副本
+- 用户对副本的任何修改不影响原方案
+- `derivedFrom` 只是元数据，记录"我是从哪里来的"，不参与运行时逻辑
 
 ---
 
-## 五、筛选偏好
+## 六、用户操作路径
+
+### 6.1 路径一：正常使用（查看匹配结果）
+
+用户输入命盘数据后，评估引擎自动运行，格局列表仅展示匹配上的格局。
 
 ```
-用户偏好:
-  # ── Annotation 过滤 ──
-  annotationSchools: [EnumSchool]     # 显示哪些流派的注解
-  annotationShowUser: bool            # 是否显示自己创建的注解
+命盘输入 → 评估引擎 → 格局列表（仅匹配项）
 
-  # ── ConditionSet 过滤 ──
-  conditionSetSchools: [EnumSchool]   # 显示哪些流派的方案
-  conditionSetShowUser: bool          # 是否显示自己创建的方案
+格局列表 Widget:
+  ├── 格局A ✓（用户改进方案匹配）
+  ├── 格局B ✓（果老原始方案 + 琴堂标准方案 均匹配）
+  └── 格局C ✓（用户自建方案匹配）
+
+点击某个格局 → 格局详情页:
+  ├── 注解区域（按 UserPreference 中的 annotationSchools / hiddenAnnotationIds 过滤）
+  │    ├── [内置] 果老派/星学大成: "此格局主大贵..."
+  │    ├── [内置] 琴堂派/琴堂五星术: "此格局主富..."
+  │    └── [用户] 我的注解（如有）
+  │
+  └── 匹配方案区域（展示命中的 ConditionSet）
+       ├── 方案名 + 来源标签（内置/用户）
+       └── 条件逐条展示（✓ 通过 / ✗ 未通过）
 ```
 
-**Annotation 和 ConditionSet 的过滤独立运作。**
+### 6.2 路径二：发现缺失格局（核心场景）
 
-这意味着用户可以：
-- 只看果老派的注解，但同时使用果老和琴堂两派的判断方案
-- 隐藏所有内置注解只看自己的笔记，但使用内置方案做评估
-- 显示所有注解用于学习对比，但只激活一套方案用于实际论命
+用户凭经验认为某个格局应该匹配，但格局列表中没有出现。
+这是用户创建自定义判断方案的主要动机。
 
-这种灵活性正是"注解与判断分离"带来的直接收益。
+```
+格局列表（目标格局不在其中）
+  │
+  └── 进入 [编辑模式]
+       │
+       └── [搜索格局]
+            │  搜索范围：内置库 + 用户库
+            │  匹配字段：name、aliases
+            │
+            ├── ── 搜索到了 ──
+            │    │
+            │    │  展示该格局的所有 ConditionSet（包括被隐藏的，但标注隐藏状态）
+            │    │  用户可以查看每个方案的条件详情，理解"为什么没匹配上"
+            │    │
+            │    ├── [基于此方案创建新方案]（Fork）
+            │    │    1. 系统深拷贝选中方案的全部 conditions
+            │    │    2. 进入条件编辑器
+            │    │    3. 用户修改条件（如将"同宫"改为"同宫或三方"）
+            │    │    4. 填写 label、changeNote（changeNote 可选，为社区预留）
+            │    │    5. 可选：关联注解（relatedAnnotationIds）
+            │    │    6. 保存到用户库
+            │    │
+            │    ├── [从零创建新方案]
+            │    │    同上流程，但 conditions 起始为空，derivedFrom 为 null
+            │    │
+            │    └── [隐藏原始方案]（可选）
+            │         将不认同的内置方案 ID 加入 hiddenConditionSetIds
+            │         该方案不再参与后续评估
+            │         注意：隐藏不是删除，随时可以取消隐藏
+            │
+            └── ── 没搜索到 ──
+                 │
+                 └── [新建格局]
+                      1. 输入格局名称 → 创建 GeJuRule（写入用户库）
+                      2. 创建 GeJuConditionSet（从零编写条件）
+                      3. 可选：创建 GeJuAnnotation（写自己的解释）
+                      4. 全部保存到用户库
+```
+
+#### 为什么编辑模式中搜索要包含被隐藏的方案？
+
+用户可能之前隐藏了某个方案，后来想基于它创建新方案，或重新启用它。
+编辑模式是"管理"视角，应该展示完整信息。
+被隐藏的方案在编辑模式中标注隐藏状态，用户可以取消隐藏。
+
+### 6.3 路径三：管理已有方案
+
+```
+编辑模式
+  └── [我的方案]
+       │  展示用户库中所有用户创建的 ConditionSet
+       │
+       ├── 格局A — 我的改进方案
+       │    derivedFrom: 果老原始方案
+       │    changeNote: "将同宫放宽为三方"
+       │
+       ├── 格局D — 自建方案
+       │    derivedFrom: null（从零创建）
+       │
+       └── 格局E — 三方扩展版
+            derivedFrom: 琴堂标准方案
+
+       对每个方案可以：
+       ├── [编辑] → 进入条件编辑器
+       ├── [删除] → 需填写删除原因（见"七、删除机制"）
+       ├── [查看原始方案] → 通过 derivedFrom 跳转（如有）
+       └── [管理关联注解] → 查看/添加/移除 relatedAnnotationIds
+```
+
+### 6.4 隐藏与取消隐藏
+
+隐藏是一个轻量操作——不删除任何数据，只在 UserPreference 中记录 ID。
+
+```
+隐藏内置方案:
+  preference.hiddenConditionSetIds.add(conditionSetId)
+  → 该方案不再参与评估
+  → 格局详情页不再展示该方案
+  → 编辑模式中仍可见（标注"已隐藏"）
+
+取消隐藏:
+  preference.hiddenConditionSetIds.remove(conditionSetId)
+  → 该方案恢复参与评估
+```
+
+#### 隐藏 vs 删除
+
+| | 隐藏 | 删除 |
+|---|---|---|
+| 对象 | 内置方案（只读，不能删除） | 用户方案（用户自己创建的） |
+| 操作 | 在 UserPreference 中记录 ID | 标记 isDeleted + 填写删除原因 |
+| 可逆性 | 随时取消 | 不可逆（但有 DeletionRecord 快照） |
+| 数据影响 | 无（原数据不变） | 逻辑删除 + 审计记录 |
 
 ---
 
-## 六、删除机制
+## 七、Community 预埋字段说明
+
+本地阶段的数据模型中包含若干"预埋"字段。
+这些字段在本地单机阶段**不参与任何运行时逻辑**，但在数据结构中保留，
+以避免未来引入社区功能时需要做数据迁移。
+
+| 字段 | 所在实体 | 本地阶段行为 | 远期用途 |
+|---|---|---|---|
+| `visibility` | Annotation, ConditionSet | 固定为 `private` | public 时其他用户可见 |
+| `authorId` | Annotation, ConditionSet | 本地 UUID（设备标识） | 绑定云端账号 |
+| `locale` | Annotation | 固定为 `"zh-Hans"` | 标识原文语言，用于翻译 overlay |
+| `relatedAnnotationIds` | ConditionSet | 可选填写 | 社区阶段为分享提供上下文 |
+| `relatedConditionSetIds` | Annotation | 可选填写 | 社区阶段为分享提供上下文 |
+| `changeNote` | ConditionSet | 可选填写 | 社区阶段其他用户理解修改动机 |
+
+**零成本预留原则**：不填不影响功能，填了未来有额外价值。
+用户在本地阶段创建方案时，changeNote 和关联 ID 都是可选的。
+但如果用户养成了填写的习惯，未来开放社区时这些信息就是现成的分享说明。
+
+---
+
+## 八、删除机制
 
 ### 本地阶段规则
 
@@ -404,7 +701,7 @@ DeletionRecord:
 
 ---
 
-## 七、与现有代码的迁移对照
+## 九、与现有代码的迁移对照
 
 | 现有结构 | 目标结构 | 迁移说明 |
 |---|---|---|
@@ -423,7 +720,7 @@ DeletionRecord:
 
 ---
 
-## 八、术语表
+## 十、术语表
 
 | 术语 | 英文 | 说明 |
 |---|---|---|
@@ -436,3 +733,7 @@ DeletionRecord:
 | 溯源 | Derivation | 判断方案之间的来源追溯（纯元数据） |
 | 锚点 | Anchor | Rule 的角色定位——只提供名字，不持有实质内容 |
 | 自包含 | Self-contained | ConditionSet 的核心特性——不依赖外部继承 |
+| 双库隔离 | Dual-DB Isolation | 内置库（只读）与用户库（读写）物理分离 |
+| 隐藏 | Hide | 用户将不认同的内置内容从视图和评估中排除，可随时取消 |
+| Fork | Fork | 基于已有方案深拷贝创建用户自己的独立方案 |
+| 预埋 | Pre-embedded | 本地阶段不启用但为远期社区功能保留的字段 |
