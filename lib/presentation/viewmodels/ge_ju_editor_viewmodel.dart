@@ -7,7 +7,9 @@ import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_condition_set.dar
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_rule.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju_model.dart';
 import 'package:qizhengsiyu/domain/errors/ge_ju_errors.dart';
+import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_school.dart';
 import 'package:qizhengsiyu/domain/services/ge_ju_crud_service.dart';
+import 'package:qizhengsiyu/domain/services/ge_ju_school_service.dart';
 import 'package:qizhengsiyu/domain/services/ge_ju_validation.dart';
 import 'package:qizhengsiyu/presentation/models/condition_editor_node.dart';
 
@@ -39,9 +41,13 @@ class SaveResult {
 /// 以"格局"为单位操作，内部管理 Rule + Annotation + ConditionSet 三个实体的字段
 class GeJuEditorViewModel extends ChangeNotifier {
   final GeJuCrudService _crudService;
+  final GeJuSchoolService? _schoolService;
 
-  GeJuEditorViewModel({required GeJuCrudService crudService})
-      : _crudService = crudService;
+  GeJuEditorViewModel({
+    required GeJuCrudService crudService,
+    GeJuSchoolService? schoolService,
+  })  : _crudService = crudService,
+        _schoolService = schoolService;
 
   // ========== 模式与原始数据 ==========
 
@@ -70,6 +76,11 @@ class GeJuEditorViewModel extends ChangeNotifier {
   String? _changeNote;
   ConditionEditorNode? _rootConditionNode;
   String? _derivedFrom;
+
+  // ═══ School 字段 ═══
+  List<GeJuSchool> _allSchools = [];
+  List<String> _annotationSchools = [];
+  List<String> _conditionSetSchools = [];
 
   // ═══ UI 状态 ═══
   ValidationResult? _validationResult;
@@ -104,6 +115,11 @@ class GeJuEditorViewModel extends ChangeNotifier {
   String? get changeNote => _changeNote;
   ConditionEditorNode? get rootConditionNode => _rootConditionNode;
   String? get derivedFrom => _derivedFrom;
+
+  // School fields
+  List<GeJuSchool> get allSchools => _allSchools;
+  List<String> get annotationSchools => _annotationSchools;
+  List<String> get conditionSetSchools => _conditionSetSchools;
 
   // UI state
   ValidationResult? get validationResult => _validationResult;
@@ -141,6 +157,7 @@ class GeJuEditorViewModel extends ChangeNotifier {
     _originalAnnotation = null;
     _originalConditionSet = null;
     _resetForm();
+    await reloadSchools();
     notifyListeners();
     return true;
   }
@@ -170,6 +187,7 @@ class GeJuEditorViewModel extends ChangeNotifier {
       _hasUnsavedChanges = false;
       _validationResult = null;
       _saveError = null;
+      await reloadSchools();
       notifyListeners();
       return true;
     } catch (e) {
@@ -207,6 +225,7 @@ class GeJuEditorViewModel extends ChangeNotifier {
       _hasUnsavedChanges = true;
       _validationResult = null;
       _saveError = null;
+      await reloadSchools();
       notifyListeners();
       return true;
     } catch (e) {
@@ -243,6 +262,7 @@ class GeJuEditorViewModel extends ChangeNotifier {
       _hasUnsavedChanges = true;
       _validationResult = null;
       _saveError = null;
+      await reloadSchools();
       notifyListeners();
       return true;
     } catch (e) {
@@ -333,6 +353,27 @@ class GeJuEditorViewModel extends ChangeNotifier {
     if (_sourceSection != value) {
       _sourceSection = value;
       _markChanged();
+    }
+  }
+
+  // ========== School 字段更新 ==========
+
+  void updateAnnotationSchools(List<String> schools) {
+    _annotationSchools = schools;
+    _markChanged();
+  }
+
+  void updateConditionSetSchools(List<String> schools) {
+    _conditionSetSchools = schools;
+    _markChanged();
+  }
+
+  /// 重新加载可选流派列表
+  Future<void> reloadSchools() async {
+    if (_schoolService != null) {
+      _schoolService!.clearCache();
+      _allSchools = await _schoolService!.getAllSchools();
+      notifyListeners();
     }
   }
 
@@ -515,10 +556,12 @@ class GeJuEditorViewModel extends ChangeNotifier {
             className: _className.trim(),
             books: _books.trim().isNotEmpty ? _books.trim() : null,
             sourceSection: _sourceSection,
+            annotationSchools: _annotationSchools.isNotEmpty ? _annotationSchools : null,
             csLabel: _csLabel.trim().isNotEmpty ? _csLabel.trim() : _name.trim(),
             conditions: condition,
             changeNote: _changeNote,
             derivedFrom: _derivedFrom,
+            conditionSetSchools: _conditionSetSchools.isNotEmpty ? _conditionSetSchools : null,
           ));
           resultRuleId = rule.id;
           _editingRuleId = rule.id;
@@ -544,6 +587,7 @@ class GeJuEditorViewModel extends ChangeNotifier {
               jiXiong: _jiXiong,
               geJuType: _geJuType,
               className: _className.trim(),
+              schools: _annotationSchools.isNotEmpty ? _annotationSchools : null,
               updatedAt: DateTime.now(),
             );
             await _crudService.updateAnnotation(updatedAnn);
@@ -559,6 +603,7 @@ class GeJuEditorViewModel extends ChangeNotifier {
                 className: _className.trim(),
                 books: _books.trim().isNotEmpty ? _books.trim() : null,
                 sourceSection: _sourceSection,
+                schools: _annotationSchools.isNotEmpty ? _annotationSchools : null,
               ),
             );
             _originalAnnotation = ann;
@@ -570,6 +615,7 @@ class GeJuEditorViewModel extends ChangeNotifier {
               label: _csLabel.trim().isNotEmpty ? _csLabel.trim() : _name.trim(),
               conditions: condition,
               changeNote: _changeNote,
+              schools: _conditionSetSchools.isNotEmpty ? _conditionSetSchools : null,
               updatedAt: DateTime.now(),
             );
             await _crudService.updateConditionSet(updatedCs);
@@ -582,6 +628,7 @@ class GeJuEditorViewModel extends ChangeNotifier {
                 label: _csLabel.trim().isNotEmpty ? _csLabel.trim() : _name.trim(),
                 conditions: condition,
                 changeNote: _changeNote,
+                schools: _conditionSetSchools.isNotEmpty ? _conditionSetSchools : null,
               ),
             );
             _originalConditionSet = cs;
@@ -601,10 +648,12 @@ class GeJuEditorViewModel extends ChangeNotifier {
             className: _className.trim(),
             books: _books.trim().isNotEmpty ? _books.trim() : null,
             sourceSection: _sourceSection,
+            annotationSchools: _annotationSchools.isNotEmpty ? _annotationSchools : null,
             csLabel: _csLabel.trim().isNotEmpty ? _csLabel.trim() : _name.trim(),
             conditions: condition,
             changeNote: _changeNote,
             derivedFrom: _derivedFrom,
+            conditionSetSchools: _conditionSetSchools.isNotEmpty ? _conditionSetSchools : null,
           ));
           resultRuleId = rule.id;
           _editingRuleId = rule.id;
@@ -665,6 +714,8 @@ class GeJuEditorViewModel extends ChangeNotifier {
     _changeNote = null;
     _rootConditionNode = null;
     _derivedFrom = null;
+    _annotationSchools = [];
+    _conditionSetSchools = [];
     _hasUnsavedChanges = false;
     _validationResult = null;
     _saveError = null;
@@ -696,6 +747,14 @@ class GeJuEditorViewModel extends ChangeNotifier {
     _rootConditionNode = conditionSet?.conditions != null
         ? ConditionEditorNode.fromCondition(conditionSet!.conditions!)
         : null;
+
+    // School fields
+    _annotationSchools = annotation?.schools != null
+        ? List<String>.from(annotation!.schools!)
+        : [];
+    _conditionSetSchools = conditionSet?.schools != null
+        ? List<String>.from(conditionSet!.schools!)
+        : [];
   }
 
   void _markChanged() {

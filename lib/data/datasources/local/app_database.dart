@@ -24,11 +24,12 @@ part 'app_database.g.dart';
     GeJuConditionSetsTable,
     GeJuUserPreferencesTable,
     GeJuDeletionRecordsTable,
+    GeJuSchoolsTable,
   ],
   daos: [QiZhengSiYuPanDao, GeJuDao],
 )
 class AppDatabase extends _$AppDatabase {
-  AppDatabase([QueryExecutor? e])
+  AppDatabase._([QueryExecutor? e])
       : super(
           e ??
               driftDatabase(
@@ -51,8 +52,16 @@ class AppDatabase extends _$AppDatabase {
               ),
         );
 
+  static AppDatabase? _instance;
+
+  /// 单例访问（同一个数据库文件只能打开一次）
+  factory AppDatabase() => _instance ??= AppDatabase._();
+
+  /// 仅用于测试：注入自定义 QueryExecutor
+  factory AppDatabase.forTesting(QueryExecutor e) => AppDatabase._(e);
+
   @override
-  int get schemaVersion => 2;
+  int get schemaVersion => 3;
 
   @override
   MigrationStrategy get migration {
@@ -68,6 +77,10 @@ class AppDatabase extends _$AppDatabase {
           await m.createTable(geJuConditionSetsTable);
           await m.createTable(geJuUserPreferencesTable);
           await m.createTable(geJuDeletionRecordsTable);
+        }
+        if (from < 3) {
+          // v3: Add GeJu Schools table
+          await m.createTable(geJuSchoolsTable);
         }
       },
     );

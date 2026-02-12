@@ -25,8 +25,8 @@ class _CenterLayoutDelegate extends MultiChildLayoutDelegate {
         final childSize = layoutChild(i, BoxConstraints.loose(size));
         positionChild(
           i,
-          Offset(
-              center.dx - childSize.width / 2, center.dy - childSize.height / 2),
+          Offset(center.dx - childSize.width / 2,
+              center.dy - childSize.height / 2),
         );
       }
     }
@@ -66,7 +66,8 @@ class AllShenShaRing extends StatelessWidget {
       cumulativeAngles.add(cumulativeAngle);
       cumulativeAngle += gongs[i].degree;
     }
-    double baseGongAngleOffset = 2 * 30; // This might also need to be dynamic based on zeroPoint
+    double baseGongAngleOffset =
+        2 * 30; // This might also need to be dynamic based on zeroPoint
 
     return SizedBox(
       width: itemSize,
@@ -78,7 +79,8 @@ class AllShenShaRing extends StatelessWidget {
             LayoutId(
               id: i,
               child: Transform.rotate(
-                angle: (cumulativeAngles[i] + baseGongAngleOffset) * math.pi / 180,
+                angle:
+                    (cumulativeAngles[i] + baseGongAngleOffset) * math.pi / 180,
                 child: CustomPaint(
                   size: Size(itemSize, itemSize),
                   painter: SectorPainter(
@@ -93,7 +95,8 @@ class AllShenShaRing extends StatelessWidget {
                     outerRadius: outerRadius,
                     innerRadius: innerRadius,
                     gongAngleOffset: 0,
-                    textGongAngleOffset: cumulativeAngles[i] + baseGongAngleOffset,
+                    textGongAngleOffset:
+                        cumulativeAngles[i] + baseGongAngleOffset,
                     shenShaList: shenShaMapper[gongs[i].gong] ?? [],
                   ),
                 ),

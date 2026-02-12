@@ -10,6 +10,7 @@ import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_deletion_record.d
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_rule.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_source.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_user_preference.dart';
+import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_school.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju_model.dart';
 import 'package:qizhengsiyu/enums/enum_panel_system_type.dart';
 import '../app_database.dart';
@@ -23,6 +24,7 @@ part 'ge_ju_dao.g.dart';
   GeJuConditionSetsTable,
   GeJuUserPreferencesTable,
   GeJuDeletionRecordsTable,
+  GeJuSchoolsTable,
 ])
 class GeJuDao extends DatabaseAccessor<AppDatabase> with _$GeJuDaoMixin {
   GeJuDao(AppDatabase db) : super(db);
@@ -252,6 +254,47 @@ class GeJuDao extends DatabaseAccessor<AppDatabase> with _$GeJuDaoMixin {
   }
 
   // ══════════════════════════════════════════
+  // School CRUD
+  // ══════════════════════════════════════════
+
+  Future<void> insertSchool(GeJuSchool school) async {
+    await into(geJuSchoolsTable).insert(
+      GeJuSchoolsTableCompanion.insert(
+        id: school.id,
+        name: school.name,
+        brief: Value(school.brief),
+        featuresJson: Value(jsonEncode(school.features)),
+      ),
+      mode: InsertMode.insertOrReplace,
+    );
+  }
+
+  Future<List<GeJuSchool>> getAllSchools() async {
+    final rows = await select(geJuSchoolsTable).get();
+    return rows.map(_rowToSchool).toList();
+  }
+
+  Future<GeJuSchool?> getSchoolById(String id) async {
+    final query = select(geJuSchoolsTable)..where((t) => t.id.equals(id));
+    final row = await query.getSingleOrNull();
+    return row != null ? _rowToSchool(row) : null;
+  }
+
+  Future<void> updateSchool(GeJuSchool school) async {
+    await (update(geJuSchoolsTable)..where((t) => t.id.equals(school.id))).write(
+      GeJuSchoolsTableCompanion(
+        name: Value(school.name),
+        brief: Value(school.brief),
+        featuresJson: Value(jsonEncode(school.features)),
+      ),
+    );
+  }
+
+  Future<void> deleteSchool(String id) async {
+    await (delete(geJuSchoolsTable)..where((t) => t.id.equals(id))).go();
+  }
+
+  // ══════════════════════════════════════════
   // Row → Domain mappers
   // ══════════════════════════════════════════
 
@@ -397,6 +440,20 @@ class GeJuDao extends DatabaseAccessor<AppDatabase> with _$GeJuDaoMixin {
       conditionSetSchools: csSchools,
       hiddenAnnotationIds: hiddenAnnIds,
       annotationSchools: annSchools,
+    );
+  }
+
+  GeJuSchool _rowToSchool(GeJuSchoolsTableData row) {
+    List<String> features = [];
+    try {
+      features = (jsonDecode(row.featuresJson) as List).cast<String>();
+    } catch (_) {}
+
+    return GeJuSchool(
+      id: row.id,
+      name: row.name,
+      brief: row.brief,
+      features: features,
     );
   }
 

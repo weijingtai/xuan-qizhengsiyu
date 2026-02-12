@@ -100,6 +100,21 @@ class GeJuUserPreferencesTable extends Table {
   Set<Column> get primaryKey => {id};
 }
 
+/// 用户自定义流派表
+class GeJuSchoolsTable extends Table {
+  @override
+  String get tableName => 't_ge_ju_schools';
+
+  TextColumn get id => text().withLength(min: 1)();
+  TextColumn get name => text()();
+  TextColumn get brief => text().nullable()();
+  /// JSON: List<String>
+  TextColumn get featuresJson => text().withDefault(const Constant('[]')).named('features_json')();
+
+  @override
+  Set<Column> get primaryKey => {id};
+}
+
 /// 删除审计记录表
 class GeJuDeletionRecordsTable extends Table {
   @override

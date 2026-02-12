@@ -20,9 +20,12 @@ import 'package:qizhengsiyu/data/datasources/local/daos/ge_ju_dao.dart';
 import 'package:qizhengsiyu/data/repositories/ge_ju_repository_impl.dart';
 import 'package:qizhengsiyu/domain/repositories/ge_ju_repository.dart';
 import 'package:qizhengsiyu/domain/services/ge_ju_crud_service.dart';
+import 'package:qizhengsiyu/domain/services/ge_ju_school_service.dart';
 import 'package:qizhengsiyu/presentation/viewmodels/ge_ju_list_viewmodel.dart';
 import 'package:qizhengsiyu/presentation/viewmodels/ge_ju_editor_viewmodel.dart';
 import 'package:qizhengsiyu/presentation/viewmodels/ge_ju_detail_viewmodel.dart';
+import 'package:qizhengsiyu/presentation/viewmodels/ge_ju_school_list_viewmodel.dart';
+import 'package:qizhengsiyu/presentation/viewmodels/ge_ju_school_editor_viewmodel.dart';
 
 List<SingleChildWidget> createProviders() {
   return [
@@ -84,10 +87,9 @@ List<SingleChildWidget> createProviders() {
 
     // ============ GeJu 格局管理 ============
 
-    // GeJu Database & DAO
+    // GeJu Database & DAO (singleton — 不随路由 dispose)
     Provider<AppDatabase>(
       create: (_) => AppDatabase(),
-      dispose: (_, db) => db.close(),
     ),
     Provider<GeJuDao>(
       create: (context) => GeJuDao(context.read<AppDatabase>()),
@@ -113,6 +115,13 @@ List<SingleChildWidget> createProviders() {
       ),
     ),
 
+    // GeJu School Service
+    Provider<GeJuSchoolService>(
+      create: (context) => GeJuSchoolService(
+        dao: context.read<GeJuDao>(),
+      ),
+    ),
+
     // GeJu ViewModels
     ChangeNotifierProvider<GeJuListViewModel>(
       create: (context) => GeJuListViewModel(
@@ -122,11 +131,22 @@ List<SingleChildWidget> createProviders() {
     ChangeNotifierProvider<GeJuEditorViewModel>(
       create: (context) => GeJuEditorViewModel(
         crudService: context.read<GeJuCrudService>(),
+        schoolService: context.read<GeJuSchoolService>(),
       ),
     ),
     ChangeNotifierProvider<GeJuDetailViewModel>(
       create: (context) => GeJuDetailViewModel(
         crudService: context.read<GeJuCrudService>(),
+      ),
+    ),
+    ChangeNotifierProvider<GeJuSchoolListViewModel>(
+      create: (context) => GeJuSchoolListViewModel(
+        schoolService: context.read<GeJuSchoolService>(),
+      ),
+    ),
+    ChangeNotifierProvider<GeJuSchoolEditorViewModel>(
+      create: (context) => GeJuSchoolEditorViewModel(
+        schoolService: context.read<GeJuSchoolService>(),
       ),
     ),
   ];

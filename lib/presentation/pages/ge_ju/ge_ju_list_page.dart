@@ -38,6 +38,18 @@ class _GeJuListPageState extends State<GeJuListPage> {
         title: const Text('格局管理'),
         actions: [
           IconButton(
+            icon: const Icon(Icons.school_outlined),
+            tooltip: '流派管理',
+            onPressed: () {
+              Navigator.pushNamed(
+                context,
+                '/qizhengsiyu/ge_ju/school/list',
+              ).then((_) {
+                context.read<GeJuListViewModel>().refreshRules();
+              });
+            },
+          ),
+          IconButton(
             icon: const Icon(Icons.add),
             tooltip: '新建格局',
             onPressed: () => _navigateToEditor(context),

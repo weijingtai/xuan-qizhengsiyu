@@ -7,6 +7,8 @@ import 'package:qizhengsiyu/presentation/pages/primary_page.dart';
 import 'package:qizhengsiyu/presentation/pages/ge_ju/ge_ju_list_page.dart';
 import 'package:qizhengsiyu/presentation/pages/ge_ju/ge_ju_detail_page.dart';
 import 'package:qizhengsiyu/presentation/pages/ge_ju/ge_ju_editor_page.dart';
+import 'package:qizhengsiyu/presentation/pages/ge_ju/ge_ju_school_list_page.dart';
+import 'package:qizhengsiyu/presentation/pages/ge_ju/ge_ju_school_editor_page.dart';
 import 'package:qizhengsiyu/presentation/pages/qizhengsiyu_home_page.dart';
 
 import 'data/datasources/local/app_database.dart';
@@ -21,15 +23,12 @@ class NavigatorGenerator {
       RouteObserver<PageRoute>();
   static Logger logger = Logger();
   static final routes = {
+    // ============ 根路由 ============
+    "/": (context, {arguments}) => const QiZhengSiYuHomePage(),
+
     "/qizhengsiyu/panel": (context, {arguments}) => MultiProvider(providers: [
           // ============ 核心依赖注入 ============
-          ...createProviders(), // ⭐⭐⭐ 关键!注入所有数据层、业务层和新的MVVM ViewModel
-
-          // 数据库
-          Provider<AppDatabase>(
-            create: (ctx) => AppDatabase(),
-            dispose: (ctx, db) => db.close(),
-          ),
+          ...createProviders(), // ⭐ 注入所有数据层、业务层和MVVM ViewModel（含 AppDatabase 单例）
 
           // 仓储
           Provider<IQiZhengSiYuPanRepository>(
@@ -43,7 +42,7 @@ class NavigatorGenerator {
               create: (ctx) => SaveCalculatedPanelUseCase(
                   qiZhengSiYuPanRepository:
                       ctx.read<IQiZhengSiYuPanRepository>())),
-        ], child: const BeautyViewPage() // ⭐ 使用 const 构造
+        ], child: const BeautyViewPage()
             ),
 
     // ============ 七政四余首页 ============
@@ -89,6 +88,20 @@ class NavigatorGenerator {
         child: GeJuEditorPage(ruleId: ruleId),
       );
     },
+
+    // ============ 流派管理路由 ============
+    "/qizhengsiyu/ge_ju/school/list": (context, {arguments}) => MultiProvider(
+          providers: createProviders(),
+          child: const GeJuSchoolListPage(),
+        ),
+
+    "/qizhengsiyu/ge_ju/school/edit": (context, {arguments}) {
+      final schoolId = arguments as String?;
+      return MultiProvider(
+        providers: createProviders(),
+        child: GeJuSchoolEditorPage(schoolId: schoolId),
+      );
+    },
   };
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -102,10 +115,16 @@ class NavigatorGenerator {
                 pageContentBuilder(context, arguments: settings.arguments));
         return route;
       } else {
-        return _errorPage('Could not found route for $name');
+        // 未知路由回退到首页（处理 Web 端 initialRoute 路径拆分产生的中间路由）
+        logger.w('Unknown route: $name, falling back to home');
+        return MaterialPageRoute(
+            settings: settings,
+            builder: (_) => const QiZhengSiYuHomePage());
       }
     } else {
-      return _errorPage("Navigator required naviation name.");
+      return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => const QiZhengSiYuHomePage());
     }
   }
 

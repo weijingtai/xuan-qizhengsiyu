@@ -31,6 +31,15 @@ class GeJuSchool {
 
   Map<String, dynamic> toJson() => _$GeJuSchoolToJson(this);
 
+  /// 内置流派 ID 集合
+  static const Set<String> builtInIds = {'guolao', 'qintang', 'tianguan'};
+
+  /// 是否为系统内置流派
+  bool get isBuiltIn => builtInIds.contains(id);
+
+  /// 是否为用户自定义流派
+  bool get isUser => !isBuiltIn;
+
   // --- 系统内置流派 System Built-in Schools ---
 
   static const GeJuSchool guoLao = GeJuSchool(

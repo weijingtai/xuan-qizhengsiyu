@@ -138,12 +138,14 @@ class GeJuRuleSaveAsParams {
   final String? className;
   final String? books;
   final String? sourceSection;
+  final List<String>? annotationSchools;
 
   // ConditionSet fields
   final String csLabel;
   final GeJuCondition? conditions;
   final String? changeNote;
   final String? derivedFrom;
+  final List<String>? conditionSetSchools;
 
   const GeJuRuleSaveAsParams({
     required this.name,
@@ -155,9 +157,11 @@ class GeJuRuleSaveAsParams {
     this.className,
     this.books,
     this.sourceSection,
+    this.annotationSchools,
     required this.csLabel,
     this.conditions,
     this.changeNote,
     this.derivedFrom,
+    this.conditionSetSchools,
   });
 }

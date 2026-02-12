@@ -13,6 +13,8 @@ mixin _$GeJuDaoMixin on DatabaseAccessor<AppDatabase> {
       attachedDatabase.geJuUserPreferencesTable;
   $GeJuDeletionRecordsTableTable get geJuDeletionRecordsTable =>
       attachedDatabase.geJuDeletionRecordsTable;
+  $GeJuSchoolsTableTable get geJuSchoolsTable =>
+      attachedDatabase.geJuSchoolsTable;
   GeJuDaoManager get managers => GeJuDaoManager(this);
 }
 
@@ -34,4 +36,7 @@ class GeJuDaoManager {
   $$GeJuDeletionRecordsTableTableTableManager get geJuDeletionRecordsTable =>
       $$GeJuDeletionRecordsTableTableTableManager(
           _db.attachedDatabase, _db.geJuDeletionRecordsTable);
+  $$GeJuSchoolsTableTableTableManager get geJuSchoolsTable =>
+      $$GeJuSchoolsTableTableTableManager(
+          _db.attachedDatabase, _db.geJuSchoolsTable);
 }

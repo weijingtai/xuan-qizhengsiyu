@@ -3176,6 +3176,286 @@ class GeJuDeletionRecordsTableCompanion
   }
 }
 
+class $GeJuSchoolsTableTable extends GeJuSchoolsTable
+    with TableInfo<$GeJuSchoolsTableTable, GeJuSchoolsTableData> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $GeJuSchoolsTableTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id =
+      GeneratedColumn<String>('id', aliasedName, false,
+          additionalChecks: GeneratedColumn.checkTextLength(
+            minTextLength: 1,
+          ),
+          type: DriftSqlType.string,
+          requiredDuringInsert: true);
+  static const VerificationMeta _nameMeta = const VerificationMeta('name');
+  @override
+  late final GeneratedColumn<String> name = GeneratedColumn<String>(
+      'name', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _briefMeta = const VerificationMeta('brief');
+  @override
+  late final GeneratedColumn<String> brief = GeneratedColumn<String>(
+      'brief', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  static const VerificationMeta _featuresJsonMeta =
+      const VerificationMeta('featuresJson');
+  @override
+  late final GeneratedColumn<String> featuresJson = GeneratedColumn<String>(
+      'features_json', aliasedName, false,
+      type: DriftSqlType.string,
+      requiredDuringInsert: false,
+      defaultValue: const Constant('[]'));
+  @override
+  List<GeneratedColumn> get $columns => [id, name, brief, featuresJson];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 't_ge_ju_schools';
+  @override
+  VerificationContext validateIntegrity(
+      Insertable<GeJuSchoolsTableData> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('name')) {
+      context.handle(
+          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
+    } else if (isInserting) {
+      context.missing(_nameMeta);
+    }
+    if (data.containsKey('brief')) {
+      context.handle(
+          _briefMeta, brief.isAcceptableOrUnknown(data['brief']!, _briefMeta));
+    }
+    if (data.containsKey('features_json')) {
+      context.handle(
+          _featuresJsonMeta,
+          featuresJson.isAcceptableOrUnknown(
+              data['features_json']!, _featuresJsonMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  GeJuSchoolsTableData map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return GeJuSchoolsTableData(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
+      name: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
+      brief: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}brief']),
+      featuresJson: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}features_json'])!,
+    );
+  }
+
+  @override
+  $GeJuSchoolsTableTable createAlias(String alias) {
+    return $GeJuSchoolsTableTable(attachedDatabase, alias);
+  }
+}
+
+class GeJuSchoolsTableData extends DataClass
+    implements Insertable<GeJuSchoolsTableData> {
+  final String id;
+  final String name;
+  final String? brief;
+
+  /// JSON: List<String>
+  final String featuresJson;
+  const GeJuSchoolsTableData(
+      {required this.id,
+      required this.name,
+      this.brief,
+      required this.featuresJson});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['name'] = Variable<String>(name);
+    if (!nullToAbsent || brief != null) {
+      map['brief'] = Variable<String>(brief);
+    }
+    map['features_json'] = Variable<String>(featuresJson);
+    return map;
+  }
+
+  GeJuSchoolsTableCompanion toCompanion(bool nullToAbsent) {
+    return GeJuSchoolsTableCompanion(
+      id: Value(id),
+      name: Value(name),
+      brief:
+          brief == null && nullToAbsent ? const Value.absent() : Value(brief),
+      featuresJson: Value(featuresJson),
+    );
+  }
+
+  factory GeJuSchoolsTableData.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return GeJuSchoolsTableData(
+      id: serializer.fromJson<String>(json['id']),
+      name: serializer.fromJson<String>(json['name']),
+      brief: serializer.fromJson<String?>(json['brief']),
+      featuresJson: serializer.fromJson<String>(json['featuresJson']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'name': serializer.toJson<String>(name),
+      'brief': serializer.toJson<String?>(brief),
+      'featuresJson': serializer.toJson<String>(featuresJson),
+    };
+  }
+
+  GeJuSchoolsTableData copyWith(
+          {String? id,
+          String? name,
+          Value<String?> brief = const Value.absent(),
+          String? featuresJson}) =>
+      GeJuSchoolsTableData(
+        id: id ?? this.id,
+        name: name ?? this.name,
+        brief: brief.present ? brief.value : this.brief,
+        featuresJson: featuresJson ?? this.featuresJson,
+      );
+  GeJuSchoolsTableData copyWithCompanion(GeJuSchoolsTableCompanion data) {
+    return GeJuSchoolsTableData(
+      id: data.id.present ? data.id.value : this.id,
+      name: data.name.present ? data.name.value : this.name,
+      brief: data.brief.present ? data.brief.value : this.brief,
+      featuresJson: data.featuresJson.present
+          ? data.featuresJson.value
+          : this.featuresJson,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('GeJuSchoolsTableData(')
+          ..write('id: $id, ')
+          ..write('name: $name, ')
+          ..write('brief: $brief, ')
+          ..write('featuresJson: $featuresJson')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, name, brief, featuresJson);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is GeJuSchoolsTableData &&
+          other.id == this.id &&
+          other.name == this.name &&
+          other.brief == this.brief &&
+          other.featuresJson == this.featuresJson);
+}
+
+class GeJuSchoolsTableCompanion extends UpdateCompanion<GeJuSchoolsTableData> {
+  final Value<String> id;
+  final Value<String> name;
+  final Value<String?> brief;
+  final Value<String> featuresJson;
+  final Value<int> rowid;
+  const GeJuSchoolsTableCompanion({
+    this.id = const Value.absent(),
+    this.name = const Value.absent(),
+    this.brief = const Value.absent(),
+    this.featuresJson = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  GeJuSchoolsTableCompanion.insert({
+    required String id,
+    required String name,
+    this.brief = const Value.absent(),
+    this.featuresJson = const Value.absent(),
+    this.rowid = const Value.absent(),
+  })  : id = Value(id),
+        name = Value(name);
+  static Insertable<GeJuSchoolsTableData> custom({
+    Expression<String>? id,
+    Expression<String>? name,
+    Expression<String>? brief,
+    Expression<String>? featuresJson,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (name != null) 'name': name,
+      if (brief != null) 'brief': brief,
+      if (featuresJson != null) 'features_json': featuresJson,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  GeJuSchoolsTableCompanion copyWith(
+      {Value<String>? id,
+      Value<String>? name,
+      Value<String?>? brief,
+      Value<String>? featuresJson,
+      Value<int>? rowid}) {
+    return GeJuSchoolsTableCompanion(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      brief: brief ?? this.brief,
+      featuresJson: featuresJson ?? this.featuresJson,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (name.present) {
+      map['name'] = Variable<String>(name.value);
+    }
+    if (brief.present) {
+      map['brief'] = Variable<String>(brief.value);
+    }
+    if (featuresJson.present) {
+      map['features_json'] = Variable<String>(featuresJson.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('GeJuSchoolsTableCompanion(')
+          ..write('id: $id, ')
+          ..write('name: $name, ')
+          ..write('brief: $brief, ')
+          ..write('featuresJson: $featuresJson, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -3190,6 +3470,8 @@ abstract class _$AppDatabase extends GeneratedDatabase {
       $GeJuUserPreferencesTableTable(this);
   late final $GeJuDeletionRecordsTableTable geJuDeletionRecordsTable =
       $GeJuDeletionRecordsTableTable(this);
+  late final $GeJuSchoolsTableTable geJuSchoolsTable =
+      $GeJuSchoolsTableTable(this);
   late final QiZhengSiYuPanDao qiZhengSiYuPanDao =
       QiZhengSiYuPanDao(this as AppDatabase);
   late final GeJuDao geJuDao = GeJuDao(this as AppDatabase);
@@ -3203,7 +3485,8 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         geJuAnnotationsTable,
         geJuConditionSetsTable,
         geJuUserPreferencesTable,
-        geJuDeletionRecordsTable
+        geJuDeletionRecordsTable,
+        geJuSchoolsTable
       ];
 }
 
@@ -4774,6 +5057,168 @@ typedef $$GeJuDeletionRecordsTableTableProcessedTableManager
         ),
         GeJuDeletionRecordsTableData,
         PrefetchHooks Function()>;
+typedef $$GeJuSchoolsTableTableCreateCompanionBuilder
+    = GeJuSchoolsTableCompanion Function({
+  required String id,
+  required String name,
+  Value<String?> brief,
+  Value<String> featuresJson,
+  Value<int> rowid,
+});
+typedef $$GeJuSchoolsTableTableUpdateCompanionBuilder
+    = GeJuSchoolsTableCompanion Function({
+  Value<String> id,
+  Value<String> name,
+  Value<String?> brief,
+  Value<String> featuresJson,
+  Value<int> rowid,
+});
+
+class $$GeJuSchoolsTableTableFilterComposer
+    extends Composer<_$AppDatabase, $GeJuSchoolsTableTable> {
+  $$GeJuSchoolsTableTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get name => $composableBuilder(
+      column: $table.name, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get brief => $composableBuilder(
+      column: $table.brief, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get featuresJson => $composableBuilder(
+      column: $table.featuresJson, builder: (column) => ColumnFilters(column));
+}
+
+class $$GeJuSchoolsTableTableOrderingComposer
+    extends Composer<_$AppDatabase, $GeJuSchoolsTableTable> {
+  $$GeJuSchoolsTableTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get name => $composableBuilder(
+      column: $table.name, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get brief => $composableBuilder(
+      column: $table.brief, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get featuresJson => $composableBuilder(
+      column: $table.featuresJson,
+      builder: (column) => ColumnOrderings(column));
+}
+
+class $$GeJuSchoolsTableTableAnnotationComposer
+    extends Composer<_$AppDatabase, $GeJuSchoolsTableTable> {
+  $$GeJuSchoolsTableTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get name =>
+      $composableBuilder(column: $table.name, builder: (column) => column);
+
+  GeneratedColumn<String> get brief =>
+      $composableBuilder(column: $table.brief, builder: (column) => column);
+
+  GeneratedColumn<String> get featuresJson => $composableBuilder(
+      column: $table.featuresJson, builder: (column) => column);
+}
+
+class $$GeJuSchoolsTableTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $GeJuSchoolsTableTable,
+    GeJuSchoolsTableData,
+    $$GeJuSchoolsTableTableFilterComposer,
+    $$GeJuSchoolsTableTableOrderingComposer,
+    $$GeJuSchoolsTableTableAnnotationComposer,
+    $$GeJuSchoolsTableTableCreateCompanionBuilder,
+    $$GeJuSchoolsTableTableUpdateCompanionBuilder,
+    (
+      GeJuSchoolsTableData,
+      BaseReferences<_$AppDatabase, $GeJuSchoolsTableTable,
+          GeJuSchoolsTableData>
+    ),
+    GeJuSchoolsTableData,
+    PrefetchHooks Function()> {
+  $$GeJuSchoolsTableTableTableManager(
+      _$AppDatabase db, $GeJuSchoolsTableTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$GeJuSchoolsTableTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$GeJuSchoolsTableTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$GeJuSchoolsTableTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<String> id = const Value.absent(),
+            Value<String> name = const Value.absent(),
+            Value<String?> brief = const Value.absent(),
+            Value<String> featuresJson = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              GeJuSchoolsTableCompanion(
+            id: id,
+            name: name,
+            brief: brief,
+            featuresJson: featuresJson,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String id,
+            required String name,
+            Value<String?> brief = const Value.absent(),
+            Value<String> featuresJson = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              GeJuSchoolsTableCompanion.insert(
+            id: id,
+            name: name,
+            brief: brief,
+            featuresJson: featuresJson,
+            rowid: rowid,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$GeJuSchoolsTableTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $GeJuSchoolsTableTable,
+    GeJuSchoolsTableData,
+    $$GeJuSchoolsTableTableFilterComposer,
+    $$GeJuSchoolsTableTableOrderingComposer,
+    $$GeJuSchoolsTableTableAnnotationComposer,
+    $$GeJuSchoolsTableTableCreateCompanionBuilder,
+    $$GeJuSchoolsTableTableUpdateCompanionBuilder,
+    (
+      GeJuSchoolsTableData,
+      BaseReferences<_$AppDatabase, $GeJuSchoolsTableTable,
+          GeJuSchoolsTableData>
+    ),
+    GeJuSchoolsTableData,
+    PrefetchHooks Function()>;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -4793,4 +5238,6 @@ class $AppDatabaseManager {
   $$GeJuDeletionRecordsTableTableTableManager get geJuDeletionRecordsTable =>
       $$GeJuDeletionRecordsTableTableTableManager(
           _db, _db.geJuDeletionRecordsTable);
+  $$GeJuSchoolsTableTableTableManager get geJuSchoolsTable =>
+      $$GeJuSchoolsTableTableTableManager(_db, _db.geJuSchoolsTable);
 }

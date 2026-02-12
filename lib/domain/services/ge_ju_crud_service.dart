@@ -314,6 +314,7 @@ class GeJuCrudService {
     final ann = GeJuAnnotation(
       id: 'user_${_uuid.v4()}',
       ruleId: newRuleId,
+      schools: params.annotationSchools,
       authorType: 'user',
       description: params.description,
       jiXiong: params.jiXiong,
@@ -330,6 +331,7 @@ class GeJuCrudService {
       id: 'user_${_uuid.v4()}',
       ruleId: newRuleId,
       label: params.csLabel,
+      schools: params.conditionSetSchools,
       authorType: 'user',
       conditions: params.conditions,
       derivedFrom: params.derivedFrom,
