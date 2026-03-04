@@ -4,11 +4,17 @@
 
 list(APPEND FLUTTER_PLUGIN_LIST
   file_selector_windows
+  firebase_auth
+  firebase_core
+  flutter_timezone
+  geolocator_windows
   record_windows
   sqlite3_flutter_libs
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST
+  llama_sdk
+  sweph
 )
 
 set(PLUGIN_BUNDLED_LIBRARIES)

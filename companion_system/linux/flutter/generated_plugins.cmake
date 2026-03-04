@@ -4,11 +4,14 @@
 
 list(APPEND FLUTTER_PLUGIN_LIST
   file_selector_linux
+  flutter_timezone
   record_linux
   sqlite3_flutter_libs
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST
+  llama_sdk
+  sweph
 )
 
 set(PLUGIN_BUNDLED_LIBRARIES)

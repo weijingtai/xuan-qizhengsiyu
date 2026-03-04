@@ -50,3 +50,6 @@ app.*.symbols
 app.*.map.json
 
 scripts/*
+# Chrome profile
+.chrome-profile/
+example/.chrome-profile/

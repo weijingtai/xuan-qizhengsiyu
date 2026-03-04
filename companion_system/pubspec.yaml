@@ -63,7 +63,7 @@ dependencies:
   # xuan-ai 的共享模块（直接引用以使用 ResolvedPersona 等类型）
   # 注：使用 common_stub 覆盖以避免 xuan-common 的重型原生依赖
   common:
-    path: ../../common_stub
+    path: ../../xuan-common
 
   # AI Toolkit（ai_core 的 ChatMessage 类型）
   flutter_ai_toolkit: ^0.9.1
@@ -85,15 +85,11 @@ dependency_overrides:
   # 版本冲突覆盖
   google_fonts: ^6.2.1
   # 用最小化 stub 替换重型 xuan-common，避免 Firebase/sweph 等原生插件引入 Windows 构建
-  common:
-    path: ../../common_stub
-  # 替换 flutter_ai_providers，避免 llama_sdk 原生 C++ 代码引入 Windows 构建
-  flutter_ai_providers:
-    path: ../../flutter_ai_providers_stub
-  # 替换 firebase_ai 为纯 Dart stub，彻底消除 Firebase C++ SDK MSVC 链接器错误
-  # （flutter_ai_toolkit 的 FirebaseProvider 仅在此包中使用 Firebase，companion_system 不使用它）
-  firebase_ai:
-    path: ../../firebase_ai_stub
+  # ai_core:
+  #   path: ../../xuan-ai
+  # common:
+  #   path: ../../xuan-common
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
