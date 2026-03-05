@@ -1382,15 +1382,6 @@ class $GeJuRulesTable extends GeJuRules with TableInfo<$GeJuRulesTable, Rule> {
     type: DriftSqlType.string,
     requiredDuringInsert: true,
   );
-  static const VerificationMeta _levelMeta = const VerificationMeta('level');
-  @override
-  late final GeneratedColumn<String> level = GeneratedColumn<String>(
-    'level',
-    aliasedName,
-    false,
-    type: DriftSqlType.string,
-    requiredDuringInsert: true,
-  );
   static const VerificationMeta _geJuTypeMeta = const VerificationMeta(
     'geJuType',
   );
@@ -1599,7 +1590,6 @@ class $GeJuRulesTable extends GeJuRules with TableInfo<$GeJuRulesTable, Rule> {
     patternId,
     schoolId,
     jixiong,
-    level,
     geJuType,
     scope,
     coordinateSystem,
@@ -1657,14 +1647,6 @@ class $GeJuRulesTable extends GeJuRules with TableInfo<$GeJuRulesTable, Rule> {
       );
     } else if (isInserting) {
       context.missing(_jixiongMeta);
-    }
-    if (data.containsKey('level')) {
-      context.handle(
-        _levelMeta,
-        level.isAcceptableOrUnknown(data['level']!, _levelMeta),
-      );
-    } else if (isInserting) {
-      context.missing(_levelMeta);
     }
     if (data.containsKey('ge_ju_type')) {
       context.handle(
@@ -1825,10 +1807,6 @@ class $GeJuRulesTable extends GeJuRules with TableInfo<$GeJuRulesTable, Rule> {
         DriftSqlType.string,
         data['${effectivePrefix}jixiong'],
       )!,
-      level: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}level'],
-      )!,
       geJuType: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
         data['${effectivePrefix}ge_ju_type'],
@@ -1915,7 +1893,6 @@ class Rule extends DataClass implements Insertable<Rule> {
   final String patternId;
   final String schoolId;
   final String jixiong;
-  final String level;
   final String geJuType;
   final String scope;
   final String? coordinateSystem;
@@ -1939,7 +1916,6 @@ class Rule extends DataClass implements Insertable<Rule> {
     required this.patternId,
     required this.schoolId,
     required this.jixiong,
-    required this.level,
     required this.geJuType,
     required this.scope,
     this.coordinateSystem,
@@ -1966,7 +1942,6 @@ class Rule extends DataClass implements Insertable<Rule> {
     map['pattern_id'] = Variable<String>(patternId);
     map['school_id'] = Variable<String>(schoolId);
     map['jixiong'] = Variable<String>(jixiong);
-    map['level'] = Variable<String>(level);
     map['ge_ju_type'] = Variable<String>(geJuType);
     map['scope'] = Variable<String>(scope);
     if (!nullToAbsent || coordinateSystem != null) {
@@ -2012,7 +1987,6 @@ class Rule extends DataClass implements Insertable<Rule> {
       patternId: Value(patternId),
       schoolId: Value(schoolId),
       jixiong: Value(jixiong),
-      level: Value(level),
       geJuType: Value(geJuType),
       scope: Value(scope),
       coordinateSystem: coordinateSystem == null && nullToAbsent
@@ -2062,7 +2036,6 @@ class Rule extends DataClass implements Insertable<Rule> {
       patternId: serializer.fromJson<String>(json['patternId']),
       schoolId: serializer.fromJson<String>(json['schoolId']),
       jixiong: serializer.fromJson<String>(json['jixiong']),
-      level: serializer.fromJson<String>(json['level']),
       geJuType: serializer.fromJson<String>(json['geJuType']),
       scope: serializer.fromJson<String>(json['scope']),
       coordinateSystem: serializer.fromJson<String?>(json['coordinateSystem']),
@@ -2091,7 +2064,6 @@ class Rule extends DataClass implements Insertable<Rule> {
       'patternId': serializer.toJson<String>(patternId),
       'schoolId': serializer.toJson<String>(schoolId),
       'jixiong': serializer.toJson<String>(jixiong),
-      'level': serializer.toJson<String>(level),
       'geJuType': serializer.toJson<String>(geJuType),
       'scope': serializer.toJson<String>(scope),
       'coordinateSystem': serializer.toJson<String?>(coordinateSystem),
@@ -2118,7 +2090,6 @@ class Rule extends DataClass implements Insertable<Rule> {
     String? patternId,
     String? schoolId,
     String? jixiong,
-    String? level,
     String? geJuType,
     String? scope,
     Value<String?> coordinateSystem = const Value.absent(),
@@ -2142,7 +2113,6 @@ class Rule extends DataClass implements Insertable<Rule> {
     patternId: patternId ?? this.patternId,
     schoolId: schoolId ?? this.schoolId,
     jixiong: jixiong ?? this.jixiong,
-    level: level ?? this.level,
     geJuType: geJuType ?? this.geJuType,
     scope: scope ?? this.scope,
     coordinateSystem: coordinateSystem.present
@@ -2172,7 +2142,6 @@ class Rule extends DataClass implements Insertable<Rule> {
       patternId: data.patternId.present ? data.patternId.value : this.patternId,
       schoolId: data.schoolId.present ? data.schoolId.value : this.schoolId,
       jixiong: data.jixiong.present ? data.jixiong.value : this.jixiong,
-      level: data.level.present ? data.level.value : this.level,
       geJuType: data.geJuType.present ? data.geJuType.value : this.geJuType,
       scope: data.scope.present ? data.scope.value : this.scope,
       coordinateSystem: data.coordinateSystem.present
@@ -2213,7 +2182,6 @@ class Rule extends DataClass implements Insertable<Rule> {
           ..write('patternId: $patternId, ')
           ..write('schoolId: $schoolId, ')
           ..write('jixiong: $jixiong, ')
-          ..write('level: $level, ')
           ..write('geJuType: $geJuType, ')
           ..write('scope: $scope, ')
           ..write('coordinateSystem: $coordinateSystem, ')
@@ -2242,7 +2210,6 @@ class Rule extends DataClass implements Insertable<Rule> {
     patternId,
     schoolId,
     jixiong,
-    level,
     geJuType,
     scope,
     coordinateSystem,
@@ -2270,7 +2237,6 @@ class Rule extends DataClass implements Insertable<Rule> {
           other.patternId == this.patternId &&
           other.schoolId == this.schoolId &&
           other.jixiong == this.jixiong &&
-          other.level == this.level &&
           other.geJuType == this.geJuType &&
           other.scope == this.scope &&
           other.coordinateSystem == this.coordinateSystem &&
@@ -2296,7 +2262,6 @@ class GeJuRulesCompanion extends UpdateCompanion<Rule> {
   final Value<String> patternId;
   final Value<String> schoolId;
   final Value<String> jixiong;
-  final Value<String> level;
   final Value<String> geJuType;
   final Value<String> scope;
   final Value<String?> coordinateSystem;
@@ -2320,7 +2285,6 @@ class GeJuRulesCompanion extends UpdateCompanion<Rule> {
     this.patternId = const Value.absent(),
     this.schoolId = const Value.absent(),
     this.jixiong = const Value.absent(),
-    this.level = const Value.absent(),
     this.geJuType = const Value.absent(),
     this.scope = const Value.absent(),
     this.coordinateSystem = const Value.absent(),
@@ -2345,7 +2309,6 @@ class GeJuRulesCompanion extends UpdateCompanion<Rule> {
     required String patternId,
     required String schoolId,
     required String jixiong,
-    required String level,
     required String geJuType,
     required String scope,
     this.coordinateSystem = const Value.absent(),
@@ -2367,7 +2330,6 @@ class GeJuRulesCompanion extends UpdateCompanion<Rule> {
   }) : patternId = Value(patternId),
        schoolId = Value(schoolId),
        jixiong = Value(jixiong),
-       level = Value(level),
        geJuType = Value(geJuType),
        scope = Value(scope),
        version = Value(version),
@@ -2378,7 +2340,6 @@ class GeJuRulesCompanion extends UpdateCompanion<Rule> {
     Expression<String>? patternId,
     Expression<String>? schoolId,
     Expression<String>? jixiong,
-    Expression<String>? level,
     Expression<String>? geJuType,
     Expression<String>? scope,
     Expression<String>? coordinateSystem,
@@ -2403,7 +2364,6 @@ class GeJuRulesCompanion extends UpdateCompanion<Rule> {
       if (patternId != null) 'pattern_id': patternId,
       if (schoolId != null) 'school_id': schoolId,
       if (jixiong != null) 'jixiong': jixiong,
-      if (level != null) 'level': level,
       if (geJuType != null) 'ge_ju_type': geJuType,
       if (scope != null) 'scope': scope,
       if (coordinateSystem != null) 'coordinate_system': coordinateSystem,
@@ -2430,7 +2390,6 @@ class GeJuRulesCompanion extends UpdateCompanion<Rule> {
     Value<String>? patternId,
     Value<String>? schoolId,
     Value<String>? jixiong,
-    Value<String>? level,
     Value<String>? geJuType,
     Value<String>? scope,
     Value<String?>? coordinateSystem,
@@ -2455,7 +2414,6 @@ class GeJuRulesCompanion extends UpdateCompanion<Rule> {
       patternId: patternId ?? this.patternId,
       schoolId: schoolId ?? this.schoolId,
       jixiong: jixiong ?? this.jixiong,
-      level: level ?? this.level,
       geJuType: geJuType ?? this.geJuType,
       scope: scope ?? this.scope,
       coordinateSystem: coordinateSystem ?? this.coordinateSystem,
@@ -2491,9 +2449,6 @@ class GeJuRulesCompanion extends UpdateCompanion<Rule> {
     }
     if (jixiong.present) {
       map['jixiong'] = Variable<String>(jixiong.value);
-    }
-    if (level.present) {
-      map['level'] = Variable<String>(level.value);
     }
     if (geJuType.present) {
       map['ge_ju_type'] = Variable<String>(geJuType.value);
@@ -2559,7 +2514,6 @@ class GeJuRulesCompanion extends UpdateCompanion<Rule> {
           ..write('patternId: $patternId, ')
           ..write('schoolId: $schoolId, ')
           ..write('jixiong: $jixiong, ')
-          ..write('level: $level, ')
           ..write('geJuType: $geJuType, ')
           ..write('scope: $scope, ')
           ..write('coordinateSystem: $coordinateSystem, ')
@@ -4317,7 +4271,6 @@ typedef $$GeJuRulesTableCreateCompanionBuilder =
       required String patternId,
       required String schoolId,
       required String jixiong,
-      required String level,
       required String geJuType,
       required String scope,
       Value<String?> coordinateSystem,
@@ -4343,7 +4296,6 @@ typedef $$GeJuRulesTableUpdateCompanionBuilder =
       Value<String> patternId,
       Value<String> schoolId,
       Value<String> jixiong,
-      Value<String> level,
       Value<String> geJuType,
       Value<String> scope,
       Value<String?> coordinateSystem,
@@ -4390,11 +4342,6 @@ class $$GeJuRulesTableFilterComposer
 
   ColumnFilters<String> get jixiong => $composableBuilder(
     column: $table.jixiong,
-    builder: (column) => ColumnFilters(column),
-  );
-
-  ColumnFilters<String> get level => $composableBuilder(
-    column: $table.level,
     builder: (column) => ColumnFilters(column),
   );
 
@@ -4518,11 +4465,6 @@ class $$GeJuRulesTableOrderingComposer
     builder: (column) => ColumnOrderings(column),
   );
 
-  ColumnOrderings<String> get level => $composableBuilder(
-    column: $table.level,
-    builder: (column) => ColumnOrderings(column),
-  );
-
   ColumnOrderings<String> get geJuType => $composableBuilder(
     column: $table.geJuType,
     builder: (column) => ColumnOrderings(column),
@@ -4635,9 +4577,6 @@ class $$GeJuRulesTableAnnotationComposer
   GeneratedColumn<String> get jixiong =>
       $composableBuilder(column: $table.jixiong, builder: (column) => column);
 
-  GeneratedColumn<String> get level =>
-      $composableBuilder(column: $table.level, builder: (column) => column);
-
   GeneratedColumn<String> get geJuType =>
       $composableBuilder(column: $table.geJuType, builder: (column) => column);
 
@@ -4737,7 +4676,6 @@ class $$GeJuRulesTableTableManager
                 Value<String> patternId = const Value.absent(),
                 Value<String> schoolId = const Value.absent(),
                 Value<String> jixiong = const Value.absent(),
-                Value<String> level = const Value.absent(),
                 Value<String> geJuType = const Value.absent(),
                 Value<String> scope = const Value.absent(),
                 Value<String?> coordinateSystem = const Value.absent(),
@@ -4761,7 +4699,6 @@ class $$GeJuRulesTableTableManager
                 patternId: patternId,
                 schoolId: schoolId,
                 jixiong: jixiong,
-                level: level,
                 geJuType: geJuType,
                 scope: scope,
                 coordinateSystem: coordinateSystem,
@@ -4787,7 +4724,6 @@ class $$GeJuRulesTableTableManager
                 required String patternId,
                 required String schoolId,
                 required String jixiong,
-                required String level,
                 required String geJuType,
                 required String scope,
                 Value<String?> coordinateSystem = const Value.absent(),
@@ -4811,7 +4747,6 @@ class $$GeJuRulesTableTableManager
                 patternId: patternId,
                 schoolId: schoolId,
                 jixiong: jixiong,
-                level: level,
                 geJuType: geJuType,
                 scope: scope,
                 coordinateSystem: coordinateSystem,

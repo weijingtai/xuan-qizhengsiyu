@@ -1,25 +1,22 @@
-/// 吉凶基础类型枚举
-enum Jixiong {
-  /// 吉
-  ji,
-  
-  /// 平
-  ping,
-  
-  /// 凶
-  xiong;
-}
+/// 吉凶枚举（7级，与主项目 JiXiongEnum 对齐）
+enum JiXiong {
+  daJi('大吉'),
+  ji('吉'),
+  xiaoJi('小吉'),
+  ping('平'),
+  xiaoXiong('小凶'),
+  xiong('凶'),
+  daXiong('大凶');
 
-/// 吉凶强度层级枚举
-enum Level {
-  /// 小
-  xiao,
-  
-  /// 中
-  zhong,
-  
-  /// 大
-  da;
+  const JiXiong(this.label);
+  final String label;
+
+  static JiXiong fromLabel(String label) {
+    return JiXiong.values.firstWhere(
+      (e) => e.label == label,
+      orElse: () => JiXiong.ping,
+    );
+  }
 }
 
 /// 格局类型枚举
@@ -83,30 +80,6 @@ enum CoordinateSystem {
   
   /// 赤道制
   equatorial,
-}
-
-/// 吉凶中文显示
-String jixiongToChinese(Jixiong jixiong) {
-  switch (jixiong) {
-    case Jixiong.ji:
-      return '吉';
-    case Jixiong.ping:
-      return '平';
-    case Jixiong.xiong:
-      return '凶';
-  }
-}
-
-/// 层级中文显示
-String levelToChinese(Level level) {
-  switch (level) {
-    case Level.xiao:
-      return '小';
-    case Level.zhong:
-      return '中';
-    case Level.da:
-      return '大';
-  }
 }
 
 /// 格局类型中文显示

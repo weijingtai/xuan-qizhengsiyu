@@ -24,10 +24,10 @@ typedef _Col = ({String label, double width});
 
 // 列索引常量（不随列序改变）：
 // [0]  #          [1] 格局名称   [2] 描述(pattern) [3] 简介(rule)
-// [4]  流派        [5] 书籍      [6] 吉凶           [7] 层级
-// [8]  类型        [9] 范围      [10] 版本          [11] 算法(conditions)
-// [12] AI识别     [13] 章节     [14] 原文           [15] 原文注解
-// [16] 注解       [17] 手动校验  [18] 保存          [19] 操作
+// [4]  流派        [5] 书籍      [6] 吉凶
+// [7]  类型        [8] 范围      [9] 版本           [10] 算法(conditions)
+// [11] AI识别     [12] 章节     [13] 原文           [14] 原文注解
+// [15] 注解       [16] 手动校验  [17] 保存          [18] 操作
 const List<_Col> _kCols = [
   (label: '#', width: 48),
   (label: '格局名称', width: 160),
@@ -35,8 +35,7 @@ const List<_Col> _kCols = [
   (label: '简介', width: 150),
   (label: '流派', width: 120),
   (label: '书籍', width: 140),
-  (label: '吉凶', width: 68),
-  (label: '层级', width: 60),
+  (label: '吉凶', width: 80),
   (label: '类型', width: 68),
   (label: '范围', width: 76),
   (label: '版本', width: 80),
@@ -99,8 +98,10 @@ const _kHeaderText = TextStyle(
 
 // ── 下拉选项常量 ──────────────────────────────────────────────────────────────
 
-const _kJixiongOptions = [('吉', '吉'), ('平', '平'), ('凶', '凶')];
-const _kLevelOptions = [('小', '小'), ('中', '中'), ('大', '大')];
+const _kJixiongOptions = [
+  ('大吉', '大吉'), ('吉', '吉'), ('小吉', '小吉'), ('平', '平'),
+  ('小凶', '小凶'), ('凶', '凶'), ('大凶', '大凶'),
+];
 const _kTypeOptions = [
   ('贵', '贵'), ('富', '富'), ('贫', '贫'), ('贱', '贱'),
   ('夭', '夭'), ('寿', '寿'), ('贤', '贤'), ('愚', '愚'),
@@ -592,7 +593,7 @@ class _RuleListPageState extends State<RuleListPage> {
               _detailRow('流派', schoolName),
               _detailRow('书籍',
                   _kSchoolBookNames[rule.schoolId] ?? ''),
-              _detailRow('吉凶', '${rule.jixiong}（${rule.level}）'),
+              _detailRow('吉凶', rule.jixiong),
               _detailRow('类型', rule.geJuType),
               _detailRow('范围', _scopeLabel(rule.scope)),
               _detailRow('版本', rule.version),
@@ -777,16 +778,20 @@ class _FilterBar extends StatelessWidget {
             const SizedBox(width: 12),
             SizedBox(
               width: 100,
-              child: DropdownButton<Jixiong>(
+              child: DropdownButton<JiXiong>(
                 hint: const Text('吉凶'),
                 value: provider.selectedJixiong,
                 isExpanded: true,
                 isDense: true,
                 items: const [
                   DropdownMenuItem(value: null, child: Text('全部')),
-                  DropdownMenuItem(value: Jixiong.ji, child: Text('吉')),
-                  DropdownMenuItem(value: Jixiong.ping, child: Text('平')),
-                  DropdownMenuItem(value: Jixiong.xiong, child: Text('凶')),
+                  DropdownMenuItem(value: JiXiong.daJi, child: Text('大吉')),
+                  DropdownMenuItem(value: JiXiong.ji, child: Text('吉')),
+                  DropdownMenuItem(value: JiXiong.xiaoJi, child: Text('小吉')),
+                  DropdownMenuItem(value: JiXiong.ping, child: Text('平')),
+                  DropdownMenuItem(value: JiXiong.xiaoXiong, child: Text('小凶')),
+                  DropdownMenuItem(value: JiXiong.xiong, child: Text('凶')),
+                  DropdownMenuItem(value: JiXiong.daXiong, child: Text('大凶')),
                 ],
                 onChanged: (v) {
                   provider.setSelectedJixiong(v);
@@ -1104,7 +1109,6 @@ class _HoverableRowState extends State<_HoverableRow> {
   late String _dBrief;
   late String _dSchoolId;
   late String _dJixiong;
-  late String _dLevel;
   late String _dGeJuType;
   late String _dScope;
   late String _dVersion;
@@ -1120,7 +1124,6 @@ class _HoverableRowState extends State<_HoverableRow> {
     _dBrief = r.brief ?? '';
     _dSchoolId = r.schoolId;
     _dJixiong = r.jixiong;
-    _dLevel = r.level;
     _dGeJuType = r.geJuType;
     _dScope = r.scope;
     _dVersion = r.version;
@@ -1137,7 +1140,6 @@ class _HoverableRowState extends State<_HoverableRow> {
         _dBrief != (r.brief ?? '') ||
         _dSchoolId != r.schoolId ||
         _dJixiong != r.jixiong ||
-        _dLevel != r.level ||
         _dGeJuType != r.geJuType ||
         _dScope != r.scope ||
         _dVersion != r.version ||
@@ -1163,7 +1165,6 @@ class _HoverableRowState extends State<_HoverableRow> {
         r.brief != o.brief ||
         r.schoolId != o.schoolId ||
         r.jixiong != o.jixiong ||
-        r.level != o.level ||
         r.geJuType != o.geJuType ||
         r.scope != o.scope ||
         r.version != o.version ||
@@ -1187,7 +1188,6 @@ class _HoverableRowState extends State<_HoverableRow> {
       GeJuRulesCompanion(
         schoolId: Value(_dSchoolId),
         jixiong: Value(_dJixiong),
-        level: Value(_dLevel),
         geJuType: Value(_dGeJuType),
         scope: Value(_dScope),
         version: Value(_dVersion),
@@ -1281,7 +1281,7 @@ class _HoverableRowState extends State<_HoverableRow> {
           style: const TextStyle(
               fontSize: 13, color: Color(0xFF555555), fontStyle: FontStyle.italic),
         );
-      case 6: // 吉凶（彩色）
+      case 6: // 吉凶（彩色，7级）
         return _DropdownEditCell(
           value: _dJixiong,
           width: w,
@@ -1290,21 +1290,26 @@ class _HoverableRowState extends State<_HoverableRow> {
             fontSize: 13,
             fontWeight: FontWeight.bold,
             color: switch (v) {
+              '大吉' || '吉' || '小吉' => Colors.green[700]!,
+              '大凶' || '凶' || '小凶' => Colors.red[700]!,
+              _ => Colors.grey[600]!,
+            },
+          ),
+          itemStyle: (v) => TextStyle(
+            fontSize: 13,
+            color: switch (v) {
+              '大吉' => const Color(0xFF1B5E20),
               '吉' => Colors.green[700]!,
+              '小吉' => Colors.green[400]!,
+              '大凶' => const Color(0xFF7B1010),
               '凶' => Colors.red[700]!,
+              '小凶' => Colors.red[400]!,
               _ => Colors.grey[600]!,
             },
           ),
           onSave: (v) => setState(() => _dJixiong = v),
         );
-      case 7: // 层级
-        return _DropdownEditCell(
-          value: _dLevel,
-          width: w,
-          options: _kLevelOptions,
-          onSave: (v) => setState(() => _dLevel = v),
-        );
-      case 8: // 类型（八种国风配色）
+      case 7: // 类型（八种国风配色）
         return _DropdownEditCell(
           value: _dGeJuType,
           width: w,
@@ -1320,26 +1325,26 @@ class _HoverableRowState extends State<_HoverableRow> {
           ),
           onSave: (v) => setState(() => _dGeJuType = v),
         );
-      case 9: // 范围
+      case 8: // 范围
         return _DropdownEditCell(
           value: _dScope,
           width: w,
           options: _kScopeOptions,
           onSave: (v) => setState(() => _dScope = v),
         );
-      case 10: // 版本
+      case 9: // 版本
         return _TextEditCell(
           text: _dVersion,
           width: w,
           onSave: (v) => setState(() => _dVersion = v),
         );
-      case 11: // 算法（conditions JSON）内联可视化
+      case 10: // 算法（conditions JSON）内联可视化
         return _ConditionInlineCell(
           jsonText: _dConditions,
           width: w,
           onSave: (v) => setState(() => _dConditions = v),
         );
-      case 12: // AI识别
+      case 11: // AI识别
         return _AiCell(
           width: w,
           rule: rule,
@@ -1352,31 +1357,31 @@ class _HoverableRowState extends State<_HoverableRow> {
           onUpdateConditions: (newJson) =>
               setState(() => _dConditions = newJson),
         );
-      case 13: // 章节
+      case 12: // 章节
         return _TextEditCell(
           text: _dChapter,
           width: w,
           onSave: (v) => setState(() => _dChapter = v),
         );
-      case 14: // 原文
+      case 13: // 原文
         return _TextEditCell(
           text: _dOriginalText,
           width: w,
           onSave: (v) => setState(() => _dOriginalText = v),
         );
-      case 15: // 原文注解
+      case 14: // 原文注解
         return _TextEditCell(
           text: _dExplanation,
           width: w,
           onSave: (v) => setState(() => _dExplanation = v),
         );
-      case 16: // 注解
+      case 15: // 注解
         return _TextEditCell(
           text: _dNotes,
           width: w,
           onSave: (v) => setState(() => _dNotes = v),
         );
-      case 17: // 手动校验
+      case 16: // 手动校验
         return _VerifyCell(
           verified: rule.isVerified,
           width: w,
@@ -1385,14 +1390,14 @@ class _HoverableRowState extends State<_HoverableRow> {
             GeJuRulesCompanion(isVerified: Value(v)),
           ),
         );
-      case 18: // 保存 + 回滚
+      case 17: // 保存 + 回滚
         return _SaveCell(
           dirty: _isDirty,
           width: w,
           onSave: _save,
           onRollback: () => setState(_initDraft),
         );
-      case 19: // 操作
+      case 18: // 操作
         return SizedBox(
           width: w,
           height: _kRowHeight,

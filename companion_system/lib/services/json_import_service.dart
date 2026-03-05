@@ -151,7 +151,7 @@ class JsonImportService {
     final (schoolId, schoolCreated) = await _ensureSchool(books);
 
     // 3. 拆分 jiXiong
-    final (jixiong, level) = _splitJixiong(jiXiongRaw);
+    final jixiong = _normalizeJixiong(jiXiongRaw);
 
     // 4. conditions → JSON 字符串
     final conditionsStr =
@@ -181,7 +181,6 @@ class JsonImportService {
       patternId: id,
       schoolId: schoolId,
       jixiong: jixiong,
-      level: level,
       geJuType: geJuType,
       scope: scope,
       version: '1.0.0',
@@ -243,18 +242,10 @@ class JsonImportService {
     return (id, true);
   }
 
-  /// jiXiong 拆分为 (jixiong, level)
-  (String, String) _splitJixiong(String raw) {
-    return switch (raw) {
-      '大吉' => ('吉', '大'),
-      '吉' => ('吉', '中'),
-      '小吉' => ('吉', '小'),
-      '平' => ('平', '中'),
-      '小凶' => ('凶', '小'),
-      '凶' => ('凶', '中'),
-      '大凶' => ('凶', '大'),
-      _ => ('平', '中'), // 未知
-    };
+  /// jiXiong 规范化为 7 级值
+  String _normalizeJixiong(String raw) {
+    const valid = {'大吉', '吉', '小吉', '平', '小凶', '凶', '大凶'};
+    return valid.contains(raw) ? raw : '平';
   }
 
   /// geJuType 规范化（数据库 TEXT 字段，直接存字符串）

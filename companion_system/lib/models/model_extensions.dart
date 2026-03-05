@@ -50,7 +50,6 @@ extension RuleExtension on Rule {
       patternId: Value(patternId),
       schoolId: Value(schoolId),
       jixiong: Value(jixiong),
-      level: Value(level),
       geJuType: Value(geJuType),
       scope: Value(scope),
       coordinateSystem: Value(coordinateSystem),
@@ -72,33 +71,8 @@ extension RuleExtension on Rule {
     );
   }
 
-  /// 获取吉凶枚举
-  Jixiong get jixiongEnum {
-    switch (jixiong) {
-      case '吉':
-        return Jixiong.ji;
-      case '平':
-        return Jixiong.ping;
-      case '凶':
-        return Jixiong.xiong;
-      default:
-        return Jixiong.ping;
-    }
-  }
-
-  /// 获取层级枚举
-  Level get levelEnum {
-    switch (level) {
-      case '小':
-        return Level.xiao;
-      case '中':
-        return Level.zhong;
-      case '大':
-        return Level.da;
-      default:
-        return Level.zhong;
-    }
-  }
+  /// 获取吉凶枚举（7级）
+  JiXiong get jixiongEnum => JiXiong.fromLabel(jixiong);
 
   /// 获取格局类型枚举
   GeJuType get geJuTypeEnum {

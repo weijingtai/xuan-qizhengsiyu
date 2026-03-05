@@ -35,7 +35,6 @@ class _RuleFormPageState extends State<RuleFormPage> {
   String? _selectedPatternId;
   String? _selectedSchoolId;
   String _jixiong = '吉';
-  String _level = '中';
   String _geJuType = '贵';
   String _scope = 'both';
   String? _coordinateSystem;
@@ -43,8 +42,7 @@ class _RuleFormPageState extends State<RuleFormPage> {
   bool _isSaving = false;
   bool _isLoading = true;
 
-  static const _jixiongOptions = ['吉', '平', '凶'];
-  static const _levelOptions = ['小', '中', '大'];
+  static const _jixiongOptions = ['大吉', '吉', '小吉', '平', '小凶', '凶', '大凶'];
   static const _geJuTypeOptions = ['贵', '富', '贫', '贱', '夭', '寿', '贤', '愚'];
   static const _scopeOptions = [
     ('natal', '仅命盘'),
@@ -77,7 +75,6 @@ class _RuleFormPageState extends State<RuleFormPage> {
       _selectedPatternId = r.patternId;
       _selectedSchoolId = r.schoolId;
       _jixiong = r.jixiong;
-      _level = r.level;
       _geJuType = r.geJuType;
       _scope = r.scope;
       _coordinateSystem = r.coordinateSystem;
@@ -121,7 +118,6 @@ class _RuleFormPageState extends State<RuleFormPage> {
           patternId: Value(_selectedPatternId!),
           schoolId: Value(_selectedSchoolId!),
           jixiong: Value(_jixiong),
-          level: Value(_level),
           geJuType: Value(_geJuType),
           scope: Value(_scope),
           coordinateSystem: Value(_coordinateSystem),
@@ -142,7 +138,6 @@ class _RuleFormPageState extends State<RuleFormPage> {
                 patternId: _selectedPatternId!,
                 schoolId: _selectedSchoolId!,
                 jixiong: _jixiong,
-                level: _level,
                 geJuType: _geJuType,
                 scope: _scope,
                 version: _versionCtrl.text.trim(),
@@ -254,23 +249,6 @@ class _RuleFormPageState extends State<RuleFormPage> {
                                 .toList(),
                             onChanged: (v) {
                               if (v != null) setState(() => _jixiong = v);
-                            },
-                          ),
-                        ),
-                        const SizedBox(width: 10),
-                        Expanded(
-                          child: DropdownButtonFormField<String>(
-                            initialValue: _level,
-                            decoration: const InputDecoration(
-                              labelText: '层级 *',
-                              border: OutlineInputBorder(),
-                            ),
-                            items: _levelOptions
-                                .map((v) => DropdownMenuItem(
-                                    value: v, child: Text(v)))
-                                .toList(),
-                            onChanged: (v) {
-                              if (v != null) setState(() => _level = v);
                             },
                           ),
                         ),

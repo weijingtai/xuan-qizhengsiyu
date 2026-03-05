@@ -13,8 +13,7 @@ class RuleProvider extends ChangeNotifier {
   String? _errorMessage;
   String _searchKeyword = '';
   String? _selectedSchoolId;
-  Jixiong? _selectedJixiong;
-  Level? _selectedLevel;
+  JiXiong? _selectedJixiong;
   Scope? _selectedScope;
 
   RuleProvider(this.db) {
@@ -26,8 +25,7 @@ class RuleProvider extends ChangeNotifier {
   String? get errorMessage => _errorMessage;
   String get searchKeyword => _searchKeyword;
   String? get selectedSchoolId => _selectedSchoolId;
-  Jixiong? get selectedJixiong => _selectedJixiong;
-  Level? get selectedLevel => _selectedLevel;
+  JiXiong? get selectedJixiong => _selectedJixiong;
   Scope? get selectedScope => _selectedScope;
 
   List<Rule> get _filteredRules {
@@ -49,18 +47,8 @@ class RuleProvider extends ChangeNotifier {
 
     // 吉凶过滤
     if (_selectedJixiong != null) {
-      filtered = filtered.where((rule) {
-        final jixiong = _jixiongFromString(rule.jixiong);
-        return jixiong == _selectedJixiong;
-      }).toList();
-    }
-
-    // 层级过滤
-    if (_selectedLevel != null) {
-      filtered = filtered.where((rule) {
-        final level = _levelFromString(rule.level);
-        return level == _selectedLevel;
-      }).toList();
+      filtered = filtered.where((rule) =>
+          JiXiong.fromLabel(rule.jixiong) == _selectedJixiong).toList();
     }
 
     // 范围过滤
@@ -101,13 +89,8 @@ class RuleProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setSelectedJixiong(Jixiong? jixiong) {
+  void setSelectedJixiong(JiXiong? jixiong) {
     _selectedJixiong = jixiong;
-    notifyListeners();
-  }
-
-  void setSelectedLevel(Level? level) {
-    _selectedLevel = level;
     notifyListeners();
   }
 
@@ -120,7 +103,6 @@ class RuleProvider extends ChangeNotifier {
     _searchKeyword = '';
     _selectedSchoolId = null;
     _selectedJixiong = null;
-    _selectedLevel = null;
     _selectedScope = null;
     notifyListeners();
   }
@@ -146,32 +128,6 @@ class RuleProvider extends ChangeNotifier {
     await (db.update(db.geJuPatterns)..where((t) => t.id.equals(patternId)))
         .write(GeJuPatternsCompanion(description: Value(description)));
     notifyListeners();
-  }
-
-  Jixiong _jixiongFromString(String value) {
-    switch (value) {
-      case '吉':
-        return Jixiong.ji;
-      case '平':
-        return Jixiong.ping;
-      case '凶':
-        return Jixiong.xiong;
-      default:
-        return Jixiong.ping;
-    }
-  }
-
-  Level _levelFromString(String value) {
-    switch (value) {
-      case '小':
-        return Level.xiao;
-      case '中':
-        return Level.zhong;
-      case '大':
-        return Level.da;
-      default:
-        return Level.zhong;
-    }
   }
 
   Scope _scopeFromString(String value) {

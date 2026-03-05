@@ -14,7 +14,9 @@ import 'package:qizhengsiyu/domain/managers/hua_yao_manager.dart';
 import 'package:qizhengsiyu/presentation/viewmodels/qi_zheng_si_yu_viewmodel.dart';
 
 // GeJu 相关导入
+import 'package:qizhengsiyu/data/datasources/local/ge_ju_builtin_database.dart';
 import 'package:qizhengsiyu/data/datasources/local/ge_ju_local_data_source.dart';
+import 'package:qizhengsiyu/data/datasources/local/ge_ju_sqlite_data_source.dart';
 import 'package:qizhengsiyu/data/datasources/local/app_database.dart';
 import 'package:qizhengsiyu/data/datasources/local/daos/ge_ju_dao.dart';
 import 'package:qizhengsiyu/data/repositories/ge_ju_repository_impl.dart';
@@ -95,9 +97,16 @@ List<SingleChildWidget> createProviders() {
       create: (context) => GeJuDao(context.read<AppDatabase>()),
     ),
 
-    // GeJu Built-in DataSource
+    // GeJu Built-in Database (只读，独立于 AppDatabase)
+    Provider<GeJuBuiltInDatabase>(
+      create: (_) => GeJuBuiltInDatabase(createGeJuBuiltInConnection()),
+    ),
+
+    // GeJu Built-in DataSource (SQLite 替换 JSON assets)
     Provider<GeJuBuiltInDataSource>(
-      create: (_) => GeJuBuiltInDataSourceImpl(),
+      create: (context) => GeJuSQLiteDataSource(
+        context.read<GeJuBuiltInDatabase>(),
+      ),
     ),
 
     // GeJu Repository

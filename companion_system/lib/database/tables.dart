@@ -44,8 +44,7 @@ class GeJuRules extends Table {
   IntColumn get id => integer().autoIncrement()();
   TextColumn get patternId => text().named('pattern_id')();
   TextColumn get schoolId => text().named('school_id')();
-  TextColumn get jixiong => text()(); // '吉', '平', '凶'
-  TextColumn get level => text()(); // '小', '中', '大'
+  TextColumn get jixiong => text()(); // '大吉'/'吉'/'小吉'/'平'/'小凶'/'凶'/'大凶'
   TextColumn get geJuType => text().named('ge_ju_type')();
   TextColumn get scope => text()();
   TextColumn get coordinateSystem => text().named('coordinate_system').nullable()();

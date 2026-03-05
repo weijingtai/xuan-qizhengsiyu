@@ -37,5 +37,7 @@ enum GeJuType {
   @JsonValue("贤")
   xian,
   @JsonValue("愚")
-  yu;
+  yu,
+  @JsonValue("其他")
+  other;
 }
