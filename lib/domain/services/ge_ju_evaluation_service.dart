@@ -1,0 +1,130 @@
+import 'package:common/enums.dart';
+import 'package:qizhengsiyu/domain/entities/models/base_panel_model.dart';
+import 'package:qizhengsiyu/domain/entities/models/eleven_stars_info.dart';
+import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_input.dart';
+import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_result.dart';
+import 'package:qizhengsiyu/domain/managers/ge_ju/ge_ju_evaluator.dart';
+import 'package:qizhengsiyu/domain/managers/ge_ju/ge_ju_input_builder.dart';
+import 'package:qizhengsiyu/domain/repositories/ge_ju_repository.dart';
+import 'package:qizhengsiyu/enums/enum_twelve_gong.dart';
+
+/// 格局评估服务
+///
+/// 连接 [IGeJuRepository]（数据层）与 [GeJuEvaluator]（评估引擎）。
+/// 负责从 Repository 加载并组装 [RuleEvaluationData]，然后调用评估器。
+class GeJuEvaluationService {
+  final IGeJuRepository _repository;
+
+  GeJuEvaluationService({required IGeJuRepository repository})
+      : _repository = repository;
+
+  /// 评估命盘格局
+  ///
+  /// [panelModel]        基础命盘模型
+  /// [starsSet]          十一星体信息集合
+  /// [monthZhi]          出生月地支
+  /// [yearJiaZi]         出生年甲子
+  /// [coordinateSystem]  坐标系（默认黄道）
+  /// [preferredSchools]  偏好流派 ID 集合（默认 guo_lao）
+  /// [onlyMatched]       是否只返回匹配项
+  Future<GeJuEvaluationSummary> evaluateNatalChart({
+    required BasePanelModel panelModel,
+    required Set<ElevenStarsInfo> starsSet,
+    required DiZhi monthZhi,
+    required JiaZi yearJiaZi,
+    CelestialCoordinateSystem coordinateSystem =
+        CelestialCoordinateSystem.ecliptic,
+    Set<String> preferredSchools = const {'guo_lao'},
+    bool onlyMatched = false,
+  }) async {
+    final input = GeJuInputBuilder.buildFromPanel(
+      panelModel: panelModel,
+      starsSet: starsSet,
+      monthZhi: monthZhi,
+      yearJiaZi: yearJiaZi,
+      coordinateSystem: coordinateSystem,
+      preferredSchools: preferredSchools,
+    );
+
+    final ruleData = await _assembleRuleData();
+
+    return GeJuEvaluator.evaluateWithConditionSets(
+      input: input,
+      ruleData: ruleData,
+      onlyMatched: onlyMatched,
+    );
+  }
+
+  /// 评估行限格局
+  ///
+  /// 额外需要 [xianGong] 和 [xianConstellation]；只评估 scope 为
+  /// `xingxian` 或 `both` 的规则。
+  Future<GeJuEvaluationSummary> evaluateXingXian({
+    required BasePanelModel panelModel,
+    required Set<ElevenStarsInfo> starsSet,
+    required DiZhi monthZhi,
+    required JiaZi yearJiaZi,
+    required EnumTwelveGong xianGong,
+    required Enum28Constellations xianConstellation,
+    CelestialCoordinateSystem coordinateSystem =
+        CelestialCoordinateSystem.ecliptic,
+    Set<String> preferredSchools = const {'guo_lao'},
+    bool onlyMatched = false,
+  }) async {
+    final input = GeJuInputBuilder.buildForXingXian(
+      panelModel: panelModel,
+      starsSet: starsSet,
+      monthZhi: monthZhi,
+      yearJiaZi: yearJiaZi,
+      xianGong: xianGong,
+      xianConstellation: xianConstellation,
+      coordinateSystem: coordinateSystem,
+      preferredSchools: preferredSchools,
+    );
+
+    final ruleData = await _assembleRuleData();
+
+    return GeJuEvaluator.evaluateWithConditionSets(
+      input: input,
+      ruleData: ruleData,
+      onlyMatched: onlyMatched,
+    );
+  }
+
+  /// 使用已构建好的 [GeJuInput] 直接评估（高级用法）
+  Future<GeJuEvaluationSummary> evaluateWithInput({
+    required GeJuInput input,
+    bool onlyMatched = false,
+  }) async {
+    final ruleData = await _assembleRuleData();
+    return GeJuEvaluator.evaluateWithConditionSets(
+      input: input,
+      ruleData: ruleData,
+      onlyMatched: onlyMatched,
+    );
+  }
+
+  // ── 内部辅助 ────────────────────────────────────────────────────────────
+
+  /// 从 Repository 加载所有规则及其关联数据，组装为评估所需的 [RuleEvaluationData] 列表。
+  ///
+  /// 并发加载每个规则的 ConditionSets 和 Annotations，充分利用 Repository 内置缓存。
+  Future<List<RuleEvaluationData>> _assembleRuleData() async {
+    final rules = await _repository.loadAllRules();
+
+    final ruleDataList = await Future.wait(
+      rules.map((rule) async {
+        final conditionSets =
+            await _repository.getConditionSetsForRule(rule.id);
+        final annotations = await _repository.getAnnotationsForRule(rule.id);
+        return RuleEvaluationData(
+          rule: rule,
+          conditionSets: conditionSets,
+          annotations: annotations,
+        );
+      }),
+    );
+
+    return ruleDataList;
+  }
+}

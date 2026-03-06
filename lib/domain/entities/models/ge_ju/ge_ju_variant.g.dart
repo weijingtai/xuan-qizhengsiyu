@@ -56,4 +56,5 @@ const _$GeJuTypeEnumMap = {
   GeJuType.shou: '寿',
   GeJuType.xian: '贤',
   GeJuType.yu: '愚',
+  GeJuType.other: '其他',
 };

@@ -32,6 +32,7 @@ class GeJuInputBuilder {
     required DiZhi monthZhi,
     required JiaZi yearJiaZi,
     CelestialCoordinateSystem coordinateSystem = CelestialCoordinateSystem.ecliptic,
+    Set<String> preferredSchools = const {'guo_lao'},
     List<StarPositionStatusDatasetModel<EnumTwelveGong>>? starStatusDataList,
     EnumTwelveGong? currentXianGong,
     Enum28Constellations? currentXianConstellation,
@@ -69,6 +70,7 @@ class GeJuInputBuilder {
 
     return GeJuInput(
       coordinateSystem: coordinateSystem,
+      preferredSchools: preferredSchools,
       starsSet: starsSet,
       starRelationship: starRelationship,
       fiveStarWalkingTypeMapper: panelModel.fiveStarWalkingTypeMapper,
@@ -97,6 +99,7 @@ class GeJuInputBuilder {
     required DiZhi monthZhi,
     required JiaZi yearJiaZi,
     CelestialCoordinateSystem coordinateSystem = CelestialCoordinateSystem.ecliptic,
+    Set<String> preferredSchools = const {'guo_lao'},
   }) {
     return build(
       panelModel: panelModel,
@@ -104,6 +107,7 @@ class GeJuInputBuilder {
       monthZhi: monthZhi,
       yearJiaZi: yearJiaZi,
       coordinateSystem: coordinateSystem,
+      preferredSchools: preferredSchools,
     );
   }
 
@@ -116,6 +120,7 @@ class GeJuInputBuilder {
     required EnumTwelveGong xianGong,
     required Enum28Constellations xianConstellation,
     CelestialCoordinateSystem coordinateSystem = CelestialCoordinateSystem.ecliptic,
+    Set<String> preferredSchools = const {'guo_lao'},
   }) {
     // 计算行限宫内的星曜
     final xianPalaceStars = starsSet
@@ -129,6 +134,7 @@ class GeJuInputBuilder {
       monthZhi: monthZhi,
       yearJiaZi: yearJiaZi,
       coordinateSystem: coordinateSystem,
+      preferredSchools: preferredSchools,
       currentXianGong: xianGong,
       currentXianConstellation: xianConstellation,
       xianPalaceStars: xianPalaceStars,
@@ -249,5 +255,50 @@ class GeJuInputBuilder {
         .where((s) => s.enteredGong == gong)
         .map((s) => s.star)
         .toList();
+  }
+
+  /// 从 [BasePanelModel] 组装 [ElevenStarsInfo] 集合
+  ///
+  /// 用于在只有 [BasePanelModel] 的场景下调用 [GeJuEvaluationService]。
+  /// 月相默认 [EnumMoonPhases.New]（BasePanelModel 不存储月相）。
+  static Set<ElevenStarsInfo> buildElevenStarsSetFromPanel(
+      BasePanelModel panel) {
+    final result = <ElevenStarsInfo>{};
+
+    for (final entry in panel.starAngleMapper.entries) {
+      final star = entry.key;
+      final angle = entry.value.angle;
+      final speed = entry.value.speed;
+      final enterInfo = panel.enteredGongMapper[star];
+      if (enterInfo == null) continue;
+
+      final ElevenStarsInfo info;
+      if (star == EnumStars.Sun) {
+        info = SunInfo(angle: angle, enterInfo: enterInfo);
+      } else if (star == EnumStars.Moon) {
+        info = MoonInfo(
+          angle: angle,
+          enterInfo: enterInfo,
+          moonPhase: EnumMoonPhases.New,
+        );
+      } else {
+        final walkingType =
+            panel.fiveStarWalkingTypeMapper[star]?.walkingType ??
+                FiveStarWalkingType.Normal;
+        info = ElevenStarsInfo(
+          star: star,
+          angle: angle,
+          enterInfo: enterInfo,
+          fiveStarWalkingType: walkingType,
+          walkingSpeed: speed,
+          priority: star.isFiveStar
+              ? EnumStarsPriority.Normal
+              : EnumStarsPriority.Lowest,
+        );
+      }
+      result.add(info);
+    }
+
+    return result;
   }
 }

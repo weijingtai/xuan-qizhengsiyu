@@ -166,11 +166,11 @@ class GeJuEvaluationSummary {
 
   /// 获取所有吉格局
   List<GeJuResult> get matchedAuspiciousPatterns =>
-      matchedPatterns.where((r) => r.jiXiong == JiXiongEnum.JI).toList();
+      matchedPatterns.where((r) => r.jiXiong.isJi()).toList();
 
   /// 获取所有凶格局
   List<GeJuResult> get matchedInauspiciousPatterns =>
-      matchedPatterns.where((r) => r.jiXiong == JiXiongEnum.XIONG).toList();
+      matchedPatterns.where((r) => r.jiXiong.isXiong()).toList();
 
   /// 按格局类型分组获取匹配结果
   Map<GeJuType, List<GeJuResult>> get matchedByType {

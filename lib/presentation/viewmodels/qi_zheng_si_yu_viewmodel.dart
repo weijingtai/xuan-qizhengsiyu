@@ -5,10 +5,13 @@ import 'package:qizhengsiyu/domain/entities/models/base_panel_model.dart';
 import 'package:qizhengsiyu/domain/entities/models/observer_position.dart';
 import 'package:qizhengsiyu/domain/entities/models/panel_config.dart';
 import 'package:qizhengsiyu/domain/entities/models/passage_year_panel_model.dart';
+import 'package:qizhengsiyu/domain/managers/ge_ju/ge_ju_input_builder.dart';
 import 'package:qizhengsiyu/domain/managers/hua_yao_manager.dart';
 import 'package:qizhengsiyu/domain/managers/shen_sha_manager.dart';
 import 'package:qizhengsiyu/domain/managers/zhou_tian_model_manager.dart';
 import 'package:qizhengsiyu/domain/services/generate_base_panel_service.dart';
+import 'package:qizhengsiyu/domain/services/ge_ju_evaluation_service.dart';
+import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_result.dart';
 import 'package:qizhengsiyu/domain/entities/models/zhou_tian_model.dart';
 import 'package:qizhengsiyu/presentation/models/ui_star_model.dart'; // 使用UI分支的版本
 import 'package:qizhengsiyu/data/datasources/local/hua_yao_local_data_source.dart';
@@ -46,16 +49,24 @@ class QiZhengSiYuViewModel extends ChangeNotifier {
   final ShenShaManager shenShaManager;
   final HuaYaoManager huaYaoManager;
   final ZhouTianModelManager zhouTianModelManager;
+  final GeJuEvaluationService? geJuEvaluationService;
 
   QiZhengSiYuViewModel({
     required this.shenShaManager,
     required this.huaYaoManager,
     required this.zhouTianModelManager,
+    this.geJuEvaluationService,
   });
 
   // ==================== 核心状态 (MVVM) ====================
   BasePanelModel? _basicLifePanel;
   BasePanelModel? get basicLifePanel => _basicLifePanel;
+
+  /// 出生年甲子（格局评估使用）
+  JiaZi? _birthYearJiaZi;
+
+  /// 出生月地支（格局评估使用）
+  DiZhi? _birthMonthZhi;
 
   List<UIStarModel> _uiBasicLifeStars = [];
   List<UIStarModel> get uiBasicLifeStars => _uiBasicLifeStars;
@@ -95,6 +106,10 @@ class QiZhengSiYuViewModel extends ChangeNotifier {
 
   /// 观察者位置数据 - 用于 ValueListenableBuilder
   final ValueNotifier<ObserverPosition?> baseObserverPositionNotifier =
+      ValueNotifier(null);
+
+  /// 格局评估结果 - 用于 ValueListenableBuilder
+  final ValueNotifier<GeJuEvaluationSummary?> geJuSummaryNotifier =
       ValueNotifier(null);
 
   // ==================== UI兼容层: 普通属性 ====================
@@ -286,6 +301,10 @@ class QiZhengSiYuViewModel extends ChangeNotifier {
       starAngleMapper: starAngleMapper,
     );
 
+    // 保存出生时间参数（格局评估使用）
+    _birthYearJiaZi = observer.yearGanZhi;
+    _birthMonthZhi = observer.monthGanZhi.zhi;
+
     // 实现 UI 星体计算逻辑
     if (_baseMiniSafetyAngle > 0) {
       _uiBasicLifeStars = _calculateUIStarsFromMapper(
@@ -320,7 +339,45 @@ class QiZhengSiYuViewModel extends ChangeNotifier {
     uiBasicLifeStarsNotifier.dispose();
     uiFateLifeStarsNotifier.dispose();
     baseObserverPositionNotifier.dispose();
+    geJuSummaryNotifier.dispose();
     super.dispose();
+  }
+
+  // ==================== 格局评估 ====================
+
+  /// 评估当前命盘的格局
+  ///
+  /// 结果通过 [geJuSummaryNotifier] 通知，同时作为返回值。
+  /// [onlyMatched] 为 true 时只返回匹配格局，默认 false 返回全部。
+  Future<GeJuEvaluationSummary?> evaluateGeJu({
+    bool onlyMatched = false,
+    Set<String> preferredSchools = const {'guo_lao'},
+  }) async {
+    if (geJuEvaluationService == null) {
+      debugPrint('GeJuEvaluationService not injected');
+      return null;
+    }
+    final panel = _basicLifePanel;
+    final monthZhi = _birthMonthZhi;
+    final yearJiaZi = _birthYearJiaZi;
+    if (panel == null || monthZhi == null || yearJiaZi == null) {
+      debugPrint('evaluateGeJu: panel not calculated yet');
+      return null;
+    }
+
+    final starsSet = GeJuInputBuilder.buildElevenStarsSetFromPanel(panel);
+    final summary = await geJuEvaluationService!.evaluateNatalChart(
+      panelModel: panel,
+      starsSet: starsSet,
+      monthZhi: monthZhi,
+      yearJiaZi: yearJiaZi,
+      preferredSchools: preferredSchools,
+      onlyMatched: onlyMatched,
+    );
+
+    geJuSummaryNotifier.value = summary;
+    notifyListeners();
+    return summary;
   }
 
   // ==================== UI兼容层: 星体安全角度计算 ====================

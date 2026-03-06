@@ -22,6 +22,7 @@ import 'package:qizhengsiyu/data/datasources/local/daos/ge_ju_dao.dart';
 import 'package:qizhengsiyu/data/repositories/ge_ju_repository_impl.dart';
 import 'package:qizhengsiyu/domain/repositories/ge_ju_repository.dart';
 import 'package:qizhengsiyu/domain/services/ge_ju_crud_service.dart';
+import 'package:qizhengsiyu/domain/services/ge_ju_evaluation_service.dart';
 import 'package:qizhengsiyu/domain/services/ge_ju_school_service.dart';
 import 'package:qizhengsiyu/presentation/viewmodels/ge_ju_list_viewmodel.dart';
 import 'package:qizhengsiyu/presentation/viewmodels/ge_ju_editor_viewmodel.dart';
@@ -78,15 +79,6 @@ List<SingleChildWidget> createProviders() {
       ),
     ),
 
-    // ViewModels
-    ChangeNotifierProvider<QiZhengSiYuViewModel>(
-      create: (context) => QiZhengSiYuViewModel(
-        shenShaManager: context.read<ShenShaManager>(),
-        huaYaoManager: context.read<HuaYaoManager>(),
-        zhouTianModelManager: context.read<ZhouTianModelManager>(),
-      ),
-    ),
-
     // ============ GeJu 格局管理 ============
 
     // GeJu Database & DAO (singleton — 不随路由 dispose)
@@ -124,10 +116,27 @@ List<SingleChildWidget> createProviders() {
       ),
     ),
 
+    // GeJu Evaluation Service
+    Provider<GeJuEvaluationService>(
+      create: (context) => GeJuEvaluationService(
+        repository: context.read<IGeJuRepository>(),
+      ),
+    ),
+
     // GeJu School Service
     Provider<GeJuSchoolService>(
       create: (context) => GeJuSchoolService(
         dao: context.read<GeJuDao>(),
+      ),
+    ),
+
+    // ViewModels
+    ChangeNotifierProvider<QiZhengSiYuViewModel>(
+      create: (context) => QiZhengSiYuViewModel(
+        shenShaManager: context.read<ShenShaManager>(),
+        huaYaoManager: context.read<HuaYaoManager>(),
+        zhouTianModelManager: context.read<ZhouTianModelManager>(),
+        geJuEvaluationService: context.read<GeJuEvaluationService>(),
       ),
     ),
 

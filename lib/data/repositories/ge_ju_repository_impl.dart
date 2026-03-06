@@ -214,9 +214,6 @@ class GeJuRepositoryImpl implements IGeJuRepository {
     _builtInRulesCache = null;
     _builtInAnnotationsCache = null;
     _builtInConditionSetsCache = null;
-    if (_builtInDataSource is GeJuBuiltInDataSourceImpl) {
-      (_builtInDataSource as GeJuBuiltInDataSourceImpl).clearCache();
-    }
   }
 
   // ══════════════════════════════════════════
