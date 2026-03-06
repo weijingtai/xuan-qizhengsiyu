@@ -49,6 +49,7 @@ import 'package:qizhengsiyu/presentation/widgets/destiny_twelve_gong_ring.dart';
 import 'package:qizhengsiyu/presentation/widgets/center_text_circle_widget.dart';
 import 'package:qizhengsiyu/controllers/panel_controller.dart';
 import 'package:qizhengsiyu/domain/entities/models/panel_config.dart'; // UI层使用的PanelConfig
+import 'package:qizhengsiyu/presentation/widgets/ge_ju/ge_ju_result_panel.dart';
 
 import 'package:qizhengsiyu/enums/enum_panel_system_type.dart';
 import 'package:qizhengsiyu/enums/enum_settle_life_body.dart';
@@ -485,6 +486,9 @@ class _BeautyViewPageState extends State<BeautyViewPage>
                 },
               ),
             ),
+
+            // ── 格局评估结果面板 ──
+            const GeJuResultPanel(),
           ],
         ),
       ),
