@@ -207,8 +207,8 @@ class GongShenShaRing extends StatelessWidget {
     // isOdd ? shenShaList.length ~/ 2 + 1 : shenShaList.length ~/ 2;
 
     bool isInner = j >= halfCount;
-    final _outerRadius = isInner ? middleRadius : outerRadius;
-    final _innerRadius = isInner ? innerRadius : middleRadius;
+    final effectiveOuterRadius = isInner ? middleRadius : outerRadius;
+    final effectiveInnerRadius = isInner ? innerRadius : middleRadius;
 
     final angleOffset = isInner ? innerAngleOffset : outerAngleOffset;
     final sweepRadians = isInner ? innerSweepRadians : outerSweepRadians;
@@ -223,8 +223,8 @@ class GongShenShaRing extends StatelessWidget {
         index: index,
         angleOffset: angleOffset,
         totalCount: shenShaList.length,
-        outerRadius: _outerRadius,
-        innerRadius: _innerRadius,
+        outerRadius: effectiveOuterRadius,
+        innerRadius: effectiveInnerRadius,
         itemSize: itemSize,
         textDirection: RingTextDirection.gravity,
         startAngle: (gongAngleOffset + eachAngleOffset) * math.pi / 180,
@@ -268,8 +268,8 @@ class GongShenShaRing extends StatelessWidget {
     for (var j = 0; j < shenShaList.length; j++) {
       // 确定神煞是在内圈还是外圈
       bool isInner = j > halfCount;
-      final _outerRadius = isInner ? middleRadius : outerRadius;
-      final _innerRadius = isInner ? innerRadius : middleRadius;
+      final effectiveOuterRadius = isInner ? middleRadius : outerRadius;
+      final effectiveInnerRadius = isInner ? innerRadius : middleRadius;
 
       final angleOffset = isInner ? innerAngleOffset : outerAngleOffset;
       final sweepRadians = isInner ? innerSweepRadians : outerSweepRadians;
@@ -281,8 +281,8 @@ class GongShenShaRing extends StatelessWidget {
           index: isInner ? j - halfCount - 1 : j,
           angleOffset: angleOffset,
           totalCount: shenShaList.length,
-          outerRadius: _outerRadius,
-          innerRadius: _innerRadius,
+          outerRadius: effectiveOuterRadius,
+          innerRadius: effectiveInnerRadius,
           itemSize: itemSize,
           textDirection: RingTextDirection.gravity,
           startAngle: (gongAngleOffset + eachAngleOffset) * math.pi / 180,
