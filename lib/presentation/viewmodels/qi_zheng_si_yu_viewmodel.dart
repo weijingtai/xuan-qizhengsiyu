@@ -12,6 +12,9 @@ import 'package:qizhengsiyu/domain/managers/zhou_tian_model_manager.dart';
 import 'package:qizhengsiyu/domain/services/generate_base_panel_service.dart';
 import 'package:qizhengsiyu/domain/services/ge_ju_evaluation_service.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_result.dart';
+import 'package:qizhengsiyu/domain/entities/models/rise_set_display_data.dart';
+import 'package:common/utils/celestial_rise_set_calculator.dart';
+import 'package:common/helpers/solar_time_calculator.dart';
 import 'package:qizhengsiyu/domain/entities/models/zhou_tian_model.dart';
 import 'package:qizhengsiyu/presentation/models/ui_star_model.dart'; // 使用UI分支的版本
 import 'package:qizhengsiyu/data/datasources/local/hua_yao_local_data_source.dart';
@@ -27,6 +30,7 @@ import 'package:qizhengsiyu/enums/enum_panel_system_type.dart';
 import 'package:qizhengsiyu/enums/enum_settle_life_body.dart';
 import 'package:qizhengsiyu/presentation/pages/StarsResolver.dart';
 import 'package:timezone/timezone.dart' as tz;
+import 'package:common/adapters/lunar_adapter.dart';
 import 'dart:math';
 import 'package:qizhengsiyu/domain/entities/models/panel_config.dart'
     as UIPanelConfig; // UI层的PanelConfig
@@ -67,6 +71,9 @@ class QiZhengSiYuViewModel extends ChangeNotifier {
 
   /// 出生月地支（格局评估使用）
   DiZhi? _birthMonthZhi;
+
+  /// 出生日期时间（月相计算使用）
+  DateTime? _birthDateTime;
 
   List<UIStarModel> _uiBasicLifeStars = [];
   List<UIStarModel> get uiBasicLifeStars => _uiBasicLifeStars;
@@ -111,6 +118,18 @@ class QiZhengSiYuViewModel extends ChangeNotifier {
   /// 格局评估结果 - 用于 ValueListenableBuilder
   final ValueNotifier<GeJuEvaluationSummary?> geJuSummaryNotifier =
       ValueNotifier(null);
+
+  /// 出生时日月出没信息
+  final ValueNotifier<RiseSetDisplayData?> birthRiseSetNotifier =
+      ValueNotifier(null);
+
+  /// 自定义日期日月出没信息
+  final ValueNotifier<RiseSetDisplayData?> customRiseSetNotifier =
+      ValueNotifier(null);
+
+  /// 出生地地址信息（用于显示地名）
+  String? _birthLocationName;
+  String? get birthLocationName => _birthLocationName;
 
   // ==================== UI兼容层: 普通属性 ====================
   /// 大限星体列表
@@ -171,6 +190,18 @@ class QiZhengSiYuViewModel extends ChangeNotifier {
   void setLifeObserver(DivinationInfoModel divinationInfoModel) {
     _lifeObserver = _generateLifeObserverPosition(divinationInfoModel);
     baseObserverPositionNotifier.value = _lifeObserver;
+
+    // 提取地址名称用于日月出没面板显示
+    final datetimeData = divinationInfoModel.divinationDatetime;
+    final datetimeModel = datetimeData.timingInfoListJson!
+        .firstWhere((t) => t.uuid == datetimeData.timingInfoUuid);
+    final address = datetimeModel.observer.location?.address;
+    if (address != null) {
+      final parts = <String>[];
+      if (address.city != null) parts.add(address.city!.name);
+      parts.add('${address.countryName} ${address.province.name}');
+      _birthLocationName = parts.join(', ');
+    }
   }
 
   /// 从 DivinationInfoModel 生成 ObserverPosition
@@ -304,6 +335,7 @@ class QiZhengSiYuViewModel extends ChangeNotifier {
     // 保存出生时间参数（格局评估使用）
     _birthYearJiaZi = observer.yearGanZhi;
     _birthMonthZhi = observer.monthGanZhi.zhi;
+    _birthDateTime = observer.dateTime;
 
     // 实现 UI 星体计算逻辑
     if (_baseMiniSafetyAngle > 0) {
@@ -322,10 +354,16 @@ class QiZhengSiYuViewModel extends ChangeNotifier {
     uiBasePanelNotifier.value = _basicLifePanel;
     uiBasicLifeStarsNotifier.value = _uiBasicLifeStars;
 
+    // 计算出生时日月出没信息
+    birthRiseSetNotifier.value = _computeRiseSetData(_lifeObserver!);
+
     notifyListeners();
 
     // 基础命盘计算完成后自动计算流年
     await calculateDaXian();
+
+    // 基础命盘计算完成后自动评估格局
+    evaluateGeJu(onlyMatched: true);
   }
 
   // ==================== UI兼容层: dispose ====================
@@ -340,10 +378,28 @@ class QiZhengSiYuViewModel extends ChangeNotifier {
     uiFateLifeStarsNotifier.dispose();
     baseObserverPositionNotifier.dispose();
     geJuSummaryNotifier.dispose();
+    birthRiseSetNotifier.dispose();
+    customRiseSetNotifier.dispose();
     super.dispose();
   }
 
   // ==================== 格局评估 ====================
+
+  /// 使格局规则数据缓存失效（用户增删改规则后调用）
+  void invalidateGeJuCache() {
+    geJuEvaluationService?.invalidateRuleDataCache();
+  }
+
+  /// 当前是否启用预过滤器
+  bool get geJuUsePreFilter => geJuEvaluationService?.usePreFilter ?? true;
+
+  /// 切换预过滤器开关并重新评估（debug 用）
+  Future<void> toggleGeJuPreFilter() async {
+    final svc = geJuEvaluationService;
+    if (svc == null) return;
+    svc.usePreFilter = !svc.usePreFilter;
+    await evaluateGeJu(onlyMatched: true);
+  }
 
   /// 评估当前命盘的格局
   ///
@@ -365,7 +421,10 @@ class QiZhengSiYuViewModel extends ChangeNotifier {
       return null;
     }
 
-    final starsSet = GeJuInputBuilder.buildElevenStarsSetFromPanel(panel);
+    final starsSet = GeJuInputBuilder.buildElevenStarsSetFromPanel(
+      panel,
+      birthDateTime: _birthDateTime,
+    );
     final summary = await geJuEvaluationService!.evaluateNatalChart(
       panelModel: panel,
       starsSet: starsSet,
@@ -535,6 +594,89 @@ class QiZhengSiYuViewModel extends ChangeNotifier {
     return mapper;
   }
 
+  // ==================== 日月出没计算 ====================
+
+  /// 计算日月出没展示数据
+  RiseSetDisplayData? _computeRiseSetData(ObserverPosition observer) {
+    try {
+      // 日月出没（UTC）
+      final dailyInfo = CelestialRiseSetCalculator.calculateDaily(
+        utcDateTime: observer.utcDateTime,
+        longitude: observer.longitude,
+        latitude: observer.latitude,
+        altitude: observer.altitude,
+      );
+
+      // UTC → 本地时区
+      final loc = tz.getLocation(observer.timezone);
+      DateTime? toLocal(DateTime? utc) =>
+          utc != null ? tz.TZDateTime.from(utc, loc) : null;
+
+      // 真太阳时
+      final trueSolarTime = SolarTimeCalculator(
+        dateTime: observer.utcDateTime,
+        longitude: observer.longitude,
+      ).getTrueSolarTime();
+
+      // 阴历信息（基于本地时间）
+      final lunar = LunarAdapter.fromDate(observer.dateTime);
+      final lunarDateString =
+          '${lunar.getYearInGanZhi()}年${lunar.getMonthInChinese()}${lunar.getDayInChinese()}日';
+      final lunarTimeString = '${lunar.getTimeZhi()}时';
+      final jieQiInfo = lunar.getJieQi();
+
+      return RiseSetDisplayData(
+        sunRise: toLocal(dailyInfo.sun.rise),
+        sunSet: toLocal(dailyInfo.sun.set_),
+        moonRise: toLocal(dailyInfo.moon.rise),
+        moonSet: toLocal(dailyInfo.moon.set_),
+        trueSolarTime: trueSolarTime,
+        longitude: observer.longitude,
+        latitude: observer.latitude,
+        timezone: observer.timezone,
+        lunarDateString: lunarDateString,
+        lunarTimeString: lunarTimeString,
+        isDayBirth: observer.isDayBirth,
+        fourPillarsDisplay: observer.fourZhuEightChar,
+        localDateTime: observer.dateTime,
+        locationName: _birthLocationName,
+        jieQiInfo: jieQiInfo,
+      );
+    } catch (e) {
+      debugPrint('Error computing rise/set data: $e');
+      return null;
+    }
+  }
+
+  /// 更新自定义日期的日月出没数据（供 UI 日期选择器调用）
+  void updateCustomDate(DateTime selectedDate) {
+    if (_lifeObserver == null) return;
+
+    final loc = tz.getLocation(_lifeObserver!.timezone);
+    final tzDateTime = tz.TZDateTime(
+        loc, selectedDate.year, selectedDate.month, selectedDate.day, 12, 0);
+
+    final yearGanZhi = _calculateYearGanZhi(tzDateTime);
+    final monthGanZhi = _calculateMonthGanZhi(tzDateTime);
+    final dayGanZhi = _calculateDayGanZhi(tzDateTime);
+    final timeGanZhi = _calculateTimeGanZhi(tzDateTime);
+
+    final customObserver = ObserverPosition(
+      latitude: _lifeObserver!.latitude,
+      longitude: _lifeObserver!.longitude,
+      altitude: _lifeObserver!.altitude,
+      timezone: _lifeObserver!.timezone,
+      dateTime: tzDateTime,
+      isDayBirth: _getDayTimeZhi().contains(timeGanZhi.zhi),
+      yearGanZhi: yearGanZhi,
+      monthGanZhi: monthGanZhi,
+      dayGanZhi: dayGanZhi,
+      timeGanZhi: timeGanZhi,
+    );
+
+    customRiseSetNotifier.value = _computeRiseSetData(customObserver);
+  }
+
   // ==================== 流年计算方法 ====================
 
   /// 计算流年星盘
@@ -588,6 +730,9 @@ class QiZhengSiYuViewModel extends ChangeNotifier {
       uiDaXianPanelNotifier.value = passageYearPanel;
       uiFateLifeStarsNotifier.value = _uiFateLifeStars;
 
+      // 计算流年日月出没信息
+      customRiseSetNotifier.value = _computeRiseSetData(_fateObserver!);
+
       debugPrint("Fate panel calculated successfully for $targetDateTime");
       debugPrint("Fate stars count: ${_uiFateLifeStars.length}");
     } catch (e) {
@@ -632,31 +777,27 @@ class QiZhengSiYuViewModel extends ChangeNotifier {
     );
   }
 
-  /// 计算年份干支（简化版本，实际应使用完整干支计算）
+  /// 计算年份干支
   JiaZi _calculateYearGanZhi(tz.TZDateTime datetime) {
-    // 这里应该使用完整的干支计算逻辑
-    // 为简化，返回基础命盘的年份干支
-    return _lifeObserver!.yearGanZhi;
+    final lunar = LunarAdapter.fromDate(datetime);
+    return JiaZi.getFromGanZhiValue(lunar.getYearInGanZhi())!;
   }
 
-  /// 计算月份干支（简化版本）
+  /// 计算月份干支
   JiaZi _calculateMonthGanZhi(tz.TZDateTime datetime) {
-    // 这里应该使用完整的干支计算逻辑
-    // 为简化，返回基础命盘的月份干支
-    return _lifeObserver!.monthGanZhi;
+    final lunar = LunarAdapter.fromDate(datetime);
+    return JiaZi.getFromGanZhiValue(lunar.getMonthInGanZhi())!;
   }
 
-  /// 计算日干支（简化版本）
+  /// 计算日干支
   JiaZi _calculateDayGanZhi(tz.TZDateTime datetime) {
-    // 这里应该使用完整的干支计算逻辑
-    // 为简化，返回基础命盘的日干支
-    return _lifeObserver!.dayGanZhi;
+    final lunar = LunarAdapter.fromDate(datetime);
+    return JiaZi.getFromGanZhiValue(lunar.getDayInGanZhi())!;
   }
 
-  /// 计算时辰干支（简化版本）
+  /// 计算时辰干支
   JiaZi _calculateTimeGanZhi(tz.TZDateTime datetime) {
-    // 这里应该使用完整的干支计算逻辑
-    // 为简化，返回基础命盘的时辰干支
-    return _lifeObserver!.timeGanZhi;
+    final lunar = LunarAdapter.fromDate(datetime);
+    return JiaZi.getFromGanZhiValue(lunar.getTimeInGanZhi())!;
   }
 }
