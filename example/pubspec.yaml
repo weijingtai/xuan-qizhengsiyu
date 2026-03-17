@@ -80,8 +80,6 @@ flutter:
   assets:
     - assets/icons/
     - assets/planets/
-    - assets/da_liu_ren/
-    - assets/qi_men_dun_jia/
     - assets/lotties/
     - assets/gifs/
     - assets/backgrounds/

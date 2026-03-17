@@ -1,4 +1,5 @@
 /// AI 对话控制器 — 管理 xuan-ai 聊天 Session，同时承担 AI 识别的 LLM 调用
+library;
 
 import 'dart:convert';
 
@@ -17,8 +18,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'settings_provider.dart';
 
 const _kNvidiaProviderUuid = 'cmpn0001-0000-0000-0000-000000000001';
-const _kNvidiaModelUuid    = 'cmpn0001-0000-0000-0000-000000000002';
-const _kNvidiaPersonaUuid  = 'cmpn0001-0000-0000-0000-000000000003';
+const _kNvidiaModelUuid = 'cmpn0001-0000-0000-0000-000000000002';
+const _kNvidiaPersonaUuid = 'cmpn0001-0000-0000-0000-000000000003';
 const _kChatSessionKey = 'companion_chat_session_uuid';
 
 /// 管理 xuan-ai 聊天 Session 的控制器。
@@ -73,8 +74,9 @@ class AiChatController extends ChangeNotifier {
 
       // 加载格局条件规范（注入为每次识别调用的 system prompt）
       try {
-        _specContent = await rootBundle
-            .loadString('assets/ge_ju_condition_spec.md');
+        _specContent = await rootBundle.loadString(
+          'assets/ge_ju_condition_spec.md',
+        );
       } catch (_) {
         _specContent = ''; // asset 不可用时降级，LLM 仍可继续
       }
@@ -87,8 +89,7 @@ class AiChatController extends ChangeNotifier {
       final savedUuid = prefs.getString(_kChatSessionKey);
 
       if (savedUuid != null) {
-        final result =
-            await _aiService.sessionManager.resumeSession(savedUuid);
+        final result = await _aiService.sessionManager.resumeSession(savedUuid);
         if (result != null) {
           _sessionUuid = savedUuid;
           _history = result.messages;
@@ -99,8 +100,9 @@ class AiChatController extends ChangeNotifier {
         }
       }
 
-      final result =
-          await _aiService.sessionManager.createSession(persona: persona);
+      final result = await _aiService.sessionManager.createSession(
+        persona: persona,
+      );
       _sessionUuid = result.sessionUuid;
       _history = [];
       await prefs.setString(_kChatSessionKey, _sessionUuid!);
@@ -166,9 +168,11 @@ class AiChatController extends ChangeNotifier {
       ai_msg.ChatMessageModel.system(systemContent),
       ...recent
           .where((m) => m.role == 'user' || m.role == 'assistant')
-          .map((m) => m.role == 'user'
-              ? ai_msg.ChatMessageModel.user(m.content)
-              : ai_msg.ChatMessageModel.assistant(m.content)),
+          .map(
+            (m) => m.role == 'user'
+                ? ai_msg.ChatMessageModel.user(m.content)
+                : ai_msg.ChatMessageModel.assistant(m.content),
+          ),
       ai_msg.ChatMessageModel.user(userContent.toString()),
     ];
 
@@ -199,8 +203,7 @@ class AiChatController extends ChangeNotifier {
     );
 
     // 7. 刷新 Chat Window
-    final result =
-        await _aiService.sessionManager.resumeSession(_sessionUuid!);
+    final result = await _aiService.sessionManager.resumeSession(_sessionUuid!);
     if (result != null) _history = result.messages;
     _refreshKey++;
     notifyListeners();
@@ -219,8 +222,10 @@ class AiChatController extends ChangeNotifier {
 
   String? _extractJson(String raw) {
     final trimmed = raw.trim();
-    final jsonBlockRegex =
-        RegExp(r'```(?:json)?\s*([\s\S]*?)```', multiLine: true);
+    final jsonBlockRegex = RegExp(
+      r'```(?:json)?\s*([\s\S]*?)```',
+      multiLine: true,
+    );
     final match = jsonBlockRegex.firstMatch(trimmed);
     if (match != null) {
       final candidate = match.group(1)!.trim();
@@ -260,8 +265,9 @@ class AiChatController extends ChangeNotifier {
     final now = DateTime.now();
 
     // 1. Provider
-    final existingProvider =
-        await aiDb.llmProvidersDao.getByUuid(_kNvidiaProviderUuid);
+    final existingProvider = await aiDb.llmProvidersDao.getByUuid(
+      _kNvidiaProviderUuid,
+    );
     if (existingProvider == null) {
       if (!updateOnly) {
         await aiDb.llmProvidersDao.upsert(
@@ -302,8 +308,7 @@ class AiChatController extends ChangeNotifier {
     }
 
     // 2. Model
-    final existingModel =
-        await aiDb.llmModelsDao.getByUuid(_kNvidiaModelUuid);
+    final existingModel = await aiDb.llmModelsDao.getByUuid(_kNvidiaModelUuid);
     if (existingModel == null) {
       await aiDb.llmModelsDao.upsert(
         LlmModelsCompanion(
@@ -328,8 +333,9 @@ class AiChatController extends ChangeNotifier {
     }
 
     // 3. Persona
-    final existingPersona =
-        await aiDb.aiPersonasDao.getByUuid(_kNvidiaPersonaUuid);
+    final existingPersona = await aiDb.aiPersonasDao.getByUuid(
+      _kNvidiaPersonaUuid,
+    );
     if (existingPersona == null) {
       await aiDb.aiPersonasDao.insertPersona(
         AiPersonasCompanion(

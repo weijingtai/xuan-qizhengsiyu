@@ -163,6 +163,7 @@ class GenerateBasePanelService {
       shenShaItemMapper: shenShaItemMapper,
       huaYaoItemMapper: huaYaoItemMapper,
       twelveZhangShengGongMapper: twelveZhangShengGongMapper,
+      huaYaoMapper: huaYaoMapper,
     );
   }
 
@@ -236,6 +237,7 @@ class GenerateBasePanelService {
       shenShaItemMapper: shenShaItemMapper,
       huaYaoItemMapper: huaYaoItemMapper,
       twelveZhangShengGongMapper: twelveZhangShengGongMapper,
+      huaYaoMapper: huaYaoMapper,
     );
   }
 

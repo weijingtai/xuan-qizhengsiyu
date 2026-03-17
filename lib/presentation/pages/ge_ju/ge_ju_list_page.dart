@@ -387,6 +387,8 @@ class _GeJuListPageState extends State<GeJuListPage> {
         return '贤';
       case GeJuType.yu:
         return '愚';
+      case GeJuType.other:
+        return '其他';
     }
   }
 }

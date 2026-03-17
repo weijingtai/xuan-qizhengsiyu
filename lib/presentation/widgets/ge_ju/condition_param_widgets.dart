@@ -146,7 +146,7 @@ class _StarDropdown extends StatelessWidget {
     return _ParamSection(
       label: label,
       child: DropdownButtonFormField<String>(
-        value: value,
+        initialValue: value,
         decoration: const InputDecoration(
           border: OutlineInputBorder(),
           isDense: true,
@@ -181,7 +181,7 @@ class _GongDropdown extends StatelessWidget {
     return _ParamSection(
       label: label,
       child: DropdownButtonFormField<String>(
-        value: value,
+        initialValue: value,
         decoration: const InputDecoration(
           border: OutlineInputBorder(),
           isDense: true,
@@ -216,7 +216,7 @@ class _ConstellationDropdown extends StatelessWidget {
     return _ParamSection(
       label: label,
       child: DropdownButtonFormField<String>(
-        value: value,
+        initialValue: value,
         decoration: const InputDecoration(
           border: OutlineInputBorder(),
           isDense: true,
@@ -251,7 +251,7 @@ class _DestinyGongDropdown extends StatelessWidget {
     return _ParamSection(
       label: label,
       child: DropdownButtonFormField<String>(
-        value: value,
+        initialValue: value,
         decoration: const InputDecoration(
           border: OutlineInputBorder(),
           isDense: true,
@@ -285,7 +285,8 @@ class _GongIdentifierDropdown extends StatelessWidget {
     final specialItems = ConditionParamOptions.specialGongIdentifiers
         .map((id) => DropdownMenuItem(
               value: id,
-              child: Text(ConditionParamOptions.specialGongDisplayNames[id] ?? id),
+              child:
+                  Text(ConditionParamOptions.specialGongDisplayNames[id] ?? id),
             ))
         .toList();
     final gongItems = ConditionParamOptions.gongs
@@ -298,7 +299,7 @@ class _GongIdentifierDropdown extends StatelessWidget {
     return _ParamSection(
       label: label,
       child: DropdownButtonFormField<String>(
-        value: value,
+        initialValue: value,
         decoration: const InputDecoration(
           border: OutlineInputBorder(),
           isDense: true,
@@ -770,7 +771,8 @@ class _ShenShaTextInputState extends State<_ShenShaTextInput> {
                   return Chip(
                     label: Text(v),
                     onDeleted: () {
-                      final newList = widget.values.where((e) => e != v).toList();
+                      final newList =
+                          widget.values.where((e) => e != v).toList();
                       widget.onChanged(newList);
                     },
                   );

@@ -1,57 +1,47 @@
-import 'package:common/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_result.dart';
-import 'package:qizhengsiyu/domain/entities/models/ge_ju_model.dart';
 import 'package:qizhengsiyu/presentation/viewmodels/qi_zheng_si_yu_viewmodel.dart';
 
-// ─── 调色板 ───────────────────────────────────────────────────────────────────
+// ─── 调色板（中国风 + 现代感融合）──────────────────────────────────────────────
 
-class _GeJuColors {
-  // 吉 — 松花绿系
-  static const jiPrimary = Color(0xFF1C4A34);
-  static const jiAccent = Color(0xFF2E7D52);
-  static const jiLight = Color(0xFFEAF4EE);
-  static const jiBorder = Color(0xFF5A9C75);
+class _C {
+  // 喜格 — 翠绿系
+  static const jiBg = Color(0xFFECFDF5);
+  static const jiText = Color(0xFF059669);
+  static const jiBorder = Color(0xFFD1FAE5);
 
-  // 凶 — 朱砂红系
-  static const xiongPrimary = Color(0xFF6B1A1A);
-  static const xiongAccent = Color(0xFF9C2D2D);
-  static const xiongLight = Color(0xFFF9EDED);
-  static const xiongBorder = Color(0xFFC05050);
+  // 忌格 — 柔红系
+  static const xiongBg = Color(0xFFFFF1F2);
+  static const xiongText = Color(0xFFE11D48);
+  static const xiongBorder = Color(0xFFFFE4E6);
 
   // 通用
-  static const gold = Color(0xFFB8963E);
-  static const parchment = Color(0xFFF8F3E8);
-  static const inkLight = Color(0xFF6B6355);
-  static const inkFaint = Color(0xFF9E9789);
+  static const pageBg = Color(0xFFF8FAFC);
+  static const cardBg = Color(0xFFFFFFFF);
+  static const textMain = Color(0xFF1E293B);
+  static const textMuted = Color(0xFF64748B);
+  static const badgeBg = Color(0xFFF1F5F9);
+  static const dividerColor = Color(0xFFF1F5F9);
 }
 
 // ─── 主入口 Widget ─────────────────────────────────────────────────────────────
 
 /// 命盘格局面板
 ///
-/// 置于星盘下方，显示吉/凶两类格局 Card 列表。
-/// 通过 [QiZhengSiYuViewModel.geJuSummaryNotifier] 监听评估结果。
-class GeJuResultPanel extends StatefulWidget {
-  const GeJuResultPanel({super.key});
+/// 以两个独立卡片显示「政余喜格」和「政余忌格」，格局名以胶囊标签云展示。
+/// - [singleColumnMode] 为 true 时两张卡片纵向排列，适合窄屏或详情页
+/// - [showDebugBar] 为 true 时在顶部显示调试工具栏（切换优化/经典模式 + 耗时对比）
+/// - 默认模式下根据可用宽度自适应（≥720 并排，否则纵向）
+class GeJuResultPanel extends StatelessWidget {
+  final bool singleColumnMode;
+  final bool showDebugBar;
 
-  @override
-  State<GeJuResultPanel> createState() => _GeJuResultPanelState();
-}
-
-class _GeJuResultPanelState extends State<GeJuResultPanel> {
-  bool _isLoading = false;
-
-  Future<void> _evaluate() async {
-    if (_isLoading) return;
-    setState(() => _isLoading = true);
-    try {
-      await context.read<QiZhengSiYuViewModel>().evaluateGeJu(onlyMatched: true);
-    } finally {
-      if (mounted) setState(() => _isLoading = false);
-    }
-  }
+  const GeJuResultPanel({
+    super.key,
+    this.singleColumnMode = false,
+    this.showDebugBar = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -59,169 +49,216 @@ class _GeJuResultPanelState extends State<GeJuResultPanel> {
       valueListenable:
           context.read<QiZhengSiYuViewModel>().geJuSummaryNotifier,
       builder: (context, summary, _) {
+        if (summary == null) return const SizedBox.shrink();
+
+        final ji = summary.matchedAuspiciousPatterns;
+        final xiong = summary.matchedInauspiciousPatterns;
+
+        if (ji.isEmpty && xiong.isEmpty && !showDebugBar) {
+          return const SizedBox.shrink();
+        }
+
         return Container(
-          color: _GeJuColors.parchment,
-          padding: const EdgeInsets.fromLTRB(12, 20, 12, 24),
+          color: _C.pageBg,
+          padding: const EdgeInsets.fromLTRB(16, 16, 16, 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              _SectionTitle(
-                onEvaluate: _isLoading ? null : _evaluate,
-                isLoading: _isLoading,
-              ),
-              const SizedBox(height: 16),
-              if (summary == null && !_isLoading)
-                _EmptyHint(onTap: _evaluate)
-              else if (_isLoading && summary == null)
-                const _LoadingPlaceholder()
-              else if (summary != null)
-                _ResultBody(summary: summary),
+              if (showDebugBar) _GeJuDebugBar(summary: summary),
+              if (ji.isNotEmpty || xiong.isNotEmpty) ...[
+                if (showDebugBar) const SizedBox(height: 12),
+                singleColumnMode
+                    ? _buildSingleColumn(ji, xiong)
+                    : LayoutBuilder(
+                        builder: (context, constraints) {
+                          if (constraints.maxWidth >= 720) {
+                            return _buildRow(ji, xiong);
+                          }
+                          return _buildSingleColumn(ji, xiong);
+                        },
+                      ),
+              ],
             ],
           ),
         );
       },
     );
   }
-}
 
-// ─── 节标题 ───────────────────────────────────────────────────────────────────
-
-class _SectionTitle extends StatelessWidget {
-  final VoidCallback? onEvaluate;
-  final bool isLoading;
-
-  const _SectionTitle({required this.onEvaluate, required this.isLoading});
-
-  @override
-  Widget build(BuildContext context) {
+  Widget _buildRow(List<GeJuResult> ji, List<GeJuResult> xiong) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // 左侧装饰线
-        Expanded(child: _OrnamentalDivider(reversed: true)),
-        const SizedBox(width: 12),
-        Column(
-          children: [
-            Text(
-              '命 盘 格 局',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w700,
-                letterSpacing: 3,
-                color: _GeJuColors.jiPrimary,
-              ),
-            ),
-            const SizedBox(height: 4),
-            GestureDetector(
-              onTap: onEvaluate,
-              child: AnimatedSwitcher(
-                duration: const Duration(milliseconds: 250),
-                child: isLoading
-                    ? SizedBox(
-                        key: const ValueKey('loading'),
-                        width: 72,
-                        height: 22,
-                        child: Center(
-                          child: SizedBox(
-                            width: 14,
-                            height: 14,
-                            child: CircularProgressIndicator(
-                              strokeWidth: 1.5,
-                              color: _GeJuColors.gold,
-                            ),
-                          ),
-                        ),
-                      )
-                    : Container(
-                        key: const ValueKey('btn'),
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 12, vertical: 2),
-                        decoration: BoxDecoration(
-                          border:
-                              Border.all(color: _GeJuColors.gold, width: 0.8),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Text(
-                          '◈ 测算格局',
-                          style: TextStyle(
-                            fontSize: 11,
-                            color: _GeJuColors.gold,
-                            letterSpacing: 1,
-                          ),
-                        ),
-                      ),
-              ),
-            ),
-          ],
+        Expanded(
+          child: _GeJuCard(
+            title: '政余喜格',
+            results: ji,
+            tagBg: _C.jiBg,
+            tagText: _C.jiText,
+            tagBorder: _C.jiBorder,
+          ),
         ),
-        const SizedBox(width: 12),
-        Expanded(child: _OrnamentalDivider()),
+        const SizedBox(width: 24),
+        Expanded(
+          child: _GeJuCard(
+            title: '政余忌格',
+            results: xiong,
+            tagBg: _C.xiongBg,
+            tagText: _C.xiongText,
+            tagBorder: _C.xiongBorder,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildSingleColumn(List<GeJuResult> ji, List<GeJuResult> xiong) {
+    return Column(
+      children: [
+        _GeJuCard(
+          title: '政余喜格',
+          results: ji,
+          tagBg: _C.jiBg,
+          tagText: _C.jiText,
+          tagBorder: _C.jiBorder,
+        ),
+        const SizedBox(height: 20),
+        _GeJuCard(
+          title: '政余忌格',
+          results: xiong,
+          tagBg: _C.xiongBg,
+          tagText: _C.xiongText,
+          tagBorder: _C.xiongBorder,
+        ),
       ],
     );
   }
 }
 
-// ─── 装饰分割线 ───────────────────────────────────────────────────────────────
+// ─── Debug 工具栏 ─────────────────────────────────────────────────────────────
 
-class _OrnamentalDivider extends StatelessWidget {
-  final bool reversed;
-  const _OrnamentalDivider({this.reversed = false});
+class _GeJuDebugBar extends StatelessWidget {
+  final GeJuEvaluationSummary summary;
+
+  const _GeJuDebugBar({required this.summary});
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        if (!reversed) ...[
-          Expanded(
-            child: Divider(
-              color: _GeJuColors.gold.withOpacity(0.4),
-              thickness: 0.8,
-            ),
+    final vm = context.watch<QiZhengSiYuViewModel>();
+    final isOptimized = vm.geJuUsePreFilter;
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+      decoration: BoxDecoration(
+        color: const Color(0xFFF0F4FF),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: const Color(0xFFD0D8F0)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // ── 第一行：模式切换按钮 + 标签 ──
+          Row(
+            children: [
+              const Icon(Icons.bug_report, size: 16, color: Color(0xFF6366F1)),
+              const SizedBox(width: 6),
+              const Text(
+                'DEBUG',
+                style: TextStyle(
+                  fontSize: 11,
+                  fontWeight: FontWeight.w700,
+                  color: Color(0xFF6366F1),
+                  letterSpacing: 1.2,
+                ),
+              ),
+              const Spacer(),
+              _ModeChip(
+                label: 'Classic',
+                active: !isOptimized,
+                onTap: isOptimized ? () => vm.toggleGeJuPreFilter() : null,
+              ),
+              const SizedBox(width: 6),
+              _ModeChip(
+                label: 'Optimized',
+                active: isOptimized,
+                onTap: !isOptimized ? () => vm.toggleGeJuPreFilter() : null,
+              ),
+            ],
           ),
-          const SizedBox(width: 4),
-          Text('◆', style: TextStyle(fontSize: 8, color: _GeJuColors.gold)),
-          const SizedBox(width: 4),
-          Text('◇', style: TextStyle(fontSize: 6, color: _GeJuColors.gold)),
-        ] else ...[
-          Text('◇', style: TextStyle(fontSize: 6, color: _GeJuColors.gold)),
-          const SizedBox(width: 4),
-          Text('◆', style: TextStyle(fontSize: 8, color: _GeJuColors.gold)),
-          const SizedBox(width: 4),
-          Expanded(
-            child: Divider(
-              color: _GeJuColors.gold.withOpacity(0.4),
-              thickness: 0.8,
-            ),
+          const SizedBox(height: 8),
+
+          // ── 第二行：统计指标 ──
+          Wrap(
+            spacing: 12,
+            runSpacing: 4,
+            children: [
+              _StatBadge(
+                label: 'matched',
+                value: '${summary.matchedCount}/${summary.totalCount}',
+              ),
+              if (summary.evaluationDurationMs != null)
+                _StatBadge(
+                  label: 'time',
+                  value: '${summary.evaluationDurationMs}ms',
+                  highlight: true,
+                ),
+              _StatBadge(
+                label: 'preFilter',
+                value: '${summary.totalPreFilterRejected}',
+              ),
+              _StatBadge(
+                label: 'noCondition',
+                value: '${summary.totalConditionMissing}',
+              ),
+              if (summary.totalEvaluationErrors > 0)
+                _StatBadge(
+                  label: 'errors',
+                  value: '${summary.totalEvaluationErrors}',
+                  highlight: true,
+                ),
+            ],
           ),
         ],
-      ],
+      ),
     );
   }
 }
 
-// ─── 空状态 / 占位 ─────────────────────────────────────────────────────────────
+// ─── 模式选择胶囊 ────────────────────────────────────────────────────────────
 
-class _EmptyHint extends StatelessWidget {
-  final VoidCallback onTap;
-  const _EmptyHint({required this.onTap});
+class _ModeChip extends StatelessWidget {
+  final String label;
+  final bool active;
+  final VoidCallback? onTap;
+
+  const _ModeChip({
+    required this.label,
+    required this.active,
+    this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: Container(
-        height: 80,
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
         decoration: BoxDecoration(
+          color: active ? const Color(0xFF6366F1) : Colors.transparent,
+          borderRadius: BorderRadius.circular(100),
           border: Border.all(
-              color: _GeJuColors.gold.withOpacity(0.25), width: 0.8),
-          borderRadius: BorderRadius.circular(4),
+            color: active
+                ? const Color(0xFF6366F1)
+                : const Color(0xFFB0B8D0),
+          ),
         ),
-        alignment: Alignment.center,
         child: Text(
-          '点击「测算格局」以查看命盘中的吉凶格局',
+          label,
           style: TextStyle(
-            fontSize: 13,
-            color: _GeJuColors.inkFaint,
-            letterSpacing: 0.5,
+            fontSize: 12,
+            fontWeight: FontWeight.w600,
+            color: active ? Colors.white : const Color(0xFF6B7280),
           ),
         ),
       ),
@@ -229,351 +266,179 @@ class _EmptyHint extends StatelessWidget {
   }
 }
 
-class _LoadingPlaceholder extends StatelessWidget {
-  const _LoadingPlaceholder();
+// ─── 指标徽章 ─────────────────────────────────────────────────────────────────
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 80,
-      alignment: Alignment.center,
-      child: Text(
-        '正在推演格局…',
-        style: TextStyle(fontSize: 13, color: _GeJuColors.inkFaint),
-      ),
-    );
-  }
-}
+class _StatBadge extends StatelessWidget {
+  final String label;
+  final String value;
+  final bool highlight;
 
-// ─── 结果主体 ─────────────────────────────────────────────────────────────────
-
-class _ResultBody extends StatelessWidget {
-  final GeJuEvaluationSummary summary;
-  const _ResultBody({required this.summary});
-
-  @override
-  Widget build(BuildContext context) {
-    final ji = summary.matchedAuspiciousPatterns;
-    final xiong = summary.matchedInauspiciousPatterns;
-
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Expanded(
-          child: _GeJuGroupCard(
-            title: '吉  格',
-            count: ji.length,
-            results: ji,
-            primaryColor: _GeJuColors.jiPrimary,
-            accentColor: _GeJuColors.jiAccent,
-            lightColor: _GeJuColors.jiLight,
-            borderColor: _GeJuColors.jiBorder,
-            badgeColor: _GeJuColors.jiAccent,
-            headerIcon: '☽',
-          ),
-        ),
-        const SizedBox(width: 10),
-        Expanded(
-          child: _GeJuGroupCard(
-            title: '凶  格',
-            count: xiong.length,
-            results: xiong,
-            primaryColor: _GeJuColors.xiongPrimary,
-            accentColor: _GeJuColors.xiongAccent,
-            lightColor: _GeJuColors.xiongLight,
-            borderColor: _GeJuColors.xiongBorder,
-            badgeColor: _GeJuColors.xiongAccent,
-            headerIcon: '☿',
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-// ─── 吉/凶 分组 Card ──────────────────────────────────────────────────────────
-
-class _GeJuGroupCard extends StatelessWidget {
-  final String title;
-  final int count;
-  final List<GeJuResult> results;
-  final Color primaryColor;
-  final Color accentColor;
-  final Color lightColor;
-  final Color borderColor;
-  final Color badgeColor;
-  final String headerIcon;
-
-  const _GeJuGroupCard({
-    required this.title,
-    required this.count,
-    required this.results,
-    required this.primaryColor,
-    required this.accentColor,
-    required this.lightColor,
-    required this.borderColor,
-    required this.badgeColor,
-    required this.headerIcon,
+  const _StatBadge({
+    required this.label,
+    required this.value,
+    this.highlight = false,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 0,
-      clipBehavior: Clip.antiAlias,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(6),
-        side: BorderSide(color: borderColor.withOpacity(0.45), width: 1),
-      ),
-      color: lightColor,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+    return RichText(
+      text: TextSpan(
+        style: const TextStyle(fontSize: 12, fontFamily: 'monospace'),
         children: [
-          // ── Header ──
-          Container(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-            decoration: BoxDecoration(
-              color: primaryColor,
-              // 顶部细线
-              border: Border(
-                top: BorderSide(color: _GeJuColors.gold, width: 1.5),
-              ),
+          TextSpan(
+            text: '$label ',
+            style: const TextStyle(color: Color(0xFF9CA3AF)),
+          ),
+          TextSpan(
+            text: value,
+            style: TextStyle(
+              color: highlight
+                  ? const Color(0xFF6366F1)
+                  : const Color(0xFF374151),
+              fontWeight: FontWeight.w600,
             ),
-            child: Row(
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// ─── 格局卡片 ────────────────────────────────────────────────────────────────
+
+class _GeJuCard extends StatelessWidget {
+  final String title;
+  final List<GeJuResult> results;
+  final Color tagBg;
+  final Color tagText;
+  final Color tagBorder;
+
+  const _GeJuCard({
+    required this.title,
+    required this.results,
+    required this.tagBg,
+    required this.tagText,
+    required this.tagBorder,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: _C.cardBg,
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: const [
+          BoxShadow(
+            color: Color(0x0D000000),
+            blurRadius: 25,
+            offset: Offset(0, 10),
+            spreadRadius: -5,
+          ),
+          BoxShadow(
+            color: Color(0x0D000000),
+            blurRadius: 10,
+            offset: Offset(0, 8),
+            spreadRadius: -6,
+          ),
+        ],
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // ── 标题行：标题 + 数量徽章 ──
+            Row(
               children: [
-                Text(headerIcon,
-                    style: const TextStyle(
-                        fontSize: 14,
-                        color: Colors.white70,
-                        fontWeight: FontWeight.w300)),
-                const SizedBox(width: 6),
                 Text(
                   title,
                   style: const TextStyle(
-                    fontSize: 14,
+                    fontSize: 17,
                     fontWeight: FontWeight.w700,
-                    color: Colors.white,
-                    letterSpacing: 2,
+                    color: _C.textMain,
+                    letterSpacing: -0.3,
                   ),
                 ),
                 const Spacer(),
                 Container(
                   padding: const EdgeInsets.symmetric(
-                      horizontal: 7, vertical: 1),
+                      horizontal: 10, vertical: 2),
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.18),
-                    borderRadius: BorderRadius.circular(10),
+                    color: _C.badgeBg,
+                    borderRadius: BorderRadius.circular(12),
                   ),
                   child: Text(
-                    '$count',
+                    '${results.length} 项',
                     style: const TextStyle(
-                        fontSize: 12,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600),
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
+                      color: _C.textMuted,
+                    ),
                   ),
                 ),
               ],
             ),
-          ),
+            const SizedBox(height: 14),
+            const Divider(height: 1, color: _C.dividerColor),
+            const SizedBox(height: 18),
 
-          // ── Body ──
-          if (results.isEmpty)
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 24, horizontal: 12),
-              child: Text(
-                count == 0 ? '本命盘中无此类格局' : '加载中…',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    fontSize: 12,
-                    color: primaryColor.withOpacity(0.5),
-                    letterSpacing: 0.5),
+            // ── 标签云（Wrap 自适应每行）──
+            if (results.isEmpty)
+              Text(
+                '（无）',
+                style: TextStyle(fontSize: 13, color: _C.textMuted),
+              )
+            else
+              Wrap(
+                spacing: 10,
+                runSpacing: 10,
+                children: results.map((r) {
+                  return _GeJuTag(
+                    name: r.patternName,
+                    bgColor: tagBg,
+                    textColor: tagText,
+                    borderColor: tagBorder,
+                  );
+                }).toList(),
               ),
-            )
-          else
-            ...results.asMap().entries.map((entry) {
-              final idx = entry.key;
-              final result = entry.value;
-              return Column(
-                children: [
-                  if (idx > 0)
-                    Divider(
-                      height: 1,
-                      thickness: 0.5,
-                      color: borderColor.withOpacity(0.25),
-                      indent: 10,
-                      endIndent: 10,
-                    ),
-                  _GeJuItemCard(
-                    result: result,
-                    accentColor: accentColor,
-                    primaryColor: primaryColor,
-                  ),
-                ],
-              );
-            }),
-        ],
-      ),
-    );
-  }
-}
-
-// ─── 单条格局 Item ────────────────────────────────────────────────────────────
-
-class _GeJuItemCard extends StatelessWidget {
-  final GeJuResult result;
-  final Color accentColor;
-  final Color primaryColor;
-
-  const _GeJuItemCard({
-    required this.result,
-    required this.accentColor,
-    required this.primaryColor,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 9),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // ── 名称行 ──
-          Row(
-            children: [
-              Expanded(
-                child: Text(
-                  result.patternName,
-                  style: TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.w700,
-                    color: primaryColor,
-                    letterSpacing: 0.5,
-                  ),
-                ),
-              ),
-              const SizedBox(width: 6),
-              _JiXiongBadge(
-                  jiXiong: result.jiXiong, baseColor: accentColor),
-            ],
-          ),
-
-          // ── 描述 ──
-          if (result.description.isNotEmpty) ...[
-            const SizedBox(height: 4),
-            Text(
-              result.description,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                fontSize: 11,
-                color: _GeJuColors.inkLight,
-                height: 1.5,
-              ),
-            ),
           ],
-
-          // ── 格局类型 + 出处 ──
-          const SizedBox(height: 5),
-          Row(
-            children: [
-              _GeJuTypeBadge(
-                  type: result.geJuType, baseColor: accentColor),
-              const Spacer(),
-              if (result.source.isNotEmpty)
-                Text(
-                  result.source,
-                  style: TextStyle(
-                    fontSize: 10,
-                    color: _GeJuColors.inkFaint,
-                    letterSpacing: 0.3,
-                  ),
-                ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-// ─── 吉凶 Badge ───────────────────────────────────────────────────────────────
-
-class _JiXiongBadge extends StatelessWidget {
-  final JiXiongEnum jiXiong;
-  final Color baseColor;
-
-  const _JiXiongBadge({required this.jiXiong, required this.baseColor});
-
-  @override
-  Widget build(BuildContext context) {
-    final label = jiXiong.name; // 中文字符，来自 const JiXiongEnum(this.name)
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
-      decoration: BoxDecoration(
-        color: baseColor,
-        borderRadius: BorderRadius.circular(3),
-      ),
-      child: Text(
-        label,
-        style: const TextStyle(
-          fontSize: 10,
-          color: Colors.white,
-          fontWeight: FontWeight.w600,
-          letterSpacing: 0.5,
         ),
       ),
     );
   }
 }
 
-// ─── 格局类型 Badge ────────────────────────────────────────────────────────────
+// ─── 胶囊标签 ────────────────────────────────────────────────────────────────
 
-class _GeJuTypeBadge extends StatelessWidget {
-  final GeJuType type;
-  final Color baseColor;
+class _GeJuTag extends StatelessWidget {
+  final String name;
+  final Color bgColor;
+  final Color textColor;
+  final Color borderColor;
 
-  const _GeJuTypeBadge({required this.type, required this.baseColor});
-
-  static String _label(GeJuType t) {
-    switch (t) {
-      case GeJuType.gui:
-        return '贵';
-      case GeJuType.fu:
-        return '富';
-      case GeJuType.pin:
-        return '贫';
-      case GeJuType.jian:
-        return '贱';
-      case GeJuType.yao:
-        return '夭';
-      case GeJuType.shou:
-        return '寿';
-      case GeJuType.xian:
-        return '贤';
-      case GeJuType.yu:
-        return '愚';
-      case GeJuType.other:
-        return '其';
-    }
-  }
+  const _GeJuTag({
+    required this.name,
+    required this.bgColor,
+    required this.textColor,
+    required this.borderColor,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 1),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 7),
       decoration: BoxDecoration(
-        color: baseColor.withOpacity(0.12),
-        borderRadius: BorderRadius.circular(3),
-        border: Border.all(color: baseColor.withOpacity(0.35), width: 0.7),
+        color: bgColor,
+        borderRadius: BorderRadius.circular(100),
+        border: Border.all(color: borderColor, width: 1),
       ),
       child: Text(
-        _label(type),
+        name,
         style: TextStyle(
-          fontSize: 10,
-          color: baseColor,
+          fontSize: 13.5,
           fontWeight: FontWeight.w500,
+          color: textColor,
         ),
       ),
     );

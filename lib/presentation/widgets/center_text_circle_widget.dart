@@ -168,15 +168,15 @@ class CenterTextCircleWidget extends StatelessWidget {
   /// 将度数转换为字符串格式
   Tuple2<String, String?> _toStringDegree(double degree) {
     var mingGongDegree = degree.toString();
-    List<String> _tmpList = mingGongDegree.split(".");
-    var mingGongDegreeFirstPart = _tmpList[0];
+    List<String> tmpList = mingGongDegree.split(".");
+    var mingGongDegreeFirstPart = tmpList[0];
     String? mingGongDegreeSecondPar;
-    if (_tmpList.length > 1) {
-      mingGongDegreeFirstPart = _tmpList[0] + ".";
-      mingGongDegreeSecondPar = _tmpList[1] + "°";
+    if (tmpList.length > 1) {
+      mingGongDegreeFirstPart = tmpList[0] + ".";
+      mingGongDegreeSecondPar = tmpList[1] + "°";
       return Tuple2(mingGongDegreeFirstPart, mingGongDegreeSecondPar);
     } else {
-      mingGongDegreeFirstPart = _tmpList[0] + "°";
+      mingGongDegreeFirstPart = tmpList[0] + "°";
       return Tuple2(mingGongDegreeFirstPart, null);
     }
   }

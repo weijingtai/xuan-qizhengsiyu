@@ -24,6 +24,20 @@ class CoordinateConverter {
     return [degrees, minutes, seconds];
   }
 
+  /// 格式化为 DMS 字符串
+  ///
+  /// 经度示例: 104.07 → "104E04'12"
+  /// 纬度示例: 30.67 → "30N40'12"
+  static String formatDms(double decimalDegrees, {required bool isLongitude}) {
+    final dms = ddToDms(decimalDegrees.abs());
+    final dir = isLongitude
+        ? (decimalDegrees >= 0 ? 'E' : 'W')
+        : (decimalDegrees >= 0 ? 'N' : 'S');
+    return '${dms[0].toInt()}$dir'
+        "${dms[1].toInt().toString().padLeft(2, '0')}'"
+        '${dms[2].toDouble().round().toString().padLeft(2, '0')}';
+  }
+
   /// 将度、分、秒 (DMS) 转换为十进制度数 (DD)
   ///
   /// [degrees] 度数 (int)。可以为负数表示南纬或西经

@@ -1,13 +1,10 @@
-import 'dart:io';
 import 'dart:math' as math;
 
 import 'package:common/module.dart';
 import 'package:flutter/material.dart';
 import 'package:qizhengsiyu/enums/enum_twelve_gong.dart';
-import 'package:tuple/tuple.dart';
 
 import 'enum_ring_text_direction.dart';
-import 'sector_painter.dart';
 import 'da_xian_ring_painter.dart';
 
 class DaXianRing extends StatelessWidget {

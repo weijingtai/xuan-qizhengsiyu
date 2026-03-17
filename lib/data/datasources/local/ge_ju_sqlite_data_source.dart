@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:common/enums.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:qizhengsiyu/data/datasources/local/ge_ju_builtin_database.dart';
 import 'package:qizhengsiyu/data/datasources/local/ge_ju_local_data_source.dart';
@@ -102,7 +103,10 @@ class GeJuSQLiteDataSource implements GeJuBuiltInDataSource {
         try {
           conditions = GeJuCondition.fromJson(
               jsonDecode(row.conditions!) as Map<String, dynamic>);
-        } catch (_) {}
+        } catch (e) {
+          debugPrint('GeJu: failed to parse conditions for rule ${row.patternId} '
+              '(builtin_cs_${row.id}): $e');
+        }
       }
       return GeJuConditionSet(
         id: 'builtin_cs_${row.id}',

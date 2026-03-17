@@ -211,7 +211,7 @@ class ShenShaRingV2 extends StatelessWidget {
                     ((30 - baseAngleOffset) * math.pi / 180),
             // angle: textRotation,
             child: apper
-                ? Container(
+                ? SizedBox(
                     width: holderSize,
                     height: holderSize,
                     child: (index == 0)

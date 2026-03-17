@@ -12,12 +12,12 @@ class PanelWidget extends StatelessWidget {
   final Widget child;
 
   const PanelWidget({
-    Key? key,
+    super.key,
     required this.canvasSize,
     required this.child,
     this.rotationDeg = 0,
     this.padding,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

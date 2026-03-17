@@ -1,4 +1,5 @@
 /// 数据模型扩展，添加转换方法
+library;
 
 import 'package:drift/drift.dart';
 import 'package:companion_system/database/drift_database.dart';

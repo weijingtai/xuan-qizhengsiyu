@@ -1,4 +1,5 @@
 /// School管理页面
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -42,14 +43,14 @@ class _SchoolManagementPageState extends State<SchoolManagementPage> {
 
   Future<void> _deleteSchool(String schoolId) async {
     try {
-      await (_db.delete(_db.geJuSchools)
-            ..where((s) => s.id.equals(schoolId)))
-          .go();
+      await (_db.delete(
+        _db.geJuSchools,
+      )..where((s) => s.id.equals(schoolId))).go();
       await _loadSchools();
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('删除成功')),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(const SnackBar(content: Text('删除成功')));
       }
     } catch (e) {
       print('删除失败: $e');
@@ -86,10 +87,7 @@ class _SchoolManagementPageState extends State<SchoolManagementPage> {
         title: const Text('School管理'),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         actions: [
-          IconButton(
-            icon: const Icon(Icons.refresh),
-            onPressed: _loadSchools,
-          ),
+          IconButton(icon: const Icon(Icons.refresh), onPressed: _loadSchools),
         ],
       ),
       body: _isLoading
@@ -116,11 +114,16 @@ class _SchoolManagementPageState extends State<SchoolManagementPage> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(Icons.school_outlined,
-                                  size: 64, color: Colors.grey[400]),
+                              Icon(
+                                Icons.school_outlined,
+                                size: 64,
+                                color: Colors.grey[400],
+                              ),
                               const SizedBox(height: 16),
-                              Text('暂无流派数据',
-                                  style: Theme.of(context).textTheme.titleMedium),
+                              Text(
+                                '暂无流派数据',
+                                style: Theme.of(context).textTheme.titleMedium,
+                              ),
                             ],
                           ),
                         )
@@ -136,28 +139,40 @@ class _SchoolManagementPageState extends State<SchoolManagementPage> {
 
                             return Card(
                               margin: const EdgeInsets.symmetric(
-                                  horizontal: 8, vertical: 4),
+                                horizontal: 8,
+                                vertical: 4,
+                              ),
                               child: ListTile(
-                                leading: Icon(Icons.school,
-                                    color: Theme.of(context).primaryColor),
-                                title: Text(school.name,
-                                    style: const TextStyle(
-                                        fontWeight: FontWeight.bold)),
+                                leading: Icon(
+                                  Icons.school,
+                                  color: Theme.of(context).primaryColor,
+                                ),
+                                title: Text(
+                                  school.name,
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
                                 subtitle: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     const SizedBox(height: 4),
-                                    Text('类型: ${school.type}',
-                                        style: const TextStyle(fontSize: 12)),
                                     Text(
-                                        '时代: ${school.era ?? "未设置"}',
-                                        style: const TextStyle(fontSize: 12)),
+                                      '类型: ${school.type}',
+                                      style: const TextStyle(fontSize: 12),
+                                    ),
                                     Text(
-                                        '创始人: ${school.founder ?? "未设置"}',
-                                        style: const TextStyle(fontSize: 12)),
+                                      '时代: ${school.era ?? "未设置"}',
+                                      style: const TextStyle(fontSize: 12),
+                                    ),
                                     Text(
-                                        '规则数: ${school.ruleCount}',
-                                        style: const TextStyle(fontSize: 12)),
+                                      '创始人: ${school.founder ?? "未设置"}',
+                                      style: const TextStyle(fontSize: 12),
+                                    ),
+                                    Text(
+                                      '规则数: ${school.ruleCount}',
+                                      style: const TextStyle(fontSize: 12),
+                                    ),
                                   ],
                                 ),
                                 trailing: SizedBox(
@@ -166,25 +181,36 @@ class _SchoolManagementPageState extends State<SchoolManagementPage> {
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
                                       IconButton(
-                                        icon: const Icon(Icons.edit,
-                                            size: 20, color: Colors.blue),
+                                        icon: const Icon(
+                                          Icons.edit,
+                                          size: 20,
+                                          color: Colors.blue,
+                                        ),
                                         onPressed: () async {
                                           final saved =
                                               await Navigator.push<bool>(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (_) => SchoolFormPage(
-                                                  db: _db, school: school),
-                                            ),
-                                          );
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (_) =>
+                                                      SchoolFormPage(
+                                                        db: _db,
+                                                        school: school,
+                                                      ),
+                                                ),
+                                              );
                                           if (saved == true) _loadSchools();
                                         },
                                       ),
                                       IconButton(
-                                        icon: const Icon(Icons.delete,
-                                            size: 20, color: Colors.red),
-                                        onPressed: () =>
-                                            _showDeleteDialog(school.id, school.name),
+                                        icon: const Icon(
+                                          Icons.delete,
+                                          size: 20,
+                                          color: Colors.red,
+                                        ),
+                                        onPressed: () => _showDeleteDialog(
+                                          school.id,
+                                          school.name,
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -200,9 +226,7 @@ class _SchoolManagementPageState extends State<SchoolManagementPage> {
         onPressed: () async {
           final saved = await Navigator.push<bool>(
             context,
-            MaterialPageRoute(
-              builder: (_) => SchoolFormPage(db: _db),
-            ),
+            MaterialPageRoute(builder: (_) => SchoolFormPage(db: _db)),
           );
           if (saved == true) _loadSchools();
         },

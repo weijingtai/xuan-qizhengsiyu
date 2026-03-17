@@ -5,27 +5,27 @@ import 'package:qizhengsiyu/theme/app_theme.dart';
 class WaterInkCard extends StatefulWidget {
   /// 卡片标题
   final String title;
-  
+
   /// 卡片内容
   final Widget child;
-  
+
   /// 是否选中
   final bool isSelected;
-  
+
   /// 点击回调
   final VoidCallback? onTap;
-  
+
   /// 卡片图标
   final IconData? icon;
 
   const WaterInkCard({
-    Key? key,
+    super.key,
     required this.title,
     required this.child,
     this.isSelected = false,
     this.onTap,
     this.icon,
-  }) : super(key: key);
+  });
 
   @override
   State<WaterInkCard> createState() => _WaterInkCardState();
@@ -51,16 +51,15 @@ class _WaterInkCardState extends State<WaterInkCard> {
             ),
             borderRadius: BorderRadius.circular(AppTheme.borderRadius),
             border: Border.all(
-              color: widget.isSelected 
-                  ? AppTheme.primaryColor 
-                  : _isHovering 
-                      ? AppTheme.primaryColor.withOpacity(0.5) 
+              color: widget.isSelected
+                  ? AppTheme.primaryColor
+                  : _isHovering
+                      ? AppTheme.primaryColor.withOpacity(0.5)
                       : Colors.transparent,
               width: widget.isSelected ? 3 : 1,
             ),
-            boxShadow: _isHovering || widget.isSelected
-                ? AppTheme.cardShadow
-                : null,
+            boxShadow:
+                _isHovering || widget.isSelected ? AppTheme.cardShadow : null,
           ),
           padding: const EdgeInsets.all(AppTheme.spacing16),
           child: Column(
@@ -71,15 +70,15 @@ class _WaterInkCardState extends State<WaterInkCard> {
                   if (widget.icon != null)
                     AnimatedContainer(
                       duration: const Duration(milliseconds: 200),
-                      transform: _isHovering 
-                          ? Matrix4.diagonal3Values(1.1, 1.1, 1) 
+                      transform: _isHovering
+                          ? Matrix4.diagonal3Values(1.1, 1.1, 1)
                           : Matrix4.identity(),
                       transformAlignment: Alignment.center,
                       child: Icon(
                         widget.icon,
                         size: 32,
-                        color: widget.isSelected 
-                            ? AppTheme.primaryColor 
+                        color: widget.isSelected
+                            ? AppTheme.primaryColor
                             : AppTheme.primaryText,
                       ),
                     ),
@@ -87,11 +86,12 @@ class _WaterInkCardState extends State<WaterInkCard> {
                   Expanded(
                     child: Text(
                       widget.title,
-                      style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                        color: widget.isSelected 
-                            ? AppTheme.primaryColor 
-                            : AppTheme.primaryText,
-                      ),
+                      style:
+                          Theme.of(context).textTheme.displayMedium?.copyWith(
+                                color: widget.isSelected
+                                    ? AppTheme.primaryColor
+                                    : AppTheme.primaryText,
+                              ),
                     ),
                   ),
                 ],

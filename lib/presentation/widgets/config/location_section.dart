@@ -12,10 +12,10 @@ class LocationSection extends StatefulWidget {
   final Address? initialLocation;
 
   const LocationSection({
-    Key? key,
+    super.key,
     required this.onLocationChanged,
     this.initialLocation,
-  }) : super(key: key);
+  });
 
   @override
   State<LocationSection> createState() => _LocationSectionState();
@@ -157,7 +157,7 @@ class _LocationSectionState extends State<LocationSection> {
                   _updateLocation();
                 },
                 contentPadding: EdgeInsets.zero,
-                activeColor: AppTheme.primaryColor,
+                activeThumbColor: AppTheme.primaryColor,
               ),
 
               // 真太阳时选项
@@ -172,7 +172,7 @@ class _LocationSectionState extends State<LocationSection> {
                   _updateLocation();
                 },
                 contentPadding: EdgeInsets.zero,
-                activeColor: AppTheme.primaryColor,
+                activeThumbColor: AppTheme.primaryColor,
               ),
 
               if (_isTrueSolarTime)

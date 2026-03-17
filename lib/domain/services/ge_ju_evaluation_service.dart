@@ -1,4 +1,5 @@
 import 'package:common/enums.dart';
+import 'package:flutter/foundation.dart';
 import 'package:qizhengsiyu/domain/entities/models/base_panel_model.dart';
 import 'package:qizhengsiyu/domain/entities/models/eleven_stars_info.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_input.dart';
@@ -6,6 +7,7 @@ import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_result.dart';
 import 'package:qizhengsiyu/domain/managers/ge_ju/ge_ju_evaluator.dart';
 import 'package:qizhengsiyu/domain/managers/ge_ju/ge_ju_input_builder.dart';
 import 'package:qizhengsiyu/domain/repositories/ge_ju_repository.dart';
+import 'package:qizhengsiyu/enums/enum_panel_system_type.dart';
 import 'package:qizhengsiyu/enums/enum_twelve_gong.dart';
 
 /// 格局评估服务
@@ -15,8 +17,19 @@ import 'package:qizhengsiyu/enums/enum_twelve_gong.dart';
 class GeJuEvaluationService {
   final IGeJuRepository _repository;
 
+  /// 组装好的规则数据缓存（避免每次评估重复加载）
+  List<RuleEvaluationData>? _assembledRuleDataCache;
+
+  /// 是否启用预过滤器（debug 用，可运行时切换）
+  bool usePreFilter = true;
+
   GeJuEvaluationService({required IGeJuRepository repository})
       : _repository = repository;
+
+  /// 使缓存失效（CRUD 操作后调用）
+  void invalidateRuleDataCache() {
+    _assembledRuleDataCache = null;
+  }
 
   /// 评估命盘格局
   ///
@@ -48,11 +61,18 @@ class GeJuEvaluationService {
 
     final ruleData = await _assembleRuleData();
 
-    return GeJuEvaluator.evaluateWithConditionSets(
+    final sw = Stopwatch()..start();
+    final summary = GeJuEvaluator.evaluateWithConditionSets(
       input: input,
       ruleData: ruleData,
       onlyMatched: onlyMatched,
+      usePreFilter: usePreFilter,
     );
+    sw.stop();
+
+    final timed = summary.withTiming(sw.elapsedMilliseconds);
+    _printEvaluationSummary('NatalChart', timed);
+    return timed;
   }
 
   /// 评估行限格局
@@ -84,11 +104,18 @@ class GeJuEvaluationService {
 
     final ruleData = await _assembleRuleData();
 
-    return GeJuEvaluator.evaluateWithConditionSets(
+    final sw = Stopwatch()..start();
+    final summary = GeJuEvaluator.evaluateWithConditionSets(
       input: input,
       ruleData: ruleData,
       onlyMatched: onlyMatched,
+      usePreFilter: usePreFilter,
     );
+    sw.stop();
+
+    final timed = summary.withTiming(sw.elapsedMilliseconds);
+    _printEvaluationSummary('XingXian', timed);
+    return timed;
   }
 
   /// 使用已构建好的 [GeJuInput] 直接评估（高级用法）
@@ -106,25 +133,35 @@ class GeJuEvaluationService {
 
   // ── 内部辅助 ────────────────────────────────────────────────────────────
 
+  /// 输出评估汇总日志
+  void _printEvaluationSummary(String label, GeJuEvaluationSummary summary) {
+    final mode = usePreFilter ? 'optimized' : 'classic';
+    debugPrint('GeJu[$label|$mode] ${summary.matchedCount}/${summary.totalCount} matched '
+        '| preFilterRejected=${summary.totalPreFilterRejected} '
+        '| conditionMissing=${summary.totalConditionMissing} '
+        '| errors=${summary.totalEvaluationErrors} '
+        '| scopeSkipped=${summary.totalScopeSkipped} '
+        '| ${summary.evaluationDurationMs}ms');
+  }
+
   /// 从 Repository 加载所有规则及其关联数据，组装为评估所需的 [RuleEvaluationData] 列表。
   ///
-  /// 并发加载每个规则的 ConditionSets 和 Annotations，充分利用 Repository 内置缓存。
+  /// 使用批量加载 + 缓存，避免 N 次逐条查询。
   Future<List<RuleEvaluationData>> _assembleRuleData() async {
+    if (_assembledRuleDataCache != null) return _assembledRuleDataCache!;
+
     final rules = await _repository.loadAllRules();
+    final csMap = await _repository.loadAllConditionSetsGrouped();
+    final annMap = await _repository.loadAllAnnotationsGrouped();
 
-    final ruleDataList = await Future.wait(
-      rules.map((rule) async {
-        final conditionSets =
-            await _repository.getConditionSetsForRule(rule.id);
-        final annotations = await _repository.getAnnotationsForRule(rule.id);
-        return RuleEvaluationData(
-          rule: rule,
-          conditionSets: conditionSets,
-          annotations: annotations,
-        );
-      }),
-    );
+    _assembledRuleDataCache = rules.map((rule) {
+      return RuleEvaluationData(
+        rule: rule,
+        conditionSets: csMap[rule.id] ?? [],
+        annotations: annMap[rule.id] ?? [],
+      );
+    }).toList();
 
-    return ruleDataList;
+    return _assembledRuleDataCache!;
   }
 }

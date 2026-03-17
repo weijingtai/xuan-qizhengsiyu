@@ -5,6 +5,30 @@ import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_condition_set.dar
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_variant.dart';
 import 'ge_ju_rule.dart';
 
+/// 格局评估状态
+enum GeJuEvaluationStatus {
+  /// 条件评估通过
+  matched,
+
+  /// 条件评估不通过
+  unmatched,
+
+  /// 无 ConditionSet（规则没有关联的条件集）
+  conditionSetMissing,
+
+  /// ConditionSet 存在但 conditions 为 null
+  conditionMissing,
+
+  /// 条件评估抛异常
+  evaluationError,
+
+  /// scope 不适用（如本命盘跳过行限规则）
+  scopeSkipped,
+
+  /// 预过滤器判定条件不可能满足（快速跳过，未进入完整 evaluate）
+  preFilterRejected,
+}
+
 /// 格局判断结果模型
 /// 代表一个格局规则对命盘的评估结果
 class GeJuResult {
@@ -41,6 +65,9 @@ class GeJuResult {
   /// 匹配的 ConditionSet ID（新模型）
   final String? conditionSetId;
 
+  /// 评估状态（区分"不匹配"与"无法评估"等情形）
+  final GeJuEvaluationStatus evaluationStatus;
+
   GeJuResult({
     required this.patternId,
     required this.patternName,
@@ -53,6 +80,7 @@ class GeJuResult {
     this.matchedConditionDescriptions = const [],
     this.matchSchools = const [],
     this.conditionSetId,
+    this.evaluationStatus = GeJuEvaluationStatus.unmatched,
   });
 
   /// 从 GeJuRule 和匹配状态创建结果 (Legacy support)
@@ -108,6 +136,7 @@ class GeJuResult {
     GeJuAnnotation? annotation,
     required bool matched,
     List<String> matchedConditionDescriptions = const [],
+    GeJuEvaluationStatus evaluationStatus = GeJuEvaluationStatus.unmatched,
   }) {
     return GeJuResult(
       patternId: rule.id,
@@ -121,6 +150,7 @@ class GeJuResult {
       matchedConditionDescriptions: matchedConditionDescriptions,
       matchSchools: cs.schools ?? [],
       conditionSetId: cs.id,
+      evaluationStatus: evaluationStatus,
     );
   }
 
@@ -137,6 +167,7 @@ class GeJuResult {
       'matchedConditionDescriptions': matchedConditionDescriptions,
       'matchSchools': matchSchools,
       if (conditionSetId != null) 'conditionSetId': conditionSetId,
+      'evaluationStatus': evaluationStatus.name,
     };
   }
 
@@ -155,10 +186,23 @@ class GeJuEvaluationSummary {
   /// 评估时间
   final DateTime evaluatedAt;
 
+  /// 评估耗时（毫秒），null 表示未计时
+  final int? evaluationDurationMs;
+
   GeJuEvaluationSummary({
     required this.allResults,
     DateTime? evaluatedAt,
+    this.evaluationDurationMs,
   }) : evaluatedAt = evaluatedAt ?? DateTime.now();
+
+  /// 附加计时信息，返回新实例
+  GeJuEvaluationSummary withTiming(int durationMs) {
+    return GeJuEvaluationSummary(
+      allResults: allResults,
+      evaluatedAt: evaluatedAt,
+      evaluationDurationMs: durationMs,
+    );
+  }
 
   /// 获取所有匹配的格局
   List<GeJuResult> get matchedPatterns =>
@@ -187,10 +231,41 @@ class GeJuEvaluationSummary {
   /// 总评估数量
   int get totalCount => allResults.length;
 
+  /// 条件缺失数量（ConditionSet 存在但 conditions 为 null）
+  int get totalConditionMissing => allResults
+      .where((r) => r.evaluationStatus == GeJuEvaluationStatus.conditionMissing)
+      .length;
+
+  /// ConditionSet 缺失数量
+  int get totalConditionSetMissing => allResults
+      .where((r) => r.evaluationStatus == GeJuEvaluationStatus.conditionSetMissing)
+      .length;
+
+  /// 评估错误数量
+  int get totalEvaluationErrors => allResults
+      .where((r) => r.evaluationStatus == GeJuEvaluationStatus.evaluationError)
+      .length;
+
+  /// Scope 跳过数量
+  int get totalScopeSkipped => allResults
+      .where((r) => r.evaluationStatus == GeJuEvaluationStatus.scopeSkipped)
+      .length;
+
+  /// 预过滤器拒绝数量（条件不可能满足，快速跳过）
+  int get totalPreFilterRejected => allResults
+      .where((r) => r.evaluationStatus == GeJuEvaluationStatus.preFilterRejected)
+      .length;
+
   Map<String, dynamic> toJson() {
     return {
       'totalCount': totalCount,
       'matchedCount': matchedCount,
+      'totalConditionMissing': totalConditionMissing,
+      'totalConditionSetMissing': totalConditionSetMissing,
+      'totalEvaluationErrors': totalEvaluationErrors,
+      'totalScopeSkipped': totalScopeSkipped,
+      'totalPreFilterRejected': totalPreFilterRejected,
+      if (evaluationDurationMs != null) 'evaluationDurationMs': evaluationDurationMs,
       'evaluatedAt': evaluatedAt.toIso8601String(),
       'matchedPatterns': matchedPatterns.map((r) => r.toJson()).toList(),
     };

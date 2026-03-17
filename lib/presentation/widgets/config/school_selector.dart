@@ -12,10 +12,10 @@ class SchoolSelector extends StatelessWidget {
   final Function(EnumSchoolType) onSchoolSelected;
 
   const SchoolSelector({
-    Key? key,
+    super.key,
     required this.selectedSchool,
     required this.onSchoolSelected,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新国风 · 墨韵印记 UI</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&display=swap');
+
+        :root {
+            --paper-white: #f4f1ea;     /* 老宣纸色 */
+            --ink-black: #1a1a1a;       /* 浓墨 */
+            --seal-red: #b22822;        /* 朱砂 */
+            --jade-green: #3a5a40;      /* 石绿 */
+            --border-gold: #c5b358;     /* 描金 */
+            --bg-texture: radial-gradient(circle, #e6e2d3 1px, transparent 1px);
+        }
+
+        body {
+            background-color: var(--paper-white);
+            background-image: var(--bg-texture);
+            background-size: 40px 40px;
+            font-family: 'Noto Serif SC', serif;
+            color: var(--ink-black);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+            width: 90%;
+            max-width: 1000px;
+            padding: 40px;
+        }
+
+        /* 核心版面设计 */
+        .section-box {
+            position: relative;
+            background: rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(197, 179, 88, 0.3);
+            padding: 50px 60px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.05);
+            display: flex;
+            gap: 40px;
+        }
+
+        /* 装饰性的边角回纹 */
+        .section-box::before {
+            content: "﹃";
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: var(--border-gold);
+            font-size: 24px;
+        }
+
+        .section-box::after {
+            content: "﹄";
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            color: var(--border-gold);
+            font-size: 24px;
+        }
+
+        /* 侧边标题区：竖排文字增强国风感 */
+        .title-aside {
+            writing-mode: vertical-rl;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            border-left: 1px solid var(--border-gold);
+            padding-left: 20px;
+        }
+
+        .title-main {
+            font-size: 2rem;
+            font-weight: 900;
+            letter-spacing: 8px;
+            color: var(--ink-black);
+        }
+
+        /* 数量统计：印章效果 */
+        .count-seal {
+            writing-mode: horizontal-tb;
+            width: 36px;
+            height: 36px;
+            background: var(--seal-red);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+            font-weight: 700;
+            border-radius: 4px;
+            box-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .count-seal::after {
+            content: "计";
+            position: absolute;
+            bottom: -20px;
+            font-size: 10px;
+            color: var(--seal-red);
+            font-weight: bold;
+        }
+
+        /* 标签显示区 */
+        .content-area {
+            flex: 1;
+            display: flex;
+            flex-wrap: wrap;
+            align-content: flex-start;
+            gap: 15px;
+        }
+
+        .tag-item {
+            position: relative;
+            padding: 8px 20px;
+            background: transparent;
+            border-bottom: 2px solid #ddd; /* 类似信笺下划线 */
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* 喜格：竹绿墨韵 */
+        .pos-section .tag-item { color: var(--jade-green); border-bottom-color: rgba(58, 90, 64, 0.2); }
+        .pos-section .tag-item:hover {
+            color: #fff;
+            background: var(--jade-green);
+            transform: skew(-5deg); /* 微微倾斜模仿笔触 */
+            box-shadow: 5px 5px 0px rgba(58, 90, 64, 0.1);
+        }
+
+        /* 忌格：朱砂墨韵 */
+        .neg-section .tag-item { color: var(--seal-red); border-bottom-color: rgba(178, 40, 34, 0.2); }
+        .neg-section .tag-item:hover {
+            color: #fff;
+            background: var(--seal-red);
+            transform: skew(-5deg);
+            box-shadow: 5px 5px 0px rgba(178, 40, 34, 0.1);
+        }
+
+        /* 英文辅助修饰：增加现代化呼吸感 */
+        .sub-eng {
+            font-size: 10px;
+            color: #aaa;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .section-box { flex-direction: column; padding: 30px; }
+            .title-aside { writing-mode: horizontal-tb; border-left: none; border-bottom: 1px solid var(--border-gold); padding: 0 0 20px 0; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="main-container">
+    <div class="section-box pos-section">
+        <div class="title-aside">
+            <span class="title-main">政余喜格</span>
+            <div class="count-seal">14</div>
+            <span class="sub-eng">Auspicious</span>
+        </div>
+        <div class="content-area">
+            <div class="tag-item">火临燕地</div>
+            <div class="tag-item">火星升殿</div>
+            <div class="tag-item">木气扶火</div>
+            <div class="tag-item">精神运转</div>
+            <div class="tag-item">木入秦州</div>
+            <div class="tag-item">岁居蟹鬼</div>
+            <div class="tag-item">木星升殿</div>
+            <div class="tag-item">水居土室</div>
+            <div class="tag-item">冬水三令</div>
+            <div class="tag-item">土在齐吴</div>
+            <div class="tag-item">土号太常</div>
+            <div class="tag-item">镇星居垣</div>
+            <div class="tag-item">土好太常</div>
+            <div class="tag-item">日温土化</div>
+        </div>
+    </div>
+
+    <div class="section-box neg-section">
+        <div class="title-aside">
+            <span class="title-main">政余忌格</span>
+            <div class="count-seal">5</div>
+            <span class="sub-eng">Inauspicious</span>
+        </div>
+        <div class="content-area">
+            <div class="tag-item">金水背驰</div>
+            <div class="tag-item">水流扬州</div>
+            <div class="tag-item">土混水浊</div>
+            <div class="tag-item">土混水浊</div>
+            <div class="tag-item">土水相激</div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

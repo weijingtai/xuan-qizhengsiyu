@@ -231,6 +231,8 @@ class GeJuListTile extends StatelessWidget {
         return '贤';
       case GeJuType.yu:
         return '愚';
+      case GeJuType.other:
+        return '其他';
     }
   }
 }

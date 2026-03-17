@@ -19,13 +19,6 @@ class _C {
   static const transitText = Color(0xFF4F46E5);
   static const transitBorder = Color(0xFFC7D2FE);
 
-  // 吉色系
-  static const jiColor = Color(0xFF059669);
-  // 凶色系
-  static const xiongColor = Color(0xFFE11D48);
-  // 平色系
-  static const pingColor = Color(0xFF64748B);
-
   // 通用
   static const pageBg = Color(0xFFF8FAFC);
   static const cardBg = Color(0xFFFFFFFF);
@@ -128,37 +121,52 @@ class HuaYaoResultPanel extends StatelessWidget {
     }).toList();
   }
 
-  List<_HuaYaoGroup> _groupItems(List<_HuaYaoDisplayItem> items) {
-    // 果老十天化曜（天禄/天暗/天福/天耗/天荫/天贵/天刑/天印/天囚/天权）
-    final group1 = items.where((i) => i.type == ShenShaType.GuoLao).toList();
-
-    // 天干神煞（科名/文星/魁星/官星/印星/催官/禄神/禄元/仁元/喜神/生官/伤官/天官/天嗣）
-    final group2 = items.where((i) => i.type == ShenShaType.TianGan).toList();
-
+  /// 排版分组及组内顺序（基于参考图的折行方案，不依赖 ShenShaType）
+  static const _displayGroupOrder = [
+    // 果老十天化曜 + 天嗣
+    ['天禄', '天暗', '天福', '天耗', '天荫', '天贵', '天刑', '天印', '天囚', '天权', '天嗣'],
+    // 天干神煞
+    ['爵神', '喜神', '禄神', '催官', '寿元', '印星', '官星', '魁星', '文星', '科甲', '科名'],
     // 地支化曜
-    final group3 = items.where((i) =>
-        i.type == ShenShaType.DiZhi_year || i.type == ShenShaType.DiZhi_month).toList();
+    ['产星', '血忌', '血支', '仁元', '人元禄', '地元禄', '天元禄', '马元', '禄元', '地驿', '天马'],
+    // 命宫/其他
+    ['伤官', '地纬', '天经', '局主', '职元', '值难', '生官'],
+  ];
 
-    // 其他化曜
-    final group4 = items.where((i) =>
-        i.type == ShenShaType.MingGong ||
-        i.type == ShenShaType.Others ||
-        i.type == ShenShaType.NaYin ||
-        i.type == ShenShaType.NaJia).toList();
+  List<_HuaYaoGroup> _groupItems(List<_HuaYaoDisplayItem> items) {
+    final itemMap = {for (final i in items) i.name: i};
+    final used = <String>{};
+    final groups = <_HuaYaoGroup>[];
 
-    return [
-      _HuaYaoGroup(title: '十天化曜', items: group1),
-      _HuaYaoGroup(title: '天干神煞', items: group2),
-      _HuaYaoGroup(title: '地支化曜', items: group3),
-      _HuaYaoGroup(title: '其他化曜', items: group4),
-    ];
+    for (final nameList in _displayGroupOrder) {
+      final groupItems = <_HuaYaoDisplayItem>[];
+      for (final name in nameList) {
+        final item = itemMap[name];
+        if (item != null) {
+          groupItems.add(item);
+          used.add(name);
+        }
+      }
+      groups.add(_HuaYaoGroup(items: groupItems));
+    }
+
+    // 未匹配的项追加到最后一组
+    final remaining = items.where((i) => !used.contains(i.name)).toList();
+    if (remaining.isNotEmpty) {
+      if (groups.isNotEmpty) {
+        groups.last = _HuaYaoGroup(items: [...groups.last.items, ...remaining]);
+      } else {
+        groups.add(_HuaYaoGroup(items: remaining));
+      }
+    }
+
+    return groups;
   }
 }
 
 class _HuaYaoGroup {
-  final String title;
   final List<_HuaYaoDisplayItem> items;
-  const _HuaYaoGroup({required this.title, required this.items});
+  const _HuaYaoGroup({required this.items});
 }
 
 // ─── Unified 卡片（合并所有分组到一个卡片）─────────────────────────────────────
@@ -176,6 +184,9 @@ class _HuaYaoUnifiedCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final nonEmptyGroups = groups.where((g) => g.items.isNotEmpty).toList();
     if (nonEmptyGroups.isEmpty) return const SizedBox.shrink();
+
+    final totalCount =
+        nonEmptyGroups.fold<int>(0, (sum, g) => sum + g.items.length);
 
     return Container(
       decoration: BoxDecoration(
@@ -202,7 +213,7 @@ class _HuaYaoUnifiedCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            // 总标题
+            // 标题
             Row(
               children: [
                 Text(
@@ -223,7 +234,7 @@ class _HuaYaoUnifiedCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Text(
-                    '${nonEmptyGroups.fold<int>(0, (sum, g) => sum + g.items.length)} 项',
+                    '$totalCount 项',
                     style: const TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
@@ -235,205 +246,133 @@ class _HuaYaoUnifiedCard extends StatelessWidget {
             ),
             const SizedBox(height: 14),
             const Divider(height: 1, color: _C.dividerColor),
-            const SizedBox(height: 18),
+            const SizedBox(height: 12),
 
-            // 所有分组
-            for (int groupIdx = 0; groupIdx < nonEmptyGroups.length; groupIdx++) ...[
-              if (groupIdx > 0) ...[
-                const SizedBox(height: 20),
+            // 按分组折行，组间用分隔线隔开，无分组标题
+            for (int i = 0; i < nonEmptyGroups.length; i++) ...[
+              if (i > 0) ...[
+                const SizedBox(height: 12),
                 const Divider(height: 1, color: _C.dividerColor),
-                const SizedBox(height: 18),
+                const SizedBox(height: 12),
               ],
-              _HuaYaoGroupSection(
-                group: nonEmptyGroups[groupIdx],
-                hasTransit: hasTransit,
-              ),
+              _buildGroupRows(nonEmptyGroups[i].items),
             ],
           ],
         ),
       ),
     );
   }
-}
 
-// ─── 分组小节（在unified卡片内显示）──────────────────────────────────────────
-
-class _HuaYaoGroupSection extends StatelessWidget {
-  final _HuaYaoGroup group;
-  final bool hasTransit;
-
-  const _HuaYaoGroupSection({
-    required this.group,
-    required this.hasTransit,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        // 分组标题
-        Row(
-          children: [
-            Text(
-              group.title,
-              style: const TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w600,
-                color: _C.textMain,
-              ),
-            ),
-            const Spacer(),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-              decoration: BoxDecoration(
-                color: _C.badgeBg,
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Text(
-                '${group.items.length} 项',
-                style: const TextStyle(
-                  fontSize: 11,
-                  fontWeight: FontWeight.w500,
-                  color: _C.textMuted,
-                ),
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 12),
-
-        // 化曜列表（水平滚动）
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            children: group.items.map((item) {
-              return Padding(
-                padding: const EdgeInsets.only(right: 12),
-                child: _buildHuaYaoItem(item, hasTransit),
-              );
-            }).toList(),
+  /// 构建一个分组的行式布局（名称行 + 阴阳胶囊行）
+  Widget _buildGroupRows(List<_HuaYaoDisplayItem> items) {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // 名称行
+          Row(
+            children: items.map((item) => _nameCell(item.name)).toList(),
           ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildHuaYaoItem(
-    _HuaYaoDisplayItem item,
-    bool hasTransit,
-  ) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        // 化曜名称
-        SizedBox(
-          width: 48,
-          child: Text(
-            item.name,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w600,
-              color: _C.textMain,
-              overflow: TextOverflow.ellipsis,
-            ),
-            maxLines: 2,
-          ),
-        ),
-        const SizedBox(height: 6),
-
-        // 吉凶标记
-        Container(
-          width: 48,
-          height: 20,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            color: item.jiXiong == JiXiongEnum.JI
-                ? const Color(0xFFECFDF5)
-                : item.jiXiong == JiXiongEnum.XIONG
-                    ? const Color(0xFFFEF2F2)
-                    : const Color(0xFFF1F5F9),
-            borderRadius: BorderRadius.circular(6),
-            border: Border.all(
-              color: item.jiXiong == JiXiongEnum.JI
-                  ? const Color(0xFFA7F3D0)
-                  : item.jiXiong == JiXiongEnum.XIONG
-                      ? const Color(0xFFFECACA)
-                      : const Color(0xFFE2E8F0),
-              width: 0.5,
-            ),
-          ),
-          child: Text(
-            item.jiXiong == JiXiongEnum.JI
-                ? '吉'
-                : item.jiXiong == JiXiongEnum.XIONG
-                    ? '凶'
-                    : '平',
-            style: TextStyle(
-              fontSize: 10,
-              fontWeight: FontWeight.w600,
-              color: item.jiXiong == JiXiongEnum.JI
-                  ? _C.jiColor
-                  : item.jiXiong == JiXiongEnum.XIONG
-                      ? _C.xiongColor
-                      : _C.pingColor,
-            ),
-          ),
-        ),
-        const SizedBox(height: 6),
-
-        // 本命星（单字）
-        Container(
-          width: 30,
-          height: 30,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            color: _C.natalBg,
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(color: _C.natalBorder, width: 0.5),
-          ),
-          child: Text(
-            item.natalStar.singleName,
-            style: const TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.w700,
-              color: _C.natalText,
-            ),
-          ),
-        ),
-
-        if (hasTransit && !item.natalOnly) ...[
-          const Padding(
-            padding: EdgeInsets.symmetric(vertical: 2),
-            child: Text('│',
-                style: TextStyle(fontSize: 10, color: _C.textMuted)),
-          ),
-
-          // 流年星（单字）
-          Container(
-            width: 30,
-            height: 30,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: _C.transitBg,
-              borderRadius: BorderRadius.circular(8),
-              border: Border.all(color: _C.transitBorder, width: 0.5),
-            ),
-            child: Text(
-              item.transitStar?.singleName ?? '—',
-              style: TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.w700,
-                color: item.transitStar != null
-                    ? _C.transitText
-                    : _C.textMuted,
-              ),
-            ),
+          const SizedBox(height: 4),
+          // 阴阳胶囊行
+          Row(
+            children: items.map((item) => _capsuleCell(item)).toList(),
           ),
         ],
-      ],
+      ),
+    );
+  }
+
+  Widget _nameCell(String name) {
+    return Container(
+      width: 36,
+      margin: const EdgeInsets.symmetric(horizontal: 1),
+      child: Text(
+        name,
+        textAlign: TextAlign.center,
+        style: const TextStyle(
+          fontSize: 10,
+          fontWeight: FontWeight.w600,
+          color: _C.textMain,
+        ),
+        maxLines: 2,
+        overflow: TextOverflow.ellipsis,
+      ),
+    );
+  }
+
+  /// 阴阳胶囊：上半本命（暖色），下半流年（冷色）
+  Widget _capsuleCell(_HuaYaoDisplayItem item) {
+    if (!hasTransit) {
+      // 无流年：单色圆角
+      return Container(
+        width: 36,
+        height: 24,
+        margin: const EdgeInsets.symmetric(horizontal: 1),
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          color: _C.natalBg,
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: _C.natalBorder, width: 0.5),
+        ),
+        child: Text(
+          item.natalStar.singleName,
+          style: const TextStyle(
+            fontSize: 13,
+            fontWeight: FontWeight.w700,
+            color: _C.natalText,
+          ),
+        ),
+      );
+    }
+
+    // 有流年：竖直阴阳胶囊
+    final showTransit = !item.natalOnly && item.transitStar != null;
+    return Container(
+      width: 36,
+      margin: const EdgeInsets.symmetric(horizontal: 1),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: const Color(0xFFE2E8F0), width: 0.5),
+      ),
+      clipBehavior: Clip.antiAlias,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          // 上：本命（暖色）
+          Container(
+            height: 22,
+            alignment: Alignment.center,
+            color: _C.natalBg,
+            child: Text(
+              item.natalStar.singleName,
+              style: const TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.w700,
+                color: _C.natalText,
+              ),
+            ),
+          ),
+          // 下：流年（冷色）
+          Container(
+            height: 22,
+            alignment: Alignment.center,
+            color: showTransit ? _C.transitBg : null,
+            child: showTransit
+                ? Text(
+                    item.transitStar!.singleName,
+                    style: const TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w700,
+                      color: _C.transitText,
+                    ),
+                  )
+                : null,
+          ),
+        ],
+      ),
     );
   }
 }
+

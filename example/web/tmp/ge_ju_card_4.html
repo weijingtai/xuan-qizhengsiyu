@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新国风 · 烟雨山河 UI</title>
+    <style>
+        /* 引入具有书法感的楷体和衬线体 */
+        @import url('https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;700&display=swap');
+
+        :root {
+            --paper-bg: #f7f3ed;     /* 熟宣色 */
+            --ink-deep: #1e1e1e;     /* 漆黑 */
+            --cinnabar: #a62c2b;     /* 朱砂红 */
+            --bamboo-green: #4a6741; /* 墨绿 */
+            --gold-line: #d4b483;    /* 檀金 */
+            --mist-gray: #e0e0e0;    /* 烟岚 */
+        }
+
+        body {
+            background-color: var(--paper-bg);
+            /* 模拟远山叠影的渐变 */
+            background-image: 
+                linear-gradient(to top, rgba(255,255,255,0.8), transparent),
+                radial-gradient(circle at 20% 150%, var(--mist-gray), transparent 50%),
+                radial-gradient(circle at 80% 140%, var(--mist-gray), transparent 50%);
+            font-family: 'Noto Serif SC', serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: var(--ink-deep);
+            overflow-x: hidden;
+        }
+
+        .stage {
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+            width: 100%;
+            max-width: 1100px;
+            padding: 40px;
+            z-index: 1;
+        }
+
+        /* 屏风/窗棂式容器 */
+        .grid-card {
+            position: relative;
+            display: flex;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--gold-line);
+            padding: 40px;
+            box-shadow: 20px 20px 60px rgba(0,0,0,0.03);
+        }
+
+        /* 装饰性的如意纹装饰 */
+        .grid-card::before {
+            content: "◆";
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            color: var(--gold-line);
+            background: var(--paper-bg);
+            padding: 2px;
+        }
+
+        /* 标题区：书法字体+竖排 */
+        .header-box {
+            writing-mode: vertical-rl;
+            padding-right: 30px;
+            margin-right: 30px;
+            border-right: 1px solid rgba(212, 180, 131, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .main-title {
+            font-family: 'Ma Shan Zheng', cursive; /* 书法体 */
+            font-size: 2.8rem;
+            letter-spacing: 12px;
+            line-height: 1;
+        }
+
+        /* 数量统计：转化为传统印章 */
+        .stats-stamp {
+            writing-mode: horizontal-tb;
+            border: 2px solid var(--cinnabar);
+            padding: 4px;
+            position: relative;
+        }
+
+        .stats-stamp .inner {
+            background: var(--cinnabar);
+            color: white;
+            padding: 4px 8px;
+            font-size: 14px;
+            font-weight: bold;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .stats-stamp::after {
+            content: "格数";
+            writing-mode: vertical-rl;
+            position: absolute;
+            right: -25px;
+            top: 0;
+            font-size: 10px;
+            color: var(--cinnabar);
+            letter-spacing: 2px;
+        }
+
+        /* 标签区：采用不规则错落布局 */
+        .tags-wrapper {
+            flex: 1;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-content: center;
+        }
+
+        .tag-pill {
+            padding: 8px 22px;
+            background: white;
+            border: 1px solid var(--mist-gray);
+            font-size: 1.05rem;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            clip-path: polygon(5% 0%, 100% 0%, 95% 100%, 0% 100%); /* 略微平行四边形，增加动感 */
+        }
+
+        /* 喜格：碧玉风格 */
+        .pos-card .tag-pill { color: var(--bamboo-green); }
+        .pos-card .tag-pill:hover {
+            background: var(--bamboo-green);
+            color: white;
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 20px rgba(74, 103, 65, 0.2);
+        }
+
+        /* 忌格：朱砂风格 */
+        .neg-card .tag-pill { color: var(--cinnabar); }
+        .neg-card .tag-pill:hover {
+            background: var(--cinnabar);
+            color: white;
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 20px rgba(166, 44, 43, 0.2);
+        }
+
+        /* 装饰背景文字 */
+        .bg-text {
+            position: fixed;
+            font-family: 'Ma Shan Zheng';
+            font-size: 15vw;
+            color: rgba(0,0,0,0.02);
+            z-index: 0;
+            pointer-events: none;
+            right: -5%;
+            top: 10%;
+            writing-mode: vertical-rl;
+        }
+
+        @media (max-width: 800px) {
+            .grid-card { flex-direction: column; padding: 20px; }
+            .header-box { writing-mode: horizontal-tb; border-right: none; border-bottom: 1px solid var(--gold-line); margin: 0 0 20px 0; padding: 0 0 20px 0; width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="bg-text">紫气东来</div>
+
+<div class="stage">
+    <div class="grid-card pos-card">
+        <div class="header-box">
+            <div class="main-title">政余喜格</div>
+            <div class="stats-stamp">
+                <div class="inner">
+                    <span>壹</span>
+                    <span>肆</span>
+                </div>
+            </div>
+        </div>
+        <div class="tags-wrapper">
+            <div class="tag-pill">火临燕地</div>
+            <div class="tag-pill">火星升殿</div>
+            <div class="tag-pill">木气扶火</div>
+            <div class="tag-pill">精神运转</div>
+            <div class="tag-pill">木入秦州</div>
+            <div class="tag-pill">岁居蟹鬼</div>
+            <div class="tag-pill">木星升殿</div>
+            <div class="tag-pill">水居土室</div>
+            <div class="tag-pill">冬水三令</div>
+            <div class="tag-pill">土在齐吴</div>
+            <div class="tag-pill">土号太常</div>
+            <div class="tag-pill">镇星居垣</div>
+            <div class="tag-pill">土好太常</div>
+            <div class="tag-pill">日温土化</div>
+        </div>
+    </div>
+
+    <div class="grid-card neg-card">
+        <div class="header-box">
+            <div class="main-title">政余忌格</div>
+            <div class="stats-stamp">
+                <div class="inner">
+                    <span>零</span>
+                    <span>伍</span>
+                </div>
+            </div>
+        </div>
+        <div class="tags-wrapper">
+            <div class="tag-pill">金水背驰</div>
+            <div class="tag-pill">水流扬州</div>
+            <div class="tag-pill">土混水浊</div>
+            <div class="tag-pill">土混水浊</div>
+            <div class="tag-pill">土水相激</div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

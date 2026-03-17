@@ -15,7 +15,6 @@ import '../widgets/config/location_section.dart';
 import '../widgets/config/school_selector.dart';
 import '../widgets/config/star_chart_preview.dart';
 
-
 /// 七政四余命盘配置页面
 class QiZhengSiYuConfigPage extends StatefulWidget {
   /// 配置完成后的回调函数
@@ -25,10 +24,10 @@ class QiZhengSiYuConfigPage extends StatefulWidget {
   final BasePanelConfig? initialConfig;
 
   const QiZhengSiYuConfigPage({
-    Key? key,
+    super.key,
     // required this.onConfigComplete,
     this.initialConfig,
-  }) : super(key: key);
+  });
 
   @override
   State<QiZhengSiYuConfigPage> createState() => _QiZhengSiYuConfigPageState();

@@ -6,7 +6,6 @@ import 'package:qizhengsiyu/utils/da_xian_calculate_helper.dart';
 
 import '../../../enums/enum_twelve_gong.dart';
 
-
 class DaXianRingPainter extends CustomPainter {
   final double startAngle;
   final double sweepRadian;
@@ -76,7 +75,7 @@ class DaXianRingPainter extends CustomPainter {
           starAngle: gongStartAngle,
           endAngle: gongEndAngle,
           slotDrawAngleList: generateDrawAngles[i],
-          slotYearMonthList: eachGongSlotsList[i]!,
+          slotYearMonthList: eachGongSlotsList[i],
           baseYear: prevBaseYear);
     }
   }
@@ -147,7 +146,7 @@ class DaXianRingPainter extends CustomPainter {
     return years + monthInDouble;
   }
 
-  _drawBackground(Canvas canvas,
+  void _drawBackground(Canvas canvas,
       {required Offset center,
       required Rect outerRect,
       required Rect innerRect,
@@ -166,7 +165,7 @@ class DaXianRingPainter extends CustomPainter {
     canvas.drawPath(fillPath, fillPaint);
   }
 
-  _drawBorder(
+  void _drawBorder(
     Canvas canvas, {
     required Offset center,
     required Rect outerRect,

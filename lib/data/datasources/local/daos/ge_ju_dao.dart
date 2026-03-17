@@ -139,6 +139,12 @@ class GeJuDao extends DatabaseAccessor<AppDatabase> with _$GeJuDaoMixin {
     await (delete(geJuConditionSetsTable)..where((t) => t.ruleId.equals(ruleId))).go();
   }
 
+  /// 全量查询所有用户 ConditionSet（用于批量加载）
+  Future<List<GeJuConditionSet>> getAllConditionSets() async {
+    final rows = await select(geJuConditionSetsTable).get();
+    return rows.map(_rowToConditionSet).toList();
+  }
+
   // ══════════════════════════════════════════
   // Annotation CRUD
   // ══════════════════════════════════════════
@@ -209,6 +215,12 @@ class GeJuDao extends DatabaseAccessor<AppDatabase> with _$GeJuDaoMixin {
 
   Future<void> deleteAnnotationsForRule(String ruleId) async {
     await (delete(geJuAnnotationsTable)..where((t) => t.ruleId.equals(ruleId))).go();
+  }
+
+  /// 全量查询所有用户 Annotation（用于批量加载）
+  Future<List<GeJuAnnotation>> getAllAnnotations() async {
+    final rows = await select(geJuAnnotationsTable).get();
+    return rows.map(_rowToAnnotation).toList();
   }
 
   // ══════════════════════════════════════════

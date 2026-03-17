@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>七政四余全星体专业排盘 - 最终版</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #f1f5f9; font-family: -apple-system, "Noto Sans SC", sans-serif; }
+        .num-font { font-family: 'JetBrains Mono', monospace; }
+        
+        /* 状态颜色定义 */
+        .status-miao { --brand: #ef4444; --bg: #fef2f2; } /* 庙-红 */
+        .status-wang { --brand: #8b5cf6; --bg: #f5f3ff; } /* 旺-紫 */
+        .status-le   { --brand: #f97316; --bg: #fff7ed; } /* 乐-橙 */
+        .status-xi   { --brand: #eab308; --bg: #fefce8; } /* 喜-黄 */
+        .status-none { --brand: #64748b; --bg: transparent; }
+
+        /* 实时动态背景逻辑 */
+        .theme-retrograde { --bg: #ecfdf5; --brand: #10b981; } /* 逆-绿 */
+        
+        .row-item { background-color: var(--bg); transition: background 0.2s; }
+        
+        /* 斑马纹优先级：状态色背景 > 斑马纹背景 */
+        .row-item:nth-child(odd).status-none:not(.theme-retrograde) { background-color: #ffffff; }
+        .row-item:nth-child(even).status-none:not(.theme-retrograde) { background-color: #f8fafc; }
+        
+        .bar-fill-palace { background-color: var(--brand); }
+        .text-brand { color: var(--brand); }
+        .border-brand { border-color: var(--brand); }
+        
+        /* 逆Tag动画 */
+        @keyframes pulse-emerald {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .animate-pulse-emerald {
+            animation: pulse-emerald 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-10">
+
+    <div class="max-w-6xl mx-auto bg-white rounded-xl shadow-2xl overflow-hidden border border-slate-200">
+        <div class="grid grid-cols-12 bg-slate-900 text-slate-400 text-[11px] font-bold uppercase tracking-[0.2em] px-6 py-4">
+            <div class="col-span-1">星体</div>
+            <div class="col-span-2 text-center text-slate-200">状态 (宫/宿)</div>
+            <div class="col-span-4 px-6">入宿度数 (动态宿位总度)</div>
+            <div class="col-span-4 px-6">入宫度数 (0 - 30°)</div>
+            <div class="col-span-1 text-right">动态</div>
+        </div>
+
+        <div class="divide-y divide-slate-100">
+            
+            <div class="grid grid-cols-12 items-center px-6 py-4 row-item status-none">
+                <div class="col-span-1 text-lg font-black text-slate-800">身主</div>
+                <div class="col-span-2 text-center text-slate-300">-</div>
+                <div class="col-span-4 px-6">
+                    <div class="flex items-baseline gap-2 mb-1"><span class="text-sm font-bold text-slate-500">危</span><span class="num-font text-slate-700">14.57</span></div>
+                    <div class="w-full h-1.5 bg-slate-200 rounded-full overflow-hidden"><div class="h-full bg-slate-400" style="width: 72%"></div></div>
+                </div>
+                <div class="col-span-4 px-6">
+                    <div class="flex items-baseline gap-2 mb-1"><span class="text-sm font-bold text-slate-500">亥</span><span class="num-font text-slate-700">03.15</span></div>
+                    <div class="w-full h-1.5 bg-slate-200 rounded-full overflow-hidden"><div class="h-full bg-slate-400" style="width: 10%"></div></div>
+                </div>
+                <div class="col-span-1 text-right text-slate-300">-</div>
+            </div>
+
+            <div class="grid grid-cols-12 items-center px-6 py-4 row-item status-none">
+                <div class="col-span-1 text-lg font-black text-slate-800">命主</div>
+                <div class="col-span-2 text-center text-slate-300">-</div>
+                <div class="col-span-4 px-6">
+                    <div class="flex items-baseline gap-2 mb-1"><span class="text-sm font-bold text-slate-500">斗</span><span class="num-font text-slate-700">14.30</span></div>
+                    <div class="w-full h-1.5 bg-slate-200 rounded-full overflow-hidden"><div class="h-full bg-slate-400" style="width: 55%"></div></div>
+                </div>
+                <div class="col-span-4 px-6">
+                    <div class="flex items-baseline gap-2 mb-1"><span class="text-sm font-bold text-slate-500">戌</span><span class="num-font text-slate-700">10.48</span></div>
+                    <div class="w-full h-1.5 bg-slate-200 rounded-full overflow-hidden"><div class="h-full bg-slate-400" style="width: 34%"></div></div>
+                </div>
+                <div class="col-span-1 text-right text-slate-300">-</div>
+            </div>
+
+            <div class="grid grid-cols-12 items-center px-6 py-4 row-item status-xi">
+                <div class="col-span-1 text-lg font-black text-slate-800">日</div>
+                <div class="col-span-2 flex justify-center gap-1">
+                    <span class="px-2 py-0.5 rounded border border-brand text-brand text-[10px] font-bold bg-white">喜</span>
+                </div>
+                <div class="col-span-4 px-6">
+                    <div class="flex items-baseline gap-2 mb-1"><span class="text-sm font-bold text-slate-500">斗</span><span class="num-font text-slate-700">14.30</span></div>
+                    <div class="w-full h-1.5 bg-slate-200 rounded-full overflow-hidden"><div class="h-full bg-slate-500" style="width: 55%"></div></div>
+                </div>
+                <div class="col-span-4 px-6">
+                    <div class="flex items-baseline gap-2 mb-1"><span class="text-sm font-bold text-brand">丑</span><span class="num-font text-slate-700">10.48</span></div>
+                    <div class="w-full h-1.5 bg-slate-200 rounded-full overflow-hidden"><div class="h-full bar-fill-palace" style="width: 34%"></div></div>
+                </div>
+                <div class="col-span-1 text-right text-slate-300">-</div>
+            </div>
+
+            <div class="grid grid-cols-12 items-center px-6 py-4 row-item status-le">
+                <div class="col-span-1 text-lg font-black text-slate-800">月</div>
+                <div class="col-span-2 flex justify-center gap-1">
+                    <span class="px-2 py-0.5 rounded border border-brand text-brand text-[10px] font-bold bg-white">乐</span>
+                </div>
+                <div class="col-span-4 px-6">
+                    <div class="flex items-baseline gap-2 mb-1"><span class="text-sm font-bold text-slate-500">危</span><span class="num-font text-slate-700">14.57</span></div>
+                    <div class="w-full h-1.5 bg-slate-200 rounded-full overflow-hidden"><div class="h-full bg-slate-500" style="width: 72%"></div></div>
+                </div>
+                <div class="col-span-4 px-6">
+                    <div class="flex items-baseline gap-2 mb-1"><span class="text-sm font-bold text-brand">亥</span><span class="num-font text-slate-700">03.15</span></div>
+                    <div class="w-full h-1.5 bg-slate-200 rounded-full overflow-hidden"><div class="h-full bar-fill-palace" style="width: 10%"></div></div>
+                </div>
+                <div class="col-span-1 text-right text-slate-300">-</div>
+            </div>
+
+            <div class="grid grid-cols-12 items-center px-6 py-4 row-item status-none theme-retrograde">
+                <div class="col-span-1 text-lg font-black text-slate-800">金</div>
+                <div class="col-span-2 text-center text-slate-300">-</div>
+                <div class="col-span-4 px-6">
+                    <div class="flex items-baseline gap-2 mb-1"><span class="text-sm font-bold text-slate-500">女</span><span class="num-font text-slate-700">08.13</span></div>
+                    <div class="w-full h-1.5 bg-slate-200 rounded-full overflow-hidden"><div class="h-full bg-slate-400" style="width: 30%"></div></div>
+                </div>
+                <div class="col-span-4 px-6">
+                    <div class="flex items-baseline gap-2 mb-1"><span class="text-sm font-bold text-slate-500">子</span><span class="num-font text-slate-700">06.13</span></div>
+                    <div class="w-full h-1.5 bg-slate-200 rounded-full overflow-hidden"><div class="h-full bg-slate-400" style="width: 20%"></div></div>
+                </div>
+                <div class="col-span-1 text-right"><span class="text-emerald-500 font-bold animate-pulse-emerald">逆</span></div>
+            </div>
+
+            <div class="grid grid-cols-12 items-center px-6 py-4 row-item status-wang theme-retrograde">
+                <div class="col-span-1 text-lg font-black text-slate-800">木</div>
+                <div class="col-span-2 flex justify-center gap-1">
+                    <span class="px-2 py-0.5 rounded border border-purple-500 text-purple-700 text-[10px] font-bold bg-white status-wang">旺</span>
+                    <span class="px-2 py-0.5 rounded bg-slate-800 text-white text-[10px] font-bold">殿</span>
+                </div>
+                <div class="col-span-4 px-6">
+                    <div class="flex items-baseline gap-2 mb-1"><span class="text-sm font-bold text-slate-500">井</span><span class="num-font text-slate-700">13.20</span></div>
+                    <div class="w-full h-1.5 bg-slate-200 rounded-full overflow-hidden"><div class="h-full bg-slate-800" style="width: 40%"></div></div>
+                </div>
+                <div class="col-span-4 px-6">
+                    <div class="flex items-baseline gap-2 mb-1"><span class="text-sm font-bold text-purple-600">未</span><span class="num-font text-slate-700">05.09</span></div>
+                    <div class="w-full h-1.5 bg-slate-200 rounded-full overflow-hidden"><div class="h-full bg-purple-500 rounded-full" style="width: 17%"></div></div>
+                </div>
+                <div class="col-span-1 text-right"><span class="text-emerald-500 font-bold animate-pulse-emerald">逆</span></div>
+            </div>
+
+            <div class="grid grid-cols-12 items-center px-6 py-4 row-item status-none theme-retrograde">
+                <div class="col-span-1 text-lg font-black text-slate-800">水</div>
+                <div class="col-span-2 text-center text-slate-300">-</div>
+                <div class="col-span-4 px-6">
+                    <div class="flex items-baseline gap-2 mb-1"><span class="text-sm font-bold text-slate-500">牛</span><span class="num-font text-slate-700">05.34</span></div>
+                    <div class="w-full h-1.5 bg-slate-200 rounded-full overflow-hidden"><div class="h-full bg-slate-400" style="width: 18%"></div></div>
+                </div>
+                <div class="col-span-4 px-6">
+                    <div class="flex items-baseline gap-2 mb-1"><span class="text-sm font-bold text-slate-500">丑</span><span class="num-font text-slate-700">25.40</span></div>
+                    <div class="w-full h-1.5 bg-slate-200 rounded-full overflow-hidden"><div class="h-full bg-slate-400" style="width: 85%"></div></div>
+                </div>
+                <div class="col-span-1 text-right"><span class="text-emerald-500 font-bold animate-pulse-emerald">逆</span></div>
+            </div>
+
+            <div class="grid grid-cols-12 items-center px-6 py-4 row-item status-none">
+                <div class="col-span-1 text-lg font-black text-slate-800">火</div>
+                <div class="col-span-2 text-center text-slate-300">-</div>
+                <div class="col-span-4 px-6">
+                    <div class="flex items-baseline gap-2 mb-1"><span class="text-sm font-bold text-slate-500">尾</span><span class="num-font text-slate-700">13.00</span></div>
+                    <div class="w-full h-1.5 bg-slate-200 rounded-full overflow-hidden"><div class="h-full bg-slate-400" style="width: 48%"></div></div>
+                </div>
+                <div class="col-span-4 px-6">
+                    <div class="flex items-baseline gap-2 mb-1"><span class="text-sm font-bold text-slate-500">寅</span><span class="num-font text-slate-700">10.00</span></div>
+                    <div class="w-full h-1.5 bg-slate-200 rounded-full overflow-hidden"><div class="h-full bg-slate-400" style="width: 33%"></div></div>
+                </div>
+                <div class="col-span-1 text-right text-slate-300">-</div>
+            </div>
+
+            <div class="grid grid-cols-12 items-center px-6 py-4 row-item status-miao">
+                <div class="col-span-1 text-lg font-black text-slate-800">土</div>
+                <div class="col-span-2 flex justify-center gap-1">
+                    <span class="px-2 py-0.5 rounded border border-brand text-brand text-[10px] font-bold bg-white">庙</span>
+                </div>
+                <div class="col-span-4 px-6">
+                    <div class="flex items-baseline gap-2 mb-1"><span class="text-sm font-bold text-slate-500">斗</span><span class="num-font text-slate-700">19.21</span></div>
+                    <div class="w-full h-1.5 bg-slate-200 rounded-full overflow-hidden"><div class="h-full bg-slate-500" style="width: 73%"></div></div>
+                </div>
+                <div class="col-span-4 px-6">
+                    <div class="flex items-baseline gap-2 mb-1"><span class="text-sm font-bold text-brand">丑</span><span class="num-font text-slate-700">15.39</span></div>
+                    <div class="w-full h-1.5 bg-slate-200 rounded-full overflow-hidden"><div class="h-full bar-fill-palace" style="width: 51%"></div></div>
+                </div>
+                <div class="col-span-1 text-right text-slate-300">-</div>
+            </div>
+
+            <div class="grid grid-cols-12 items-center px-6 py-4 row-item status-miao">
+                <div class="col-span-1 text-lg font-black text-slate-800">罗</div>
+                <div class="col-span-2 flex justify-center gap-1">
+                    <span class="px-2 py-0.5 rounded border border-brand text-brand text-[10px] font-bold bg-white">庙</span>
+                </div>
+                <div class="col-span-4 px-6">
+                    <div class="flex items-baseline gap-2 mb-1"><span class="text-sm font-bold text-slate-500">张</span><span class="num-font text-slate-700">02.02</span></div>
+                    <div class="w-full h-1.5 bg-slate-200 rounded-full overflow-hidden"><div class="h-full bg-slate-500" style="width: 12%"></div></div>
+                </div>
+                <div class="col-span-4 px-6">
+                    <div class="flex items-baseline gap-2 mb-1"><span class="text-sm font-bold text-brand">午</span><span class="num-font text-slate-700">18.26</span></div>
+                    <div class="w-full h-1.5 bg-slate-200 rounded-full overflow-hidden"><div class="h-full bar-fill-palace" style="width: 61%"></div></div>
+                </div>
+                <div class="col-span-1 text-right text-slate-300">-</div>
+            </div>
+
+            <div class="grid grid-cols-12 items-center px-6 py-4 row-item status-le">
+                <div class="col-span-1 text-lg font-black text-slate-800">计</div>
+                <div class="col-span-2 flex justify-center gap-1">
+                    <span class="px-2 py-0.5 rounded border border-brand text-brand text-[10px] font-bold bg-white">乐</span>
+                    <span class="px-2 py-0.5 rounded bg-slate-500 text-white text-[10px] font-bold">偏</span>
+                </div>
+                <div class="col-span-4 px-6">
+                    <div class="flex items-baseline gap-2 mb-1"><span class="text-sm font-bold text-slate-500">危</span><span class="num-font text-slate-700">00.08</span></div>
+                    <div class="w-full h-1.5 bg-slate-200 rounded-full overflow-hidden"><div class="h-full bg-slate-500" style="width: 2%"></div></div>
+                </div>
+                <div class="col-span-4 px-6">
+                    <div class="flex items-baseline gap-2 mb-1"><span class="text-sm font-bold text-brand">子</span><span class="num-font text-slate-700">18.26</span></div>
+                    <div class="w-full h-1.5 bg-slate-200 rounded-full overflow-hidden"><div class="h-full bar-fill-palace" style="width: 61%"></div></div>
+                </div>
+                <div class="col-span-1 text-right text-slate-300">-</div>
+            </div>
+
+            <div class="grid grid-cols-12 items-center px-6 py-4 row-item status-none">
+                <div class="col-span-1 text-lg font-black text-slate-800">炁</div>
+                <div class="col-span-2 text-center text-slate-300">-</div>
+                <div class="col-span-4 px-6">
+                    <div class="flex items-baseline gap-2 mb-1"><span class="text-sm font-bold text-slate-500">女</span><span class="num-font text-slate-700">01.07</span></div>
+                    <div class="w-full h-1.5 bg-slate-200 rounded-full overflow-hidden"><div class="h-full bg-slate-400" style="width: 5%"></div></div>
+                </div>
+                <div class="col-span-4 px-6">
+                    <div class="flex items-baseline gap-2 mb-1"><span class="text-sm font-bold text-slate-500">丑</span><span class="num-font text-slate-700">29.07</span></div>
+                    <div class="w-full h-1.5 bg-slate-200 rounded-full overflow-hidden"><div class="h-full bg-slate-400" style="width: 97%"></div></div>
+                </div>
+                <div class="col-span-1 text-right text-slate-300">-</div>
+            </div>
+
+            <div class="grid grid-cols-12 items-center px-6 py-4 row-item status-none">
+                <div class="col-span-1 text-lg font-black text-slate-800">孛</div>
+                <div class="col-span-2 text-center text-slate-300">-</div>
+                <div class="col-span-4 px-6">
+                    <div class="flex items-baseline gap-2 mb-1"><span class="text-sm font-bold text-slate-500">氐</span><span class="num-font text-slate-700">07.33</span></div>
+                    <div class="w-full h-1.5 bg-slate-200 rounded-full overflow-hidden"><div class="h-full bg-slate-400" style="width: 45%"></div></div>
+                </div>
+                <div class="col-span-4 px-6">
+                    <div class="flex items-baseline gap-2 mb-1"><span class="text-sm font-bold text-slate-500">卯</span><span class="num-font text-slate-700">06.27</span></div>
+                    <div class="w-full h-1.5 bg-slate-200 rounded-full overflow-hidden"><div class="h-full bg-slate-400" style="width: 21%"></div></div>
+                </div>
+                <div class="col-span-1 text-right text-slate-300">-</div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

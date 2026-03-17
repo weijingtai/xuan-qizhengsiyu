@@ -100,9 +100,8 @@ class _GeJuEditorPageState extends State<GeJuEditorPage> {
                       child: const Text('另存为'),
                     ),
                   TextButton(
-                    onPressed: viewModel.canSave
-                        ? () => _save(viewModel)
-                        : null,
+                    onPressed:
+                        viewModel.canSave ? () => _save(viewModel) : null,
                     child: const Text('保存'),
                   ),
                 ],
@@ -292,7 +291,7 @@ class _GeJuEditorPageState extends State<GeJuEditorPage> {
                 labelText: '格局类型',
                 border: OutlineInputBorder(),
               ),
-              value: viewModel.geJuType,
+              initialValue: viewModel.geJuType,
               items: GeJuType.values
                   .map((t) => DropdownMenuItem(
                         value: t,
@@ -323,7 +322,8 @@ class _GeJuEditorPageState extends State<GeJuEditorPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text('关联流派',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                    style:
+                        TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                 TextButton(
                   onPressed: () {
                     Navigator.pushNamed(
@@ -351,7 +351,8 @@ class _GeJuEditorPageState extends State<GeJuEditorPage> {
               allSchools: viewModel.allSchools,
               selectedIds: viewModel.conditionSetSchools,
               enabled: !isReadOnly,
-              onChanged: isReadOnly ? null : viewModel.updateConditionSetSchools,
+              onChanged:
+                  isReadOnly ? null : viewModel.updateConditionSetSchools,
             ),
           ],
         ),
@@ -438,7 +439,8 @@ class _GeJuEditorPageState extends State<GeJuEditorPage> {
                 border: OutlineInputBorder(),
               ),
               readOnly: isReadOnly,
-              onChanged: (v) => viewModel.updateChangeNote(v.isEmpty ? null : v),
+              onChanged: (v) =>
+                  viewModel.updateChangeNote(v.isEmpty ? null : v),
             ),
             if (viewModel.derivedFrom != null) ...[
               const SizedBox(height: 8),
@@ -467,11 +469,8 @@ class _GeJuEditorPageState extends State<GeJuEditorPage> {
             Row(
               children: [
                 Icon(
-                  validation.isValid
-                      ? Icons.check_circle
-                      : Icons.error,
-                  color:
-                      validation.isValid ? Colors.green : Colors.red,
+                  validation.isValid ? Icons.check_circle : Icons.error,
+                  color: validation.isValid ? Colors.green : Colors.red,
                   size: 20,
                 ),
                 const SizedBox(width: 8),
@@ -584,6 +583,8 @@ class _GeJuEditorPageState extends State<GeJuEditorPage> {
         return '贤';
       case GeJuType.yu:
         return '愚';
+      case GeJuType.other:
+        return '其他';
     }
   }
 }

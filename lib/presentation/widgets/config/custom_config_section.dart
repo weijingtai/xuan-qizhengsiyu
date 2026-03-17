@@ -14,10 +14,10 @@ class CustomConfigSection extends StatefulWidget {
   final PanelConfig? initialConfig;
 
   const CustomConfigSection({
-    Key? key,
+    super.key,
     required this.onConfigChanged,
     this.initialConfig,
-  }) : super(key: key);
+  });
 
   @override
   State<CustomConfigSection> createState() => _CustomConfigSectionState();
@@ -211,7 +211,7 @@ class _CustomConfigSectionState extends State<CustomConfigSection> {
               ),
               const SizedBox(height: AppTheme.spacing12),
               DropdownButtonFormField<String>(
-                value: _classicBook.first,
+                initialValue: _classicBook.first,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
@@ -308,7 +308,7 @@ class _CustomConfigSectionState extends State<CustomConfigSection> {
                   _updateConfig();
                 },
                 contentPadding: EdgeInsets.zero,
-                activeColor: AppTheme.primaryColor,
+                activeThumbColor: AppTheme.primaryColor,
               ),
 
               if (_useTraditionalCalculation)

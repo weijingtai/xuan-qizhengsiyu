@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:common/enums.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:tuple/tuple.dart';
 
 import 'eleven_stars_info.dart';

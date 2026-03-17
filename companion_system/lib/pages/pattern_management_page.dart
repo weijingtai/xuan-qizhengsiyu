@@ -1,4 +1,5 @@
 /// Pattern管理页面
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -42,14 +43,14 @@ class _PatternManagementPageState extends State<PatternManagementPage> {
 
   Future<void> _deletePattern(String patternId) async {
     try {
-      await (_db.delete(_db.geJuPatterns)
-            ..where((p) => p.id.equals(patternId)))
-          .go();
+      await (_db.delete(
+        _db.geJuPatterns,
+      )..where((p) => p.id.equals(patternId))).go();
       await _loadPatterns();
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('删除成功')),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(const SnackBar(content: Text('删除成功')));
       }
     } catch (e) {
       print('删除失败: $e');
@@ -86,10 +87,7 @@ class _PatternManagementPageState extends State<PatternManagementPage> {
         title: const Text('Pattern管理'),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         actions: [
-          IconButton(
-            icon: const Icon(Icons.refresh),
-            onPressed: _loadPatterns,
-          ),
+          IconButton(icon: const Icon(Icons.refresh), onPressed: _loadPatterns),
         ],
       ),
       body: _isLoading
@@ -116,11 +114,16 @@ class _PatternManagementPageState extends State<PatternManagementPage> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(Icons.category_outlined,
-                                  size: 64, color: Colors.grey[400]),
+                              Icon(
+                                Icons.category_outlined,
+                                size: 64,
+                                color: Colors.grey[400],
+                              ),
                               const SizedBox(height: 16),
-                              Text('暂无格局数据',
-                                  style: Theme.of(context).textTheme.titleMedium),
+                              Text(
+                                '暂无格局数据',
+                                style: Theme.of(context).textTheme.titleMedium,
+                              ),
                             ],
                           ),
                         )
@@ -136,25 +139,34 @@ class _PatternManagementPageState extends State<PatternManagementPage> {
 
                             return Card(
                               margin: const EdgeInsets.symmetric(
-                                  horizontal: 8, vertical: 4),
+                                horizontal: 8,
+                                vertical: 4,
+                              ),
                               child: ListTile(
-                                leading: Icon(Icons.category,
-                                    color: Theme.of(context).primaryColor),
-                                title: Text(pattern.name,
-                                    style: const TextStyle(
-                                        fontWeight: FontWeight.bold)),
+                                leading: Icon(
+                                  Icons.category,
+                                  color: Theme.of(context).primaryColor,
+                                ),
+                                title: Text(
+                                  pattern.name,
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
                                 subtitle: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     const SizedBox(height: 4),
                                     Text(
-                                        '拼音: ${pattern.pinyin ?? "未设置"}',
-                                        style: const TextStyle(fontSize: 12)),
+                                      '拼音: ${pattern.pinyin ?? "未设置"}',
+                                      style: const TextStyle(fontSize: 12),
+                                    ),
                                     Text(
-                                        '描述: ${pattern.description ?? "无"}',
-                                        style: const TextStyle(fontSize: 12),
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis),
+                                      '描述: ${pattern.description ?? "无"}',
+                                      style: const TextStyle(fontSize: 12),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
                                   ],
                                 ),
                                 trailing: SizedBox(
@@ -163,25 +175,36 @@ class _PatternManagementPageState extends State<PatternManagementPage> {
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
                                       IconButton(
-                                        icon: const Icon(Icons.edit,
-                                            size: 20, color: Colors.blue),
+                                        icon: const Icon(
+                                          Icons.edit,
+                                          size: 20,
+                                          color: Colors.blue,
+                                        ),
                                         onPressed: () async {
                                           final saved =
                                               await Navigator.push<bool>(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (_) => PatternFormPage(
-                                                  db: _db, pattern: pattern),
-                                            ),
-                                          );
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (_) =>
+                                                      PatternFormPage(
+                                                        db: _db,
+                                                        pattern: pattern,
+                                                      ),
+                                                ),
+                                              );
                                           if (saved == true) _loadPatterns();
                                         },
                                       ),
                                       IconButton(
-                                        icon: const Icon(Icons.delete,
-                                            size: 20, color: Colors.red),
-                                        onPressed: () =>
-                                            _showDeleteDialog(pattern.id, pattern.name),
+                                        icon: const Icon(
+                                          Icons.delete,
+                                          size: 20,
+                                          color: Colors.red,
+                                        ),
+                                        onPressed: () => _showDeleteDialog(
+                                          pattern.id,
+                                          pattern.name,
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -197,9 +220,7 @@ class _PatternManagementPageState extends State<PatternManagementPage> {
         onPressed: () async {
           final saved = await Navigator.push<bool>(
             context,
-            MaterialPageRoute(
-              builder: (_) => PatternFormPage(db: _db),
-            ),
+            MaterialPageRoute(builder: (_) => PatternFormPage(db: _db)),
           );
           if (saved == true) _loadPatterns();
         },

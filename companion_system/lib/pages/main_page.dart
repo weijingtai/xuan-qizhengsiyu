@@ -1,4 +1,5 @@
 /// 主页
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -49,7 +50,8 @@ class MainPage extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => const PatternManagementPage()),
+                  builder: (context) => const PatternManagementPage(),
+                ),
               );
             },
           ),
@@ -63,7 +65,8 @@ class MainPage extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => const SchoolManagementPage()),
+                  builder: (context) => const SchoolManagementPage(),
+                ),
               );
             },
           ),
@@ -100,9 +103,9 @@ class MainPage extends StatelessWidget {
             subtitle: '系统设置和配置',
             color: Colors.grey,
             onTap: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('设置功能开发中...')),
-              );
+              ScaffoldMessenger.of(
+                context,
+              ).showSnackBar(const SnackBar(content: Text('设置功能开发中...')));
             },
           ),
           _buildCard(
@@ -138,17 +141,13 @@ class MainPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(
-                icon,
-                size: 48,
-                color: color,
-              ),
+              Icon(icon, size: 48, color: color),
               const SizedBox(height: 16),
               Text(
                 title,
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+                  fontWeight: FontWeight.bold,
+                ),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 8),

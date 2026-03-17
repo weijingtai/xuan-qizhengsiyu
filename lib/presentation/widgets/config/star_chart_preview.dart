@@ -5,7 +5,6 @@ import 'package:qizhengsiyu/theme/app_theme.dart';
 import '../../../domain/entities/models/panel_config.dart';
 import '../../../enums/enum_panel_system_type.dart';
 
-
 /// 星盘预览组件
 class StarChartPreview extends StatelessWidget {
   /// 命盘配置
@@ -15,10 +14,10 @@ class StarChartPreview extends StatelessWidget {
   final double height;
 
   const StarChartPreview({
-    Key? key,
+    super.key,
     required this.config,
     this.height = 300,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

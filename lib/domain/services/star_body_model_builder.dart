@@ -39,14 +39,12 @@ class StarBodyModelBuilder {
     return SunInfo(angle: sunAngle, enterInfo: starInfo);
   }
 
-  createMoonStar(EnumStars star, double moonAngle, bool isHidden) {
-    // TODO: 需要添加月亮 月象的部分
+  createMoonStar(EnumStars star, double moonAngle, double sunAngle, bool isHidden) {
     EnteredInfo starInfo = calculateStarEnterInfo(star, moonAngle);
     return MoonInfo(
         angle: moonAngle,
         enterInfo: starInfo,
-        // isHidden: isHidden,
-        moonPhase: EnumMoonPhases.Can_Yue);
+        moonPhase: EnumMoonPhases.fromSunMoonAngle(moonAngle, sunAngle));
   }
 
   createFuYu(EnumStars star, double starAngle, bool isHidden) {

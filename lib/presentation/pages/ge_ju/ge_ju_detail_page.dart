@@ -543,6 +543,7 @@ class _GeJuDetailPageState extends State<GeJuDetailPage> {
       case GeJuType.shou: return '寿';
       case GeJuType.xian: return '贤';
       case GeJuType.yu: return '愚';
+      case GeJuType.other: return '其他';
     }
   }
 

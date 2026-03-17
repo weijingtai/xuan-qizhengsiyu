@@ -25,11 +25,11 @@ class BasicInfoSection extends StatefulWidget {
   final dynamic initialInfo;
 
   const BasicInfoSection({
-    Key? key,
+    super.key,
     required this.configType,
     required this.onInfoChanged,
     this.initialInfo,
-  }) : super(key: key);
+  });
 
   @override
   State<BasicInfoSection> createState() => _BasicInfoSectionState();

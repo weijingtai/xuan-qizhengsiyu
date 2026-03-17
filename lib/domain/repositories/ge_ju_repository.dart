@@ -39,6 +39,10 @@ abstract class IGeJuRepository {
   // === Cache ===
   void clearCache();
 
+  // === Batch loading (评估管线优化) ===
+  Future<Map<String, List<GeJuConditionSet>>> loadAllConditionSetsGrouped();
+  Future<Map<String, List<GeJuAnnotation>>> loadAllAnnotationsGrouped();
+
   // === Legacy 兼容（保留用于迁移和 Evaluator 过渡期） ===
   @Deprecated('Use loadAllRules + getConditionSetsForRule instead')
   Future<List<GeJuRule>> loadBuiltInRules();

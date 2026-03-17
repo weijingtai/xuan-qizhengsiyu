@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>星体垣乐数据卡片</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --paper-white: #fdfbf5;    /* 绢布白 */
+            --ink-black: #2d3436;      /* 水墨黑 */
+            --sub-gray: #636e72;       /* 烟灰 */
+            --seal-red: #c0392b;       /* 朱砂红 */
+            --jade-green: #27ae60;     /* 黛绿 */
+            --border-tan: #e5e0d5;     /* 古法金/浅褐 */
+        }
+
+        body {
+            background-color: #f0ede5;
+            font-family: 'Noto Serif SC', serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .card {
+            background-color: var(--paper-white);
+            width: 580px;
+            padding: 30px;
+            border-radius: 4px; /* 中式风格通常不用太圆的角 */
+            border: 1px solid var(--border-tan);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            position: relative;
+        }
+
+        /* 装饰性边框 */
+        .card::after {
+            content: "";
+            position: absolute;
+            top: 5px; left: 5px; right: 5px; bottom: 5px;
+            border: 1px solid var(--border-tan);
+            pointer-events: none;
+            opacity: 0.5;
+        }
+
+        .title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--ink-black);
+            margin-bottom: 25px;
+            letter-spacing: 4px;
+            border-left: 4px solid var(--seal-red);
+            padding-left: 12px;
+            line-height: 1;
+        }
+
+        /* 数据表头 */
+        .data-header {
+            display: grid;
+            grid-template-columns: 80px 60px 1fr 1fr 60px;
+            padding: 10px 0;
+            border-bottom: 2px solid var(--ink-black);
+            font-size: 13px;
+            color: var(--sub-gray);
+            font-weight: 700;
+        }
+
+        /* 核心分组样式（命主、身主） */
+        .core-group {
+            background-color: #f8f6f0;
+            margin: 10px -15px;
+            padding: 0 15px;
+            border-radius: 4px;
+        }
+
+        /* 数据行 */
+        .data-row {
+            display: grid;
+            grid-template-columns: 80px 60px 1fr 1fr 60px;
+            align-items: center;
+            padding: 14px 0;
+            border-bottom: 1px solid #eee;
+            transition: background 0.2s;
+        }
+
+        .data-row:last-child { border-bottom: none; }
+
+        .star-name {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--ink-black);
+        }
+
+        /* 垣位标签化 */
+        .tag-yuan {
+            font-size: 11px;
+            padding: 2px 6px;
+            border-radius: 2px;
+            font-weight: 400;
+        }
+        .tag-xi { color: #d35400; background: #fdf2e9; border: 1px solid #fadbd8; }
+        .tag-wang { color: #8e44ad; background: #f5eef8; border: 1px solid #ebdef0; }
+        .tag-miao { color: var(--seal-red); background: #f9ebea; border: 1px solid #fadbd8; }
+
+        /* 度数数值：使用等宽数字 */
+        .degree-val {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+            color: var(--ink-black);
+        }
+        .degree-label {
+            color: var(--sub-gray);
+            font-size: 12px;
+            margin-right: 4px;
+        }
+
+        /* 状态列 */
+        .status-val {
+            text-align: center;
+            font-size: 13px;
+        }
+        .status-retro {
+            color: var(--jade-green);
+            font-weight: 700;
+            background: #e8f8f5;
+            padding: 2px 4px;
+            border-radius: 2px;
+        }
+
+        .empty-dash { color: #ddd; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <div class="title">星体垣乐</div>
+
+    <div class="data-header">
+        <div>星体</div>
+        <div>垣位</div>
+        <div>入宿度数</div>
+        <div>入宫度数</div>
+        <div style="text-align:center">状态</div>
+    </div>
+
+    <div class="core-group">
+        <div class="data-row">
+            <div class="star-name">命主</div>
+            <div><span class="empty-dash">--</span></div>
+            <div class="degree-val"><span class="degree-label">斗:</span>14.30</div>
+            <div class="degree-val"><span class="degree-label">戌:</span>10.48</div>
+            <div class="status-val"><span class="empty-dash">--</span></div>
+        </div>
+        <div class="data-row">
+            <div class="star-name">身主</div>
+            <div><span class="empty-dash">--</span></div>
+            <div class="degree-val"><span class="degree-label">危:</span>14.57</div>
+            <div class="degree-val"><span class="degree-label">亥:</span>03.15</div>
+            <div class="status-val"><span class="empty-dash">--</span></div>
+        </div>
+    </div>
+
+    <div class="data-row">
+        <div class="star-name">日</div>
+        <div><span class="tag-yuan tag-xi">喜</span></div>
+        <div class="degree-val"><span class="degree-label">斗:</span>14.30</div>
+        <div class="degree-val"><span class="degree-label">丑:</span>10.48</div>
+        <div class="status-val"><span class="empty-dash">--</span></div>
+    </div>
+
+    <div class="data-row">
+        <div class="star-name">月</div>
+        <div><span class="tag-yuan tag-xi">喜</span></div>
+        <div class="degree-val"><span class="degree-label">危:</span>14.57</div>
+        <div class="degree-val"><span class="degree-label">亥:</span>03.15</div>
+        <div class="status-val"><span class="empty-dash">--</span></div>
+    </div>
+
+    <div class="data-row">
+        <div class="star-name">水</div>
+        <div><span class="tag-yuan tag-xi">喜</span></div>
+        <div class="degree-val"><span class="degree-label">牛:</span>05.34</div>
+        <div class="degree-val"><span class="degree-label">丑:</span>25.40</div>
+        <div class="status-val"><span class="status-retro">逆</span></div>
+    </div>
+
+    <div class="data-row">
+        <div class="star-name">木</div>
+        <div><span class="tag-yuan tag-wang">旺</span></div>
+        <div class="degree-val"><span class="degree-label">井:</span>13.20</div>
+        <div class="degree-val"><span class="degree-label">未:</span>05.09</div>
+        <div class="status-val"><span class="status-retro">逆</span></div>
+    </div>
+
+    <div class="data-row">
+        <div class="star-name">土</div>
+        <div><span class="tag-yuan tag-miao">庙</span></div>
+        <div class="degree-val"><span class="degree-label">斗:</span>19.21</div>
+        <div class="degree-val"><span class="degree-label">丑:</span>15.39</div>
+        <div class="status-val"><span class="empty-dash">--</span></div>
+    </div>
+</div>
+
+</body>
+</html>

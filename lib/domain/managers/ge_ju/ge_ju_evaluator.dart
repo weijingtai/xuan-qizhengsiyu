@@ -1,9 +1,13 @@
+import 'package:common/enums.dart';
+import 'package:flutter/foundation.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_annotation.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_condition_set.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_input.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_result.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_rule.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_variant.dart';
+import 'package:qizhengsiyu/domain/entities/models/ge_ju_model.dart';
+import 'package:qizhengsiyu/domain/managers/ge_ju/ge_ju_pre_filter.dart';
 
 /// 格局评估引擎
 /// 负责将格局规则列表与命盘输入进行匹配评估
@@ -110,17 +114,39 @@ class GeJuEvaluator {
     required GeJuInput input,
     required List<RuleEvaluationData> ruleData,
     bool onlyMatched = false,
+    bool usePreFilter = true,
   }) {
     final results = <GeJuResult>[];
 
+    // 按开关决定是否构建预过滤器
+    final preFilter =
+        usePreFilter ? GeJuPreFilter.fromInput(input) : null;
+
     for (var data in ruleData) {
-      if (!_isScopeApplicable(data.rule.scope, input)) continue;
+      if (!_isScopeApplicable(data.rule.scope, input)) {
+        // scope 不适用：生成 scopeSkipped 结果（而非直接跳过）
+        if (!onlyMatched) {
+          results.add(GeJuResult(
+            patternId: data.rule.id,
+            patternName: data.rule.name,
+            matched: false,
+            jiXiong: JiXiongEnum.PING,
+            geJuType: GeJuType.pin,
+            description: '',
+            source: '',
+            scope: data.rule.scope,
+            evaluationStatus: GeJuEvaluationStatus.scopeSkipped,
+          ));
+        }
+        continue;
+      }
 
       final result = evaluateRuleWithConditionSets(
         input: input,
         rule: data.rule,
         conditionSets: data.conditionSets,
         annotations: data.annotations,
+        preFilter: preFilter,
       );
 
       if (onlyMatched && !result.matched) continue;
@@ -136,6 +162,7 @@ class GeJuEvaluator {
     required GeJuRule rule,
     required List<GeJuConditionSet> conditionSets,
     required List<GeJuAnnotation> annotations,
+    GeJuPreFilter? preFilter,
   }) {
     // 1. 按 preferredSchools 筛选 ConditionSet
     GeJuConditionSet? targetCs;
@@ -180,6 +207,7 @@ class GeJuEvaluator {
         ),
         annotation: bestAnnotation,
         matched: false,
+        evaluationStatus: GeJuEvaluationStatus.conditionSetMissing,
       );
     }
 
@@ -190,10 +218,38 @@ class GeJuEvaluator {
         targetCs,
         annotation: bestAnnotation,
         matched: false,
+        evaluationStatus: GeJuEvaluationStatus.conditionMissing,
       );
     }
 
-    // 6. 评估条件
+    // 6. 预过滤：用三值逻辑快速判定
+    if (preFilter != null) {
+      final quick = preFilter.quickEvaluate(targetCs.conditions!);
+      if (quick == false) {
+        // 条件不可能满足 → 直接跳过完整 evaluate
+        return GeJuResult.fromConditionSet(
+          rule,
+          targetCs,
+          annotation: bestAnnotation,
+          matched: false,
+          evaluationStatus: GeJuEvaluationStatus.preFilterRejected,
+        );
+      }
+      if (quick == true) {
+        // 条件一定满足 → 直接标记为匹配
+        return GeJuResult.fromConditionSet(
+          rule,
+          targetCs,
+          annotation: bestAnnotation,
+          matched: true,
+          matchedConditionDescriptions: [targetCs.conditions!.describe()],
+          evaluationStatus: GeJuEvaluationStatus.matched,
+        );
+      }
+      // quick == null → 无法确定，回退到完整 evaluate
+    }
+
+    // 7. 完整评估条件
     try {
       final matched = targetCs.conditions!.evaluate(input);
       final conditionDescriptions = <String>[];
@@ -208,13 +264,18 @@ class GeJuEvaluator {
         annotation: bestAnnotation,
         matched: matched,
         matchedConditionDescriptions: conditionDescriptions,
+        evaluationStatus: matched
+            ? GeJuEvaluationStatus.matched
+            : GeJuEvaluationStatus.unmatched,
       );
     } catch (e) {
+      debugPrint('GeJu: evaluationError for rule "${rule.name}" (${rule.id}): $e');
       return GeJuResult.fromConditionSet(
         rule,
         targetCs,
         annotation: bestAnnotation,
         matched: false,
+        evaluationStatus: GeJuEvaluationStatus.evaluationError,
       );
     }
   }

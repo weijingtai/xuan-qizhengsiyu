@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新国风现代UI布局</title>
+    <style>
+        /* 引入具有国风韵味的字体库（若本地无字体则回退到宋体/衬线体） */
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap');
+
+        :root {
+            /* 国风色谱重构 */
+            --bg-paper: #f9f6f2;      /* 宣纸色 */
+            --ink-black: #2c3e50;    /* 远山墨 */
+            --cinnabar-red: #c0392b; /* 朱砂红 */
+            --jade-green: #2d5a27;   /* 碧玉绿 */
+            --gold-leaf: #b8977e;   /* 描金 */
+            --border-color: #e3ddd3;
+        }
+
+        body {
+            background-color: var(--bg-paper);
+            background-image: radial-gradient(#e3ddd3 1px, transparent 1px);
+            background-size: 30px 30px; /* 模拟信笺底纹 */
+            font-family: 'Noto Serif SC', "Source Han Serif SC", "Songti SC", serif;
+            color: var(--ink-black);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            padding: 50px 20px;
+        }
+
+        .layout-wrapper {
+            max-width: 900px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        /* 现代化的卡片，但带有中式留白 */
+        .section-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(5px);
+            border-radius: 4px; /* 中式审美偏向方正，仅保留微小圆角 */
+            padding: 40px;
+            position: relative;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .section-card:hover {
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+            border-color: var(--gold-leaf);
+        }
+
+        /* 标题装饰：垂直线条结合现代字号 */
+        .title-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            border-left: 3px solid var(--ink-black);
+            padding-left: 15px;
+        }
+
+        .section-card.pos .title-group { border-color: var(--jade-green); }
+        .section-card.neg .title-group { border-color: var(--cinnabar-red); }
+
+        .title-main {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .title-sub {
+            font-size: 0.8rem;
+            color: var(--gold-leaf);
+            margin-left: 10px;
+            text-transform: uppercase;
+        }
+
+        /* 标签设计：不再是臃肿的方块，而是带有“印章”感和微弱边框 */
+        .tags-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .tag {
+            padding: 6px 14px;
+            font-size: 0.95rem;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: transparent;
+            border: 1px solid var(--border-color);
+        }
+
+        /* 喜格：玉石绿风格 */
+        .pos .tag {
+            color: var(--jade-green);
+        }
+        .pos .tag:hover {
+            background: var(--jade-green);
+            color: white;
+            border-color: var(--jade-green);
+        }
+
+        /* 忌格：朱砂红风格 */
+        .neg .tag {
+            color: var(--cinnabar-red);
+        }
+        .neg .tag:hover {
+            background: var(--cinnabar-red);
+            color: white;
+            border-color: var(--cinnabar-red);
+        }
+
+        /* 角标装饰：模拟古籍装帧 */
+        .section-card::before {
+            content: "";
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 20px;
+            height: 20px;
+            border-top: 1px solid var(--gold-leaf);
+            border-right: 1px solid var(--gold-leaf);
+            opacity: 0.5;
+        }
+
+        @media (max-width: 768px) {
+            .layout-wrapper { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="layout-wrapper">
+    <div class="section-card pos">
+        <div class="title-group">
+            <span class="title-main">政余喜格</span>
+            <span class="title-sub">Positive</span>
+        </div>
+        <div class="tags-grid">
+            <div class="tag">火临燕地</div>
+            <div class="tag">火星升殿</div>
+            <div class="tag">木气扶火</div>
+            <div class="tag">精神运转</div>
+            <div class="tag">木入秦州</div>
+            <div class="tag">岁居蟹鬼</div>
+            <div class="tag">木星升殿</div>
+            <div class="tag">水居土室</div>
+            <div class="tag">冬水三令</div>
+            <div class="tag">土在齐吴</div>
+            <div class="tag">土号太常</div>
+            <div class="tag">镇星居垣</div>
+            <div class="tag">土好太常</div>
+            <div class="tag">日温土化</div>
+        </div>
+    </div>
+
+    <div class="section-card neg">
+        <div class="title-group">
+            <span class="title-main">政余忌格</span>
+            <span class="title-sub">Negative</span>
+        </div>
+        <div class="tags-grid">
+            <div class="tag">金水背驰</div>
+            <div class="tag">水流扬州</div>
+            <div class="tag">土混水浊</div>
+            <div class="tag">土混水浊</div>
+            <div class="tag">土水相激</div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

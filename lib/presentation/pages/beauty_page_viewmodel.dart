@@ -530,7 +530,7 @@ class BeautyPageViewModel extends ChangeNotifier {
     );
 
     // 执行计算
-    final result = await calculateFateDongWeiUseCase.execute(params);
+    final result = calculateFateDongWeiUseCase.execute(params);
     dongWeiFateResultNotifier.value = result;
   }
 
@@ -545,10 +545,6 @@ class BeautyPageViewModel extends ChangeNotifier {
 
     // 从基础面板模型中提取身命信息
     final bodyLifeModel = basePanelModel.bodyLifeModel;
-    if (bodyLifeModel == null) {
-      debugPrint("无法计算洞微命理：基础面板模型中缺少身命信息");
-      return;
-    }
 
     // 执行洞微命理计算
     await calculateDongWeiFate(bodyLifeModel: bodyLifeModel);
@@ -606,10 +602,10 @@ class BeautyPageViewModel extends ChangeNotifier {
 
   void setLifeObserver(DivinationInfoModel divinationInfoModel) {
     _divinationInfoModel = divinationInfoModel;
-    DatatimeDivinationDetailsDataModel _tmp =
+    DatatimeDivinationDetailsDataModel tmp =
         divinationInfoModel.divinationDatetime;
-    observer = _tmp.timingInfoListJson!
-        .firstWhere((t) => t.uuid == _tmp.timingInfoUuid)
+    observer = tmp.timingInfoListJson!
+        .firstWhere((t) => t.uuid == tmp.timingInfoUuid)
         .observer;
     lifeObserver = generateLifeObserverPosition();
     logger.d(json.encode(lifeObserver));
@@ -618,27 +614,27 @@ class BeautyPageViewModel extends ChangeNotifier {
   ObserverPosition? lifeObserver;
 
   ObserverPosition generateLifeObserverPosition() {
-    DivinationDatetimeModel _datetimeModel = _divinationInfoModel!
+    DivinationDatetimeModel datetimeModel = _divinationInfoModel!
         .divinationDatetime.timingInfoListJson!
         .firstWhere((t) =>
-            t.uuid == _divinationInfoModel!.divinationDatetime.timingInfoUuid)!;
-    Coordinates _coordinates;
+            t.uuid == _divinationInfoModel!.divinationDatetime.timingInfoUuid);
+    Coordinates coordinates;
     switch (observer!.type) {
       case EnumDatetimeType.standard:
       case EnumDatetimeType.removeDST:
-        _coordinates =
-            _datetimeModel.observer.location!.address!.province.coordinates!;
+        coordinates =
+            datetimeModel.observer.location!.address!.province.coordinates;
         break;
       case EnumDatetimeType.meanSolar:
-        _coordinates =
-            _datetimeModel.observer.location!.address!.city?.coordinates ??
-                _datetimeModel.observer.location!.address!.province.coordinates;
+        coordinates =
+            datetimeModel.observer.location!.address!.city?.coordinates ??
+                datetimeModel.observer.location!.address!.province.coordinates;
         break;
       case EnumDatetimeType.trueSolar:
-        if (_datetimeModel.observer.isManualCalibration) {
-          _coordinates = _datetimeModel.observer.location!.preciseCoordinates!;
+        if (datetimeModel.observer.isManualCalibration) {
+          coordinates = datetimeModel.observer.location!.preciseCoordinates!;
         } else {
-          _coordinates = _datetimeModel.observer.location!.coordinates!;
+          coordinates = datetimeModel.observer.location!.coordinates!;
         }
 
         break;
@@ -652,22 +648,22 @@ class BeautyPageViewModel extends ChangeNotifier {
       // birthdayUtcTime: tz.TZDateTime.from(dateTime, tz.getLocation(location.address!.timezone!)).toUtc(),
       // 或者如果 datetime 本身就是 UTC，则直接使用
       // 这里假设 datetime 已经是带有时区信息的 TZDateTime 或需要被视为 UTC
-      latitude: _coordinates.latitude,
-      longitude: _coordinates.longitude,
+      latitude: coordinates.latitude,
+      longitude: coordinates.longitude,
       altitude: 0, // 原始代码 altitude 为 0，保留
       timezone: observer!.timezoneStr,
-      dateTime: _datetimeModel.datetime, // 保存时区信息
-      isDayBirth: getDayTimeZhi().contains(_datetimeModel.timeJiaZi.zhi),
-      yearGanZhi: _datetimeModel.yearJiaZi,
-      monthGanZhi: _datetimeModel.monthJiaZi,
-      dayGanZhi: _datetimeModel.dayJiaZi,
-      timeGanZhi: _datetimeModel.timeJiaZi,
+      dateTime: datetimeModel.datetime, // 保存时区信息
+      isDayBirth: getDayTimeZhi().contains(datetimeModel.timeJiaZi.zhi),
+      yearGanZhi: datetimeModel.yearJiaZi,
+      monthGanZhi: datetimeModel.monthJiaZi,
+      dayGanZhi: datetimeModel.dayJiaZi,
+      timeGanZhi: datetimeModel.timeJiaZi,
     );
   }
 
   ObserverPosition? fateObserver;
   ObserverPosition generateFateObserverPosition(DateTime fateDatetime) {
-    DivinationDatetimeModel _datetimeModel;
+    DivinationDatetimeModel datetimeModel;
     tz.TZDateTime tzDatetime =
         tz.TZDateTime.from(fateDatetime, tz.getLocation(observer!.timezoneStr));
     final isDST = tzDatetime.timeZone.isDst;
@@ -675,7 +671,7 @@ class BeautyPageViewModel extends ChangeNotifier {
     // Coordinates _coordinates;
     switch (observer!.type) {
       case EnumDatetimeType.standard:
-        _datetimeModel =
+        datetimeModel =
             SolarLunarDateTimeHelper.calculateNormalQueryDateTimeInfo(
           queryUuid: queryUuid,
           dateTime: tzDatetime.toDateTime(),
@@ -690,7 +686,7 @@ class BeautyPageViewModel extends ChangeNotifier {
           // 处理夏令时的情况
           // 例如，将时间向前调整一个小时
           tzDatetime = tzDatetime.subtract(Duration(hours: 1));
-          _datetimeModel =
+          datetimeModel =
               SolarLunarDateTimeHelper.calculateRemoveDSTQueryDateTimeInfo(
             queryUuid: queryUuid,
             dateTime: tzDatetime.toDateTime(),
@@ -700,7 +696,7 @@ class BeautyPageViewModel extends ChangeNotifier {
             isSeersLocation: false,
           );
         } else {
-          _datetimeModel =
+          datetimeModel =
               SolarLunarDateTimeHelper.calculateNormalQueryDateTimeInfo(
             queryUuid: queryUuid,
             dateTime: tzDatetime.toDateTime(),
@@ -713,12 +709,12 @@ class BeautyPageViewModel extends ChangeNotifier {
 
         break;
       case EnumDatetimeType.meanSolar:
-        _datetimeModel =
+        datetimeModel =
             SolarLunarDateTimeHelper.calculateMeanSolarQueryDateTimeInfo(
                 queryUuid, tzDatetime, observer!.location!.address!, false);
         break;
       case EnumDatetimeType.trueSolar:
-        _datetimeModel =
+        datetimeModel =
             SolarLunarDateTimeHelper.calculateTrueSolarQueryDateTimeInfo(
                 queryUuid,
                 tzDatetime.toDateTime(),
@@ -736,16 +732,16 @@ class BeautyPageViewModel extends ChangeNotifier {
       // birthdayUtcTime: tz.TZDateTime.from(dateTime, tz.getLocation(location.address!.timezone!)).toUtc(),
       // 或者如果 datetime 本身就是 UTC，则直接使用
       // 这里假设 datetime 已经是带有时区信息的 TZDateTime 或需要被视为 UTC
-      latitude: _datetimeModel.observer.coordinate!.latitude,
-      longitude: _datetimeModel.observer.coordinate!.longitude,
+      latitude: datetimeModel.observer.coordinate!.latitude,
+      longitude: datetimeModel.observer.coordinate!.longitude,
       altitude: 0, // 原始代码 altitude 为 0，保留
       timezone: observer!.timezoneStr,
-      dateTime: _datetimeModel.datetime, // 保存时区信息
-      isDayBirth: getDayTimeZhi().contains(_datetimeModel.timeJiaZi.zhi),
-      yearGanZhi: _datetimeModel.yearJiaZi,
-      monthGanZhi: _datetimeModel.monthJiaZi,
-      dayGanZhi: _datetimeModel.dayJiaZi,
-      timeGanZhi: _datetimeModel.timeJiaZi,
+      dateTime: datetimeModel.datetime, // 保存时区信息
+      isDayBirth: getDayTimeZhi().contains(datetimeModel.timeJiaZi.zhi),
+      yearGanZhi: datetimeModel.yearJiaZi,
+      monthGanZhi: datetimeModel.monthJiaZi,
+      dayGanZhi: datetimeModel.dayJiaZi,
+      timeGanZhi: datetimeModel.timeJiaZi,
     );
   }
 
@@ -754,14 +750,14 @@ class BeautyPageViewModel extends ChangeNotifier {
   /// 返回: ObserverPosition 对象。
   ObserverPosition convertToObserverPosition(
       DivinationInfoModel divinationInfo) {
-    DatatimeDivinationDetailsDataModel _tmp = divinationInfo.divinationDatetime;
-    observer = _tmp.timingInfoListJson!
-        .firstWhere((t) => t.uuid == _tmp.timingInfoUuid)
+    DatatimeDivinationDetailsDataModel tmp = divinationInfo.divinationDatetime;
+    observer = tmp.timingInfoListJson!
+        .firstWhere((t) => t.uuid == tmp.timingInfoUuid)
         .observer;
 
     // 确保日期时间信息有效
-    final dateTime = _tmp.datetime;
-    final location = _tmp.location;
+    final dateTime = tmp.datetime;
+    final location = tmp.location;
 
     if (location == null ||
         location.coordinates == null ||

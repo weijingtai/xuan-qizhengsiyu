@@ -24,6 +24,10 @@ class GeJuRepositoryImpl implements IGeJuRepository {
   List<GeJuAnnotation>? _builtInAnnotationsCache;
   List<GeJuConditionSet>? _builtInConditionSetsCache;
 
+  /// 按 ruleId 索引的缓存（O(1) 查找，由 _ensure* 方法构建）
+  Map<String, List<GeJuConditionSet>>? _builtInConditionSetsByRuleId;
+  Map<String, List<GeJuAnnotation>>? _builtInAnnotationsByRuleId;
+
   /// 内置规则 ID 集合
   final Set<String> _builtInRuleIds = {};
 
@@ -95,8 +99,8 @@ class GeJuRepositoryImpl implements IGeJuRepository {
 
   @override
   Future<List<GeJuConditionSet>> getConditionSetsForRule(String ruleId) async {
-    final builtInAll = await _ensureBuiltInConditionSetsLoaded();
-    final builtIn = builtInAll.where((cs) => cs.ruleId == ruleId).toList();
+    await _ensureBuiltInConditionSetsLoaded();
+    final builtIn = _builtInConditionSetsByRuleId?[ruleId] ?? [];
     final user = await _queryDb(
         () => _dao.getConditionSetsForRule(ruleId), <GeJuConditionSet>[]);
     return [...builtIn, ...user];
@@ -140,8 +144,8 @@ class GeJuRepositoryImpl implements IGeJuRepository {
 
   @override
   Future<List<GeJuAnnotation>> getAnnotationsForRule(String ruleId) async {
-    final builtInAll = await _ensureBuiltInAnnotationsLoaded();
-    final builtIn = builtInAll.where((a) => a.ruleId == ruleId).toList();
+    await _ensureBuiltInAnnotationsLoaded();
+    final builtIn = _builtInAnnotationsByRuleId?[ruleId] ?? [];
     final user = await _queryDb(
         () => _dao.getAnnotationsForRule(ruleId), <GeJuAnnotation>[]);
     return [...builtIn, ...user];
@@ -214,6 +218,8 @@ class GeJuRepositoryImpl implements IGeJuRepository {
     _builtInRulesCache = null;
     _builtInAnnotationsCache = null;
     _builtInConditionSetsCache = null;
+    _builtInConditionSetsByRuleId = null;
+    _builtInAnnotationsByRuleId = null;
   }
 
   // ══════════════════════════════════════════
@@ -285,12 +291,60 @@ class GeJuRepositoryImpl implements IGeJuRepository {
   Future<List<GeJuAnnotation>> _ensureBuiltInAnnotationsLoaded() async {
     if (_builtInAnnotationsCache != null) return _builtInAnnotationsCache!;
     _builtInAnnotationsCache = await _builtInDataSource.loadBuiltInAnnotations();
+    // 构建 ruleId 索引
+    final index = <String, List<GeJuAnnotation>>{};
+    for (final ann in _builtInAnnotationsCache!) {
+      index.putIfAbsent(ann.ruleId, () => []).add(ann);
+    }
+    _builtInAnnotationsByRuleId = index;
     return _builtInAnnotationsCache!;
   }
 
   Future<List<GeJuConditionSet>> _ensureBuiltInConditionSetsLoaded() async {
     if (_builtInConditionSetsCache != null) return _builtInConditionSetsCache!;
     _builtInConditionSetsCache = await _builtInDataSource.loadBuiltInConditionSets();
+    // 构建 ruleId 索引
+    final index = <String, List<GeJuConditionSet>>{};
+    for (final cs in _builtInConditionSetsCache!) {
+      index.putIfAbsent(cs.ruleId, () => []).add(cs);
+    }
+    _builtInConditionSetsByRuleId = index;
     return _builtInConditionSetsCache!;
+  }
+
+  // ══════════════════════════════════════════
+  // Batch loading (评估管线优化)
+  // ══════════════════════════════════════════
+
+  @override
+  Future<Map<String, List<GeJuConditionSet>>> loadAllConditionSetsGrouped() async {
+    await _ensureBuiltInConditionSetsLoaded();
+    final result = <String, List<GeJuConditionSet>>{};
+    // 复制 built-in 索引
+    _builtInConditionSetsByRuleId?.forEach((ruleId, list) {
+      result[ruleId] = [...list];
+    });
+    // 合并 user 数据
+    final userAll = await _queryDb(() => _dao.getAllConditionSets(), <GeJuConditionSet>[]);
+    for (final cs in userAll) {
+      result.putIfAbsent(cs.ruleId, () => []).add(cs);
+    }
+    return result;
+  }
+
+  @override
+  Future<Map<String, List<GeJuAnnotation>>> loadAllAnnotationsGrouped() async {
+    await _ensureBuiltInAnnotationsLoaded();
+    final result = <String, List<GeJuAnnotation>>{};
+    // 复制 built-in 索引
+    _builtInAnnotationsByRuleId?.forEach((ruleId, list) {
+      result[ruleId] = [...list];
+    });
+    // 合并 user 数据
+    final userAll = await _queryDb(() => _dao.getAllAnnotations(), <GeJuAnnotation>[]);
+    for (final ann in userAll) {
+      result.putIfAbsent(ann.ruleId, () => []).add(ann);
+    }
+    return result;
   }
 }

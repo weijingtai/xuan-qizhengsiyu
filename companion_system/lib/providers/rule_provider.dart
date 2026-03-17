@@ -1,4 +1,5 @@
 /// 规则数据Provider
+library;
 
 import 'package:flutter/foundation.dart';
 import 'package:companion_system/database/drift_database.dart';
@@ -35,20 +36,25 @@ class RuleProvider extends ChangeNotifier {
     if (_searchKeyword.isNotEmpty) {
       filtered = filtered.where((rule) {
         // 注意：需要从关联的Pattern获取名称
-        return rule.conditions?.toLowerCase().contains(_searchKeyword.toLowerCase()) ??
+        return rule.conditions?.toLowerCase().contains(
+              _searchKeyword.toLowerCase(),
+            ) ??
             false;
       }).toList();
     }
 
     // 流派过滤
     if (_selectedSchoolId != null) {
-      filtered = filtered.where((rule) => rule.schoolId == _selectedSchoolId).toList();
+      filtered = filtered
+          .where((rule) => rule.schoolId == _selectedSchoolId)
+          .toList();
     }
 
     // 吉凶过滤
     if (_selectedJixiong != null) {
-      filtered = filtered.where((rule) =>
-          JiXiong.fromLabel(rule.jixiong) == _selectedJixiong).toList();
+      filtered = filtered
+          .where((rule) => JiXiong.fromLabel(rule.jixiong) == _selectedJixiong)
+          .toList();
     }
 
     // 范围过滤
@@ -118,13 +124,16 @@ class RuleProvider extends ChangeNotifier {
   }
 
   Future<void> updateRule(int ruleId, GeJuRulesCompanion companion) async {
-    await (db.update(db.geJuRules)..where((t) => t.id.equals(ruleId)))
-        .write(companion);
+    await (db.update(
+      db.geJuRules,
+    )..where((t) => t.id.equals(ruleId))).write(companion);
     await loadRules();
   }
 
   Future<void> updatePatternDescription(
-      String patternId, String? description) async {
+    String patternId,
+    String? description,
+  ) async {
     await (db.update(db.geJuPatterns)..where((t) => t.id.equals(patternId)))
         .write(GeJuPatternsCompanion(description: Value(description)));
     notifyListeners();

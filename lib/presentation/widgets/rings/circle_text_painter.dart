@@ -63,7 +63,7 @@ class CircleTextPainter extends CustomPainter {
     // printEachYearSlot(canvas, sectorCenter, sectorCenterAngle);
   }
 
-  _drawBackground(Canvas canvas,
+  void _drawBackground(Canvas canvas,
       {required Offset center,
       required Rect outerRect,
       required Rect innerRect,
@@ -84,7 +84,7 @@ class CircleTextPainter extends CustomPainter {
     canvas.drawPath(fillPath, fillPaint);
   }
 
-  _drawBorder(Canvas canvas,
+  void _drawBorder(Canvas canvas,
       {required Offset center,
       required Rect outerRect,
       required Rect innerRect,
@@ -157,7 +157,7 @@ class CircleTextPainter extends CustomPainter {
     // double _prevEndAngle = gongAngle - 30;
     // double eachSlotAngle = gongAngle / contentList.length;
     double eachSlotAngle = 13;
-    double _prevEndAngle = starAngle + (gongAngle * .5 - eachSlotAngle * 3);
+    double prevEndAngle = starAngle + (gongAngle * .5 - eachSlotAngle * 3);
     for (var i = 0; i < contentList.length; i++) {
       printEachYearSlotV2(
         canvas,
@@ -165,8 +165,8 @@ class CircleTextPainter extends CustomPainter {
         outerRect,
         innerRect,
         index: i,
-        starAngle: _prevEndAngle,
-        endAngle: _prevEndAngle + eachSlotAngle,
+        starAngle: prevEndAngle,
+        endAngle: prevEndAngle + eachSlotAngle,
         contentList: [EnumTwelveGong.Yin, EnumTwelveGong.Hai]
                 .contains(gongOrderedSeq[gongIndex])
             ? contentList.reversed.toList()
@@ -176,7 +176,7 @@ class CircleTextPainter extends CustomPainter {
             ? RingTextDirection.outer
             : RingTextDirection.center,
       );
-      _prevEndAngle += eachSlotAngle;
+      prevEndAngle += eachSlotAngle;
     }
   }
 

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>星体垣乐 - 强化状态版</title>
+    <style>
+        :root {
+            --primary-black: #2d3436;
+            --secondary-gray: #888888;
+            --accent-red: #eb4d4b;
+            --accent-blue: #4a90e2;
+            --card-bg: #ffffff;
+            --bg-page: #f0f2f5;
+            
+            /* 状态色值 - 强色用于标签，淡色用于行背 */
+            --color-xi: #f39c12;   --bg-xi: #fff9ed;
+            --color-wang: #8e44ad; --bg-wang: #f9f4fc;
+            --color-miao: #e74c3c; --bg-miao: #fef5f4;
+            --color-le: #2980b9;   --bg-le: #f0f7fb;
+            --color-retro: #27ae60;
+        }
+
+        body {
+            background-color: var(--bg-page);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", sans-serif;
+            display: flex; justify-content: center; align-items: center;
+            min-height: 100vh; margin: 0;
+        }
+
+        .card {
+            background: var(--card-bg);
+            width: 520px;
+            border-radius: 24px;
+            padding: 25px 30px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
+            color: var(--primary-black);
+        }
+
+        /* 顶部 header 保持之前的权重设计 */
+        .header {
+            display: flex; justify-content: space-between; align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .date-info { font-size: 20px; color: var(--secondary-gray); font-weight: 300; margin-top: 5px; }
+
+        .time-group { text-align: right; }
+        .big-time { font-size: 38px; font-weight: 800; line-height: 1; letter-spacing: -1px; }
+        .shichen-tag { 
+            display: inline-block; background: #f0f0f0; color: var(--secondary-gray); 
+            font-size: 11px; padding: 2px 8px; border-radius: 4px; margin-top: 5px; 
+        }
+
+        /* 数据表结构 */
+        .table-container { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 14px; }
+        
+        .t-header { 
+            display: grid; grid-template-columns: 80px 60px 1fr 1fr 60px;
+            padding: 8px 10px; border-bottom: 1px solid #eee;
+            color: var(--secondary-gray); font-weight: 600; font-size: 12px;
+        }
+
+        /* 行基础样式与斑马纹 */
+        .t-row { 
+            display: grid; grid-template-columns: 80px 60px 1fr 1fr 60px;
+            padding: 10px; align-items: center; border-radius: 6px; margin: 2px 0;
+        }
+        
+        /* 1. 斑马条纹：在没有特殊状态的行上生效 */
+        .t-row:nth-child(even):not(.has-status) { background-color: #fbfbfb; }
+
+        /* 2. 状态行背景色：优先级高于斑马纹 */
+        .row-xi { background-color: var(--bg-xi) !important; }
+        .row-wang { background-color: var(--bg-wang) !important; }
+        .row-miao { background-color: var(--bg-miao) !important; }
+        .row-le { background-color: var(--bg-le) !important; }
+
+        .star-name { font-weight: 700; color: #333; }
+        
+        /* 标签样式 */
+        .tag { font-size: 11px; padding: 1px 5px; border-radius: 3px; font-weight: 600; }
+        .tag-xi { color: var(--color-xi); border: 1px solid #fdebd0; }
+        .tag-wang { color: var(--color-wang); border: 1px solid #ebdef0; }
+        .tag-miao { color: var(--color-miao); border: 1px solid #fadbd8; }
+        
+        .val-num { font-family: monospace; font-size: 13px; }
+        .val-label { color: var(--secondary-gray); font-size: 11px; margin-right: 3px; }
+
+        .status-retro { color: var(--color-retro); font-weight: 800; }
+
+        /* 日月升落：水平中心对齐 */
+        .astro-bar {
+            display: flex; justify-content: center; gap: 10px; margin-top: 15px;
+        }
+        .astro-pill {
+            flex: 1; padding: 10px; border-radius: 10px; color: white;
+            display: flex; justify-content: space-between; align-items: center; font-size: 12px;
+        }
+        .sun-p { background: var(--accent-red); }
+        .moon-p { background: var(--accent-blue); }
+
+        /* 极致缩小的 Footer */
+        .footer-tiny {
+            margin-top: 20px; border-top: 1px solid #f5f5f5; padding-top: 10px;
+            text-align: center; font-size: 9px; color: #d1d1d1;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <div class="header">
+        <div class="date-info">1995年06月13日</div>
+        <div class="time-group">
+            <div class="big-time">01:30</div>
+            <div class="shichen-tag">丑时</div>
+        </div>
+    </div>
+
+    <div class="t-header">
+        <div>星体</div><div>垣位</div><div>入宿度数</div><div>入宫度数</div><div style="text-align:right">状态</div>
+    </div>
+
+    <div class="t-row">
+        <div class="star-name">命主</div><div>-</div>
+        <div class="val-num"><span class="val-label">斗:</span>14.30</div>
+        <div class="val-num"><span class="val-label">戌:</span>10.48</div>
+        <div style="text-align:right">-</div>
+    </div>
+    <div class="t-row">
+        <div class="star-name">身主</div><div>-</div>
+        <div class="val-num"><span class="val-label">危:</span>14.57</div>
+        <div class="val-num"><span class="val-label">亥:</span>03.15</div>
+        <div style="text-align:right">-</div>
+    </div>
+
+    <div class="t-row has-status row-xi">
+        <div class="star-name">日</div>
+        <div><span class="tag tag-xi">喜</span></div>
+        <div class="val-num"><span class="val-label">斗:</span>14.30</div>
+        <div class="val-num"><span class="val-label">丑:</span>10.48</div>
+        <div style="text-align:right">-</div>
+    </div>
+
+    <div class="t-row has-status row-wang">
+        <div class="star-name">木</div>
+        <div><span class="tag tag-wang">旺</span></div>
+        <div class="val-num"><span class="val-label">井:</span>13.20</div>
+        <div class="val-num"><span class="val-label">未:</span>05.09</div>
+        <div style="text-align:right" class="status-retro">逆</div>
+    </div>
+
+    <div class="t-row has-status row-miao">
+        <div class="star-name">土</div>
+        <div><span class="tag tag-miao">庙</span></div>
+        <div class="val-num"><span class="val-label">斗:</span>19.21</div>
+        <div class="val-num"><span class="val-label">丑:</span>15.39</div>
+        <div style="text-align:right">-</div>
+    </div>
+
+    <div class="astro-bar">
+        <div class="astro-pill sun-p">
+            <span>☼ 06:23</span><span>18:22 ☀</span>
+        </div>
+        <div class="astro-pill moon-p">
+            <span>☾ 05:50</span><span>16:28 🌑</span>
+        </div>
+    </div>
+
+    <div class="footer-tiny">
+        北京市 朝阳区 · 116°24'E / 39°54'N
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,4 +1,5 @@
 /// 主应用入口
+library;
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -9,29 +10,31 @@ import 'package:companion_system/pages/main_page.dart';
 import 'package:companion_system/database/drift_database.dart';
 
 void main() {
-  runApp(MultiProvider(
-    providers: [
-      Provider<AppDatabase>(
-        create: (ctx) => AppDatabase(),
-        dispose: (ctx, db) => db.close(),
-      ),
-      ChangeNotifierProvider<RuleProvider>(
-        create: (ctx) => RuleProvider(ctx.read<AppDatabase>()),
-      ),
-      ChangeNotifierProvider<SettingsProvider>(
-        create: (ctx) => SettingsProvider()..load(),
-      ),
-      // AiChatController 依赖 SettingsProvider，使用 ProxyProvider 自动跟随配置变化
-      ChangeNotifierProxyProvider<SettingsProvider, AiChatController>(
-        create: (_) => AiChatController(),
-        update: (_, settings, controller) {
-          controller!.onSettingsChanged(settings);
-          return controller;
-        },
-      ),
-    ],
-    child: const MyApp(),
-  ));
+  runApp(
+    MultiProvider(
+      providers: [
+        Provider<AppDatabase>(
+          create: (ctx) => AppDatabase(),
+          dispose: (ctx, db) => db.close(),
+        ),
+        ChangeNotifierProvider<RuleProvider>(
+          create: (ctx) => RuleProvider(ctx.read<AppDatabase>()),
+        ),
+        ChangeNotifierProvider<SettingsProvider>(
+          create: (ctx) => SettingsProvider()..load(),
+        ),
+        // AiChatController 依赖 SettingsProvider，使用 ProxyProvider 自动跟随配置变化
+        ChangeNotifierProxyProvider<SettingsProvider, AiChatController>(
+          create: (_) => AiChatController(),
+          update: (_, settings, controller) {
+            controller!.onSettingsChanged(settings);
+            return controller;
+          },
+        ),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

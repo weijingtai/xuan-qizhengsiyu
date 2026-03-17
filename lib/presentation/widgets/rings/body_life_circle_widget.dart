@@ -40,7 +40,7 @@ class BodyLifeCircleWidget extends StatelessWidget {
   final double? sweepRadian;
 
   const BodyLifeCircleWidget({
-    Key? key,
+    super.key,
     this.itemSize = 80,
     required this.bodyLifeModel,
     this.textStyle,
@@ -51,7 +51,7 @@ class BodyLifeCircleWidget extends StatelessWidget {
     this.borderColor,
     this.startAngle,
     this.sweepRadian,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -207,11 +207,11 @@ class BodyLifeCircleWidget extends StatelessWidget {
     String? secondPart;
 
     if (parts.length > 1) {
-      firstPart = parts[0] + ".";
-      secondPart = parts[1] + "°";
+      firstPart = "${parts[0]}.";
+      secondPart = "${parts[1]}°";
       return Tuple2(firstPart, secondPart);
     } else {
-      firstPart = parts[0] + "°";
+      firstPart = "${parts[0]}°";
       return Tuple2(firstPart, null);
     }
   }

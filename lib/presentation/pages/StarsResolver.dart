@@ -1,7 +1,6 @@
 import 'dart:core';
 import 'dart:math';
 
-import 'package:common/enums.dart';
 import 'package:tuple/tuple.dart';
 
 import '../models/ui_star_model.dart';

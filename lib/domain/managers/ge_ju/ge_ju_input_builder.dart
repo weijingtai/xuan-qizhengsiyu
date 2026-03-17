@@ -1,5 +1,6 @@
 import 'package:common/enums.dart';
 import 'package:common/enums/enum_four_seasons.dart';
+import 'package:flutter/foundation.dart';
 import 'package:qizhengsiyu/dataset/star_position_status_model.dart';
 import 'package:qizhengsiyu/domain/entities/models/base_panel_model.dart';
 import 'package:qizhengsiyu/domain/entities/models/di_zhi_shen_sha.dart';
@@ -8,6 +9,7 @@ import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_input.dart';
 import 'package:qizhengsiyu/domain/entities/models/star_to_star_relationship_model.dart';
 import 'package:qizhengsiyu/enums/enum_moon_phases.dart';
 import 'package:qizhengsiyu/enums/enum_panel_system_type.dart';
+import 'package:qizhengsiyu/enums/enum_qi_zheng.dart';
 import 'package:qizhengsiyu/enums/enum_star_position_status.dart';
 import 'package:qizhengsiyu/enums/enum_stars_four_type.dart';
 import 'package:qizhengsiyu/enums/enum_twelve_gong.dart';
@@ -101,6 +103,8 @@ class GeJuInputBuilder {
     CelestialCoordinateSystem coordinateSystem = CelestialCoordinateSystem.ecliptic,
     Set<String> preferredSchools = const {'guo_lao'},
   }) {
+    debugPrint('GeJu: starGongStatusMapper not provided — '
+        'starGongStatus conditions will evaluate to false');
     return build(
       panelModel: panelModel,
       starsSet: starsSet,
@@ -174,6 +178,8 @@ class GeJuInputBuilder {
   }
 
   /// 获取月相
+  /// MoonInfo.moonPhase 已由 buildElevenStarsSetFromPanel() 计算真实月相。
+  /// 此方法仅提取值，非 MoonInfo 类型时 fallback 为 New。
   static EnumMoonPhases _getMoonPhase(Set<ElevenStarsInfo> starsSet) {
     final moonInfo = starsSet.firstWhere(
       (s) => s.star == EnumStars.Moon,
@@ -260,9 +266,10 @@ class GeJuInputBuilder {
   /// 从 [BasePanelModel] 组装 [ElevenStarsInfo] 集合
   ///
   /// 用于在只有 [BasePanelModel] 的场景下调用 [GeJuEvaluationService]。
-  /// 月相默认 [EnumMoonPhases.New]（BasePanelModel 不存储月相）。
+  /// [birthDateTime] 出生日期时间，优先使用 tyme 农历方案计算月相；
+  /// 若未提供，则 fallback 到 Sweph 天文方案（从日月黄经差计算）。
   static Set<ElevenStarsInfo> buildElevenStarsSetFromPanel(
-      BasePanelModel panel) {
+      BasePanelModel panel, {DateTime? birthDateTime}) {
     final result = <ElevenStarsInfo>{};
 
     for (final entry in panel.starAngleMapper.entries) {
@@ -276,10 +283,21 @@ class GeJuInputBuilder {
       if (star == EnumStars.Sun) {
         info = SunInfo(angle: angle, enterInfo: enterInfo);
       } else if (star == EnumStars.Moon) {
+        final EnumMoonPhases moonPhase;
+        if (birthDateTime != null) {
+          // 优先: tyme 农历方案
+          moonPhase = EnumMoonPhases.fromDateTime(birthDateTime);
+        } else {
+          // 备选: Sweph 天文方案（从日月黄经差计算）
+          final sunAngle = panel.starAngleMapper[EnumStars.Sun]?.angle;
+          moonPhase = sunAngle != null
+              ? EnumMoonPhases.fromSunMoonAngle(angle, sunAngle)
+              : EnumMoonPhases.New;
+        }
         info = MoonInfo(
           angle: angle,
           enterInfo: enterInfo,
-          moonPhase: EnumMoonPhases.New,
+          moonPhase: moonPhase,
         );
       } else {
         final walkingType =

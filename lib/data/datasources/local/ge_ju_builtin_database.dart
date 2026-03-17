@@ -58,7 +58,15 @@ class GeJuBuiltInDatabase extends _$GeJuBuiltInDatabase {
 
   @override
   int get schemaVersion => 1;
-  // 不需要迁移——每次从 assets 覆盖，schema 始终最新
+
+  // 每次从 assets 覆盖，schema 始终最新，无需真正迁移
+  @override
+  MigrationStrategy get migration {
+    return MigrationStrategy(
+      onCreate: (Migrator m) async {},
+      onUpgrade: (Migrator m, int from, int to) async {},
+    );
+  }
 }
 
 /// 创建只读连接（每次启动从 assets 覆盖到 app support）

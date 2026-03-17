@@ -145,7 +145,8 @@ class StarPositionStatusDatasetModel<T extends Enum> {
 
   static T _positionFromJson<T>(dynamic json) {
     if (T == EnumTwelveGong) {
-      return EnumTwelveGong.getEnumTwelveGongByZhi(json) as T;
+      // json 是字符串，如 "戌"、"子"、"卯" 等
+      return EnumTwelveGong.fromStrZhi(json as String) as T;
     } else if (T == Enum28Constellations) {
       return Enum28Constellations.fromStarName(json) as T;
     }

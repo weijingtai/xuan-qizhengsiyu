@@ -15,6 +15,7 @@ class ShenShaItem extends StatelessWidget {
   final RingTextDirection shaTextDirection;
 
   const ShenShaItem({
+    super.key,
     required this.name,
     required this.index,
     required this.totalCount,

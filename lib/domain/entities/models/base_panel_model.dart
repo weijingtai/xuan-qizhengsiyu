@@ -31,6 +31,10 @@ class BasePanelModel {
   // 7. 计算化曜 - 改写为按星体分组的化曜映射
   final Map<EnumStars, List<HuaYaoItem>> huaYaoItemMapper;
 
+  // 7.1 原始化曜→星体映射（用于化曜展示面板）
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final Map<HuaYao, EnumStars> huaYaoMapper;
+
   // 8. 计算十二长生
   final Map<EnumTwelveGong, TwelveZhangSheng> twelveZhangShengGongMapper;
 
@@ -43,6 +47,7 @@ class BasePanelModel {
     required this.shenShaItemMapper,
     required this.huaYaoItemMapper,
     required this.twelveZhangShengGongMapper,
+    this.huaYaoMapper = const {},
   });
 
   factory BasePanelModel.fromJson(Map<String, dynamic> json) =>
@@ -59,6 +64,7 @@ class BasePanelModel {
     Map<EnumTwelveGong, List<ShenSha>>? shenShaItemMapper,
     Map<EnumStars, List<HuaYaoItem>>? huaYaoItemMapper,
     Map<EnumTwelveGong, TwelveZhangSheng>? twelveZhangShengGongMapper,
+    Map<HuaYao, EnumStars>? huaYaoMapper,
   }) {
     return BasePanelModel(
       starAngleMapper: starAngleMapper ?? this.starAngleMapper,
@@ -71,6 +77,7 @@ class BasePanelModel {
       huaYaoItemMapper: huaYaoItemMapper ?? this.huaYaoItemMapper,
       twelveZhangShengGongMapper:
           twelveZhangShengGongMapper ?? this.twelveZhangShengGongMapper,
+      huaYaoMapper: huaYaoMapper ?? this.huaYaoMapper,
     );
   }
 

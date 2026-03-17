@@ -26,6 +26,10 @@ class PassageYearPanelModel {
   // final Map<HuaYao, EnumStars> huaYaoMapper;
   final Map<EnumStars, List<HuaYaoItem>> huaYaoItemMapper;
 
+  // 7.1 原始化曜→星体映射（用于化曜展示面板）
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final Map<HuaYao, EnumStars> huaYaoMapper;
+
   // 8. 计算十二长生
   final Map<EnumTwelveGong, TwelveZhangSheng> twelveZhangShengGongMapper;
 
@@ -36,6 +40,7 @@ class PassageYearPanelModel {
     required this.shenShaItemMapper,
     required this.huaYaoItemMapper,
     required this.twelveZhangShengGongMapper,
+    this.huaYaoMapper = const {},
   });
 
   factory PassageYearPanelModel.fromJson(Map<String, dynamic> json) =>
@@ -51,6 +56,7 @@ class PassageYearPanelModel {
     Map<EnumTwelveGong, List<ShenSha>>? shenShaItemMapper,
     Map<EnumStars, List<HuaYaoItem>>? huaYaoItemMapper,
     Map<EnumTwelveGong, TwelveZhangSheng>? twelveZhangShengGongMapper,
+    Map<HuaYao, EnumStars>? huaYaoMapper,
   }) {
     return PassageYearPanelModel(
       starAngleMapper: starAngleMapper ?? this.starAngleMapper,
@@ -61,6 +67,7 @@ class PassageYearPanelModel {
       huaYaoItemMapper: huaYaoItemMapper ?? this.huaYaoItemMapper,
       twelveZhangShengGongMapper:
           twelveZhangShengGongMapper ?? this.twelveZhangShengGongMapper,
+      huaYaoMapper: huaYaoMapper ?? this.huaYaoMapper,
     );
   }
 }

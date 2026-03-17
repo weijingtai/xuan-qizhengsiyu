@@ -50,6 +50,8 @@ import 'package:qizhengsiyu/presentation/widgets/center_text_circle_widget.dart'
 import 'package:qizhengsiyu/controllers/panel_controller.dart';
 import 'package:qizhengsiyu/domain/entities/models/panel_config.dart'; // UI层使用的PanelConfig
 import 'package:qizhengsiyu/presentation/widgets/ge_ju/ge_ju_result_panel.dart';
+import 'package:qizhengsiyu/presentation/widgets/hua_yao/hua_yao_result_panel.dart';
+import 'package:qizhengsiyu/presentation/widgets/yuan_le/yuan_le_result_panel_v2.dart';
 
 import 'package:qizhengsiyu/enums/enum_panel_system_type.dart';
 import 'package:qizhengsiyu/enums/enum_settle_life_body.dart';
@@ -488,7 +490,13 @@ class _BeautyViewPageState extends State<BeautyViewPage>
             ),
 
             // ── 格局评估结果面板 ──
-            const GeJuResultPanel(),
+            const GeJuResultPanel(showDebugBar: true),
+
+            // ── 星体垣乐面板 ──
+            const YuanLeResultPanelV2(),
+
+            // ── 天星化曜面板 ──
+            const HuaYaoResultPanel(),
           ],
         ),
       ),
@@ -955,7 +963,7 @@ class _BeautyViewPageState extends State<BeautyViewPage>
                     );
                   });
             },
-            child: Container(
+            child: SizedBox(
               width: panelSizeDataModel.innerShenShaSizeOuter,
               height: panelSizeDataModel.innerShenShaSizeOuter,
             ),
@@ -998,7 +1006,7 @@ class _BeautyViewPageState extends State<BeautyViewPage>
                         );
                       });
                 },
-                child: Container(
+                child: SizedBox(
                   width: panelSizeDataModel.outerShenShaSizeOuter,
                   height: panelSizeDataModel.outerShenShaSizeOuter,
                 ));
@@ -1161,12 +1169,8 @@ class _BeautyViewPageState extends State<BeautyViewPage>
         children: [
           ...List.generate(
               1,
-              (i) => eachShenShaVertical(
-                  twelveZhangShengShenSha[i],
-                  4.2 * i + 2.0,
-                  basicRotatedAngle,
-                  outerSize,
-                  textStyle)).toList(growable: false),
+              (i) => eachShenShaVertical(twelveZhangShengShenSha[i],
+                  4.2 * i + 2.0, basicRotatedAngle, outerSize, textStyle)),
           ...List.generate(
               6,
               (i) => eachShenShaVertical(
@@ -1174,7 +1178,7 @@ class _BeautyViewPageState extends State<BeautyViewPage>
                   4.2 * i + 2.0,
                   basicRotatedAngle,
                   outerSize - 120,
-                  textStyle)).toList(growable: false),
+                  textStyle)),
         ],
       ),
     );
@@ -1188,12 +1192,8 @@ class _BeautyViewPageState extends State<BeautyViewPage>
           children: [
             ...List.generate(
                 7,
-                (i) => eachShenShaVertical(
-                    twelveZhangShengShenSha[i],
-                    4.2 * i + 2.0,
-                    basicRotatedAngle,
-                    outerSize,
-                    textStyle)).toList(growable: false),
+                (i) => eachShenShaVertical(twelveZhangShengShenSha[i],
+                    4.2 * i + 2.0, basicRotatedAngle, outerSize, textStyle)),
             ...List.generate(
                 6,
                 (i) => eachShenShaVertical(
@@ -1201,7 +1201,7 @@ class _BeautyViewPageState extends State<BeautyViewPage>
                     4.2 * i + 2.0,
                     basicRotatedAngle,
                     outerSize - 120,
-                    textStyle)).toList(growable: false),
+                    textStyle)),
           ],
         ),
       );
@@ -1214,12 +1214,8 @@ class _BeautyViewPageState extends State<BeautyViewPage>
           children: [
             ...List.generate(
                 7,
-                (i) => eachShenShaHorizontal(
-                    twelveZhangShengShenSha[i],
-                    4.2 * i + 2.0,
-                    basicRotatedAngle,
-                    outerSize,
-                    textStyle)).toList(growable: false),
+                (i) => eachShenShaHorizontal(twelveZhangShengShenSha[i],
+                    4.2 * i + 2.0, basicRotatedAngle, outerSize, textStyle)),
             ...List.generate(
                 6,
                 (i) => eachShenShaHorizontal(
@@ -1227,7 +1223,7 @@ class _BeautyViewPageState extends State<BeautyViewPage>
                     4.2 * i + 2.0,
                     basicRotatedAngle,
                     outerSize - 120,
-                    textStyle)).toList(growable: false),
+                    textStyle)),
           ],
         ),
       );
