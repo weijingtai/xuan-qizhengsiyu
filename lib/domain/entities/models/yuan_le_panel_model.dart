@@ -49,8 +49,11 @@ class YuanLeStarInfo {
   /// 分数部分（0-59）
   final int minutes;
 
-  /// 庙旺落陷等状态（如"庙"、"旺"、"喜"、"乐"、"怒"、"凶"）
-  final EnumStarGongPositionStatusType? positionStatus;
+  /// 庙旺落陷等状态 - 宫位 (Palace)
+  final EnumStarGongPositionStatusType? gongPositionStatus;
+
+  /// 庙旺落陷等状态 - 星宿 (Constellation)
+  final EnumStarGongPositionStatusType? innPositionStatus;
 
   /// 星体运行状态（迟/留/伏/逆）
   final String? walkingStatus;
@@ -67,6 +70,9 @@ class YuanLeStarInfo {
   /// 星体进入的宫位名称
   final String gongName;
 
+  /// 此星宿的总度数
+  final double constellationTotalDegree;
+
   YuanLeStarInfo({
     required this.star,
     required this.constellationName,
@@ -74,17 +80,19 @@ class YuanLeStarInfo {
     required this.minutes,
     required this.gongDegree,
     required this.gongName,
-    this.positionStatus,
+    this.gongPositionStatus,
+    this.innPositionStatus,
     this.walkingStatus,
     this.isBodyLifeMaster = false,
     this.label = '',
+    this.constellationTotalDegree = 30.0,
   });
 
-  /// 格式化显示：星宿:度.分
+  /// 格式化显示：星宿 度.分/总度数
   String get formattedDegree {
     final degInt = degree.toInt();
     final minutesFrac = ((degree - degInt) * 60).toInt();
-    return '$constellationName:$degInt.${minutesFrac.toString().padLeft(2, '0')}';
+    return '$constellationName $degInt.${minutesFrac.toString().padLeft(2, '0')}/${constellationTotalDegree.toStringAsFixed(2)}';
   }
 
   /// 格式化入宫度数：宫位度.分
@@ -106,10 +114,12 @@ class YuanLeStarInfo {
     int? minutes,
     double? gongDegree,
     String? gongName,
-    EnumStarGongPositionStatusType? positionStatus,
+    EnumStarGongPositionStatusType? gongPositionStatus,
+    EnumStarGongPositionStatusType? innPositionStatus,
     String? walkingStatus,
     bool? isBodyLifeMaster,
     String? label,
+    double? constellationTotalDegree,
   }) {
     return YuanLeStarInfo(
       star: star ?? this.star,
@@ -118,10 +128,13 @@ class YuanLeStarInfo {
       minutes: minutes ?? this.minutes,
       gongDegree: gongDegree ?? this.gongDegree,
       gongName: gongName ?? this.gongName,
-      positionStatus: positionStatus ?? this.positionStatus,
+      gongPositionStatus: gongPositionStatus ?? this.gongPositionStatus,
+      innPositionStatus: innPositionStatus ?? this.innPositionStatus,
       walkingStatus: walkingStatus ?? this.walkingStatus,
       isBodyLifeMaster: isBodyLifeMaster ?? this.isBodyLifeMaster,
       label: label ?? this.label,
+      constellationTotalDegree:
+          constellationTotalDegree ?? this.constellationTotalDegree,
     );
   }
 }

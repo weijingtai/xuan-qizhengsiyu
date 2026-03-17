@@ -214,7 +214,7 @@ class _TableLayout extends StatelessWidget {
     final groups = <String, List<YuanLeStarInfo>>{};
 
     for (final star in stars) {
-      final status = star.positionStatus?.name ?? '其他';
+      final status = star.gongPositionStatus?.name ?? '其他';
       groups.putIfAbsent(status, () => []).add(star);
     }
 

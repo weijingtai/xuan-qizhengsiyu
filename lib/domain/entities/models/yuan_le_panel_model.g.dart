@@ -29,11 +29,15 @@ YuanLeStarInfo _$YuanLeStarInfoFromJson(Map<String, dynamic> json) =>
       minutes: (json['minutes'] as num).toInt(),
       gongDegree: (json['gongDegree'] as num).toDouble(),
       gongName: json['gongName'] as String,
-      positionStatus: $enumDecodeNullable(
-          _$EnumStarGongPositionStatusTypeEnumMap, json['positionStatus']),
+      gongPositionStatus: $enumDecodeNullable(
+          _$EnumStarGongPositionStatusTypeEnumMap, json['gongPositionStatus']),
+      innPositionStatus: $enumDecodeNullable(
+          _$EnumStarGongPositionStatusTypeEnumMap, json['innPositionStatus']),
       walkingStatus: json['walkingStatus'] as String?,
       isBodyLifeMaster: json['isBodyLifeMaster'] as bool? ?? false,
       label: json['label'] as String? ?? '',
+      constellationTotalDegree:
+          (json['constellationTotalDegree'] as num?)?.toDouble() ?? 30.0,
     );
 
 Map<String, dynamic> _$YuanLeStarInfoToJson(YuanLeStarInfo instance) =>
@@ -42,13 +46,16 @@ Map<String, dynamic> _$YuanLeStarInfoToJson(YuanLeStarInfo instance) =>
       'constellationName': instance.constellationName,
       'degree': instance.degree,
       'minutes': instance.minutes,
-      'positionStatus':
-          _$EnumStarGongPositionStatusTypeEnumMap[instance.positionStatus],
+      'gongPositionStatus':
+          _$EnumStarGongPositionStatusTypeEnumMap[instance.gongPositionStatus],
+      'innPositionStatus':
+          _$EnumStarGongPositionStatusTypeEnumMap[instance.innPositionStatus],
       'walkingStatus': instance.walkingStatus,
       'isBodyLifeMaster': instance.isBodyLifeMaster,
       'label': instance.label,
       'gongDegree': instance.gongDegree,
       'gongName': instance.gongName,
+      'constellationTotalDegree': instance.constellationTotalDegree,
     };
 
 const _$EnumStarsEnumMap = {

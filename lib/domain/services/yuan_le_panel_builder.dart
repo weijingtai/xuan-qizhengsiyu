@@ -1,7 +1,8 @@
 import 'dart:convert';
 
 import 'package:common/enums.dart';
-import 'package:flutter/services.dart' show rootBundle;
+import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:qizhengsiyu/dataset/star_position_status_model.dart';
 import 'package:qizhengsiyu/domain/entities/models/base_panel_model.dart';
 import 'package:qizhengsiyu/domain/entities/models/passage_year_panel_model.dart';
@@ -9,52 +10,43 @@ import 'package:qizhengsiyu/domain/entities/models/star_enter_info.dart';
 import 'package:qizhengsiyu/domain/entities/models/yuan_le_panel_model.dart';
 import 'package:qizhengsiyu/domain/entities/models/body_life_model.dart';
 import 'package:qizhengsiyu/domain/entities/models/stars_angle.dart';
+import 'package:qizhengsiyu/domain/entities/models/zhou_tian_model.dart';
+import 'package:qizhengsiyu/domain/entities/models/naming_degree_pair.dart';
 import 'package:qizhengsiyu/enums/enum_star_position_status.dart';
-import 'package:qizhengsiyu/enums/enum_twelve_gong.dart';
+
+import '../../enums/enum_twelve_gong.dart';
 
 /// 构建垣乐面板的 Builder 服务
 class YuanLePanelBuilder {
-  // 缓存星体位置状态数据
+  /// 缓存星体位置状态数据
   static List<StarPositionStatusDatasetModel<EnumTwelveGong>>? _cachedStatusData;
 
-  /// 从 assets 加载星体位置状态数据（带缓存）
-  static Future<List<StarPositionStatusDatasetModel<EnumTwelveGong>>>
-      _loadStarPositionStatusData() async {
+  /// 加载星体位置状态数据（从 JSON 资源）
+  static Future<List<StarPositionStatusDatasetModel<EnumTwelveGong>>> _loadStarPositionStatusData() async {
     if (_cachedStatusData != null) {
       return _cachedStatusData!;
     }
 
     try {
-      final jsonString = await rootBundle
-          .loadString('assets/qizhengsiyu/star_position_status.json');
-      final jsonList = jsonDecode(jsonString) as List<dynamic>;
+      final jsonString =
+          await rootBundle.loadString('assets/qizhengsiyu/star_position_status.json');
+      final jsonList = JsonDecoder().convert(jsonString) as List<dynamic>;
 
-      print('[YuanLePanelBuilder] Loaded ${jsonList.length} position status records');
-
-      final parsed = <StarPositionStatusDatasetModel<EnumTwelveGong>>[];
-      for (final item in jsonList) {
+      final statusDataList = <StarPositionStatusDatasetModel<EnumTwelveGong>>[];
+      for (final json in jsonList) {
         try {
-          final record = StarPositionStatusDatasetModel<EnumTwelveGong>.fromJson(
-              item as Map<String, dynamic>);
-          parsed.add(record);
+          final model = StarPositionStatusDatasetModel<EnumTwelveGong>.fromJson(
+              json as Map<String, dynamic>);
+          statusDataList.add(model);
         } catch (e) {
-          // Skip records that fail to parse (e.g., those with 28-constellation positions)
-          print('[YuanLePanelBuilder] Skipped record (likely constellation-based): ${item['star']} in ${item['positionList']}');
+          // 跳过非宫位记录（如二十八宿数据），静默忽略
         }
       }
 
-      _cachedStatusData = parsed;
-
-      print('[YuanLePanelBuilder] Successfully parsed ${_cachedStatusData!.length} records');
-      // 打印前几条记录用于调试
-      for (var i = 0; i < (_cachedStatusData!.length < 3 ? _cachedStatusData!.length : 3); i++) {
-        final record = _cachedStatusData![i];
-        print('[YuanLePanelBuilder] Record $i: star=${record.star}, status=${record.starPositionStatusType}, positions=${record.positionList}');
-      }
-
-      return _cachedStatusData!;
+      _cachedStatusData = statusDataList;
+      return statusDataList;
     } catch (e) {
-      print('[YuanLePanelBuilder] Error loading star position status data: $e');
+      debugPrint('[YuanLePanelBuilder] Error loading status data: $e');
       return [];
     }
   }
@@ -63,16 +55,15 @@ class YuanLePanelBuilder {
   static Future<YuanLePanel> build(
     BasePanelModel natalPanel, {
     PassageYearPanelModel? transitPanel,
+    ZhouTianModel? zhouTianModel,
   }) async {
-    print('[YuanLePanelBuilder] Starting to load position status data...');
     // 加载星体位置状态数据
     final statusDataList = await _loadStarPositionStatusData();
-    print('[YuanLePanelBuilder] Loaded statusDataList with ${statusDataList.length} records');
 
-    final natalStars = _buildStarListFromBasePanel(natalPanel,
-        statusDataList: statusDataList);
+    final natalStars =
+        _buildStarListFromBasePanel(natalPanel, statusDataList, zhouTianModel);
     final transitStars = transitPanel != null
-        ? _buildStarListFromTransitPanel(transitPanel, statusDataList: statusDataList)
+        ? _buildStarListFromTransitPanel(transitPanel, statusDataList)
         : null;
 
     return YuanLePanel(
@@ -83,8 +74,10 @@ class YuanLePanelBuilder {
 
   /// 从 BasePanelModel 构建星体列表
   static List<YuanLeStarInfo> _buildStarListFromBasePanel(
-      BasePanelModel panelModel,
-      {List<StarPositionStatusDatasetModel<EnumTwelveGong>>? statusDataList}) {
+    BasePanelModel panelModel,
+    List<StarPositionStatusDatasetModel<EnumTwelveGong>> statusDataList,
+    ZhouTianModel? zhouTianModel,
+  ) {
     final starList = <YuanLeStarInfo>[];
 
     // 添加命主和身主（特殊处理）
@@ -104,7 +97,7 @@ class YuanLePanelBuilder {
       ),
     );
 
-    // 添加普通五星（日、月、金、木、水、火、土）以及罗、计、炁、孛
+    // 添加普通五星（日、月、金、木、水、火、土、罗、计、炁、孛）
     final fiveStars = [
       EnumStars.Sun,
       EnumStars.Moon,
@@ -113,10 +106,10 @@ class YuanLePanelBuilder {
       EnumStars.Mars,
       EnumStars.Jupiter,
       EnumStars.Saturn,
-      EnumStars.Luo,        // 罗
-      EnumStars.Ji,         // 计
-      EnumStars.Qi,         // 炁
-      EnumStars.Bei,        // 孛
+      EnumStars.Luo,      // 罗
+      EnumStars.Ji,       // 计
+      EnumStars.Qi,       // 炁
+      EnumStars.Bei,      // 孛
     ];
 
     for (final star in fiveStars) {
@@ -124,13 +117,36 @@ class YuanLePanelBuilder {
       final fiveStarWalkingInfo = panelModel.fiveStarWalkingTypeMapper[star];
 
       if (enteredInfo != null) {
+        // 获取星宿总度数 (从 ViewModel 获取或默认为 30.0)
+        double constellationTotalDegree = 30.0;
+        final zhouTian = zhouTianModel;
+        if (zhouTian != null) {
+          final constellationDegree = zhouTian.starInnDegreeSeq.firstWhere(
+            (e) => e.constellation == enteredInfo.inn,
+            orElse: () => ConstellationDegree(
+                constellation: enteredInfo.inn, 
+                degree: 30.0,
+            ),
+          );
+          constellationTotalDegree = constellationDegree.degree;
+        }
+
         starList.add(
           _buildStarInfo(
             star: star,
             enteredInfo: enteredInfo,
             fiveStarWalkingInfo: fiveStarWalkingInfo,
-            positionStatusType: _getPositionStatus(star, enteredInfo.gong,
-                statusDataList: statusDataList),
+            gongPositionStatus: _queryPositionStatus<EnumTwelveGong>(
+              star,
+              enteredInfo.gong,
+              statusDataList,
+            ),
+            innPositionStatus: _queryPositionStatus<Enum28Constellations>(
+              star,
+              enteredInfo.inn,
+              statusDataList,
+            ),
+            constellationTotalDegree: constellationTotalDegree,
           ),
         );
       }
@@ -143,13 +159,14 @@ class YuanLePanelBuilder {
 
   /// 从 PassageYearPanelModel 构建星体列表
   static List<YuanLeStarInfo> _buildStarListFromTransitPanel(
-      PassageYearPanelModel panelModel,
-      {List<StarPositionStatusDatasetModel<EnumTwelveGong>>? statusDataList}) {
+    PassageYearPanelModel panelModel,
+    List<StarPositionStatusDatasetModel<EnumTwelveGong>> statusDataList,
+  ) {
     final starList = <YuanLeStarInfo>[];
 
     // 流年盘没有身命信息，所以跳过命主和身主
 
-    // 添加普通五星（日、月、金、木、水、火、土）以及罗、计、炁、孛
+    // 添加普通五星（日、月、金、木、水、火、土、罗、计、炁、孛）
     final fiveStars = [
       EnumStars.Sun,
       EnumStars.Moon,
@@ -158,10 +175,10 @@ class YuanLePanelBuilder {
       EnumStars.Mars,
       EnumStars.Jupiter,
       EnumStars.Saturn,
-      EnumStars.Luo,        // 罗
-      EnumStars.Ji,         // 计
-      EnumStars.Qi,         // 炁
-      EnumStars.Bei,        // 孛
+      EnumStars.Luo,      // 罗
+      EnumStars.Ji,       // 计
+      EnumStars.Qi,       // 炁
+      EnumStars.Bei,      // 孛
     ];
 
     for (final star in fiveStars) {
@@ -174,8 +191,17 @@ class YuanLePanelBuilder {
             star: star,
             enteredInfo: enteredInfo,
             fiveStarWalkingInfo: fiveStarWalkingInfo,
-            positionStatusType: _getPositionStatus(star, enteredInfo.gong,
-                statusDataList: statusDataList),
+            gongPositionStatus: _queryPositionStatus<EnumTwelveGong>(
+              star,
+              enteredInfo.gong,
+              statusDataList,
+            ),
+            innPositionStatus: _queryPositionStatus<Enum28Constellations>(
+              star,
+              enteredInfo.inn,
+              statusDataList,
+            ),
+            constellationTotalDegree: 30.0,
           ),
         );
       }
@@ -207,8 +233,10 @@ class YuanLePanelBuilder {
       minutes: ((degree - degree.toInt()) * 60).toInt(),
       isBodyLifeMaster: true,
       label: isLife ? '命主' : '身主',
-      positionStatus: null,
+      gongPositionStatus: null,
+      innPositionStatus: null,
       walkingStatus: null,
+      constellationTotalDegree: 30.0, // 命身宿总度数通常固定或需从 ZhouTianModel 获取
     );
   }
 
@@ -217,7 +245,9 @@ class YuanLePanelBuilder {
     required EnumStars star,
     required EnteredInfo enteredInfo,
     required BaseFiveStarWalkingInfo? fiveStarWalkingInfo,
-    required EnumStarGongPositionStatusType? positionStatusType,
+    required EnumStarGongPositionStatusType? gongPositionStatus,
+    required EnumStarGongPositionStatusType? innPositionStatus,
+    required double constellationTotalDegree,
   }) {
     final innDegree = enteredInfo.atInnDegree;
     final gongDegree = enteredInfo.atGongDegree;
@@ -231,36 +261,66 @@ class YuanLePanelBuilder {
       minutes: ((innDegree - innDegree.toInt()) * 60).toInt(),
       gongDegree: gongDegree,
       gongName: gongName,
-      positionStatus: positionStatusType,
+      gongPositionStatus: gongPositionStatus,
+      innPositionStatus: innPositionStatus,
       walkingStatus: _formatWalkingStatus(fiveStarWalkingInfo),
       isBodyLifeMaster: false,
       label: '',
+      constellationTotalDegree: constellationTotalDegree,
     );
   }
 
-  /// 获取星体在宫位的垣位状态（庙旺喜乐落陷等）
-  /// 基于 StarPositionStatusDatasetModel 的数据查询
-  static EnumStarGongPositionStatusType? _getPositionStatus(
+  /// 从数据库查询星体在宫位或星宿的垣位状态
+  /// 返回第一个匹配的状态（按优先级）
+  static EnumStarGongPositionStatusType? _queryPositionStatus<T extends Enum>(
     EnumStars star,
-    EnumTwelveGong gong, {
-    List<StarPositionStatusDatasetModel<EnumTwelveGong>>? statusDataList,
-  }) {
-    if (statusDataList == null || statusDataList.isEmpty) {
-      print('[YuanLePanelBuilder] No status data available for $star in $gong');
-      return null;
-    }
+    T position,
+    List<StarPositionStatusDatasetModel<EnumTwelveGong>> statusDataList,
+  ) {
+    final statuses = <EnumStarGongPositionStatusType>[];
 
-    // 查找该星在该宫位的第一个匹配状态
-    // 优先级：如果一个宫位有多个状态，返回第一个找到的
+    // 查找该星在该位置的所有状态
     for (var data in statusDataList) {
-      if (data.star == star && data.positionList.contains(gong)) {
-        print('[YuanLePanelBuilder] Found status for $star in $gong: ${data.starPositionStatusType}');
-        return data.starPositionStatusType;
+      // 检查 data.positionList 是否包含 position
+      // 注意：data.positionList 的泛型可能与 T 不匹配，但运行时内容应该是对应的 Enum
+      if (data.star == star) {
+        bool match = false;
+        for (var p in data.positionList) {
+          if (p == position) {
+            match = true;
+            break;
+          }
+        }
+        if (match) {
+          statuses.add(data.starPositionStatusType);
+        }
       }
     }
 
-    print('[YuanLePanelBuilder] No match found for $star in $gong');
-    return null;
+    if (statuses.isEmpty) return null;
+
+    // 优先级排序：庙 > 旺 > 喜 > 乐 > 正 > 垣 > 殿 > 贵 > 偏 > 怒 > 凶
+    const priorityOrder = [
+      EnumStarGongPositionStatusType.Miao,    // 庙
+      EnumStarGongPositionStatusType.Wang,    // 旺
+      EnumStarGongPositionStatusType.Xi,      // 喜
+      EnumStarGongPositionStatusType.Le,      // 乐
+      EnumStarGongPositionStatusType.Zheng,   // 正
+      EnumStarGongPositionStatusType.Yuan,    // 垣
+      EnumStarGongPositionStatusType.Dian,    // 殿
+      EnumStarGongPositionStatusType.Gui,     // 贵
+      EnumStarGongPositionStatusType.Pian,    // 偏
+      EnumStarGongPositionStatusType.Nu,      // 怒
+      EnumStarGongPositionStatusType.Xiong,   // 凶
+    ];
+
+    for (final priority in priorityOrder) {
+      if (statuses.contains(priority)) {
+        return priority;
+      }
+    }
+
+    return statuses.first;
   }
 
   /// 格式化星体运行状态（迟/留/伏/逆）
@@ -271,3 +331,4 @@ class YuanLePanelBuilder {
     return walkingType.name; // 返回 FiveStarWalkingType 的名称（迟/留/伏/逆等）
   }
 }
+
