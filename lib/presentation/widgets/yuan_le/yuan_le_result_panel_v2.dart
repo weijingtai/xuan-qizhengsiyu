@@ -31,16 +31,24 @@ class _CV2 {
   static const statusNone = Color(0xFF64748B);
   static const statusNoneBg = Color(0xFFF8FAFC);
 
-  // 动态状态 (逆行/运行状态)
-  static const walkingNegativeColor = Color(0xFF10B981); // 翠绿 (也即 retrogradeColor)
-  static const walkingNegativeBg = Color(0xFFECFDF5);
-  static const walkingPositiveColor = Color(0xFF0EA5E9); // 天蓝
-  static const walkingPositiveBg = Color(0xFFF0F9FF);
+  // 动态状态 — 凶向（迟留伏逆、金速）用红/暖色，吉向（速）用绿/冷色
+  // 与 GeJuResultPanel 的吉凶语义保持一致：红=凶, 绿=吉
 
-  @Deprecated('Use walkingNegativeColor')
-  static const retrogradeColor = walkingNegativeColor;
-  @Deprecated('Use walkingNegativeBg')
-  static const retrogradeBg = walkingNegativeBg;
+  // 吉向（速，非金星）
+  static const walkingPositiveColor = Color(0xFF059669); // 翠绿
+  static const walkingPositiveBg = Color(0xFFECFDF5);
+
+  // 凶向分级（严重度递增：迟 → 速(金) → 留 → 逆 → 伏）
+  static const walkingChiColor = Color(0xFFF59E0B); // 琥珀 — 迟（轻微）
+  static const walkingChiBg = Color(0xFFFEFCE8);
+  static const walkingSuJinColor = Color(0xFFF97316); // 橙色 — 速(金)
+  static const walkingSuJinBg = Color(0xFFFFF7ED);
+  static const walkingLiuColor = Color(0xFFEF4444); // 红色 — 留
+  static const walkingLiuBg = Color(0xFFFEF2F2);
+  static const walkingNiColor = Color(0xFFDC2626); // 深红 — 逆
+  static const walkingNiBg = Color(0xFFFEE2E2);
+  static const walkingFuColor = Color(0xFF991B1B); // 暗红 — 伏（最严重）
+  static const walkingFuBg = Color(0xFFFEE2E2);
 }
 
 /// 垣乐展示面板 V2（表格式布局）
@@ -380,20 +388,20 @@ class _V2SwitchableTableLayoutState extends State<_V2SwitchableTableLayout> {
 
     final status = star.walkingStatus;
     if (status != null && status != '常') {
-      final isNegative = _isWalkingNegative(star);
-      final overlayColor =
-          isNegative ? _CV2.walkingNegativeBg : _CV2.walkingPositiveBg;
-      return Color.alphaBlend(overlayColor.withOpacity(0.5), baseBg);
+      final colors = _getWalkingColors(star);
+      if (colors != null) {
+        return Color.alphaBlend(colors.$2.withOpacity(0.5), baseBg);
+      }
     }
 
     return baseBg;
   }
 
-  bool _isWalkingNegative(YuanLeStarInfo star) {
+  /// 根据五星运行状态返回 (前景色, 背景色)，非五星或常态返回 null
+  static (Color, Color)? _getWalkingColors(YuanLeStarInfo star) {
     final status = star.walkingStatus;
-    if (status == null || status == '常') return false;
+    if (status == null || status == '常') return null;
 
-    // 只处理五星：金木水火土
     const fiveStars = [
       EnumStars.Mercury,
       EnumStars.Venus,
@@ -401,12 +409,25 @@ class _V2SwitchableTableLayoutState extends State<_V2SwitchableTableLayout> {
       EnumStars.Jupiter,
       EnumStars.Saturn
     ];
-    if (!fiveStars.contains(star.star)) return false;
+    if (!fiveStars.contains(star.star)) return null;
 
-    if (['迟', '留', '伏', '逆'].contains(status)) return true;
-    if (status == '速' && star.star == EnumStars.Venus) return true;
-
-    return false;
+    switch (status) {
+      case '伏':
+        return (_CV2.walkingFuColor, _CV2.walkingFuBg);
+      case '逆':
+        return (_CV2.walkingNiColor, _CV2.walkingNiBg);
+      case '留':
+        return (_CV2.walkingLiuColor, _CV2.walkingLiuBg);
+      case '迟':
+        return (_CV2.walkingChiColor, _CV2.walkingChiBg);
+      case '速':
+        if (star.star == EnumStars.Venus) {
+          return (_CV2.walkingSuJinColor, _CV2.walkingSuJinBg);
+        }
+        return (_CV2.walkingPositiveColor, _CV2.walkingPositiveBg);
+      default:
+        return null;
+    }
   }
 }
 
@@ -560,32 +581,11 @@ class _V2DynamicStatus extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final status = star.walkingStatus;
-    if (status == null || status == '常') return const SizedBox.shrink();
+    final colors = _V2SwitchableTableLayoutState._getWalkingColors(star);
+    if (colors == null) return const SizedBox.shrink();
 
-    // 运行状态逻辑划分 (只处理五星: 金木水火土)
-    final fiveStars = [
-      EnumStars.Mercury,
-      EnumStars.Venus,
-      EnumStars.Mars,
-      EnumStars.Jupiter,
-      EnumStars.Saturn
-    ];
-    if (!fiveStars.contains(star.star)) return const SizedBox.shrink();
-
-    // 正负向判断
-    bool isNegative = false;
-    if (['迟', '留', '伏', '逆'].contains(status)) {
-      isNegative = true;
-    } else if (status == '速') {
-      // 金星之速为负，其他为正
-      isNegative = (star.star == EnumStars.Venus);
-    }
-
-    final color =
-        isNegative ? _CV2.walkingNegativeColor : _CV2.walkingPositiveColor;
-    final bgColor =
-        isNegative ? _CV2.walkingNegativeBg : _CV2.walkingPositiveBg;
+    final (color, bgColor) = colors;
+    final status = star.walkingStatus!;
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),

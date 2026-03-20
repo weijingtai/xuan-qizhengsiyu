@@ -92,7 +92,15 @@ class HuaYaoResultPanel extends StatelessWidget {
 
   /// 这些化曜基于命宫/固定条件推算，流年不改变结果，不显示流年星
   static const _natalOnlyNames = {
-    '人元禄', '地元禄', '天元禄', '科甲', '天经', '地纬', '局主', '职元', '值难',
+    '人元禄',
+    '地元禄',
+    '天元禄',
+    '科甲',
+    '天经',
+    '地纬',
+    '局主',
+    '职元',
+    '值难',
   };
 
   List<_HuaYaoDisplayItem> _buildDisplayItems(
@@ -159,7 +167,6 @@ class HuaYaoResultPanel extends StatelessWidget {
         groups.add(_HuaYaoGroup(items: remaining));
       }
     }
-
     return groups;
   }
 }
@@ -302,32 +309,8 @@ class _HuaYaoUnifiedCard extends StatelessWidget {
     );
   }
 
-  /// 阴阳胶囊：上半本命（暖色），下半流年（冷色）
+  /// 阴阳胶囊：上半本命（暖色），下半流年（冷色），始终双色显示
   Widget _capsuleCell(_HuaYaoDisplayItem item) {
-    if (!hasTransit) {
-      // 无流年：单色圆角
-      return Container(
-        width: 36,
-        height: 24,
-        margin: const EdgeInsets.symmetric(horizontal: 1),
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          color: _C.natalBg,
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: _C.natalBorder, width: 0.5),
-        ),
-        child: Text(
-          item.natalStar.singleName,
-          style: const TextStyle(
-            fontSize: 13,
-            fontWeight: FontWeight.w700,
-            color: _C.natalText,
-          ),
-        ),
-      );
-    }
-
-    // 有流年：竖直阴阳胶囊
     final showTransit = !item.natalOnly && item.transitStar != null;
     return Container(
       width: 36,
@@ -354,25 +337,22 @@ class _HuaYaoUnifiedCard extends StatelessWidget {
               ),
             ),
           ),
-          // 下：流年（冷色）
+          // 下：流年（冷色）或占位符
           Container(
             height: 22,
             alignment: Alignment.center,
-            color: showTransit ? _C.transitBg : null,
-            child: showTransit
-                ? Text(
-                    item.transitStar!.singleName,
-                    style: const TextStyle(
-                      fontSize: 13,
-                      fontWeight: FontWeight.w700,
-                      color: _C.transitText,
-                    ),
-                  )
-                : null,
+            color: showTransit ? _C.transitBg : _C.badgeBg,
+            child: Text(
+              showTransit ? item.transitStar!.singleName : '—',
+              style: TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.w700,
+                color: showTransit ? _C.transitText : _C.textMuted,
+              ),
+            ),
           ),
         ],
       ),
     );
   }
 }
-

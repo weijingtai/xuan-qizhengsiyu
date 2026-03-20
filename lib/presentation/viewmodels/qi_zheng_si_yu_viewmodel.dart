@@ -697,6 +697,7 @@ class QiZhengSiYuViewModel extends ChangeNotifier {
 
     try {
       // 调用流年计算服务
+      debugPrint("[DaXian] Step 1: Creating panel service...");
       final panelService = GenerateBasePanelService(
         panelConfig: _buildDefaultConfig(_lifeObserver!),
         observerPosition: _lifeObserver!,
@@ -705,20 +706,30 @@ class QiZhengSiYuViewModel extends ChangeNotifier {
       );
 
       // 重新计算流年星体位置
+      debugPrint("[DaXian] Step 2: Building config & engine...");
       final config = _buildDefaultConfig(_lifeObserver!);
       final engine = CalculationEngineFactory.create(config);
+
+      debugPrint("[DaXian] Step 3: Getting system definition...");
       final zhouTianModel = await engine.getSystemDefinition(config);
+
+      debugPrint("[DaXian] Step 4: Calculating star positions for $targetDateTime...");
       final starPositions = await engine.calculateStarPositions(
           _fateObserver!.dateTime, _fateObserver!, config);
+
+      debugPrint("[DaXian] Step 5: Transforming star positions...");
       final starAngleMapper = _transformStarPositions(starPositions, config);
 
       // 计算流年盘
+      debugPrint("[DaXian] Step 6: Calculating DaXia panel...");
       final passageYearPanel = await panelService.calculateDaXia(
         _basicLifePanel!,
         _fateObserver!,
         zhouTianModel: zhouTianModel,
         starAngleMapper: starAngleMapper,
       );
+
+      debugPrint("[DaXian] Step 7: Success! huaYaoMapper entries: ${passageYearPanel.huaYaoMapper.length}");
 
       // 计算流年星体UI数据
       _uiFateLifeStars = _calculateUIStarsFromMapper(
@@ -735,8 +746,9 @@ class QiZhengSiYuViewModel extends ChangeNotifier {
 
       debugPrint("Fate panel calculated successfully for $targetDateTime");
       debugPrint("Fate stars count: ${_uiFateLifeStars.length}");
-    } catch (e) {
+    } catch (e, stackTrace) {
       debugPrint("Error calculating fate panel: $e");
+      debugPrint("Stack trace: $stackTrace");
       _uiFateLifeStars = [];
       uiDaXianPanelNotifier.value = null;
       uiFateLifeStarsNotifier.value = null;

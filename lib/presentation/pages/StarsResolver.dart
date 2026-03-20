@@ -814,7 +814,7 @@ class StarsResolver {
             tmpInRangeResult.item3 == null)) {
       throw Exception(isLeft
           ? "${star.star.starName}(${star.angle}) 不在 距离centerConstellation${constellation.edges} rightEdge更近的角度范围内"
-          : "${star.star.starName}(${star.angle}) 在但距离centerConstellation${constellation.edges} leftEdge更近的角度范围内");
+          : "${star.star.starName}(${star.angle}) 在，但距离centerConstellation${constellation.edges} leftEdge更近的角度范围内");
     }
     if (isLeft) {
       star.toLeftAdjustAngle(tmpInRangeResult.item2!);
