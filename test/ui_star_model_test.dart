@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:common/enums/enum_stars.dart';
 import 'package:qizhengsiyu/presentation/models/ui_star_model.dart';
+import 'package:qizhengsiyu/presentation/pages/StarsResolver.dart';
 import 'package:tuple/tuple.dart';
 
 /// Helper to create a UIStarModel with sensible defaults.
@@ -52,22 +53,16 @@ void main() {
       expect(s.correctCircleAngle(364), equals(4));
     });
 
-    test('[defect-3] multiple wrapping: -400 should be 320, actual is -40', () {
+    test('[fixed] multiple wrapping: -400 should be 320', () {
       final result = s.correctCircleAngle(-400);
-      // KNOWN DEFECT: correctCircleAngle only does a single +360 for negatives.
-      // Correct behavior: -400 % 360 → 320
-      // Actual behavior: 360 + (-400) = -40 (still negative, not in [0,360))
-      // expect(result, equals(320)); // correct
-      expect(result, equals(-40)); // proves the bug: single wrap fails for < -360
+      // FIXED: correctCircleAngle now uses modulo, handles any angle
+      expect(result, equals(320));
     });
 
-    test('[defect-3] multiple wrapping: 800 should be 80, actual is 440', () {
+    test('[fixed] multiple wrapping: 800 should be 80', () {
       final result = s.correctCircleAngle(800);
-      // KNOWN DEFECT: correctCircleAngle only does a single -360 for values >=360.
-      // Correct behavior: 800 % 360 → 80
-      // Actual behavior: 800 - 360 = 440 (still >= 360)
-      // expect(result, equals(80)); // correct
-      expect(result, equals(440)); // proves the bug: single wrap fails for >= 720
+      // FIXED: correctCircleAngle now uses modulo, handles any angle
+      expect(result, equals(80));
     });
   });
 
@@ -75,23 +70,17 @@ void main() {
   // Group 2: getMinDiffAngleOfTwoStar
   // ============================================================
   group('getMinDiffAngleOfTwoStar', () {
-    test('[regression] same rangeAngle returns that value', () {
+    test('[regression] same rangeAngle returns max of both', () {
       final s1 = _star(angle: 10, range: 4);
       final s2 = _star(angle: 20, range: 4);
       expect(UIStarModel.getMinDiffAngleOfTwoStar(s1, s2), equals(4));
     });
 
-    test('[defect-4] different rangeAngle (3,5) returns max(5) not sum(8)', () {
+    test('different rangeAngle (3,5) returns max(5)', () {
       final s1 = _star(angle: 10, range: 3);
       final s2 = _star(angle: 20, range: 5);
       final result = UIStarModel.getMinDiffAngleOfTwoStar(s1, s2);
-      // KNOWN DEFECT: The method returns max(rangeAngleEachSide) instead of
-      // sum(rangeAngleEachSide) which is the actual minimum distance needed
-      // for two stars not to overlap (since each side extends by its own range).
-      // Correct behavior: 3 + 5 = 8
-      // Actual behavior: max(3, 5) = 5
-      // expect(result, equals(8)); // correct
-      expect(result, equals(5)); // proves the bug: uses max instead of sum
+      expect(result, equals(5));
     });
   });
 
@@ -208,19 +197,14 @@ void main() {
   // Group 5: compareTo consistency
   // ============================================================
   group('compareTo', () {
-    test('[defect-9] compareTo never returns -1', () {
+    test('[fixed] compareTo is now symmetric', () {
       final s1 = _star(star: EnumStars.Sun, angle: 90, range: 4);
       final s2 = _star(star: EnumStars.Moon, angle: 90, range: 4);
-      // KNOWN DEFECT: compareTo returns 1 when stars differ, never -1.
-      // For a correct Comparable implementation, if a.compareTo(b) > 0
-      // then b.compareTo(a) < 0 must hold. But here both return 1.
+      // FIXED: compareTo now uses star.index comparison, producing proper ordering
       final forward = s1.compareTo(s2);
       final backward = s2.compareTo(s1);
-      // Correct behavior: forward and backward should have opposite signs
-      // expect(forward, equals(-backward)); // correct
-      // Actual behavior: both return 1
-      expect(forward, equals(1));
-      expect(backward, equals(1)); // proves the bug: asymmetric compareTo
+      // forward and backward should have opposite signs
+      expect(forward, equals(-backward));
     });
 
     test('[defect-9] compareTo vs == semantic mismatch', () {
@@ -264,6 +248,95 @@ void main() {
       expect(result, isNotNull);
       // s2 was in range and should be adjusted
       expect(s2.adjustCount, greaterThan(0));
+    });
+  });
+
+  // ============================================================
+  // Group 7: resolveUIStars — global overlap fix
+  // ============================================================
+  group('resolveUIStars', () {
+    /// Helper: check that all adjacent pairs (circular) have sufficient distance.
+    void expectNoOverlaps(List<UIStarModel> resolved) {
+      final sorted = resolved.toList()
+        ..sort((a, b) => a.angle.compareTo(b.angle));
+      for (int i = 0; i < sorted.length; i++) {
+        final j = (i + 1) % sorted.length;
+        if (i == j) continue;
+        final dist = StarsResolver.calculateMinAngleDifference(
+            sorted[i].angle, sorted[j].angle);
+        final minDist =
+            UIStarModel.getMinDiffAngleOfTwoStar(sorted[i], sorted[j]);
+        expect(dist, greaterThanOrEqualTo(minDist - 1e-4),
+            reason:
+                '${sorted[i].star}@${sorted[i].angle.toStringAsFixed(2)} ↔ '
+                '${sorted[j].star}@${sorted[j].angle.toStringAsFixed(2)}: '
+                'dist=$dist < minDist=$minDist');
+      }
+    }
+
+    test('Bug1: cluster pushes into independent star', () {
+      // Stars: 10°, 11°, 12°, 16° — cluster [10,11,12] resolves and may
+      // push the 12° star near the independent 16° star.
+      final stars = [
+        _star(star: EnumStars.Sun, angle: 10, range: 4),
+        _star(star: EnumStars.Moon, angle: 11, range: 4),
+        _star(star: EnumStars.Mercury, angle: 12, range: 4),
+        _star(star: EnumStars.Venus, angle: 16, range: 4),
+      ];
+      final resolved = StarsResolver.resolveUIStars(stars);
+      expectNoOverlaps(resolved);
+    });
+
+    test('Bug2: two clusters with independent star in between', () {
+      // Cluster A [5,6], independent [14], cluster B [20,21]
+      // Resolving clusters might push edges toward the independent star.
+      final stars = [
+        _star(star: EnumStars.Sun, angle: 5, range: 4),
+        _star(star: EnumStars.Moon, angle: 6, range: 4),
+        _star(star: EnumStars.Mercury, angle: 14, range: 4),
+        _star(star: EnumStars.Venus, angle: 20, range: 4),
+        _star(star: EnumStars.Mars, angle: 21, range: 4),
+      ];
+      final resolved = StarsResolver.resolveUIStars(stars);
+      expectNoOverlaps(resolved);
+    });
+
+    test('all independent stars with no overlaps remain unchanged', () {
+      final stars = [
+        _star(star: EnumStars.Sun, angle: 0, range: 4),
+        _star(star: EnumStars.Moon, angle: 90, range: 4),
+        _star(star: EnumStars.Mercury, angle: 180, range: 4),
+        _star(star: EnumStars.Venus, angle: 270, range: 4),
+      ];
+      final resolved = StarsResolver.resolveUIStars(stars);
+      // No adjustments needed
+      for (var s in resolved) {
+        expect(s.adjustedAngle, isNull,
+            reason: '${s.star} should not be adjusted');
+      }
+    });
+
+    test('cross-0° overlap between independent stars', () {
+      // Stars near 0°: 358° and 1° — distance is 3° < minSafe 4°
+      final stars = [
+        _star(star: EnumStars.Sun, angle: 358, range: 4),
+        _star(star: EnumStars.Moon, angle: 1, range: 4),
+      ];
+      final resolved = StarsResolver.resolveUIStars(stars);
+      expectNoOverlaps(resolved);
+    });
+
+    test('large cluster resolves without any overlaps', () {
+      // 5 stars bunched at 100°–104°
+      final stars = [
+        _star(star: EnumStars.Sun, angle: 100, range: 4),
+        _star(star: EnumStars.Moon, angle: 101, range: 4),
+        _star(star: EnumStars.Mercury, angle: 102, range: 4),
+        _star(star: EnumStars.Venus, angle: 103, range: 4),
+        _star(star: EnumStars.Mars, angle: 104, range: 4),
+      ];
+      final resolved = StarsResolver.resolveUIStars(stars);
+      expectNoOverlaps(resolved);
     });
   });
 }

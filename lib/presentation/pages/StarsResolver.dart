@@ -21,6 +21,7 @@ class StarsResolver {
   } // 判断一个角度是否在弧的范围内
 
   /// 根据两个星体解析星座模型
+  @Deprecated('Use resolveUIStars() instead')
   static UIConstellationModel? doResolve2Stars(List<UIStarModel> stars) {
     if (stars[0].angle == stars[1].angle) {
       return doResolveSameAngleStars(stars);
@@ -42,12 +43,14 @@ class StarsResolver {
   }
 
   /// 从图中提取连通分量
+  @Deprecated('Use resolveUIStars() instead')
   static List<Set<double>> extractConnectedComponents(
       Map<double, Set<double>> graph) {
     return GraphUtils.findConnectedComponents(graph);
   }
 
   /// 处理多个星座模型，检查并调整重叠情况
+  @Deprecated('Use resolveUIStars() instead')
   static void handleTwoConstellationModel(
       List<UIConstellationModel> constellations) {
     for (var i = 0; i < constellations.length; i++) {
@@ -74,6 +77,7 @@ class StarsResolver {
   }
 
   /// 处理星座与星体，调整并加入符合条件的星体
+  @Deprecated('Use resolveUIStars() instead')
   static Tuple2<UIConstellationModel, List<UIStarModel>>
       doResolveConstellationWithStars(
           UIConstellationModel constellation, List<UIStarModel> stars) {
@@ -99,69 +103,288 @@ class StarsResolver {
   }
 
   /// 从图中提取连通的星体集合
+  @Deprecated('Use resolveUIStars() instead')
   static List<Set<UIStarModel>> findConnectedStars(
       Map<UIStarModel, Set<UIStarModel>> graph) {
     return GraphUtils.findConnectedComponents(graph);
   }
 
-  /// 解析一组星体为星座模型
+  /// 解析一组星体为星座模型（重写版本）
+  ///
+  /// 新算法流程：
+  /// 1. 重置所有星体的调整状态（幂等性）
+  /// 2. 按 originalAngle 排序
+  /// 3. 检测重叠集群
+  /// 4. 逐集群解析（均匀分配位置）
+  /// 5. 迭代修复集群间重叠
   static List<UIStarModel> resolveUIStars(List<UIStarModel> stars) {
-    List<UIStarModel> stars0 = stars.toList();
-    stars0.sort((a, b) => a.originalAngle.compareTo(b.originalAngle));
-    Map<UIStarModel, Set<UIStarModel>> needHandled = {};
-    Set<UIStarModel> singleStar = {};
+    if (stars.isEmpty) return stars;
 
-    _classifyStars(stars0, needHandled, singleStar);
-    // _stars.forEach((s)=>print(s));
-    // print("needHandled: ${needHandled.length}");
-    // print("singleStar: ${singleStar.length}");
-    if (needHandled.isEmpty) {
-      return stars0;
-    }
-    // needHandled.forEach((k, v) => print("$k: ${v.length}"));
-
-    List<Set<UIStarModel>> connectedStars = findConnectedStars(needHandled);
-    // print("-------- ");
-    // connectedStars.map((e) => print(e.map((e) => e.star.starName).toList()));
-    // print("-------- ");
-
-    connectedStars.sort((a, b) => a.length.compareTo(b.length));
-
-    List<UIConstellationModel> constellations = [];
-    for (var i = 0; i < connectedStars.length; i++) {
-      if (connectedStars[i].length > 1) {
-        constellations.add(doResolveConstellation(connectedStars[i].toList()));
-      }
+    // Step 0: 重置所有星体的调整状态（幂等性）
+    for (var s in stars) {
+      s.resetAdjustment();
     }
 
-    // Map<double, UIStarModel> singleStarMap = _createStarMap(singleStar.toList());
-    List<UIConstellationModel> addedSingleStarsConstellation = [];
-    for (var i = 0; i < constellations.length; i++) {
-      Tuple2<UIConstellationModel, List<UIStarModel>> result =
-          doResolveConstellationWithStars(
-              constellations[i], singleStar.toList());
-      if (result.item2.isNotEmpty) {
-        for (var s in result.item2) {
-          singleStar.remove(s);
+    // Step 1: 按 originalAngle 排序
+    List<UIStarModel> sorted = stars.toList()
+      ..sort((a, b) => a.originalAngle.compareTo(b.originalAngle));
+
+    if (sorted.length == 1) return sorted;
+
+    // Step 2: 检测重叠集群
+    List<List<UIStarModel>> clusters = _findOverlapClusters(sorted);
+
+    // 如果没有任何集群（全部独立），直接返回
+    if (clusters.isEmpty) return sorted;
+
+    // Step 3: 逐集群解析
+    for (var cluster in clusters) {
+      _resolveCluster(cluster);
+    }
+
+    // Step 4: 全局后处理 — 修复所有相邻对重叠（含独立星体）
+    for (int round = 0; round < 20; round++) {
+      if (!_fixGlobalOverlaps(sorted)) break;
+    }
+
+    // Step 5: 返回结果
+    return sorted;
+  }
+
+  /// 检测重叠集群：按排序顺序扫描，相邻距离 < minSafeDistance 则合并入同一集群
+  static List<List<UIStarModel>> _findOverlapClusters(
+      List<UIStarModel> sorted) {
+    List<List<UIStarModel>> clusters = [];
+    List<UIStarModel>? currentCluster;
+
+    for (int i = 0; i < sorted.length; i++) {
+      if (currentCluster == null) {
+        currentCluster = [sorted[i]];
+      } else {
+        double dist = _circularDistance(
+            currentCluster.last.originalAngle, sorted[i].originalAngle);
+        double minDist = _minSafeDistance(currentCluster.last, sorted[i]);
+        if (dist < minDist) {
+          currentCluster.add(sorted[i]);
+        } else {
+          if (currentCluster.length > 1) {
+            clusters.add(currentCluster);
+          }
+          currentCluster = [sorted[i]];
         }
       }
-      addedSingleStarsConstellation.add(result.item1);
+    }
+    // 处理最后一个集群
+    if (currentCluster != null && currentCluster.length > 1) {
+      clusters.add(currentCluster);
     }
 
-    if (constellations.length > 1) {
-      // print(
-      // "${constellations.length} --- ${constellations.map((e) => e.orderedStars.map((e) => e.star.starName).toList()).toList()}");
-      handleTwoConstellationModel(addedSingleStarsConstellation);
+    // 关键：检查首尾集群是否跨 0° 重叠
+    if (clusters.length >= 2) {
+      _mergeFirstLastIfOverlapping(clusters, sorted);
+    } else if (clusters.isEmpty && sorted.length > 1) {
+      // 只有独立星体，但检查首尾是否跨 0° 重叠
+      double dist = _circularDistance(
+          sorted.last.originalAngle, sorted.first.originalAngle);
+      double minDist = _minSafeDistance(sorted.last, sorted.first);
+      if (dist < minDist) {
+        // 首尾重叠，创建一个集群
+        clusters.add([sorted.last, sorted.first]);
+      }
+    } else if (clusters.length == 1) {
+      // 检查集群的边缘星体是否与未入群的首/尾星体跨 0° 重叠
+      var cluster = clusters.first;
+      // 检查与 sorted 中未入群的首尾
+      if (cluster.first != sorted.first) {
+        double dist = _circularDistance(
+            sorted.last.originalAngle, cluster.first.originalAngle);
+        double minDist = _minSafeDistance(sorted.last, cluster.first);
+        if (dist < minDist) {
+          cluster.insert(0, sorted.last);
+        }
+      }
+      if (cluster.last != sorted.last) {
+        double dist = _circularDistance(
+            cluster.last.originalAngle, sorted.first.originalAngle);
+        double minDist = _minSafeDistance(cluster.last, sorted.first);
+        if (dist < minDist) {
+          cluster.add(sorted.first);
+        }
+      }
     }
 
-    return addedSingleStarsConstellation
-        .map((e) => e.orderedStars)
-        .expand((e) => e)
-        .toList(growable: true)
-      ..addAll(singleStar);
+    return clusters;
+  }
+
+  /// 检查首尾集群是否需要合并（跨 0° 环绕）
+  static void _mergeFirstLastIfOverlapping(
+      List<List<UIStarModel>> clusters, List<UIStarModel> sorted) {
+    var firstCluster = clusters.first;
+    var lastCluster = clusters.last;
+
+    // 检查 lastCluster 的最后一颗星与 firstCluster 的第一颗星是否跨 0° 重叠
+    // 同时检查未入群的首/尾独立星体
+    UIStarModel lastStar = lastCluster.last;
+    UIStarModel firstStar = firstCluster.first;
+
+    // 检查最后一个集群末端到第一个集群开头的距离
+    double dist =
+        _circularDistance(lastStar.originalAngle, firstStar.originalAngle);
+    double minDist = _minSafeDistance(lastStar, firstStar);
+
+    if (dist < minDist) {
+      // 合并：将 firstCluster 追加到 lastCluster
+      lastCluster.addAll(firstCluster);
+      clusters.removeAt(0);
+    } else {
+      // 还需检查独立星体在首尾是否与集群重叠
+      // 检查 sorted 中最后一颗（若不在 lastCluster 中）是否与 firstCluster 重叠
+      if (!lastCluster.contains(sorted.last) &&
+          !firstCluster.contains(sorted.last)) {
+        double d = _circularDistance(
+            sorted.last.originalAngle, firstStar.originalAngle);
+        double md = _minSafeDistance(sorted.last, firstStar);
+        if (d < md) {
+          firstCluster.insert(0, sorted.last);
+        }
+      }
+      if (!firstCluster.contains(sorted.first) &&
+          !lastCluster.contains(sorted.first)) {
+        double d = _circularDistance(
+            lastStar.originalAngle, sorted.first.originalAngle);
+        double md = _minSafeDistance(lastStar, sorted.first);
+        if (d < md) {
+          lastCluster.add(sorted.first);
+        }
+      }
+    }
+  }
+
+  /// 集群内解析：只推开实际重叠的星体，保留原本已足够的间距
+  ///
+  /// 算法：
+  /// 1. 按相对于加权中心的角度排序
+  /// 2. 左→右扫描：仅当相邻对实际重叠时才推开右侧星体
+  /// 3. 重新居中：使整个集群以加权中心为基准对称分布
+  static void _resolveCluster(List<UIStarModel> cluster) {
+    if (cluster.length <= 1) return;
+
+    // 计算集群的加权圆周中心
+    double center = _weightedCircularMean(cluster);
+
+    // 按相对于中心的有符号弧度排序
+    cluster.sort((a, b) {
+      double da = _signedDiff(a.originalAngle, center);
+      double db = _signedDiff(b.originalAngle, center);
+      return da.compareTo(db);
+    });
+
+    // 转换为以 center 为原点的线性坐标
+    List<double> positions = cluster
+        .map((s) => _signedDiff(s.originalAngle, center))
+        .toList();
+
+    // 左→右扫描：仅在实际重叠时推开
+    for (int i = 1; i < positions.length; i++) {
+      double dist = positions[i] - positions[i - 1];
+      double minDist = _minSafeDistance(cluster[i - 1], cluster[i]);
+      if (dist < minDist) {
+        positions[i] = positions[i - 1] + minDist;
+      }
+    }
+
+    // 重新居中：保持集群以加权中心为基准对称
+    double midpoint = (positions.first + positions.last) / 2;
+    for (int i = 0; i < positions.length; i++) {
+      positions[i] -= midpoint;
+    }
+
+    // 应用调整
+    for (int i = 0; i < cluster.length; i++) {
+      double target = _normalize(center + positions[i]);
+      double delta = _signedDiff(target, cluster[i].originalAngle);
+      if (delta.abs() > 1e-9) {
+        cluster[i].adjustAngle(delta);
+      }
+    }
+  }
+
+  /// 全局后处理：按 adjustedAngle 排序后遍历所有相邻对（含首尾跨 0°），
+  /// 将重叠对对称推开 overlap/2。
+  /// 返回 true 表示有修改，false 表示已稳定。
+  static bool _fixGlobalOverlaps(List<UIStarModel> allStars) {
+    if (allStars.length <= 1) return false;
+
+    bool anyChange = false;
+    // 按当前角度排序
+    allStars.sort((a, b) => a.angle.compareTo(b.angle));
+
+    for (int i = 0; i < allStars.length; i++) {
+      int j = (i + 1) % allStars.length;
+      if (i == j) continue; // 只有 1 颗星时跳过
+
+      double dist = _circularDistance(allStars[i].angle, allStars[j].angle);
+      double minDist = _minSafeDistance(allStars[i], allStars[j]);
+
+      if (dist < minDist - 1e-9) {
+        double shift = (minDist - dist) / 2;
+        // i 在左（角度小），j 在右（角度大）；推 i 向左，j 向右
+        // 对于首尾跨 0° 对（i=last, j=0），i 在大角度侧，j 在小角度侧
+        // 此时 i 应向右推（增大），j 应向左推（减小）
+        if (j == 0 && i == allStars.length - 1) {
+          // 跨 0° 情况：i 在高角度端，j 在低角度端
+          allStars[i].adjustAngle(shift);
+          allStars[j].adjustAngle(-shift);
+        } else {
+          allStars[i].adjustAngle(-shift);
+          allStars[j].adjustAngle(shift);
+        }
+        anyChange = true;
+      }
+    }
+    return anyChange;
+  }
+
+  // ===== 圆周算术辅助方法 =====
+
+  /// 角度归一化到 [0, 360)
+  static double _normalize(double angle) {
+    return ((angle % 360) + 360) % 360;
+  }
+
+  /// 有符号最短弧差 (a - b)，范围 (-180, 180]
+  static double _signedDiff(double a, double b) {
+    double d = _normalize(a) - _normalize(b);
+    if (d > 180) d -= 360;
+    if (d <= -180) d += 360;
+    return d;
+  }
+
+  /// 两角度间的绝对最短弧距
+  static double _circularDistance(double a, double b) {
+    return _signedDiff(a, b).abs();
+  }
+
+  /// 两星中心之间的最小安全距离 = max(r1, r2)
+  static double _minSafeDistance(UIStarModel a, UIStarModel b) {
+    return max(a.rangeAngleEachSide, b.rangeAngleEachSide);
+  }
+
+  /// 基于优先级加权的圆周均值（向量均值法）
+  static double _weightedCircularMean(List<UIStarModel> stars) {
+    double sumSin = 0, sumCos = 0;
+    for (var s in stars) {
+      double rad = s.originalAngle * pi / 180;
+      double w = s.priority.toDouble();
+      sumSin += w * sin(rad);
+      sumCos += w * cos(rad);
+    }
+    double meanRad = atan2(sumSin, sumCos);
+    return _normalize(meanRad * 180 / pi);
   }
 
   /// 根据星座和星体解析星座模型
+  @Deprecated('Use resolveUIStars() instead')
   static UIConstellationModel? doResolveByConstellation(
       UIConstellationModel stars, UIStarModel other) {
     Tuple3<bool, double?, double?> inRangeTuple = stars.inRangeAngle(other);
@@ -189,6 +412,7 @@ class StarsResolver {
   }
 
   /// 根据星体列表解析星座模型
+  @Deprecated('Use resolveUIStars() instead')
   static UIConstellationModel doResolveConstellation(List<UIStarModel> stars) {
     if (stars.length == 2) {
       UIConstellationModel? result = doResolve2Stars(stars);
@@ -207,6 +431,7 @@ class StarsResolver {
   }
 
   /// 处理多个相同角度的星体，构建星座模型
+  @Deprecated('Use resolveUIStars() instead')
   static UIConstellationModel sortMultipleInRangeStars(
       Map<double, List<UIStarModel>> starsMapper) {
     List<double> circularAngleSorted =
@@ -255,6 +480,7 @@ class StarsResolver {
   }
 
   /// 根据星体优先级排序并构建星座模型
+  @Deprecated('Use resolveUIStars() instead')
   static UIConstellationModel sortInRangeStarsNoneSameAngleWithPriority(
       List<UIStarModel> stars) {
     List<UIStarModel> sortedStars = stars
@@ -676,7 +902,7 @@ class StarsResolver {
         double currentLeftRightDiff = calculateMinAngleDifference(
             leftFirstStar.angle, rightFirstStar.angle);
         double leftRightStarMinDiffAngle =
-            UIStarModel.getMinDiffAngleOfTwoStar(leftFirstStar, leftFirstStar);
+            UIStarModel.getMinDiffAngleOfTwoStar(leftFirstStar, rightFirstStar);
         double shouldAdjustAngleEachStar =
             (leftRightStarMinDiffAngle - currentLeftRightDiff) * .5;
         leftFirstStar.toLeftAdjustAngle(shouldAdjustAngleEachStar);
