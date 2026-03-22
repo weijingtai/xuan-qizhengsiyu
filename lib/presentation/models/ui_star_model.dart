@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:common/enums.dart';
 import 'package:equatable/equatable.dart';
 import 'package:tuple/tuple.dart';
@@ -95,11 +97,9 @@ class UIStarModel extends Equatable with Compare<UIStarModel>, Edge {
     return Tuple3(leftAngleEdge, rightAngleEdge, angle);
   }
 
-  /// 比较两个星体的
+  /// 两星中心之间的最小安全距离 = max(r1, r2)
   static double getMinDiffAngleOfTwoStar(UIStarModel star1, UIStarModel star2) {
-    return star1.rangeAngleEachSide >= star2.rangeAngleEachSide
-        ? star1.rangeAngleEachSide
-        : star2.rangeAngleEachSide;
+    return max(star1.rangeAngleEachSide, star2.rangeAngleEachSide);
   }
 
   // 结果包含ball在edgeAngle边缘之上，即ball.angle == edgeAngle.item1 || ball.angle == edgeAngle.item2, 返回结果为0
@@ -226,14 +226,17 @@ class UIStarModel extends Equatable with Compare<UIStarModel>, Edge {
     adjustCount++;
   }
 
+  /// 重置调整状态，保证幂等性——多次调用 resolveUIStars() 不会叠加
+  void resetAdjustment() {
+    adjustedAngle = null;
+    adjustedEdges = null;
+    adjustCount = 0;
+    previousAdjustedDirection = false;
+    inRangeStar = {};
+  }
+
   double correctCircleAngle(double angle) {
-    if (angle < 0) {
-      return 360 + angle;
-    }
-    if (angle >= 360) {
-      return angle - 360;
-    }
-    return angle;
+    return ((angle % 360) + 360) % 360;
   }
 
   @override
@@ -247,8 +250,8 @@ class UIStarModel extends Equatable with Compare<UIStarModel>, Edge {
 
   @override
   int compareTo(UIStarModel other) {
-    // TODO: implement compareTo
-    return other.star == star ? 0 : 1;
+    if (star == other.star) return 0;
+    return star.index.compareTo(other.star.index);
   }
 
   /// @Description:
