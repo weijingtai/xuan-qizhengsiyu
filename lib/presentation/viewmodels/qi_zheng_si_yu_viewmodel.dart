@@ -31,6 +31,14 @@ import 'package:qizhengsiyu/enums/enum_settle_life_body.dart';
 import 'package:qizhengsiyu/presentation/pages/StarsResolver.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:common/adapters/lunar_adapter.dart';
+import 'package:common/models/lunar_date_info_v2_data.dart';
+import 'package:common/features/datetime_details/input_info_params.dart';
+import 'package:common/features/datetime_details/datetime_details_bundle_calculation.dart';
+import 'package:common/features/liu_yun/viewmodels/yun_liu_view_model.dart';
+import 'package:common/features/liu_yun/services/yun_liu_service.dart';
+import 'package:common/helpers/solar_lunar_datetime_helper.dart';
+import 'package:common/models/divination_datetime.dart';
+import 'package:common/datamodel/location.dart' as loc;
 import 'dart:math';
 import 'package:qizhengsiyu/domain/entities/models/panel_config.dart'
     as UIPanelConfig; // UI层的PanelConfig
@@ -126,6 +134,15 @@ class QiZhengSiYuViewModel extends ChangeNotifier {
   /// 自定义日期日月出没信息
   final ValueNotifier<RiseSetDisplayData?> customRiseSetNotifier =
       ValueNotifier(null);
+
+  // ==================== LunarDateInfo + YunLiu ====================
+  /// 时间详情数据 - 用于 LunarDateInfoCardV2
+  final ValueNotifier<LunarDateInfoV2Data?> lunarDateInfoNotifier =
+      ValueNotifier(null);
+
+  /// 大运流年 ViewModel - 用于 YunLiuListTileCardWidget
+  YunLiuViewModel? _yunLiuViewModel;
+  YunLiuViewModel? get yunLiuViewModel => _yunLiuViewModel;
 
   /// 出生地地址信息（用于显示地名）
   String? _birthLocationName;
@@ -364,6 +381,10 @@ class QiZhengSiYuViewModel extends ChangeNotifier {
 
     // 基础命盘计算完成后自动评估格局
     evaluateGeJu(onlyMatched: true);
+
+    // 基础命盘计算完成后构建时间详情和大运流年
+    await buildLunarDateInfo();
+    buildYunLiuViewModel();
   }
 
   // ==================== UI兼容层: dispose ====================
@@ -380,7 +401,58 @@ class QiZhengSiYuViewModel extends ChangeNotifier {
     geJuSummaryNotifier.dispose();
     birthRiseSetNotifier.dispose();
     customRiseSetNotifier.dispose();
+    lunarDateInfoNotifier.dispose();
+    _yunLiuViewModel?.dispose();
     super.dispose();
+  }
+
+  // ==================== LunarDateInfo + YunLiu 构建 ====================
+
+  /// 构建时间详情数据 (用于 LunarDateInfoCardV2)
+  Future<void> buildLunarDateInfo() async {
+    if (_lifeObserver == null) return;
+
+    final observer = _lifeObserver!;
+    final params = DateTimeDetailsCalculationParams(
+      inputDateTime: observer.dateTime,
+      timezoneStr: observer.timezone,
+      coordinates: loc.Coordinates(
+        latitude: observer.latitude,
+        longitude: observer.longitude,
+      ),
+    );
+
+    try {
+      final bundle = await DateTimeDetailsBundleCalculation.calculate(
+        params: params,
+      );
+      lunarDateInfoNotifier.value = LunarDateInfoV2Data(
+        bundle: bundle,
+        inUsed: EnumDatetimeType.standard,
+      );
+    } catch (e) {
+      debugPrint('[LunarDateInfo] calculation error: $e');
+    }
+  }
+
+  /// 构建大运流年 ViewModel (用于 YunLiuListTileCardWidget)
+  void buildYunLiuViewModel() {
+    if (_lifeObserver == null) return;
+
+    final observer = _lifeObserver!;
+    final birthDateInfo = SolarLunarDateTimeHelper.cacluateChineseDateInfo(
+      observer.dateTime,
+      ZiShiStrategy.noDistinguishAt23,
+    );
+
+    _yunLiuViewModel?.dispose();
+    _yunLiuViewModel = YunLiuViewModel(
+      service: YunLiuService(),
+      birthDateTime: observer.dateTime,
+      gender: Gender.male, // TODO: 从占卜上下文获取性别
+      birthDateInfo: birthDateInfo,
+    );
+    notifyListeners();
   }
 
   // ==================== 格局评估 ====================

@@ -57,6 +57,13 @@ import 'package:qizhengsiyu/enums/enum_panel_system_type.dart';
 import 'package:qizhengsiyu/enums/enum_settle_life_body.dart';
 import 'package:qizhengsiyu/domain/entities/models/panel_ui_size.dart'; // UI模型,保留在原位置
 
+// ── 新增：四柱Card / 节气Card / 大运流年TreeList ──
+import 'package:common/models/eight_chars.dart';
+import 'package:common/widgets/four_zhu_card_host.dart';
+import 'package:common/widgets/lunar_date_info_card_v2.dart';
+import 'package:common/models/lunar_date_info_v2_data.dart';
+import 'package:common/features/liu_yun/widgets/yun_liu_list_tile_card_widget.dart';
+
 // 尺寸模型已迁移至 models/panel_ui_size.dart
 
 class BeautyViewPage extends StatefulWidget {
@@ -117,7 +124,6 @@ class _BeautyViewPageState extends State<BeautyViewPage>
   double yinYangStarSize = 32;
 
   late QiZhengSiYuPanSizeDataModel panelSizeDataModel;
-
   Future<void> devInit() async {
     final vm = context.read<QiZhengSiYuViewModel>();
     await vm.init();
@@ -153,7 +159,9 @@ class _BeautyViewPageState extends State<BeautyViewPage>
         .seekersDao
         .getSeekersByDivinationUuid(divinations.last.uuid);
     var res = DivinationInfoModel(
-        divination: divinations.last, divinationDatetime: seeker.first);
+      divination: divinations.last,
+      divinationDatetime: seeker.first,
+    );
 
     return res;
   }
@@ -167,8 +175,9 @@ class _BeautyViewPageState extends State<BeautyViewPage>
     });
     // 0°02′02‘’ 一天
     _jupiterController = AnimationController(
-        vsync: this, duration: const Duration(seconds: 1062))
-      ..addStatusListener((status) {
+      vsync: this,
+      duration: const Duration(seconds: 1062),
+    )..addStatusListener((status) {
         if (status == AnimationStatus.completed) {
           _jupiterController.repeat();
         }
@@ -176,8 +185,9 @@ class _BeautyViewPageState extends State<BeautyViewPage>
 
     // 土星 0°00′59'' 一天
     _saturnController = AnimationController(
-        vsync: this, duration: const Duration(seconds: 2197))
-      ..addStatusListener((status) {
+      vsync: this,
+      duration: const Duration(seconds: 2197),
+    )..addStatusListener((status) {
         if (status == AnimationStatus.completed) {
           _saturnController.repeat();
         }
@@ -185,8 +195,9 @@ class _BeautyViewPageState extends State<BeautyViewPage>
 
     // 金星 1°33′ 一天
     _venusController = AnimationController(
-        vsync: this, duration: const Duration(seconds: 1393))
-      ..addStatusListener((status) {
+      vsync: this,
+      duration: const Duration(seconds: 1393),
+    )..addStatusListener((status) {
         if (status == AnimationStatus.completed) {
           _venusController.repeat();
         }
@@ -248,17 +259,18 @@ class _BeautyViewPageState extends State<BeautyViewPage>
             }
           });
     panelSizeDataModel = QiZhengSiYuPanSizeDataModel(
-        starBodyRadius: 16,
-        centerSize: 140,
-        diZhi12GongHeight: 50,
-        zodiac12GongHeight: 24,
-        starSeq12GongHeight: 0,
-        destiny12GongHeight: 70, // 增加命理十二宫的径向高度,避免文字挤在一起
-        lifeStarRingHeight: 48, // 64
-        starXiu28RingHeight: 36, // 660
-        innerShenShaHeight: 90,
-        outerShenShaHeight: 90,
-        showFateLifeStarRing: true);
+      starBodyRadius: 16,
+      centerSize: 140,
+      diZhi12GongHeight: 50,
+      zodiac12GongHeight: 24,
+      starSeq12GongHeight: 0,
+      destiny12GongHeight: 70, // 增加命理十二宫的径向高度,避免文字挤在一起
+      lifeStarRingHeight: 48, // 64
+      starXiu28RingHeight: 36, // 660
+      innerShenShaHeight: 90,
+      outerShenShaHeight: 90,
+      showFateLifeStarRing: true,
+    );
 
     // 创建默认 PanelConfig 并初始化控制器
     final defaultPanelConfig = PanelConfig(
@@ -389,18 +401,19 @@ class _BeautyViewPageState extends State<BeautyViewPage>
   final ValueNotifier<List<String>?> _selectedTaiJiDestiny12GongListNotifier =
       ValueNotifier(null);
   TextStyle destinyTextStyle = GoogleFonts.maShanZheng(
-      color: Colors.black87,
-      fontSize: 28,
-      fontWeight: FontWeight.normal,
-      height: 1.0,
-      shadows: [
-        BoxShadow(
-          color: Colors.black45.withOpacity(.2),
-          spreadRadius: 1,
-          blurRadius: 1,
-          offset: const Offset(1, 1), // changes position of shadow
-        )
-      ]);
+    color: Colors.black87,
+    fontSize: 28,
+    fontWeight: FontWeight.normal,
+    height: 1.0,
+    shadows: [
+      BoxShadow(
+        color: Colors.black45.withOpacity(.2),
+        spreadRadius: 1,
+        blurRadius: 1,
+        offset: const Offset(1, 1), // changes position of shadow
+      ),
+    ],
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -489,6 +502,15 @@ class _BeautyViewPageState extends State<BeautyViewPage>
               ),
             ),
 
+            // ── 四柱Card ──
+            _buildFourZhuCardSection(),
+
+            // ── 节气/时间详情Card ──
+            _buildLunarDateInfoSection(),
+
+            // ── 大运流年·三层级联 ──
+            _buildYunLiuCardSection(),
+
             // ── 格局评估结果面板 ──
             const GeJuResultPanel(showDebugBar: true),
 
@@ -505,70 +527,109 @@ class _BeautyViewPageState extends State<BeautyViewPage>
 
   Widget center(BasePanelModel basePanel) {
     return Container(
-        width: centerSize,
-        height: centerSize,
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(centerSize),
-          border: Border.all(color: Colors.black, width: 1),
-        ),
-        child: CenterTextCircleWidget(
-          bodyLifeModel: basePanel.bodyLifeModel,
-          size: centerSize,
-        ));
+      width: centerSize,
+      height: centerSize,
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(centerSize),
+        border: Border.all(color: Colors.black, width: 1),
+      ),
+      child: CenterTextCircleWidget(
+        bodyLifeModel: basePanel.bodyLifeModel,
+        size: centerSize,
+      ),
+    );
   }
 
   Widget fourZhu(BodyLifeModel bodyLifeModel) {
-    TextStyle titleTextStyle =
-        TextStyle(fontSize: 14, height: 1.2, color: Colors.black38);
-    TextStyle infoTextStyle =
-        TextStyle(fontSize: 14, height: 1.2, fontWeight: FontWeight.bold);
+    TextStyle titleTextStyle = TextStyle(
+      fontSize: 14,
+      height: 1.2,
+      color: Colors.black38,
+    );
+    TextStyle infoTextStyle = TextStyle(
+      fontSize: 14,
+      height: 1.2,
+      fontWeight: FontWeight.bold,
+    );
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text.rich(TextSpan(text: "命主:", style: titleTextStyle, children: [
-                TextSpan(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text.rich(
+              TextSpan(
+                text: "命主:",
+                style: titleTextStyle,
+                children: [
+                  TextSpan(
                     text: bodyLifeModel.lifeGong.sevenZheng.singleName,
                     style: infoTextStyle.copyWith(
-                        color: QiZhengSiYuUIConstantResources
-                            .zhengColorMap[bodyLifeModel.lifeGong.sevenZheng])),
-              ])),
-              Text.rich(TextSpan(text: "度主:", style: titleTextStyle, children: [
-                TextSpan(
+                      color: QiZhengSiYuUIConstantResources
+                          .zhengColorMap[bodyLifeModel.lifeGong.sevenZheng],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Text.rich(
+              TextSpan(
+                text: "度主:",
+                style: titleTextStyle,
+                children: [
+                  TextSpan(
                     text: bodyLifeModel.lifeConstellation.sevenZheng.singleName,
                     style: infoTextStyle.copyWith(
-                        color: QiZhengSiYuUIConstantResources.zhengColorMap[
-                            bodyLifeModel.lifeConstellation.sevenZheng]))
-              ])),
-            ]),
-        SizedBox(
-          width: 24,
+                      color: QiZhengSiYuUIConstantResources.zhengColorMap[
+                          bodyLifeModel.lifeConstellation.sevenZheng],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
+        SizedBox(width: 24),
         Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text.rich(TextSpan(text: "身主:", style: titleTextStyle, children: [
-                TextSpan(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text.rich(
+              TextSpan(
+                text: "身主:",
+                style: titleTextStyle,
+                children: [
+                  TextSpan(
                     text: bodyLifeModel.bodyGong.sevenZheng.singleName,
                     style: infoTextStyle.copyWith(
-                        color: QiZhengSiYuUIConstantResources
-                            .zhengColorMap[bodyLifeModel.bodyGong.sevenZheng]))
-              ])),
-              Text.rich(TextSpan(text: "身度:", style: titleTextStyle, children: [
-                TextSpan(
+                      color: QiZhengSiYuUIConstantResources
+                          .zhengColorMap[bodyLifeModel.bodyGong.sevenZheng],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Text.rich(
+              TextSpan(
+                text: "身度:",
+                style: titleTextStyle,
+                children: [
+                  TextSpan(
                     text: bodyLifeModel.bodyConstellation.sevenZheng.singleName,
                     style: infoTextStyle.copyWith(
-                        color: QiZhengSiYuUIConstantResources.zhengColorMap[
-                            bodyLifeModel.bodyConstellation.sevenZheng]))
-              ])),
-            ])
+                      color: QiZhengSiYuUIConstantResources.zhengColorMap[
+                          bodyLifeModel.bodyConstellation.sevenZheng],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ],
     );
   }
@@ -595,17 +656,12 @@ class _BeautyViewPageState extends State<BeautyViewPage>
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
-              "运",
-              style: titleStyle,
-            ),
+            Text("运", style: titleStyle),
             Text("癸", style: ganZhiStyle),
             Text("卯", style: ganZhiStyle),
           ],
         ),
-        SizedBox(
-          width: 6,
-        ),
+        SizedBox(width: 6),
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -615,24 +671,17 @@ class _BeautyViewPageState extends State<BeautyViewPage>
             Text("丑", style: ganZhiStyle),
           ],
         ),
-        SizedBox(
-          width: 6,
-        ),
+        SizedBox(width: 6),
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
-              "年",
-              style: titleStyle,
-            ),
+            Text("年", style: titleStyle),
             Text(observer.yearGanZhi.gan.name, style: ganZhiStyle),
             Text(observer.yearGanZhi.zhi.name, style: ganZhiStyle),
           ],
         ),
-        SizedBox(
-          width: 6,
-        ),
+        SizedBox(width: 6),
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -642,24 +691,17 @@ class _BeautyViewPageState extends State<BeautyViewPage>
             Text(observer.monthGanZhi.zhi.name, style: ganZhiStyle),
           ],
         ),
-        SizedBox(
-          width: 6,
-        ),
+        SizedBox(width: 6),
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
-              "日",
-              style: titleStyle,
-            ),
+            Text("日", style: titleStyle),
             Text(observer.dayGanZhi.gan.name, style: ganZhiStyle),
             Text(observer.dayGanZhi.zhi.name, style: ganZhiStyle),
           ],
         ),
-        SizedBox(
-          width: 6,
-        ),
+        SizedBox(width: 6),
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -668,14 +710,12 @@ class _BeautyViewPageState extends State<BeautyViewPage>
             Text(observer.timeGanZhi.gan.name, style: ganZhiStyle),
             Text(observer.timeGanZhi.zhi.name, style: ganZhiStyle),
           ],
-        )
+        ),
       ],
     );
   }
 
-  Widget panel(
-    double starBodyRadius,
-  ) {
+  Widget panel(double starBodyRadius) {
     // 黄道十二宫 从白羊开始
     List<String> zodiacList = <String>[
       "白羊",
@@ -693,16 +733,13 @@ class _BeautyViewPageState extends State<BeautyViewPage>
     ];
     // TextStyle zodiacTextStyle = TextStyle(color: Colors.grey, fontSize: 12,fontFamily: 'KaiTi',fontWeight: FontWeight.w300,height: 1.2);
     TextStyle zodiacTextStyle = GoogleFonts.longCang(
-        color: const Color.fromRGBO(66, 76, 80, 1),
-        fontSize: 16,
-        fontWeight: FontWeight.normal,
-        height: 1.0);
-    List<Text> zodiacTextList = zodiacList
-        .map((e) => Text(
-              e,
-              style: zodiacTextStyle,
-            ))
-        .toList();
+      color: const Color.fromRGBO(66, 76, 80, 1),
+      fontSize: 16,
+      fontWeight: FontWeight.normal,
+      height: 1.0,
+    );
+    List<Text> zodiacTextList =
+        zodiacList.map((e) => Text(e, style: zodiacTextStyle)).toList();
 
     // 十二星次 从大梁开始
     List<String> starSeqList = <String>[
@@ -721,30 +758,30 @@ class _BeautyViewPageState extends State<BeautyViewPage>
     ];
     // TextStyle starTextStyle = TextStyle(color: Colors.grey, fontSize: 12,fontFamily: 'KaiTi',fontWeight: FontWeight.w300,height: 1.2);
     TextStyle starTextStyle = GoogleFonts.zhiMangXing(
-        color: const Color.fromRGBO(80, 97, 109, 1),
-        fontSize: 12,
-        fontWeight: FontWeight.normal,
-        height: 1.0);
-    List<Text> starSeqTextList = starSeqList
-        .map((e) => Text(
-              e,
-              style: starTextStyle,
-            ))
-        .toList();
+      color: const Color.fromRGBO(80, 97, 109, 1),
+      fontSize: 12,
+      fontWeight: FontWeight.normal,
+      height: 1.0,
+    );
+    List<Text> starSeqTextList =
+        starSeqList.map((e) => Text(e, style: starTextStyle)).toList();
     // 命理十二宫 从命宫开始
     // List<String> destinyList = <String>["命宫①", "财帛②", "兄弟③", "田宅④", "男女⑤", "奴仆⑥", "夫妻⑦", "疾厄⑧", "迁移⑨", "官禄⑩", "福德⑪", "相貌⑫",];
     // TextStyle destinyTextStyle = TextStyle(color: Colors.black, fontSize: 20,fontFamily: 'KaiTi',fontWeight: FontWeight.w400);
 
     List<Text> destinySeqTextList = destinyList
-        .map((e) => Text(
-              e,
-              style: destinyTextStyle.copyWith(
-                  decoration: e == destinyList[0]
-                      ? TextDecoration.underline
-                      : TextDecoration.none,
-                  fontWeight:
-                      e == destinyList[0] ? FontWeight.w600 : FontWeight.w500),
-            ))
+        .map(
+          (e) => Text(
+            e,
+            style: destinyTextStyle.copyWith(
+              decoration: e == destinyList[0]
+                  ? TextDecoration.underline
+                  : TextDecoration.none,
+              fontWeight:
+                  e == destinyList[0] ? FontWeight.w600 : FontWeight.w500,
+            ),
+          ),
+        )
         .toList();
 
     double rotating = 0;
@@ -806,18 +843,19 @@ class _BeautyViewPageState extends State<BeautyViewPage>
           ),
           bodyRotationAngle: -30 * pi / 180,
           bodyBuilder: () => ValueListenableBuilder<ZhouTianModel?>(
-              valueListenable:
-                  context.read<QiZhengSiYuViewModel>().uiZhouTianModelNotifier,
-              builder: (ctx, zhouTianModel, _) {
-                if (zhouTianModel == null) {
-                  return const SizedBox();
-                }
-                return build12DiZhiGong(
-                  diZhi12GongOuter * .5,
-                  diZhi12GongInner * .5,
-                  zhouTianModel,
-                );
-              }),
+            valueListenable:
+                context.read<QiZhengSiYuViewModel>().uiZhouTianModelNotifier,
+            builder: (ctx, zhouTianModel, _) {
+              if (zhouTianModel == null) {
+                return const SizedBox();
+              }
+              return build12DiZhiGong(
+                diZhi12GongOuter * .5,
+                diZhi12GongInner * .5,
+                zhouTianModel,
+              );
+            },
+          ),
         ),
         // 黄道十二宫（统一为 RingLayer）
         RingLayer(
@@ -945,23 +983,22 @@ class _BeautyViewPageState extends State<BeautyViewPage>
                 return child!;
               }
               return ValueListenableBuilder<ZhouTianModel?>(
-                  valueListenable: context
-                      .read<QiZhengSiYuViewModel>()
-                      .uiZhouTianModelNotifier,
-                  builder: (ctx, zhouTianModel, _) {
-                    if (zhouTianModel == null) {
-                      return child!;
-                    }
-                    return AllShenShaRing(
-                      outerRadius:
-                          panelSizeDataModel.innerShenShaSizeOuter * .5,
-                      innerRadius:
-                          panelSizeDataModel.innerShenShaSizeInner * .5,
-                      shenShaMapper: basePanel.shenShaItemMapper,
-                      gongOrder: EnumTwelveGong.listAll,
-                      zhouTianModel: zhouTianModel,
-                    );
-                  });
+                valueListenable: context
+                    .read<QiZhengSiYuViewModel>()
+                    .uiZhouTianModelNotifier,
+                builder: (ctx, zhouTianModel, _) {
+                  if (zhouTianModel == null) {
+                    return child!;
+                  }
+                  return AllShenShaRing(
+                    outerRadius: panelSizeDataModel.innerShenShaSizeOuter * .5,
+                    innerRadius: panelSizeDataModel.innerShenShaSizeInner * .5,
+                    shenShaMapper: basePanel.shenShaItemMapper,
+                    gongOrder: EnumTwelveGong.listAll,
+                    zhouTianModel: zhouTianModel,
+                  );
+                },
+              );
             },
             child: SizedBox(
               width: panelSizeDataModel.innerShenShaSizeOuter,
@@ -981,82 +1018,88 @@ class _BeautyViewPageState extends State<BeautyViewPage>
           bodyRotationAngle: -30 * pi / 180,
           bodyBuilder: () {
             return ValueListenableBuilder<PassageYearPanelModel?>(
-                valueListenable:
-                    context.read<QiZhengSiYuViewModel>().uiDaXianPanelNotifier,
-                builder: (ctx, daXianPanel, child) {
-                  if (daXianPanel == null) {
-                    return child!;
-                  }
-                  return ValueListenableBuilder<ZhouTianModel?>(
-                      valueListenable: context
-                          .read<QiZhengSiYuViewModel>()
-                          .uiZhouTianModelNotifier,
-                      builder: (ctx, zhouTianModel, _) {
-                        if (zhouTianModel == null) {
-                          return child!;
-                        }
-                        return AllShenShaRing(
-                          outerRadius:
-                              panelSizeDataModel.outerShenShaSizeOuter * .5,
-                          innerRadius:
-                              panelSizeDataModel.outerShenShaSizeInner * .5,
-                          shenShaMapper: daXianPanel.shenShaItemMapper,
-                          gongOrder: EnumTwelveGong.listAll,
-                          zhouTianModel: zhouTianModel,
-                        );
-                      });
-                },
-                child: SizedBox(
-                  width: panelSizeDataModel.outerShenShaSizeOuter,
-                  height: panelSizeDataModel.outerShenShaSizeOuter,
-                ));
+              valueListenable:
+                  context.read<QiZhengSiYuViewModel>().uiDaXianPanelNotifier,
+              builder: (ctx, daXianPanel, child) {
+                if (daXianPanel == null) {
+                  return child!;
+                }
+                return ValueListenableBuilder<ZhouTianModel?>(
+                  valueListenable: context
+                      .read<QiZhengSiYuViewModel>()
+                      .uiZhouTianModelNotifier,
+                  builder: (ctx, zhouTianModel, _) {
+                    if (zhouTianModel == null) {
+                      return child!;
+                    }
+                    return AllShenShaRing(
+                      outerRadius:
+                          panelSizeDataModel.outerShenShaSizeOuter * .5,
+                      innerRadius:
+                          panelSizeDataModel.outerShenShaSizeInner * .5,
+                      shenShaMapper: daXianPanel.shenShaItemMapper,
+                      gongOrder: EnumTwelveGong.listAll,
+                      zhouTianModel: zhouTianModel,
+                    );
+                  },
+                );
+              },
+              child: SizedBox(
+                width: panelSizeDataModel.outerShenShaSizeOuter,
+                height: panelSizeDataModel.outerShenShaSizeOuter,
+              ),
+            );
           },
         ),
 
         Transform.rotate(
           angle: -30 * pi / 180,
           child: ValueListenableBuilder<BasePanelModel?>(
-              valueListenable:
-                  context.read<QiZhengSiYuViewModel>().uiBasePanelNotifier,
-              builder: (ctx, baseModel, _) {
-                if (baseModel == null) {
-                  // 显示中心占位以避免空白
-                  return Container(
-                    width: centerSize,
-                    height: centerSize,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(centerSize),
-                      border: Border.all(color: Colors.black54, width: 1),
-                    ),
-                    child: const Text("加载中..."),
-                  );
-                }
-                return center(baseModel);
-              }),
+            valueListenable:
+                context.read<QiZhengSiYuViewModel>().uiBasePanelNotifier,
+            builder: (ctx, baseModel, _) {
+              if (baseModel == null) {
+                // 显示中心占位以避免空白
+                return Container(
+                  width: centerSize,
+                  height: centerSize,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(centerSize),
+                    border: Border.all(color: Colors.black54, width: 1),
+                  ),
+                  child: const Text("加载中..."),
+                );
+              }
+              return center(baseModel);
+            },
+          ),
         ),
       ],
     );
   }
 
   Widget build12DiZhiGong(
-      double outerRadius, double innerRadius, ZhouTianModel zhouTianModel) {
-    TextStyle firstTextStyle =
-        TextStyle(fontSize: 18, height: 1.0, color: Colors.black87, shadows: [
-      Shadow(
-        color: Colors.black26,
-        offset: Offset(1, 1),
-        blurRadius: 3,
-      ),
-    ]);
-    TextStyle secondTextStyle =
-        TextStyle(fontSize: 12, height: 1.0, color: Colors.black87, shadows: [
-      Shadow(
-        color: Colors.black26,
-        offset: Offset(1, 1),
-        blurRadius: 3,
-      ),
-    ]);
+    double outerRadius,
+    double innerRadius,
+    ZhouTianModel zhouTianModel,
+  ) {
+    TextStyle firstTextStyle = TextStyle(
+      fontSize: 18,
+      height: 1.0,
+      color: Colors.black87,
+      shadows: [
+        Shadow(color: Colors.black26, offset: Offset(1, 1), blurRadius: 3),
+      ],
+    );
+    TextStyle secondTextStyle = TextStyle(
+      fontSize: 12,
+      height: 1.0,
+      color: Colors.black87,
+      shadows: [
+        Shadow(color: Colors.black26, offset: Offset(1, 1), blurRadius: 3),
+      ],
+    );
     // double outerRadius = 100;
     // double innerRadius = outerRadius - 50;
     return Gong12DiZhiRing(
@@ -1068,62 +1111,62 @@ class _BeautyViewPageState extends State<BeautyViewPage>
         EnumTwelveGong.Zi: [
           Text("子", style: firstTextStyle),
           Text("坎", style: secondTextStyle),
-          Text("土", style: secondTextStyle)
+          Text("土", style: secondTextStyle),
         ],
         EnumTwelveGong.Chou: [
           Text("丑", style: firstTextStyle),
           Text("艮", style: secondTextStyle),
-          Text("土", style: secondTextStyle)
+          Text("土", style: secondTextStyle),
         ],
         EnumTwelveGong.Yin: [
           Text("寅", style: firstTextStyle),
           Text("艮", style: secondTextStyle),
-          Text("木", style: secondTextStyle)
+          Text("木", style: secondTextStyle),
         ],
         EnumTwelveGong.Mao: [
           Text("卯", style: firstTextStyle),
           Text("震", style: secondTextStyle),
-          Text("火", style: secondTextStyle)
+          Text("火", style: secondTextStyle),
         ],
         EnumTwelveGong.Chen: [
           Text("辰", style: firstTextStyle),
           Text("巽", style: secondTextStyle),
-          Text("金", style: secondTextStyle)
+          Text("金", style: secondTextStyle),
         ],
         EnumTwelveGong.Si: [
           Text("巳", style: firstTextStyle),
           Text("巽", style: secondTextStyle),
-          Text("水", style: secondTextStyle)
+          Text("水", style: secondTextStyle),
         ],
         EnumTwelveGong.Wu: [
           Text("午", style: firstTextStyle),
           Text("离", style: secondTextStyle),
-          Text("日", style: secondTextStyle)
+          Text("日", style: secondTextStyle),
         ],
         EnumTwelveGong.Wei: [
           Text("未", style: firstTextStyle),
           Text("坤", style: secondTextStyle),
-          Text("月", style: secondTextStyle)
+          Text("月", style: secondTextStyle),
         ],
         EnumTwelveGong.Shen: [
           Text("申", style: firstTextStyle),
           Text("坤", style: secondTextStyle),
-          Text("水", style: secondTextStyle)
+          Text("水", style: secondTextStyle),
         ],
         EnumTwelveGong.You: [
           Text("酉", style: firstTextStyle),
           Text("兑", style: secondTextStyle),
-          Text("金", style: secondTextStyle)
+          Text("金", style: secondTextStyle),
         ],
         EnumTwelveGong.Xu: [
           Text("戌", style: firstTextStyle),
           Text("乾", style: secondTextStyle),
-          Text("火", style: secondTextStyle)
+          Text("火", style: secondTextStyle),
         ],
         EnumTwelveGong.Hai: [
           Text("亥", style: firstTextStyle),
           Text("乾", style: secondTextStyle),
-          Text("木", style: secondTextStyle)
+          Text("木", style: secondTextStyle),
         ],
       },
     );
@@ -1137,15 +1180,27 @@ class _BeautyViewPageState extends State<BeautyViewPage>
       fontWeight: FontWeight.w400,
     );
     return Stack(
-        alignment: Alignment.center,
-        children: List.generate(
-            6,
-            (i) => innerShenShaEachGong(i, innerSize, outerSize, textStyle,
-                i <= 3 && i >= 8 ? i * 30 : -i * 30)).toList());
+      alignment: Alignment.center,
+      children: List.generate(
+        6,
+        (i) => innerShenShaEachGong(
+          i,
+          innerSize,
+          outerSize,
+          textStyle,
+          i <= 3 && i >= 8 ? i * 30 : -i * 30,
+        ),
+      ).toList(),
+    );
   }
 
-  Widget innerShenShaEachGong(int number, double innerSize, double outerSize,
-      TextStyle textStyle, double basicRotatedAngle) {
+  Widget innerShenShaEachGong(
+    int number,
+    double innerSize,
+    double outerSize,
+    TextStyle textStyle,
+    double basicRotatedAngle,
+  ) {
     List<String> twelveZhangShengShenSha = [
       "长生",
       "沐浴",
@@ -1158,7 +1213,7 @@ class _BeautyViewPageState extends State<BeautyViewPage>
       "墓",
       "绝",
       "胎",
-      "养"
+      "养",
     ];
 
     return Transform.rotate(
@@ -1168,17 +1223,25 @@ class _BeautyViewPageState extends State<BeautyViewPage>
         alignment: Alignment.center,
         children: [
           ...List.generate(
-              1,
-              (i) => eachShenShaVertical(twelveZhangShengShenSha[i],
-                  4.2 * i + 2.0, basicRotatedAngle, outerSize, textStyle)),
+            1,
+            (i) => eachShenShaVertical(
+              twelveZhangShengShenSha[i],
+              4.2 * i + 2.0,
+              basicRotatedAngle,
+              outerSize,
+              textStyle,
+            ),
+          ),
           ...List.generate(
-              6,
-              (i) => eachShenShaVertical(
-                  twelveZhangShengShenSha[i + 6],
-                  4.2 * i + 2.0,
-                  basicRotatedAngle,
-                  outerSize - 120,
-                  textStyle)),
+            6,
+            (i) => eachShenShaVertical(
+              twelveZhangShengShenSha[i + 6],
+              4.2 * i + 2.0,
+              basicRotatedAngle,
+              outerSize - 120,
+              textStyle,
+            ),
+          ),
         ],
       ),
     );
@@ -1191,17 +1254,25 @@ class _BeautyViewPageState extends State<BeautyViewPage>
           alignment: Alignment.center,
           children: [
             ...List.generate(
-                7,
-                (i) => eachShenShaVertical(twelveZhangShengShenSha[i],
-                    4.2 * i + 2.0, basicRotatedAngle, outerSize, textStyle)),
+              7,
+              (i) => eachShenShaVertical(
+                twelveZhangShengShenSha[i],
+                4.2 * i + 2.0,
+                basicRotatedAngle,
+                outerSize,
+                textStyle,
+              ),
+            ),
             ...List.generate(
-                6,
-                (i) => eachShenShaVertical(
-                    twelveZhangShengShenSha[i + 6],
-                    4.2 * i + 2.0,
-                    basicRotatedAngle,
-                    outerSize - 120,
-                    textStyle)),
+              6,
+              (i) => eachShenShaVertical(
+                twelveZhangShengShenSha[i + 6],
+                4.2 * i + 2.0,
+                basicRotatedAngle,
+                outerSize - 120,
+                textStyle,
+              ),
+            ),
           ],
         ),
       );
@@ -1213,25 +1284,38 @@ class _BeautyViewPageState extends State<BeautyViewPage>
           alignment: Alignment.center,
           children: [
             ...List.generate(
-                7,
-                (i) => eachShenShaHorizontal(twelveZhangShengShenSha[i],
-                    4.2 * i + 2.0, basicRotatedAngle, outerSize, textStyle)),
+              7,
+              (i) => eachShenShaHorizontal(
+                twelveZhangShengShenSha[i],
+                4.2 * i + 2.0,
+                basicRotatedAngle,
+                outerSize,
+                textStyle,
+              ),
+            ),
             ...List.generate(
-                6,
-                (i) => eachShenShaHorizontal(
-                    twelveZhangShengShenSha[i + 6],
-                    4.2 * i + 2.0,
-                    basicRotatedAngle,
-                    outerSize - 120,
-                    textStyle)),
+              6,
+              (i) => eachShenShaHorizontal(
+                twelveZhangShengShenSha[i + 6],
+                4.2 * i + 2.0,
+                basicRotatedAngle,
+                outerSize - 120,
+                textStyle,
+              ),
+            ),
           ],
         ),
       );
     }
   }
 
-  Widget eachShenShaHorizontal(String shenShaName, double rotateOffset,
-      double fontBasicRotated, double height, TextStyle textStyle) {
+  Widget eachShenShaHorizontal(
+    String shenShaName,
+    double rotateOffset,
+    double fontBasicRotated,
+    double height,
+    TextStyle textStyle,
+  ) {
     List<String> nameList = shenShaName.split("");
     return Transform.rotate(
       angle: rotateOffset * (pi / 180),
@@ -1251,57 +1335,57 @@ class _BeautyViewPageState extends State<BeautyViewPage>
             RotatedBox(
               quarterTurns: 0,
               child: Container(
-                  height: 22,
-                  width: 54,
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 0, horizontal: 4),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      color: Colors.teal),
-                  alignment: Alignment.center,
-                  child: Row(
-                      mainAxisAlignment: nameList.length > -1
-                          ? MainAxisAlignment.spaceAround
-                          : MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: nameList
-                          .map(
-                            (singleName) => Transform.rotate(
-                                angle: pi / 178,
-                                child: Text(
-                                  singleName,
-                                  style: textStyle,
-                                )),
-                          )
-                          .toList())),
+                height: 22,
+                width: 54,
+                padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 4),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                  color: Colors.teal,
+                ),
+                alignment: Alignment.center,
+                child: Row(
+                  mainAxisAlignment: nameList.length > -1
+                      ? MainAxisAlignment.spaceAround
+                      : MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: nameList
+                      .map(
+                        (singleName) => Transform.rotate(
+                          angle: pi / 178,
+                          child: Text(singleName, style: textStyle),
+                        ),
+                      )
+                      .toList(),
+                ),
+              ),
             ),
             const Expanded(child: SizedBox()),
             RotatedBox(
               quarterTurns: 0,
               child: Container(
-                  height: 24,
-                  width: 56,
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 2, horizontal: 4),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(32),
-                      color: Colors.amber),
-                  alignment: Alignment.center,
-                  child: Row(
-                      mainAxisAlignment: nameList.length > 1
-                          ? MainAxisAlignment.spaceAround
-                          : MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: nameList
-                          .map(
-                            (singleName) => Transform.rotate(
-                                angle: pi / 180,
-                                child: Text(
-                                  singleName,
-                                  style: textStyle,
-                                )),
-                          )
-                          .toList())),
+                height: 24,
+                width: 56,
+                padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 4),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(32),
+                  color: Colors.amber,
+                ),
+                alignment: Alignment.center,
+                child: Row(
+                  mainAxisAlignment: nameList.length > 1
+                      ? MainAxisAlignment.spaceAround
+                      : MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: nameList
+                      .map(
+                        (singleName) => Transform.rotate(
+                          angle: pi / 180,
+                          child: Text(singleName, style: textStyle),
+                        ),
+                      )
+                      .toList(),
+                ),
+              ),
             ),
           ],
         ),
@@ -1309,8 +1393,13 @@ class _BeautyViewPageState extends State<BeautyViewPage>
     );
   }
 
-  Widget eachShenShaVertical(String shenShaName, double rotateOffset,
-      double fontBasicRotated, double height, TextStyle textStyle) {
+  Widget eachShenShaVertical(
+    String shenShaName,
+    double rotateOffset,
+    double fontBasicRotated,
+    double height,
+    TextStyle textStyle,
+  ) {
     List<String> nameList = shenShaName.split("");
     return Transform.rotate(
       angle: rotateOffset * (pi / 180),
@@ -1321,11 +1410,10 @@ class _BeautyViewPageState extends State<BeautyViewPage>
         width: 32,
         padding: const EdgeInsets.symmetric(vertical: 6),
         decoration: BoxDecoration(
-            // border: BorderSide(color: Colors.black87, width: 1),
-            // 底部 border
-            border: Border(
-          bottom: BorderSide(color: Colors.yellow, width: 1),
-        )),
+          // border: BorderSide(color: Colors.black87, width: 1),
+          // 底部 border
+          border: Border(bottom: BorderSide(color: Colors.yellow, width: 1)),
+        ),
         // decoration: BoxDecoration(
         // TODO: DevHelper Color
         // color: Colors.blue.withOpacity(.1)),
@@ -1336,57 +1424,57 @@ class _BeautyViewPageState extends State<BeautyViewPage>
             RotatedBox(
               quarterTurns: 2,
               child: Container(
-                  height: 56,
-                  width: 24,
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 4, horizontal: 2),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(32),
-                      color: Colors.teal),
-                  alignment: Alignment.center,
-                  child: Column(
-                      mainAxisAlignment: nameList.length > 1
-                          ? MainAxisAlignment.spaceAround
-                          : MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: nameList
-                          .map(
-                            (singleName) => Transform.rotate(
-                                angle: pi / 180,
-                                child: Text(
-                                  singleName,
-                                  style: textStyle,
-                                )),
-                          )
-                          .toList())),
+                height: 56,
+                width: 24,
+                padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 2),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(32),
+                  color: Colors.teal,
+                ),
+                alignment: Alignment.center,
+                child: Column(
+                  mainAxisAlignment: nameList.length > 1
+                      ? MainAxisAlignment.spaceAround
+                      : MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: nameList
+                      .map(
+                        (singleName) => Transform.rotate(
+                          angle: pi / 180,
+                          child: Text(singleName, style: textStyle),
+                        ),
+                      )
+                      .toList(),
+                ),
+              ),
             ),
             const Expanded(child: SizedBox()),
             RotatedBox(
               quarterTurns: 2,
               child: Container(
-                  height: 56,
-                  width: 24,
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 4, horizontal: 2),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(32),
-                      color: Colors.cyan),
-                  alignment: Alignment.center,
-                  child: Column(
-                      mainAxisAlignment: nameList.length > 1
-                          ? MainAxisAlignment.spaceAround
-                          : MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: nameList
-                          .map(
-                            (singleName) => Transform.rotate(
-                                angle: pi / 180,
-                                child: Text(
-                                  singleName,
-                                  style: textStyle,
-                                )),
-                          )
-                          .toList())),
+                height: 56,
+                width: 24,
+                padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 2),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(32),
+                  color: Colors.cyan,
+                ),
+                alignment: Alignment.center,
+                child: Column(
+                  mainAxisAlignment: nameList.length > 1
+                      ? MainAxisAlignment.spaceAround
+                      : MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: nameList
+                      .map(
+                        (singleName) => Transform.rotate(
+                          angle: pi / 180,
+                          child: Text(singleName, style: textStyle),
+                        ),
+                      )
+                      .toList(),
+                ),
+              ),
             ),
           ],
         ),
@@ -1411,19 +1499,20 @@ class _BeautyViewPageState extends State<BeautyViewPage>
           innerSize: fateLifeStarInnerSize,
           trackSize: fateLifeStarTrackSize,
           textStyle: GoogleFonts.notoSans(
-              fontSize: 24.0,
-              height: 1,
-              // color: Color.fromRGBO(55, 53, 52, 1),
-              color: Colors.black87,
-              fontWeight: FontWeight.normal,
-              shadows: [
-                BoxShadow(
-                  color: Colors.black38.withOpacity(.3),
-                  spreadRadius: 1,
-                  blurRadius: 1,
-                  offset: const Offset(1, 1), // changes position of shadow
-                )
-              ]),
+            fontSize: 24.0,
+            height: 1,
+            // color: Color.fromRGBO(55, 53, 52, 1),
+            color: Colors.black87,
+            fontWeight: FontWeight.normal,
+            shadows: [
+              BoxShadow(
+                color: Colors.black38.withOpacity(.3),
+                spreadRadius: 1,
+                blurRadius: 1,
+                offset: const Offset(1, 1), // changes position of shadow
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -1436,7 +1525,8 @@ class _BeautyViewPageState extends State<BeautyViewPage>
   Widget outerStarTrackRing(List<UIStarModel> uiBasicLifeStarList) {
     logger.d("-------- ${uiBasicLifeStarList.length}");
     logger.d(
-        "---- ${uiBasicLifeStarList.map((e) => e.star.singleName).join(",")}");
+      "---- ${uiBasicLifeStarList.map((e) => e.star.singleName).join(",")}",
+    );
     return Container(
       width: basicLifeStarRingOuterSize,
       height: basicLifeStarRingOuterSize,
@@ -1448,7 +1538,9 @@ class _BeautyViewPageState extends State<BeautyViewPage>
       child: CustomPaint(
         // size: Size(basicLifeStarCenterCircleSize + starBodyRadius * 4, basicLifeStarCenterCircleSize + starBodyRadius * 4), // 设置画布大小
         size: Size(
-            basicLifeStarRingOuterSize, basicLifeStarRingOuterSize), // 设置画布大小
+          basicLifeStarRingOuterSize,
+          basicLifeStarRingOuterSize,
+        ), // 设置画布大小
         painter: OuterLifeStarRangePainter(
           stars: uiBasicLifeStarList,
           starsColorMap: QiZhengSiYuUIConstantResources.starsColorMap,
@@ -1456,26 +1548,29 @@ class _BeautyViewPageState extends State<BeautyViewPage>
           innerSize: basicLifeStarRingInnerSize,
           trackSize: basicLifeStarBodyTrackSize,
           textStyle: GoogleFonts.notoSans(
-              fontSize: 24.0,
-              height: 1,
-              // color: Color.fromRGBO(55, 53, 52, 1),
-              color: Colors.black87,
-              fontWeight: FontWeight.normal,
-              shadows: [
-                BoxShadow(
-                  color: Colors.black38.withOpacity(.3),
-                  spreadRadius: 1,
-                  blurRadius: 1,
-                  offset: const Offset(1, 1), // changes position of shadow
-                )
-              ]),
+            fontSize: 24.0,
+            height: 1,
+            // color: Color.fromRGBO(55, 53, 52, 1),
+            color: Colors.black87,
+            fontWeight: FontWeight.normal,
+            shadows: [
+              BoxShadow(
+                color: Colors.black38.withOpacity(.3),
+                spreadRadius: 1,
+                blurRadius: 1,
+                offset: const Offset(1, 1), // changes position of shadow
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 
   UIStarsAngle correctBasicLifeAngle(
-      StarsAngle starsAngle, double basicLifeStarCenterCircleSize) {
+    StarsAngle starsAngle,
+    double basicLifeStarCenterCircleSize,
+  ) {
     double? uiSunAngle;
     double? uiMoonAngle;
     double? uiVenusAngle;
@@ -1513,18 +1608,20 @@ class _BeautyViewPageState extends State<BeautyViewPage>
 
     // create UIStarsAngle from StarsAngle
 
-    return UIStarsAngle.from(starsAngle,
-        uiSunAngle: uiSunAngle,
-        uiMoonAngle: uiMoonAngle,
-        uiVenusAngle: uiVenusAngle,
-        uiJupiterAngle: uiJupiterAngle,
-        uiMarsAngle: uiMarsAngle,
-        uiSaturnAngle: uiSaturnAngle,
-        uiWaterAngle: uiWaterAngle,
-        uiSouthNodeAngle: uiSouthNodeAngle,
-        uiNorthNodeAngle: uiNorthNodeAngle,
-        uiBeiNodeAngle: uiBeiNodeAngle,
-        uiQiAngle: uiQiAngle);
+    return UIStarsAngle.from(
+      starsAngle,
+      uiSunAngle: uiSunAngle,
+      uiMoonAngle: uiMoonAngle,
+      uiVenusAngle: uiVenusAngle,
+      uiJupiterAngle: uiJupiterAngle,
+      uiMarsAngle: uiMarsAngle,
+      uiSaturnAngle: uiSaturnAngle,
+      uiWaterAngle: uiWaterAngle,
+      uiSouthNodeAngle: uiSouthNodeAngle,
+      uiNorthNodeAngle: uiNorthNodeAngle,
+      uiBeiNodeAngle: uiBeiNodeAngle,
+      uiQiAngle: uiQiAngle,
+    );
   }
 
   Widget basicLifeStarPanelHelperCircle(double size) {
@@ -1541,8 +1638,12 @@ class _BeautyViewPageState extends State<BeautyViewPage>
   }
 
   Widget fatePanelStarDefault(
-      EnumStars star, double degree, double offsetWidth, double size,
-      {int offsetWidthTimes = 0}) {
+    EnumStars star,
+    double degree,
+    double offsetWidth,
+    double size, {
+    int offsetWidthTimes = 0,
+  }) {
     Color backgroundColor = QiZhengSiYuUIConstantResources.starsColorMap[star]!;
     double oWidth = offsetWidth;
     if (offsetWidthTimes != 0) {
@@ -1554,22 +1655,122 @@ class _BeautyViewPageState extends State<BeautyViewPage>
       }
     }
     return Transform.rotate(
-        angle: (120 - degree) * pi / 180,
-        child: Container(
-          width: 32 + oWidth,
-          // height: 560,
-          // height: 610,
-          height: size,
-          // color: Colors.blue.withOpacity(.1),
-          alignment: Alignment.topCenter,
-          child: ElTooltip(
-            showModal: false,
-            showChildAboveOverlay: false,
-            content: const Text("tooltip"),
-            child: CustomPaint(
-              size: const Size(32, 650 - 600 - 4),
-              painter: MyCirclePainter(
-                  toOuter: true,
+      angle: (120 - degree) * pi / 180,
+      child: Container(
+        width: 32 + oWidth,
+        // height: 560,
+        // height: 610,
+        height: size,
+        // color: Colors.blue.withOpacity(.1),
+        alignment: Alignment.topCenter,
+        child: ElTooltip(
+          showModal: false,
+          showChildAboveOverlay: false,
+          content: const Text("tooltip"),
+          child: CustomPaint(
+            size: const Size(32, 650 - 600 - 4),
+            painter: MyCirclePainter(
+              toOuter: true,
+              starName: star.singleName,
+              starAngle: degree,
+              // angle:((360-degree) * pi) / 180,
+              radians: ((360 - (120 - degree)) * pi) / 180,
+              offsetTimes: offsetWidthTimes,
+              backgroundColor: backgroundColor,
+              textStyle: GoogleFonts.notoSans(
+                fontSize: 20.0,
+                height: 1,
+                // color: Color.fromRGBO(55, 53, 52, 1),
+                color: QiZhengSiYuUIConstantResources.starsColorMap[star]!,
+                fontWeight: FontWeight.normal,
+                shadows: [
+                  BoxShadow(
+                    color: Colors.black38.withOpacity(.1),
+                    spreadRadius: 1,
+                    blurRadius: 1,
+                    offset: const Offset(1, 1), // changes position of shadow
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget lifePanelUIStarDefault(UIStarModel uiStar) {
+    Color backgroundColor =
+        QiZhengSiYuUIConstantResources.starsColorMap[uiStar.star]!;
+    return Transform.rotate(
+      angle: (120 - uiStar.angle) * pi / 180,
+      child: Container(
+        width: 32,
+        height: 706,
+        // color: Colors.blue.withOpacity(.1),
+        alignment: Alignment.topCenter,
+        child: ElTooltip(
+          showModal: false,
+          showChildAboveOverlay: false,
+          content: const Text("tooltip"),
+          // child: Container(),
+          child: CustomPaint(
+            size: const Size(32, 48),
+            painter: StarBodyPainter(
+              star: uiStar,
+              // angle:((360-degree) * pi) / 180,
+              radians: ((360 - (120 - uiStar.angle)) * pi) / 180,
+              backgroundColor: backgroundColor,
+              textStyle: GoogleFonts.notoSans(
+                fontSize: 20.0,
+                height: 1,
+                // color: Color.fromRGBO(55, 53, 52, 1),
+                color:
+                    QiZhengSiYuUIConstantResources.starsColorMap[uiStar.star]!,
+                fontWeight: FontWeight.normal,
+                shadows: [
+                  BoxShadow(
+                    color: Colors.black38.withOpacity(.3),
+                    spreadRadius: 1,
+                    blurRadius: 1,
+                    offset: const Offset(1, 1), // changes position of shadow
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget lifePanelStarDefault(
+    EnumStars star,
+    double degree,
+    double offsetWidth, {
+    int offsetWidthTimes = 0,
+  }) {
+    Color backgroundColor = QiZhengSiYuUIConstantResources.starsColorMap[star]!;
+    return Transform.rotate(
+      angle: (120 - degree) * pi / 180,
+      child: Container(
+        width: 32,
+        // height: 560,
+        // height: 610,
+        // height: 610 + 64+32,
+        height: 706,
+        // color: Colors.blue.withOpacity(.1),
+        alignment: Alignment.topCenter,
+        child: ElTooltip(
+          showModal: false,
+          showChildAboveOverlay: false,
+          content: const Text("tooltip"),
+          child: FutureBuilder(
+            future: loadImage(),
+            builder: (ctx, asyncSnap) {
+              return CustomPaint(
+                size: const Size(32, 650 - 600 - 4),
+                painter: MyCirclePainter(
                   starName: star.singleName,
                   starAngle: degree,
                   // angle:((360-degree) * pi) / 180,
@@ -1577,126 +1778,37 @@ class _BeautyViewPageState extends State<BeautyViewPage>
                   offsetTimes: offsetWidthTimes,
                   backgroundColor: backgroundColor,
                   textStyle: GoogleFonts.notoSans(
-                      fontSize: 20.0,
-                      height: 1,
-                      // color: Color.fromRGBO(55, 53, 52, 1),
-                      color:
-                          QiZhengSiYuUIConstantResources.starsColorMap[star]!,
-                      fontWeight: FontWeight.normal,
-                      shadows: [
-                        BoxShadow(
-                          color: Colors.black38.withOpacity(.1),
-                          spreadRadius: 1,
-                          blurRadius: 1,
-                          offset:
-                              const Offset(1, 1), // changes position of shadow
-                        )
-                      ])),
-            ),
+                    fontSize: 20.0,
+                    height: 1,
+                    // color: Color.fromRGBO(55, 53, 52, 1),
+                    color: QiZhengSiYuUIConstantResources.starsColorMap[star]!,
+                    fontWeight: FontWeight.normal,
+                    shadows: [
+                      BoxShadow(
+                        color: Colors.black38.withOpacity(.3),
+                        spreadRadius: 1,
+                        blurRadius: 1,
+                        offset: const Offset(
+                          1,
+                          1,
+                        ), // changes position of shadow
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
           ),
-        ));
+        ),
+      ),
+    );
   }
 
-  Widget lifePanelUIStarDefault(UIStarModel uiStar) {
-    Color backgroundColor =
-        QiZhengSiYuUIConstantResources.starsColorMap[uiStar.star]!;
-    return Transform.rotate(
-        angle: (120 - uiStar.angle) * pi / 180,
-        child: Container(
-          width: 32,
-          height: 706,
-          // color: Colors.blue.withOpacity(.1),
-          alignment: Alignment.topCenter,
-          child: ElTooltip(
-            showModal: false,
-            showChildAboveOverlay: false,
-            content: const Text("tooltip"),
-            // child: Container(),
-            child: CustomPaint(
-              size: const Size(32, 48),
-              painter: StarBodyPainter(
-                  star: uiStar,
-                  // angle:((360-degree) * pi) / 180,
-                  radians: ((360 - (120 - uiStar.angle)) * pi) / 180,
-                  backgroundColor: backgroundColor,
-                  textStyle: GoogleFonts.notoSans(
-                      fontSize: 20.0,
-                      height: 1,
-                      // color: Color.fromRGBO(55, 53, 52, 1),
-                      color: QiZhengSiYuUIConstantResources
-                          .starsColorMap[uiStar.star]!,
-                      fontWeight: FontWeight.normal,
-                      shadows: [
-                        BoxShadow(
-                          color: Colors.black38.withOpacity(.3),
-                          spreadRadius: 1,
-                          blurRadius: 1,
-                          offset:
-                              const Offset(1, 1), // changes position of shadow
-                        )
-                      ])),
-            ),
-          ),
-        ));
-  }
-
-  Widget lifePanelStarDefault(EnumStars star, double degree, double offsetWidth,
-      {int offsetWidthTimes = 0}) {
-    Color backgroundColor = QiZhengSiYuUIConstantResources.starsColorMap[star]!;
-    return Transform.rotate(
-        angle: (120 - degree) * pi / 180,
-        child: Container(
-          width: 32,
-          // height: 560,
-          // height: 610,
-          // height: 610 + 64+32,
-          height: 706,
-          // color: Colors.blue.withOpacity(.1),
-          alignment: Alignment.topCenter,
-          child: ElTooltip(
-            showModal: false,
-            showChildAboveOverlay: false,
-            content: const Text("tooltip"),
-            child: FutureBuilder(
-              future: loadImage(),
-              builder: (
-                ctx,
-                asyncSnap,
-              ) {
-                return CustomPaint(
-                  size: const Size(32, 650 - 600 - 4),
-                  painter: MyCirclePainter(
-                      starName: star.singleName,
-                      starAngle: degree,
-                      // angle:((360-degree) * pi) / 180,
-                      radians: ((360 - (120 - degree)) * pi) / 180,
-                      offsetTimes: offsetWidthTimes,
-                      backgroundColor: backgroundColor,
-                      textStyle: GoogleFonts.notoSans(
-                          fontSize: 20.0,
-                          height: 1,
-                          // color: Color.fromRGBO(55, 53, 52, 1),
-                          color: QiZhengSiYuUIConstantResources
-                              .starsColorMap[star]!,
-                          fontWeight: FontWeight.normal,
-                          shadows: [
-                            BoxShadow(
-                              color: Colors.black38.withOpacity(.3),
-                              spreadRadius: 1,
-                              blurRadius: 1,
-                              offset: const Offset(
-                                  1, 1), // changes position of shadow
-                            )
-                          ])),
-                );
-              },
-            ),
-          ),
-        ));
-  }
-
-  Widget lifePanelStar(ElevenStarsInfo star, double offsetWidth,
-      {int offsetWidthTimes = 0}) {
+  Widget lifePanelStar(
+    ElevenStarsInfo star,
+    double offsetWidth, {
+    int offsetWidthTimes = 0,
+  }) {
     Color backgroundColor =
         QiZhengSiYuUIConstantResources.starsColorMap[star.star]!;
     double oWidth = offsetWidth;
@@ -1712,68 +1824,70 @@ class _BeautyViewPageState extends State<BeautyViewPage>
       // angle: (120 * pi) / 180,
       angle: 0,
       child: Transform.rotate(
-          angle: (120 - star.angle) * pi / 180,
-          child: Container(
-            width: 32 + oWidth,
-            // height: 560,
-            // height: 610,
-            height: 610 + 64 + 32,
-            // color: Colors.blue.withOpacity(.1),
-            alignment: Alignment.topCenter,
-            child: ElTooltip(
-              showModal: false,
-              showChildAboveOverlay: false,
-              content: const Text("tooltip"),
-              child: FutureBuilder(
-                future: loadImage(),
-                builder: (
-                  ctx,
-                  asyncSnap,
-                ) {
-                  // if (asyncSnap.hasData && asyncSnap.data != null){
-                  //   return CustomPaint(
-                  //     size: Size(32, 650-600-4),
-                  //     painter: PlanetPainter(
-                  //         starName:starName,
-                  //         angle:((360-degree) * pi) / 180,
-                  //         offsetTimes: offsetWidthTimes,
-                  //         image: asyncSnap.data!
-                  //     ),
-                  //   );
-                  // }
-                  // if (asyncSnap.hasError){
-                  //   print(asyncSnap.error);
-                  // }
-                  return CustomPaint(
-                    size: const Size(32, 650 - 600 - 4),
-                    painter: MyCirclePainter(
-                        starName: star.star.singleName,
-                        // angle:((360-degree) * pi) / 180,
-                        radians: ((360 - (120 - star.angle)) * pi) / 180,
-                        starAngle: star.angle,
-                        offsetTimes: offsetWidthTimes,
-                        backgroundColor: backgroundColor,
-                        textStyle: GoogleFonts.notoSans(
-                            fontSize: 20.0,
-                            height: 1,
-                            // color: Color.fromRGBO(55, 53, 52, 1),
-                            color: QiZhengSiYuUIConstantResources
-                                .starsColorMap[star.star]!,
-                            fontWeight: FontWeight.normal,
-                            shadows: [
-                              BoxShadow(
-                                color: Colors.black38.withOpacity(.1),
-                                spreadRadius: 1,
-                                blurRadius: 1,
-                                offset: const Offset(
-                                    1, 1), // changes position of shadow
-                              )
-                            ])),
-                  );
-                },
-              ),
+        angle: (120 - star.angle) * pi / 180,
+        child: Container(
+          width: 32 + oWidth,
+          // height: 560,
+          // height: 610,
+          height: 610 + 64 + 32,
+          // color: Colors.blue.withOpacity(.1),
+          alignment: Alignment.topCenter,
+          child: ElTooltip(
+            showModal: false,
+            showChildAboveOverlay: false,
+            content: const Text("tooltip"),
+            child: FutureBuilder(
+              future: loadImage(),
+              builder: (ctx, asyncSnap) {
+                // if (asyncSnap.hasData && asyncSnap.data != null){
+                //   return CustomPaint(
+                //     size: Size(32, 650-600-4),
+                //     painter: PlanetPainter(
+                //         starName:starName,
+                //         angle:((360-degree) * pi) / 180,
+                //         offsetTimes: offsetWidthTimes,
+                //         image: asyncSnap.data!
+                //     ),
+                //   );
+                // }
+                // if (asyncSnap.hasError){
+                //   print(asyncSnap.error);
+                // }
+                return CustomPaint(
+                  size: const Size(32, 650 - 600 - 4),
+                  painter: MyCirclePainter(
+                    starName: star.star.singleName,
+                    // angle:((360-degree) * pi) / 180,
+                    radians: ((360 - (120 - star.angle)) * pi) / 180,
+                    starAngle: star.angle,
+                    offsetTimes: offsetWidthTimes,
+                    backgroundColor: backgroundColor,
+                    textStyle: GoogleFonts.notoSans(
+                      fontSize: 20.0,
+                      height: 1,
+                      // color: Color.fromRGBO(55, 53, 52, 1),
+                      color: QiZhengSiYuUIConstantResources
+                          .starsColorMap[star.star]!,
+                      fontWeight: FontWeight.normal,
+                      shadows: [
+                        BoxShadow(
+                          color: Colors.black38.withOpacity(.1),
+                          spreadRadius: 1,
+                          blurRadius: 1,
+                          offset: const Offset(
+                            1,
+                            1,
+                          ), // changes position of shadow
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
             ),
-          )),
+          ),
+        ),
+      ),
     );
   }
 
@@ -1783,7 +1897,7 @@ class _BeautyViewPageState extends State<BeautyViewPage>
       FiveStarWalkingType.Fast: Colors.red,
       FiveStarWalkingType.Normal: Colors.blue,
       FiveStarWalkingType.Slow: Colors.brown,
-      FiveStarWalkingType.Stay: Colors.blueGrey
+      FiveStarWalkingType.Stay: Colors.blueGrey,
     };
     Color backgroundColor = colorMap[walkingInfo.walkingType]!;
     double oWidth = 0;
@@ -1798,92 +1912,100 @@ class _BeautyViewPageState extends State<BeautyViewPage>
       }
     }
     final textStyle = GoogleFonts.notoSans(
-        fontSize: 20.0,
-        height: 1,
-        // color: Color.fromRGBO(55, 53, 52, 1),
-        color: QiZhengSiYuUIConstantResources.zhengColorMap[walkingInfo.star]!,
-        fontWeight: FontWeight.normal,
-        shadows: [
-          BoxShadow(
-            color: Colors.black38.withOpacity(.1),
-            spreadRadius: 1,
-            blurRadius: 1,
-            offset: const Offset(1, 1), // changes position of shadow
-          )
-        ]);
+      fontSize: 20.0,
+      height: 1,
+      // color: Color.fromRGBO(55, 53, 52, 1),
+      color: QiZhengSiYuUIConstantResources.zhengColorMap[walkingInfo.star]!,
+      fontWeight: FontWeight.normal,
+      shadows: [
+        BoxShadow(
+          color: Colors.black38.withOpacity(.1),
+          spreadRadius: 1,
+          blurRadius: 1,
+          offset: const Offset(1, 1), // changes position of shadow
+        ),
+      ],
+    );
     return Transform.rotate(
-        angle: (120 - walkingInfo.angle) * pi / 180,
-        child: Container(
-          width: 32 + oWidth,
-          height: size,
-          // height: 610,
-          // color: Colors.blue.withOpacity(.1),
-          alignment: Alignment.topCenter,
-          child: ElTooltip(
-            showModal: false,
-            showChildAboveOverlay: false,
-            content: const Text("tooltip"),
-            child: FutureBuilder(
-              future: loadImage(),
-              builder: (
-                ctx,
-                asyncSnap,
-              ) {
-                return CustomPaint(
-                  size: const Size(32, 650 - 600 - 4),
-                  painter: MyCirclePainter(
-                      starName: walkingInfo.star.singleName,
-                      // angle:((360-degree) * pi) / 180,
-                      textStyle: textStyle,
-                      radians: ((360 - (120 - walkingInfo.angle)) * pi) / 180,
-                      starAngle: walkingInfo.angle,
-                      offsetTimes: offsetWidthTimes,
-                      backgroundColor: backgroundColor,
-                      toOuter: true),
-                );
-              },
-            ),
+      angle: (120 - walkingInfo.angle) * pi / 180,
+      child: Container(
+        width: 32 + oWidth,
+        height: size,
+        // height: 610,
+        // color: Colors.blue.withOpacity(.1),
+        alignment: Alignment.topCenter,
+        child: ElTooltip(
+          showModal: false,
+          showChildAboveOverlay: false,
+          content: const Text("tooltip"),
+          child: FutureBuilder(
+            future: loadImage(),
+            builder: (ctx, asyncSnap) {
+              return CustomPaint(
+                size: const Size(32, 650 - 600 - 4),
+                painter: MyCirclePainter(
+                  starName: walkingInfo.star.singleName,
+                  // angle:((360-degree) * pi) / 180,
+                  textStyle: textStyle,
+                  radians: ((360 - (120 - walkingInfo.angle)) * pi) / 180,
+                  starAngle: walkingInfo.angle,
+                  offsetTimes: offsetWidthTimes,
+                  backgroundColor: backgroundColor,
+                  toOuter: true,
+                ),
+              );
+            },
           ),
-        ));
+        ),
+      ),
+    );
   }
 
   Future<ui.Image> loadImage() async {
     var data = await rootBundle.load(
-        'assets/planets/mars-bubbles-50.png'); // Replace with your image path
-    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(),
-        targetHeight: 40, targetWidth: 42);
+      'assets/planets/mars-bubbles-50.png',
+    ); // Replace with your image path
+    ui.Codec codec = await ui.instantiateImageCodec(
+      data.buffer.asUint8List(),
+      targetHeight: 40,
+      targetWidth: 42,
+    );
     ui.FrameInfo fi = await codec.getNextFrame();
     return fi.image;
   }
 
   Widget star(String starName, double degree) {
     return Transform.rotate(
-        angle: (degree * pi) / 180,
-        child: Container(
-          width: 32,
-          // height: 560,
-          height: 650,
-          color: Colors.blue.withOpacity(.1),
-          padding: const EdgeInsets.only(top: 8),
-          alignment: Alignment.topCenter,
-          child: Transform.rotate(
-            angle: ((360 - degree) * pi) / 180,
-            child: Container(
-              width: 32,
-              height: 32,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: Colors.black87.withOpacity(.1),
-                borderRadius: BorderRadius.circular(32),
-              ),
-              child: Text(
-                starName,
-                style: const TextStyle(
-                    fontSize: 18, fontWeight: FontWeight.normal, height: 1),
+      angle: (degree * pi) / 180,
+      child: Container(
+        width: 32,
+        // height: 560,
+        height: 650,
+        color: Colors.blue.withOpacity(.1),
+        padding: const EdgeInsets.only(top: 8),
+        alignment: Alignment.topCenter,
+        child: Transform.rotate(
+          angle: ((360 - degree) * pi) / 180,
+          child: Container(
+            width: 32,
+            height: 32,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: Colors.black87.withOpacity(.1),
+              borderRadius: BorderRadius.circular(32),
+            ),
+            child: Text(
+              starName,
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.normal,
+                height: 1,
               ),
             ),
           ),
-        ));
+        ),
+      ),
+    );
   }
 
   // 二十八星宿 刻度环
@@ -1891,25 +2013,25 @@ class _BeautyViewPageState extends State<BeautyViewPage>
     double outerRadius = size / 2;
     return RepaintBoundary(
       child: Container(
-          width: size, //
-          height: size,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey.withOpacity(.4), width: 1),
-            // color: Colors黑...withOpacity(.1),
-            borderRadius: BorderRadius.circular(outerRadius),
+        width: size, //
+        height: size,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.grey.withOpacity(.4), width: 1),
+          // color: Colors黑...withOpacity(.1),
+          borderRadius: BorderRadius.circular(outerRadius),
+        ),
+        child: CustomPaint(
+          size: Size(size, size),
+          painter: StarXiuRingPainter(
+            outerSize: starXiu28RingSizeOuter,
+            innerSize: starXiu28RingSizeInner,
+            mapper: QiZhengSiYuConstantResources
+                .ZodiacTropicalModernStarsInnSystemMapper,
+            sevenZhengColorMapper: QiZhengSiYuUIConstantResources.zhengColorMap,
           ),
-          child: CustomPaint(
-            size: Size(size, size),
-            painter: StarXiuRingPainter(
-              outerSize: starXiu28RingSizeOuter,
-              innerSize: starXiu28RingSizeInner,
-              mapper: QiZhengSiYuConstantResources
-                  .ZodiacTropicalModernStarsInnSystemMapper,
-              sevenZhengColorMapper:
-                  QiZhengSiYuUIConstantResources.zhengColorMap,
-            ),
-          )),
+        ),
+      ),
     );
   }
 
@@ -1921,74 +2043,84 @@ class _BeautyViewPageState extends State<BeautyViewPage>
         child: Stack(
           children: [
             Container(
-                width: size, //
-                height: size,
-                alignment: Alignment.center,
-                child: CustomPaint(
-                  size: Size(size, size),
-                  painter: IndicatorScalePainter(
-                      ringWidth: ringWidth,
-                      tickLength: 7,
-                      indicatorAngle: 45.1),
-                )),
-            Container(
-                width: size, //
-                height: size,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  border:
-                      Border.all(color: Colors.grey.withOpacity(.4), width: 1),
-                  // color: Colors黑...withOpacity(.1),
-                  borderRadius: BorderRadius.circular(outerRadius),
+              width: size, //
+              height: size,
+              alignment: Alignment.center,
+              child: CustomPaint(
+                size: Size(size, size),
+                painter: IndicatorScalePainter(
+                  ringWidth: ringWidth,
+                  tickLength: 7,
+                  indicatorAngle: 45.1,
                 ),
-                child: CustomPaint(
-                  size: Size(size, size),
-                  painter: StarXiuRingPainter(
-                    outerSize: starXiu28RingSizeOuter,
-                    innerSize: starXiu28RingSizeInner,
-                    mapper: QiZhengSiYuConstantResources
-                        .ZodiacTropicalModernStarsInnSystemMapper,
-                    sevenZhengColorMapper:
-                        QiZhengSiYuUIConstantResources.zhengColorMap,
-                  ),
-                )),
+              ),
+            ),
+            Container(
+              width: size, //
+              height: size,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Colors.grey.withOpacity(.4),
+                  width: 1,
+                ),
+                // color: Colors黑...withOpacity(.1),
+                borderRadius: BorderRadius.circular(outerRadius),
+              ),
+              child: CustomPaint(
+                size: Size(size, size),
+                painter: StarXiuRingPainter(
+                  outerSize: starXiu28RingSizeOuter,
+                  innerSize: starXiu28RingSizeInner,
+                  mapper: QiZhengSiYuConstantResources
+                      .ZodiacTropicalModernStarsInnSystemMapper,
+                  sevenZhengColorMapper:
+                      QiZhengSiYuUIConstantResources.zhengColorMap,
+                ),
+              ),
+            ),
           ],
         ),
       ),
     );
   }
 
-  Widget drawRing(double size, double ringWidth, List<String> contentList,
-      TextStyle textStyle,
-      {double innerPadding = 2}) {
+  Widget drawRing(
+    double size,
+    double ringWidth,
+    List<String> contentList,
+    TextStyle textStyle, {
+    double innerPadding = 2,
+  }) {
     double outerRadius = size / 2;
     double innerRadius = outerRadius - ringWidth;
     return Container(
-        alignment: Alignment.center,
-        height: size,
-        width: size,
-        decoration: BoxDecoration(
-          // color: Colors.red.withOpacity(.1),
-          borderRadius: BorderRadius.circular(size),
-          border: Border.all(color: Colors.black, width: 1),
-        ),
-        child: Transform.rotate(
-          angle: 105 * pi / 180,
-          origin: Offset.zero,
-          child: CustomPaint(
-            size: Size(size, size),
-            painter: CircleRingPainter(
-              innerRadius: innerRadius,
-              outerRadius: outerRadius,
-              textList: contentList,
-              isAntiClockwise: true,
-              innerPadding: innerPadding,
-              isReverseText: false,
-              isHorizontalText: true,
-              textStyle: textStyle.copyWith(height: 1.2),
-            ),
+      alignment: Alignment.center,
+      height: size,
+      width: size,
+      decoration: BoxDecoration(
+        // color: Colors.red.withOpacity(.1),
+        borderRadius: BorderRadius.circular(size),
+        border: Border.all(color: Colors.black, width: 1),
+      ),
+      child: Transform.rotate(
+        angle: 105 * pi / 180,
+        origin: Offset.zero,
+        child: CustomPaint(
+          size: Size(size, size),
+          painter: CircleRingPainter(
+            innerRadius: innerRadius,
+            outerRadius: outerRadius,
+            textList: contentList,
+            isAntiClockwise: true,
+            innerPadding: innerPadding,
+            isReverseText: false,
+            isHorizontalText: true,
+            textStyle: textStyle.copyWith(height: 1.2),
           ),
-        ));
+        ),
+      ),
+    );
   }
 
   // 命理十二宫环已抽取为组件：`DestinyTwelveGongRingWidget`，位于
@@ -2015,12 +2147,18 @@ class _BeautyViewPageState extends State<BeautyViewPage>
 
   Widget zodicalRing(double innerSize, double outerSize) {
     return generateDefault12GongRing(
-        innerSize, outerSize, defaultZodiac12GongMapper);
+      innerSize,
+      outerSize,
+      defaultZodiac12GongMapper,
+    );
   }
 
   Widget starSeqRing(double innerSize, double outerSize) {
     return generateDefault12GongRing(
-        innerSize, outerSize, defaultStarSeq12GongMapper);
+      innerSize,
+      outerSize,
+      defaultStarSeq12GongMapper,
+    );
   }
 
   Widget buildMingLi12GongRing(double innerSize, double outerSize) {
@@ -2115,72 +2253,80 @@ class _BeautyViewPageState extends State<BeautyViewPage>
   // 继续使用同名方法 `generateDefault12GongRing`。
 
   Widget draw12GongRing(
-      double innerSize, double outerSize, List<Text> contentList,
-      {double innerPadding = 2}) {
+    double innerSize,
+    double outerSize,
+    List<Text> contentList, {
+    double innerPadding = 2,
+  }) {
     double outerRadius = outerSize * .5;
     double innerRadius = innerSize * .5;
     return Container(
-        alignment: Alignment.center,
-        height: outerSize,
-        width: outerSize,
-        decoration: BoxDecoration(
-          // color: Colors.red.withOpacity(.1),
-          borderRadius: BorderRadius.circular(outerSize),
-          border: Border.all(color: Colors.black, width: 1),
-        ),
-        child: Transform.rotate(
-          angle: 75 * pi / 180,
-          // angle: 0,
-          origin: Offset.zero,
-          child: CustomPaint(
-            size: Size(outerSize, outerSize),
-            painter: RingSheetPainter(
-              innerRadius: innerRadius,
-              outerRadius: outerRadius,
-            ),
-            // painter:TextCircleRingPainter(
-            //   innerRadius: innerRadius,
-            //   outerRadius: outerRadius,
-            //   textList: contentList,
-            //   isAntiClockwise: true,
-            //   innerPadding: 0,
-            //   isReverseText: false,
-            //   isHorizontalText: true,
-            // ),
+      alignment: Alignment.center,
+      height: outerSize,
+      width: outerSize,
+      decoration: BoxDecoration(
+        // color: Colors.red.withOpacity(.1),
+        borderRadius: BorderRadius.circular(outerSize),
+        border: Border.all(color: Colors.black, width: 1),
+      ),
+      child: Transform.rotate(
+        angle: 75 * pi / 180,
+        // angle: 0,
+        origin: Offset.zero,
+        child: CustomPaint(
+          size: Size(outerSize, outerSize),
+          painter: RingSheetPainter(
+            innerRadius: innerRadius,
+            outerRadius: outerRadius,
           ),
-        ));
+          // painter:TextCircleRingPainter(
+          //   innerRadius: innerRadius,
+          //   outerRadius: outerRadius,
+          //   textList: contentList,
+          //   isAntiClockwise: true,
+          //   innerPadding: 0,
+          //   isReverseText: false,
+          //   isHorizontalText: true,
+          // ),
+        ),
+      ),
+    );
   }
 
   Widget drawRingWithTextList(
-      double size, double ringWidth, List<Text> contentList,
-      {double innerPadding = 2}) {
+    double size,
+    double ringWidth,
+    List<Text> contentList, {
+    double innerPadding = 2,
+  }) {
     double outerRadius = size / 2;
     double innerRadius = outerRadius - ringWidth;
     return Container(
-        alignment: Alignment.center,
-        height: size,
-        width: size,
-        decoration: BoxDecoration(
-          // color: Colors.red.withOpacity(.1),
-          borderRadius: BorderRadius.circular(size),
-          border: Border.all(color: Colors.black, width: 1),
-        ),
-        child: Transform.rotate(
-          angle: 75 * pi / 180,
-          origin: Offset.zero,
-          child: CustomPaint(
-            size: Size(size, size),
-            painter: TextCircleRingPainter(
-              innerRadius: innerRadius,
-              outerRadius: outerRadius,
-              textList: contentList,
-              isAntiClockwise: true,
-              innerPadding: innerPadding,
-              isReverseText: false,
-              isHorizontalText: true,
-            ),
+      alignment: Alignment.center,
+      height: size,
+      width: size,
+      decoration: BoxDecoration(
+        // color: Colors.red.withOpacity(.1),
+        borderRadius: BorderRadius.circular(size),
+        border: Border.all(color: Colors.black, width: 1),
+      ),
+      child: Transform.rotate(
+        angle: 75 * pi / 180,
+        origin: Offset.zero,
+        child: CustomPaint(
+          size: Size(size, size),
+          painter: TextCircleRingPainter(
+            innerRadius: innerRadius,
+            outerRadius: outerRadius,
+            textList: contentList,
+            isAntiClockwise: true,
+            innerPadding: innerPadding,
+            isReverseText: false,
+            isHorizontalText: true,
           ),
-        ));
+        ),
+      ),
+    );
   }
 
   /// gongIndex 0-11 子-亥
@@ -2189,8 +2335,9 @@ class _BeautyViewPageState extends State<BeautyViewPage>
     List<String> tmpDefaultList = destinyList.map((d) => d).toList();
     List<String> tmpDestinyList =
         _destiny12GongListNotifier.value.map((d) => d).toList();
-    int selectedIndex = _destiny12GongListNotifier.value
-        .indexWhere((x) => x == selectedGongName);
+    int selectedIndex = _destiny12GongListNotifier.value.indexWhere(
+      (x) => x == selectedGongName,
+    );
     String taiJiAtGong = _destiny12GongListNotifier.value[selectedIndex];
     logger.i("user select as TaiJi, which is $taiJiAtGong");
     int index = tmpDefaultList.indexOf(taiJiAtGong);
@@ -2212,8 +2359,9 @@ class _BeautyViewPageState extends State<BeautyViewPage>
     List<String> tmpDestinyList =
         _destiny12GongListNotifier.value.map((d) => d).toList();
     String taiJiAtGong = _destiny12GongListNotifier.value[selectedIndex];
-    logger
-        .i("user select index:$selectedIndex as TaiJi, which is $taiJiAtGong");
+    logger.i(
+      "user select index:$selectedIndex as TaiJi, which is $taiJiAtGong",
+    );
     int index = tmpDefaultList.indexOf(taiJiAtGong);
     // 将_tmpList 从 gongIndex 处分成两个
 
@@ -2228,5 +2376,64 @@ class _BeautyViewPageState extends State<BeautyViewPage>
 
   void unselectTaiJiDestiny() {
     _selectedTaiJiDestiny12GongListNotifier.value = null;
+  }
+
+  // ==================== 新增组件构建方法 ====================
+
+  /// 四柱Card 区块
+  Widget _buildFourZhuCardSection() {
+    final vm = context.read<QiZhengSiYuViewModel>();
+    return ValueListenableBuilder<ObserverPosition?>(
+      valueListenable: vm.baseObserverPositionNotifier,
+      builder: (context, observer, _) {
+        if (observer == null) return const SizedBox.shrink();
+
+        final eightChars = EightChars(
+          year: observer.yearGanZhi,
+          month: observer.monthGanZhi,
+          day: observer.dayGanZhi,
+          time: observer.timeGanZhi,
+        );
+
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          child: FourZhuCardHost(
+            eightChars: eightChars,
+            collectionId: 'qizhengsiyu_four_zhu_templates',
+          ),
+        );
+      },
+    );
+  }
+
+  /// 时间详情Card 区块 (LunarDateInfoCardV2)
+  Widget _buildLunarDateInfoSection() {
+    final vm = context.read<QiZhengSiYuViewModel>();
+    return ValueListenableBuilder<LunarDateInfoV2Data?>(
+      valueListenable: vm.lunarDateInfoNotifier,
+      builder: (context, data, _) {
+        if (data == null) return const SizedBox.shrink();
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          child: LunarDateInfoCardV2(data: data),
+        );
+      },
+    );
+  }
+
+  /// 大运流年·三层级联 区块 (YunLiuListTileCardWidget)
+  Widget _buildYunLiuCardSection() {
+    final vm = context.read<QiZhengSiYuViewModel>();
+    return ListenableBuilder(
+      listenable: vm,
+      builder: (context, _) {
+        final yunLiuVm = vm.yunLiuViewModel;
+        if (yunLiuVm == null) return const SizedBox.shrink();
+        return Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8),
+          child: YunLiuListTileCardWidget(viewModel: yunLiuVm),
+        );
+      },
+    );
   }
 }
