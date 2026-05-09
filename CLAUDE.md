@@ -109,3 +109,16 @@ Domain enums live in `lib/enums/` with `enum_` prefix. Key enums: `EnumQiZheng` 
 - Repository interfaces use `I` prefix (e.g., `IGeJuRepository`) or no prefix (e.g., `ShenShaRepository`)
 - Models use `@JsonSerializable()` with factory `fromJson` constructors
 - New GeJu condition types must: extend `GeJuCondition`, implement `evaluate()` and `describe()`, register in `GeJuCondition.fromJson()` type dispatch
+
+## docs/ — Upstream subtree (pull-only)
+
+`docs/` 是从 `https://github.com/weijingtai/docs.git`（分支 `master`）通过 `git subtree` 引入的 AI 协同文档框架。所有文件由本仓库的 git 管理（与普通源文件等同）。
+
+**铁律**：
+- **MUST NOT** 向 `weijingtai/docs` 推送任何修改；该仓库对本项目而言是只读上游。
+- 本项目对 `docs/` 的本地适配（如 `Plans.md`、`ai/code-style.md` 等）随本仓库 commit 即可。
+- 拉取上游更新（仅在需要时执行）：
+  ```bash
+  git subtree pull --prefix=docs https://github.com/weijingtai/docs.git master --squash
+  ```
+- 严禁运行 `git subtree push --prefix=docs ...`。本仓库未配置任何指向 `weijingtai/docs` 的 git remote，正常 `git push` 不会触及上游。
