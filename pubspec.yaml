@@ -49,8 +49,13 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
-  common:
-    path: ../xuan-common
+  xuan_common:
+
+    git:
+
+      url: http://xuan:wjt19951215@192.168.0.165:3000/xuan/xuan-common.git
+
+      ref: main
   persistence_core:
     git:
       url: https://github.com/weijingtai/xuan-storage.git
@@ -109,8 +114,6 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
-
-
   # This section identifies your Flutter project as a module meant for
   # embedding in a native host app.  These identifiers should _not_ ordinarily
   # be changed after generation - they are used to ensure that the tooling can
