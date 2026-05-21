@@ -1,0 +1,41 @@
+{
+  "files": 350,
+  "categories": {
+    "data": 17,
+    "code": 264,
+    "docs": 58,
+    "config": 3,
+    "script": 8
+  },
+  "nodes": 2117,
+  "nodeTypes": {
+    "resource": 17,
+    "file": 272,
+    "document": 58,
+    "config": 3,
+    "class": 488,
+    "function": 1279
+  },
+  "edges": 2586,
+  "edgeTypes": {
+    "contains": 1767,
+    "imports": 819
+  },
+  "layers": [
+    "Assets and Data",
+    "Configuration",
+    "Documentation",
+    "Module Core",
+    "Data",
+    "Domain",
+    "Enums",
+    "Presentation",
+    "Scripts",
+    "Tests"
+  ],
+  "tourSteps": 6,
+  "validation": {
+    "success": true,
+    "issues": []
+  }
+}
