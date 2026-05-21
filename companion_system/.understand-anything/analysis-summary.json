@@ -1,0 +1,44 @@
+{
+  "files": 86,
+  "categories": {
+    "docs": 20,
+    "config": 2,
+    "infra": 37,
+    "data": 1,
+    "code": 26
+  },
+  "nodes": 406,
+  "nodeTypes": {
+    "document": 20,
+    "config": 2,
+    "service": 37,
+    "resource": 1,
+    "file": 26,
+    "class": 86,
+    "function": 234
+  },
+  "edges": 366,
+  "edgeTypes": {
+    "contains": 320,
+    "imports": 46
+  },
+  "layers": [
+    "Documentation",
+    "Configuration",
+    "Platform Shells",
+    "Assets and Data",
+    "Database",
+    "App Core",
+    "Models",
+    "Presentation",
+    "State Management",
+    "Services",
+    "Widgets",
+    "Tests"
+  ],
+  "tourSteps": 6,
+  "validation": {
+    "success": true,
+    "issues": []
+  }
+}

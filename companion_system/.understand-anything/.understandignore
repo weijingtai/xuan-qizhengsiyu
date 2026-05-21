@@ -1,0 +1,19 @@
+# .understandignore — patterns for files/dirs to exclude from analysis
+# Syntax: same as .gitignore.
+
+.dart_tool/
+build/
+.flutter-plugins
+.flutter-plugins-dependencies
+*.lock
+*.g.dart
+*.freezed.dart
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.ico
+*.map
+
+# Keep platform configuration files, docs, assets, and tests for this
+# standalone Flutter app graph.
