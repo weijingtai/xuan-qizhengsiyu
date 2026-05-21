@@ -40,10 +40,14 @@ dependencies:
 
   dotted_border: ^3.1.0
   common:
-    path: ../../xuan-common
+    git:
+      url: http://xuan:***@192.168.0.165:3000/xuan/xuan-common.git
+      ref: main
 
   qizhengsiyu:
-    path: ../
+    git:
+      url: http://xuan:***@192.168.0.165:3000/xuan/xuan-qizhengsiyu.git
+      ref: main
 
   cupertino_icons: ^1.0.8
   dotlottie_loader: ^0.0.5

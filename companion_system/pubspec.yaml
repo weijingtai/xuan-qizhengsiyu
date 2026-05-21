@@ -58,12 +58,16 @@ dependencies:
 
   # xuan-ai Chat Window（本地 path 依赖）
   ai_core:
-    path: ../../xuan-ai
+    git:
+      url: http://xuan:***@192.168.0.165:3000/xuan/xuan-ai.git
+      ref: main
 
   # xuan-ai 的共享模块（直接引用以使用 ResolvedPersona 等类型）
   # 注：使用 common_stub 覆盖以避免 xuan-common 的重型原生依赖
   common:
-    path: ../../xuan-common
+    git:
+      url: http://xuan:***@192.168.0.165:3000/xuan/xuan-common.git
+      ref: main
 
   # AI Toolkit（ai_core 的 ChatMessage 类型）
   flutter_ai_toolkit: ^0.9.1
