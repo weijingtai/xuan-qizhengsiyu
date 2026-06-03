@@ -16,7 +16,7 @@ dependencies:
   intl: ^0.20.2
   meta: ^1.17.0
   collection: ^1.19.1
-  google_fonts: ^8.0.0
+  google_fonts: ^6.2.1
   fpdart: ^2.0.0-dev.3
   json_serializable: ^6.12.0
   json_annotation: ^4.10.0
@@ -54,7 +54,7 @@ dependencies:
   auto_size_text: ^3.0.0
   flutter_sliding_toast: ^1.5.3
   flutter_animate: 4.5.2
-  timezone: ^0.11.0
+  timezone: ^0.9.4
   lat_lng_to_timezone: ^0.2.0
   el_tooltip: ^2.2.1
   equatable: ^2.0.8

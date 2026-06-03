@@ -33,9 +33,9 @@ dependencies:
   meta: ^1.17.0
   collection: ^1.19.1
   aura_box: ^1.0.2
-  google_fonts: ^8.0.0
+  google_fonts: ^6.2.1
   sweph: ^3.2.1+2.10.3
-  timezone: ^0.11.0
+  timezone: ^0.9.4
   el_tooltip: ^2.2.1
   provider: ^6.1.5+1
   equatable: ^2.0.8
