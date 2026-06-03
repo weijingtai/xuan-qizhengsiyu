@@ -1,4 +1,4 @@
-import 'package:xuan_common/module.dart';
+import 'package:xuan_logger/xuan_logger.dart';
 import 'fate_manager.dart';
 
 // 竹罗三限

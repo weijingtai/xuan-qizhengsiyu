@@ -6,7 +6,7 @@ import '../../enums/enum_twelve_gong.dart';
 import '../../xing_xian/gong_constellation_mapping.dart';
 import '../entities/models/zhou_tian_model.dart';
 
-import 'package:xuan_common/log/xuan_logger.dart';
+import 'package:xuan_logger/xuan_logger.dart';
 
 import '../engines/projection/i_celestial_projector.dart';
 import 'celestial_projector_factory.dart';

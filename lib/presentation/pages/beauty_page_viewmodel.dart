@@ -9,7 +9,7 @@ import 'package:metaphysics_core/helpers/solar_lunar_datetime_helper.dart';
 import 'package:metaphysics_core/models/divination_datetime.dart';
 import 'package:metaphysics_core/models/divination_info_model.dart';
 import 'package:metaphysics_core/models/shen_sha.dart';
-import 'package:xuan_common/module.dart';
+import 'package:xuan_logger/xuan_logger.dart';
 import 'package:flutter/foundation.dart'; // 使用 @visibleForTesting
 import 'package:flutter/material.dart'; // ChangeNotifier 仍然需要
 import 'package:flutter/services.dart';

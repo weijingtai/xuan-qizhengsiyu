@@ -5,7 +5,7 @@ import 'package:qizhengsiyu/domain/entities/models/naming_degree_pair.dart'; // 
 import 'package:qizhengsiyu/domain/entities/models/zhou_tian_model.dart'; // 使用domain层的模型
 
 import '../domain/entities/models/star_enter_info.dart'; // 使用domain层的模型
-import 'package:xuan_common/module.dart';
+import 'package:xuan_logger/xuan_logger.dart';
 
 // 计算每个星体的进入宫位和星宿
 class StarEnterInfoCalculator {

@@ -53,8 +53,10 @@ dependencies:
   cupertino_icons: ^1.0.8
   xuan_common:
     git:
-      url: http://xuan:wjt19951215@192.168.0.165:3000/xuan/xuan-common.git
+      url: http://xuan:***@192.168.0.165:3000/xuan/xuan-common.git
       ref: main
+  xuan_logger:
+    path: ../xuan-logger
   metaphysics_core:
     path: ../xuan-metaphysics-core
   persistence_core:

@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:metaphysics_core/datamodel/basic_diviation_info.dart';
 import 'package:metaphysics_core/datamodel/basic_person_info.dart';
 import 'package:xuan_four_zhu_card/utils/city_picker_bottom_sheet.dart';
-import 'package:xuan_common/module.dart' show logger;
+import 'package:xuan_logger/xuan_logger.dart';
 import 'package:flutter_city_picker/city_picker.dart';
 import 'package:flutter_city_picker/model/address.dart';
 import 'package:flutter_sliding_toast/flutter_sliding_toast.dart';

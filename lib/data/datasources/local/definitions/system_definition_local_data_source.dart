@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:xuan_common/module.dart';
+import 'package:xuan_logger/xuan_logger.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:qizhengsiyu/domain/entities/models/zhou_tian_model.dart';
 

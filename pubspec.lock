@@ -1388,6 +1388,13 @@ packages:
       relative: true
     source: path
     version: "0.1.0"
+  xuan_logger:
+    dependency: "direct main"
+    description:
+      path: "../xuan-logger"
+      relative: true
+    source: path
+    version: "1.0.0"
   xuan_time_location:
     dependency: transitive
     description:
