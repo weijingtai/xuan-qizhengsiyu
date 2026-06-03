@@ -12,7 +12,7 @@ import 'package:metaphysics_core/enums.dart';
 import 'package:metaphysics_core/enums.dart'; // JiaZi
 import 'package:metaphysics_core/models/divination_info_model.dart';
 import 'package:metaphysics_core/models/shen_sha.dart';
-import 'package:xuan_common/module.dart';
+import 'package:xuan_four_zhu_card/pages/dev_enter_page_view_model.dart';
 import 'package:qizhengsiyu/domain/entities/models/base_panel_model.dart';
 import 'package:qizhengsiyu/domain/entities/models/passage_year_panel_model.dart';
 

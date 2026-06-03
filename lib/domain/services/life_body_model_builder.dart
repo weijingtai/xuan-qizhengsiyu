@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:metaphysics_core/enums.dart';
-import 'package:xuan_common/module.dart';
 import 'package:metaphysics_core/utils/collections_utils.dart';
 import 'package:tuple/tuple.dart';
 

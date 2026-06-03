@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
-import 'package:xuan_common/module.dart';
+import 'package:xuan_four_zhu_card/painter/complete_circle_painter.dart';
+import 'package:xuan_four_zhu_card/painter/divided_circle_painter.dart';
+import 'package:xuan_four_zhu_card/painter/ring_scale_painter.dart';
 
 class PrimaryPage extends StatefulWidget {
   const PrimaryPage({super.key});
