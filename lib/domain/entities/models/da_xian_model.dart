@@ -1,7 +1,7 @@
-import 'package:common/enums.dart';
+import 'package:metaphysics_core/enums.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:qizhengsiyu/enums/enum_twelve_gong.dart';
-import 'package:common/models/year_month.dart';
+import 'package:metaphysics_core/models/year_month.dart';
 
 enum EnumGongPositionType {
   @JsonValue("同宫")

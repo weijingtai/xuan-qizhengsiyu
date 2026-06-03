@@ -1,4 +1,4 @@
-import 'package:common/enums.dart';
+import 'package:metaphysics_core/enums.dart';
 import 'package:flutter/foundation.dart';
 import 'package:qizhengsiyu/enums/enum_twelve_gong.dart';
 

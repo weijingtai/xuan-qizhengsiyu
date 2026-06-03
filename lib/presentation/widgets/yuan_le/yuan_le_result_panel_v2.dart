@@ -5,7 +5,7 @@ import 'package:qizhengsiyu/domain/entities/models/passage_year_panel_model.dart
 import 'package:qizhengsiyu/domain/entities/models/yuan_le_panel_model.dart';
 import 'package:qizhengsiyu/domain/services/yuan_le_panel_builder.dart';
 import 'package:qizhengsiyu/presentation/viewmodels/qi_zheng_si_yu_viewmodel.dart';
-import 'package:common/enums.dart';
+import 'package:metaphysics_core/enums.dart';
 import 'package:qizhengsiyu/enums/enum_star_position_status.dart';
 
 // ─── 调色板 ──────────────────────────────────────────────────────────────

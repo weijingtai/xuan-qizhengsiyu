@@ -1,8 +1,8 @@
 import 'dart:math';
 
-import 'package:common/enums.dart';
-import 'package:common/module.dart';
-import 'package:common/utils.dart';
+import 'package:metaphysics_core/enums.dart';
+import 'package:xuan_common/module.dart';
+import 'package:metaphysics_core/utils/collections_utils.dart';
 import 'package:tuple/tuple.dart';
 
 import '../../enums/enum_settle_life_body.dart';

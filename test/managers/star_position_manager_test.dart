@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:common/enums.dart';
+import 'package:metaphysics_core/enums.dart';
 import 'package:qizhengsiyu/domain/entities/models/gong_star_info.dart';
 import 'package:qizhengsiyu/domain/entities/models/naming_degree_pair.dart';
 import 'package:qizhengsiyu/domain/entities/models/star_enter_info.dart';

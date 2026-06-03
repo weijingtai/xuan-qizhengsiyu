@@ -1,9 +1,9 @@
-import 'package:common/database/app_database.dart' as db;
-import 'package:common/database/world_info_database.dart' as db;
-import 'package:common/datasource/geo_location_repository.dart';
-import 'package:common/datasource/loca_binary/world_country_repository.dart';
-import 'package:common/viewmodels/dev_enter_page_view_model.dart';
-import 'package:common/viewmodels/timezone_location_viewmodel.dart';
+import 'package:xuan_common/database/app_database.dart' as db;
+import 'package:xuan_common/database/world_info_database.dart' as db;
+import 'package:xuan_common/datasource/geo_location_repository.dart';
+import 'package:xuan_common/datasource/loca_binary/world_country_repository.dart';
+import 'package:xuan_common/viewmodels/dev_enter_page_view_model.dart';
+import 'package:xuan_common/viewmodels/timezone_location_viewmodel.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -13,7 +13,7 @@ import 'package:sweph/sweph.dart' hide kIsWeb;
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:qizhengsiyu/di.dart' as qizhengsiyu_di;
 import 'package:qizhengsiyu/navigator.dart' as qizhengsiyu_nav;
-import 'package:common/common_logger.dart';
+import 'package:xuan_common/common_logger.dart';
 import 'package:http/http.dart' as http;
 
 class _RootBundleAssetLoader implements AssetLoader {

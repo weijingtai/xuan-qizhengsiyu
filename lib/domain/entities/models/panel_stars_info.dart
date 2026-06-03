@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:common/enums.dart';
+import 'package:metaphysics_core/enums.dart';
 import 'package:tuple/tuple.dart';
 
 import 'eleven_stars_info.dart';

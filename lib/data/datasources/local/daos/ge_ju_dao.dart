@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:common/enums.dart';
+import 'package:metaphysics_core/enums.dart';
 import 'package:drift/drift.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_alias.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_annotation.dart';

@@ -1,5 +1,5 @@
-import 'package:common/datamodel/basic_person_info.dart';
-import 'package:common/enums.dart';
+import 'package:metaphysics_core/datamodel/basic_person_info.dart';
+import 'package:metaphysics_core/enums.dart';
 import 'package:qizhengsiyu/enums/enum_twelve_gong.dart';
 import 'package:qizhengsiyu/qi_zheng_si_yu_constant_resources.dart';
 import 'package:tuple/tuple.dart';

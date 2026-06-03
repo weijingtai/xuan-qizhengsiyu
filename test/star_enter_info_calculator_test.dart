@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:common/enums.dart';
+import 'package:metaphysics_core/enums.dart';
 import 'package:path/path.dart' as path;
-import 'package:common/enums/enum_stars.dart';
+import 'package:metaphysics_core/enums.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:qizhengsiyu/domain/entities/models/naming_degree_pair.dart';
 import 'package:qizhengsiyu/domain/entities/models/zhou_tian_model.dart';

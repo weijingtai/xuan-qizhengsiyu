@@ -1,5 +1,5 @@
-import 'package:common/enums/enum_28_constellations.dart';
-import 'package:common/enums/enum_stars.dart';
+import 'package:metaphysics_core/enums.dart';
+import 'package:metaphysics_core/enums.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_condition.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_input.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/twelve_gong_system.dart';

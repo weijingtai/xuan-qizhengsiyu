@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:common/utils/celestial_rise_set_calculator.dart';
+import 'package:xuan_common/utils/celestial_rise_set_calculator.dart';
 import 'package:sweph/sweph.dart';
 import 'package:timezone/data/latest.dart' as tz_data;
 

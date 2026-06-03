@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
-import 'package:common/module.dart';
+import 'package:metaphysics_core/models/year_month.dart';
+import 'package:xuan_common/module.dart';
 import 'package:flutter/material.dart';
 import 'package:qizhengsiyu/enums/enum_twelve_gong.dart';
 

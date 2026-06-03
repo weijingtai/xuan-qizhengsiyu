@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
-import 'package:common/module.dart';
+import 'package:xuan_common/module.dart';
 
 class PrimaryPage extends StatefulWidget {
   const PrimaryPage({super.key});

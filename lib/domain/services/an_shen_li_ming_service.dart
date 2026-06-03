@@ -1,5 +1,5 @@
-import 'package:common/enums.dart';
-import 'package:common/utils.dart';
+import 'package:metaphysics_core/enums.dart';
+import 'package:metaphysics_core/utils/collections_utils.dart';
 import 'package:qizhengsiyu/enums/enum_settle_life_body.dart';
 
 import 'package:tuple/tuple.dart';

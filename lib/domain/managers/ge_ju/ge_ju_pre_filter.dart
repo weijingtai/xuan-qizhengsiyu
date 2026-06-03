@@ -1,7 +1,7 @@
-import 'package:common/enums/enum_di_zhi.dart';
-import 'package:common/enums/enum_four_seasons.dart';
-import 'package:common/enums/enum_stars.dart';
-import 'package:common/models/shen_sha.dart';
+import 'package:metaphysics_core/enums.dart';
+import 'package:metaphysics_core/enums.dart';
+import 'package:metaphysics_core/enums.dart';
+import 'package:metaphysics_core/models/shen_sha.dart';
 import 'package:qizhengsiyu/domain/entities/models/di_zhi_shen_sha.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_condition.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_input.dart';

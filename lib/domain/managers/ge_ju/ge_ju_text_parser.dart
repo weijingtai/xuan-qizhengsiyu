@@ -1,4 +1,4 @@
-import 'package:common/enums.dart';
+import 'package:metaphysics_core/enums.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/conditions/position_conditions.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/conditions/relationship_conditions.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/conditions/structure_conditions.dart';

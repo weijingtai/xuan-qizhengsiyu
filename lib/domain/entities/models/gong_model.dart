@@ -1,5 +1,6 @@
-import 'package:common/enums.dart';
-import 'package:common/module.dart';
+import 'package:metaphysics_core/enums.dart';
+import 'package:metaphysics_core/models/shen_sha.dart';
+import 'package:metaphysics_core/models/twelve_zhang_sheng.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:qizhengsiyu/enums/enum_hua_yao_shen_sha.dart';
 

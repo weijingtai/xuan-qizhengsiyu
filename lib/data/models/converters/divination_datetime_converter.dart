@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:drift/drift.dart';
-import 'package:common/models/divination_datetime.dart';
+import 'package:metaphysics_core/models/divination_datetime.dart';
 
 class DivinationDatetimeConverter extends TypeConverter<DivinationDatetimeModel, String> {
   const DivinationDatetimeConverter();

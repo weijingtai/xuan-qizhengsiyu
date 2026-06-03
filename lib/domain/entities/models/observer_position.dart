@@ -1,6 +1,6 @@
-import 'package:common/datamodel/location.dart';
-import 'package:common/datamodel/observer_datamodel.dart';
-import 'package:common/enums.dart';
+import 'package:metaphysics_core/datamodel/location.dart';
+import 'package:metaphysics_core/datamodel/observer_datamodel.dart';
+import 'package:metaphysics_core/enums.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:timezone/timezone.dart' as tz;
 

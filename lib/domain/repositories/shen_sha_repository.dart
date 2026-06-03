@@ -1,7 +1,7 @@
 
-import 'package:common/models/shen_sha_bundled.dart';
-import 'package:common/models/shen_sha_gan_zhi.dart';
-import 'package:common/models/shen_sha_tian_gan.dart';
+import 'package:metaphysics_core/models/shen_sha_bundled.dart';
+import 'package:metaphysics_core/models/shen_sha_gan_zhi.dart';
+import 'package:metaphysics_core/models/shen_sha_tian_gan.dart';
 
 import '../entities/models/di_zhi_shen_sha.dart';
 

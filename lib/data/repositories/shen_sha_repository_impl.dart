@@ -1,8 +1,8 @@
-import 'package:common/models/shen_sha_bundled.dart';
-import 'package:common/models/shen_sha_tian_gan.dart';
+import 'package:metaphysics_core/models/shen_sha_bundled.dart';
+import 'package:metaphysics_core/models/shen_sha_tian_gan.dart';
 import 'package:qizhengsiyu/data/datasources/local/shen_sha_local_data_source.dart';
 import 'package:qizhengsiyu/domain/repositories/shen_sha_repository.dart';
-import 'package:common/models/shen_sha_gan_zhi.dart';
+import 'package:metaphysics_core/models/shen_sha_gan_zhi.dart';
 
 import '../../domain/entities/models/di_zhi_shen_sha.dart';
 

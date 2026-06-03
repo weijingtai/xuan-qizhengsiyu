@@ -1,4 +1,4 @@
-import 'package:common/module.dart';
+import 'package:metaphysics_core/models/year_month.dart';
 
 class DaXianCalculateHelper {
   /// 将数字数组转换为列表的列表，遵循特定的规则。

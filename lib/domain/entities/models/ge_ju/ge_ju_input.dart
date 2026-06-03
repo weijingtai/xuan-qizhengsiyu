@@ -1,9 +1,9 @@
-import 'package:common/enums/enum_28_constellations.dart';
+import 'package:metaphysics_core/enums.dart';
 
-import 'package:common/enums/enum_four_seasons.dart';
+import 'package:metaphysics_core/enums.dart';
 import 'package:qizhengsiyu/enums/enum_moon_phases.dart';
-import 'package:common/enums.dart';
-import 'package:common/models/shen_sha.dart';
+import 'package:metaphysics_core/enums.dart';
+import 'package:metaphysics_core/models/shen_sha.dart';
 import 'package:qizhengsiyu/domain/entities/models/body_life_model.dart';
 import 'package:qizhengsiyu/domain/entities/models/di_zhi_shen_sha.dart';
 import 'package:qizhengsiyu/domain/entities/models/eleven_stars_info.dart';

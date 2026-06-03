@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:common/enums.dart';
+import 'package:metaphysics_core/enums.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:qizhengsiyu/dataset/star_position_status_model.dart';

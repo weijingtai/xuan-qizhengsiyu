@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:common/enums.dart';
+import 'package:metaphysics_core/enums.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:qizhengsiyu/data/datasources/local/ge_ju_builtin_database.dart';

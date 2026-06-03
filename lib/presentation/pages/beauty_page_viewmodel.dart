@@ -1,13 +1,15 @@
 import 'dart:convert';
 import 'dart:math';
 
-import 'package:common/datamodel/datetime_divination_datamodel.dart';
-import 'package:common/datamodel/location.dart';
-import 'package:common/datamodel/observer_datamodel.dart';
-import 'package:common/enums.dart';
-import 'package:common/helpers/solar_lunar_datetime_helper.dart';
-import 'package:common/models/divination_datetime.dart';
-import 'package:common/module.dart';
+import 'package:metaphysics_core/datamodel/datetime_divination_datamodel.dart';
+import 'package:metaphysics_core/datamodel/location.dart';
+import 'package:metaphysics_core/datamodel/observer_datamodel.dart';
+import 'package:metaphysics_core/enums.dart';
+import 'package:metaphysics_core/helpers/solar_lunar_datetime_helper.dart';
+import 'package:metaphysics_core/models/divination_datetime.dart';
+import 'package:metaphysics_core/models/divination_info_model.dart';
+import 'package:metaphysics_core/models/shen_sha.dart';
+import 'package:xuan_common/module.dart';
 import 'package:flutter/foundation.dart'; // 使用 @visibleForTesting
 import 'package:flutter/material.dart'; // ChangeNotifier 仍然需要
 import 'package:flutter/services.dart';

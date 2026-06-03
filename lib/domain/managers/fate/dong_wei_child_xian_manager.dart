@@ -1,4 +1,4 @@
-import 'package:common/module.dart';
+import 'package:metaphysics_core/models/year_month.dart';
 import 'package:qizhengsiyu/enums/enum_twelve_gong.dart';
 
 import 'fate_manager.dart';

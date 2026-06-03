@@ -1,5 +1,4 @@
-import 'package:common/models/year_month.dart';
-import 'package:common/module.dart';
+import 'package:metaphysics_core/models/year_month.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../../../enums/enum_twelve_gong.dart';

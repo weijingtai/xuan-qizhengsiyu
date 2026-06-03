@@ -1,6 +1,6 @@
 import 'dart:math' as math;
 
-import 'package:common/module.dart';
+import 'package:metaphysics_core/models/year_month.dart';
 import 'package:flutter/material.dart';
 import 'package:qizhengsiyu/utils/da_xian_calculate_helper.dart';
 

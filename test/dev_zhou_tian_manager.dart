@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:common/enums.dart';
-import 'package:common/utils.dart';
+import 'package:metaphysics_core/enums.dart';
+import 'package:xuan_common/utils.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -15,7 +15,7 @@ import 'package:qizhengsiyu/domain/managers/zhou_tian_model_manager.dart';
 import 'package:qizhengsiyu/enums/enum_panel_system_type.dart';
 import 'package:qizhengsiyu/enums/enum_settle_life_body.dart';
 import 'package:qizhengsiyu/enums/enum_twelve_gong.dart';
-import 'package:common/models/year_month.dart';
+import 'package:xuan_common/models/year_month.dart';
 import 'package:qizhengsiyu/xing_xian/da_xian_calculator.dart';
 import 'package:qizhengsiyu/xing_xian/da_xian_palace_info.dart';
 import 'package:qizhengsiyu/xing_xian/fei_xian_calculator.dart';

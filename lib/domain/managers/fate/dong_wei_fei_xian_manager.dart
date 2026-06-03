@@ -1,6 +1,6 @@
-import 'package:common/enums.dart';
-import 'package:common/module.dart';
-import 'package:common/utils.dart';
+import 'package:metaphysics_core/enums.dart';
+import 'package:metaphysics_core/models/year_month.dart';
+import 'package:metaphysics_core/utils/collections_utils.dart';
 import 'package:qizhengsiyu/enums/enum_twelve_gong.dart';
 
 import '../../entities/models/fate_dong_wei_da_xian.dart';

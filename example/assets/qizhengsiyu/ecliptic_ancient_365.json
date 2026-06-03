@@ -1,0 +1,20 @@
+{
+  "systemType": "ecliptic_tropical",
+  "constellationSystemType": "ancient",
+  "panelSystemType": "tropical",
+  "epochCorrection": 0.0,
+  "totalDegree": 365.25,
+  "gongOrder": ["zi", "chou", "yin", "mao", "chen", "si", "wu", "wei", "shen", "you", "xu", "hai"],
+  "starInnOrder": ["jiao", "kang", "di", "fang", "xin", "wei", "ji", "dou", "niu", "nu", "xu", "wei_low", "shi", "bi", "kui", "lou", "wei_st", "mao_st", "bi_st", "zi_st", "can", "jing", "gui", "liu", "xing", "zhang", "yi", "zhen"],
+  "gongDegreeSeq": [],
+  "starInnDegreeSeq": [],
+  "zeroPointAtGong": {"gong": "zi", "degree": 0.0},
+  "zeroPointAtConstellation": {"constellation": "dou", "degree": 0.0},
+  "alignmentPointAtGong": {"gong": "zi", "degree": 0.0},
+  "alignmentPointAtConstellation": {"constellation": "dou", "degree": 0.0},
+  "specificationList": ["Ancient 365.25 system"],
+  "projectionConfig": {
+    "strategy": "linear",
+    "offset": 0.0
+  }
+}

@@ -8,9 +8,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 import 'package:qizhengsiyu/enums/enum_qi_zheng.dart';
-import 'package:common/enums/enum_stars.dart';
-import 'package:common/enums/enum_jia_zi.dart'; // JiaZi
-import 'package:common/module.dart';
+import 'package:metaphysics_core/enums.dart';
+import 'package:metaphysics_core/enums.dart'; // JiaZi
+import 'package:metaphysics_core/models/divination_info_model.dart';
+import 'package:metaphysics_core/models/shen_sha.dart';
+import 'package:xuan_common/module.dart';
 import 'package:qizhengsiyu/domain/entities/models/base_panel_model.dart';
 import 'package:qizhengsiyu/domain/entities/models/passage_year_panel_model.dart';
 
@@ -20,8 +22,8 @@ import 'package:qizhengsiyu/presentation/models/ui_star_model.dart';
 import 'package:qizhengsiyu/qi_zheng_si_yu_constant_resources.dart';
 // import 'package:qizhengsiyu/pages/qi_zheng_si_yu_viewmodel.dart'; // 旧的 ViewModel,已废弃
 
-import 'package:common/painter/text_circle_ring_painter.dart';
-import 'package:common/painter/circle_ring_printer.dart';
+import 'package:xuan_common/painter/text_circle_ring_painter.dart';
+import 'package:xuan_common/painter/circle_ring_printer.dart';
 import '../../domain/entities/models/body_life_model.dart';
 import '../../domain/entities/models/observer_position.dart';
 import '../../domain/entities/models/panel_stars_info.dart';
@@ -58,11 +60,11 @@ import 'package:qizhengsiyu/enums/enum_settle_life_body.dart';
 import 'package:qizhengsiyu/domain/entities/models/panel_ui_size.dart'; // UI模型,保留在原位置
 
 // ── 新增：四柱Card / 节气Card / 大运流年TreeList ──
-import 'package:common/models/eight_chars.dart';
-import 'package:common/widgets/four_zhu_card_host.dart';
-import 'package:common/widgets/lunar_date_info_card_v2.dart';
-import 'package:common/models/lunar_date_info_v2_data.dart';
-import 'package:common/features/liu_yun/widgets/yun_liu_list_tile_card_widget.dart';
+import 'package:metaphysics_core/models/eight_chars.dart';
+import 'package:xuan_four_zhu_card/widgets/four_zhu_card_host.dart';
+import 'package:xuan_common/widgets/lunar_date_info_card_v2.dart';
+import 'package:metaphysics_core/models/lunar_date_info_v2_data.dart';
+import 'package:xuan_four_zhu_card/features/liu_yun/widgets/yun_liu_list_tile_card_widget.dart';
 
 // 尺寸模型已迁移至 models/panel_ui_size.dart
 

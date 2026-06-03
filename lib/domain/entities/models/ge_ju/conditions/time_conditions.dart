@@ -1,5 +1,5 @@
-import 'package:common/enums/enum_di_zhi.dart';
-import 'package:common/enums/enum_four_seasons.dart';
+import 'package:metaphysics_core/enums.dart';
+import 'package:metaphysics_core/enums.dart';
 import 'package:qizhengsiyu/enums/enum_moon_phases.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_condition.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_input.dart';

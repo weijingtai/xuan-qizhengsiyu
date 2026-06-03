@@ -1,4 +1,4 @@
-import 'package:common/models/divination_datetime.dart';
+import 'package:metaphysics_core/models/divination_datetime.dart';
 import 'package:qizhengsiyu/domain/entities/models/panel_config.dart';
 
 import 'base_panel_model.dart';

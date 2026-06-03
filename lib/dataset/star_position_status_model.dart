@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:common/enums.dart';
+import 'package:metaphysics_core/enums.dart';
 import 'package:drift/drift.dart';
 import 'package:json_annotation/json_annotation.dart';
 

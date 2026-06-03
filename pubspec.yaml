@@ -18,9 +18,11 @@ description: A new Flutter module project.
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.1.0 <4.0.0'
+  sdk: '>=3.2.3 <4.0.0'
 
 dependencies:
+  xuan_four_zhu_card:
+    path: ../xuan-four-zhu-card
   flutter:
     sdk: flutter
   logger: ^2.6.2
@@ -38,7 +40,7 @@ dependencies:
   provider: ^6.1.5+1
   equatable: ^2.0.8
   json_serializable: ^6.12.0
-  json_annotation: ^4.10.0
+  json_annotation: ^4.11.0
   flutter_city_picker: ^2.2.0
   board_datetime_picker: 2.8.5
   flutter_sliding_toast: ^1.5.3
@@ -50,12 +52,11 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
   xuan_common:
-
     git:
-
       url: http://xuan:wjt19951215@192.168.0.165:3000/xuan/xuan-common.git
-
       ref: main
+  metaphysics_core:
+    path: ../xuan-metaphysics-core
   persistence_core:
     git:
       url: https://github.com/weijingtai/xuan-storage.git
@@ -124,3 +125,9 @@ flutter:
     androidX: true
     androidPackage: com.example.qizhengsiyu
     iosBundleIdentifier: com.example.qizhengsiyu
+
+dependency_overrides:
+  xuan_common:
+    path: ../xuan-common
+  persistence_core:
+    path: ../xuan-storage/core

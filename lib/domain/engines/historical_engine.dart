@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:common/enums/enum_stars.dart';
+import 'package:metaphysics_core/enums.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:qizhengsiyu/data/datasources/local/definitions/system_definition_local_data_source.dart';
 import 'package:qizhengsiyu/domain/entities/models/observer_position.dart';

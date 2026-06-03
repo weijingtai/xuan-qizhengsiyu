@@ -1,5 +1,5 @@
-import 'package:common/datamodel/location.dart';
-import 'package:common/module.dart';
+import 'package:metaphysics_core/datamodel/location.dart';
+import 'package:metaphysics_core/datamodel/basic_diviation_info.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'divination_model.g.dart';

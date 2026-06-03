@@ -1,6 +1,6 @@
-import 'package:common/datamodel/location.dart';
+import 'package:metaphysics_core/datamodel/location.dart';
 import 'package:flutter/material.dart';
-import 'package:common/module.dart';
+import 'package:xuan_common/module.dart';
 import 'package:qizhengsiyu/theme/app_theme.dart';
 
 /// 位置信息配置部分

@@ -1,4 +1,4 @@
-import 'package:common/enums.dart';
+import 'package:metaphysics_core/enums.dart';
 import 'package:tuple/tuple.dart';
 
 import '../enums/enum_twelve_gong.dart';

@@ -1,5 +1,5 @@
-import 'package:common/datamodel/divination_request_info_datamodel.dart';
-import 'package:common/models/divination_datetime.dart';
+import 'package:metaphysics_core/datamodel/divination_request_info_datamodel.dart';
+import 'package:metaphysics_core/models/divination_datetime.dart';
 import 'package:flutter/rendering.dart';
 import 'package:uuid/uuid.dart';
 

@@ -1,9 +1,9 @@
-import 'package:common/enums.dart';
+import 'package:metaphysics_core/enums.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../enums/enum_twelve_gong.dart';
 import '../enums/enum_xing_xian_type.dart';
-import 'package:common/models/year_month.dart';
+import 'package:metaphysics_core/models/year_month.dart';
 import '../domain/entities/models/zhou_tian_model.dart'; // 使用domain层的模型
 import 'da_xian_palace_info.dart';
 import 'da_xian_constellation_passage_info.dart';

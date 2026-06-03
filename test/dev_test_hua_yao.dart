@@ -1,6 +1,6 @@
 // 这是一个测试文件
 // 用于开发和测试化曜相关功能
-import 'package:common/enums.dart';
+import 'package:metaphysics_core/enums.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:qizhengsiyu/enums/enum_hua_yao.dart';
 

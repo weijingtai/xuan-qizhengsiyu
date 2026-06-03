@@ -1,4 +1,4 @@
-import 'package:common/enums.dart';
+import 'package:metaphysics_core/enums.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:qizhengsiyu/domain/entities/models/star_to_star_relationship_model.dart';
 import 'package:qizhengsiyu/enums/enum_qi_zheng.dart';

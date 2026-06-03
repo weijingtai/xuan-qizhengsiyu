@@ -1,12 +1,15 @@
 import 'dart:math';
 
-import 'package:common/enums.dart';
+import 'package:metaphysics_core/enums.dart';
 
 import '../../enums/enum_twelve_gong.dart';
 import '../../xing_xian/gong_constellation_mapping.dart';
 import '../entities/models/zhou_tian_model.dart';
 
-import 'package:common/module.dart';
+import 'package:xuan_common/log/xuan_logger.dart';
+
+import '../engines/projection/i_celestial_projector.dart';
+import 'celestial_projector_factory.dart';
 
 // --- 计算逻辑 ---
 class ZhouTianCalculator {
@@ -19,11 +22,14 @@ class ZhouTianCalculator {
 
   final ZhouTianModel zhouTianModel;
   final int totalDegreesInt;
+  final ICelestialProjector projector;
 
   ZhouTianCalculator({required this.zhouTianModel})
       : totalDegreesInt =
             (zhouTianModel.totalDegree * ZhouTianCalculator.DEGREE_MULTIPLIER)
-                .round();
+                .round(),
+        projector = CelestialProjectorFactory.create(
+            zhouTianModel.projectionConfig, zhouTianModel.totalDegree);
 // 规范化角度到 [0, TOTAL_CELESTIAL_DEGREES_INT)
   static int normalizeAngleInt(int angle, int totalDegreesInt) {
     int normalized = angle % totalDegreesInt;
@@ -83,11 +89,13 @@ class ZhouTianCalculator {
 
       int pabsEndInt = currentPalaceabsStartInt + pWidthInt;
 
+      double pAbsStart = projector.project(currentPalaceabsStartInt / ZhouTianCalculator.DEGREE_MULTIPLIER);
+      double pWidth = pWidthInt / ZhouTianCalculator.DEGREE_MULTIPLIER;
       palaceAngles[pName] = CelestialObject<EnumTwelveGong>(
           pName, // 直接使用枚举值而不是name
-          currentPalaceabsStartInt / ZhouTianCalculator.DEGREE_MULTIPLIER,
-          pabsEndInt / ZhouTianCalculator.DEGREE_MULTIPLIER,
-          pWidthInt / ZhouTianCalculator.DEGREE_MULTIPLIER);
+          pAbsStart,
+          pAbsStart + pWidth,
+          pWidth);
       currentPalaceabsStartInt = pabsEndInt;
     }
     return palaceAngles;
@@ -147,13 +155,14 @@ class ZhouTianCalculator {
       int cWidthInt = constellationWidthsInt[cName]!;
 
       int cabsEndInt = currentConstellationabsStartInt + cWidthInt;
-
+      double cAbsStart = projector.project(currentConstellationabsStartInt /
+              ZhouTianCalculator.DEGREE_MULTIPLIER);
+      double cWidth = cWidthInt / ZhouTianCalculator.DEGREE_MULTIPLIER;
       constellationAngles[cName] = CelestialObject<Enum28Constellations>(
           cName, // 直接使用枚举值而不是name
-          currentConstellationabsStartInt /
-              ZhouTianCalculator.DEGREE_MULTIPLIER,
-          cabsEndInt / ZhouTianCalculator.DEGREE_MULTIPLIER,
-          cWidthInt / ZhouTianCalculator.DEGREE_MULTIPLIER);
+          cAbsStart,
+          cAbsStart + cWidth,
+          cWidth);
       currentConstellationabsStartInt = cabsEndInt;
     }
     return constellationAngles;
@@ -209,13 +218,14 @@ class ZhouTianCalculator {
       int cWidthInt = constellationWidthsInt[cName]!;
 
       int cabsEndInt = currentConstellationabsStartInt + cWidthInt;
-
+      double cAbsStart = projector.project(currentConstellationabsStartInt /
+              ZhouTianCalculator.DEGREE_MULTIPLIER);
+      double cWidth = cWidthInt / ZhouTianCalculator.DEGREE_MULTIPLIER;
       constellationAngles[cName] = CelestialObject<Enum28Constellations>(
           cName, // 直接使用枚举值而不是name
-          currentConstellationabsStartInt /
-              ZhouTianCalculator.DEGREE_MULTIPLIER,
-          cabsEndInt / ZhouTianCalculator.DEGREE_MULTIPLIER,
-          cWidthInt / ZhouTianCalculator.DEGREE_MULTIPLIER);
+          cAbsStart,
+          cAbsStart + cWidth,
+          cWidth);
       currentConstellationabsStartInt = cabsEndInt;
     }
     return constellationAngles;
@@ -549,9 +559,9 @@ extension ZhouTianCalculatorStaticHelpers on ZhouTianCalculator {
 
       palaceAngles[pName] = CelestialObject(
           pName.name,
-          currentPalaceAbsStartContinuousInt /
-              ZhouTianCalculator.DEGREE_MULTIPLIER,
-          pAbsEndContinuousInt / ZhouTianCalculator.DEGREE_MULTIPLIER,
+          projector.project(currentPalaceAbsStartContinuousInt /
+              ZhouTianCalculator.DEGREE_MULTIPLIER),
+          projector.project(pAbsEndContinuousInt / ZhouTianCalculator.DEGREE_MULTIPLIER),
           pWidthInt / ZhouTianCalculator.DEGREE_MULTIPLIER);
       currentPalaceAbsStartContinuousInt = pAbsEndContinuousInt;
     }
@@ -613,9 +623,9 @@ extension ZhouTianCalculatorStaticHelpers on ZhouTianCalculator {
 
       constellationAngles[cName] = CelestialObject(
           cName.name,
-          currentConstellationAbsStartContinuousInt /
-              ZhouTianCalculator.DEGREE_MULTIPLIER,
-          cAbsEndContinuousInt / ZhouTianCalculator.DEGREE_MULTIPLIER,
+          projector.project(currentConstellationAbsStartContinuousInt /
+              ZhouTianCalculator.DEGREE_MULTIPLIER),
+          projector.project(cAbsEndContinuousInt / ZhouTianCalculator.DEGREE_MULTIPLIER),
           cWidthInt / ZhouTianCalculator.DEGREE_MULTIPLIER);
       currentConstellationAbsStartContinuousInt = cAbsEndContinuousInt;
     }

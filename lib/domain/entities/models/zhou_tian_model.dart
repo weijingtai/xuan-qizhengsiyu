@@ -1,11 +1,13 @@
-import 'package:common/enums.dart';
-import 'package:common/widgets/twenty_four_jie_qi_tag.dart';
+import 'package:metaphysics_core/enums.dart';
+import 'package:xuan_common/widgets/twenty_four_jie_qi_tag.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:qizhengsiyu/enums/enum_twelve_gong.dart';
 import 'package:tuple/tuple.dart';
 
+export '../../../enums/enum_panel_system_type.dart';
 import '../../../enums/enum_panel_system_type.dart';
 import 'naming_degree_pair.dart';
+import 'projection_config.dart';
 
 part 'zhou_tian_model.g.dart';
 
@@ -13,6 +15,9 @@ part 'zhou_tian_model.g.dart';
 class ZhouTianModel {
   // 黄道制，赤道制，天赤道制，拟黄道术
   CelestialCoordinateSystem systemType;
+
+  // 投影配置
+  ProjectionConfig? projectionConfig;
 
   // 古宿，今宿，矫正古宿，恒星不变
   ConstellationSystemType constellationSystemType;
@@ -66,6 +71,7 @@ class ZhouTianModel {
 
   ZhouTianModel({
     required this.systemType,
+    this.projectionConfig,
     required this.constellationSystemType,
     required this.panelSystemType,
     required this.epochCorrection,

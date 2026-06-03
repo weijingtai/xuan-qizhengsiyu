@@ -1,9 +1,8 @@
-import 'package:common/module.dart';
-import 'package:common/utils.dart';
+import 'package:metaphysics_core/models/year_month.dart';
+import 'package:metaphysics_core/utils/collections_utils.dart';
 import 'package:qizhengsiyu/enums/enum_twelve_gong.dart';
 import 'package:tuple/tuple.dart';
 
-import 'package:common/models/year_month.dart';
 import '../../entities/models/body_life_model.dart';
 import '../../entities/models/fate_dong_wei_da_xian.dart';
 import '../../entities/models/naming_degree_pair.dart';

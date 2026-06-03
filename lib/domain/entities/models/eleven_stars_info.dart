@@ -1,4 +1,4 @@
-import 'package:common/enums.dart';
+import 'package:metaphysics_core/enums.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:qizhengsiyu/domain/entities/models/star_enter_info.dart';
 import 'package:qizhengsiyu/enums/enum_qi_zheng.dart';

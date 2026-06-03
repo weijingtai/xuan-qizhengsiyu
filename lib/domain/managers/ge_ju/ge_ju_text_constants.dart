@@ -1,6 +1,6 @@
-import 'package:common/enums/enum_28_constellations.dart';
-import 'package:common/enums/enum_di_zhi.dart';
-import 'package:common/enums/enum_stars.dart';
+import 'package:metaphysics_core/enums.dart';
+import 'package:metaphysics_core/enums.dart';
+import 'package:metaphysics_core/enums.dart';
 import 'package:qizhengsiyu/enums/enum_twelve_gong.dart';
 
 /// 格局文本解析常量表

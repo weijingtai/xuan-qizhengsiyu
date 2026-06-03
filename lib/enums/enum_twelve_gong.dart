@@ -1,5 +1,5 @@
 import 'package:collection/collection.dart';
-import 'package:common/enums.dart';
+import 'package:metaphysics_core/enums.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 enum EnumDestinyTwelveGong {

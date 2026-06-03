@@ -1,5 +1,5 @@
 import 'package:drift/drift.dart';
-import 'package:common/models/divination_datetime.dart';
+import 'package:metaphysics_core/models/divination_datetime.dart';
 
 import '../../../../domain/entities/models/pan_entity.dart';
 import '../../../models/converters/divination_datetime_converter.dart';

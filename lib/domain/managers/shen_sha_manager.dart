@@ -1,10 +1,11 @@
 import 'package:collection/collection.dart';
-import 'package:common/enums.dart';
-import 'package:common/models/shen_sha_di_zhi.dart';
-import 'package:common/models/shen_sha_gan_zhi.dart';
-import 'package:common/models/shen_sha_tian_gan.dart';
-import 'package:common/module.dart';
-import 'package:common/utils.dart';
+import 'package:metaphysics_core/enums.dart';
+import 'package:metaphysics_core/models/shen_sha_di_zhi.dart';
+import 'package:metaphysics_core/models/shen_sha_gan_zhi.dart';
+import 'package:metaphysics_core/models/shen_sha_tian_gan.dart';
+import 'package:metaphysics_core/models/shen_sha.dart';
+import 'package:metaphysics_core/models/twelve_zhang_sheng.dart';
+import 'package:metaphysics_core/utils/collections_utils.dart';
 import 'package:qizhengsiyu/domain/services/shen_sha_service.dart';
 import 'package:qizhengsiyu/enums/enum_twelve_gong.dart';
 import 'package:qizhengsiyu/qi_zheng_si_yu_constant_resources.dart';

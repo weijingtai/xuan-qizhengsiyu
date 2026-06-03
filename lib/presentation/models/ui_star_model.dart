@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:common/enums.dart';
+import 'package:metaphysics_core/enums.dart';
 import 'package:equatable/equatable.dart';
 import 'package:tuple/tuple.dart';
 
@@ -18,6 +18,7 @@ class UIStarModel extends Equatable with Compare<UIStarModel>, Edge {
   final double originalAngle; // 原始角度
   late final double rangeAngleEachSide;
   final int priority; // 优先级（4最高）
+  final double totalDegree; // 周天总度数，默认 360，赤道制为 365.25
   Map<UIStarModel, Tuple2<double?, double?>> inRangeStar = {};
 
   /// ***Edges item1 为左边 ，item2 为右边 ， item3 为中间点
@@ -41,17 +42,19 @@ class UIStarModel extends Equatable with Compare<UIStarModel>, Edge {
     required this.priority,
     required this.originalAngle,
     required this.rangeAngleEachSide,
+    this.totalDegree = 360.0,
   }) {
     // TODO: 使用静态函数替换重复代码
-    originalEdges = UIStarModel.getAngleRange(angle, rangeAngleEachSide);
+    originalEdges = UIStarModel.getAngleRange(angle, rangeAngleEachSide, totalDegree);
   }
 
   UIStarModel generateEasyCalculate() {
     return UIStarModel(
         star: star,
         priority: priority,
-        originalAngle: originalAngle + 360,
-        rangeAngleEachSide: rangeAngleEachSide);
+        originalAngle: originalAngle + totalDegree,
+        rangeAngleEachSide: rangeAngleEachSide,
+        totalDegree: totalDegree);
   }
 
   UIStarModel clone() {
@@ -61,6 +64,7 @@ class UIStarModel extends Equatable with Compare<UIStarModel>, Edge {
       priority: priority,
       originalAngle: originalAngle,
       rangeAngleEachSide: rangeAngleEachSide,
+      totalDegree: totalDegree,
     )
       ..adjustedAngle = adjustedAngle
       ..adjustCount = adjustCount
@@ -84,15 +88,16 @@ class UIStarModel extends Equatable with Compare<UIStarModel>, Edge {
 
   /// @Return Item1 为左边缘， item2为右边缘， item3为局中点间距角度
   static Tuple3<double, double, double> getAngleRange(
-      double angle, double minAngleDiff) {
-    // 需要处理0°与360°
+      double angle, double minAngleDiff,
+      [double totalDegree = 360.0]) {
+    // 需要处理0°与totalDegree
     double leftAngleEdge = angle - minAngleDiff;
     if (leftAngleEdge < 0) {
-      leftAngleEdge = 360 + leftAngleEdge;
+      leftAngleEdge = totalDegree + leftAngleEdge;
     }
     double rightAngleEdge = angle + minAngleDiff;
-    if (rightAngleEdge > 360) {
-      rightAngleEdge = rightAngleEdge - 360;
+    if (rightAngleEdge > totalDegree) {
+      rightAngleEdge = rightAngleEdge - totalDegree;
     }
     return Tuple3(leftAngleEdge, rightAngleEdge, angle);
   }
@@ -236,7 +241,7 @@ class UIStarModel extends Equatable with Compare<UIStarModel>, Edge {
   }
 
   double correctCircleAngle(double angle) {
-    return ((angle % 360) + 360) % 360;
+    return ((angle % totalDegree) + totalDegree) % totalDegree;
   }
 
   @override
@@ -302,11 +307,12 @@ class UIStarModel extends Equatable with Compare<UIStarModel>, Edge {
     return null;
   }
 
-  static double shortestAngleDifference(double angle1, double angle2) {
+  static double shortestAngleDifference(double angle1, double angle2,
+      [double totalDegree = 360.0]) {
     // 计算直接差值
     double diff1 = (angle1 - angle2).abs();
     // 计算反向差值
-    double diff2 = 360 - diff1;
+    double diff2 = totalDegree - diff1;
     // 返回较小的差值
     return diff1 < diff2 ? diff1 : diff2;
   }

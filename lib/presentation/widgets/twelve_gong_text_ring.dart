@@ -1,6 +1,6 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
-import 'package:common/painter/text_circle_ring_painter.dart';
+import 'package:xuan_common/painter/text_circle_ring_painter.dart';
 
 /// Text-only ring for twelve-gong layout using TextCircleRingPainter.
 class TwelveGongTextRingWidget extends StatelessWidget {

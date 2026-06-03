@@ -1,6 +1,7 @@
-import 'package:common/datamodel/location.dart';
-import 'package:common/enums.dart';
-import 'package:common/module.dart';
+import 'package:metaphysics_core/datamodel/location.dart';
+import 'package:metaphysics_core/enums.dart';
+import 'package:metaphysics_core/datamodel/basic_diviation_info.dart';
+import 'package:metaphysics_core/datamodel/basic_person_info.dart';
 import 'package:flutter/widgets.dart';
 import 'package:qizhengsiyu/enums/enum_panel_ring.dart';
 import 'package:qizhengsiyu/enums/enum_panel_system_type.dart';

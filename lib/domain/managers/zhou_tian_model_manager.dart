@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:common/enums.dart';
+import 'package:metaphysics_core/enums.dart';
 import 'package:flutter/services.dart';
 import 'package:tuple/tuple.dart';
 
@@ -46,39 +46,63 @@ class ZhouTianModelManager {
     if (_isLoaded) return;
 
     try {
-      // 定义需要加载的JSON文件列表
-      final List<String> jsonFiles = [
-        'assets/qizhengsiyu/ecliptic_tropical_morden.json',
-        'assets/qizhengsiyu/ecliptic_tropical_classical_adjusted.json',
-        'assets/qizhengsiyu/ecliptic_tropical_classical.json',
-        // 'assets/qizhengsiyu/ecliptic_sidereal_morden.json',
-        // 'assets/qizhengsiyu/ecliptic_sidereal_ancient.json',
-        // 'assets/qizhengsiyu/equatorial_tropical_morden.json',
-        // 'assets/qizhengsiyu/equatorial_tropical_ancient.json',
-        // 'assets/qizhengsiyu/equatorial_sidereal_morden.json',
-        // 'assets/qizhengsiyu/equatorial_sidereal_ancient.json',
-      ];
-
-      // 并行加载所有JSON文件
-      final List<String> jsonContents = await Future.wait(
-          jsonFiles.map((file) => rootBundle.loadString(file)));
-
-      // 解析JSON并存储到映射器中
-      for (int i = 0; i < jsonContents.length; i++) {
-        final jsonData = json.decode(jsonContents[i]);
-        final model = ZhouTianModel.fromJson(jsonData);
-
-        // 创建唯一的键来标识每个模型
-        final key = _createMapperKey(model.systemType, model.panelSystemType,
-            model.constellationSystemType);
-
-        _mapper[key] = model;
-      }
+      // 1. 加载官方内置预设
+      await _loadBuiltinPresets();
+      
+      // 2. 加载用户自定义预设 (如果环境允许)
+      await loadUserSchemes();
 
       _isLoaded = true;
     } catch (e) {
       throw Exception('Failed to load ZhouTianModel data: $e');
     }
+  }
+
+  Future<void> _loadBuiltinPresets() async {
+    // 定义需要加载的JSON文件列表
+    final List<String> jsonFiles = [
+      'assets/qizhengsiyu/ecliptic_tropical_morden.json',
+      'assets/qizhengsiyu/ecliptic_tropical_classical_adjusted.json',
+      'assets/qizhengsiyu/ecliptic_tropical_classical.json',
+    ];
+
+    // 并行加载所有JSON文件
+    final List<String> jsonContents = await Future.wait(
+        jsonFiles.map((file) => rootBundle.loadString(file)));
+
+    // 解析JSON并存储到映射器中
+    for (int i = 0; i < jsonContents.length; i++) {
+      final jsonData = json.decode(jsonContents[i]);
+      final model = ZhouTianModel.fromJson(jsonData);
+      _addModelToMapper(model);
+    }
+  }
+
+  Future<void> loadUserSchemes() async {
+    try {
+      // 假设用户预设存放在应用文档目录的 user_schemes/ 文件夹下
+      // 在 CLI 环境中，我们可以检查本地目录
+      final userSchemesDir = Directory('user_schemes');
+      if (await userSchemesDir.exists()) {
+        final List<FileSystemEntity> entities = await userSchemesDir.list().toList();
+        for (var entity in entities) {
+          if (entity is File && entity.path.endsWith('.json')) {
+            final String content = await entity.readAsString();
+            final model = ZhouTianModel.fromJson(json.decode(content));
+            _addModelToMapper(model);
+            logger.i("Loaded user scheme: ${entity.path}");
+          }
+        }
+      }
+    } catch (e) {
+      logger.w("Failed to load user schemes: $e");
+    }
+  }
+
+  void _addModelToMapper(ZhouTianModel model) {
+    final key = _createMapperKey(model.systemType, model.panelSystemType,
+        model.constellationSystemType);
+    _mapper[key] = model;
   }
 
   /// 根据PanelConfig获取对应的ZhouTianModel

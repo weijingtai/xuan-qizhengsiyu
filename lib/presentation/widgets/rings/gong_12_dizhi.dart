@@ -1,5 +1,6 @@
 import 'dart:math' as math;
-import 'package:common/module.dart';
+import 'package:metaphysics_core/models/shen_sha.dart';
+import 'package:xuan_common/module.dart';
 
 import 'package:flutter/material.dart';
 import 'package:qizhengsiyu/enums/enum_twelve_gong.dart';

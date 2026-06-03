@@ -7,17 +7,17 @@
 
 import 'dart:convert';
 import 'dart:io';
-import 'package:common/enums/enum_jia_zi.dart';
+import 'package:metaphysics_core/enums.dart';
 
-import 'package:common/models/shen_sha.dart';
-import 'package:common/models/shen_sha_bundled.dart';
-import 'package:common/models/shen_sha_gan_zhi.dart';
-import 'package:common/utils/collections_utils.dart';
+import 'package:xuan_common/models/shen_sha.dart';
+import 'package:xuan_common/models/shen_sha_bundled.dart';
+import 'package:xuan_common/models/shen_sha_gan_zhi.dart';
+import 'package:xuan_common/utils/collections_utils.dart';
 import 'package:path/path.dart' as path;
 
-import 'package:common/enums/enum_di_zhi.dart';
+import 'package:metaphysics_core/enums.dart';
 
-import 'package:common/models/shen_sha_tian_gan.dart';
+import 'package:xuan_common/models/shen_sha_tian_gan.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:qizhengsiyu/domain/entities/models/di_zhi_shen_sha.dart';

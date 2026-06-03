@@ -1,4 +1,4 @@
-import 'package:common/enums.dart';
+import 'package:metaphysics_core/enums.dart';
 import 'package:qizhengsiyu/enums/enum_twelve_gong.dart';
 import 'package:qizhengsiyu/xing_xian/fei_xian_detail_palace.dart';
 import 'package:qizhengsiyu/xing_xian/xiao_xian_detail_palace.dart';

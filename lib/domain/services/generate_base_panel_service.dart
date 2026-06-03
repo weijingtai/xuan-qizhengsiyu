@@ -1,9 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:common/enums.dart';
-import 'package:common/module.dart';
-import 'package:common/utils.dart';
+import 'package:metaphysics_core/enums.dart';
+import 'package:metaphysics_core/models/shen_sha.dart';
+import 'package:metaphysics_core/models/twelve_zhang_sheng.dart';
+import 'package:metaphysics_core/utils/collections_utils.dart';
 import 'package:flutter/services.dart';
 import 'package:qizhengsiyu/enums/enum_twelve_gong.dart';
 import 'package:qizhengsiyu/utils/star_walking_info_utils.dart';

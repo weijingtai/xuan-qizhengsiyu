@@ -1,7 +1,7 @@
 import 'dart:math';
 
-import 'package:common/enums.dart';
-import 'package:common/module.dart';
+import 'package:metaphysics_core/enums.dart';
+import 'package:metaphysics_core/models/year_month.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:qizhengsiyu/xing_xian/base_xian_palace.dart';
 

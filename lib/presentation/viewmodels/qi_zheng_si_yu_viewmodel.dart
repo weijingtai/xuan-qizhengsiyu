@@ -1,4 +1,4 @@
-import 'package:common/enums/enum_stars.dart';
+import 'package:metaphysics_core/enums.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:qizhengsiyu/domain/entities/models/base_panel_model.dart';
@@ -13,8 +13,8 @@ import 'package:qizhengsiyu/domain/services/generate_base_panel_service.dart';
 import 'package:qizhengsiyu/domain/services/ge_ju_evaluation_service.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_result.dart';
 import 'package:qizhengsiyu/domain/entities/models/rise_set_display_data.dart';
-import 'package:common/utils/celestial_rise_set_calculator.dart';
-import 'package:common/helpers/solar_time_calculator.dart';
+import 'package:metaphysics_core/utils/celestial_rise_set_calculator.dart';
+import 'package:metaphysics_core/helpers/solar_time_calculator.dart';
 import 'package:qizhengsiyu/domain/entities/models/zhou_tian_model.dart';
 import 'package:qizhengsiyu/presentation/models/ui_star_model.dart'; // 使用UI分支的版本
 import 'package:qizhengsiyu/data/datasources/local/hua_yao_local_data_source.dart';
@@ -30,23 +30,25 @@ import 'package:qizhengsiyu/enums/enum_panel_system_type.dart';
 import 'package:qizhengsiyu/enums/enum_settle_life_body.dart';
 import 'package:qizhengsiyu/presentation/pages/StarsResolver.dart';
 import 'package:timezone/timezone.dart' as tz;
-import 'package:common/adapters/lunar_adapter.dart';
-import 'package:common/models/lunar_date_info_v2_data.dart';
-import 'package:common/features/datetime_details/input_info_params.dart';
-import 'package:common/features/datetime_details/datetime_details_bundle_calculation.dart';
-import 'package:common/features/liu_yun/viewmodels/yun_liu_view_model.dart';
-import 'package:common/features/liu_yun/services/yun_liu_service.dart';
-import 'package:common/helpers/solar_lunar_datetime_helper.dart';
-import 'package:common/models/divination_datetime.dart';
-import 'package:common/datamodel/location.dart' as loc;
+import 'package:xuan_common/adapters/lunar_adapter.dart';
+import 'package:metaphysics_core/models/lunar_date_info_v2_data.dart';
+import 'package:xuan_common/features/datetime_details/input_info_params.dart';
+import 'package:metaphysics_core/features/datetime_details/datetime_details_bundle_calculation.dart';
+import 'package:xuan_common/features/liu_yun/viewmodels/yun_liu_view_model.dart';
+import 'package:xuan_common/features/liu_yun/services/yun_liu_service.dart';
+import 'package:metaphysics_core/helpers/solar_lunar_datetime_helper.dart';
+import 'package:metaphysics_core/models/divination_datetime.dart';
+import 'package:metaphysics_core/datamodel/location.dart' as loc;
 import 'dart:math';
 import 'package:qizhengsiyu/domain/entities/models/panel_config.dart'
     as UIPanelConfig; // UI层的PanelConfig
-import 'package:common/module.dart'; // DivinationInfoModel
-import 'package:common/datamodel/datetime_divination_datamodel.dart';
-import 'package:common/models/divination_datetime.dart';
-import 'package:common/datamodel/location.dart';
-import 'package:common/enums.dart';
+import 'package:metaphysics_core/models/chinese_date_info.dart';
+import 'package:metaphysics_core/models/divination_info_model.dart';
+import 'package:metaphysics_core/models/shen_sha.dart'; // DivinationInfoModel
+import 'package:metaphysics_core/datamodel/datetime_divination_datamodel.dart';
+import 'package:metaphysics_core/models/divination_datetime.dart';
+import 'package:metaphysics_core/datamodel/location.dart';
+import 'package:metaphysics_core/enums.dart';
 import 'package:uuid/uuid.dart'; // 用于生成UUID
 
 import '../../domain/entities/models/stars_angle.dart'; // 使用domain层模型
@@ -566,74 +568,82 @@ class QiZhengSiYuViewModel extends ChangeNotifier {
   ) {
     // 定义星体及其在 UI 调整位置时的优先级
     // 优先级越高,越不容易被移动
+    // 映射到 UI 视觉空间 (始终为 360 度)
+    // 根据设计原则: visualDegree = (projected / totalDegree) * 360
+    double normalize(double? projected) {
+      if (projected == null) return 0;
+      return (projected / _zhouTianModel!.totalDegree) * 360.0;
+    }
+
     List<UIStarModel> unadjustedStarList = [
       UIStarModel(
         star: EnumStars.Sun,
-        originalAngle: starsAngleMapper[EnumStars.Sun]?.angle ?? 0,
+        originalAngle: normalize(starsAngleMapper[EnumStars.Sun]?.angle),
         priority: 4, // 太阳优先级最高
         rangeAngleEachSide: miniSafetyAngle,
       ),
       UIStarModel(
         star: EnumStars.Moon,
-        originalAngle: starsAngleMapper[EnumStars.Moon]?.angle ?? 0,
+        originalAngle: normalize(starsAngleMapper[EnumStars.Moon]?.angle),
         priority: 3, // 月亮优先级次之
         rangeAngleEachSide: miniSafetyAngle,
       ),
       UIStarModel(
         star: EnumStars.Venus,
-        originalAngle: starsAngleMapper[EnumStars.Venus]?.angle ?? 0,
+        originalAngle: normalize(starsAngleMapper[EnumStars.Venus]?.angle),
         priority: 2, // 五星优先级中等
         rangeAngleEachSide: miniSafetyAngle,
       ),
       UIStarModel(
         star: EnumStars.Jupiter,
-        originalAngle: starsAngleMapper[EnumStars.Jupiter]?.angle ?? 0,
+        originalAngle: normalize(starsAngleMapper[EnumStars.Jupiter]?.angle),
         priority: 2,
         rangeAngleEachSide: miniSafetyAngle,
       ),
       UIStarModel(
         star: EnumStars.Mercury,
-        originalAngle: starsAngleMapper[EnumStars.Mercury]?.angle ?? 0,
+        originalAngle: normalize(starsAngleMapper[EnumStars.Mercury]?.angle),
         priority: 2,
         rangeAngleEachSide: miniSafetyAngle,
       ),
       UIStarModel(
         star: EnumStars.Mars,
-        originalAngle: starsAngleMapper[EnumStars.Mars]?.angle ?? 0,
+        originalAngle: normalize(starsAngleMapper[EnumStars.Mars]?.angle),
         priority: 2,
         rangeAngleEachSide: miniSafetyAngle,
       ),
       UIStarModel(
         star: EnumStars.Saturn,
-        originalAngle: starsAngleMapper[EnumStars.Saturn]?.angle ?? 0,
+        originalAngle: normalize(starsAngleMapper[EnumStars.Saturn]?.angle),
         priority: 2,
         rangeAngleEachSide: miniSafetyAngle,
       ),
       UIStarModel(
         star: EnumStars.Qi, // 紫气
-        originalAngle: starsAngleMapper[EnumStars.Qi]?.angle ?? 0,
+        originalAngle: normalize(starsAngleMapper[EnumStars.Qi]?.angle),
         priority: 1, // 辅星优先级最低
         rangeAngleEachSide: miniSafetyAngle,
       ),
       UIStarModel(
         star: EnumStars.Bei, // 月孛
-        originalAngle: starsAngleMapper[EnumStars.Bei]?.angle ?? 0,
+        originalAngle: normalize(starsAngleMapper[EnumStars.Bei]?.angle),
         priority: 1,
         rangeAngleEachSide: miniSafetyAngle,
       ),
       UIStarModel(
         star: EnumStars.Luo, // 罗睺
-        originalAngle: starsAngleMapper[EnumStars.Luo]?.angle ?? 0,
+        originalAngle: normalize(starsAngleMapper[EnumStars.Luo]?.angle),
         priority: 1,
         rangeAngleEachSide: miniSafetyAngle,
       ),
       UIStarModel(
         star: EnumStars.Ji, // 计都
-        originalAngle: starsAngleMapper[EnumStars.Ji]?.angle ?? 0,
+        originalAngle: normalize(starsAngleMapper[EnumStars.Ji]?.angle),
         priority: 1,
         rangeAngleEachSide: miniSafetyAngle,
       ),
     ];
+
 
     // 移除角度为0的星体 (可能表示该星体未计算或不存在于mapper中)
     unadjustedStarList.removeWhere(

@@ -1,7 +1,7 @@
-import 'package:common/enums/enum_stars.dart';
+import 'package:metaphysics_core/enums.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_condition.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_input.dart';
-import 'package:common/utils/collections_utils.dart';
+import 'package:metaphysics_core/utils/collections_utils.dart';
 
 /// 辅助方法：从 JSON 解析星曜列表
 List<EnumStars> _parseStars(List<dynamic> jsonList) {

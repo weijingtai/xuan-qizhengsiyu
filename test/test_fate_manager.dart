@@ -1,5 +1,5 @@
-import 'package:common/enums.dart';
-import 'package:common/models/year_month.dart';
+import 'package:metaphysics_core/enums.dart';
+import 'package:xuan_common/models/year_month.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:qizhengsiyu/domain/entities/models/body_life_model.dart';
 import 'package:qizhengsiyu/domain/entities/models/fate_dong_wei_da_xian.dart';

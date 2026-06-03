@@ -1,13 +1,13 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:qizhengsiyu/domain/managers/ge_ju/ge_ju_rule_parser.dart';
-import 'package:common/enums/enum_ji_xiong.dart';
+import 'package:metaphysics_core/enums.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/conditions/structure_conditions.dart';
 import 'package:qizhengsiyu/enums/enum_twelve_gong.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/conditions/time_conditions.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/conditions/position_conditions.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/conditions/shen_sha_conditions.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/conditions/xian_conditions.dart';
-import 'package:common/enums/enum_di_zhi.dart';
+import 'package:metaphysics_core/enums.dart';
 
 void main() {
   test('Should strictly parse "未知" as WEI_ZHI', () {

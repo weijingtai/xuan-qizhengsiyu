@@ -1,5 +1,5 @@
-import 'package:common/enums.dart';
-import 'package:common/models/year_month.dart';
+import 'package:metaphysics_core/enums.dart';
+import 'package:metaphysics_core/models/year_month.dart';
 import 'package:qizhengsiyu/xing_xian/gong_constellation_mapping.dart';
 
 import '../domain/entities/models/star_enter_info.dart';

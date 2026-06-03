@@ -1,4 +1,4 @@
-import 'package:common/enums/enum_di_zhi.dart';
+import 'package:metaphysics_core/enums.dart';
 import 'package:qizhengsiyu/enums/enum_twelve_gong.dart';
 
 /// 十二次（赤道十二宮）系统

@@ -1,5 +1,5 @@
-import 'package:common/enums.dart';
-import 'package:common/enums/enum_four_seasons.dart';
+import 'package:metaphysics_core/enums.dart';
+import 'package:metaphysics_core/enums.dart';
 import 'package:flutter/foundation.dart';
 import 'package:qizhengsiyu/dataset/star_position_status_model.dart';
 import 'package:qizhengsiyu/domain/entities/models/base_panel_model.dart';

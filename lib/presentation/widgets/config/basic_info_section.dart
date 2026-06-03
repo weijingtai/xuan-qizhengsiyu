@@ -1,10 +1,12 @@
 import 'package:board_datetime_picker/board_datetime_picker.dart';
-import 'package:common/datamodel/location.dart';
-import 'package:common/enums.dart';
-import 'package:common/enums/enum_gender.dart';
-import 'package:common/models/eight_chars.dart';
+import 'package:metaphysics_core/datamodel/location.dart';
+import 'package:metaphysics_core/enums.dart';
+import 'package:metaphysics_core/enums.dart';
+import 'package:metaphysics_core/models/eight_chars.dart';
 import 'package:flutter/material.dart';
-import 'package:common/module.dart';
+import 'package:metaphysics_core/datamodel/basic_diviation_info.dart';
+import 'package:metaphysics_core/datamodel/basic_person_info.dart';
+import 'package:xuan_common/module.dart';
 import 'package:flutter_city_picker/city_picker.dart';
 import 'package:flutter_city_picker/model/address.dart';
 import 'package:flutter_sliding_toast/flutter_sliding_toast.dart';

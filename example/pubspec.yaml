@@ -39,7 +39,7 @@ dependencies:
   path_provider: ^2.1.5
 
   dotted_border: ^3.1.0
-  common:
+  xuan_common:
     git:
       url: http://xuan:***@192.168.0.165:3000/xuan/xuan-common.git
       ref: main
@@ -97,3 +97,11 @@ flutter:
     - assets/qizhengsiyu/ge_ju/
     - assets/qizhengsiyu/ge_ju/rules/
     - assets/qizhengsiyu/ge_ju/content/
+
+dependency_overrides:
+  xuan_common:
+    path: ../../xuan-common
+  qizhengsiyu:
+    path: ..
+  persistence_core:
+    path: ../../xuan-storage/core

@@ -2,7 +2,7 @@ import 'dart:math' as math;
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:qizhengsiyu/utils/da_xian_calculate_helper.dart';
-import 'package:common/models/year_month.dart'; // 导入 math 库以使用 abs 函数
+import 'package:xuan_common/models/year_month.dart'; // 导入 math 库以使用 abs 函数
 
 void main() {
   group("洞微大限 ui 年转换列表 google", () {
