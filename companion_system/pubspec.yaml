@@ -64,7 +64,7 @@ dependencies:
 
   # xuan-ai 的共享模块（直接引用以使用 ResolvedPersona 等类型）
   # 注：使用 common_stub 覆盖以避免 xuan-common 的重型原生依赖
-  common:
+  xuan_common:
     git:
       url: http://xuan:***@192.168.0.165:3000/xuan/xuan-common.git
       ref: main
