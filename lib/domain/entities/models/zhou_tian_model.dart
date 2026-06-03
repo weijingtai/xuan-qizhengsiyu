@@ -1,5 +1,5 @@
 import 'package:metaphysics_core/enums.dart';
-import 'package:xuan_common/widgets/twenty_four_jie_qi_tag.dart';
+import 'package:xuan_four_zhu_card/widgets/twenty_four_jie_qi_tag.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:qizhengsiyu/enums/enum_twelve_gong.dart';
 import 'package:tuple/tuple.dart';

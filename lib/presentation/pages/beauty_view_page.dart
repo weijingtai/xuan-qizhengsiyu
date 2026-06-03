@@ -22,8 +22,8 @@ import 'package:qizhengsiyu/presentation/models/ui_star_model.dart';
 import 'package:qizhengsiyu/qi_zheng_si_yu_constant_resources.dart';
 // import 'package:qizhengsiyu/pages/qi_zheng_si_yu_viewmodel.dart'; // 旧的 ViewModel,已废弃
 
-import 'package:xuan_common/painter/text_circle_ring_painter.dart';
-import 'package:xuan_common/painter/circle_ring_printer.dart';
+import 'package:xuan_four_zhu_card/painter/text_circle_ring_painter.dart';
+import 'package:xuan_four_zhu_card/painter/circle_ring_printer.dart';
 import '../../domain/entities/models/body_life_model.dart';
 import '../../domain/entities/models/observer_position.dart';
 import '../../domain/entities/models/panel_stars_info.dart';
