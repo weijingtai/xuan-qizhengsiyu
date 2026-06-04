@@ -18,7 +18,7 @@ description: A new Flutter module project.
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.2.3 <4.0.0'
+  sdk: '>=3.8.0 <4.0.0'
 
 dependencies:
   xuan_four_zhu_card:
@@ -51,10 +51,6 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
-  xuan_common:
-    git:
-      url: http://xuan:***@192.168.0.165:3000/xuan/xuan-common.git
-      ref: main
   xuan_logger:
     path: ../xuan-logger
   metaphysics_core:
@@ -129,7 +125,5 @@ flutter:
     iosBundleIdentifier: com.example.qizhengsiyu
 
 dependency_overrides:
-  xuan_common:
-    path: ../xuan-common
   persistence_core:
     path: ../xuan-storage/core
