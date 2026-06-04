@@ -62,13 +62,6 @@ dependencies:
       url: http://xuan:***@192.168.0.165:3000/xuan/xuan-ai.git
       ref: main
 
-  # xuan-ai 的共享模块（直接引用以使用 ResolvedPersona 等类型）
-  # 注：使用 common_stub 覆盖以避免 xuan-common 的重型原生依赖
-  xuan_common:
-    git:
-      url: http://xuan:***@192.168.0.165:3000/xuan/xuan-common.git
-      ref: main
-
   # AI Toolkit（ai_core 的 ChatMessage 类型）
   flutter_ai_toolkit: ^0.9.1
 
@@ -88,11 +81,8 @@ dev_dependencies:
 dependency_overrides:
   # 版本冲突覆盖
   google_fonts: ^6.2.1
-  # 用最小化 stub 替换重型 xuan-common，避免 Firebase/sweph 等原生插件引入 Windows 构建
-  # ai_core:
-  #   path: ../../xuan-ai
-  # common:
-  #   path: ../../xuan-common
+  ai_core:
+    path: ../../xuan-ai
 
 
 # For information on the generic Dart part of this file, see the

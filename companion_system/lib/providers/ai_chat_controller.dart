@@ -5,10 +5,10 @@ import 'dart:convert';
 
 import 'package:ai_core/database/ai_database.dart';
 import 'package:ai_core/models/chat_message_model.dart' as ai_msg;
+import 'package:ai_core/ai/resolved_persona.dart';
 import 'package:ai_core/services/ai_service_impl.dart';
 import 'package:ai_core/services/chat/chat_persistence_service.dart';
 import 'package:ai_core/services/llm/llm_service.dart' as ai_llm;
-import 'package:common/domain/ai/resolved_persona.dart';
 import 'package:drift/drift.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart' show rootBundle;

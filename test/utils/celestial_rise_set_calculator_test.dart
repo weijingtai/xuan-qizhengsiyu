@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:xuan_common/utils/celestial_rise_set_calculator.dart';
+import 'package:metaphysics_core/utils/celestial_rise_set_calculator.dart';
 import 'package:sweph/sweph.dart';
 import 'package:timezone/data/latest.dart' as tz_data;
 
@@ -69,7 +69,9 @@ void main() {
         expect(solsticeResult.rise, isNotNull);
         // 夏至日落更晚（UTC 时间更大）
         expect(
-            solsticeResult.set_!.hour, greaterThan(equinoxResult.set_!.hour));
+          solsticeResult.set_!.hour,
+          greaterThan(equinoxResult.set_!.hour),
+        );
       });
     });
 
@@ -141,14 +143,18 @@ void main() {
         expect(twilight.civilDawn, isNotNull);
 
         // 天文晨光 < 航海晨光 < 民用晨光
-        expect(twilight.astronomicalDawn!.isBefore(twilight.nauticalDawn!),
-            isTrue);
+        expect(
+          twilight.astronomicalDawn!.isBefore(twilight.nauticalDawn!),
+          isTrue,
+        );
         expect(twilight.nauticalDawn!.isBefore(twilight.civilDawn!), isTrue);
 
         // 民用昏影 < 航海昏影 < 天文昏影
         expect(twilight.civilDusk!.isBefore(twilight.nauticalDusk!), isTrue);
-        expect(twilight.nauticalDusk!.isBefore(twilight.astronomicalDusk!),
-            isTrue);
+        expect(
+          twilight.nauticalDusk!.isBefore(twilight.astronomicalDusk!),
+          isTrue,
+        );
       });
     });
 

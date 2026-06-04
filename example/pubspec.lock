@@ -264,14 +264,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.3"
-  day_night_themed_switcher:
-    dependency: transitive
-    description:
-      name: day_night_themed_switcher
-      sha256: b562f22dac182aaf8c9412b7e74407d04cfd9567a169880b4ba29be512a62231
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.2"
   dbus:
     dependency: transitive
     description:
@@ -327,14 +319,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.0"
-  drag_and_drop_lists:
-    dependency: transitive
-    description:
-      name: drag_and_drop_lists
-      sha256: "285e602face3a1cfe1367e1bcca84228b215914d52ef4fd5310a53fe695144ed"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.4.2"
   drift:
     dependency: "direct main"
     description:
@@ -444,14 +428,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.2.0"
-  flutter_inset_shadow:
-    dependency: transitive
-    description:
-      name: flutter_inset_shadow
-      sha256: "5978b67f028c7ca3566516eda14f0a25a5ce13c0fa21a86a48a0b00faa7db9d7"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.3"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -476,14 +452,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.1"
-  flutter_screenutil:
-    dependency: transitive
-    description:
-      name: flutter_screenutil
-      sha256: "8239210dd68bee6b0577aa4a090890342d04a136ce1c81f98ee513fc0ce891de"
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.9.3"
   flutter_shaders:
     dependency: transitive
     description:
@@ -508,14 +476,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.5.3"
-  flutter_svg:
-    dependency: transitive
-    description:
-      name: flutter_svg
-      sha256: "87fbd7c534435b6c5d9d98b01e1fd527812b82e68ddd8bd35fc45ed0fa8f0a95"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.2.3"
   flutter_switch:
     dependency: "direct main"
     description:
@@ -901,14 +861,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.9.1"
-  path_parsing:
-    dependency: transitive
-    description:
-      name: path_parsing
-      sha256: "883402936929eac138ee0a45da5b0f2c80f89913e6dc3bf77eb65b84b409c6ca"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.1.0"
   path_provider:
     dependency: "direct main"
     description:
@@ -1309,14 +1261,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.9.4"
-  topojson:
-    dependency: transitive
-    description:
-      name: topojson
-      sha256: d31ea01a4d10423bb148bb593c2956d0748064407a5f63e9a5e44657082d9083
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.3.0"
   tuple:
     dependency: "direct main"
     description:
@@ -1373,30 +1317,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.5.2"
-  vector_graphics:
-    dependency: transitive
-    description:
-      name: vector_graphics
-      sha256: a4f059dc26fc8295b5921376600a194c4ec7d55e72f2fe4c7d2831e103d461e6
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.1.19"
-  vector_graphics_codec:
-    dependency: transitive
-    description:
-      name: vector_graphics_codec
-      sha256: "99fd9fbd34d9f9a32efd7b6a6aae14125d8237b10403b422a6a6dfeac2806146"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.1.13"
-  vector_graphics_compiler:
-    dependency: transitive
-    description:
-      name: vector_graphics_compiler
-      sha256: "201e876b5d52753626af64b6359cd13ac6011b80728731428fd34bc840f71c9b"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.1.20"
   vector_math:
     dependency: transitive
     description:
@@ -1485,13 +1405,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.6.1"
-  xuan_common:
-    dependency: "direct main"
-    description:
-      path: "../../xuan-common"
-      relative: true
-    source: path
-    version: "1.0.0+1"
   xuan_four_zhu_card:
     dependency: transitive
     description:
@@ -1499,6 +1412,13 @@ packages:
       relative: true
     source: path
     version: "0.1.0"
+  xuan_logger:
+    dependency: transitive
+    description:
+      path: "../../xuan-logger"
+      relative: true
+    source: path
+    version: "1.0.0"
   xuan_time_location:
     dependency: transitive
     description:

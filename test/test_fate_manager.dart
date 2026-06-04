@@ -1,5 +1,5 @@
 import 'package:metaphysics_core/enums.dart';
-import 'package:xuan_common/models/year_month.dart';
+import 'package:metaphysics_core/models/year_month.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:qizhengsiyu/domain/entities/models/body_life_model.dart';
 import 'package:qizhengsiyu/domain/entities/models/fate_dong_wei_da_xian.dart';
@@ -25,14 +25,20 @@ void main() {
     });
     test("命限计算，古代方式， 太阳入宫巳火，命宫丑 10度", () {
       final res = DongWeiDaXianManager().calculate(
-          DongWeiDaXianMingGongCountingType.Ancient,
-          BodyLifeModel(
-              lifeGongInfo: GongDegree(gong: EnumTwelveGong.Chou, degree: 10),
-              lifeConstellationInfo: ConstellationDegree(
-                  constellation: Enum28Constellations.Yi_Huo_She, degree: 3),
-              bodyGongInfo: GongDegree(gong: EnumTwelveGong.Si, degree: 10),
-              bodyConstellationInfo: ConstellationDegree(
-                  constellation: Enum28Constellations.Yi_Huo_She, degree: 3)));
+        DongWeiDaXianMingGongCountingType.Ancient,
+        BodyLifeModel(
+          lifeGongInfo: GongDegree(gong: EnumTwelveGong.Chou, degree: 10),
+          lifeConstellationInfo: ConstellationDegree(
+            constellation: Enum28Constellations.Yi_Huo_She,
+            degree: 3,
+          ),
+          bodyGongInfo: GongDegree(gong: EnumTwelveGong.Si, degree: 10),
+          bodyConstellationInfo: ConstellationDegree(
+            constellation: Enum28Constellations.Yi_Huo_She,
+            degree: 3,
+          ),
+        ),
+      );
       expect(res.daXianGongs.length, 12);
       expect(res.daXianGongs[0].destinyGong, EnumDestinyTwelveGong.Ming);
       expect(res.daXianGongs[0].gong, EnumTwelveGong.Chou);
@@ -71,22 +77,34 @@ void main() {
   group("洞微小限", () {
     test("乙亥年生 命宫子 太岁在巳", () {
       final res = DongWeiXiaoXianManager.calculate(
-          JiaZi.YI_HAI, EnumTwelveGong.Zi, DiZhi.SI);
+        JiaZi.YI_HAI,
+        EnumTwelveGong.Zi,
+        DiZhi.SI,
+      );
       expect(res, EnumTwelveGong.Wu);
     });
     test("乙亥年生 命宫子 太岁在未", () {
       final res = DongWeiXiaoXianManager.calculate(
-          JiaZi.YI_HAI, EnumTwelveGong.Zi, DiZhi.WEI);
+        JiaZi.YI_HAI,
+        EnumTwelveGong.Zi,
+        DiZhi.WEI,
+      );
       expect(res, EnumTwelveGong.Chen);
     });
     test("乙巳年生 命宫丑 太岁在亥", () {
       final res = DongWeiXiaoXianManager.calculate(
-          JiaZi.YI_SI, EnumTwelveGong.Chou, DiZhi.HAI);
+        JiaZi.YI_SI,
+        EnumTwelveGong.Chou,
+        DiZhi.HAI,
+      );
       expect(res, EnumTwelveGong.Wei);
     });
     test("辛酉年生 命宫卯 太岁在亥", () {
       final res = DongWeiXiaoXianManager.calculate(
-          JiaZi.XIN_YOU, EnumTwelveGong.Mao, DiZhi.CHEN);
+        JiaZi.XIN_YOU,
+        EnumTwelveGong.Mao,
+        DiZhi.CHEN,
+      );
       expect(res, EnumTwelveGong.Shen);
     });
   });
@@ -94,7 +112,10 @@ void main() {
   group("洞微月限", () {
     test("月限 小限申 月限子", () {
       final res = DongWeiMonthXianManager.calculate(
-          EnumTwelveGong.Shen, JiaZi.XIN_MAO, JiaZi.YI_HAI);
+        EnumTwelveGong.Shen,
+        JiaZi.XIN_MAO,
+        JiaZi.YI_HAI,
+      );
       expect(res, EnumTwelveGong.Zi);
     });
   });
@@ -106,20 +127,26 @@ void main() {
   });
   group("洞微飞限", () {
     test("飞限计算 命宫10年 阳宫", () {
-      final res = DongWeiFeiXianManager().doCalculate(DaXianGong(
+      final res = DongWeiFeiXianManager().doCalculate(
+        DaXianGong(
           order: 0,
           gong: EnumTwelveGong.Wu,
           start: YearMonth(1, 0),
           end: YearMonth(10, 0),
           totalYears: YearMonth(10, 0),
-          destinyGong: EnumDestinyTwelveGong.Ming));
+          destinyGong: EnumDestinyTwelveGong.Ming,
+        ),
+      );
       expect(res.length, 10);
 
       // 第 1，2 年 本宫
       for (var i = 0; i < 2; i++) {
         expect(res[i].gong, EnumTwelveGong.Wu);
-        expect(res[i].start.year, 1 + i,
-            reason: res[0].start.toJson().toString());
+        expect(
+          res[i].start.year,
+          1 + i,
+          reason: res[0].start.toJson().toString(),
+        );
         expect(res[i].start.month, 0, reason: res[0].start.toJson().toString());
 
         expect(res[i].end.year, 2 + i, reason: res[i].end.toJson().toString());
@@ -129,8 +156,11 @@ void main() {
       // 第 3，4 年 对宫
       for (var i = 2; i < 4; i++) {
         expect(res[i].gong, EnumTwelveGong.Zi);
-        expect(res[i].start.year, 1 + i,
-            reason: res[i].start.toJson().toString());
+        expect(
+          res[i].start.year,
+          1 + i,
+          reason: res[i].start.toJson().toString(),
+        );
         expect(res[i].start.month, 0, reason: res[i].start.toJson().toString());
 
         expect(res[i].end.year, 2 + i, reason: res[i].end.toJson().toString());
@@ -149,20 +179,26 @@ void main() {
       expect(res[9].gong, EnumTwelveGong.Zi);
     });
     test("飞限计算 相貌宫10年 阴宫", () {
-      final res = DongWeiFeiXianManager().doCalculate(DaXianGong(
+      final res = DongWeiFeiXianManager().doCalculate(
+        DaXianGong(
           order: 1,
           gong: EnumTwelveGong.Wei,
           start: YearMonth(11, 0),
           end: YearMonth(20, 0),
           totalYears: YearMonth(10, 0),
-          destinyGong: EnumDestinyTwelveGong.XiangMao));
+          destinyGong: EnumDestinyTwelveGong.XiangMao,
+        ),
+      );
       expect(res.length, 10);
 
       // 第 1，2 年 本宫
       for (var i = 0; i < 2; i++) {
         expect(res[i].gong, EnumTwelveGong.Wei);
-        expect(res[i].start.year, 11 + i,
-            reason: res[0].start.toJson().toString());
+        expect(
+          res[i].start.year,
+          11 + i,
+          reason: res[0].start.toJson().toString(),
+        );
         expect(res[i].start.month, 0, reason: res[0].start.toJson().toString());
 
         expect(res[i].end.year, 12 + i, reason: res[i].end.toJson().toString());
@@ -172,8 +208,11 @@ void main() {
       // 第 3，4 年 对宫
       for (var i = 2; i < 4; i++) {
         expect(res[i].gong, EnumTwelveGong.Chou);
-        expect(res[i].start.year, 11 + i,
-            reason: res[i].start.toJson().toString());
+        expect(
+          res[i].start.year,
+          11 + i,
+          reason: res[i].start.toJson().toString(),
+        );
         expect(res[i].start.month, 0, reason: res[i].start.toJson().toString());
 
         expect(res[i].end.year, 12 + i, reason: res[i].end.toJson().toString());
@@ -200,13 +239,16 @@ void main() {
       // 27、28岁在申宫
       // 29、30岁在寅宫
       // 31岁在子宫
-      final res = DongWeiFeiXianManager().doCalculate(DaXianGong(
+      final res = DongWeiFeiXianManager().doCalculate(
+        DaXianGong(
           order: 2,
           gong: EnumTwelveGong.Shen,
           start: YearMonth(21, 0),
           end: YearMonth(31, 0),
           totalYears: YearMonth(11, 0),
-          destinyGong: EnumDestinyTwelveGong.FuDe));
+          destinyGong: EnumDestinyTwelveGong.FuDe,
+        ),
+      );
       expect(res.length, 11);
       expect(res[0].gong, EnumTwelveGong.Shen);
       expect(res[1].gong, EnumTwelveGong.Shen);
@@ -221,13 +263,16 @@ void main() {
       // 73、74岁在丑宫
       // 75、76岁在未宫
       // 77岁上半年酉宫
-      final res = DongWeiFeiXianManager().doCalculate(DaXianGong(
+      final res = DongWeiFeiXianManager().doCalculate(
+        DaXianGong(
           order: 3,
           gong: EnumTwelveGong.Chou,
           start: YearMonth(73, 0),
           end: YearMonth(77, 6),
           totalYears: YearMonth(4, 6),
-          destinyGong: EnumDestinyTwelveGong.NuPu));
+          destinyGong: EnumDestinyTwelveGong.NuPu,
+        ),
+      );
       expect(res.length, 5);
       expect(res[0].gong, EnumTwelveGong.Chou);
       expect(res[1].gong, EnumTwelveGong.Chou);
@@ -247,13 +292,16 @@ void main() {
       // 79岁上半年在寅宫、下半年在申宫
       // 80岁在申宫
       // 81岁上半年在申宫、下半年在午宫
-      final res = DongWeiFeiXianManager().doCalculate(DaXianGong(
+      final res = DongWeiFeiXianManager().doCalculate(
+        DaXianGong(
           order: 4,
           gong: EnumTwelveGong.Yin,
           start: YearMonth(77, 6),
           end: YearMonth(81, 6),
           totalYears: YearMonth(4, 6),
-          destinyGong: EnumDestinyTwelveGong.NuPu));
+          destinyGong: EnumDestinyTwelveGong.NuPu,
+        ),
+      );
       expect(res.length, 5);
       expect(res[0].gong, EnumTwelveGong.Yin);
       expect(res[0].start.year, 77);

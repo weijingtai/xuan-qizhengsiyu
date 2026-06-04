@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:metaphysics_core/enums.dart';
-import 'package:xuan_common/utils.dart';
+import 'package:metaphysics_core/utils/collections_utils.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -15,7 +15,7 @@ import 'package:qizhengsiyu/domain/managers/zhou_tian_model_manager.dart';
 import 'package:qizhengsiyu/enums/enum_panel_system_type.dart';
 import 'package:qizhengsiyu/enums/enum_settle_life_body.dart';
 import 'package:qizhengsiyu/enums/enum_twelve_gong.dart';
-import 'package:xuan_common/models/year_month.dart';
+import 'package:metaphysics_core/models/year_month.dart';
 import 'package:qizhengsiyu/xing_xian/da_xian_calculator.dart';
 import 'package:qizhengsiyu/xing_xian/da_xian_palace_info.dart';
 import 'package:qizhengsiyu/xing_xian/fei_xian_calculator.dart';
@@ -24,28 +24,30 @@ import 'package:timezone/data/latest.dart' as tz;
 
 void main() {
   late PanelConfig panelConfig = PanelConfig(
-      panelSystemType: PanelSystemType.tropical,
-      celestialCoordinateSystem: CelestialCoordinateSystem.ecliptic,
-      houseDivisionSystem: HouseDivisionSystem.equal,
-      settleLifeType: EnumSettleLifeType.Mao,
-      settleBodyType: EnumSettleBodyType.moon,
-      islifeGongBySunRealTimeLocation: true,
-      constellationSystemType: ConstellationSystemType.classical);
+    panelSystemType: PanelSystemType.Tropical,
+    celestialCoordinateSystem: CelestialCoordinateSystem.Ecliptic,
+    houseDivisionSystem: HouseDivisionSystem.equal,
+    settleLifeType: EnumSettleLifeType.Mao,
+    settleBodyType: EnumSettleBodyType.moon,
+    islifeGongBySunRealTimeLocation: true,
+    constellationSystemType: ConstellationSystemType.Classical,
+  );
   late ZhouTianModel zhouTianModel;
 
   late BasePanelModel basePanel;
 
   late ObserverPosition observer = ObserverPosition(
-      latitude: 38.8026097,
-      longitude: -116.419389,
-      altitude: 0,
-      timezone: "America/Los_Angeles",
-      dateTime: DateTime.parse("2025-05-28T22:33:37.000"),
-      yearGanZhi: JiaZi.YI_SI,
-      monthGanZhi: JiaZi.XIN_SI,
-      dayGanZhi: JiaZi.DING_YOU,
-      timeGanZhi: JiaZi.XIN_HAI,
-      isDayBirth: false);
+    latitude: 38.8026097,
+    longitude: -116.419389,
+    altitude: 0,
+    timezone: "America/Los_Angeles",
+    dateTime: DateTime.parse("2025-05-28T22:33:37.000"),
+    yearGanZhi: JiaZi.YI_SI,
+    monthGanZhi: JiaZi.XIN_SI,
+    dayGanZhi: JiaZi.DING_YOU,
+    timeGanZhi: JiaZi.XIN_HAI,
+    isDayBirth: false,
+  );
 
   final List<EnumTwelveGong> daxianOrder = [
     EnumTwelveGong.Zi,
@@ -59,7 +61,7 @@ void main() {
     EnumTwelveGong.Shen,
     EnumTwelveGong.You,
     EnumTwelveGong.Xu,
-    EnumTwelveGong.Hai
+    EnumTwelveGong.Hai,
   ];
   // 将double类型的宫位时长改为YearMonth类型
   final Map<EnumTwelveGong, YearMonth> daxianDurations = {
@@ -90,12 +92,13 @@ void main() {
       await ZhouTianModelManager.instance.loadFromFiles([
         "$projectAssetsPath/ecliptic_tropical_classical_adjusted.json",
         "$projectAssetsPath/ecliptic_tropical_classical.json",
-        "$projectAssetsPath/ecliptic_tropical_morden.json"
+        "$projectAssetsPath/ecliptic_tropical_morden.json",
       ]);
       // ZhouTianModelManager.instance.setModelsForTesting(testMapper);
 
-      zhouTianModel =
-          ZhouTianModelManager.instance.getZhouTianModelBy(panelConfig);
+      zhouTianModel = ZhouTianModelManager.instance.getZhouTianModelBy(
+        panelConfig,
+      );
     } catch (e) {
       print("load panel config encounter error :$e");
     }
@@ -112,24 +115,30 @@ void main() {
 
   group("", () {
     test("获取对应的tiZhouTianModel, 黄道回归古宿", () async {
-      ZhouTianModel? zhouTianModel =
-          ZhouTianModelManager.instance.getZhouTianModelBy(panelConfig);
+      ZhouTianModel? zhouTianModel = ZhouTianModelManager.instance
+          .getZhouTianModelBy(panelConfig);
       expect(zhouTianModel, isNotNull);
       expect(zhouTianModel!.panelSystemType, PanelSystemType.tropical);
-      expect(zhouTianModel.constellationSystemType,
-          ConstellationSystemType.classical);
-      expect(zhouTianModel.systemType, CelestialCoordinateSystem.ecliptic);
+      expect(
+        zhouTianModel.constellationSystemType,
+        ConstellationSystemType.Classical,
+      );
+      expect(zhouTianModel.systemType, CelestialCoordinateSystem.Ecliptic);
       expect(zhouTianModel.epochCorrection, "开禧历");
     });
   });
   group("calculator", () {
     test("test", skip: true, () {
       final calculator = ZhouTianCalculator(
-        zhouTianModel:
-            ZhouTianModelManager.instance.getZhouTianModelBy(panelConfig),
+        zhouTianModel: ZhouTianModelManager.instance.getZhouTianModelBy(
+          panelConfig,
+        ),
       );
-      print(calculator.zhouTianModel.starInnDegreeSeq.firstWhere(
-          (t) => t.constellation == Enum28Constellations.Kui_Mu_Lang));
+      print(
+        calculator.zhouTianModel.starInnDegreeSeq.firstWhere(
+          (t) => t.constellation == Enum28Constellations.Kui_Mu_Lang,
+        ),
+      );
       final result = calculator.mapConstellationsToPalaces();
       expect(result, isNotEmpty);
       expect(result.length, 28);
@@ -143,15 +152,17 @@ void main() {
     test("计算洞微大限 v3", skip: true, () {
       try {
         final zhouTianCalculator = ZhouTianCalculator(
-          zhouTianModel:
-              ZhouTianModelManager.instance.getZhouTianModelBy(panelConfig),
+          zhouTianModel: ZhouTianModelManager.instance.getZhouTianModelBy(
+            panelConfig,
+          ),
         );
         final result = zhouTianCalculator.mapConstellationsToPalaces();
         final palaceMapper = zhouTianCalculator.calculatePalaceAngles();
 
         final dongWeiCalculator = DongWeiDaXianCalculator(
-          zhouTianModel: ZhouTianModelManager.instance
-              .getZhouTianModelBy(panelConfig), // 你的静态周天模型
+          zhouTianModel: ZhouTianModelManager.instance.getZhouTianModelBy(
+            panelConfig,
+          ), // 你的静态周天模型
           basePanel: basePanel,
           daxianPalaceOrder: daxianOrder,
           daxianPalaceDurations: daxianDurations,
@@ -186,16 +197,21 @@ void main() {
         observerPosition: observer,
       );
       List<DaXianPalaceInfo> daxianResults = dongWeiCalculator.calculateDaXian(
-          result, palaceMapper, basePanel.enteredGongMapper);
+        result,
+        palaceMapper,
+        basePanel.enteredGongMapper,
+      );
 
       final feiXianCalculator = FeiXianCalculator(
-        zhouTianModel:
-            ZhouTianModelManager.instance.getZhouTianModelBy(panelConfig),
+        zhouTianModel: ZhouTianModelManager.instance.getZhouTianModelBy(
+          panelConfig,
+        ),
         daxianPalaceOrder: daxianOrder,
         daxianPalaceDurations: daxianDurations,
       );
-      List<FeiXianDetailPalace> finalResult =
-          feiXianCalculator.calculateEach(daxianResults.first);
+      List<FeiXianDetailPalace> finalResult = feiXianCalculator.calculateEach(
+        daxianResults.first,
+      );
       for (var element in finalResult) {
         print(jsonEncode(element));
       }
@@ -215,16 +231,21 @@ void main() {
         observerPosition: observer,
       );
       List<DaXianPalaceInfo> daxianResults = dongWeiCalculator.calculateDaXian(
-          result, palaceMapper, basePanel.enteredGongMapper);
+        result,
+        palaceMapper,
+        basePanel.enteredGongMapper,
+      );
 
       final feiXianCalculator = FeiXianCalculator(
-        zhouTianModel:
-            ZhouTianModelManager.instance.getZhouTianModelBy(panelConfig),
+        zhouTianModel: ZhouTianModelManager.instance.getZhouTianModelBy(
+          panelConfig,
+        ),
         daxianPalaceOrder: daxianOrder,
         daxianPalaceDurations: daxianDurations,
       );
-      List<FeiXianDetailPalace> finalResult =
-          feiXianCalculator.calculateEach(daxianResults[1]);
+      List<FeiXianDetailPalace> finalResult = feiXianCalculator.calculateEach(
+        daxianResults[1],
+      );
       for (var element in finalResult) {
         print(jsonEncode(element));
       }
@@ -244,16 +265,21 @@ void main() {
         observerPosition: observer,
       );
       List<DaXianPalaceInfo> daxianResults = dongWeiCalculator.calculateDaXian(
-          result, palaceMapper, basePanel.enteredGongMapper);
+        result,
+        palaceMapper,
+        basePanel.enteredGongMapper,
+      );
 
       final feiXianCalculator = FeiXianCalculator(
-        zhouTianModel:
-            ZhouTianModelManager.instance.getZhouTianModelBy(panelConfig),
+        zhouTianModel: ZhouTianModelManager.instance.getZhouTianModelBy(
+          panelConfig,
+        ),
         daxianPalaceOrder: daxianOrder,
         daxianPalaceDurations: daxianDurations,
       );
-      List<FeiXianDetailPalace> finalResult =
-          feiXianCalculator.calculateEach(daxianResults[7]);
+      List<FeiXianDetailPalace> finalResult = feiXianCalculator.calculateEach(
+        daxianResults[7],
+      );
       expect(finalResult.length, 3);
       expect(finalResult.last.durationYears, YearMonth(0, 6));
       expect(finalResult.last.triangleIndex, 0);
@@ -266,7 +292,8 @@ void main() {
       final palaceMapper = zhouTianCalculator.calculatePalaceAngles();
 
       var ming5_5Mapper = Map.fromEntries(
-          daxianDurations.map((k, v) => MapEntry(k, v)).entries);
+        daxianDurations.map((k, v) => MapEntry(k, v)).entries,
+      );
       ming5_5Mapper[EnumTwelveGong.Zi] = YearMonth(5, 6);
 
       final dongWeiCalculator = DongWeiDaXianCalculator(
@@ -277,16 +304,21 @@ void main() {
         observerPosition: observer,
       );
       List<DaXianPalaceInfo> daxianResults = dongWeiCalculator.calculateDaXian(
-          result, palaceMapper, basePanel.enteredGongMapper);
+        result,
+        palaceMapper,
+        basePanel.enteredGongMapper,
+      );
 
       final feiXianCalculator = FeiXianCalculator(
-        zhouTianModel:
-            ZhouTianModelManager.instance.getZhouTianModelBy(panelConfig),
+        zhouTianModel: ZhouTianModelManager.instance.getZhouTianModelBy(
+          panelConfig,
+        ),
         daxianPalaceOrder: daxianOrder,
         daxianPalaceDurations: daxianDurations,
       );
-      List<FeiXianDetailPalace> finalResult =
-          feiXianCalculator.calculateEach(daxianResults.first);
+      List<FeiXianDetailPalace> finalResult = feiXianCalculator.calculateEach(
+        daxianResults.first,
+      );
 
       expect(finalResult.length, 4);
       expect(finalResult.last.durationYears, YearMonth(0, 6));
@@ -300,7 +332,8 @@ void main() {
       final palaceMapper = zhouTianCalculator.calculatePalaceAngles();
 
       var ming5_5Mapper = Map.fromEntries(
-          daxianDurations.map((k, v) => MapEntry(k, v)).entries);
+        daxianDurations.map((k, v) => MapEntry(k, v)).entries,
+      );
       ming5_5Mapper[EnumTwelveGong.Zi] = YearMonth(6, 6);
 
       final dongWeiCalculator = DongWeiDaXianCalculator(
@@ -311,16 +344,21 @@ void main() {
         observerPosition: observer,
       );
       List<DaXianPalaceInfo> daxianResults = dongWeiCalculator.calculateDaXian(
-          result, palaceMapper, basePanel.enteredGongMapper);
+        result,
+        palaceMapper,
+        basePanel.enteredGongMapper,
+      );
 
       final feiXianCalculator = FeiXianCalculator(
-        zhouTianModel:
-            ZhouTianModelManager.instance.getZhouTianModelBy(panelConfig),
+        zhouTianModel: ZhouTianModelManager.instance.getZhouTianModelBy(
+          panelConfig,
+        ),
         daxianPalaceOrder: daxianOrder,
         daxianPalaceDurations: daxianDurations,
       );
-      List<FeiXianDetailPalace> finalResult =
-          feiXianCalculator.calculateEach(daxianResults.first);
+      List<FeiXianDetailPalace> finalResult = feiXianCalculator.calculateEach(
+        daxianResults.first,
+      );
 
       expect(finalResult.length, 5);
       expect(finalResult.last.durationYears, YearMonth(0, 6));
@@ -334,7 +372,8 @@ void main() {
       final palaceMapper = zhouTianCalculator.calculatePalaceAngles();
 
       var ming5_5Mapper = Map.fromEntries(
-          daxianDurations.map((k, v) => MapEntry(k, v)).entries);
+        daxianDurations.map((k, v) => MapEntry(k, v)).entries,
+      );
       ming5_5Mapper[EnumTwelveGong.Zi] = YearMonth(7, 6);
 
       final dongWeiCalculator = DongWeiDaXianCalculator(
@@ -345,16 +384,21 @@ void main() {
         observerPosition: observer,
       );
       List<DaXianPalaceInfo> daxianResults = dongWeiCalculator.calculateDaXian(
-          result, palaceMapper, basePanel.enteredGongMapper);
+        result,
+        palaceMapper,
+        basePanel.enteredGongMapper,
+      );
 
       final feiXianCalculator = FeiXianCalculator(
-        zhouTianModel:
-            ZhouTianModelManager.instance.getZhouTianModelBy(panelConfig),
+        zhouTianModel: ZhouTianModelManager.instance.getZhouTianModelBy(
+          panelConfig,
+        ),
         daxianPalaceOrder: daxianOrder,
         daxianPalaceDurations: daxianDurations,
       );
-      List<FeiXianDetailPalace> finalResult =
-          feiXianCalculator.calculateEach(daxianResults.first);
+      List<FeiXianDetailPalace> finalResult = feiXianCalculator.calculateEach(
+        daxianResults.first,
+      );
 
       expect(finalResult.length, 5);
       expect(finalResult.last.durationYears, YearMonth(1, 6));
@@ -368,7 +412,8 @@ void main() {
       final palaceMapper = zhouTianCalculator.calculatePalaceAngles();
 
       var ming5_5Mapper = Map.fromEntries(
-          daxianDurations.map((k, v) => MapEntry(k, v)).entries);
+        daxianDurations.map((k, v) => MapEntry(k, v)).entries,
+      );
       ming5_5Mapper[EnumTwelveGong.Zi] = YearMonth(8, 6);
 
       final dongWeiCalculator = DongWeiDaXianCalculator(
@@ -379,16 +424,21 @@ void main() {
         observerPosition: observer,
       );
       List<DaXianPalaceInfo> daxianResults = dongWeiCalculator.calculateDaXian(
-          result, palaceMapper, basePanel.enteredGongMapper);
+        result,
+        palaceMapper,
+        basePanel.enteredGongMapper,
+      );
 
       final feiXianCalculator = FeiXianCalculator(
-        zhouTianModel:
-            ZhouTianModelManager.instance.getZhouTianModelBy(panelConfig),
+        zhouTianModel: ZhouTianModelManager.instance.getZhouTianModelBy(
+          panelConfig,
+        ),
         daxianPalaceOrder: daxianOrder,
         daxianPalaceDurations: daxianDurations,
       );
-      List<FeiXianDetailPalace> finalResult =
-          feiXianCalculator.calculateEach(daxianResults.first);
+      List<FeiXianDetailPalace> finalResult = feiXianCalculator.calculateEach(
+        daxianResults.first,
+      );
 
       expect(finalResult.length, 6);
       expect(finalResult.last.durationYears, YearMonth(0, 6));
@@ -402,7 +452,8 @@ void main() {
       final palaceMapper = zhouTianCalculator.calculatePalaceAngles();
 
       var ming5_5Mapper = Map.fromEntries(
-          daxianDurations.map((k, v) => MapEntry(k, v)).entries);
+        daxianDurations.map((k, v) => MapEntry(k, v)).entries,
+      );
       ming5_5Mapper[EnumTwelveGong.Zi] = YearMonth(9, 6);
 
       final dongWeiCalculator = DongWeiDaXianCalculator(
@@ -413,16 +464,21 @@ void main() {
         observerPosition: observer,
       );
       List<DaXianPalaceInfo> daxianResults = dongWeiCalculator.calculateDaXian(
-          result, palaceMapper, basePanel.enteredGongMapper);
+        result,
+        palaceMapper,
+        basePanel.enteredGongMapper,
+      );
 
       final feiXianCalculator = FeiXianCalculator(
-        zhouTianModel:
-            ZhouTianModelManager.instance.getZhouTianModelBy(panelConfig),
+        zhouTianModel: ZhouTianModelManager.instance.getZhouTianModelBy(
+          panelConfig,
+        ),
         daxianPalaceOrder: daxianOrder,
         daxianPalaceDurations: daxianDurations,
       );
-      List<FeiXianDetailPalace> finalResult =
-          feiXianCalculator.calculateEach(daxianResults.first);
+      List<FeiXianDetailPalace> finalResult = feiXianCalculator.calculateEach(
+        daxianResults.first,
+      );
       // for (var element in finalResult) {
       //   print(jsonEncode(element));
       // }
@@ -445,24 +501,32 @@ void main() {
         observerPosition: observer,
       );
       List<DaXianPalaceInfo> daxianResults = dongWeiCalculator.calculateDaXian(
-          result, palaceMapper, basePanel.enteredGongMapper);
+        result,
+        palaceMapper,
+        basePanel.enteredGongMapper,
+      );
 
       final feiXianCalculator = FeiXianCalculator(
-        zhouTianModel:
-            ZhouTianModelManager.instance.getZhouTianModelBy(panelConfig),
+        zhouTianModel: ZhouTianModelManager.instance.getZhouTianModelBy(
+          panelConfig,
+        ),
         daxianPalaceOrder: daxianOrder,
         daxianPalaceDurations: daxianDurations,
       );
-      List<FeiXianDetailPalace> finalResult =
-          feiXianCalculator.calculateEach(daxianResults[7]);
+      List<FeiXianDetailPalace> finalResult = feiXianCalculator.calculateEach(
+        daxianResults[7],
+      );
       // for (var element in finalResult) {
       //   print(jsonEncode(element));
       // }
       expect(finalResult.length, 3);
       expect(finalResult.last.durationYears, YearMonth(0, 6));
       expect(finalResult.last.triangleIndex, 0);
-      expect(finalResult.last.endAge, daxianResults[7].endAge,
-          reason: "${finalResult.last.endAge} - ${daxianResults[7].endAge}");
+      expect(
+        finalResult.last.endAge,
+        daxianResults[7].endAge,
+        reason: "${finalResult.last.endAge} - ${daxianResults[7].endAge}",
+      );
     });
 
     test("申宫 计算飞限", skip: false, () {
@@ -480,16 +544,21 @@ void main() {
         observerPosition: observer,
       );
       List<DaXianPalaceInfo> daxianResults = dongWeiCalculator.calculateDaXian(
-          result, palaceMapper, basePanel.enteredGongMapper);
+        result,
+        palaceMapper,
+        basePanel.enteredGongMapper,
+      );
 
       final feiXianCalculator = FeiXianCalculator(
-        zhouTianModel:
-            ZhouTianModelManager.instance.getZhouTianModelBy(panelConfig),
+        zhouTianModel: ZhouTianModelManager.instance.getZhouTianModelBy(
+          panelConfig,
+        ),
         daxianPalaceOrder: daxianOrder,
         daxianPalaceDurations: daxianDurations,
       );
-      List<FeiXianDetailPalace> finalResult =
-          feiXianCalculator.calculateEach(daxianResults[8]);
+      List<FeiXianDetailPalace> finalResult = feiXianCalculator.calculateEach(
+        daxianResults[8],
+      );
       // for (var element in finalResult) {
       //   print(jsonEncode(element));
       // }
@@ -497,8 +566,11 @@ void main() {
       expect(finalResult.length, 3);
       expect(finalResult.last.durationYears, YearMonth(0, 6));
       expect(finalResult.last.triangleIndex, 0);
-      expect(finalResult.last.endAge, daxianResults[8].endAge,
-          reason: "${finalResult.last.endAge} - ${daxianResults[8].endAge}");
+      expect(
+        finalResult.last.endAge,
+        daxianResults[8].endAge,
+        reason: "${finalResult.last.endAge} - ${daxianResults[8].endAge}",
+      );
     });
   });
 }
