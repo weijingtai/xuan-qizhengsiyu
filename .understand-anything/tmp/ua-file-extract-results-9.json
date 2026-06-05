@@ -1,0 +1,358 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 6,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "doc/zhu_luo_san_xian/ACT.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 300,
+      "nonEmptyLines": 264,
+      "sections": [
+        {
+          "heading": "竹罗三限 ACT",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "ACT 1：基础类型与表",
+          "level": 2,
+          "line": 5
+        },
+        {
+          "heading": "ACT 2：宫位移动工具",
+          "level": 2,
+          "line": 59
+        },
+        {
+          "heading": "ACT 3：配置模型与 A/B 配置",
+          "level": 2,
+          "line": 98
+        },
+        {
+          "heading": "ACT 4：行限计算器",
+          "level": 2,
+          "line": 175
+        },
+        {
+          "heading": "ACT 5：测试",
+          "level": 2,
+          "line": 259
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 6
+      }
+    },
+    {
+      "path": "doc/zhu_luo_san_xian/gstack_validation_report.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 162,
+      "nonEmptyLines": 112,
+      "sections": [
+        {
+          "heading": "gStack 验证报告",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "范围",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "发现与修正",
+          "level": 2,
+          "line": 25
+        },
+        {
+          "heading": "1. LANG 不够精确",
+          "level": 3,
+          "line": 27
+        },
+        {
+          "heading": "2. 十二宫重复定义与七政依赖边界",
+          "level": 3,
+          "line": 41
+        },
+        {
+          "heading": "3. B 法重叠交限年未写清楚",
+          "level": 3,
+          "line": 59
+        },
+        {
+          "heading": "4. A 法年龄口径可能混乱",
+          "level": 3,
+          "line": 75
+        },
+        {
+          "heading": "5. 现有占位 manager 可能被误改",
+          "level": 3,
+          "line": 91
+        },
+        {
+          "heading": "剩余风险",
+          "level": 2,
+          "line": 107
+        },
+        {
+          "heading": "R1：A 法是否应完全采用古文节点年龄",
+          "level": 3,
+          "line": 109
+        },
+        {
+          "heading": "R2：B 法补桥触发条件仍来自案例归纳",
+          "level": 3,
+          "line": 129
+        },
+        {
+          "heading": "准出结论",
+          "level": 2,
+          "line": 149
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 12
+      }
+    },
+    {
+      "path": "doc/zhu_luo_san_xian/plans.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 194,
+      "nonEmptyLines": 138,
+      "sections": [
+        {
+          "heading": "竹罗三限算法 Plans",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "目标",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "统一公式",
+          "level": 2,
+          "line": 7
+        },
+        {
+          "heading": "A 法配置",
+          "level": 2,
+          "line": 59
+        },
+        {
+          "heading": "B 法配置",
+          "level": 2,
+          "line": 96
+        },
+        {
+          "heading": "可扩展 C 法",
+          "level": 2,
+          "line": 144
+        },
+        {
+          "heading": "可扩展 D 法",
+          "level": 2,
+          "line": 164
+        },
+        {
+          "heading": "设计原则",
+          "level": 2,
+          "line": 184
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 8
+      }
+    },
+    {
+      "path": "doc/zhu_luo_san_xian/tasks.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 193,
+      "nonEmptyLines": 138,
+      "sections": [
+        {
+          "heading": "竹罗三限算法 Tasks",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Task 1：定义基础数据",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "Task 2：定义共同表",
+          "level": 2,
+          "line": 19
+        },
+        {
+          "heading": "Task 3：定义算法配置模型",
+          "level": 2,
+          "line": 42
+        },
+        {
+          "heading": "Task 4：实现宫位移动工具",
+          "level": 2,
+          "line": 65
+        },
+        {
+          "heading": "Task 5：实现 A 法配置化计算",
+          "level": 2,
+          "line": 87
+        },
+        {
+          "heading": "Task 6：实现 B 法配置化计算",
+          "level": 2,
+          "line": 110
+        },
+        {
+          "heading": "Task 7：输出结构",
+          "level": 2,
+          "line": 149
+        },
+        {
+          "heading": "Task 8：测试",
+          "level": 2,
+          "line": 177
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 9
+      }
+    },
+    {
+      "path": "doc/zhu_luo_san_xian/test_plan.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 179,
+      "nonEmptyLines": 130,
+      "sections": [
+        {
+          "heading": "竹罗三限 Test Plan",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "目标",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "测试环境",
+          "level": 2,
+          "line": 14
+        },
+        {
+          "heading": "基础表测试",
+          "level": 2,
+          "line": 22
+        },
+        {
+          "heading": "宫位移动测试",
+          "level": 2,
+          "line": 45
+        },
+        {
+          "heading": "A 法测试",
+          "level": 2,
+          "line": 58
+        },
+        {
+          "heading": "B 法测试",
+          "level": 2,
+          "line": 86
+        },
+        {
+          "heading": "腓特烈样例测试",
+          "level": 2,
+          "line": 113
+        },
+        {
+          "heading": "分叉测试",
+          "level": 2,
+          "line": 151
+        },
+        {
+          "heading": "禁止项",
+          "level": 2,
+          "line": 172
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 10
+      }
+    },
+    {
+      "path": "doc/zhu_luo_san_xian/竹罗三限调查报告.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 145,
+      "nonEmptyLines": 101,
+      "sections": [
+        {
+          "heading": "竹罗三限调查报告",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "结论",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "共同基础",
+          "level": 2,
+          "line": 12
+        },
+        {
+          "heading": "A 法：原典逆节零顺法",
+          "level": 2,
+          "line": 48
+        },
+        {
+          "heading": "B 法：顺排行年交星法",
+          "level": 2,
+          "line": 90
+        },
+        {
+          "heading": "核心差异",
+          "level": 2,
+          "line": 138
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 6
+      }
+    }
+  ]
+}

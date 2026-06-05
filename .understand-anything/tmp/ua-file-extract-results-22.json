@@ -1,0 +1,207 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 25,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "lib/presentation/pages/qizhengsiyu_home_page.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 54,
+      "nonEmptyLines": 51,
+      "metrics": {}
+    },
+    {
+      "path": "lib/presentation/pages/StarsResolver.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 1085,
+      "nonEmptyLines": 990,
+      "metrics": {}
+    },
+    {
+      "path": "lib/presentation/theme/gan_zhi_gua_colors.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 53,
+      "nonEmptyLines": 49,
+      "metrics": {}
+    },
+    {
+      "path": "lib/presentation/viewmodels/ge_ju_detail_viewmodel.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 168,
+      "nonEmptyLines": 143,
+      "metrics": {}
+    },
+    {
+      "path": "lib/presentation/viewmodels/ge_ju_editor_viewmodel.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 765,
+      "nonEmptyLines": 667,
+      "metrics": {}
+    },
+    {
+      "path": "lib/presentation/viewmodels/ge_ju_list_viewmodel.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 359,
+      "nonEmptyLines": 299,
+      "metrics": {}
+    },
+    {
+      "path": "lib/presentation/viewmodels/ge_ju_school_editor_viewmodel.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 163,
+      "nonEmptyLines": 142,
+      "metrics": {}
+    },
+    {
+      "path": "lib/presentation/viewmodels/ge_ju_school_list_viewmodel.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 49,
+      "nonEmptyLines": 40,
+      "metrics": {}
+    },
+    {
+      "path": "lib/presentation/viewmodels/panel_config_viewmodel.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 209,
+      "nonEmptyLines": 180,
+      "metrics": {}
+    },
+    {
+      "path": "lib/presentation/viewmodels/qi_zheng_si_yu_viewmodel.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 897,
+      "nonEmptyLines": 779,
+      "metrics": {}
+    },
+    {
+      "path": "lib/presentation/viewmodels/yun_liu_view_model.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 187,
+      "nonEmptyLines": 157,
+      "metrics": {}
+    },
+    {
+      "path": "lib/presentation/widgets/center_text_circle_widget.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 225,
+      "nonEmptyLines": 209,
+      "metrics": {}
+    },
+    {
+      "path": "lib/presentation/widgets/common/responsive_grid.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 58,
+      "nonEmptyLines": 49,
+      "metrics": {}
+    },
+    {
+      "path": "lib/presentation/widgets/common/water_ink_card.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 107,
+      "nonEmptyLines": 98,
+      "metrics": {}
+    },
+    {
+      "path": "lib/presentation/widgets/config/basic_info_section.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 678,
+      "nonEmptyLines": 642,
+      "metrics": {}
+    },
+    {
+      "path": "lib/presentation/widgets/config/custom_config_section.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 406,
+      "nonEmptyLines": 381,
+      "metrics": {}
+    },
+    {
+      "path": "lib/presentation/widgets/config/location_section.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 223,
+      "nonEmptyLines": 208,
+      "metrics": {}
+    },
+    {
+      "path": "lib/presentation/widgets/config/school_selector.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 187,
+      "nonEmptyLines": 174,
+      "metrics": {}
+    },
+    {
+      "path": "lib/presentation/widgets/config/star_chart_preview.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 131,
+      "nonEmptyLines": 120,
+      "metrics": {}
+    },
+    {
+      "path": "lib/presentation/widgets/destiny_twelve_gong_ring.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 352,
+      "nonEmptyLines": 340,
+      "metrics": {}
+    },
+    {
+      "path": "lib/presentation/widgets/ge_ju/condition_leaf_editor.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 136,
+      "nonEmptyLines": 127,
+      "metrics": {}
+    },
+    {
+      "path": "lib/presentation/widgets/ge_ju/condition_param_widgets.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 891,
+      "nonEmptyLines": 823,
+      "metrics": {}
+    },
+    {
+      "path": "lib/presentation/widgets/ge_ju/condition_tree_editor.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 469,
+      "nonEmptyLines": 433,
+      "metrics": {}
+    },
+    {
+      "path": "lib/presentation/widgets/ge_ju/condition_tree_view.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 136,
+      "nonEmptyLines": 127,
+      "metrics": {}
+    },
+    {
+      "path": "lib/presentation/widgets/ge_ju/condition_type_picker.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 226,
+      "nonEmptyLines": 210,
+      "metrics": {}
+    }
+  ]
+}

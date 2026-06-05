@@ -1,0 +1,207 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 25,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "lib/domain/entities/models/ge_ju/ge_ju_source.g.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 20,
+      "nonEmptyLines": 16,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/ge_ju/ge_ju_user_preference.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 51,
+      "nonEmptyLines": 41,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/ge_ju/ge_ju_user_preference.g.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 33,
+      "nonEmptyLines": 29,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/ge_ju/ge_ju_variant.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 56,
+      "nonEmptyLines": 44,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/ge_ju/ge_ju_variant.g.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 60,
+      "nonEmptyLines": 54,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/ge_ju/twelve_gong_system.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 109,
+      "nonEmptyLines": 97,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/gong_model.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 41,
+      "nonEmptyLines": 36,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/gong_model.g.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 139,
+      "nonEmptyLines": 130,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/gong_star_info.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 68,
+      "nonEmptyLines": 59,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/gong_star_info.g.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 141,
+      "nonEmptyLines": 128,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/hua_yao.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 89,
+      "nonEmptyLines": 73,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/hua_yao.g.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 192,
+      "nonEmptyLines": 173,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/naming_degree_pair.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 80,
+      "nonEmptyLines": 68,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/naming_degree_pair.g.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 137,
+      "nonEmptyLines": 122,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/observer_position.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 125,
+      "nonEmptyLines": 116,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/observer_position.g.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 120,
+      "nonEmptyLines": 113,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/pan_entity.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 51,
+      "nonEmptyLines": 46,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/panel_config.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 171,
+      "nonEmptyLines": 140,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/panel_config.g.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 164,
+      "nonEmptyLines": 148,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/panel_stars_info.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 487,
+      "nonEmptyLines": 453,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/panel_system_dateset.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 45,
+      "nonEmptyLines": 40,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/panel_system_dateset.g.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 124,
+      "nonEmptyLines": 115,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/panel_ui_size.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 91,
+      "nonEmptyLines": 72,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/passage_year_panel_model.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 73,
+      "nonEmptyLines": 62,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/passage_year_panel_model.g.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 108,
+      "nonEmptyLines": 101,
+      "metrics": {}
+    }
+  ]
+}

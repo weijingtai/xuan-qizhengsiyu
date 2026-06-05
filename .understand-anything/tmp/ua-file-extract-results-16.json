@@ -1,0 +1,207 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 25,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "lib/domain/entities/models/four_season_model.g.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 80,
+      "nonEmptyLines": 71,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/ge_ju_model.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 43,
+      "nonEmptyLines": 39,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/ge_ju/conditions/gong_status_conditions.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 38,
+      "nonEmptyLines": 33,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/ge_ju/conditions/position_conditions.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 161,
+      "nonEmptyLines": 135,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/ge_ju/conditions/relationship_conditions.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 298,
+      "nonEmptyLines": 241,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/ge_ju/conditions/shen_sha_conditions.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 93,
+      "nonEmptyLines": 79,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/ge_ju/conditions/structure_conditions.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 139,
+      "nonEmptyLines": 117,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/ge_ju/conditions/time_conditions.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 125,
+      "nonEmptyLines": 101,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/ge_ju/conditions/xian_conditions.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 101,
+      "nonEmptyLines": 83,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/ge_ju/conditions/yong_shen_conditions.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 180,
+      "nonEmptyLines": 157,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/ge_ju/ge_ju_alias.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 29,
+      "nonEmptyLines": 22,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/ge_ju/ge_ju_alias.g.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 22,
+      "nonEmptyLines": 18,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/ge_ju/ge_ju_annotation.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 132,
+      "nonEmptyLines": 117,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/ge_ju/ge_ju_annotation.g.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 85,
+      "nonEmptyLines": 79,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/ge_ju/ge_ju_condition_set.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 104,
+      "nonEmptyLines": 89,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/ge_ju/ge_ju_condition_set.g.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 49,
+      "nonEmptyLines": 45,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/ge_ju/ge_ju_condition.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 210,
+      "nonEmptyLines": 186,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/ge_ju/ge_ju_deletion_record.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 40,
+      "nonEmptyLines": 30,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/ge_ju/ge_ju_deletion_record.g.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 27,
+      "nonEmptyLines": 23,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/ge_ju/ge_ju_input.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 216,
+      "nonEmptyLines": 174,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/ge_ju/ge_ju_result.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 273,
+      "nonEmptyLines": 231,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/ge_ju/ge_ju_rule.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 260,
+      "nonEmptyLines": 225,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/ge_ju/ge_ju_school.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 76,
+      "nonEmptyLines": 59,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/ge_ju/ge_ju_school.g.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 25,
+      "nonEmptyLines": 21,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/ge_ju/ge_ju_source.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 28,
+      "nonEmptyLines": 21,
+      "metrics": {}
+    }
+  ]
+}

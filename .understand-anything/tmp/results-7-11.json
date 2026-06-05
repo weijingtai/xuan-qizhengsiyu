@@ -1,0 +1,2925 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 6,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "doc/refactor/merge/adapt_ui_to_mu_todolist.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 633,
+      "nonEmptyLines": 492,
+      "sections": [
+        {
+          "heading": "UI层适配MVVM架构 - 原子化任务清单",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "阶段1: 环境准备与分支管理 ✅",
+          "level": 2,
+          "line": 11
+        },
+        {
+          "heading": "1.1 Git分支操作✅",
+          "level": 3,
+          "line": 13
+        },
+        {
+          "heading": "1.2 备份关键文件 ✅",
+          "level": 3,
+          "line": 19
+        },
+        {
+          "heading": "阶段2: 深度分析两个分支的接口差异 ✅",
+          "level": 2,
+          "line": 27
+        },
+        {
+          "heading": "2.1 分析 UI 分支的 BeautyPageViewModel ✅",
+          "level": 3,
+          "line": 29
+        },
+        {
+          "heading": "2.2 分析 MVVM 分支的 QiZhengSiYuViewModel ✅",
+          "level": 3,
+          "line": 37
+        },
+        {
+          "heading": "2.3 生成接口对比表 ✅",
+          "level": 3,
+          "line": 44
+        },
+        {
+          "heading": "2.4 分析 UI 层的实际调用 ✅",
+          "level": 3,
+          "line": 51
+        },
+        {
+          "heading": "阶段3: 合并 MVVM 架构层代码 ✅",
+          "level": 2,
+          "line": 60
+        },
+        {
+          "heading": "3.1 合并 domain 层 ✅",
+          "level": 3,
+          "line": 62
+        },
+        {
+          "heading": "3.2 合并 data 层 ✅",
+          "level": 3,
+          "line": 68
+        },
+        {
+          "heading": "3.3 合并依赖注入配置 ✅",
+          "level": 3,
+          "line": 74
+        },
+        {
+          "heading": "3.4 合并 presentation 层 (选择性) ✅",
+          "level": 3,
+          "line": 79
+        },
+        {
+          "heading": "3.5 处理 pubspec.yaml ⏸️",
+          "level": 3,
+          "line": 85
+        },
+        {
+          "heading": "3.6 处理模型路径迁移 ✅",
+          "level": 3,
+          "line": 92
+        },
+        {
+          "heading": "阶段4: 扩展 QiZhengSiYuViewModel (核心任务) ✅",
+          "level": 2,
+          "line": 100
+        },
+        {
+          "heading": "4.1 添加 ValueNotifier 属性 ✅",
+          "level": 3,
+          "line": 102
+        },
+        {
+          "heading": "4.2 添加普通 Getter 属性 ✅",
+          "level": 3,
+          "line": 111
+        },
+        {
+          "heading": "4.3 添加 Manager 的 Getter (如果还没有) ✅",
+          "level": 3,
+          "line": 118
+        },
+        {
+          "heading": "4.4 实现 init() 方法 ✅",
+          "level": 3,
+          "line": 124
+        },
+        {
+          "heading": "4.5 实现兼容版 calculate() 方法 ✅",
+          "level": 3,
+          "line": 131
+        },
+        {
+          "heading": "4.6 实现 _buildDefaultConfig() 辅助方法 ✅",
+          "level": 3,
+          "line": 139
+        },
+        {
+          "heading": "4.7 重命名或重构原有的 calculate 方法 ✅",
+          "level": 3,
+          "line": 147
+        },
+        {
+          "heading": "4.8 在 calculateWithConfig 中更新 ValueNotifier ✅",
+          "level": 3,
+          "line": 152
+        },
+        {
+          "heading": "阶段5: 移植 UI 星体计算逻辑 ✅",
+          "level": 2,
+          "line": 161
+        },
+        {
+          "heading": "5.1 从 UI 分支提取星体计算方法 ✅",
+          "level": 3,
+          "line": 163
+        },
+        {
+          "heading": "5.2 移植星体计算方法到 MVVM ViewModel ✅",
+          "level": 3,
+          "line": 169
+        },
+        {
+          "heading": "5.3 实现星体位置防重叠逻辑 ✅",
+          "level": 3,
+          "line": 176
+        },
+        {
+          "heading": "5.4 实现星体速度和状态计算 ✅",
+          "level": 3,
+          "line": 182
+        },
+        {
+          "heading": "5.5 验证 UIStarModel 生成 ✅",
+          "level": 3,
+          "line": 187
+        },
+        {
+          "heading": "阶段6: 处理大限盘 (DaXianPanel) 计算",
+          "level": 2,
+          "line": 194
+        },
+        {
+          "heading": "6.1 分析 UI 分支的大限盘逻辑",
+          "level": 3,
+          "line": 196
+        },
+        {
+          "heading": "6.2 确认 MVVM 分支是否有大限盘支持",
+          "level": 3,
+          "line": 202
+        },
+        {
+          "heading": "6.3 移植或集成大限盘计算",
+          "level": 3,
+          "line": 207
+        },
+        {
+          "heading": "6.4 实现大限盘 UI 数据生成",
+          "level": 3,
+          "line": 212
+        },
+        {
+          "heading": "阶段7: 处理数据模型转换",
+          "level": 2,
+          "line": 219
+        },
+        {
+          "heading": "7.1 处理 DivinationInfoModel 兼容性",
+          "level": 3,
+          "line": 221
+        },
+        {
+          "heading": "7.2 处理 PanelConfig 模型差异",
+          "level": 3,
+          "line": 227
+        },
+        {
+          "heading": "7.3 处理 ObserverPosition 模型差异",
+          "level": 3,
+          "line": 233
+        },
+        {
+          "heading": "阶段8: 最小化修改 UI 层代码",
+          "level": 2,
+          "line": 240
+        },
+        {
+          "heading": "8.1 更新 beauty_view_page.dart 的导入",
+          "level": 3,
+          "line": 242
+        },
+        {
+          "heading": "8.2 替换 ViewModel 类型引用",
+          "level": 3,
+          "line": 248
+        },
+        {
+          "heading": "8.3 验证 UI 调用兼容性",
+          "level": 3,
+          "line": 254
+        },
+        {
+          "heading": "8.4 处理其他 UI 文件 (如果有)",
+          "level": 3,
+          "line": 260
+        },
+        {
+          "heading": "阶段9: 更新依赖注入和初始化",
+          "level": 2,
+          "line": 267
+        },
+        {
+          "heading": "9.1 分析 MVVM 分支的 di.dart",
+          "level": 3,
+          "line": 269
+        },
+        {
+          "heading": "9.2 更新 main.dart 的 Provider 注册",
+          "level": 3,
+          "line": 274
+        },
+        {
+          "heading": "9.3 注册必要的 Repository 和 DataSource",
+          "level": 3,
+          "line": 281
+        },
+        {
+          "heading": "9.4 更新 qizhengsiyu 模块的 main.dart (如果有)",
+          "level": 3,
+          "line": 288
+        },
+        {
+          "heading": "阶段10: 处理模型导入路径迁移",
+          "level": 2,
+          "line": 295
+        },
+        {
+          "heading": "10.1 生成模型迁移映射表",
+          "level": 3,
+          "line": 297
+        },
+        {
+          "heading": "10.2 更新 UI 层的 model 导入",
+          "level": 3,
+          "line": 303
+        },
+        {
+          "heading": "10.3 更新 widget 层的 model 导入",
+          "level": 3,
+          "line": 309
+        },
+        {
+          "heading": "10.4 更新 painter 层的 model 导入",
+          "level": 3,
+          "line": 314
+        },
+        {
+          "heading": "阶段11: 处理 Manager 和 Service 的路径迁移",
+          "level": 2,
+          "line": 321
+        },
+        {
+          "heading": "11.1 更新 Manager 导入路径",
+          "level": 3,
+          "line": 323
+        },
+        {
+          "heading": "11.2 更新 Service 导入路径",
+          "level": 3,
+          "line": 328
+        },
+        {
+          "heading": "11.3 处理可能的类名冲突",
+          "level": 3,
+          "line": 333
+        },
+        {
+          "heading": "阶段12: 编译和修复错误",
+          "level": 2,
+          "line": 339
+        },
+        {
+          "heading": "12.1 首次编译尝试",
+          "level": 3,
+          "line": 341
+        },
+        {
+          "heading": "12.2 修复导入错误",
+          "level": 3,
+          "line": 347
+        },
+        {
+          "heading": "12.3 修复类型错误",
+          "level": 3,
+          "line": 352
+        },
+        {
+          "heading": "12.4 修复方法签名错误",
+          "level": 3,
+          "line": 357
+        },
+        {
+          "heading": "12.5 修复常量和枚举错误",
+          "level": 3,
+          "line": 362
+        },
+        {
+          "heading": "12.6 再次编译验证",
+          "level": 3,
+          "line": 366
+        },
+        {
+          "heading": "阶段13: 代码生成和数据库迁移",
+          "level": 2,
+          "line": 373
+        },
+        {
+          "heading": "13.1 运行代码生成",
+          "level": 3,
+          "line": 375
+        },
+        {
+          "heading": "13.2 处理数据库迁移",
+          "level": 3,
+          "line": 381
+        },
+        {
+          "heading": "13.3 验证 Drift 配置",
+          "level": 3,
+          "line": 387
+        },
+        {
+          "heading": "阶段14: 单元测试和验证",
+          "level": 2,
+          "line": 394
+        },
+        {
+          "heading": "14.1 测试 ViewModel 初始化",
+          "level": 3,
+          "line": 396
+        },
+        {
+          "heading": "14.2 测试兼容接口",
+          "level": 3,
+          "line": 402
+        },
+        {
+          "heading": "14.3 测试数据转换",
+          "level": 3,
+          "line": 408
+        },
+        {
+          "heading": "14.4 测试边界情况",
+          "level": 3,
+          "line": 413
+        },
+        {
+          "heading": "阶段15: 集成测试和 UI 验证",
+          "level": 2,
+          "line": 420
+        },
+        {
+          "heading": "15.1 启动应用",
+          "level": 3,
+          "line": 422
+        },
+        {
+          "heading": "15.2 测试 UI 初始化",
+          "level": 3,
+          "line": 428
+        },
+        {
+          "heading": "15.3 测试星盘计算",
+          "level": 3,
+          "line": 434
+        },
+        {
+          "heading": "15.4 测试 ValueNotifier 响应",
+          "level": 3,
+          "line": 441
+        },
+        {
+          "heading": "15.5 测试大限盘功能",
+          "level": 3,
+          "line": 447
+        },
+        {
+          "heading": "15.6 测试交互功能",
+          "level": 3,
+          "line": 452
+        },
+        {
+          "heading": "阶段16: 性能测试和优化",
+          "level": 2,
+          "line": 460
+        },
+        {
+          "heading": "16.1 性能基准测试",
+          "level": 3,
+          "line": 462
+        },
+        {
+          "heading": "16.2 优化 ValueNotifier 使用",
+          "level": 3,
+          "line": 468
+        },
+        {
+          "heading": "16.3 优化星体计算",
+          "level": 3,
+          "line": 473
+        },
+        {
+          "heading": "阶段17: 代码清理和文档",
+          "level": 2,
+          "line": 480
+        },
+        {
+          "heading": "17.1 清理备份文件",
+          "level": 3,
+          "line": 482
+        },
+        {
+          "heading": "17.2 添加代码注释",
+          "level": 3,
+          "line": 487
+        },
+        {
+          "heading": "17.3 更新文档",
+          "level": 3,
+          "line": 493
+        },
+        {
+          "heading": "17.4 代码格式化",
+          "level": 3,
+          "line": 500
+        },
+        {
+          "heading": "阶段18: Git 提交和分支管理",
+          "level": 2,
+          "line": 507
+        },
+        {
+          "heading": "18.1 审查修改",
+          "level": 3,
+          "line": 509
+        },
+        {
+          "heading": "18.2 分阶段提交",
+          "level": 3,
+          "line": 515
+        },
+        {
+          "heading": "18.3 创建 Pull Request (可选)",
+          "level": 3,
+          "line": 527
+        },
+        {
+          "heading": "阶段19: 回归测试和验收",
+          "level": 2,
+          "line": 535
+        },
+        {
+          "heading": "19.1 完整功能测试",
+          "level": 3,
+          "line": 537
+        },
+        {
+          "heading": "19.2 跨平台测试",
+          "level": 3,
+          "line": 543
+        },
+        {
+          "heading": "19.3 边界和异常测试",
+          "level": 3,
+          "line": 549
+        },
+        {
+          "heading": "19.4 用户验收测试",
+          "level": 3,
+          "line": 555
+        },
+        {
+          "heading": "阶段20: 后续优化计划",
+          "level": 2,
+          "line": 563
+        },
+        {
+          "heading": "20.1 识别技术债务",
+          "level": 3,
+          "line": 565
+        },
+        {
+          "heading": "20.2 制定重构路线图",
+          "level": 3,
+          "line": 571
+        },
+        {
+          "heading": "20.3 文档和知识分享",
+          "level": 3,
+          "line": 577
+        },
+        {
+          "heading": "验收标准",
+          "level": 2,
+          "line": 585
+        },
+        {
+          "heading": "风险和应对",
+          "level": 2,
+          "line": 597
+        },
+        {
+          "heading": "风险1: ViewModel 接口不完全兼容",
+          "level": 3,
+          "line": 599
+        },
+        {
+          "heading": "风险2: UI 星体计算逻辑复杂难以移植",
+          "level": 3,
+          "line": 603
+        },
+        {
+          "heading": "风险3: 数据库结构不兼容",
+          "level": 3,
+          "line": 607
+        },
+        {
+          "heading": "风险4: 性能下降",
+          "level": 3,
+          "line": 611
+        },
+        {
+          "heading": "风险5: 第三方依赖冲突",
+          "level": 3,
+          "line": 615
+        },
+        {
+          "heading": "参考资料",
+          "level": 2,
+          "line": 621
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 112
+      }
+    },
+    {
+      "path": "doc/refactor/merge/integration_progress_report.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 338,
+      "nonEmptyLines": 255,
+      "sections": [
+        {
+          "heading": "UI层适配MVVM架构 - 集成进度报告",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "已完成任务 ✅",
+          "level": 2,
+          "line": 9
+        },
+        {
+          "heading": "阶段1: 环境准备与分支管理 ✅",
+          "level": 3,
+          "line": 11
+        },
+        {
+          "heading": "阶段2: 深度分析接口差异 ✅",
+          "level": 3,
+          "line": 17
+        },
+        {
+          "heading": "阶段3: 合并MVVM架构层 ✅",
+          "level": 3,
+          "line": 23
+        },
+        {
+          "heading": "阶段4: 扩展 QiZhengSiYuViewModel (核心) ✅",
+          "level": 3,
+          "line": 30
+        },
+        {
+          "heading": "阶段5: Git提交 ✅",
+          "level": 3,
+          "line": 65
+        },
+        {
+          "heading": "阶段6: 移植UI星体计算逻辑 ✅ **核心突破**",
+          "level": 3,
+          "line": 77
+        },
+        {
+          "heading": "当前状态总结 (更新)",
+          "level": 2,
+          "line": 125
+        },
+        {
+          "heading": "架构层面 ✅",
+          "level": 3,
+          "line": 127
+        },
+        {
+          "heading": "ViewModel接口完整度 (更新)",
+          "level": 3,
+          "line": 132
+        },
+        {
+          "heading": "关键成果 🎉",
+          "level": 3,
+          "line": 153
+        },
+        {
+          "heading": "下一步任务 (按优先级) (更新)",
+          "level": 2,
+          "line": 174
+        },
+        {
+          "heading": "方案A: 直接进入UI层适配 🚀 **推荐**",
+          "level": 3,
+          "line": 176
+        },
+        {
+          "heading": "任务A1: 最小化修改UI层代码 🔴 **关键 - 30分钟**",
+          "level": 4,
+          "line": 180
+        },
+        {
+          "heading": "任务A2: 更新依赖注入 🔴 **关键 - 30分钟**",
+          "level": 4,
+          "line": 196
+        },
+        {
+          "heading": "任务A3: 测试运行 🟡 **重要 - 1小时**",
+          "level": 4,
+          "line": 207
+        },
+        {
+          "heading": "方案B: 先完成优先级3功能 🟡 **可选**",
+          "level": 3,
+          "line": 224
+        },
+        {
+          "heading": "任务B1: 实现大限盘计算 🟡 (可选 - 2-3小时)",
+          "level": 4,
+          "line": 228
+        },
+        {
+          "heading": "任务B2: 添加数据模型转换方法 🟡 (可选 - 30分钟)",
+          "level": 4,
+          "line": 239
+        },
+        {
+          "heading": "剩余工作量估计 (更新)",
+          "level": 2,
+          "line": 253
+        },
+        {
+          "heading": "如果选择方案A (推荐)",
+          "level": 3,
+          "line": 255
+        },
+        {
+          "heading": "如果选择方案B",
+          "level": 3,
+          "line": 260
+        },
+        {
+          "heading": "风险与待解决问题 (更新)",
+          "level": 2,
+          "line": 268
+        },
+        {
+          "heading": "~~风险1: UI星体计算逻辑复杂~~ ✅ **已解决**",
+          "level": 3,
+          "line": 270
+        },
+        {
+          "heading": "风险2: 大限盘计算可能缺失 🟡",
+          "level": 3,
+          "line": 276
+        },
+        {
+          "heading": "待解决问题 (更新)",
+          "level": 3,
+          "line": 284
+        },
+        {
+          "heading": "~~问题1: 模型导入路径迁移~~ ⏸️ **待UI适配时处理**",
+          "level": 4,
+          "line": 286
+        },
+        {
+          "heading": "~~问题2: pubspec.yaml 依赖合并~~ ⏸️ **待处理**",
+          "level": 4,
+          "line": 291
+        },
+        {
+          "heading": "问题3: BasePanelConfig 字段差异 🟡 **需确认**",
+          "level": 4,
+          "line": 295
+        },
+        {
+          "heading": "重要提示 ⚠️",
+          "level": 2,
+          "line": 302
+        },
+        {
+          "heading": "当前可以做的事",
+          "level": 3,
+          "line": 304
+        },
+        {
+          "heading": "建议的执行顺序 (方案A)",
+          "level": 3,
+          "line": 313
+        },
+        {
+          "heading": "接下来的行动建议 💡",
+          "level": 2,
+          "line": 321
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 34
+      }
+    },
+    {
+      "path": "doc/refactor/merge/interface_comparison.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 281,
+      "nonEmptyLines": 215,
+      "sections": [
+        {
+          "heading": "ViewModel 接口对比分析",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "1. UI分支 BeautyPageViewModel 完整接口清单",
+          "level": 2,
+          "line": 8
+        },
+        {
+          "heading": "1.1 ValueNotifier 属性 (用于UI响应式更新)",
+          "level": 3,
+          "line": 10
+        },
+        {
+          "heading": "1.2 普通 Getter 属性",
+          "level": 3,
+          "line": 19
+        },
+        {
+          "heading": "1.3 状态属性",
+          "level": 3,
+          "line": 29
+        },
+        {
+          "heading": "1.4 公开方法",
+          "level": 3,
+          "line": 34
+        },
+        {
+          "heading": "1.5 私有方法(需要移植的核心逻辑)",
+          "level": 3,
+          "line": 66
+        },
+        {
+          "heading": "1.6 常量",
+          "level": 3,
+          "line": 83
+        },
+        {
+          "heading": "2. MVVM分支 QiZhengSiYuViewModel 现有接口清单",
+          "level": 2,
+          "line": 93
+        },
+        {
+          "heading": "2.1 构造函数依赖注入",
+          "level": 3,
+          "line": 95
+        },
+        {
+          "heading": "2.2 Getter 属性",
+          "level": 3,
+          "line": 104
+        },
+        {
+          "heading": "2.3 公开方法",
+          "level": 3,
+          "line": 110
+        },
+        {
+          "heading": "2.4 私有方法",
+          "level": 3,
+          "line": 119
+        },
+        {
+          "heading": "3. 接口差异对比表",
+          "level": 2,
+          "line": 127
+        },
+        {
+          "heading": "4. 关键差异说明",
+          "level": 2,
+          "line": 166
+        },
+        {
+          "heading": "4.1 calculate 方法签名冲突",
+          "level": 3,
+          "line": 168
+        },
+        {
+          "heading": "4.2 ValueNotifier 的缺失",
+          "level": 3,
+          "line": 184
+        },
+        {
+          "heading": "4.3 依赖注入 vs 延迟加载",
+          "level": 3,
+          "line": 192
+        },
+        {
+          "heading": "4.4 大限盘计算",
+          "level": 3,
+          "line": 199
+        },
+        {
+          "heading": "4.5 UI星体计算逻辑",
+          "level": 3,
+          "line": 206
+        },
+        {
+          "heading": "5. 扩展计划优先级",
+          "level": 2,
+          "line": 215
+        },
+        {
+          "heading": "优先级1 (必须 - UI层依赖)",
+          "level": 3,
+          "line": 217
+        },
+        {
+          "heading": "优先级2 (重要 - 核心功能)",
+          "level": 3,
+          "line": 225
+        },
+        {
+          "heading": "优先级3 (中等 - 扩展功能)",
+          "level": 3,
+          "line": 232
+        },
+        {
+          "heading": "优先级4 (可选 - 辅助功能)",
+          "level": 3,
+          "line": 238
+        },
+        {
+          "heading": "6. 数据模型兼容性",
+          "level": 2,
+          "line": 245
+        },
+        {
+          "heading": "6.1 DivinationInfoModel vs ObserverPosition",
+          "level": 3,
+          "line": 247
+        },
+        {
+          "heading": "6.2 PanelConfig 模型差异",
+          "level": 3,
+          "line": 264
+        },
+        {
+          "heading": "7. 下一步行动",
+          "level": 2,
+          "line": 270
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 29
+      }
+    },
+    {
+      "path": "doc/refactor/merge/ui_adaptation_complete.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 394,
+      "nonEmptyLines": 302,
+      "sections": [
+        {
+          "heading": "UI层适配完成报告",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "🎉 成功完成所有集成任务!",
+          "level": 2,
+          "line": 9
+        },
+        {
+          "heading": "最终状态",
+          "level": 3,
+          "line": 11
+        },
+        {
+          "heading": "完成的关键任务",
+          "level": 2,
+          "line": 21
+        },
+        {
+          "heading": "1. ✅ ValueListenable 类型问题解决",
+          "level": 3,
+          "line": 23
+        },
+        {
+          "heading": "2. ✅ setLifeObserver() 方法实现",
+          "level": 3,
+          "line": 39
+        },
+        {
+          "heading": "3. ✅ BasePanelModel 类型统一",
+          "level": 3,
+          "line": 67
+        },
+        {
+          "heading": "4. ✅ 依赖注入配置",
+          "level": 3,
+          "line": 77
+        },
+        {
+          "heading": "完成的架构集成",
+          "level": 2,
+          "line": 112
+        },
+        {
+          "heading": "MVVM 架构层完整集成 ✅",
+          "level": 3,
+          "line": 114
+        },
+        {
+          "heading": "UI兼容层实现 ✅",
+          "level": 3,
+          "line": 157
+        },
+        {
+          "heading": "已知暂时禁用的功能",
+          "level": 2,
+          "line": 174
+        },
+        {
+          "heading": "大限盘 (DaXianPanel) - 优先级3 ⏸️",
+          "level": 3,
+          "line": 176
+        },
+        {
+          "heading": "Git 提交历史",
+          "level": 2,
+          "line": 196
+        },
+        {
+          "heading": "技术指标",
+          "level": 2,
+          "line": 212
+        },
+        {
+          "heading": "代码质量",
+          "level": 3,
+          "line": 214
+        },
+        {
+          "heading": "测试覆盖",
+          "level": 3,
+          "line": 221
+        },
+        {
+          "heading": "下一步行动",
+          "level": 2,
+          "line": 228
+        },
+        {
+          "heading": "立即执行 (优先级1)",
+          "level": 3,
+          "line": 230
+        },
+        {
+          "heading": "短期任务 (优先级2)",
+          "level": 3,
+          "line": 247
+        },
+        {
+          "heading": "中期任务 (优先级3)",
+          "level": 3,
+          "line": 259
+        },
+        {
+          "heading": "长期重构 (优先级4)",
+          "level": 3,
+          "line": 271
+        },
+        {
+          "heading": "验收标准",
+          "level": 2,
+          "line": 285
+        },
+        {
+          "heading": "技术亮点",
+          "level": 2,
+          "line": 298
+        },
+        {
+          "heading": "1. 最小化UI修改策略 ✨",
+          "level": 3,
+          "line": 300
+        },
+        {
+          "heading": "2. 类型安全转换 ✨",
+          "level": 3,
+          "line": 307
+        },
+        {
+          "heading": "3. 渐进式集成 ✨",
+          "level": 3,
+          "line": 314
+        },
+        {
+          "heading": "4. 清晰的依赖关系 ✨",
+          "level": 3,
+          "line": 322
+        },
+        {
+          "heading": "经验教训",
+          "level": 2,
+          "line": 336
+        },
+        {
+          "heading": "✅ 成功经验",
+          "level": 3,
+          "line": 338
+        },
+        {
+          "heading": "⚠️ 注意事项",
+          "level": 3,
+          "line": 355
+        },
+        {
+          "heading": "总结",
+          "level": 2,
+          "line": 373
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 32
+      }
+    },
+    {
+      "path": "doc/refactor/merge/ui_adaptation_progress.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 221,
+      "nonEmptyLines": 166,
+      "sections": [
+        {
+          "heading": "UI层适配进度报告",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "已完成任务 ✅",
+          "level": 2,
+          "line": 9
+        },
+        {
+          "heading": "1. 更新 beauty_view_page.dart 导入 ✅",
+          "level": 3,
+          "line": 11
+        },
+        {
+          "heading": "2. 替换 ViewModel 类型引用 ✅",
+          "level": 3,
+          "line": 23
+        },
+        {
+          "heading": "3. Git 提交 ✅",
+          "level": 3,
+          "line": 28
+        },
+        {
+          "heading": "当前遇到的编译错误 ❌",
+          "level": 2,
+          "line": 33
+        },
+        {
+          "heading": "错误分类",
+          "level": 3,
+          "line": 35
+        },
+        {
+          "heading": "下一步行动方案",
+          "level": 2,
+          "line": 95
+        },
+        {
+          "heading": "方案A: 完整实现所有缺失方法 (推荐) ⏰ 2-3小时",
+          "level": 3,
+          "line": 97
+        },
+        {
+          "heading": "方案B: 最小化修复,暂时跳过部分功能 ⏰ 1小时",
+          "level": 3,
+          "line": 123
+        },
+        {
+          "heading": "技术债务记录",
+          "level": 2,
+          "line": 145
+        },
+        {
+          "heading": "模型兼容性问题",
+          "level": 3,
+          "line": 147
+        },
+        {
+          "heading": "未迁移的UI模型",
+          "level": 3,
+          "line": 162
+        },
+        {
+          "heading": "推荐执行路径 💡",
+          "level": 2,
+          "line": 170
+        },
+        {
+          "heading": "当前阻塞点 🚨",
+          "level": 2,
+          "line": 203
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 15
+      }
+    },
+    {
+      "path": "doc/refactor/merge/ui_adaptation_progress_v2.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 230,
+      "nonEmptyLines": 171,
+      "sections": [
+        {
+          "heading": "UI层适配进度报告 V2",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "显著进展 🎉",
+          "level": 2,
+          "line": 9
+        },
+        {
+          "heading": "已成功实现",
+          "level": 3,
+          "line": 11
+        },
+        {
+          "heading": "剩余5个关键错误 🔴",
+          "level": 2,
+          "line": 30
+        },
+        {
+          "heading": "错误1: 缺少 setLifeObserver() 方法",
+          "level": 3,
+          "line": 32
+        },
+        {
+          "heading": "错误2&3: ValueNotifier 类型不匹配",
+          "level": 3,
+          "line": 58
+        },
+        {
+          "heading": "错误4&5: DaXianPanelModel vs PassageYearPanelModel 类型冲突",
+          "level": 3,
+          "line": 86
+        },
+        {
+          "heading": "错误6: BasePanelModel 缺少 shenShaMapper getter",
+          "level": 3,
+          "line": 127
+        },
+        {
+          "heading": "下一步行动计划 📋",
+          "level": 2,
+          "line": 147
+        },
+        {
+          "heading": "方案A: 完整修复所有错误 (推荐)",
+          "level": 3,
+          "line": 149
+        },
+        {
+          "heading": "方案B: 最小化修复,跳过大限盘 (快速方案)",
+          "level": 3,
+          "line": 164
+        },
+        {
+          "heading": "技术债务与风险 ⚠️",
+          "level": 2,
+          "line": 178
+        },
+        {
+          "heading": "1. 模型层分歧",
+          "level": 3,
+          "line": 180
+        },
+        {
+          "heading": "2. 大限盘功能未实现",
+          "level": 3,
+          "line": 185
+        },
+        {
+          "heading": "3. DivinationInfoModel 定义不明确",
+          "level": 3,
+          "line": 190
+        },
+        {
+          "heading": "Git 提交历史",
+          "level": 2,
+          "line": 197
+        },
+        {
+          "heading": "推荐执行路径 💡",
+          "level": 2,
+          "line": 210
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 17
+      }
+    }
+  ]
+}{
+  "scriptCompleted": true,
+  "filesAnalyzed": 5,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "doc/refactor/ui/beauty_page_code_review.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 483,
+      "nonEmptyLines": 376,
+      "sections": [
+        {
+          "heading": "1. 创建测试数据文件",
+          "level": 1,
+          "line": 371
+        },
+        {
+          "heading": "2. 移动 devDefault 中的JSON到新文件",
+          "level": 1,
+          "line": 375
+        },
+        {
+          "heading": "3. 更新 beauty_view_page.dart 中的引用",
+          "level": 1,
+          "line": 376
+        },
+        {
+          "heading": "1. 创建配置目录",
+          "level": 1,
+          "line": 380
+        },
+        {
+          "heading": "2. 创建配置文件",
+          "level": 1,
+          "line": 383
+        },
+        {
+          "heading": "3. 移动相关代码",
+          "level": 1,
+          "line": 387
+        },
+        {
+          "heading": "1. 创建组件目录结构",
+          "level": 1,
+          "line": 391
+        },
+        {
+          "heading": "2. 逐个移动Widget方法到独立文件",
+          "level": 1,
+          "line": 394
+        },
+        {
+          "heading": "3. 更新imports和引用",
+          "level": 1,
+          "line": 395
+        },
+        {
+          "heading": "补充：命理十二宫与地支宫组件详解",
+          "level": 1,
+          "line": 397
+        },
+        {
+          "heading": "UI 状态与数据流",
+          "level": 1,
+          "line": 419
+        },
+        {
+          "heading": "依赖索引与文件定位",
+          "level": 1,
+          "line": 436
+        },
+        {
+          "heading": "重构补充建议",
+          "level": 1,
+          "line": 450
+        },
+        {
+          "heading": "分阶段实施计划更新",
+          "level": 1,
+          "line": 468
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 14
+      }
+    },
+    {
+      "path": "doc/refactor/ui/beauty_page_report.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 119,
+      "nonEmptyLines": 110,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 0
+      }
+    },
+    {
+      "path": "doc/refactor/ui/newview_code_review.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 158,
+      "nonEmptyLines": 124,
+      "sections": [
+        {
+          "heading": "newview 聚合导出重构代码评审（Code Review）",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "一、重构范围与目标",
+          "level": 2,
+          "line": 5
+        },
+        {
+          "heading": "二、目录与依赖关系评审",
+          "level": 2,
+          "line": 17
+        },
+        {
+          "heading": "三、关键组件接口与实现评审",
+          "level": 2,
+          "line": 26
+        },
+        {
+          "heading": "1. RingLayer（统一四环层骨架）",
+          "level": 3,
+          "line": 28
+        },
+        {
+          "heading": "2. StarRingLayer（星体层统一封装）",
+          "level": 3,
+          "line": 40
+        },
+        {
+          "heading": "3. TwelveGongTextRingWidget（文本环）",
+          "level": 3,
+          "line": 53
+        },
+        {
+          "heading": "4. DestinyTwelveGongRingWidget（命理十二宫环交互版）",
+          "level": 3,
+          "line": 64
+        },
+        {
+          "heading": "5. 环绘制子模块（gong_ming_li_ring/gong_shen_sha_ring/da_xian_ring 等）",
+          "level": 3,
+          "line": 75
+        },
+        {
+          "heading": "四、聚合导出实现评审（lib/newview/*）",
+          "level": 2,
+          "line": 85
+        },
+        {
+          "heading": "使用建议",
+          "level": 3,
+          "line": 97
+        },
+        {
+          "heading": "五、质量与规范评审",
+          "level": 2,
+          "line": 104
+        },
+        {
+          "heading": "六、性能与可维护性建议",
+          "level": 2,
+          "line": 113
+        },
+        {
+          "heading": "七、风险与注意事项",
+          "level": 2,
+          "line": 123
+        },
+        {
+          "heading": "八、示例与迁移指引",
+          "level": 2,
+          "line": 129
+        },
+        {
+          "heading": "九、验收标准（针对聚合导出与组件封装）",
+          "level": 2,
+          "line": 138
+        },
+        {
+          "heading": "十、后续行动建议",
+          "level": 2,
+          "line": 145
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 17
+      }
+    },
+    {
+      "path": "doc/refactor/ui/ui_refactor_todo.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 60,
+      "nonEmptyLines": 51,
+      "sections": [
+        {
+          "heading": "UI重构原子待办清单",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "已完成",
+          "level": 2,
+          "line": 7
+        },
+        {
+          "heading": "核心组件",
+          "level": 2,
+          "line": 12
+        },
+        {
+          "heading": "卡片区",
+          "level": 2,
+          "line": 22
+        },
+        {
+          "heading": "布局与适配",
+          "level": 2,
+          "line": 30
+        },
+        {
+          "heading": "交互与状态",
+          "level": 2,
+          "line": 38
+        },
+        {
+          "heading": "性能优化",
+          "level": 2,
+          "line": 44
+        },
+        {
+          "heading": "预览与测试",
+          "level": 2,
+          "line": 50
+        },
+        {
+          "heading": "文档与验收",
+          "level": 2,
+          "line": 56
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 9
+      }
+    },
+    {
+      "path": "doc/refactor/ui/unimpl_flexiable_page.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 319,
+      "nonEmptyLines": 280,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 0
+      }
+    }
+  ]
+}{
+  "scriptCompleted": true,
+  "filesAnalyzed": 6,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "doc/zhu_luo_san_xian/ACT.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 300,
+      "nonEmptyLines": 264,
+      "sections": [
+        {
+          "heading": "竹罗三限 ACT",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "ACT 1：基础类型与表",
+          "level": 2,
+          "line": 5
+        },
+        {
+          "heading": "ACT 2：宫位移动工具",
+          "level": 2,
+          "line": 59
+        },
+        {
+          "heading": "ACT 3：配置模型与 A/B 配置",
+          "level": 2,
+          "line": 98
+        },
+        {
+          "heading": "ACT 4：行限计算器",
+          "level": 2,
+          "line": 175
+        },
+        {
+          "heading": "ACT 5：测试",
+          "level": 2,
+          "line": 259
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 6
+      }
+    },
+    {
+      "path": "doc/zhu_luo_san_xian/gstack_validation_report.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 162,
+      "nonEmptyLines": 112,
+      "sections": [
+        {
+          "heading": "gStack 验证报告",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "范围",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "发现与修正",
+          "level": 2,
+          "line": 25
+        },
+        {
+          "heading": "1. LANG 不够精确",
+          "level": 3,
+          "line": 27
+        },
+        {
+          "heading": "2. 十二宫重复定义与七政依赖边界",
+          "level": 3,
+          "line": 41
+        },
+        {
+          "heading": "3. B 法重叠交限年未写清楚",
+          "level": 3,
+          "line": 59
+        },
+        {
+          "heading": "4. A 法年龄口径可能混乱",
+          "level": 3,
+          "line": 75
+        },
+        {
+          "heading": "5. 现有占位 manager 可能被误改",
+          "level": 3,
+          "line": 91
+        },
+        {
+          "heading": "剩余风险",
+          "level": 2,
+          "line": 107
+        },
+        {
+          "heading": "R1：A 法是否应完全采用古文节点年龄",
+          "level": 3,
+          "line": 109
+        },
+        {
+          "heading": "R2：B 法补桥触发条件仍来自案例归纳",
+          "level": 3,
+          "line": 129
+        },
+        {
+          "heading": "准出结论",
+          "level": 2,
+          "line": 149
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 12
+      }
+    },
+    {
+      "path": "doc/zhu_luo_san_xian/plans.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 194,
+      "nonEmptyLines": 138,
+      "sections": [
+        {
+          "heading": "竹罗三限算法 Plans",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "目标",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "统一公式",
+          "level": 2,
+          "line": 7
+        },
+        {
+          "heading": "A 法配置",
+          "level": 2,
+          "line": 59
+        },
+        {
+          "heading": "B 法配置",
+          "level": 2,
+          "line": 96
+        },
+        {
+          "heading": "可扩展 C 法",
+          "level": 2,
+          "line": 144
+        },
+        {
+          "heading": "可扩展 D 法",
+          "level": 2,
+          "line": 164
+        },
+        {
+          "heading": "设计原则",
+          "level": 2,
+          "line": 184
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 8
+      }
+    },
+    {
+      "path": "doc/zhu_luo_san_xian/tasks.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 193,
+      "nonEmptyLines": 138,
+      "sections": [
+        {
+          "heading": "竹罗三限算法 Tasks",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Task 1：定义基础数据",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "Task 2：定义共同表",
+          "level": 2,
+          "line": 19
+        },
+        {
+          "heading": "Task 3：定义算法配置模型",
+          "level": 2,
+          "line": 42
+        },
+        {
+          "heading": "Task 4：实现宫位移动工具",
+          "level": 2,
+          "line": 65
+        },
+        {
+          "heading": "Task 5：实现 A 法配置化计算",
+          "level": 2,
+          "line": 87
+        },
+        {
+          "heading": "Task 6：实现 B 法配置化计算",
+          "level": 2,
+          "line": 110
+        },
+        {
+          "heading": "Task 7：输出结构",
+          "level": 2,
+          "line": 149
+        },
+        {
+          "heading": "Task 8：测试",
+          "level": 2,
+          "line": 177
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 9
+      }
+    },
+    {
+      "path": "doc/zhu_luo_san_xian/test_plan.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 179,
+      "nonEmptyLines": 130,
+      "sections": [
+        {
+          "heading": "竹罗三限 Test Plan",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "目标",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "测试环境",
+          "level": 2,
+          "line": 14
+        },
+        {
+          "heading": "基础表测试",
+          "level": 2,
+          "line": 22
+        },
+        {
+          "heading": "宫位移动测试",
+          "level": 2,
+          "line": 45
+        },
+        {
+          "heading": "A 法测试",
+          "level": 2,
+          "line": 58
+        },
+        {
+          "heading": "B 法测试",
+          "level": 2,
+          "line": 86
+        },
+        {
+          "heading": "腓特烈样例测试",
+          "level": 2,
+          "line": 113
+        },
+        {
+          "heading": "分叉测试",
+          "level": 2,
+          "line": 151
+        },
+        {
+          "heading": "禁止项",
+          "level": 2,
+          "line": 172
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 10
+      }
+    },
+    {
+      "path": "doc/zhu_luo_san_xian/竹罗三限调查报告.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 145,
+      "nonEmptyLines": 101,
+      "sections": [
+        {
+          "heading": "竹罗三限调查报告",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "结论",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "共同基础",
+          "level": 2,
+          "line": 12
+        },
+        {
+          "heading": "A 法：原典逆节零顺法",
+          "level": 2,
+          "line": 48
+        },
+        {
+          "heading": "B 法：顺排行年交星法",
+          "level": 2,
+          "line": 90
+        },
+        {
+          "heading": "核心差异",
+          "level": 2,
+          "line": 138
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 6
+      }
+    }
+  ]
+}{
+  "scriptCompleted": true,
+  "filesAnalyzed": 4,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "docs/ONBOARDING.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 176,
+      "nonEmptyLines": 129,
+      "sections": [
+        {
+          "heading": "首次接入指南",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "一、这套文档体系是什么",
+          "level": 2,
+          "line": 7
+        },
+        {
+          "heading": "术语说明表",
+          "level": 2,
+          "line": 45
+        },
+        {
+          "heading": "体系角色",
+          "level": 3,
+          "line": 47
+        },
+        {
+          "heading": "核心概念",
+          "level": 3,
+          "line": 55
+        },
+        {
+          "heading": "目录速查",
+          "level": 3,
+          "line": 66
+        },
+        {
+          "heading": "流程术语",
+          "level": 3,
+          "line": 78
+        },
+        {
+          "heading": "规范语言",
+          "level": 3,
+          "line": 89
+        },
+        {
+          "heading": "二、开箱即用三步",
+          "level": 2,
+          "line": 102
+        },
+        {
+          "heading": "第 1 步：替换项目专属内容",
+          "level": 3,
+          "line": 104
+        },
+        {
+          "heading": "第 2 步：创建 AI_README.md（宪法入口）",
+          "level": 3,
+          "line": 116
+        },
+        {
+          "heading": "第 3 步：告知 AI",
+          "level": 3,
+          "line": 127
+        },
+        {
+          "heading": "三、AI 首次接入时的行为",
+          "level": 2,
+          "line": 139
+        },
+        {
+          "heading": "四、人维护指南",
+          "level": 2,
+          "line": 153
+        },
+        {
+          "heading": "五、常见问题",
+          "level": 2,
+          "line": 164
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 15
+      }
+    },
+    {
+      "path": "docs/Plans.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 148,
+      "nonEmptyLines": 114,
+      "sections": [
+        {
+          "heading": "七政四余开发计划",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "目标",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "总体原则",
+          "level": 2,
+          "line": 15
+        },
+        {
+          "heading": "推荐目录结构",
+          "level": 2,
+          "line": 24
+        },
+        {
+          "heading": "关键子系统",
+          "level": 2,
+          "line": 72
+        },
+        {
+          "heading": "核心模型（GeJu 三实体模型）",
+          "level": 2,
+          "line": 83
+        },
+        {
+          "heading": "开发阶段（按当前推进顺序）",
+          "level": 2,
+          "line": 109
+        },
+        {
+          "heading": "里程碑",
+          "level": 2,
+          "line": 122
+        },
+        {
+          "heading": "风险点",
+          "level": 2,
+          "line": 132
+        },
+        {
+          "heading": "与 docs/ai/ 的关系",
+          "level": 2,
+          "line": 143
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 10
+      }
+    },
+    {
+      "path": "docs/README.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 81,
+      "nonEmptyLines": 61,
+      "sections": [
+        {
+          "heading": "AI Collaboration Docs Framework",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "What This Provides",
+          "level": 2,
+          "line": 5
+        },
+        {
+          "heading": "Quick Start",
+          "level": 2,
+          "line": 13
+        },
+        {
+          "heading": "Directory Structure",
+          "level": 2,
+          "line": 27
+        },
+        {
+          "heading": "Adapting to Your Project",
+          "level": 2,
+          "line": 55
+        },
+        {
+          "heading": "Core Principles",
+          "level": 2,
+          "line": 67
+        },
+        {
+          "heading": "License",
+          "level": 2,
+          "line": 79
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 7
+      }
+    },
+    {
+      "path": "docs/README_zh.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 81,
+      "nonEmptyLines": 61,
+      "sections": [
+        {
+          "heading": "AI 协同开发文档框架",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "框架提供什么",
+          "level": 2,
+          "line": 5
+        },
+        {
+          "heading": "快速开始",
+          "level": 2,
+          "line": 13
+        },
+        {
+          "heading": "目录结构",
+          "level": 2,
+          "line": 27
+        },
+        {
+          "heading": "适配你的项目",
+          "level": 2,
+          "line": 55
+        },
+        {
+          "heading": "核心原则",
+          "level": 2,
+          "line": 67
+        },
+        {
+          "heading": "许可",
+          "level": 2,
+          "line": 79
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 7
+      }
+    }
+  ]
+}{
+  "scriptCompleted": true,
+  "filesAnalyzed": 12,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "docs/ai/CONSTITUTION.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 45,
+      "nonEmptyLines": 34,
+      "sections": [
+        {
+          "heading": "宪法版本清单",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "当前版本矩阵",
+          "level": 2,
+          "line": 6
+        },
+        {
+          "heading": "SemVer 规则",
+          "level": 2,
+          "line": 24
+        },
+        {
+          "heading": "修订历史",
+          "level": 2,
+          "line": 30
+        },
+        {
+          "heading": "兼容性",
+          "level": 2,
+          "line": 36
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 5
+      }
+    },
+    {
+      "path": "docs/ai/board-protocol.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 121,
+      "nonEmptyLines": 82,
+      "sections": [
+        {
+          "heading": "看板使用协议",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "一、全局权限矩阵",
+          "level": 2,
+          "line": 7
+        },
+        {
+          "heading": "二、看板读取协议",
+          "level": 2,
+          "line": 27
+        },
+        {
+          "heading": "三、看板写入协议（唯一通道 W1-W5）",
+          "level": 2,
+          "line": 39
+        },
+        {
+          "heading": "W1: 完成任务步骤",
+          "level": 3,
+          "line": 43
+        },
+        {
+          "heading": "W2: 向用户请求",
+          "level": 3,
+          "line": 50
+        },
+        {
+          "heading": "W3: 等待用户确认",
+          "level": 3,
+          "line": 68
+        },
+        {
+          "heading": "W4: 执行写入",
+          "level": 3,
+          "line": 79
+        },
+        {
+          "heading": "W5: 写入后报告",
+          "level": 3,
+          "line": 87
+        },
+        {
+          "heading": "四、MUST NOT（绝对禁止）",
+          "level": 2,
+          "line": 99
+        },
+        {
+          "heading": "五、违规处理",
+          "level": 2,
+          "line": 113
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 11
+      }
+    },
+    {
+      "path": "docs/ai/code-style.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 87,
+      "nonEmptyLines": 68,
+      "sections": [
+        {
+          "heading": "Dart/Flutter 代码规范",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "基础规则",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "命名规范",
+          "level": 2,
+          "line": 9
+        },
+        {
+          "heading": "文件结构",
+          "level": 2,
+          "line": 26
+        },
+        {
+          "heading": "注释规范",
+          "level": 2,
+          "line": 47
+        },
+        {
+          "heading": "代码质量",
+          "level": 2,
+          "line": 77
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 6
+      }
+    },
+    {
+      "path": "docs/ai/delivery-pipeline.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 178,
+      "nonEmptyLines": 141,
+      "sections": [
+        {
+          "heading": "代码交付流水线",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "流水线总览",
+          "level": 2,
+          "line": 5
+        },
+        {
+          "heading": "Step 1: 分支就绪（Branch Ready）",
+          "level": 2,
+          "line": 21
+        },
+        {
+          "heading": "Step 2: 代码开发（Development）",
+          "level": 2,
+          "line": 42
+        },
+        {
+          "heading": "Step 3: 自测验证（Testing）",
+          "level": 2,
+          "line": 66
+        },
+        {
+          "heading": "Step 4: 提交就绪（Commit Ready）",
+          "level": 2,
+          "line": 96
+        },
+        {
+          "heading": "Step 5: 合并归档（Merge & Archive）",
+          "level": 2,
+          "line": 130
+        },
+        {
+          "heading": "判断标准分级",
+          "level": 2,
+          "line": 154
+        },
+        {
+          "heading": "硬门禁示例",
+          "level": 3,
+          "line": 164
+        },
+        {
+          "heading": "软提醒示例",
+          "level": 3,
+          "line": 170
+        },
+        {
+          "heading": "最佳实践示例",
+          "level": 3,
+          "line": 175
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 11
+      }
+    },
+    {
+      "path": "docs/ai/directory-structure.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 130,
+      "nonEmptyLines": 101,
+      "sections": [
+        {
+          "heading": "目录与文件结构规范",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "顶层目录约束",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "lib/ 结构约定",
+          "level": 2,
+          "line": 29
+        },
+        {
+          "heading": "test/ 结构约定",
+          "level": 2,
+          "line": 33
+        },
+        {
+          "heading": "docs/ 结构约定",
+          "level": 2,
+          "line": 47
+        },
+        {
+          "heading": "AI 工作区结构约定",
+          "level": 2,
+          "line": 89
+        },
+        {
+          "heading": "目录命名",
+          "level": 3,
+          "line": 91
+        },
+        {
+          "heading": "任务目录内容",
+          "level": 3,
+          "line": 101
+        },
+        {
+          "heading": "权限矩阵",
+          "level": 2,
+          "line": 114
+        },
+        {
+          "heading": "新增文件/目录的准入标准",
+          "level": 2,
+          "line": 123
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 10
+      }
+    },
+    {
+      "path": "docs/ai/doc-standards.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 108,
+      "nonEmptyLines": 86,
+      "sections": [
+        {
+          "heading": "文档规范",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "文档类型与存放位置",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "文件格式",
+          "level": 2,
+          "line": 20
+        },
+        {
+          "heading": "Markdown 写作规范",
+          "level": 2,
+          "line": 27
+        },
+        {
+          "heading": "SPEC 设计文档模板（全局）",
+          "level": 2,
+          "line": 37
+        },
+        {
+          "heading": "SELF.md 模板（AI 任务目录）",
+          "level": 2,
+          "line": 64
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 6
+      }
+    },
+    {
+      "path": "docs/ai/git-rules.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 91,
+      "nonEmptyLines": 74,
+      "sections": [
+        {
+          "heading": "Git 分支与提交规范",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "分支命名",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "提交信息",
+          "level": 2,
+          "line": 37
+        },
+        {
+          "heading": "提交粒度",
+          "level": 2,
+          "line": 74
+        },
+        {
+          "heading": "提交内容红线",
+          "level": 2,
+          "line": 82
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 5
+      }
+    },
+    {
+      "path": "docs/ai/glossary.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 58,
+      "nonEmptyLines": 45,
+      "sections": [
+        {
+          "heading": "AI 协同通用术语",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "核心方法论术语",
+          "level": 2,
+          "line": 5
+        },
+        {
+          "heading": "规范语言 (RFC 2119 风格)",
+          "level": 2,
+          "line": 17
+        },
+        {
+          "heading": "流程控制",
+          "level": 2,
+          "line": 26
+        },
+        {
+          "heading": "判断标准三级",
+          "level": 2,
+          "line": 34
+        },
+        {
+          "heading": "变更管理",
+          "level": 2,
+          "line": 42
+        },
+        {
+          "heading": "交付术语",
+          "level": 2,
+          "line": 51
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 7
+      }
+    },
+    {
+      "path": "docs/ai/phases.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 251,
+      "nonEmptyLines": 192,
+      "sections": [
+        {
+          "heading": "SPEC Coding 阶段定义",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Part A: SPEC Coding（规格驱动编码）",
+          "level": 1,
+          "line": 11
+        },
+        {
+          "heading": "Stage A1: 启动与框架（Initiation & Scaffold）",
+          "level": 2,
+          "line": 29
+        },
+        {
+          "heading": "Stage A2: 内容填充（Content Fill）",
+          "level": 2,
+          "line": 74
+        },
+        {
+          "heading": "Stage A3: 评审与批准（Review & Approval）",
+          "level": 2,
+          "line": 100
+        },
+        {
+          "heading": "Stage A4: SPEC 锁定（SPEC Lock）",
+          "level": 2,
+          "line": 121
+        },
+        {
+          "heading": "SPEC 变更流程（SPEC Amendment）",
+          "level": 2,
+          "line": 143
+        },
+        {
+          "heading": "Part B: 交付阶段（Delivery）",
+          "level": 1,
+          "line": 161
+        },
+        {
+          "heading": "Stage B1: 代码实现（Implementation）",
+          "level": 2,
+          "line": 175
+        },
+        {
+          "heading": "Stage B2: SPEC 验收（SPEC Acceptance）",
+          "level": 2,
+          "line": 202
+        },
+        {
+          "heading": "Stage B3: SPEC 归档（SPEC Archive）",
+          "level": 2,
+          "line": 227
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 11
+      }
+    },
+    {
+      "path": "docs/ai/principles.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 92,
+      "nonEmptyLines": 61,
+      "sections": [
+        {
+          "heading": "开发核心原则",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "1. SPEC First",
+          "level": 2,
+          "line": 9
+        },
+        {
+          "heading": "2. Think Before Coding",
+          "level": 2,
+          "line": 17
+        },
+        {
+          "heading": "3. Simplicity First",
+          "level": 2,
+          "line": 26
+        },
+        {
+          "heading": "4. Surgical Changes",
+          "level": 2,
+          "line": 38
+        },
+        {
+          "heading": "5. Goal-Driven Execution",
+          "level": 2,
+          "line": 54
+        },
+        {
+          "heading": "6. Chinese-First",
+          "level": 2,
+          "line": 71
+        },
+        {
+          "heading": "7. Context-Aware",
+          "level": 2,
+          "line": 81
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 8
+      }
+    },
+    {
+      "path": "docs/ai/project-context-guide.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 92,
+      "nonEmptyLines": 71,
+      "sections": [
+        {
+          "heading": "项目上下文阅读规则",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "AI 首次接入必读清单",
+          "level": 2,
+          "line": 5
+        },
+        {
+          "heading": "第 1 批: AI 宪法层 (MUST 读全)",
+          "level": 3,
+          "line": 9
+        },
+        {
+          "heading": "第 2 批: 项目概况层 (MUST 读全)",
+          "level": 3,
+          "line": 17
+        },
+        {
+          "heading": "第 3 批: 目录结构层 (MUST 读全)",
+          "level": 3,
+          "line": 22
+        },
+        {
+          "heading": "第 4 批: 源码层 (MUST 读全)",
+          "level": 3,
+          "line": 27
+        },
+        {
+          "heading": "第 5 批: 测试层 (MUST 读全)",
+          "level": 3,
+          "line": 32
+        },
+        {
+          "heading": "第 6 批: 其他 AI 工作区 (SHOULD)",
+          "level": 3,
+          "line": 37
+        },
+        {
+          "heading": "第 7 批: 最近 SPEC (SHOULD)",
+          "level": 3,
+          "line": 42
+        },
+        {
+          "heading": "任务前必读",
+          "level": 2,
+          "line": 47
+        },
+        {
+          "heading": "禁止",
+          "level": 2,
+          "line": 61
+        },
+        {
+          "heading": "文档与代码冲突处理",
+          "level": 2,
+          "line": 69
+        },
+        {
+          "heading": "同步更新规则",
+          "level": 2,
+          "line": 81
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 13
+      }
+    },
+    {
+      "path": "docs/ai/toolchain.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 83,
+      "nonEmptyLines": 57,
+      "sections": [
+        {
+          "heading": "开发环境与工具链",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Flutter/Dart SDK 版本",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "依赖管理",
+          "level": 2,
+          "line": 10
+        },
+        {
+          "heading": "开发前检查清单",
+          "level": 2,
+          "line": 18
+        },
+        {
+          "heading": "构建与运行",
+          "level": 2,
+          "line": 32
+        },
+        {
+          "heading": "隔离承诺",
+          "level": 2,
+          "line": 38
+        },
+        {
+          "heading": "项目专有约定（qizhengsiyu）",
+          "level": 2,
+          "line": 45
+        },
+        {
+          "heading": "同级 package 依赖",
+          "level": 3,
+          "line": 47
+        },
+        {
+          "heading": "代码生成",
+          "level": 3,
+          "line": 53
+        },
+        {
+          "heading": "Drift 数据库迁移",
+          "level": 3,
+          "line": 64
+        },
+        {
+          "heading": "嵌入式 Flutter Module 边界",
+          "level": 3,
+          "line": 74
+        },
+        {
+          "heading": "上游 docs/ 子树",
+          "level": 3,
+          "line": 79
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 12
+      }
+    }
+  ]
+}

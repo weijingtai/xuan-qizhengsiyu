@@ -1,0 +1,211 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 4,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "doc/ge_ju_system/PRDs.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 46,
+      "nonEmptyLines": 31,
+      "sections": [
+        {
+          "heading": "产品需求文档 (PRD): 七政四余格局系统升级",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "1. 背景与目标",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "2. 用户故事 (User Stories)",
+          "level": 2,
+          "line": 13
+        },
+        {
+          "heading": "3. 功能需求",
+          "level": 2,
+          "line": 20
+        },
+        {
+          "heading": "3.1 核心数据结构",
+          "level": 3,
+          "line": 22
+        },
+        {
+          "heading": "3.2 逻辑引擎",
+          "level": 3,
+          "line": 28
+        },
+        {
+          "heading": "3.3 用户生成内容 (UGC)",
+          "level": 3,
+          "line": 36
+        },
+        {
+          "heading": "4. 非功能需求",
+          "level": 2,
+          "line": 42
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 8
+      }
+    },
+    {
+      "path": "doc/ge_ju_system/Plans.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 79,
+      "nonEmptyLines": 60,
+      "sections": [
+        {
+          "heading": "系统架构与实施计划 (Plans)",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "1. 数据模型",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "1.1 格局索引 (`patterns_index.json`)",
+          "level": 3,
+          "line": 5
+        },
+        {
+          "heading": "1.2 定义仓库 (`definitions.json`)",
+          "level": 3,
+          "line": 19
+        },
+        {
+          "heading": "2. 执行流程",
+          "level": 2,
+          "line": 43
+        },
+        {
+          "heading": "2.1 解析逻辑 (选择器 Selector)",
+          "level": 3,
+          "line": 45
+        },
+        {
+          "heading": "2.2 计算引擎",
+          "level": 3,
+          "line": 57
+        },
+        {
+          "heading": "3. DSL 规范 (功能码)",
+          "level": 2,
+          "line": 64
+        },
+        {
+          "heading": "4. UI 组件",
+          "level": 2,
+          "line": 74
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 9
+      }
+    },
+    {
+      "path": "doc/ge_ju_system/Tasks.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 25,
+      "nonEmptyLines": 17,
+      "sections": [
+        {
+          "heading": "项目任务: 格局系统升级 (Tasks)",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "第一阶段: 基础架构与数据",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "第二阶段: 核心引擎",
+          "level": 2,
+          "line": 9
+        },
+        {
+          "heading": "第三阶段: 用户自定义 (后端/存储)",
+          "level": 2,
+          "line": 15
+        },
+        {
+          "heading": "第四阶段: UI 与交互",
+          "level": 2,
+          "line": 20
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 5
+      }
+    },
+    {
+      "path": "doc/ge_ju_system/todo_list.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 37,
+      "nonEmptyLines": 27,
+      "sections": [
+        {
+          "heading": "原子化待办事项 (Todo List)",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "第一组: 数据结构与迁移",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "第二组: 引擎实现",
+          "level": 2,
+          "line": 11
+        },
+        {
+          "heading": "第三组: 逻辑 DSL",
+          "level": 2,
+          "line": 19
+        },
+        {
+          "heading": "第四组: 用户系统",
+          "level": 2,
+          "line": 27
+        },
+        {
+          "heading": "第五组: UI 实现",
+          "level": 2,
+          "line": 33
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 6
+      }
+    }
+  ]
+}

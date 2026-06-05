@@ -1,0 +1,687 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 10,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "test/output/chinese_traditional_equatorial_sidereal copy.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 415,
+      "nonEmptyLines": 414,
+      "sections": [
+        {
+          "heading": "name",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "calenderName",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "features",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "coordinateSystem",
+          "level": 1,
+          "line": 4
+        },
+        {
+          "heading": "starInnSystem",
+          "level": 1,
+          "line": 5
+        },
+        {
+          "heading": "starInnType",
+          "level": 1,
+          "line": 6
+        },
+        {
+          "heading": "originPoint",
+          "level": 1,
+          "line": 7
+        },
+        {
+          "heading": "originPointJieQi",
+          "level": 1,
+          "line": 13
+        },
+        {
+          "heading": "descriptionList",
+          "level": 1,
+          "line": 14
+        },
+        {
+          "heading": "starInnGongDegreeMap",
+          "level": 1,
+          "line": 21
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 10
+      }
+    },
+    {
+      "path": "test/output/equatorial_sidereal.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 391,
+      "nonEmptyLines": 388,
+      "sections": [
+        {
+          "heading": "name",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "calenderName",
+          "level": 1,
+          "line": 4
+        },
+        {
+          "heading": "features",
+          "level": 1,
+          "line": 5
+        },
+        {
+          "heading": "coordinateSystem",
+          "level": 1,
+          "line": 6
+        },
+        {
+          "heading": "starInnSystem",
+          "level": 1,
+          "line": 7
+        },
+        {
+          "heading": "starInnType",
+          "level": 1,
+          "line": 8
+        },
+        {
+          "heading": "originPoint",
+          "level": 1,
+          "line": 9
+        },
+        {
+          "heading": "originPointJieQi",
+          "level": 1,
+          "line": 15
+        },
+        {
+          "heading": "descriptionList",
+          "level": 1,
+          "line": 16
+        },
+        {
+          "heading": "starInnGongDegreeMap",
+          "level": 1,
+          "line": 24
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 10
+      }
+    },
+    {
+      "path": "test/output/han_equatorial_sidereal copy.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 390,
+      "nonEmptyLines": 388,
+      "sections": [
+        {
+          "heading": "name",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "calenderName",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "features",
+          "level": 1,
+          "line": 4
+        },
+        {
+          "heading": "coordinateSystem",
+          "level": 1,
+          "line": 5
+        },
+        {
+          "heading": "starInnSystem",
+          "level": 1,
+          "line": 6
+        },
+        {
+          "heading": "starInnType",
+          "level": 1,
+          "line": 7
+        },
+        {
+          "heading": "originPoint",
+          "level": 1,
+          "line": 8
+        },
+        {
+          "heading": "originPointJieQi",
+          "level": 1,
+          "line": 14
+        },
+        {
+          "heading": "descriptionList",
+          "level": 1,
+          "line": 15
+        },
+        {
+          "heading": "starInnGongDegreeMap",
+          "level": 1,
+          "line": 23
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 10
+      }
+    },
+    {
+      "path": "test/output/han_equatorial_sidereal.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 367,
+      "nonEmptyLines": 366,
+      "sections": [
+        {
+          "heading": "角",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "亢",
+          "level": 1,
+          "line": 15
+        },
+        {
+          "heading": "氐",
+          "level": 1,
+          "line": 28
+        },
+        {
+          "heading": "房",
+          "level": 1,
+          "line": 41
+        },
+        {
+          "heading": "心",
+          "level": 1,
+          "line": 55
+        },
+        {
+          "heading": "尾",
+          "level": 1,
+          "line": 68
+        },
+        {
+          "heading": "箕",
+          "level": 1,
+          "line": 81
+        },
+        {
+          "heading": "斗",
+          "level": 1,
+          "line": 94
+        },
+        {
+          "heading": "牛",
+          "level": 1,
+          "line": 107
+        },
+        {
+          "heading": "女",
+          "level": 1,
+          "line": 120
+        },
+        {
+          "heading": "虚",
+          "level": 1,
+          "line": 133
+        },
+        {
+          "heading": "危",
+          "level": 1,
+          "line": 146
+        },
+        {
+          "heading": "室",
+          "level": 1,
+          "line": 159
+        },
+        {
+          "heading": "壁",
+          "level": 1,
+          "line": 172
+        },
+        {
+          "heading": "奎",
+          "level": 1,
+          "line": 185
+        },
+        {
+          "heading": "娄",
+          "level": 1,
+          "line": 198
+        },
+        {
+          "heading": "胃",
+          "level": 1,
+          "line": 211
+        },
+        {
+          "heading": "昴",
+          "level": 1,
+          "line": 224
+        },
+        {
+          "heading": "毕",
+          "level": 1,
+          "line": 237
+        },
+        {
+          "heading": "觜",
+          "level": 1,
+          "line": 250
+        },
+        {
+          "heading": "参",
+          "level": 1,
+          "line": 263
+        },
+        {
+          "heading": "井",
+          "level": 1,
+          "line": 276
+        },
+        {
+          "heading": "鬼",
+          "level": 1,
+          "line": 289
+        },
+        {
+          "heading": "柳",
+          "level": 1,
+          "line": 302
+        },
+        {
+          "heading": "星",
+          "level": 1,
+          "line": 315
+        },
+        {
+          "heading": "张",
+          "level": 1,
+          "line": 328
+        },
+        {
+          "heading": "翼",
+          "level": 1,
+          "line": 341
+        },
+        {
+          "heading": "轸",
+          "level": 1,
+          "line": 354
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 28
+      }
+    },
+    {
+      "path": "test/output/song_zodiac_sidereal.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 388,
+      "nonEmptyLines": 387,
+      "sections": [
+        {
+          "heading": "name",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "calenderName",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "features",
+          "level": 1,
+          "line": 4
+        },
+        {
+          "heading": "coordinateSystem",
+          "level": 1,
+          "line": 5
+        },
+        {
+          "heading": "starInnSystem",
+          "level": 1,
+          "line": 6
+        },
+        {
+          "heading": "starInnType",
+          "level": 1,
+          "line": 7
+        },
+        {
+          "heading": "originPoint",
+          "level": 1,
+          "line": 8
+        },
+        {
+          "heading": "originPointJieQi",
+          "level": 1,
+          "line": 14
+        },
+        {
+          "heading": "descriptionList",
+          "level": 1,
+          "line": 15
+        },
+        {
+          "heading": "starInnGongDegreeMap",
+          "level": 1,
+          "line": 22
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 10
+      }
+    },
+    {
+      "path": "test/output/zodiac_sidereal copy.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 366,
+      "nonEmptyLines": 366,
+      "sections": [
+        {
+          "heading": "角",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "亢",
+          "level": 1,
+          "line": 15
+        },
+        {
+          "heading": "氐",
+          "level": 1,
+          "line": 28
+        },
+        {
+          "heading": "房",
+          "level": 1,
+          "line": 41
+        },
+        {
+          "heading": "心",
+          "level": 1,
+          "line": 54
+        },
+        {
+          "heading": "尾",
+          "level": 1,
+          "line": 67
+        },
+        {
+          "heading": "箕",
+          "level": 1,
+          "line": 80
+        },
+        {
+          "heading": "斗",
+          "level": 1,
+          "line": 93
+        },
+        {
+          "heading": "牛",
+          "level": 1,
+          "line": 106
+        },
+        {
+          "heading": "女",
+          "level": 1,
+          "line": 119
+        },
+        {
+          "heading": "虚",
+          "level": 1,
+          "line": 132
+        },
+        {
+          "heading": "危",
+          "level": 1,
+          "line": 145
+        },
+        {
+          "heading": "室",
+          "level": 1,
+          "line": 158
+        },
+        {
+          "heading": "壁",
+          "level": 1,
+          "line": 171
+        },
+        {
+          "heading": "奎",
+          "level": 1,
+          "line": 184
+        },
+        {
+          "heading": "娄",
+          "level": 1,
+          "line": 197
+        },
+        {
+          "heading": "胃",
+          "level": 1,
+          "line": 210
+        },
+        {
+          "heading": "昴",
+          "level": 1,
+          "line": 223
+        },
+        {
+          "heading": "毕",
+          "level": 1,
+          "line": 236
+        },
+        {
+          "heading": "觜",
+          "level": 1,
+          "line": 249
+        },
+        {
+          "heading": "参",
+          "level": 1,
+          "line": 262
+        },
+        {
+          "heading": "井",
+          "level": 1,
+          "line": 275
+        },
+        {
+          "heading": "鬼",
+          "level": 1,
+          "line": 288
+        },
+        {
+          "heading": "柳",
+          "level": 1,
+          "line": 301
+        },
+        {
+          "heading": "星",
+          "level": 1,
+          "line": 314
+        },
+        {
+          "heading": "张",
+          "level": 1,
+          "line": 327
+        },
+        {
+          "heading": "翼",
+          "level": 1,
+          "line": 340
+        },
+        {
+          "heading": "轸",
+          "level": 1,
+          "line": 353
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 28
+      }
+    },
+    {
+      "path": "test/output/zodiac_sidereal.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 401,
+      "nonEmptyLines": 401,
+      "sections": [
+        {
+          "heading": "metadata",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "data",
+          "level": 1,
+          "line": 7
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 2
+      }
+    },
+    {
+      "path": "test/output/zodiac_tropical_corrected_classic.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 401,
+      "nonEmptyLines": 401,
+      "sections": [
+        {
+          "heading": "metadata",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "data",
+          "level": 1,
+          "line": 7
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 2
+      }
+    },
+    {
+      "path": "test/output/zodiac_tropical_modern.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 401,
+      "nonEmptyLines": 401,
+      "sections": [
+        {
+          "heading": "metadata",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "data",
+          "level": 1,
+          "line": 7
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 2
+      }
+    },
+    {
+      "path": "test/output/zodiac_tropical_original_classic.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 401,
+      "nonEmptyLines": 401,
+      "sections": [
+        {
+          "heading": "metadata",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "data",
+          "level": 1,
+          "line": 7
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 2
+      }
+    }
+  ]
+}

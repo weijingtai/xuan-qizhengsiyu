@@ -1,0 +1,1031 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 25,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "lib/domain/entities/models/ge_ju/ge_ju_source.g.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 20,
+      "nonEmptyLines": 16,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/ge_ju/ge_ju_user_preference.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 51,
+      "nonEmptyLines": 41,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/ge_ju/ge_ju_user_preference.g.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 33,
+      "nonEmptyLines": 29,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/ge_ju/ge_ju_variant.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 56,
+      "nonEmptyLines": 44,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/ge_ju/ge_ju_variant.g.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 60,
+      "nonEmptyLines": 54,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/ge_ju/twelve_gong_system.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 109,
+      "nonEmptyLines": 97,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/gong_model.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 41,
+      "nonEmptyLines": 36,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/gong_model.g.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 139,
+      "nonEmptyLines": 130,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/gong_star_info.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 68,
+      "nonEmptyLines": 59,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/gong_star_info.g.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 141,
+      "nonEmptyLines": 128,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/hua_yao.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 89,
+      "nonEmptyLines": 73,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/hua_yao.g.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 192,
+      "nonEmptyLines": 173,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/naming_degree_pair.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 80,
+      "nonEmptyLines": 68,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/naming_degree_pair.g.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 137,
+      "nonEmptyLines": 122,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/observer_position.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 125,
+      "nonEmptyLines": 116,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/observer_position.g.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 120,
+      "nonEmptyLines": 113,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/pan_entity.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 51,
+      "nonEmptyLines": 46,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/panel_config.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 171,
+      "nonEmptyLines": 140,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/panel_config.g.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 164,
+      "nonEmptyLines": 148,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/panel_stars_info.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 487,
+      "nonEmptyLines": 453,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/panel_system_dateset.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 45,
+      "nonEmptyLines": 40,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/panel_system_dateset.g.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 124,
+      "nonEmptyLines": 115,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/panel_ui_size.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 91,
+      "nonEmptyLines": 72,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/passage_year_panel_model.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 73,
+      "nonEmptyLines": 62,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/passage_year_panel_model.g.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 108,
+      "nonEmptyLines": 101,
+      "metrics": {}
+    }
+  ]
+}{
+  "scriptCompleted": true,
+  "filesAnalyzed": 25,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "lib/domain/entities/models/projection_config.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 40,
+      "nonEmptyLines": 31,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/projection_config.g.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 32,
+      "nonEmptyLines": 27,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/QiZhengSiYuPanModel.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 137,
+      "nonEmptyLines": 119,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/rise_set_display_data.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 67,
+      "nonEmptyLines": 52,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/star_angle_raw_info.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 50,
+      "nonEmptyLines": 42,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/star_angle_raw_info.g.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 38,
+      "nonEmptyLines": 32,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/star_angle_speed.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 38,
+      "nonEmptyLines": 32,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/star_angle_speed.g.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 19,
+      "nonEmptyLines": 15,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/star_enter_info.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 32,
+      "nonEmptyLines": 26,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/star_enter_info.g.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 23,
+      "nonEmptyLines": 19,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/star_hidden_type.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 66,
+      "nonEmptyLines": 63,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/star_inn_gong_degree.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 39,
+      "nonEmptyLines": 33,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/star_inn_gong_degree.g.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 70,
+      "nonEmptyLines": 64,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/star_position_raw_data.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 26,
+      "nonEmptyLines": 23,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/star_position_raw_data.g.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 36,
+      "nonEmptyLines": 31,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/star_to_star_relationship_model.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 434,
+      "nonEmptyLines": 392,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/stars_angle.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 96,
+      "nonEmptyLines": 84,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/stars_angle.g.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 49,
+      "nonEmptyLines": 43,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/stars_four_relationship.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 22,
+      "nonEmptyLines": 15,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/stars_four_relationship.g.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 53,
+      "nonEmptyLines": 47,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/yuan_le_panel_model.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 140,
+      "nonEmptyLines": 115,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/yuan_le_panel_model.g.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 88,
+      "nonEmptyLines": 80,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/zhou_tian_model.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 98,
+      "nonEmptyLines": 82,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/zhou_tian_model.g.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 169,
+      "nonEmptyLines": 159,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/errors/ge_ju_errors.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 107,
+      "nonEmptyLines": 84,
+      "metrics": {}
+    }
+  ]
+}{
+  "scriptCompleted": true,
+  "filesAnalyzed": 25,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "lib/domain/managers/celestial_projector_factory.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 23,
+      "nonEmptyLines": 22,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/managers/fate/dong_wei_child_xian_manager.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 32,
+      "nonEmptyLines": 30,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/managers/fate/dong_wei_da_xian_manager.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 192,
+      "nonEmptyLines": 180,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/managers/fate/dong_wei_fei_xian_manager.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 108,
+      "nonEmptyLines": 95,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/managers/fate/dong_wei_hundred_six_manager.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 121,
+      "nonEmptyLines": 114,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/managers/fate/dong_wei_month_xian_manager.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 28,
+      "nonEmptyLines": 25,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/managers/fate/dong_wei_xiao_xian_manager.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 20,
+      "nonEmptyLines": 17,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/managers/fate/fate_manager.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 16,
+      "nonEmptyLines": 13,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/managers/fate/zhu_luo_san_xian_manager.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 14,
+      "nonEmptyLines": 12,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/managers/ge_ju/ge_ju_evaluator.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 324,
+      "nonEmptyLines": 291,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/managers/ge_ju/ge_ju_input_builder.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 322,
+      "nonEmptyLines": 290,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/managers/ge_ju/ge_ju_manager.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 194,
+      "nonEmptyLines": 173,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/managers/ge_ju/ge_ju_pre_filter.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 477,
+      "nonEmptyLines": 422,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/managers/ge_ju/ge_ju_rule_parser.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 37,
+      "nonEmptyLines": 33,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/managers/ge_ju/ge_ju_text_constants.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 105,
+      "nonEmptyLines": 98,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/managers/ge_ju/ge_ju_text_parser.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 207,
+      "nonEmptyLines": 181,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/managers/hua_yao_manager.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 206,
+      "nonEmptyLines": 169,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/managers/shen_sha_manager.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 375,
+      "nonEmptyLines": 329,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/managers/star_position_manager.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 238,
+      "nonEmptyLines": 226,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/managers/zhou_tian_calculator.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 634,
+      "nonEmptyLines": 553,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/managers/zhou_tian_model_manager.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 233,
+      "nonEmptyLines": 200,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/repositories/ge_ju_repository.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 51,
+      "nonEmptyLines": 43,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/repositories/hua_yao_repository.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 8,
+      "nonEmptyLines": 6,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/repositories/shen_sha_repository.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 15,
+      "nonEmptyLines": 12,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/services/an_shen_li_ming_service.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 316,
+      "nonEmptyLines": 291,
+      "metrics": {}
+    }
+  ]
+}{
+  "scriptCompleted": true,
+  "filesAnalyzed": 25,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "lib/domain/services/ge_ju_crud_service.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 457,
+      "nonEmptyLines": 398,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/services/ge_ju_evaluation_service.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 167,
+      "nonEmptyLines": 147,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/services/ge_ju_school_service.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 73,
+      "nonEmptyLines": 63,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/services/ge_ju_validation.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 167,
+      "nonEmptyLines": 147,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/services/generate_base_panel_service.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 417,
+      "nonEmptyLines": 376,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/services/hua_yao_service.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 20,
+      "nonEmptyLines": 15,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/services/life_body_model_builder.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 243,
+      "nonEmptyLines": 209,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/services/shen_sha_service.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 35,
+      "nonEmptyLines": 27,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/services/star_angle_strategy.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 142,
+      "nonEmptyLines": 121,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/services/star_body_model_builder.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 120,
+      "nonEmptyLines": 104,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/services/yuan_le_panel_builder.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 334,
+      "nonEmptyLines": 297,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/usecases/calculate_fate_dong_wei_usecase.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 206,
+      "nonEmptyLines": 176,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/usecases/save_calculated_panel_usecase.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 134,
+      "nonEmptyLines": 124,
+      "metrics": {}
+    },
+    {
+      "path": "lib/enums/enum_dong_wei_type.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 13,
+      "nonEmptyLines": 12,
+      "metrics": {}
+    },
+    {
+      "path": "lib/enums/enum_hua_yao_shen_sha.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 837,
+      "nonEmptyLines": 753,
+      "metrics": {}
+    },
+    {
+      "path": "lib/enums/enum_hua_yao.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 85,
+      "nonEmptyLines": 77,
+      "metrics": {}
+    },
+    {
+      "path": "lib/enums/enum_moon_phases.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 62,
+      "nonEmptyLines": 55,
+      "metrics": {}
+    },
+    {
+      "path": "lib/enums/enum_panel_ring.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 41,
+      "nonEmptyLines": 37,
+      "metrics": {}
+    },
+    {
+      "path": "lib/enums/enum_panel_system_type.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 140,
+      "nonEmptyLines": 123,
+      "metrics": {}
+    },
+    {
+      "path": "lib/enums/enum_qi_zheng.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 216,
+      "nonEmptyLines": 201,
+      "metrics": {}
+    },
+    {
+      "path": "lib/enums/enum_qi_zheng.g.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 48,
+      "nonEmptyLines": 43,
+      "metrics": {}
+    },
+    {
+      "path": "lib/enums/enum_school.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 25,
+      "nonEmptyLines": 21,
+      "metrics": {}
+    },
+    {
+      "path": "lib/enums/enum_settle_life_body.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 33,
+      "nonEmptyLines": 28,
+      "metrics": {}
+    },
+    {
+      "path": "lib/enums/enum_star_hidden_type.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 5,
+      "nonEmptyLines": 4,
+      "metrics": {}
+    },
+    {
+      "path": "lib/enums/enum_star_position_status.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 34,
+      "nonEmptyLines": 31,
+      "metrics": {}
+    }
+  ]
+}{
+  "scriptCompleted": true,
+  "filesAnalyzed": 25,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "lib/enums/enum_stars_four_type.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 131,
+      "nonEmptyLines": 126,
+      "metrics": {}
+    },
+    {
+      "path": "lib/enums/enum_twelve_gong.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 197,
+      "nonEmptyLines": 174,
+      "metrics": {}
+    },
+    {
+      "path": "lib/enums/enum_xing_xian_type.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 21,
+      "nonEmptyLines": 15,
+      "metrics": {}
+    },
+    {
+      "path": "lib/enums/four_season_relationship_type.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 19,
+      "nonEmptyLines": 17,
+      "metrics": {}
+    },
+    {
+      "path": "lib/main.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 512,
+      "nonEmptyLines": 487,
+      "metrics": {}
+    },
+    {
+      "path": "lib/navigator.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 170,
+      "nonEmptyLines": 153,
+      "metrics": {}
+    },
+    {
+      "path": "lib/painter/painters.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 469,
+      "nonEmptyLines": 422,
+      "metrics": {}
+    },
+    {
+      "path": "lib/painter/star_body_ring_painter.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 456,
+      "nonEmptyLines": 414,
+      "metrics": {}
+    },
+    {
+      "path": "lib/painter/star_xiu_ring_painter.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 341,
+      "nonEmptyLines": 312,
+      "metrics": {}
+    },
+    {
+      "path": "lib/painter/StarInn28RingPainter.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 173,
+      "nonEmptyLines": 155,
+      "metrics": {}
+    },
+    {
+      "path": "lib/painter/twelve_zhi_gong_circle_ring_printer.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 304,
+      "nonEmptyLines": 281,
+      "metrics": {}
+    },
+    {
+      "path": "lib/presentation/models/condition_editor_node.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 258,
+      "nonEmptyLines": 229,
+      "metrics": {}
+    },
+    {
+      "path": "lib/presentation/models/condition_type_registry.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 659,
+      "nonEmptyLines": 622,
+      "metrics": {}
+    },
+    {
+      "path": "lib/presentation/models/lunar_date_info_v2_data.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 55,
+      "nonEmptyLines": 48,
+      "metrics": {}
+    },
+    {
+      "path": "lib/presentation/models/ui_star_model.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 572,
+      "nonEmptyLines": 521,
+      "metrics": {}
+    },
+    {
+      "path": "lib/presentation/pages/beauty_page_viewmodel.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 954,
+      "nonEmptyLines": 843,
+      "metrics": {}
+    },
+    {
+      "path": "lib/presentation/pages/beauty_view_page.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 2459,
+      "nonEmptyLines": 2341,
+      "metrics": {}
+    },
+    {
+      "path": "lib/presentation/pages/circle_indicator_widget.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 687,
+      "nonEmptyLines": 592,
+      "metrics": {}
+    },
+    {
+      "path": "lib/presentation/pages/ge_ju/ge_ju_detail_page.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 557,
+      "nonEmptyLines": 526,
+      "metrics": {}
+    },
+    {
+      "path": "lib/presentation/pages/ge_ju/ge_ju_editor_page.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 590,
+      "nonEmptyLines": 558,
+      "metrics": {}
+    },
+    {
+      "path": "lib/presentation/pages/ge_ju/ge_ju_list_page.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 394,
+      "nonEmptyLines": 374,
+      "metrics": {}
+    },
+    {
+      "path": "lib/presentation/pages/ge_ju/ge_ju_school_editor_page.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 231,
+      "nonEmptyLines": 210,
+      "metrics": {}
+    },
+    {
+      "path": "lib/presentation/pages/ge_ju/ge_ju_school_list_page.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 175,
+      "nonEmptyLines": 164,
+      "metrics": {}
+    },
+    {
+      "path": "lib/presentation/pages/primary_page.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 175,
+      "nonEmptyLines": 167,
+      "metrics": {}
+    },
+    {
+      "path": "lib/presentation/pages/qi_zheng_si_yu_config_page.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 659,
+      "nonEmptyLines": 605,
+      "metrics": {}
+    }
+  ]
+}

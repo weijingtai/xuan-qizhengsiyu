@@ -1,0 +1,207 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 25,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "lib/domain/engines/historical_engine.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 75,
+      "nonEmptyLines": 62,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/engines/i_calculation_engine.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 19,
+      "nonEmptyLines": 16,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/engines/projection/i_celestial_projector.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 9,
+      "nonEmptyLines": 8,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/engines/projection/linear_projector.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 36,
+      "nonEmptyLines": 30,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/engines/projection/piecewise_projector.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 41,
+      "nonEmptyLines": 35,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/engines/sweph_engine.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 162,
+      "nonEmptyLines": 143,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/entities_temp/di_zhi_shen_sha.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 1,
+      "nonEmptyLines": 1,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/enums/four_season_relationship_type.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 1,
+      "nonEmptyLines": 1,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/base_panel_model.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 114,
+      "nonEmptyLines": 96,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/base_panel_model.g.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 130,
+      "nonEmptyLines": 122,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/body_life_model.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 50,
+      "nonEmptyLines": 40,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/body_life_model.g.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 27,
+      "nonEmptyLines": 23,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/da_xian_model.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 137,
+      "nonEmptyLines": 118,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/da_xian_panel_model.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 65,
+      "nonEmptyLines": 55,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/da_xian_panel_model.g.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 105,
+      "nonEmptyLines": 98,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/di_zhi_gong_info.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 73,
+      "nonEmptyLines": 70,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/di_zhi_shen_sha.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 154,
+      "nonEmptyLines": 140,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/di_zhi_shen_sha.g.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 170,
+      "nonEmptyLines": 159,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/divination_model.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 31,
+      "nonEmptyLines": 28,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/divination_model.g.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 36,
+      "nonEmptyLines": 32,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/eleven_stars_info.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 179,
+      "nonEmptyLines": 164,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/eleven_stars_info.g.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 147,
+      "nonEmptyLines": 129,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/fate_dong_wei_da_xian.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 75,
+      "nonEmptyLines": 63,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/fate_dong_wei_da_xian.g.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 95,
+      "nonEmptyLines": 84,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/entities/models/four_season_model.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 31,
+      "nonEmptyLines": 23,
+      "metrics": {}
+    }
+  ]
+}

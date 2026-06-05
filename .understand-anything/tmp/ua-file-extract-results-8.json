@@ -1,0 +1,283 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 5,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "doc/refactor/ui/beauty_page_code_review.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 483,
+      "nonEmptyLines": 376,
+      "sections": [
+        {
+          "heading": "1. 创建测试数据文件",
+          "level": 1,
+          "line": 371
+        },
+        {
+          "heading": "2. 移动 devDefault 中的JSON到新文件",
+          "level": 1,
+          "line": 375
+        },
+        {
+          "heading": "3. 更新 beauty_view_page.dart 中的引用",
+          "level": 1,
+          "line": 376
+        },
+        {
+          "heading": "1. 创建配置目录",
+          "level": 1,
+          "line": 380
+        },
+        {
+          "heading": "2. 创建配置文件",
+          "level": 1,
+          "line": 383
+        },
+        {
+          "heading": "3. 移动相关代码",
+          "level": 1,
+          "line": 387
+        },
+        {
+          "heading": "1. 创建组件目录结构",
+          "level": 1,
+          "line": 391
+        },
+        {
+          "heading": "2. 逐个移动Widget方法到独立文件",
+          "level": 1,
+          "line": 394
+        },
+        {
+          "heading": "3. 更新imports和引用",
+          "level": 1,
+          "line": 395
+        },
+        {
+          "heading": "补充：命理十二宫与地支宫组件详解",
+          "level": 1,
+          "line": 397
+        },
+        {
+          "heading": "UI 状态与数据流",
+          "level": 1,
+          "line": 419
+        },
+        {
+          "heading": "依赖索引与文件定位",
+          "level": 1,
+          "line": 436
+        },
+        {
+          "heading": "重构补充建议",
+          "level": 1,
+          "line": 450
+        },
+        {
+          "heading": "分阶段实施计划更新",
+          "level": 1,
+          "line": 468
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 14
+      }
+    },
+    {
+      "path": "doc/refactor/ui/beauty_page_report.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 119,
+      "nonEmptyLines": 110,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 0
+      }
+    },
+    {
+      "path": "doc/refactor/ui/newview_code_review.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 158,
+      "nonEmptyLines": 124,
+      "sections": [
+        {
+          "heading": "newview 聚合导出重构代码评审（Code Review）",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "一、重构范围与目标",
+          "level": 2,
+          "line": 5
+        },
+        {
+          "heading": "二、目录与依赖关系评审",
+          "level": 2,
+          "line": 17
+        },
+        {
+          "heading": "三、关键组件接口与实现评审",
+          "level": 2,
+          "line": 26
+        },
+        {
+          "heading": "1. RingLayer（统一四环层骨架）",
+          "level": 3,
+          "line": 28
+        },
+        {
+          "heading": "2. StarRingLayer（星体层统一封装）",
+          "level": 3,
+          "line": 40
+        },
+        {
+          "heading": "3. TwelveGongTextRingWidget（文本环）",
+          "level": 3,
+          "line": 53
+        },
+        {
+          "heading": "4. DestinyTwelveGongRingWidget（命理十二宫环交互版）",
+          "level": 3,
+          "line": 64
+        },
+        {
+          "heading": "5. 环绘制子模块（gong_ming_li_ring/gong_shen_sha_ring/da_xian_ring 等）",
+          "level": 3,
+          "line": 75
+        },
+        {
+          "heading": "四、聚合导出实现评审（lib/newview/*）",
+          "level": 2,
+          "line": 85
+        },
+        {
+          "heading": "使用建议",
+          "level": 3,
+          "line": 97
+        },
+        {
+          "heading": "五、质量与规范评审",
+          "level": 2,
+          "line": 104
+        },
+        {
+          "heading": "六、性能与可维护性建议",
+          "level": 2,
+          "line": 113
+        },
+        {
+          "heading": "七、风险与注意事项",
+          "level": 2,
+          "line": 123
+        },
+        {
+          "heading": "八、示例与迁移指引",
+          "level": 2,
+          "line": 129
+        },
+        {
+          "heading": "九、验收标准（针对聚合导出与组件封装）",
+          "level": 2,
+          "line": 138
+        },
+        {
+          "heading": "十、后续行动建议",
+          "level": 2,
+          "line": 145
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 17
+      }
+    },
+    {
+      "path": "doc/refactor/ui/ui_refactor_todo.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 60,
+      "nonEmptyLines": 51,
+      "sections": [
+        {
+          "heading": "UI重构原子待办清单",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "已完成",
+          "level": 2,
+          "line": 7
+        },
+        {
+          "heading": "核心组件",
+          "level": 2,
+          "line": 12
+        },
+        {
+          "heading": "卡片区",
+          "level": 2,
+          "line": 22
+        },
+        {
+          "heading": "布局与适配",
+          "level": 2,
+          "line": 30
+        },
+        {
+          "heading": "交互与状态",
+          "level": 2,
+          "line": 38
+        },
+        {
+          "heading": "性能优化",
+          "level": 2,
+          "line": 44
+        },
+        {
+          "heading": "预览与测试",
+          "level": 2,
+          "line": 50
+        },
+        {
+          "heading": "文档与验收",
+          "level": 2,
+          "line": 56
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 9
+      }
+    },
+    {
+      "path": "doc/refactor/ui/unimpl_flexiable_page.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 319,
+      "nonEmptyLines": 280,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 0
+      }
+    }
+  ]
+}

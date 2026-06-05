@@ -1,0 +1,207 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 25,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "lib/data/datasources/local/ge_ju_file_storage_stub.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 18,
+      "nonEmptyLines": 14,
+      "metrics": {}
+    },
+    {
+      "path": "lib/data/datasources/local/ge_ju_legacy_migrator_io.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 19,
+      "nonEmptyLines": 15,
+      "metrics": {}
+    },
+    {
+      "path": "lib/data/datasources/local/ge_ju_legacy_migrator_stub.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 6,
+      "nonEmptyLines": 5,
+      "metrics": {}
+    },
+    {
+      "path": "lib/data/datasources/local/ge_ju_legacy_migrator.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 195,
+      "nonEmptyLines": 173,
+      "metrics": {}
+    },
+    {
+      "path": "lib/data/datasources/local/ge_ju_local_data_source.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 323,
+      "nonEmptyLines": 290,
+      "metrics": {}
+    },
+    {
+      "path": "lib/data/datasources/local/ge_ju_sqlite_data_source.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 140,
+      "nonEmptyLines": 131,
+      "metrics": {}
+    },
+    {
+      "path": "lib/data/datasources/local/hua_yao_local_data_source.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 37,
+      "nonEmptyLines": 31,
+      "metrics": {}
+    },
+    {
+      "path": "lib/data/datasources/local/shen_sha_local_data_source.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 70,
+      "nonEmptyLines": 60,
+      "metrics": {}
+    },
+    {
+      "path": "lib/data/datasources/local/tables/ge_ju_tables.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 132,
+      "nonEmptyLines": 114,
+      "metrics": {}
+    },
+    {
+      "path": "lib/data/datasources/local/tables/qizhengsiyu_pan_table.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 36,
+      "nonEmptyLines": 28,
+      "metrics": {}
+    },
+    {
+      "path": "lib/data/models/converters/divination_datetime_converter.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 17,
+      "nonEmptyLines": 14,
+      "metrics": {}
+    },
+    {
+      "path": "lib/data/models/converters/panel_config_converter.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 18,
+      "nonEmptyLines": 14,
+      "metrics": {}
+    },
+    {
+      "path": "lib/data/models/converters/panel_model_converter.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 18,
+      "nonEmptyLines": 14,
+      "metrics": {}
+    },
+    {
+      "path": "lib/data/models/converters/shen_sha_hua_yao_converter.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 1,
+      "nonEmptyLines": 0,
+      "metrics": {}
+    },
+    {
+      "path": "lib/data/repositories/ge_ju_repository_impl.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 350,
+      "nonEmptyLines": 303,
+      "metrics": {}
+    },
+    {
+      "path": "lib/data/repositories/hua_yao_repository_impl.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 25,
+      "nonEmptyLines": 19,
+      "metrics": {}
+    },
+    {
+      "path": "lib/data/repositories/interfaces/i_qizhengsiyu_pan_repository.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 93,
+      "nonEmptyLines": 77,
+      "metrics": {}
+    },
+    {
+      "path": "lib/data/repositories/qizhengsiyu_pan_repository.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 254,
+      "nonEmptyLines": 219,
+      "metrics": {}
+    },
+    {
+      "path": "lib/data/repositories/shen_sha_repository_impl.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 43,
+      "nonEmptyLines": 34,
+      "metrics": {}
+    },
+    {
+      "path": "lib/database/app_database.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 38,
+      "nonEmptyLines": 33,
+      "metrics": {}
+    },
+    {
+      "path": "lib/database/app_database.g.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 678,
+      "nonEmptyLines": 637,
+      "metrics": {}
+    },
+    {
+      "path": "lib/dataset/star_position_status_model.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 210,
+      "nonEmptyLines": 183,
+      "metrics": {}
+    },
+    {
+      "path": "lib/dataset/star_position_status_model.g.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 73,
+      "nonEmptyLines": 67,
+      "metrics": {}
+    },
+    {
+      "path": "lib/di.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 171,
+      "nonEmptyLines": 156,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/engines/calculation_engine_factory.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 22,
+      "nonEmptyLines": 20,
+      "metrics": {}
+    }
+  ]
+}

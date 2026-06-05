@@ -58,11 +58,11 @@ ObserverPosition _generateLifeObserverPosition(DivinationInfoModel divinationInf
 - `_getDayTimeZhi()`: 获取白天地支列表,用于判断是否日生
 
 **新增导入**:
-- `package:common/module.dart` (DivinationInfoModel)
-- `package:common/datamodel/base_divination_datetime_datamodel.dart`
-- `package:common/models/divination_datetime.dart`
-- `package:common/datamodel/location.dart`
-- `package:common/enums.dart`
+- `package:xuan_common/module.dart` (DivinationInfoModel)
+- `package:xuan_common/datamodel/base_divination_datetime_datamodel.dart`
+- `package:xuan_common/models/divination_datetime.dart`
+- `package:xuan_common/datamodel/location.dart`
+- `package:xuan_common/enums.dart`
 
 ### 3. ✅ BasePanelModel 类型统一
 

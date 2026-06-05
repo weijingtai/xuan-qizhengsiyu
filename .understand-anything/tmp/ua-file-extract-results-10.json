@@ -1,0 +1,266 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 4,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "docs/ONBOARDING.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 176,
+      "nonEmptyLines": 129,
+      "sections": [
+        {
+          "heading": "首次接入指南",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "一、这套文档体系是什么",
+          "level": 2,
+          "line": 7
+        },
+        {
+          "heading": "术语说明表",
+          "level": 2,
+          "line": 45
+        },
+        {
+          "heading": "体系角色",
+          "level": 3,
+          "line": 47
+        },
+        {
+          "heading": "核心概念",
+          "level": 3,
+          "line": 55
+        },
+        {
+          "heading": "目录速查",
+          "level": 3,
+          "line": 66
+        },
+        {
+          "heading": "流程术语",
+          "level": 3,
+          "line": 78
+        },
+        {
+          "heading": "规范语言",
+          "level": 3,
+          "line": 89
+        },
+        {
+          "heading": "二、开箱即用三步",
+          "level": 2,
+          "line": 102
+        },
+        {
+          "heading": "第 1 步：替换项目专属内容",
+          "level": 3,
+          "line": 104
+        },
+        {
+          "heading": "第 2 步：创建 AI_README.md（宪法入口）",
+          "level": 3,
+          "line": 116
+        },
+        {
+          "heading": "第 3 步：告知 AI",
+          "level": 3,
+          "line": 127
+        },
+        {
+          "heading": "三、AI 首次接入时的行为",
+          "level": 2,
+          "line": 139
+        },
+        {
+          "heading": "四、人维护指南",
+          "level": 2,
+          "line": 153
+        },
+        {
+          "heading": "五、常见问题",
+          "level": 2,
+          "line": 164
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 15
+      }
+    },
+    {
+      "path": "docs/Plans.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 148,
+      "nonEmptyLines": 114,
+      "sections": [
+        {
+          "heading": "七政四余开发计划",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "目标",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "总体原则",
+          "level": 2,
+          "line": 15
+        },
+        {
+          "heading": "推荐目录结构",
+          "level": 2,
+          "line": 24
+        },
+        {
+          "heading": "关键子系统",
+          "level": 2,
+          "line": 72
+        },
+        {
+          "heading": "核心模型（GeJu 三实体模型）",
+          "level": 2,
+          "line": 83
+        },
+        {
+          "heading": "开发阶段（按当前推进顺序）",
+          "level": 2,
+          "line": 109
+        },
+        {
+          "heading": "里程碑",
+          "level": 2,
+          "line": 122
+        },
+        {
+          "heading": "风险点",
+          "level": 2,
+          "line": 132
+        },
+        {
+          "heading": "与 docs/ai/ 的关系",
+          "level": 2,
+          "line": 143
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 10
+      }
+    },
+    {
+      "path": "docs/README.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 81,
+      "nonEmptyLines": 61,
+      "sections": [
+        {
+          "heading": "AI Collaboration Docs Framework",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "What This Provides",
+          "level": 2,
+          "line": 5
+        },
+        {
+          "heading": "Quick Start",
+          "level": 2,
+          "line": 13
+        },
+        {
+          "heading": "Directory Structure",
+          "level": 2,
+          "line": 27
+        },
+        {
+          "heading": "Adapting to Your Project",
+          "level": 2,
+          "line": 55
+        },
+        {
+          "heading": "Core Principles",
+          "level": 2,
+          "line": 67
+        },
+        {
+          "heading": "License",
+          "level": 2,
+          "line": 79
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 7
+      }
+    },
+    {
+      "path": "docs/README_zh.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 81,
+      "nonEmptyLines": 61,
+      "sections": [
+        {
+          "heading": "AI 协同开发文档框架",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "框架提供什么",
+          "level": 2,
+          "line": 5
+        },
+        {
+          "heading": "快速开始",
+          "level": 2,
+          "line": 13
+        },
+        {
+          "heading": "目录结构",
+          "level": 2,
+          "line": 27
+        },
+        {
+          "heading": "适配你的项目",
+          "level": 2,
+          "line": 55
+        },
+        {
+          "heading": "核心原则",
+          "level": 2,
+          "line": 67
+        },
+        {
+          "heading": "许可",
+          "level": 2,
+          "line": 79
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 7
+      }
+    }
+  ]
+}

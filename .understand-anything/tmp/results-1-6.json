@@ -1,0 +1,2877 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 4,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": ".understand-anything/analysis-summary.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 41,
+      "nonEmptyLines": 41,
+      "sections": [
+        {
+          "heading": "files",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "categories",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "nodes",
+          "level": 1,
+          "line": 10
+        },
+        {
+          "heading": "nodeTypes",
+          "level": 1,
+          "line": 11
+        },
+        {
+          "heading": "edges",
+          "level": 1,
+          "line": 19
+        },
+        {
+          "heading": "edgeTypes",
+          "level": 1,
+          "line": 20
+        },
+        {
+          "heading": "layers",
+          "level": 1,
+          "line": 24
+        },
+        {
+          "heading": "tourSteps",
+          "level": 1,
+          "line": 36
+        },
+        {
+          "heading": "validation",
+          "level": 1,
+          "line": 37
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 9
+      }
+    },
+    {
+      "path": ".understand-anything/fingerprint-warning.txt",
+      "language": "txt",
+      "fileCategory": "docs",
+      "totalLines": 1,
+      "nonEmptyLines": 1,
+      "metrics": {}
+    },
+    {
+      "path": ".understand-anything/knowledge-graph.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 55928,
+      "nonEmptyLines": 55928,
+      "sections": [
+        {
+          "heading": "version",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "kind",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "project",
+          "level": 1,
+          "line": 4
+        },
+        {
+          "heading": "nodes",
+          "level": 1,
+          "line": 24
+        },
+        {
+          "heading": "edges",
+          "level": 1,
+          "line": 34744
+        },
+        {
+          "heading": "layers",
+          "level": 1,
+          "line": 55434
+        },
+        {
+          "heading": "tour",
+          "level": 1,
+          "line": 55856
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 7
+      }
+    },
+    {
+      "path": ".understand-anything/meta.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 6,
+      "nonEmptyLines": 6,
+      "sections": [
+        {
+          "heading": "lastAnalyzedAt",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "gitCommitHash",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "version",
+          "level": 1,
+          "line": 4
+        },
+        {
+          "heading": "analyzedFiles",
+          "level": 1,
+          "line": 5
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 4
+      }
+    }
+  ]
+}{
+  "scriptCompleted": true,
+  "filesAnalyzed": 7,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "AGENTS.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 28,
+      "nonEmptyLines": 27,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 0
+      }
+    },
+    {
+      "path": "AI_README.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 143,
+      "nonEmptyLines": 102,
+      "sections": [
+        {
+          "heading": "AI 协同宪法",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "核心原则摘要",
+          "level": 2,
+          "line": 9
+        },
+        {
+          "heading": "强制工作流",
+          "level": 2,
+          "line": 25
+        },
+        {
+          "heading": "非平凡改动（所有超出平凡豁免的修改）",
+          "level": 3,
+          "line": 27
+        },
+        {
+          "heading": "平凡改动豁免",
+          "level": 3,
+          "line": 42
+        },
+        {
+          "heading": "SPEC Coding 阶段总览",
+          "level": 2,
+          "line": 56
+        },
+        {
+          "heading": "Part A: SPEC 生命周期",
+          "level": 3,
+          "line": 60
+        },
+        {
+          "heading": "Part B: 交付生命周期",
+          "level": 3,
+          "line": 69
+        },
+        {
+          "heading": "SPEC 变更流程",
+          "level": 3,
+          "line": 77
+        },
+        {
+          "heading": "代码交付流水线总览",
+          "level": 2,
+          "line": 83
+        },
+        {
+          "heading": "判断标准三级",
+          "level": 3,
+          "line": 95
+        },
+        {
+          "heading": "快速违规自检清单",
+          "level": 2,
+          "line": 105
+        },
+        {
+          "heading": "模块索引",
+          "level": 2,
+          "line": 124
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 13
+      }
+    },
+    {
+      "path": "CLAUDE.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 124,
+      "nonEmptyLines": 89,
+      "sections": [
+        {
+          "heading": "CLAUDE.md",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Project Overview",
+          "level": 2,
+          "line": 5
+        },
+        {
+          "heading": "Build & Development Commands",
+          "level": 2,
+          "line": 11
+        },
+        {
+          "heading": "Architecture",
+          "level": 2,
+          "line": 35
+        },
+        {
+          "heading": "Layer responsibilities",
+          "level": 3,
+          "line": 49
+        },
+        {
+          "heading": "Key domain subsystems",
+          "level": 3,
+          "line": 57
+        },
+        {
+          "heading": "GeJu System (actively developed)",
+          "level": 2,
+          "line": 67
+        },
+        {
+          "heading": "Enums",
+          "level": 2,
+          "line": 87
+        },
+        {
+          "heading": "Testing",
+          "level": 2,
+          "line": 91
+        },
+        {
+          "heading": "Key Dependencies",
+          "level": 2,
+          "line": 98
+        },
+        {
+          "heading": "Conventions",
+          "level": 2,
+          "line": 105
+        },
+        {
+          "heading": "docs/ — Upstream subtree (pull-only)",
+          "level": 2,
+          "line": 113
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 12
+      }
+    },
+    {
+      "path": "README.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 11,
+      "nonEmptyLines": 7,
+      "sections": [
+        {
+          "heading": "qizhengsiyu",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Getting Started",
+          "level": 2,
+          "line": 5
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 2
+      }
+    },
+    {
+      "path": "analysis_options.yaml",
+      "language": "yaml",
+      "fileCategory": "config",
+      "totalLines": 4,
+      "nonEmptyLines": 3,
+      "sections": [
+        {
+          "heading": "include",
+          "level": 1,
+          "line": 1
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 1
+      }
+    },
+    {
+      "path": "build.yaml",
+      "language": "yaml",
+      "fileCategory": "config",
+      "totalLines": 23,
+      "nonEmptyLines": 23,
+      "sections": [
+        {
+          "heading": "targets",
+          "level": 1,
+          "line": 1
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 1
+      }
+    },
+    {
+      "path": "pubspec.yaml",
+      "language": "yaml",
+      "fileCategory": "config",
+      "totalLines": 129,
+      "nonEmptyLines": 116,
+      "sections": [
+        {
+          "heading": "name",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "description",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "version",
+          "level": 1,
+          "line": 18
+        },
+        {
+          "heading": "environment",
+          "level": 1,
+          "line": 20
+        },
+        {
+          "heading": "dependencies",
+          "level": 1,
+          "line": 23
+        },
+        {
+          "heading": "dev_dependencies",
+          "level": 1,
+          "line": 68
+        },
+        {
+          "heading": "flutter",
+          "level": 1,
+          "line": 79
+        },
+        {
+          "heading": "dependency_overrides",
+          "level": 1,
+          "line": 127
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 8
+      }
+    }
+  ]
+}{
+  "scriptCompleted": true,
+  "filesAnalyzed": 5,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "doc/PRDs.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 82,
+      "nonEmptyLines": 62,
+      "sections": [
+        {
+          "heading": "七政四余排盘应用产品需求文档 (PRD)",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "1. 项目概述",
+          "level": 2,
+          "line": 4
+        },
+        {
+          "heading": "2. 功能需求",
+          "level": 2,
+          "line": 8
+        },
+        {
+          "heading": "2.1 核心功能：排盘",
+          "level": 3,
+          "line": 10
+        },
+        {
+          "heading": "2.1.1 技术性排盘需求",
+          "level": 3,
+          "line": 23
+        },
+        {
+          "heading": "2.2 辅助功能",
+          "level": 3,
+          "line": 52
+        },
+        {
+          "heading": "2.3 界面与体验",
+          "level": 3,
+          "line": 65
+        },
+        {
+          "heading": "3. 非功能性需求",
+          "level": 2,
+          "line": 71
+        },
+        {
+          "heading": "4. 数据模型",
+          "level": 2,
+          "line": 78
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 9
+      }
+    },
+    {
+      "path": "doc/acceptance_test_cases.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 188,
+      "nonEmptyLines": 146,
+      "sections": [
+        {
+          "heading": "Acceptance Test Cases: Star Chart Page UI Component Integration",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "1. Unit Tests — ViewModel Logic",
+          "level": 2,
+          "line": 17
+        },
+        {
+          "heading": "UT-001: buildYunLiuNodes generates correct DaYun tree structure",
+          "level": 3,
+          "line": 19
+        },
+        {
+          "heading": "UT-002: buildYunLiuNodes returns empty list when basicLifePanel is null",
+          "level": 3,
+          "line": 31
+        },
+        {
+          "heading": "UT-003: onLiuNianSelected triggers calculateDaXian with correct DateTime",
+          "level": 3,
+          "line": 39
+        },
+        {
+          "heading": "UT-004: onLiuNianSelected updates fateObserver with correct coordinates",
+          "level": 3,
+          "line": 50
+        },
+        {
+          "heading": "UT-005: JieQi info is correct for reference date",
+          "level": 3,
+          "line": 62
+        },
+        {
+          "heading": "UT-006: sunrise/sunset times reasonable for Beijing winter",
+          "level": 3,
+          "line": 68
+        },
+        {
+          "heading": "UT-007: yunLiuNodesNotifier notifies listeners on rebuild",
+          "level": 3,
+          "line": 76
+        },
+        {
+          "heading": "2. Widget Tests — Individual Widget Rendering",
+          "level": 2,
+          "line": 84
+        },
+        {
+          "heading": "WT-001: EditableFourZhuCardV3 renders four pillars correctly",
+          "level": 3,
+          "line": 86
+        },
+        {
+          "heading": "WT-002: EditableFourZhuCardV3 with default theme renders without errors",
+          "level": 3,
+          "line": 91
+        },
+        {
+          "heading": "WT-003: JieQiRiseSetCard renders solar term name and times",
+          "level": 3,
+          "line": 95
+        },
+        {
+          "heading": "WT-004: JieQiRiseSetCard compact mode",
+          "level": 3,
+          "line": 100
+        },
+        {
+          "heading": "WT-005: YunLiuTreeList renders expandable DaYun tiles",
+          "level": 3,
+          "line": 104
+        },
+        {
+          "heading": "WT-006: YunLiuTreeList leaf node renders as ListTile",
+          "level": 3,
+          "line": 109
+        },
+        {
+          "heading": "WT-007: onNodeTap callback fires on LiuNian tap",
+          "level": 3,
+          "line": 113
+        },
+        {
+          "heading": "WT-008: Custom header renders DaYunTreeTileHeader",
+          "level": 3,
+          "line": 118
+        },
+        {
+          "heading": "WT-009: Three widgets in correct order on star chart page",
+          "level": 3,
+          "line": 122
+        },
+        {
+          "heading": "3. Integration Tests — End-to-End Flow",
+          "level": 2,
+          "line": 128
+        },
+        {
+          "heading": "IT-001: Page load displays all three widgets",
+          "level": 3,
+          "line": 130
+        },
+        {
+          "heading": "IT-002: LiuNian selection triggers star chart recalculation",
+          "level": 3,
+          "line": 134
+        },
+        {
+          "heading": "IT-003: LiuNian selection does not alter natal chart",
+          "level": 3,
+          "line": 139
+        },
+        {
+          "heading": "IT-004: Rapid LiuNian selections handle gracefully",
+          "level": 3,
+          "line": 143
+        },
+        {
+          "heading": "IT-005: JieQiRiseSetCard data consistent with ViewModel",
+          "level": 3,
+          "line": 148
+        },
+        {
+          "heading": "IT-006: FourZhuCard data consistent with ObserverPosition",
+          "level": 3,
+          "line": 152
+        },
+        {
+          "heading": "4. Edge Cases",
+          "level": 2,
+          "line": 158
+        },
+        {
+          "heading": "EC-001: Null observer — widgets handle gracefully (P0)",
+          "level": 3,
+          "line": 160
+        },
+        {
+          "heading": "EC-002: Extreme old date (year 100 AD) (P2)",
+          "level": 3,
+          "line": 163
+        },
+        {
+          "heading": "EC-003: Future date (year 2200) (P2)",
+          "level": 3,
+          "line": 166
+        },
+        {
+          "heading": "EC-004: Polar location — no sunrise/sunset (P2)",
+          "level": 3,
+          "line": 169
+        },
+        {
+          "heading": "EC-005: Empty YunLiuTreeList nodes (P1)",
+          "level": 3,
+          "line": 172
+        },
+        {
+          "heading": "EC-006: JieQiRiseSetCard with altitude (P2)",
+          "level": 3,
+          "line": 175
+        },
+        {
+          "heading": "EC-007: ViewModel dispose releases ValueNotifiers (P1)",
+          "level": 3,
+          "line": 178
+        },
+        {
+          "heading": "EC-008: onNodeTap on DaYun parent node (P1)",
+          "level": 3,
+          "line": 181
+        },
+        {
+          "heading": "EC-009: JieQi boundary date (P1)",
+          "level": 3,
+          "line": 184
+        },
+        {
+          "heading": "EC-010: Concurrent calculate and onLiuNianSelected (P1)",
+          "level": 3,
+          "line": 187
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 37
+      }
+    },
+    {
+      "path": "doc/code_arch.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 121,
+      "nonEmptyLines": 107,
+      "sections": [
+        {
+          "heading": "“七政四余”项目代码架构文档",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "1. 文件结构与主要功能",
+          "level": 2,
+          "line": 4
+        },
+        {
+          "heading": "2. 程序调用结构图（以创建新命盘为例）",
+          "level": 2,
+          "line": 68
+        },
+        {
+          "heading": "调用流程说明：",
+          "level": 3,
+          "line": 105
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 4
+      }
+    },
+    {
+      "path": "doc/code_review.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 54,
+      "nonEmptyLines": 35,
+      "sections": [
+        {
+          "heading": "“七政四余”项目代码审查报告",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "1. 总体评价",
+          "level": 2,
+          "line": 4
+        },
+        {
+          "heading": "2. 优点",
+          "level": 2,
+          "line": 8
+        },
+        {
+          "heading": "3. 潜在的改进点",
+          "level": 2,
+          "line": 28
+        },
+        {
+          "heading": "4. 总结",
+          "level": 2,
+          "line": 51
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 5
+      }
+    },
+    {
+      "path": "doc/tianchudao_refactor_todo_list.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 86,
+      "nonEmptyLines": 63,
+      "sections": [
+        {
+          "heading": "“天赤道制”集成开发任务清单 (TODO List) - V3 (最终版)",
+          "level": 3,
+          "line": 1
+        },
+        {
+          "heading": "**阶段一：基础架构与抽象层搭建 (深化)**",
+          "level": 4,
+          "line": 7
+        },
+        {
+          "heading": "**阶段二：引擎实现与数据加载**",
+          "level": 4,
+          "line": 21
+        },
+        {
+          "heading": "**阶段三：表现层(UI)重构与集成**",
+          "level": 4,
+          "line": 43
+        },
+        {
+          "heading": "**阶段四：测试与验证**",
+          "level": 4,
+          "line": 77
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 5
+      }
+    }
+  ]
+}{
+  "scriptCompleted": true,
+  "filesAnalyzed": 5,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "doc/feature/ge_ju/claude_ge_ju_1_summary.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 217,
+      "nonEmptyLines": 167,
+      "sections": [
+        {
+          "heading": "ge_ju_1.txt 格局数据转换总结",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "一、转换概述",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "二、源文件统计",
+          "level": 2,
+          "line": 11
+        },
+        {
+          "heading": "三、转换结果",
+          "level": 2,
+          "line": 22
+        },
+        {
+          "heading": "3.1 输出文件",
+          "level": 3,
+          "line": 24
+        },
+        {
+          "heading": "3.2 数据质量",
+          "level": 3,
+          "line": 37
+        },
+        {
+          "heading": "四、JSON Schema",
+          "level": 2,
+          "line": 45
+        },
+        {
+          "heading": "4.1 单条格局结构",
+          "level": 3,
+          "line": 47
+        },
+        {
+          "heading": "4.2 字段说明",
+          "level": 3,
+          "line": 64
+        },
+        {
+          "heading": "五、使用的Condition Types",
+          "level": 2,
+          "line": 79
+        },
+        {
+          "heading": "星曜位置 (4种)",
+          "level": 3,
+          "line": 83
+        },
+        {
+          "heading": "星曜关系 (7种)",
+          "level": 3,
+          "line": 89
+        },
+        {
+          "heading": "命盘结构 (4种)",
+          "level": 3,
+          "line": 98
+        },
+        {
+          "heading": "用神体系 (3种)",
+          "level": 3,
+          "line": 104
+        },
+        {
+          "heading": "时间条件 (4种)",
+          "level": 3,
+          "line": 109
+        },
+        {
+          "heading": "宫位状态 (1种)",
+          "level": 3,
+          "line": 115
+        },
+        {
+          "heading": "神煞条件 (2种)",
+          "level": 3,
+          "line": 118
+        },
+        {
+          "heading": "行限条件 (3种)",
+          "level": 3,
+          "line": 122
+        },
+        {
+          "heading": "组合逻辑 (3种)",
+          "level": 3,
+          "line": 127
+        },
+        {
+          "heading": "六、转换过程中的问题与修复",
+          "level": 2,
+          "line": 132
+        },
+        {
+          "heading": "6.1 JSON解析问题",
+          "level": 3,
+          "line": 134
+        },
+        {
+          "heading": "6.2 非标准Condition Type",
+          "level": 3,
+          "line": 138
+        },
+        {
+          "heading": "6.3 枚举值修复",
+          "level": 3,
+          "line": 153
+        },
+        {
+          "heading": "七、GUI集成状态",
+          "level": 2,
+          "line": 160
+        },
+        {
+          "heading": "7.1 文件位置",
+          "level": 3,
+          "line": 162
+        },
+        {
+          "heading": "7.2 Repository配置",
+          "level": 3,
+          "line": 177
+        },
+        {
+          "heading": "7.3 pubspec.yaml配置",
+          "level": 3,
+          "line": 191
+        },
+        {
+          "heading": "7.4 集成状态",
+          "level": 3,
+          "line": 200
+        },
+        {
+          "heading": "7.5 访问路径",
+          "level": 3,
+          "line": 207
+        },
+        {
+          "heading": "八、后续工作",
+          "level": 2,
+          "line": 211
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 30
+      }
+    },
+    {
+      "path": "doc/feature/ge_ju/manager_plans.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 731,
+      "nonEmptyLines": 606,
+      "sections": [
+        {
+          "heading": "格局管理程序设计方案",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "一、需求概述",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "1.1 功能目标",
+          "level": 3,
+          "line": 5
+        },
+        {
+          "heading": "1.2 核心约束",
+          "level": 3,
+          "line": 12
+        },
+        {
+          "heading": "二、系统架构设计",
+          "level": 2,
+          "line": 20
+        },
+        {
+          "heading": "2.1 分层结构",
+          "level": 3,
+          "line": 22
+        },
+        {
+          "heading": "2.2 数据存储策略",
+          "level": 3,
+          "line": 63
+        },
+        {
+          "heading": "三、核心模块设计",
+          "level": 2,
+          "line": 73
+        },
+        {
+          "heading": "3.1 Repository 层",
+          "level": 3,
+          "line": 75
+        },
+        {
+          "heading": "3.1.1 接口定义",
+          "level": 4,
+          "line": 77
+        },
+        {
+          "heading": "3.1.2 实现类",
+          "level": 4,
+          "line": 110
+        },
+        {
+          "heading": "3.2 LocalDataSource 层",
+          "level": 3,
+          "line": 127
+        },
+        {
+          "heading": "3.3 Service 层",
+          "level": 3,
+          "line": 151
+        },
+        {
+          "heading": "3.4 ViewModel 层",
+          "level": 3,
+          "line": 241
+        },
+        {
+          "heading": "3.4.1 列表 ViewModel",
+          "level": 4,
+          "line": 243
+        },
+        {
+          "heading": "3.4.2 编辑器 ViewModel",
+          "level": 4,
+          "line": 297
+        },
+        {
+          "heading": "3.5 条件编辑器设计",
+          "level": 3,
+          "line": 340
+        },
+        {
+          "heading": "3.5.1 条件编辑器模型",
+          "level": 4,
+          "line": 344
+        },
+        {
+          "heading": "3.5.2 条件类型注册表",
+          "level": 4,
+          "line": 370
+        },
+        {
+          "heading": "四、UI 设计",
+          "level": 2,
+          "line": 445
+        },
+        {
+          "heading": "4.1 页面结构",
+          "level": 3,
+          "line": 447
+        },
+        {
+          "heading": "4.2 条件编辑器弹窗",
+          "level": 3,
+          "line": 536
+        },
+        {
+          "heading": "五、路由设计",
+          "level": 2,
+          "line": 560
+        },
+        {
+          "heading": "六、依赖注入配置",
+          "level": 2,
+          "line": 580
+        },
+        {
+          "heading": "七、数据流示例",
+          "level": 2,
+          "line": 623
+        },
+        {
+          "heading": "7.1 创建新格局流程",
+          "level": 3,
+          "line": 625
+        },
+        {
+          "heading": "八、错误处理策略",
+          "level": 2,
+          "line": 663
+        },
+        {
+          "heading": "8.1 错误类型定义",
+          "level": 3,
+          "line": 665
+        },
+        {
+          "heading": "九、测试策略",
+          "level": 2,
+          "line": 701
+        },
+        {
+          "heading": "9.1 单元测试",
+          "level": 3,
+          "line": 703
+        },
+        {
+          "heading": "9.2 集成测试",
+          "level": 3,
+          "line": 708
+        },
+        {
+          "heading": "9.3 Widget 测试",
+          "level": 3,
+          "line": 712
+        },
+        {
+          "heading": "十、后续扩展",
+          "level": 2,
+          "line": 719
+        },
+        {
+          "heading": "10.1 云同步支持",
+          "level": 3,
+          "line": 721
+        },
+        {
+          "heading": "10.2 版本管理",
+          "level": 3,
+          "line": 725
+        },
+        {
+          "heading": "10.3 社区分享",
+          "level": 3,
+          "line": 729
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 36
+      }
+    },
+    {
+      "path": "doc/feature/ge_ju/manager_tasks.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 704,
+      "nonEmptyLines": 622,
+      "sections": [
+        {
+          "heading": "格局管理程序 - 原子任务清单",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "第一阶段：数据层（Data Layer）",
+          "level": 2,
+          "line": 8
+        },
+        {
+          "heading": "1.1 错误类型定义",
+          "level": 3,
+          "line": 10
+        },
+        {
+          "heading": "1.2 本地数据源",
+          "level": 3,
+          "line": 23
+        },
+        {
+          "heading": "1.3 Repository 接口",
+          "level": 3,
+          "line": 48
+        },
+        {
+          "heading": "1.4 Repository 实现",
+          "level": 3,
+          "line": 69
+        },
+        {
+          "heading": "第二阶段：领域层（Domain Layer）",
+          "level": 2,
+          "line": 100
+        },
+        {
+          "heading": "2.1 验证结果模型",
+          "level": 3,
+          "line": 102
+        },
+        {
+          "heading": "2.2 CRUD Service",
+          "level": 3,
+          "line": 135
+        },
+        {
+          "heading": "第三阶段：表现层模型（Presentation Models）",
+          "level": 2,
+          "line": 182
+        },
+        {
+          "heading": "3.1 条件类型注册表",
+          "level": 3,
+          "line": 184
+        },
+        {
+          "heading": "3.2 条件编辑器节点模型",
+          "level": 3,
+          "line": 235
+        },
+        {
+          "heading": "第四阶段：表现层 ViewModel",
+          "level": 2,
+          "line": 266
+        },
+        {
+          "heading": "4.1 列表 ViewModel",
+          "level": 3,
+          "line": 268
+        },
+        {
+          "heading": "4.2 编辑器 ViewModel",
+          "level": 3,
+          "line": 304
+        },
+        {
+          "heading": "第五阶段：表现层 UI",
+          "level": 2,
+          "line": 346
+        },
+        {
+          "heading": "5.1 格局列表页面",
+          "level": 3,
+          "line": 348
+        },
+        {
+          "heading": "5.2 格局列表项组件",
+          "level": 3,
+          "line": 375
+        },
+        {
+          "heading": "5.3 格局详情页面",
+          "level": 3,
+          "line": 393
+        },
+        {
+          "heading": "5.4 条件树展示组件",
+          "level": 3,
+          "line": 412
+        },
+        {
+          "heading": "5.5 格局编辑器页面",
+          "level": 3,
+          "line": 426
+        },
+        {
+          "heading": "5.6 条件编辑器树组件",
+          "level": 3,
+          "line": 453
+        },
+        {
+          "heading": "5.7 条件编辑器弹窗",
+          "level": 3,
+          "line": 474
+        },
+        {
+          "heading": "5.8 参数输入组件",
+          "level": 3,
+          "line": 509
+        },
+        {
+          "heading": "第六阶段：依赖注入与路由",
+          "level": 2,
+          "line": 528
+        },
+        {
+          "heading": "6.1 依赖注入注册",
+          "level": 3,
+          "line": 530
+        },
+        {
+          "heading": "6.2 路由注册",
+          "level": 3,
+          "line": 560
+        },
+        {
+          "heading": "6.3 资源文件注册",
+          "level": 3,
+          "line": 571
+        },
+        {
+          "heading": "第七阶段：测试",
+          "level": 2,
+          "line": 584
+        },
+        {
+          "heading": "7.1 单元测试",
+          "level": 3,
+          "line": 586
+        },
+        {
+          "heading": "7.2 模型测试",
+          "level": 3,
+          "line": 598
+        },
+        {
+          "heading": "7.3 Widget 测试",
+          "level": 3,
+          "line": 604
+        },
+        {
+          "heading": "任务依赖关系",
+          "level": 2,
+          "line": 612
+        },
+        {
+          "heading": "任务统计",
+          "level": 2,
+          "line": 643
+        },
+        {
+          "heading": "文件清单",
+          "level": 2,
+          "line": 658
+        },
+        {
+          "heading": "新建文件",
+          "level": 3,
+          "line": 660
+        },
+        {
+          "heading": "修改文件",
+          "level": 3,
+          "line": 687
+        },
+        {
+          "heading": "建议的实施顺序",
+          "level": 2,
+          "line": 697
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 38
+      }
+    },
+    {
+      "path": "doc/feature/ge_ju/plans.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 1113,
+      "nonEmptyLines": 931,
+      "sections": [
+        {
+          "heading": "七政四余格局计算系统设计方案",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "一、需求分析",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "目标",
+          "level": 3,
+          "line": 5
+        },
+        {
+          "heading": "核心要求",
+          "level": 3,
+          "line": 8
+        },
+        {
+          "heading": "二、现有代码基础（已实现）",
+          "level": 2,
+          "line": 15
+        },
+        {
+          "heading": "2.1 格局模型（已有）",
+          "level": 3,
+          "line": 17
+        },
+        {
+          "heading": "2.2 星曜关系模型（已有）",
+          "level": 3,
+          "line": 34
+        },
+        {
+          "heading": "2.3 恩难仇用（已有）",
+          "level": 3,
+          "line": 51
+        },
+        {
+          "heading": "2.4 庙旺状态（已有）",
+          "level": 3,
+          "line": 63
+        },
+        {
+          "heading": "2.5 身命模型（已有）",
+          "level": 3,
+          "line": 76
+        },
+        {
+          "heading": "2.6 宫位与宫主（已有）",
+          "level": 3,
+          "line": 93
+        },
+        {
+          "heading": "2.6.1 十二宫体系：黄道与赤道（十二次）",
+          "level": 3,
+          "line": 119
+        },
+        {
+          "heading": "2.7 四主计算方式",
+          "level": 3,
+          "line": 148
+        },
+        {
+          "heading": "2.8 化曜系统（已有）",
+          "level": 3,
+          "line": 155
+        },
+        {
+          "heading": "2.9 神煞系统（已有）",
+          "level": 3,
+          "line": 166
+        },
+        {
+          "heading": "2.10 季节与昼夜（已有）",
+          "level": 3,
+          "line": 173
+        },
+        {
+          "heading": "2.11 五星运行状态（已有）",
+          "level": 3,
+          "line": 183
+        },
+        {
+          "heading": "三、格局判断输入参数设计",
+          "level": 2,
+          "line": 193
+        },
+        {
+          "heading": "3.1 输入参数表",
+          "level": 3,
+          "line": 197
+        },
+        {
+          "heading": "3.2 GeJuInput 类定义",
+          "level": 3,
+          "line": 224
+        },
+        {
+          "heading": "四、格局规则JSON结构设计",
+          "level": 2,
+          "line": 300
+        },
+        {
+          "heading": "4.1 规则文件结构",
+          "level": 3,
+          "line": 302
+        },
+        {
+          "heading": "4.2 条件类型定义",
+          "level": 3,
+          "line": 330
+        },
+        {
+          "heading": "星曜位置条件",
+          "level": 4,
+          "line": 332
+        },
+        {
+          "heading": "星曜关系条件（使用现有 StarToStarRelationshipModel）",
+          "level": 4,
+          "line": 351
+        },
+        {
+          "heading": "命盘结构条件",
+          "level": 4,
+          "line": 375
+        },
+        {
+          "heading": "用神条件",
+          "level": 4,
+          "line": 390
+        },
+        {
+          "heading": "时间条件",
+          "level": 4,
+          "line": 405
+        },
+        {
+          "heading": "神煞条件",
+          "level": 4,
+          "line": 420
+        },
+        {
+          "heading": "行限条件",
+          "level": 4,
+          "line": 431
+        },
+        {
+          "heading": "4.3 组合逻辑",
+          "level": 3,
+          "line": 440
+        },
+        {
+          "heading": "五、系统架构设计",
+          "level": 2,
+          "line": 459
+        },
+        {
+          "heading": "5.1 新建文件结构",
+          "level": 3,
+          "line": 461
+        },
+        {
+          "heading": "5.2 核心类设计",
+          "level": 3,
+          "line": 488
+        },
+        {
+          "heading": "GeJuRule（扩展现有GeJuModel）",
+          "level": 4,
+          "line": 490
+        },
+        {
+          "heading": "GeJuCondition（条件基类）",
+          "level": 4,
+          "line": 504
+        },
+        {
+          "heading": "GeJuResult",
+          "level": 4,
+          "line": 531
+        },
+        {
+          "heading": "GeJuManager",
+          "level": 4,
+          "line": 551
+        },
+        {
+          "heading": "GeJuInputBuilder",
+          "level": 4,
+          "line": 565
+        },
+        {
+          "heading": "六、实现步骤",
+          "level": 2,
+          "line": 589
+        },
+        {
+          "heading": "第一阶段：基础框架 ✅ 已完成",
+          "level": 3,
+          "line": 591
+        },
+        {
+          "heading": "第二阶段：条件实现 ✅ 已完成",
+          "level": 3,
+          "line": 598
+        },
+        {
+          "heading": "第三阶段：文本解析器 ⚠️ 部分完成",
+          "level": 3,
+          "line": 608
+        },
+        {
+          "heading": "第四阶段：规则数据 ❌ 未开始",
+          "level": 3,
+          "line": 620
+        },
+        {
+          "heading": "第五阶段：管理器与集成 ❌ 未开始",
+          "level": 3,
+          "line": 627
+        },
+        {
+          "heading": "第六阶段：用户自定义 ❌ 未开始",
+          "level": 3,
+          "line": 633
+        },
+        {
+          "heading": "七、关键文件路径汇总",
+          "level": 2,
+          "line": 639
+        },
+        {
+          "heading": "新建文件",
+          "level": 3,
+          "line": 641
+        },
+        {
+          "heading": "复用现有文件",
+          "level": 3,
+          "line": 653
+        },
+        {
+          "heading": "八、格局示例JSON",
+          "level": 2,
+          "line": 668
+        },
+        {
+          "heading": "示例1：日边红杏",
+          "level": 3,
+          "line": 670
+        },
+        {
+          "heading": "示例2：木临真垣",
+          "level": 3,
+          "line": 696
+        },
+        {
+          "heading": "示例3：雪压寒梅（复杂条件）",
+          "level": 3,
+          "line": 714
+        },
+        {
+          "heading": "九、格局文本转JSON方案",
+          "level": 2,
+          "line": 746
+        },
+        {
+          "heading": "9.1 文本格式分析",
+          "level": 3,
+          "line": 748
+        },
+        {
+          "heading": "9.2 转换策略：三层处理",
+          "level": 3,
+          "line": 757
+        },
+        {
+          "heading": "层级1：自动解析元数据（100%自动化）",
+          "level": 4,
+          "line": 759
+        },
+        {
+          "heading": "层级2：关键词映射（80%自动化）",
+          "level": 4,
+          "line": 762
+        },
+        {
+          "heading": "层级3：人工审核（需人工确认）",
+          "level": 4,
+          "line": 765
+        },
+        {
+          "heading": "9.3 关键词映射表",
+          "level": 3,
+          "line": 768
+        },
+        {
+          "heading": "9.4 转换工具类",
+          "level": 3,
+          "line": 874
+        },
+        {
+          "heading": "9.5 转换工作流程",
+          "level": 3,
+          "line": 1008
+        },
+        {
+          "heading": "9.6 示例：自动解析结果",
+          "level": 3,
+          "line": 1020
+        },
+        {
+          "heading": "十、验证方案",
+          "level": 2,
+          "line": 1091
+        },
+        {
+          "heading": "单元测试",
+          "level": 3,
+          "line": 1093
+        },
+        {
+          "heading": "集成测试",
+          "level": 3,
+          "line": 1098
+        },
+        {
+          "heading": "测试用例示例",
+          "level": 3,
+          "line": 1102
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 67
+      }
+    },
+    {
+      "path": "doc/feature/ge_ju/tasks.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 196,
+      "nonEmptyLines": 149,
+      "sections": [
+        {
+          "heading": "七政四余格局计算系统 - 原子任务清单",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "第一阶段：基础框架 ✅ 已完成",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "1.1 GeJuInput 输入模型",
+          "level": 3,
+          "line": 5
+        },
+        {
+          "heading": "1.2 十二宫体系支持（黄道/赤道）",
+          "level": 3,
+          "line": 9
+        },
+        {
+          "heading": "1.3 GeJuRule 规则模型",
+          "level": 3,
+          "line": 15
+        },
+        {
+          "heading": "1.4 GeJuCondition 条件基类",
+          "level": 3,
+          "line": 18
+        },
+        {
+          "heading": "1.5 JSON 解析器",
+          "level": 3,
+          "line": 22
+        },
+        {
+          "heading": "第二阶段：条件实现 ✅ 已完成",
+          "level": 2,
+          "line": 27
+        },
+        {
+          "heading": "2.1 星曜位置条件 ✅",
+          "level": 3,
+          "line": 29
+        },
+        {
+          "heading": "2.2 星曜关系条件 ✅",
+          "level": 3,
+          "line": 35
+        },
+        {
+          "heading": "2.3 命盘结构条件 ✅",
+          "level": 3,
+          "line": 44
+        },
+        {
+          "heading": "2.4 用神条件 ✅",
+          "level": 3,
+          "line": 50
+        },
+        {
+          "heading": "2.5 星曜庙旺状态条件 ⚠️",
+          "level": 3,
+          "line": 55
+        },
+        {
+          "heading": "2.6 时间条件 ✅",
+          "level": 3,
+          "line": 59
+        },
+        {
+          "heading": "2.7 神煞条件 ✅",
+          "level": 3,
+          "line": 65
+        },
+        {
+          "heading": "2.8 行限条件 ✅",
+          "level": 3,
+          "line": 69
+        },
+        {
+          "heading": "第三阶段：格局文本转JSON ⚠️ 部分完成",
+          "level": 2,
+          "line": 76
+        },
+        {
+          "heading": "3.1 转换工具",
+          "level": 3,
+          "line": 78
+        },
+        {
+          "heading": "3.2 格局JSON数据文件 ❌ 未开始",
+          "level": 3,
+          "line": 95
+        },
+        {
+          "heading": "第四阶段：管理器与集成 ❌ 未开始",
+          "level": 2,
+          "line": 104
+        },
+        {
+          "heading": "4.1 结果模型",
+          "level": 3,
+          "line": 106
+        },
+        {
+          "heading": "4.2 输入构建器",
+          "level": 3,
+          "line": 109
+        },
+        {
+          "heading": "4.3 格局管理器",
+          "level": 3,
+          "line": 112
+        },
+        {
+          "heading": "4.4 集成到命盘流程",
+          "level": 3,
+          "line": 115
+        },
+        {
+          "heading": "第五阶段：用户自定义与验证 ❌ 未开始",
+          "level": 2,
+          "line": 120
+        },
+        {
+          "heading": "5.1 用户自定义支持",
+          "level": 3,
+          "line": 122
+        },
+        {
+          "heading": "5.2 测试验证",
+          "level": 3,
+          "line": 126
+        },
+        {
+          "heading": "当前待完成任务（按优先级）",
+          "level": 2,
+          "line": 133
+        },
+        {
+          "heading": "优先级 1：完善文本解析器",
+          "level": 3,
+          "line": 135
+        },
+        {
+          "heading": "优先级 2：修复庙旺状态条件",
+          "level": 3,
+          "line": 169
+        },
+        {
+          "heading": "优先级 3：管理器与集成",
+          "level": 3,
+          "line": 178
+        },
+        {
+          "heading": "任务统计",
+          "level": 2,
+          "line": 185
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 32
+      }
+    }
+  ]
+}{
+  "scriptCompleted": true,
+  "filesAnalyzed": 5,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "doc/ge_ju/arch_summary_v1.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 445,
+      "nonEmptyLines": 361,
+      "sections": [
+        {
+          "heading": "格局评估系统架构说明 v1",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "目录",
+          "level": 2,
+          "line": 8
+        },
+        {
+          "heading": "1. 概述",
+          "level": 2,
+          "line": 21
+        },
+        {
+          "heading": "核心设计原则",
+          "level": 3,
+          "line": 25
+        },
+        {
+          "heading": "2. 数据模型：三实体架构",
+          "level": 2,
+          "line": 34
+        },
+        {
+          "heading": "三实体关系图",
+          "level": 3,
+          "line": 60
+        },
+        {
+          "heading": "3. 数据来源：双库分离",
+          "level": 2,
+          "line": 82
+        },
+        {
+          "heading": "3.1 内置数据库（只读）",
+          "level": 3,
+          "line": 84
+        },
+        {
+          "heading": "3.2 用户数据库（读写）",
+          "level": 3,
+          "line": 116
+        },
+        {
+          "heading": "3.3 数据合并策略（`GeJuRepositoryImpl`）",
+          "level": 3,
+          "line": 126
+        },
+        {
+          "heading": "4. 完整调用流程",
+          "level": 2,
+          "line": 149
+        },
+        {
+          "heading": "4.1 前置：星盘计算（已有流程）",
+          "level": 3,
+          "line": 151
+        },
+        {
+          "heading": "4.2 格局评估调用链",
+          "level": 3,
+          "line": 165
+        },
+        {
+          "heading": "4.3 GeJuInput 字段一览",
+          "level": 3,
+          "line": 224
+        },
+        {
+          "heading": "4.4 行限格局（XingXian）调用",
+          "level": 3,
+          "line": 247
+        },
+        {
+          "heading": "5. 条件系统",
+          "level": 2,
+          "line": 266
+        },
+        {
+          "heading": "5.1 条件基类",
+          "level": 3,
+          "line": 268
+        },
+        {
+          "heading": "5.2 已实现的条件类型（13 种）",
+          "level": 3,
+          "line": 278
+        },
+        {
+          "heading": "5.3 条件 JSON 格式示例",
+          "level": 3,
+          "line": 307
+        },
+        {
+          "heading": "5.4 评估错误处理",
+          "level": 3,
+          "line": 332
+        },
+        {
+          "heading": "6. 流派与吉凶体系",
+          "level": 2,
+          "line": 350
+        },
+        {
+          "heading": "6.1 当前流派",
+          "level": 3,
+          "line": 352
+        },
+        {
+          "heading": "6.2 吉凶枚举（7 级）",
+          "level": 3,
+          "line": 361
+        },
+        {
+          "heading": "6.3 格局类型（GeJuType）",
+          "level": 3,
+          "line": 388
+        },
+        {
+          "heading": "7. 依赖注入配置",
+          "level": 2,
+          "line": 399
+        },
+        {
+          "heading": "8. 已知限制与待办",
+          "level": 2,
+          "line": 428
+        },
+        {
+          "heading": "限制",
+          "level": 3,
+          "line": 430
+        },
+        {
+          "heading": "短期待办",
+          "level": 3,
+          "line": 439
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 28
+      }
+    },
+    {
+      "path": "doc/ge_ju/community.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 216,
+      "nonEmptyLines": 154,
+      "sections": [
+        {
+          "heading": "GeJu 社区协作层 — 远期规划",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "1. 用户互见需求概述",
+          "level": 2,
+          "line": 8
+        },
+        {
+          "heading": "2. 远端存储与同步",
+          "level": 2,
+          "line": 19
+        },
+        {
+          "heading": "离线优先架构",
+          "level": 3,
+          "line": 21
+        },
+        {
+          "heading": "预埋字段（本地阶段已包含，远期启用）",
+          "level": 3,
+          "line": 25
+        },
+        {
+          "heading": "同步机制",
+          "level": 3,
+          "line": 35
+        },
+        {
+          "heading": "3. Link 实体 — 关联生命周期管理",
+          "level": 2,
+          "line": 43
+        },
+        {
+          "heading": "Link 数据模型",
+          "level": 3,
+          "line": 47
+        },
+        {
+          "heading": "关联关系类型",
+          "level": 3,
+          "line": 62
+        },
+        {
+          "heading": "生命周期（仿 GitHub Issue/PR）",
+          "level": 3,
+          "line": 71
+        },
+        {
+          "heading": "4. 删除审计机制",
+          "level": 2,
+          "line": 97
+        },
+        {
+          "heading": "核心原则",
+          "level": 3,
+          "line": 99
+        },
+        {
+          "heading": "删除记录",
+          "level": 3,
+          "line": 105
+        },
+        {
+          "heading": "5. Discussion Thread",
+          "level": 2,
+          "line": 119
+        },
+        {
+          "heading": "6. 通知系统",
+          "level": 2,
+          "line": 135
+        },
+        {
+          "heading": "6.1 内置注解大版本更新通知",
+          "level": 3,
+          "line": 143
+        },
+        {
+          "heading": "7. 国际化 — 翻译 Overlay 层（远期）",
+          "level": 2,
+          "line": 180
+        },
+        {
+          "heading": "方案",
+          "level": 3,
+          "line": 182
+        },
+        {
+          "heading": "近期策略（已纳入本地方案）",
+          "level": 3,
+          "line": 190
+        },
+        {
+          "heading": "8. 用户筛选偏好（远期扩展部分）",
+          "level": 2,
+          "line": 198
+        },
+        {
+          "heading": "9. 从本地迁移到社区的路径",
+          "level": 2,
+          "line": 211
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 21
+      }
+    },
+    {
+      "path": "doc/ge_ju/local_data_model.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 989,
+      "nonEmptyLines": 761,
+      "sections": [
+        {
+          "heading": "GeJu 数据模型设计文档 — 本地阶段",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "一、设计背景与核心问题",
+          "level": 2,
+          "line": 9
+        },
+        {
+          "heading": "1.1 现实中的格局知识结构",
+          "level": 3,
+          "line": 11
+        },
+        {
+          "heading": "1.2 用户的实际需求",
+          "level": 3,
+          "line": 24
+        },
+        {
+          "heading": "1.3 核心设计原则",
+          "level": 3,
+          "line": 33
+        },
+        {
+          "heading": "二、数据模型总览",
+          "level": 2,
+          "line": 54
+        },
+        {
+          "heading": "三、模型定义",
+          "level": 2,
+          "line": 75
+        },
+        {
+          "heading": "3.1 GeJuRule — 格局锚点",
+          "level": 3,
+          "line": 77
+        },
+        {
+          "heading": "设计说明",
+          "level": 4,
+          "line": 87
+        },
+        {
+          "heading": "3.2 GeJuAlias — 格局别名",
+          "level": 3,
+          "line": 108
+        },
+        {
+          "heading": "设计说明",
+          "level": 4,
+          "line": 117
+        },
+        {
+          "heading": "3.3 GeJuAnnotation — 注解（文字层）",
+          "level": 3,
+          "line": 135
+        },
+        {
+          "heading": "设计说明",
+          "level": 4,
+          "line": 178
+        },
+        {
+          "heading": "3.3.1 GeJuAnnotationVersionHistory — 注解版本历史",
+          "level": 3,
+          "line": 256
+        },
+        {
+          "heading": "设计说明",
+          "level": 4,
+          "line": 270
+        },
+        {
+          "heading": "3.4 GeJuConditionSet — 判断方案（逻辑层）",
+          "level": 3,
+          "line": 283
+        },
+        {
+          "heading": "设计说明",
+          "level": 4,
+          "line": 318
+        },
+        {
+          "heading": "3.5 GeJuSource — 典籍信息",
+          "level": 3,
+          "line": 366
+        },
+        {
+          "heading": "设计说明",
+          "level": 4,
+          "line": 375
+        },
+        {
+          "heading": "四、双库隔离架构",
+          "level": 2,
+          "line": 390
+        },
+        {
+          "heading": "4.1 存储模型",
+          "level": 3,
+          "line": 392
+        },
+        {
+          "heading": "为什么要双库隔离？",
+          "level": 4,
+          "line": 413
+        },
+        {
+          "heading": "4.2 UserPreference — 用户偏好",
+          "level": 3,
+          "line": 427
+        },
+        {
+          "heading": "设计说明",
+          "level": 4,
+          "line": 442
+        },
+        {
+          "heading": "4.3 内置注解的 Assets 双文件结构",
+          "level": 3,
+          "line": 466
+        },
+        {
+          "heading": "设计说明",
+          "level": 4,
+          "line": 532
+        },
+        {
+          "heading": "4.4 注解版本可见性规则",
+          "level": 3,
+          "line": 543
+        },
+        {
+          "heading": "4.5 Switcher Widget — 版本切换",
+          "level": 3,
+          "line": 602
+        },
+        {
+          "heading": "设计说明",
+          "level": 4,
+          "line": 631
+        },
+        {
+          "heading": "五、评估流程",
+          "level": 2,
+          "line": 646
+        },
+        {
+          "heading": "5.1 核心流程",
+          "level": 3,
+          "line": 648
+        },
+        {
+          "heading": "设计说明",
+          "level": 4,
+          "line": 702
+        },
+        {
+          "heading": "5.2 ConditionSet 的创建方式",
+          "level": 3,
+          "line": 717
+        },
+        {
+          "heading": "Fork 时为什么深拷贝而不是引用？",
+          "level": 4,
+          "line": 761
+        },
+        {
+          "heading": "六、用户操作路径",
+          "level": 2,
+          "line": 770
+        },
+        {
+          "heading": "6.1 路径一：正常使用（查看匹配结果）",
+          "level": 3,
+          "line": 772
+        },
+        {
+          "heading": "6.2 路径二：发现缺失格局（核心场景）",
+          "level": 3,
+          "line": 795
+        },
+        {
+          "heading": "为什么编辑模式中搜索要包含被隐藏的方案？",
+          "level": 4,
+          "line": 839
+        },
+        {
+          "heading": "6.3 路径三：管理已有方案",
+          "level": 3,
+          "line": 845
+        },
+        {
+          "heading": "6.4 隐藏与取消隐藏",
+          "level": 3,
+          "line": 869
+        },
+        {
+          "heading": "隐藏 vs 删除",
+          "level": 4,
+          "line": 885
+        },
+        {
+          "heading": "七、Community 预埋字段说明",
+          "level": 2,
+          "line": 896
+        },
+        {
+          "heading": "八、删除机制",
+          "level": 2,
+          "line": 917
+        },
+        {
+          "heading": "本地阶段规则",
+          "level": 3,
+          "line": 919
+        },
+        {
+          "heading": "九、与现有代码的迁移对照",
+          "level": 2,
+          "line": 950
+        },
+        {
+          "heading": "十、术语表",
+          "level": 2,
+          "line": 969
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 46
+      }
+    },
+    {
+      "path": "doc/ge_ju/optimized_ge_ju_calculator.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 411,
+      "nonEmptyLines": 307,
+      "sections": [
+        {
+          "heading": "格局评估管线优化方案 — 技术文档",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "1. 背景与动机",
+          "level": 2,
+          "line": 8
+        },
+        {
+          "heading": "1.1 原始管线的问题",
+          "level": 3,
+          "line": 10
+        },
+        {
+          "heading": "1.2 优化目标",
+          "level": 3,
+          "line": 33
+        },
+        {
+          "heading": "2. 优化架构总览",
+          "level": 2,
+          "line": 42
+        },
+        {
+          "heading": "3. 各 Phase 详细设计",
+          "level": 2,
+          "line": 83
+        },
+        {
+          "heading": "Phase 1: Repository 索引优化 + 批量加载",
+          "level": 3,
+          "line": 85
+        },
+        {
+          "heading": "Phase 2: 评估服务规则数据缓存",
+          "level": 3,
+          "line": 119
+        },
+        {
+          "heading": "Phase 3: 评估状态追踪",
+          "level": 3,
+          "line": 143
+        },
+        {
+          "heading": "Phase 4: 评估计时",
+          "level": 3,
+          "line": 175
+        },
+        {
+          "heading": "Phase 5: 数据缺口文档化",
+          "level": 3,
+          "line": 192
+        },
+        {
+          "heading": "Phase 6: 预过滤器（GeJuPreFilter）— 核心优化",
+          "level": 3,
+          "line": 203
+        },
+        {
+          "heading": "6.1 设计原理",
+          "level": 4,
+          "line": 211
+        },
+        {
+          "heading": "6.2 预计算的星盘事实表",
+          "level": 4,
+          "line": 221
+        },
+        {
+          "heading": "6.3 AND/OR 三值逻辑传播",
+          "level": 4,
+          "line": 240
+        },
+        {
+          "heading": "6.4 条件覆盖率",
+          "level": 4,
+          "line": 261
+        },
+        {
+          "heading": "6.5 预期效果",
+          "level": 4,
+          "line": 278
+        },
+        {
+          "heading": "4. 文件变更清单",
+          "level": 2,
+          "line": 291
+        },
+        {
+          "heading": "5. 验证方案",
+          "level": 2,
+          "line": 309
+        },
+        {
+          "heading": "5.1 静态检查",
+          "level": 3,
+          "line": 311
+        },
+        {
+          "heading": "5.2 运行时检查",
+          "level": 3,
+          "line": 318
+        },
+        {
+          "heading": "5.3 一致性验证",
+          "level": 3,
+          "line": 332
+        },
+        {
+          "heading": "6. 后续扩展方案",
+          "level": 2,
+          "line": 338
+        },
+        {
+          "heading": "6.1 短期（可直接实施）",
+          "level": 3,
+          "line": 340
+        },
+        {
+          "heading": "6.2 中期（需数据支持）",
+          "level": 3,
+          "line": 348
+        },
+        {
+          "heading": "6.3 长期（架构级）",
+          "level": 3,
+          "line": 356
+        },
+        {
+          "heading": "7. 数据分析附录",
+          "level": 2,
+          "line": 366
+        },
+        {
+          "heading": "7.1 根节点类型分布",
+          "level": 3,
+          "line": 370
+        },
+        {
+          "heading": "7.2 叶子条件类型分布",
+          "level": 3,
+          "line": 383
+        },
+        {
+          "heading": "7.3 条件嵌套深度",
+          "level": 3,
+          "line": 401
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 30
+      }
+    },
+    {
+      "path": "doc/ge_ju/unfinished.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 45,
+      "nonEmptyLines": 43,
+      "sections": [
+        {
+          "heading": "未完成格局统计",
+          "level": 1,
+          "line": 1
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 1
+      }
+    }
+  ]
+}{
+  "scriptCompleted": true,
+  "filesAnalyzed": 4,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "doc/ge_ju_system/PRDs.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 46,
+      "nonEmptyLines": 31,
+      "sections": [
+        {
+          "heading": "产品需求文档 (PRD): 七政四余格局系统升级",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "1. 背景与目标",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "2. 用户故事 (User Stories)",
+          "level": 2,
+          "line": 13
+        },
+        {
+          "heading": "3. 功能需求",
+          "level": 2,
+          "line": 20
+        },
+        {
+          "heading": "3.1 核心数据结构",
+          "level": 3,
+          "line": 22
+        },
+        {
+          "heading": "3.2 逻辑引擎",
+          "level": 3,
+          "line": 28
+        },
+        {
+          "heading": "3.3 用户生成内容 (UGC)",
+          "level": 3,
+          "line": 36
+        },
+        {
+          "heading": "4. 非功能需求",
+          "level": 2,
+          "line": 42
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 8
+      }
+    },
+    {
+      "path": "doc/ge_ju_system/Plans.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 79,
+      "nonEmptyLines": 60,
+      "sections": [
+        {
+          "heading": "系统架构与实施计划 (Plans)",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "1. 数据模型",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "1.1 格局索引 (`patterns_index.json`)",
+          "level": 3,
+          "line": 5
+        },
+        {
+          "heading": "1.2 定义仓库 (`definitions.json`)",
+          "level": 3,
+          "line": 19
+        },
+        {
+          "heading": "2. 执行流程",
+          "level": 2,
+          "line": 43
+        },
+        {
+          "heading": "2.1 解析逻辑 (选择器 Selector)",
+          "level": 3,
+          "line": 45
+        },
+        {
+          "heading": "2.2 计算引擎",
+          "level": 3,
+          "line": 57
+        },
+        {
+          "heading": "3. DSL 规范 (功能码)",
+          "level": 2,
+          "line": 64
+        },
+        {
+          "heading": "4. UI 组件",
+          "level": 2,
+          "line": 74
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 9
+      }
+    },
+    {
+      "path": "doc/ge_ju_system/Tasks.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 25,
+      "nonEmptyLines": 17,
+      "sections": [
+        {
+          "heading": "项目任务: 格局系统升级 (Tasks)",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "第一阶段: 基础架构与数据",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "第二阶段: 核心引擎",
+          "level": 2,
+          "line": 9
+        },
+        {
+          "heading": "第三阶段: 用户自定义 (后端/存储)",
+          "level": 2,
+          "line": 15
+        },
+        {
+          "heading": "第四阶段: UI 与交互",
+          "level": 2,
+          "line": 20
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 5
+      }
+    },
+    {
+      "path": "doc/ge_ju_system/todo_list.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 37,
+      "nonEmptyLines": 27,
+      "sections": [
+        {
+          "heading": "原子化待办事项 (Todo List)",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "第一组: 数据结构与迁移",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "第二组: 引擎实现",
+          "level": 2,
+          "line": 11
+        },
+        {
+          "heading": "第三组: 逻辑 DSL",
+          "level": 2,
+          "line": 19
+        },
+        {
+          "heading": "第四组: 用户系统",
+          "level": 2,
+          "line": 27
+        },
+        {
+          "heading": "第五组: UI 实现",
+          "level": 2,
+          "line": 33
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 6
+      }
+    }
+  ]
+}

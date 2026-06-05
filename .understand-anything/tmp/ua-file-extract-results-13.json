@@ -1,0 +1,1612 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 25,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": ".metadata",
+      "language": "unknown",
+      "fileCategory": "code",
+      "totalLines": 10,
+      "nonEmptyLines": 8,
+      "metrics": {}
+    },
+    {
+      "path": ".understand-anything/.understandignore",
+      "language": "unknown",
+      "fileCategory": "code",
+      "totalLines": 58,
+      "nonEmptyLines": 52,
+      "metrics": {}
+    },
+    {
+      "path": ".understand-anything/intermediate/temp-scan.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 2580,
+      "nonEmptyLines": 2580,
+      "sections": [
+        {
+          "heading": "scriptCompleted",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "files",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "totalFiles",
+          "level": 1,
+          "line": 2561
+        },
+        {
+          "heading": "filteredByIgnore",
+          "level": 1,
+          "line": 2562
+        },
+        {
+          "heading": "estimatedComplexity",
+          "level": 1,
+          "line": 2563
+        },
+        {
+          "heading": "stats",
+          "level": 1,
+          "line": 2564
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 6
+      }
+    },
+    {
+      "path": ".understand-anything/tmp/changed-files.txt",
+      "language": "txt",
+      "fileCategory": "docs",
+      "totalLines": 211,
+      "nonEmptyLines": 209,
+      "metrics": {}
+    },
+    {
+      "path": "doc/stars_resolver/code_review_report.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 391,
+      "nonEmptyLines": 268,
+      "sections": [
+        {
+          "heading": "StarsResolver Code Review Report",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "1. Overall Purpose & Completed Work",
+          "level": 2,
+          "line": 15
+        },
+        {
+          "heading": "1.1 What StarsResolver Does",
+          "level": 3,
+          "line": 17
+        },
+        {
+          "heading": "1.2 Core Problem Domain",
+          "level": 3,
+          "line": 21
+        },
+        {
+          "heading": "1.3 Completed Algorithms",
+          "level": 3,
+          "line": 29
+        },
+        {
+          "heading": "2. Algorithm Descriptions",
+          "level": 2,
+          "line": 46
+        },
+        {
+          "heading": "2.1 `calculateMinSafeAngle(outerR, innerR, r)` — Geometric Safety Angle",
+          "level": 3,
+          "line": 48
+        },
+        {
+          "heading": "2.2 `resolveUIStars(stars)` — Full Pipeline Orchestrator",
+          "level": 3,
+          "line": 62
+        },
+        {
+          "heading": "2.3 `doResolve2Stars(stars)` — Two-Star Overlap Resolution",
+          "level": 3,
+          "line": 78
+        },
+        {
+          "heading": "2.4 `doResolveSameAngleStars(stars)` — Same-Angle Fan-Out",
+          "level": 3,
+          "line": 89
+        },
+        {
+          "heading": "2.5 `doResolveConstellation(stars)` — Multi-Star Constellation",
+          "level": 3,
+          "line": 99
+        },
+        {
+          "heading": "2.6 `handleTwoConstellationModel(constellations)` — Inter-Constellation Overlap",
+          "level": 3,
+          "line": 121
+        },
+        {
+          "heading": "2.7 `GraphUtils.findConnectedComponents(graph)` — Graph DFS",
+          "level": 3,
+          "line": 131
+        },
+        {
+          "heading": "2.8 `sortCircularAngles(angles)` — Circular Angle Sorting",
+          "level": 3,
+          "line": 137
+        },
+        {
+          "heading": "2.9 `checkAngleInRange(edges, otherAngle)` — Range Check",
+          "level": 3,
+          "line": 148
+        },
+        {
+          "heading": "2.10 `calculateMidpointAngle(angleA, angleB)` — Midpoint on Circle",
+          "level": 3,
+          "line": 158
+        },
+        {
+          "heading": "3. Data Model Summary",
+          "level": 2,
+          "line": 166
+        },
+        {
+          "heading": "3.1 `UIStarModel`",
+          "level": 3,
+          "line": 168
+        },
+        {
+          "heading": "3.2 `UIConstellationModel`",
+          "level": 3,
+          "line": 185
+        },
+        {
+          "heading": "3.3 `Edge` mixin / `StarEdgeAngle` interface",
+          "level": 3,
+          "line": 192
+        },
+        {
+          "heading": "4. Known Defects (from test suite)",
+          "level": 2,
+          "line": 202
+        },
+        {
+          "heading": "Defect 3: `correctCircleAngle()` — Single-Wrap Bug",
+          "level": 3,
+          "line": 206
+        },
+        {
+          "heading": "Defect 4: `getMinDiffAngleOfTwoStar()` — Uses `max()` Instead of `sum()`",
+          "level": 3,
+          "line": 212
+        },
+        {
+          "heading": "Defect 5: (Documented but actually correct)",
+          "level": 3,
+          "line": 218
+        },
+        {
+          "heading": "Defect 8: Cumulative `adjustAngle()` Calls",
+          "level": 3,
+          "line": 221
+        },
+        {
+          "heading": "Defect 9: `compareTo()` Asymmetry",
+          "level": 3,
+          "line": 226
+        },
+        {
+          "heading": "5. Code Quality Issues",
+          "level": 2,
+          "line": 234
+        },
+        {
+          "heading": "5.1 Mutable State Design",
+          "level": 3,
+          "line": 236
+        },
+        {
+          "heading": "5.2 Code Duplication",
+          "level": 3,
+          "line": 245
+        },
+        {
+          "heading": "5.3 Commented-Out Debug Code",
+          "level": 3,
+          "line": 256
+        },
+        {
+          "heading": "5.4 Typos and Naming",
+          "level": 3,
+          "line": 260
+        },
+        {
+          "heading": "5.5 Exception-Based Control Flow",
+          "level": 3,
+          "line": 267
+        },
+        {
+          "heading": "5.6 `Tuple` Usage",
+          "level": 3,
+          "line": 276
+        },
+        {
+          "heading": "5.7 Unused Method",
+          "level": 3,
+          "line": 282
+        },
+        {
+          "heading": "6. Algorithmic Gaps & Missing Pieces",
+          "level": 2,
+          "line": 288
+        },
+        {
+          "heading": "6.1 No Iterative Refinement",
+          "level": 3,
+          "line": 290
+        },
+        {
+          "heading": "6.2 No Global Optimization",
+          "level": 3,
+          "line": 296
+        },
+        {
+          "heading": "6.3 No Boundary Constraints",
+          "level": 3,
+          "line": 302
+        },
+        {
+          "heading": "6.4 Priority Not Fully Utilized",
+          "level": 3,
+          "line": 308
+        },
+        {
+          "heading": "6.5 No Multi-Ring Support",
+          "level": 3,
+          "line": 312
+        },
+        {
+          "heading": "6.6 `_createStarMap` Key Collision",
+          "level": 3,
+          "line": 316
+        },
+        {
+          "heading": "7. Test Coverage Assessment",
+          "level": 2,
+          "line": 322
+        },
+        {
+          "heading": "7.1 What's Tested (ui_star_model_test.dart)",
+          "level": 3,
+          "line": 324
+        },
+        {
+          "heading": "7.2 What's NOT Tested",
+          "level": 3,
+          "line": 333
+        },
+        {
+          "heading": "7.3 Recommended Test Additions",
+          "level": 3,
+          "line": 341
+        },
+        {
+          "heading": "8. Architecture Observations",
+          "level": 2,
+          "line": 355
+        },
+        {
+          "heading": "8.1 Layer Violation",
+          "level": 3,
+          "line": 357
+        },
+        {
+          "heading": "8.2 Model Location",
+          "level": 3,
+          "line": 361
+        },
+        {
+          "heading": "8.3 Dependency",
+          "level": 3,
+          "line": 365
+        },
+        {
+          "heading": "9. Summary",
+          "level": 2,
+          "line": 371
+        },
+        {
+          "heading": "What Works Well",
+          "level": 3,
+          "line": 373
+        },
+        {
+          "heading": "Key Risks",
+          "level": 3,
+          "line": 379
+        },
+        {
+          "heading": "Recommended Priority Actions",
+          "level": 3,
+          "line": 386
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 53
+      }
+    },
+    {
+      "path": "doc/stars_resolver/code_review_zh.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 391,
+      "nonEmptyLines": 268,
+      "sections": [
+        {
+          "heading": "StarsResolver 代码审查报告",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "1. 整体目标与已完成工作",
+          "level": 2,
+          "line": 15
+        },
+        {
+          "heading": "1.1 StarsResolver 的作用",
+          "level": 3,
+          "line": 17
+        },
+        {
+          "heading": "1.2 核心问题领域",
+          "level": 3,
+          "line": 21
+        },
+        {
+          "heading": "1.3 已完成的算法清单",
+          "level": 3,
+          "line": 29
+        },
+        {
+          "heading": "2. 算法详细说明",
+          "level": 2,
+          "line": 46
+        },
+        {
+          "heading": "2.1 `calculateMinSafeAngle(outerR, innerR, r)` — 几何安全角度计算",
+          "level": 3,
+          "line": 48
+        },
+        {
+          "heading": "2.2 `resolveUIStars(stars)` — 完整流水线编排器",
+          "level": 3,
+          "line": 62
+        },
+        {
+          "heading": "2.3 `doResolve2Stars(stars)` — 两星重叠解析",
+          "level": 3,
+          "line": 78
+        },
+        {
+          "heading": "2.4 `doResolveSameAngleStars(stars)` — 同角度星体扇形展开",
+          "level": 3,
+          "line": 89
+        },
+        {
+          "heading": "2.5 `doResolveConstellation(stars)` — 多星星座构建",
+          "level": 3,
+          "line": 99
+        },
+        {
+          "heading": "2.6 `handleTwoConstellationModel(constellations)` — 星座间重叠处理",
+          "level": 3,
+          "line": 121
+        },
+        {
+          "heading": "2.7 `GraphUtils.findConnectedComponents(graph)` — 图的 DFS 遍历",
+          "level": 3,
+          "line": 131
+        },
+        {
+          "heading": "2.8 `sortCircularAngles(angles)` — 圆周角度排序",
+          "level": 3,
+          "line": 137
+        },
+        {
+          "heading": "2.9 `checkAngleInRange(edges, otherAngle)` — 范围检测",
+          "level": 3,
+          "line": 148
+        },
+        {
+          "heading": "2.10 `calculateMidpointAngle(angleA, angleB)` — 圆上中点计算",
+          "level": 3,
+          "line": 158
+        },
+        {
+          "heading": "3. 数据模型概要",
+          "level": 2,
+          "line": 166
+        },
+        {
+          "heading": "3.1 `UIStarModel`",
+          "level": 3,
+          "line": 168
+        },
+        {
+          "heading": "3.2 `UIConstellationModel`",
+          "level": 3,
+          "line": 185
+        },
+        {
+          "heading": "3.3 `Edge` mixin / `StarEdgeAngle` 接口",
+          "level": 3,
+          "line": 192
+        },
+        {
+          "heading": "4. 已知缺陷（来自测试用例）",
+          "level": 2,
+          "line": 202
+        },
+        {
+          "heading": "缺陷 3：`correctCircleAngle()` — 单次环绕 Bug",
+          "level": 3,
+          "line": 206
+        },
+        {
+          "heading": "缺陷 4：`getMinDiffAngleOfTwoStar()` — 使用 `max()` 而非 `sum()`",
+          "level": 3,
+          "line": 212
+        },
+        {
+          "heading": "缺陷 5：（已记录但实际正确）",
+          "level": 3,
+          "line": 218
+        },
+        {
+          "heading": "缺陷 8：`adjustAngle()` 的累积调用",
+          "level": 3,
+          "line": 221
+        },
+        {
+          "heading": "缺陷 9：`compareTo()` 不对称",
+          "level": 3,
+          "line": 226
+        },
+        {
+          "heading": "5. 代码质量问题",
+          "level": 2,
+          "line": 234
+        },
+        {
+          "heading": "5.1 可变状态设计",
+          "level": 3,
+          "line": 236
+        },
+        {
+          "heading": "5.2 代码重复",
+          "level": 3,
+          "line": 245
+        },
+        {
+          "heading": "5.3 残留的调试代码",
+          "level": 3,
+          "line": 256
+        },
+        {
+          "heading": "5.4 拼写与命名问题",
+          "level": 3,
+          "line": 260
+        },
+        {
+          "heading": "5.5 基于异常的流程控制",
+          "level": 3,
+          "line": 267
+        },
+        {
+          "heading": "5.6 `Tuple` 的使用",
+          "level": 3,
+          "line": 276
+        },
+        {
+          "heading": "5.7 未使用的方法",
+          "level": 3,
+          "line": 282
+        },
+        {
+          "heading": "6. 算法缺口与缺失部分",
+          "level": 2,
+          "line": 288
+        },
+        {
+          "heading": "6.1 缺少迭代细化",
+          "level": 3,
+          "line": 290
+        },
+        {
+          "heading": "6.2 缺少全局优化",
+          "level": 3,
+          "line": 296
+        },
+        {
+          "heading": "6.3 缺少边界约束",
+          "level": 3,
+          "line": 302
+        },
+        {
+          "heading": "6.4 优先级未被充分利用",
+          "level": 3,
+          "line": 308
+        },
+        {
+          "heading": "6.5 缺少多圈层支持",
+          "level": 3,
+          "line": 312
+        },
+        {
+          "heading": "6.6 `_createStarMap` 的键冲突",
+          "level": 3,
+          "line": 316
+        },
+        {
+          "heading": "7. 测试覆盖率评估",
+          "level": 2,
+          "line": 322
+        },
+        {
+          "heading": "7.1 已测试内容（ui_star_model_test.dart）",
+          "level": 3,
+          "line": 324
+        },
+        {
+          "heading": "7.2 未测试内容",
+          "level": 3,
+          "line": 333
+        },
+        {
+          "heading": "7.3 建议增加的测试",
+          "level": 3,
+          "line": 341
+        },
+        {
+          "heading": "8. 架构观察",
+          "level": 2,
+          "line": 355
+        },
+        {
+          "heading": "8.1 层次违规",
+          "level": 3,
+          "line": 357
+        },
+        {
+          "heading": "8.2 模型位置",
+          "level": 3,
+          "line": 361
+        },
+        {
+          "heading": "8.3 依赖项",
+          "level": 3,
+          "line": 365
+        },
+        {
+          "heading": "9. 总结",
+          "level": 2,
+          "line": 371
+        },
+        {
+          "heading": "做得好的地方",
+          "level": 3,
+          "line": 373
+        },
+        {
+          "heading": "主要风险",
+          "level": 3,
+          "line": 379
+        },
+        {
+          "heading": "建议优先行动",
+          "level": 3,
+          "line": 386
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 53
+      }
+    },
+    {
+      "path": "docs/board/PROGRESS.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 24,
+      "nonEmptyLines": 15,
+      "sections": [
+        {
+          "heading": "项目进度仪表盘",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "当前 Sprint",
+          "level": 2,
+          "line": 6
+        },
+        {
+          "heading": "模块进度",
+          "level": 2,
+          "line": 10
+        },
+        {
+          "heading": "风险项",
+          "level": 2,
+          "line": 18
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 4
+      }
+    },
+    {
+      "path": "docs/board/TASKS.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 43,
+      "nonEmptyLines": 31,
+      "sections": [
+        {
+          "heading": "任务队列",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "状态定义",
+          "level": 2,
+          "line": 6
+        },
+        {
+          "heading": "条目格式",
+          "level": 2,
+          "line": 16
+        },
+        {
+          "heading": "任务列表",
+          "level": 2,
+          "line": 35
+        },
+        {
+          "heading": "已完成归档",
+          "level": 2,
+          "line": 41
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 5
+      }
+    },
+    {
+      "path": "docs/project/README.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 28,
+      "nonEmptyLines": 21,
+      "sections": [
+        {
+          "heading": "project/ 目录说明",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "目录结构",
+          "level": 2,
+          "line": 5
+        },
+        {
+          "heading": "文件命名规范",
+          "level": 2,
+          "line": 15
+        },
+        {
+          "heading": "与 AI SPEC 的区别",
+          "level": 2,
+          "line": 24
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 4
+      }
+    },
+    {
+      "path": "docs/superpowers/plans/2026-05-08-ai-readme-implementation.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 1537,
+      "nonEmptyLines": 1153,
+      "sections": [
+        {
+          "heading": "AI_README.md 实现计划",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "任务依赖图",
+          "level": 2,
+          "line": 10
+        },
+        {
+          "heading": "Task 1: 创建目录 + glossary.md",
+          "level": 2,
+          "line": 38
+        },
+        {
+          "heading": "Task 2: 编写 principles.md",
+          "level": 2,
+          "line": 120
+        },
+        {
+          "heading": "Task 3: 编写 phases.md",
+          "level": 2,
+          "line": 238
+        },
+        {
+          "heading": "<主题> 设计规格",
+          "level": 1,
+          "line": 300
+        },
+        {
+          "heading": "元信息",
+          "level": 2,
+          "line": 302
+        },
+        {
+          "heading": "目标",
+          "level": 2,
+          "line": 307
+        },
+        {
+          "heading": "非目标",
+          "level": 2,
+          "line": 308
+        },
+        {
+          "heading": "架构设计",
+          "level": 2,
+          "line": 309
+        },
+        {
+          "heading": "数据流",
+          "level": 2,
+          "line": 310
+        },
+        {
+          "heading": "技术决策",
+          "level": 2,
+          "line": 311
+        },
+        {
+          "heading": "权衡与已知限制",
+          "level": 2,
+          "line": 312
+        },
+        {
+          "heading": "验收条件（必须可逐项勾选）",
+          "level": 2,
+          "line": 313
+        },
+        {
+          "heading": "变更记录",
+          "level": 2,
+          "line": 314
+        },
+        {
+          "heading": "Task 4: 编写 delivery-pipeline.md",
+          "level": 2,
+          "line": 519
+        },
+        {
+          "heading": "Task 5: 编写 code-style.md",
+          "level": 2,
+          "line": 724
+        },
+        {
+          "heading": "Task 6: 编写 directory-structure.md",
+          "level": 2,
+          "line": 835
+        },
+        {
+          "heading": "Task 7: 编写 git-rules.md",
+          "level": 2,
+          "line": 953
+        },
+        {
+          "heading": "Task 8: 编写 doc-standards.md",
+          "level": 2,
+          "line": 1067
+        },
+        {
+          "heading": "<主题> 设计规格",
+          "level": 1,
+          "line": 1112
+        },
+        {
+          "heading": "元信息",
+          "level": 2,
+          "line": 1114
+        },
+        {
+          "heading": "目标",
+          "level": 2,
+          "line": 1119
+        },
+        {
+          "heading": "非目标",
+          "level": 2,
+          "line": 1120
+        },
+        {
+          "heading": "架构设计",
+          "level": 2,
+          "line": 1121
+        },
+        {
+          "heading": "数据流",
+          "level": 2,
+          "line": 1122
+        },
+        {
+          "heading": "技术决策",
+          "level": 2,
+          "line": 1123
+        },
+        {
+          "heading": "权衡与已知限制",
+          "level": 2,
+          "line": 1124
+        },
+        {
+          "heading": "验收条件（必须可逐项勾选）",
+          "level": 2,
+          "line": 1125
+        },
+        {
+          "heading": "变更记录",
+          "level": 2,
+          "line": 1126
+        },
+        {
+          "heading": "Task 9: 编写 toolchain.md",
+          "level": 2,
+          "line": 1146
+        },
+        {
+          "heading": "Task 10: 编写 project-context-guide.md",
+          "level": 2,
+          "line": 1213
+        },
+        {
+          "heading": "Task 11: 编写 AI_README.md",
+          "level": 2,
+          "line": 1313
+        },
+        {
+          "heading": "Task 12: 最终完整性验证",
+          "level": 2,
+          "line": 1494
+        },
+        {
+          "heading": "提交",
+          "level": 2,
+          "line": 1530
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 35
+      }
+    },
+    {
+      "path": "docs/superpowers/plans/2026-06-03-xuan-common-migration-spec.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 93,
+      "nonEmptyLines": 65,
+      "sections": [
+        {
+          "heading": "OpenSpec: `xuan_common` 依赖彻底清除与架构重组规范",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "1. 战略意图 (Strategic Intent)",
+          "level": 2,
+          "line": 11
+        },
+        {
+          "heading": "1.1 背景与现状",
+          "level": 3,
+          "line": 13
+        },
+        {
+          "heading": "1.2 “10星级”迁移标准",
+          "level": 3,
+          "line": 22
+        },
+        {
+          "heading": "2. 目标架构 (Target Architecture)",
+          "level": 2,
+          "line": 29
+        },
+        {
+          "heading": "3. 详细替换映射表 (Replacement Mapping)",
+          "level": 2,
+          "line": 39
+        },
+        {
+          "heading": "4. 关键实现原则 (Implementation Principles)",
+          "level": 2,
+          "line": 55
+        },
+        {
+          "heading": "4.1 最小化重构原则",
+          "level": 3,
+          "line": 57
+        },
+        {
+          "heading": "4.2 TDD 强制验证",
+          "level": 3,
+          "line": 60
+        },
+        {
+          "heading": "4.3 UI 本地化策略",
+          "level": 3,
+          "line": 63
+        },
+        {
+          "heading": "5. 边界情况与风险处理 (Edge Cases)",
+          "level": 2,
+          "line": 70
+        },
+        {
+          "heading": "6. 验收标准 (Acceptance Criteria)",
+          "level": 2,
+          "line": 78
+        },
+        {
+          "heading": "7. 执行步骤建议 (Step-by-Step for Execution Agent)",
+          "level": 2,
+          "line": 87
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 13
+      }
+    },
+    {
+      "path": "docs/superpowers/specs/2026-05-08-ai-governance-v2-design.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 263,
+      "nonEmptyLines": 198,
+      "sections": [
+        {
+          "heading": "AI 协同治理体系 v2 设计规格",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "元信息",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "目标",
+          "level": 2,
+          "line": 11
+        },
+        {
+          "heading": "非目标",
+          "level": 2,
+          "line": 23
+        },
+        {
+          "heading": "架构设计",
+          "level": 2,
+          "line": 31
+        },
+        {
+          "heading": "新版 docs/ 目录结构",
+          "level": 3,
+          "line": 33
+        },
+        {
+          "heading": "任务目录命名规范",
+          "level": 3,
+          "line": 88
+        },
+        {
+          "heading": "全局权限矩阵（全 AI 通用）",
+          "level": 2,
+          "line": 100
+        },
+        {
+          "heading": "新增宪法模块设计",
+          "level": 2,
+          "line": 116
+        },
+        {
+          "heading": "board-protocol.md",
+          "level": 3,
+          "line": 118
+        },
+        {
+          "heading": "CONSTITUTION.md",
+          "level": 3,
+          "line": 134
+        },
+        {
+          "heading": "SELF.md 模板",
+          "level": 2,
+          "line": 145
+        },
+        {
+          "heading": "board/ 文件格式",
+          "level": 2,
+          "line": 183
+        },
+        {
+          "heading": "TASKS.md",
+          "level": 3,
+          "line": 185
+        },
+        {
+          "heading": "PROGRESS.md",
+          "level": 3,
+          "line": 208
+        },
+        {
+          "heading": "现有模块变更清单",
+          "level": 2,
+          "line": 216
+        },
+        {
+          "heading": "技术决策",
+          "level": 2,
+          "line": 227
+        },
+        {
+          "heading": "权衡与已知限制",
+          "level": 2,
+          "line": 239
+        },
+        {
+          "heading": "验收条件",
+          "level": 2,
+          "line": 245
+        },
+        {
+          "heading": "变更记录",
+          "level": 2,
+          "line": 259
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 20
+      }
+    },
+    {
+      "path": "docs/superpowers/specs/2026-05-08-ai-readme-design.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 1038,
+      "nonEmptyLines": 793,
+      "sections": [
+        {
+          "heading": "AI_README.md 设计规格",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "目标",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "非目标",
+          "level": 2,
+          "line": 7
+        },
+        {
+          "heading": "文件结构",
+          "level": 2,
+          "line": 15
+        },
+        {
+          "heading": "AI_README.md 总纲设计",
+          "level": 2,
+          "line": 36
+        },
+        {
+          "heading": "板块顺序",
+          "level": 3,
+          "line": 38
+        },
+        {
+          "heading": "关键设计决策",
+          "level": 3,
+          "line": 48
+        },
+        {
+          "heading": "各子模块设计摘要",
+          "level": 2,
+          "line": 57
+        },
+        {
+          "heading": "1. principles.md —— 开发核心原则",
+          "level": 3,
+          "line": 59
+        },
+        {
+          "heading": "2. phases.md —— AI 认知阶段",
+          "level": 3,
+          "line": 78
+        },
+        {
+          "heading": "Part A: SPEC Coding（规格驱动编码）",
+          "level": 4,
+          "line": 88
+        },
+        {
+          "heading": "Stage A1: 启动与框架（Initiation & Scaffold）",
+          "level": 5,
+          "line": 106
+        },
+        {
+          "heading": "Stage A2: 内容填充（Content Fill）",
+          "level": 5,
+          "line": 151
+        },
+        {
+          "heading": "Stage A3: 评审与批准（Review & Approval）",
+          "level": 5,
+          "line": 177
+        },
+        {
+          "heading": "Stage A4: SPEC 锁定（SPEC Lock）",
+          "level": 5,
+          "line": 198
+        },
+        {
+          "heading": "SPEC 变更流程（SPEC Amendment）",
+          "level": 4,
+          "line": 218
+        },
+        {
+          "heading": "Part B: 交付阶段（Delivery）",
+          "level": 4,
+          "line": 236
+        },
+        {
+          "heading": "Stage B1: 代码实现（Implementation）",
+          "level": 5,
+          "line": 250
+        },
+        {
+          "heading": "Stage B2: SPEC 验收（SPEC Acceptance）",
+          "level": 5,
+          "line": 277
+        },
+        {
+          "heading": "Stage B3: SPEC 归档（SPEC Archive）",
+          "level": 5,
+          "line": 302
+        },
+        {
+          "heading": "3. delivery-pipeline.md —— 代码交付流水线",
+          "level": 3,
+          "line": 328
+        },
+        {
+          "heading": "流水线总览",
+          "level": 4,
+          "line": 332
+        },
+        {
+          "heading": "Step 1: 分支就绪（Branch Ready）",
+          "level": 4,
+          "line": 348
+        },
+        {
+          "heading": "Step 2: 代码开发（Development）",
+          "level": 4,
+          "line": 369
+        },
+        {
+          "heading": "Step 3: 自测验证（Testing）",
+          "level": 4,
+          "line": 393
+        },
+        {
+          "heading": "Step 4: 提交就绪（Commit Ready）",
+          "level": 4,
+          "line": 423
+        },
+        {
+          "heading": "Step 5: 合并归档（Merge & Archive）",
+          "level": 4,
+          "line": 460
+        },
+        {
+          "heading": "判断标准分级",
+          "level": 4,
+          "line": 482
+        },
+        {
+          "heading": "4. code-style.md —— Dart/Flutter 代码规范",
+          "level": 3,
+          "line": 503
+        },
+        {
+          "heading": "4.1 基础规则",
+          "level": 4,
+          "line": 505
+        },
+        {
+          "heading": "4.2 命名规范",
+          "level": 4,
+          "line": 511
+        },
+        {
+          "heading": "4.3 文件结构",
+          "level": 4,
+          "line": 528
+        },
+        {
+          "heading": "4.4 注释规范",
+          "level": 4,
+          "line": 548
+        },
+        {
+          "heading": "4.5 代码质量",
+          "level": 4,
+          "line": 577
+        },
+        {
+          "heading": "5. directory-structure.md —— 目录与文件结构规范",
+          "level": 3,
+          "line": 591
+        },
+        {
+          "heading": "5.1 顶层目录约束",
+          "level": 4,
+          "line": 593
+        },
+        {
+          "heading": "5.2 lib/ 结构约定",
+          "level": 4,
+          "line": 619
+        },
+        {
+          "heading": "5.3 test/ 结构约定",
+          "level": 4,
+          "line": 646
+        },
+        {
+          "heading": "5.4 docs/ 结构约定",
+          "level": 4,
+          "line": 662
+        },
+        {
+          "heading": "5.5 新增文件/目录的准入标准",
+          "level": 4,
+          "line": 677
+        },
+        {
+          "heading": "6. git-rules.md —— Git 分支/提交/PR 命名规范",
+          "level": 3,
+          "line": 688
+        },
+        {
+          "heading": "6.1 分支命名",
+          "level": 4,
+          "line": 690
+        },
+        {
+          "heading": "6.2 提交信息",
+          "level": 4,
+          "line": 718
+        },
+        {
+          "heading": "6.3 提交粒度",
+          "level": 4,
+          "line": 749
+        },
+        {
+          "heading": "6.4 提交内容红线",
+          "level": 4,
+          "line": 757
+        },
+        {
+          "heading": "7. doc-standards.md —— 文档存放与格式规范",
+          "level": 3,
+          "line": 770
+        },
+        {
+          "heading": "7.1 文档类型与存放位置",
+          "level": 4,
+          "line": 772
+        },
+        {
+          "heading": "7.2 文件格式",
+          "level": 4,
+          "line": 784
+        },
+        {
+          "heading": "7.3 Markdown 写作规范",
+          "level": 4,
+          "line": 791
+        },
+        {
+          "heading": "7.4 SPEC 设计文档模板",
+          "level": 4,
+          "line": 801
+        },
+        {
+          "heading": "8. toolchain.md —— 开发环境隔离与工具链",
+          "level": 3,
+          "line": 828
+        },
+        {
+          "heading": "8.1 Flutter/Dart SDK 版本",
+          "level": 4,
+          "line": 830
+        },
+        {
+          "heading": "8.2 依赖管理",
+          "level": 4,
+          "line": 837
+        },
+        {
+          "heading": "8.3 开发前检查清单",
+          "level": 4,
+          "line": 845
+        },
+        {
+          "heading": "8.4 构建与运行",
+          "level": 4,
+          "line": 858
+        },
+        {
+          "heading": "8.5 隔离承诺",
+          "level": 4,
+          "line": 864
+        },
+        {
+          "heading": "9. glossary.md —— AI 协同通用术语",
+          "level": 3,
+          "line": 871
+        },
+        {
+          "heading": "9.1 核心方法论术语",
+          "level": 4,
+          "line": 875
+        },
+        {
+          "heading": "9.2 规范语言 (RFC 2119 风格)",
+          "level": 4,
+          "line": 887
+        },
+        {
+          "heading": "9.3 流程控制",
+          "level": 4,
+          "line": 896
+        },
+        {
+          "heading": "9.4 判断标准三级",
+          "level": 4,
+          "line": 904
+        },
+        {
+          "heading": "9.5 变更管理",
+          "level": 4,
+          "line": 912
+        },
+        {
+          "heading": "9.6 交付术语",
+          "level": 4,
+          "line": 921
+        },
+        {
+          "heading": "10. project-context-guide.md —— 项目上下文阅读规则",
+          "level": 3,
+          "line": 932
+        },
+        {
+          "heading": "10.1 AI 首次接入必读清单",
+          "level": 4,
+          "line": 936
+        },
+        {
+          "heading": "10.2 任务前必读",
+          "level": 4,
+          "line": 965
+        },
+        {
+          "heading": "10.3 禁止",
+          "level": 4,
+          "line": 975
+        },
+        {
+          "heading": "10.4 文档与代码冲突处理",
+          "level": 4,
+          "line": 983
+        },
+        {
+          "heading": "10.5 同步更新规则",
+          "level": 4,
+          "line": 993
+        },
+        {
+          "heading": "平凡改动豁免（Trivial Change Exemption）",
+          "level": 2,
+          "line": 1007
+        },
+        {
+          "heading": "技术决策",
+          "level": 2,
+          "line": 1023
+        },
+        {
+          "heading": "风险",
+          "level": 2,
+          "line": 1034
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 72
+      }
+    },
+    {
+      "path": "lib/controllers/panel_controller.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 88,
+      "nonEmptyLines": 68,
+      "metrics": {}
+    },
+    {
+      "path": "lib/data/datasources/local/app_database.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 98,
+      "nonEmptyLines": 89,
+      "metrics": {}
+    },
+    {
+      "path": "lib/data/datasources/local/app_database.g.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 5243,
+      "nonEmptyLines": 4933,
+      "metrics": {}
+    },
+    {
+      "path": "lib/data/datasources/local/daos/ge_ju_dao.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 522,
+      "nonEmptyLines": 459,
+      "metrics": {}
+    },
+    {
+      "path": "lib/data/datasources/local/daos/ge_ju_dao.g.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 42,
+      "nonEmptyLines": 39,
+      "metrics": {}
+    },
+    {
+      "path": "lib/data/datasources/local/daos/qizhengsiyu_pan_dao.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 119,
+      "nonEmptyLines": 101,
+      "metrics": {}
+    },
+    {
+      "path": "lib/data/datasources/local/daos/qizhengsiyu_pan_dao.g.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 18,
+      "nonEmptyLines": 15,
+      "metrics": {}
+    },
+    {
+      "path": "lib/data/datasources/local/database_provider.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 28,
+      "nonEmptyLines": 23,
+      "metrics": {}
+    },
+    {
+      "path": "lib/data/datasources/local/definitions/system_definition_local_data_source.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 29,
+      "nonEmptyLines": 27,
+      "metrics": {}
+    },
+    {
+      "path": "lib/data/datasources/local/ge_ju_builtin_database.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 84,
+      "nonEmptyLines": 69,
+      "metrics": {}
+    },
+    {
+      "path": "lib/data/datasources/local/ge_ju_builtin_database.g.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 1536,
+      "nonEmptyLines": 1439,
+      "metrics": {}
+    },
+    {
+      "path": "lib/data/datasources/local/ge_ju_file_storage_io.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 39,
+      "nonEmptyLines": 29,
+      "metrics": {}
+    }
+  ]
+}

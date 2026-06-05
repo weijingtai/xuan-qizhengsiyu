@@ -1,0 +1,207 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 25,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "lib/domain/managers/celestial_projector_factory.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 23,
+      "nonEmptyLines": 22,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/managers/fate/dong_wei_child_xian_manager.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 32,
+      "nonEmptyLines": 30,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/managers/fate/dong_wei_da_xian_manager.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 192,
+      "nonEmptyLines": 180,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/managers/fate/dong_wei_fei_xian_manager.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 108,
+      "nonEmptyLines": 95,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/managers/fate/dong_wei_hundred_six_manager.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 121,
+      "nonEmptyLines": 114,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/managers/fate/dong_wei_month_xian_manager.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 28,
+      "nonEmptyLines": 25,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/managers/fate/dong_wei_xiao_xian_manager.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 20,
+      "nonEmptyLines": 17,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/managers/fate/fate_manager.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 16,
+      "nonEmptyLines": 13,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/managers/fate/zhu_luo_san_xian_manager.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 14,
+      "nonEmptyLines": 12,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/managers/ge_ju/ge_ju_evaluator.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 324,
+      "nonEmptyLines": 291,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/managers/ge_ju/ge_ju_input_builder.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 322,
+      "nonEmptyLines": 290,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/managers/ge_ju/ge_ju_manager.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 194,
+      "nonEmptyLines": 173,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/managers/ge_ju/ge_ju_pre_filter.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 477,
+      "nonEmptyLines": 422,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/managers/ge_ju/ge_ju_rule_parser.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 37,
+      "nonEmptyLines": 33,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/managers/ge_ju/ge_ju_text_constants.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 105,
+      "nonEmptyLines": 98,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/managers/ge_ju/ge_ju_text_parser.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 207,
+      "nonEmptyLines": 181,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/managers/hua_yao_manager.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 206,
+      "nonEmptyLines": 169,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/managers/shen_sha_manager.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 375,
+      "nonEmptyLines": 329,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/managers/star_position_manager.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 238,
+      "nonEmptyLines": 226,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/managers/zhou_tian_calculator.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 634,
+      "nonEmptyLines": 553,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/managers/zhou_tian_model_manager.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 233,
+      "nonEmptyLines": 200,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/repositories/ge_ju_repository.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 51,
+      "nonEmptyLines": 43,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/repositories/hua_yao_repository.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 8,
+      "nonEmptyLines": 6,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/repositories/shen_sha_repository.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 15,
+      "nonEmptyLines": 12,
+      "metrics": {}
+    },
+    {
+      "path": "lib/domain/services/an_shen_li_ming_service.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 316,
+      "nonEmptyLines": 291,
+      "metrics": {}
+    }
+  ]
+}
