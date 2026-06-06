@@ -1,4 +1,3 @@
-import 'zhu_luo_san_xian_tables.dart';
 
 enum ZhuLuoAlgorithmId {
   classicInverseSections,

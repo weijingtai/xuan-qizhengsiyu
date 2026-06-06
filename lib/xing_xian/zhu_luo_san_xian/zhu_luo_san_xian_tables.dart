@@ -8,17 +8,17 @@ enum LimitStage { first, middle, last }
 
 List<ZhuLuoRuler> zhuLuoLimitRulers(EnumTwelveGong lifePalace, BirthSect sect) {
   const triplicityDay = <ZhuLuoRuler, List<ZhuLuoRuler>>{
-    ZhuLuoRuler.mercury: [ZhuLuoRuler.saturn, ZhuLuoRuler.mercury, ZhuLuoRuler.mars],
+    ZhuLuoRuler.mercury: [ZhuLuoRuler.saturn, ZhuLuoRuler.mercury, ZhuLuoRuler.jupiter],
     ZhuLuoRuler.moon: [ZhuLuoRuler.venus, ZhuLuoRuler.moon, ZhuLuoRuler.mars],
-    ZhuLuoRuler.mars: [ZhuLuoRuler.sun, ZhuLuoRuler.jupiter, ZhuLuoRuler.mars],
-    ZhuLuoRuler.jupiter: [ZhuLuoRuler.jupiter, ZhuLuoRuler.saturn, ZhuLuoRuler.mars],
+    ZhuLuoRuler.mars: [ZhuLuoRuler.sun, ZhuLuoRuler.jupiter, ZhuLuoRuler.saturn],
+    ZhuLuoRuler.jupiter: [ZhuLuoRuler.venus, ZhuLuoRuler.mars, ZhuLuoRuler.moon],
   };
 
   const triplicityNight = <ZhuLuoRuler, List<ZhuLuoRuler>>{
-    ZhuLuoRuler.mercury: [ZhuLuoRuler.mercury, ZhuLuoRuler.saturn, ZhuLuoRuler.mars],
+    ZhuLuoRuler.mercury: [ZhuLuoRuler.mercury, ZhuLuoRuler.saturn, ZhuLuoRuler.jupiter],
     ZhuLuoRuler.moon: [ZhuLuoRuler.moon, ZhuLuoRuler.venus, ZhuLuoRuler.mars],
-    ZhuLuoRuler.mars: [ZhuLuoRuler.jupiter, ZhuLuoRuler.sun, ZhuLuoRuler.mars],
-    ZhuLuoRuler.jupiter: [ZhuLuoRuler.saturn, ZhuLuoRuler.jupiter, ZhuLuoRuler.mars],
+    ZhuLuoRuler.mars: [ZhuLuoRuler.jupiter, ZhuLuoRuler.sun, ZhuLuoRuler.saturn],
+    ZhuLuoRuler.jupiter: [ZhuLuoRuler.mars, ZhuLuoRuler.venus, ZhuLuoRuler.moon],
   };
 
   final firstRuler = _triplicityFirstRuler(lifePalace);
@@ -61,11 +61,11 @@ int rulerDuration(ZhuLuoRuler ruler) {
 
 ZhuLuoRuler _triplicityFirstRuler(EnumTwelveGong palace) {
   switch (palace) {
-    // 子申辰: Saturn
+    // 子申辰: Mercury
     case EnumTwelveGong.Zi:
     case EnumTwelveGong.Shen:
     case EnumTwelveGong.Chen:
-      return ZhuLuoRuler.saturn;
+      return ZhuLuoRuler.mercury;
     // 巳酉丑: Moon
     case EnumTwelveGong.Si:
     case EnumTwelveGong.You:
