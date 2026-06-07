@@ -11,12 +11,8 @@ import 'package:qizhengsiyu/presentation/pages/ge_ju/ge_ju_school_list_page.dart
 import 'package:qizhengsiyu/presentation/pages/ge_ju/ge_ju_school_editor_page.dart';
 import 'package:qizhengsiyu/presentation/pages/qizhengsiyu_home_page.dart';
 
-import 'data/datasources/local/app_database.dart';
-import 'data/repositories/interfaces/i_qizhengsiyu_pan_repository.dart';
-import 'data/repositories/qizhengsiyu_pan_repository.dart';
 import 'di.dart';
-
-import 'domain/usecases/save_calculated_panel_usecase.dart';
+import 'package:qizhengsiyu/qizhengsiyu_storage_dependencies.dart';
 
 class NavigatorGenerator {
   static final RouteObserver<PageRoute> routeObserver =
@@ -28,20 +24,7 @@ class NavigatorGenerator {
 
     "/qizhengsiyu/panel": (context, {arguments}) => MultiProvider(providers: [
           // ============ 核心依赖注入 ============
-          ...createProviders(), // ⭐ 注入所有数据层、业务层和MVVM ViewModel（含 AppDatabase 单例）
-
-          // 仓储
-          Provider<IQiZhengSiYuPanRepository>(
-            create: (ctx) => QiZhengSiYuPanRepository(
-              appDatabase: ctx.read<AppDatabase>(),
-            ),
-          ),
-
-          // UseCase
-          Provider<SaveCalculatedPanelUseCase>(
-              create: (ctx) => SaveCalculatedPanelUseCase(
-                  qiZhengSiYuPanRepository:
-                      ctx.read<IQiZhengSiYuPanRepository>())),
+          ...createProviders(context.read<QiZhengSiYuStorageDependencies>()),
         ], child: const BeautyViewPage()
             ),
 
@@ -50,7 +33,7 @@ class NavigatorGenerator {
 
     // ============ 格局管理路由 ============
     "/qizhengsiyu/ge_ju/list": (context, {arguments}) => MultiProvider(
-          providers: createProviders(),
+          providers: createProviders(context.read<QiZhengSiYuStorageDependencies>()),
           child: const GeJuListPage(),
         ),
 
@@ -58,7 +41,7 @@ class NavigatorGenerator {
       // arguments is a ruleId (String)
       if (arguments is String) {
         return MultiProvider(
-          providers: createProviders(),
+          providers: createProviders(context.read<QiZhengSiYuStorageDependencies>()),
           child: GeJuDetailPage(ruleId: arguments),
         );
       }
@@ -73,7 +56,7 @@ class NavigatorGenerator {
         saveAsFromId = arguments['saveAs'] as String?;
       }
       return MultiProvider(
-        providers: createProviders(),
+        providers: createProviders(context.read<QiZhengSiYuStorageDependencies>()),
         child: GeJuEditorPage(
           duplicateFromId: duplicateFromId,
           saveAsFromId: saveAsFromId,
@@ -84,21 +67,21 @@ class NavigatorGenerator {
     "/qizhengsiyu/ge_ju/edit": (context, {arguments}) {
       final ruleId = arguments as String?;
       return MultiProvider(
-        providers: createProviders(),
+        providers: createProviders(context.read<QiZhengSiYuStorageDependencies>()),
         child: GeJuEditorPage(ruleId: ruleId),
       );
     },
 
     // ============ 流派管理路由 ============
     "/qizhengsiyu/ge_ju/school/list": (context, {arguments}) => MultiProvider(
-          providers: createProviders(),
+          providers: createProviders(context.read<QiZhengSiYuStorageDependencies>()),
           child: const GeJuSchoolListPage(),
         ),
 
     "/qizhengsiyu/ge_ju/school/edit": (context, {arguments}) {
       final schoolId = arguments as String?;
       return MultiProvider(
-        providers: createProviders(),
+        providers: createProviders(context.read<QiZhengSiYuStorageDependencies>()),
         child: GeJuSchoolEditorPage(schoolId: schoolId),
       );
     },
