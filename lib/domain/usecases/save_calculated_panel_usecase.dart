@@ -3,13 +3,13 @@ import 'package:metaphysics_core/models/divination_datetime.dart';
 import 'package:flutter/rendering.dart';
 import 'package:uuid/uuid.dart';
 
-import '../../data/repositories/interfaces/i_qizhengsiyu_pan_repository.dart';
+import 'package:repository_interface_qizhengsiyu/repository_interface_qizhengsiyu.dart';
+import '../../data/contract_mappers/qizhengsiyu_contract_mappers.dart';
 import '../entities/models/base_panel_model.dart';
 import '../entities/models/pan_entity.dart';
 import '../entities/models/panel_config.dart';
 
 class SaveCalculatedPanelUseCase {
-  // final BasePanelDao _basePanelDao;
   final Uuid _uuid = const Uuid();
   IQiZhengSiYuPanRepository qiZhengSiYuPanRepository;
 
@@ -18,14 +18,6 @@ class SaveCalculatedPanelUseCase {
   });
 
   /// 保存计算得到的基础面板模型到本地数据库
-  ///
-  /// [basicPanelModel] 计算得到的基础面板模型
-  /// [panelConfig] 面板配置信息
-  /// [observerPosition] 观测者位置信息
-  /// [divinationUuid] 可选的占卜UUID
-  /// [seekerUuid] 可选的求测人UUID
-  ///
-  /// 返回保存的记录UUID
   Future<QiZhengSiYuPanEntity> execute({
     required BasePanelModel basicPanelModel,
     required BasePanelConfig panelConfig,
@@ -45,9 +37,8 @@ class SaveCalculatedPanelUseCase {
         panelModel: basicPanelModel,
         divinationDatetimeModel: divinationDatetimeModel,
       );
-      await qiZhengSiYuPanRepository.save(entity);
-      // TODO: Dev only
-      List<QiZhengSiYuPanEntity> all =
+      await qiZhengSiYuPanRepository.save(panEntityToContract(entity));
+      List<QiZhengSiYuPanContract> all =
           await qiZhengSiYuPanRepository.findAllActive();
       debugPrint("all: ${all.length}");
       return entity;
@@ -66,19 +57,20 @@ class SaveCalculatedPanelUseCase {
   }) async {
     try {
       final now = DateTime.now();
-      QiZhengSiYuPanEntity? oldEntity =
+      QiZhengSiYuPanContract? oldContract =
           await qiZhengSiYuPanRepository.findByUuid(uuid);
-      if (oldEntity == null) {
+      if (oldContract == null) {
         debugPrint("this is not entity with {uuid: $uuid} in db");
         return false;
       }
-      oldEntity.copyWith(
+      final oldEntity = panEntityFromContract(oldContract);
+      final updatedEntity = oldEntity.copyWith(
         panelModel: basicPanelModel,
         panelConfig: panelConfig,
         divinationDatetimeModel: divinationDatetimeModel,
         lastUpdatedAt: now,
       );
-      await qiZhengSiYuPanRepository.update(oldEntity);
+      await qiZhengSiYuPanRepository.update(panEntityToContract(updatedEntity));
       return false;
     } catch (e) {
       throw SavePanelException('更新面板数据失败: $e');
@@ -88,9 +80,9 @@ class SaveCalculatedPanelUseCase {
   /// 根据UUID获取面板数据
   Future<QiZhengSiYuPanEntity?> getByUuid(String uuid) async {
     try {
-      final record = await qiZhengSiYuPanRepository.findByUuid(uuid);
-      if (record == null) return null;
-      return record;
+      final contract = await qiZhengSiYuPanRepository.findByUuid(uuid);
+      if (contract == null) return null;
+      return panEntityFromContract(contract);
     } catch (e) {
       throw SavePanelException('获取面板数据失败: $e');
     }
@@ -100,9 +92,9 @@ class SaveCalculatedPanelUseCase {
   Future<List<QiZhengSiYuPanEntity>> getByDivinationUuid(
       String divinationUuid) async {
     try {
-      List<QiZhengSiYuPanEntity> resultList =
+      final contracts =
           await qiZhengSiYuPanRepository.findByDivinationUuid(divinationUuid);
-      return resultList;
+      return contracts.map(panEntityFromContract).toList();
     } catch (e) {
       throw SavePanelException('根据占卜UUID获取面板数据失败: $e');
     }

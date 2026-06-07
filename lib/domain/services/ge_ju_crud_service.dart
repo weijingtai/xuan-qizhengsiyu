@@ -10,7 +10,7 @@ import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_source.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_user_preference.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju_model.dart';
 import 'package:qizhengsiyu/domain/errors/ge_ju_errors.dart';
-import 'package:qizhengsiyu/domain/repositories/ge_ju_repository.dart';
+import 'package:qizhengsiyu/data/contract_mappers/qizhengsiyu_contract_mappers.dart';
 import 'package:qizhengsiyu/domain/services/ge_ju_validation.dart';
 import 'package:uuid/uuid.dart';
 
@@ -19,10 +19,10 @@ import 'package:uuid/uuid.dart';
 /// 提供 Rule/ConditionSet/Annotation 的创建、读取、更新、删除
 /// 以及 Fork、Duplicate、SaveAs 等复合操作
 class GeJuCrudService {
-  final IGeJuRepository _repository;
+  final GeJuRepositoryAdapter _repository;
   static const _uuid = Uuid();
 
-  GeJuCrudService({required IGeJuRepository repository})
+  GeJuCrudService({required GeJuRepositoryAdapter repository})
       : _repository = repository;
 
   // ══════════════════════════════════════════

@@ -1,58 +1,43 @@
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
-import 'package:qizhengsiyu/data/datasources/local/hua_yao_local_data_source.dart';
-import 'package:qizhengsiyu/data/repositories/hua_yao_repository_impl.dart';
-import 'package:qizhengsiyu/domain/repositories/hua_yao_repository.dart';
-import 'package:qizhengsiyu/domain/services/hua_yao_service.dart';
-import 'package:qizhengsiyu/data/datasources/local/shen_sha_local_data_source.dart';
-import 'package:qizhengsiyu/data/repositories/shen_sha_repository_impl.dart';
-import 'package:qizhengsiyu/domain/repositories/shen_sha_repository.dart';
-import 'package:qizhengsiyu/domain/services/shen_sha_service.dart';
+import 'package:repository_interface_qizhengsiyu/repository_interface_qizhengsiyu.dart';
+import 'package:qizhengsiyu/qizhengsiyu_storage_dependencies.dart';
+import 'package:qizhengsiyu/data/contract_mappers/qizhengsiyu_contract_mappers.dart';
 import 'package:qizhengsiyu/domain/managers/zhou_tian_model_manager.dart';
 import 'package:qizhengsiyu/domain/managers/shen_sha_manager.dart';
 import 'package:qizhengsiyu/domain/managers/hua_yao_manager.dart';
+import 'package:qizhengsiyu/domain/repositories/shen_sha_repository.dart';
+import 'package:qizhengsiyu/domain/repositories/hua_yao_repository.dart';
+import 'package:qizhengsiyu/domain/services/shen_sha_service.dart';
+import 'package:qizhengsiyu/domain/services/hua_yao_service.dart';
 import 'package:qizhengsiyu/presentation/viewmodels/qi_zheng_si_yu_viewmodel.dart';
 
 // GeJu 相关导入
-import 'package:qizhengsiyu/data/datasources/local/ge_ju_builtin_database.dart';
-import 'package:qizhengsiyu/data/datasources/local/ge_ju_local_data_source.dart';
-import 'package:qizhengsiyu/data/datasources/local/ge_ju_sqlite_data_source.dart';
-import 'package:qizhengsiyu/data/datasources/local/app_database.dart';
-import 'package:qizhengsiyu/data/datasources/local/daos/ge_ju_dao.dart';
-import 'package:qizhengsiyu/data/repositories/ge_ju_repository_impl.dart';
-import 'package:qizhengsiyu/domain/repositories/ge_ju_repository.dart';
 import 'package:qizhengsiyu/domain/services/ge_ju_crud_service.dart';
 import 'package:qizhengsiyu/domain/services/ge_ju_evaluation_service.dart';
-import 'package:qizhengsiyu/domain/services/ge_ju_school_service.dart';
 import 'package:qizhengsiyu/presentation/viewmodels/ge_ju_list_viewmodel.dart';
 import 'package:qizhengsiyu/presentation/viewmodels/ge_ju_editor_viewmodel.dart';
 import 'package:qizhengsiyu/presentation/viewmodels/ge_ju_detail_viewmodel.dart';
 import 'package:qizhengsiyu/presentation/viewmodels/ge_ju_school_list_viewmodel.dart';
 import 'package:qizhengsiyu/presentation/viewmodels/ge_ju_school_editor_viewmodel.dart';
 
-List<SingleChildWidget> createProviders() {
-  return [
-    // Data Sources
-    Provider<ShenShaLocalDataSource>(
-      create: (_) => ShenShaLocalDataSourceImpl(),
-    ),
-    Provider<HuaYaoLocalDataSource>(
-      create: (_) => HuaYaoLocalDataSourceImpl(),
-    ),
+List<SingleChildWidget> createProviders(QiZhengSiYuStorageDependencies deps) {
+  // Create adapters that bridge contract ports → product types
+  final shenShaRepo = ShenShaRepositoryAdapter(deps.shenSha);
+  final huaYaoRepo = HuaYaoRepositoryAdapter(deps.huaYao);
+  final geJuRepo = GeJuRepositoryAdapter(deps.geJuRepository);
+  final geJuSchool = GeJuSchoolServiceAdapter(deps.geJuSchoolService);
 
-    // Repositories
+  return [
+    // ============ Repositories (via adapters from injected ports) ============
     Provider<ShenShaRepository>(
-      create: (context) => ShenShaRepositoryImpl(
-        localDataSource: context.read<ShenShaLocalDataSource>(),
-      ),
+      create: (_) => shenShaRepo,
     ),
     Provider<HuaYaoRepository>(
-      create: (context) => HuaYaoRepositoryImpl(
-        localDataSource: context.read<HuaYaoLocalDataSource>(),
-      ),
+      create: (_) => huaYaoRepo,
     ),
 
-    // Services
+    // ============ Services ============
     Provider<ShenShaService>(
       create: (context) => ShenShaService(
         repository: context.read<ShenShaRepository>(),
@@ -64,7 +49,7 @@ List<SingleChildWidget> createProviders() {
       ),
     ),
 
-    // Managers
+    // ============ Managers ============
     Provider<ZhouTianModelManager>(
       create: (_) => ZhouTianModelManager.instance,
     ),
@@ -79,58 +64,33 @@ List<SingleChildWidget> createProviders() {
       ),
     ),
 
-    // ============ GeJu 格局管理 ============
+    // ============ GeJu 格局管理 (port-injected) ============
 
-    // GeJu Database & DAO (singleton — 不随路由 dispose)
-    Provider<AppDatabase>(
-      create: (_) => AppDatabase(),
-    ),
-    Provider<GeJuDao>(
-      create: (context) => GeJuDao(context.read<AppDatabase>()),
-    ),
-
-    // GeJu Built-in Database (只读，独立于 AppDatabase)
-    Provider<GeJuBuiltInDatabase>(
-      create: (_) => GeJuBuiltInDatabase(createGeJuBuiltInConnection()),
-    ),
-
-    // GeJu Built-in DataSource (SQLite 替换 JSON assets)
-    Provider<GeJuBuiltInDataSource>(
-      create: (context) => GeJuSQLiteDataSource(
-        context.read<GeJuBuiltInDatabase>(),
-      ),
-    ),
-
-    // GeJu Repository
-    Provider<IGeJuRepository>(
-      create: (context) => GeJuRepositoryImpl(
-        builtInDataSource: context.read<GeJuBuiltInDataSource>(),
-        dao: context.read<GeJuDao>(),
-      ),
+    // GeJu Repository (adapter wrapping contract port)
+    Provider<GeJuRepositoryAdapter>(
+      create: (_) => geJuRepo,
     ),
 
     // GeJu CRUD Service
     Provider<GeJuCrudService>(
       create: (context) => GeJuCrudService(
-        repository: context.read<IGeJuRepository>(),
+        repository: context.read<GeJuRepositoryAdapter>(),
       ),
     ),
 
     // GeJu Evaluation Service
     Provider<GeJuEvaluationService>(
       create: (context) => GeJuEvaluationService(
-        repository: context.read<IGeJuRepository>(),
+        repository: context.read<GeJuRepositoryAdapter>(),
       ),
     ),
 
-    // GeJu School Service
-    Provider<GeJuSchoolService>(
-      create: (context) => GeJuSchoolService(
-        dao: context.read<GeJuDao>(),
-      ),
+    // GeJu School Service (adapter wrapping contract port)
+    Provider<GeJuSchoolServiceAdapter>(
+      create: (_) => geJuSchool,
     ),
 
-    // ViewModels
+    // ============ ViewModels ============
     ChangeNotifierProvider<QiZhengSiYuViewModel>(
       create: (context) => QiZhengSiYuViewModel(
         shenShaManager: context.read<ShenShaManager>(),
@@ -149,7 +109,7 @@ List<SingleChildWidget> createProviders() {
     ChangeNotifierProvider<GeJuEditorViewModel>(
       create: (context) => GeJuEditorViewModel(
         crudService: context.read<GeJuCrudService>(),
-        schoolService: context.read<GeJuSchoolService>(),
+        schoolService: context.read<GeJuSchoolServiceAdapter>(),
       ),
     ),
     ChangeNotifierProvider<GeJuDetailViewModel>(
@@ -159,12 +119,12 @@ List<SingleChildWidget> createProviders() {
     ),
     ChangeNotifierProvider<GeJuSchoolListViewModel>(
       create: (context) => GeJuSchoolListViewModel(
-        schoolService: context.read<GeJuSchoolService>(),
+        schoolService: context.read<GeJuSchoolServiceAdapter>(),
       ),
     ),
     ChangeNotifierProvider<GeJuSchoolEditorViewModel>(
       create: (context) => GeJuSchoolEditorViewModel(
-        schoolService: context.read<GeJuSchoolService>(),
+        schoolService: context.read<GeJuSchoolServiceAdapter>(),
       ),
     ),
   ];
