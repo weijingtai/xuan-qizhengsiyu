@@ -14,30 +14,35 @@ import 'package:qizhengsiyu/presentation/widgets/rings/gong_ming_li_ring.dart';
 import 'package:qizhengsiyu/qi_zheng_si_yu_ui_constant_resources.dart';
 import 'package:tuple/tuple.dart';
 
-import 'data/datasources/local/app_database.dart';
-import 'data/repositories/interfaces/i_qizhengsiyu_pan_repository.dart';
-import 'data/repositories/qizhengsiyu_pan_repository.dart';
-import 'domain/entities/models/body_life_model.dart';
-import 'domain/entities/models/naming_degree_pair.dart';
-import 'domain/usecases/calculate_fate_dong_wei_usecase.dart';
-import 'domain/usecases/save_calculated_panel_usecase.dart';
+import 'package:persistence_drift/persistence_drift.dart';
+import 'package:persistence_assets/persistence_assets.dart';
+import 'package:repository_interface_qizhengsiyu/repository_interface_qizhengsiyu.dart';
+import 'package:qizhengsiyu/qizhengsiyu_storage_dependencies.dart';
+import 'package:qizhengsiyu/domain/entities/models/body_life_model.dart';
+import 'package:qizhengsiyu/domain/entities/models/naming_degree_pair.dart';
+import 'package:qizhengsiyu/domain/usecases/calculate_fate_dong_wei_usecase.dart';
+import 'package:qizhengsiyu/domain/usecases/save_calculated_panel_usecase.dart';
+import 'di.dart';
 import 'navigator.dart';
 
 void main() {
+  final appDatabase = AppDatabase();
+  final geJuBuiltInDataSource =
+      GeJuSQLiteDataSource(GeJuBuiltInDatabase(createGeJuBuiltInConnection()));
+  final geJuDao = GeJuDao(appDatabase);
+  final deps = QiZhengSiYuStorageDependencies(
+    panRepository: QiZhengSiYuPanRepository(appDatabase: appDatabase),
+    geJuRepository:
+        GeJuRepositoryImpl(builtInDataSource: geJuBuiltInDataSource, dao: geJuDao),
+    geJuBuiltInDataSource: geJuBuiltInDataSource,
+    geJuSchoolService: GeJuSchoolService(dao: geJuDao),
+    shenSha: AssetsQiZhengShenShaRepository(),
+    huaYao: AssetsQiZhengHuaYaoRepository(),
+  );
   runApp(MultiProvider(
     providers: [
-      Provider<AppDatabase>(
-        create: (ctx) => AppDatabase(),
-        dispose: (ctx, db) => db.close(),
-      ),
-      Provider<IQiZhengSiYuPanRepository>(
-        create: (ctx) => QiZhengSiYuPanRepository(
-          appDatabase: ctx.read<AppDatabase>(),
-        ),
-      ),
-      Provider<SaveCalculatedPanelUseCase>(
-          create: (ctx) => SaveCalculatedPanelUseCase(
-              qiZhengSiYuPanRepository: ctx.read<IQiZhengSiYuPanRepository>())),
+      Provider<QiZhengSiYuStorageDependencies>.value(value: deps),
+      ...createProviders(deps),
       ChangeNotifierProvider<BeautyPageViewModel>(
           create: (ctx) => BeautyPageViewModel(
               calculateFateDongWeiUseCase: CalculateFateDongWeiUseCase(),
