@@ -60,6 +60,8 @@ dependencies:
       url: https://github.com/weijingtai/xuan-storage.git
       path: core
   decimal: ^3.2.4
+  repository_interface_qizhengsiyu:
+    path: ../repository-interface-qizhengsiyu
   drift: ^2.30.1
   sqlite3_flutter_libs: ^0.5.41
   path_provider: ^2.1.5

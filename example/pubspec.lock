@@ -1033,6 +1033,13 @@ packages:
       relative: true
     source: path
     version: "0.0.0"
+  repository_interface_qizhengsiyu:
+    dependency: transitive
+    description:
+      path: "../../repository-interface-qizhengsiyu"
+      relative: true
+    source: path
+    version: "0.0.0"
   responsive_framework:
     dependency: "direct main"
     description:

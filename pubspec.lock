@@ -762,6 +762,13 @@ packages:
       relative: true
     source: path
     version: "0.0.0"
+  repository_interface_qizhengsiyu:
+    dependency: "direct main"
+    description:
+      path: "../repository-interface-qizhengsiyu"
+      relative: true
+    source: path
+    version: "0.0.0"
   shake_widget_flutter:
     dependency: transitive
     description:
