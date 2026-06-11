@@ -4,8 +4,10 @@
 
 - **Coding agent:** Execute ACT-ZL-CODE-001 only.
 - **Coding for test agent:** Execute ACT-ZL-TEST-001 only.
+- **Verify agent:** Execute ACT-ZL-VERIFY-001 only, after CODE and TEST are complete.
+- **Doc closeout agent:** Execute ACT-ZL-DOC-001 only, after VERIFY is complete.
 
-Both agents must stay on a non-main branch. Neither agent may fix `xuan-common`.
+All agents must stay on a non-main branch. No agent may fix `xuan-common`.
 
 ---
 TASK_ID: "ACT-ZL-CODE-001"
@@ -137,3 +139,90 @@ flutter test test/xing_xian/zhu_luo_san_xian
 flutter test test/domain/managers/fate/zhu_luo_san_xian_manager_test.dart
 flutter analyze lib/xing_xian/zhu_luo_san_xian lib/domain/managers/fate/zhu_luo_san_xian_manager.dart test/xing_xian/zhu_luo_san_xian test/domain/managers/fate/zhu_luo_san_xian_manager_test.dart
 ```
+
+---
+TASK_ID: "ACT-ZL-VERIFY-001"
+LANG: "Dart 3.10.7 / Flutter 3.38.6"
+TARGET_FILE: "docs/superpowers/plans/2026-06-11-zhu-luo-xing-xian-verification-evidence.md"
+CONTEXT:
+  DOMAIN: "七政四余 / 行限体系 / 竹罗三限闭环验收"
+  STRATEGY: "只做验证与证据记录：运行 focused test/analyze，确认 CODE 与 TEST 的产物满足 ACT，不修代码。"
+DEPENDENCY_ALLOWANCE:
+  IMPORTS: []
+  EXTERNAL_LIBS: []
+SIGNATURE: |
+  # Verification evidence document
+  # Must record:
+  # - git branch
+  # - changed files relevant to Zhu Luo integration
+  # - command results
+  # - ignored xuan-common/common blockers, if any
+  # - final acceptance verdict
+ASSERTIONS:
+  EXECENV: "zsh + flutter test + flutter analyze"
+  CASES:
+    - "git branch --show-current"
+    - "git status --short"
+    - "flutter test test/xing_xian/zhu_luo_san_xian"
+    - "flutter test test/domain/managers/fate/zhu_luo_san_xian_manager_test.dart"
+    - "flutter analyze lib/xing_xian/zhu_luo_san_xian lib/domain/managers/fate/zhu_luo_san_xian_manager.dart test/xing_xian/zhu_luo_san_xian test/domain/managers/fate/zhu_luo_san_xian_manager_test.dart"
+    - "rg -n \"package:xuan_common|package:common\" lib test"
+PROTOCOL:
+  MODE: "PATCH_ONLY"
+  NO_PROSE: true
+  OUTPUT_FORMAT: "强制返回包裹在 ``` 中的 Markdown"
+
+ABSOLUTE_DO_NOT:
+- Do not edit production code.
+- Do not edit test code.
+- Do not fix analyzer failures unrelated to focused Zhu Luo files.
+- Do not repair `xuan-common` or common-related failures.
+- Do not claim full repository validation if only focused gates were run.
+- Do not modify UI, database, 洞微, 飞限, 小限, or Ge Ju files.
+
+PASS_CONDITION:
+- Focused Zhu Luo tests pass.
+- Focused manager test passes.
+- Focused analyzer command passes, or any failure is explicitly proven unrelated to Zhu Luo integration and caused by existing common/xuan-common instability.
+
+---
+TASK_ID: "ACT-ZL-DOC-001"
+LANG: "Markdown / Dart 3.10.7 interface references"
+TARGET_FILE: "doc/zhu_luo_san_xian/竹罗三限调查报告.md; docs/superpowers/plans/2026-06-10-zhu-luo-xing-xian-integration.md; docs/superpowers/plans/2026-06-11-zhu-luo-xing-xian-test-plan.md"
+CONTEXT:
+  DOMAIN: "七政四余 / 行限体系 / 竹罗三限交付文档闭环"
+  STRATEGY: "只回填已经实现并验证的事实：接口、测试命令、验收结论、限制边界；不得新增算法解释或修改历史推导。"
+DEPENDENCY_ALLOWANCE:
+  IMPORTS: []
+  EXTERNAL_LIBS: []
+SIGNATURE: |
+  # Documentation closeout
+  # Must update human-readable docs with:
+  # - implemented entry points
+  # - A/B config remains pure algorithm
+  # - adapter path: EnumStars/BasePanelModel -> ZhuLuoInput
+  # - manager path: ZhuLuoSanXianManager typed methods
+  # - verification evidence file link
+  # - remaining out-of-scope boundaries
+ASSERTIONS:
+  EXECENV: "Markdown review + rg"
+  CASES:
+    - "rg -n \"calculateFromRulerPalaces|calculateFromStarPalaces|calculateFromPanel|buildZhuLuoInputFromPanel\" doc/zhu_luo_san_xian docs/superpowers/plans"
+    - "rg -n \"TODO|TBD|待定|implement later|fill in|Similar to|适当|以后\" doc/zhu_luo_san_xian docs/superpowers/plans/2026-06-10-zhu-luo-xing-xian-integration.md docs/superpowers/plans/2026-06-11-zhu-luo-xing-xian-test-plan.md docs/superpowers/plans/2026-06-11-zhu-luo-xing-xian-act-tasks.md"
+PROTOCOL:
+  MODE: "PATCH_ONLY"
+  NO_PROSE: true
+  OUTPUT_FORMAT: "强制返回包裹在 ``` 中的 Markdown"
+
+ABSOLUTE_DO_NOT:
+- Do not edit production code.
+- Do not edit test code.
+- Do not change algorithm formulas or historical interpretation.
+- Do not mark UI/database/Ge Ju integration as complete.
+- Do not hide unresolved focused gate failures.
+- Do not repair `xuan-common` or common-related failures.
+
+PASS_CONDITION:
+- Documents clearly say this closeout covers algorithm-to-行限-manager integration only.
+- Documents link or name the verification evidence file.
+- No placeholder terms remain in the touched docs.

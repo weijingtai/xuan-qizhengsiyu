@@ -141,5 +141,22 @@ void main() {
       expect(results.where((r) => r.age == 54).length, 1);
       expect(results.where((r) => r.age == 55).length, 1);
     });
+
+    test("bridge year metadata", () {
+      final input = ZhuLuoInput(
+        lifePalace: EnumTwelveGong.You,
+        birthSect: BirthSect.day,
+        rulerPalaces: {
+          ZhuLuoRuler.venus: EnumTwelveGong.Yin,
+          ZhuLuoRuler.moon: EnumTwelveGong.Wu,
+          ZhuLuoRuler.mars: EnumTwelveGong.Zi,
+        },
+        maxAge: 80,
+        config: directAnnualWithBridgeConfig,
+      );
+      final results = calculateZhuLuoSanXian(input);
+      expect(results.firstWhere((r) => r.age == 54).usedBridge, true);
+      expect(results.firstWhere((r) => r.age == 55).isTransitionYear, true);
+    });
   });
 }
