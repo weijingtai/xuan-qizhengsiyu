@@ -11,70 +11,106 @@ class $QizhengsiyuPanTableTable extends QizhengsiyuPanTable
   $QizhengsiyuPanTableTable(this.attachedDatabase, [this._alias]);
   static const VerificationMeta _uuidMeta = const VerificationMeta('uuid');
   @override
-  late final GeneratedColumn<String> uuid =
-      GeneratedColumn<String>('uuid', aliasedName, false,
-          additionalChecks: GeneratedColumn.checkTextLength(
-            minTextLength: 1,
-          ),
-          type: DriftSqlType.string,
-          requiredDuringInsert: true);
-  static const VerificationMeta _createdAtMeta =
-      const VerificationMeta('createdAt');
+  late final GeneratedColumn<String> uuid = GeneratedColumn<String>(
+    'uuid',
+    aliasedName,
+    false,
+    additionalChecks: GeneratedColumn.checkTextLength(minTextLength: 1),
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _createdAtMeta = const VerificationMeta(
+    'createdAt',
+  );
   @override
   late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
-      'created_at', aliasedName, false,
-      type: DriftSqlType.dateTime, requiredDuringInsert: true);
-  static const VerificationMeta _lastUpdatedAtMeta =
-      const VerificationMeta('lastUpdatedAt');
+    'created_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _lastUpdatedAtMeta = const VerificationMeta(
+    'lastUpdatedAt',
+  );
   @override
   late final GeneratedColumn<DateTime> lastUpdatedAt =
-      GeneratedColumn<DateTime>('last_updated_at', aliasedName, false,
-          type: DriftSqlType.dateTime, requiredDuringInsert: true);
-  static const VerificationMeta _deletedAtMeta =
-      const VerificationMeta('deletedAt');
+      GeneratedColumn<DateTime>(
+        'last_updated_at',
+        aliasedName,
+        false,
+        type: DriftSqlType.dateTime,
+        requiredDuringInsert: true,
+      );
+  static const VerificationMeta _deletedAtMeta = const VerificationMeta(
+    'deletedAt',
+  );
   @override
   late final GeneratedColumn<DateTime> deletedAt = GeneratedColumn<DateTime>(
-      'deleted_at', aliasedName, true,
-      type: DriftSqlType.dateTime, requiredDuringInsert: false);
+    'deleted_at',
+    aliasedName,
+    true,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+  );
   static const VerificationMeta _divinationRequestInfoUuidMeta =
       const VerificationMeta('divinationRequestInfoUuid');
   @override
   late final GeneratedColumn<String> divinationRequestInfoUuid =
       GeneratedColumn<String>(
-          'divination_request_info_uuid', aliasedName, false,
-          type: DriftSqlType.string, requiredDuringInsert: true);
+        'divination_request_info_uuid',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: true,
+      );
   @override
   late final GeneratedColumnWithTypeConverter<BasePanelConfig, String>
-      panelConfig = GeneratedColumn<String>(
-              'panel_config_json', aliasedName, false,
-              type: DriftSqlType.string, requiredDuringInsert: true)
-          .withConverter<BasePanelConfig>(
-              $QizhengsiyuPanTableTable.$converterpanelConfig);
+  panelConfig =
+      GeneratedColumn<String>(
+        'panel_config_json',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: true,
+      ).withConverter<BasePanelConfig>(
+        $QizhengsiyuPanTableTable.$converterpanelConfig,
+      );
   @override
   late final GeneratedColumnWithTypeConverter<BasePanelModel, String>
-      panelModel = GeneratedColumn<String>(
-              'panel_data_json', aliasedName, false,
-              type: DriftSqlType.string, requiredDuringInsert: true)
-          .withConverter<BasePanelModel>(
-              $QizhengsiyuPanTableTable.$converterpanelModel);
+  panelModel =
+      GeneratedColumn<String>(
+        'panel_data_json',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: true,
+      ).withConverter<BasePanelModel>(
+        $QizhengsiyuPanTableTable.$converterpanelModel,
+      );
   @override
   late final GeneratedColumnWithTypeConverter<DivinationDatetimeModel, String>
-      divinationDatetimeModel = GeneratedColumn<String>(
-              'divination_datetime_json', aliasedName, false,
-              type: DriftSqlType.string, requiredDuringInsert: true)
-          .withConverter<DivinationDatetimeModel>(
-              $QizhengsiyuPanTableTable.$converterdivinationDatetimeModel);
+  divinationDatetimeModel =
+      GeneratedColumn<String>(
+        'divination_datetime_json',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: true,
+      ).withConverter<DivinationDatetimeModel>(
+        $QizhengsiyuPanTableTable.$converterdivinationDatetimeModel,
+      );
   @override
   List<GeneratedColumn> get $columns => [
-        uuid,
-        createdAt,
-        lastUpdatedAt,
-        deletedAt,
-        divinationRequestInfoUuid,
-        panelConfig,
-        panelModel,
-        divinationDatetimeModel
-      ];
+    uuid,
+    createdAt,
+    lastUpdatedAt,
+    deletedAt,
+    divinationRequestInfoUuid,
+    panelConfig,
+    panelModel,
+    divinationDatetimeModel,
+  ];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -82,40 +118,52 @@ class $QizhengsiyuPanTableTable extends QizhengsiyuPanTable
   static const String $name = 't_qizhengsiyu_pans';
   @override
   VerificationContext validateIntegrity(
-      Insertable<QiZhengSiYuPanEntity> instance,
-      {bool isInserting = false}) {
+    Insertable<QiZhengSiYuPanEntity> instance, {
+    bool isInserting = false,
+  }) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('uuid')) {
       context.handle(
-          _uuidMeta, uuid.isAcceptableOrUnknown(data['uuid']!, _uuidMeta));
+        _uuidMeta,
+        uuid.isAcceptableOrUnknown(data['uuid']!, _uuidMeta),
+      );
     } else if (isInserting) {
       context.missing(_uuidMeta);
     }
     if (data.containsKey('created_at')) {
-      context.handle(_createdAtMeta,
-          createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta));
+      context.handle(
+        _createdAtMeta,
+        createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
+      );
     } else if (isInserting) {
       context.missing(_createdAtMeta);
     }
     if (data.containsKey('last_updated_at')) {
       context.handle(
+        _lastUpdatedAtMeta,
+        lastUpdatedAt.isAcceptableOrUnknown(
+          data['last_updated_at']!,
           _lastUpdatedAtMeta,
-          lastUpdatedAt.isAcceptableOrUnknown(
-              data['last_updated_at']!, _lastUpdatedAtMeta));
+        ),
+      );
     } else if (isInserting) {
       context.missing(_lastUpdatedAtMeta);
     }
     if (data.containsKey('deleted_at')) {
-      context.handle(_deletedAtMeta,
-          deletedAt.isAcceptableOrUnknown(data['deleted_at']!, _deletedAtMeta));
+      context.handle(
+        _deletedAtMeta,
+        deletedAt.isAcceptableOrUnknown(data['deleted_at']!, _deletedAtMeta),
+      );
     }
     if (data.containsKey('divination_request_info_uuid')) {
       context.handle(
+        _divinationRequestInfoUuidMeta,
+        divinationRequestInfoUuid.isAcceptableOrUnknown(
+          data['divination_request_info_uuid']!,
           _divinationRequestInfoUuidMeta,
-          divinationRequestInfoUuid.isAcceptableOrUnknown(
-              data['divination_request_info_uuid']!,
-              _divinationRequestInfoUuidMeta));
+        ),
+      );
     } else if (isInserting) {
       context.missing(_divinationRequestInfoUuidMeta);
     }
@@ -128,27 +176,46 @@ class $QizhengsiyuPanTableTable extends QizhengsiyuPanTable
   QiZhengSiYuPanEntity map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return QiZhengSiYuPanEntity(
-      uuid: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}uuid'])!,
-      createdAt: attachedDatabase.typeMapping
-          .read(DriftSqlType.dateTime, data['${effectivePrefix}created_at'])!,
+      uuid: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}uuid'],
+      )!,
+      createdAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}created_at'],
+      )!,
       lastUpdatedAt: attachedDatabase.typeMapping.read(
-          DriftSqlType.dateTime, data['${effectivePrefix}last_updated_at'])!,
-      deletedAt: attachedDatabase.typeMapping
-          .read(DriftSqlType.dateTime, data['${effectivePrefix}deleted_at']),
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}last_updated_at'],
+      )!,
+      deletedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}deleted_at'],
+      ),
       divinationRequestInfoUuid: attachedDatabase.typeMapping.read(
-          DriftSqlType.string,
-          data['${effectivePrefix}divination_request_info_uuid'])!,
+        DriftSqlType.string,
+        data['${effectivePrefix}divination_request_info_uuid'],
+      )!,
       panelConfig: $QizhengsiyuPanTableTable.$converterpanelConfig.fromSql(
-          attachedDatabase.typeMapping.read(DriftSqlType.string,
-              data['${effectivePrefix}panel_config_json'])!),
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}panel_config_json'],
+        )!,
+      ),
       panelModel: $QizhengsiyuPanTableTable.$converterpanelModel.fromSql(
-          attachedDatabase.typeMapping.read(
-              DriftSqlType.string, data['${effectivePrefix}panel_data_json'])!),
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}panel_data_json'],
+        )!,
+      ),
       divinationDatetimeModel: $QizhengsiyuPanTableTable
           .$converterdivinationDatetimeModel
-          .fromSql(attachedDatabase.typeMapping.read(DriftSqlType.string,
-              data['${effectivePrefix}divination_datetime_json'])!),
+          .fromSql(
+            attachedDatabase.typeMapping.read(
+              DriftSqlType.string,
+              data['${effectivePrefix}divination_datetime_json'],
+            )!,
+          ),
     );
   }
 
@@ -162,7 +229,7 @@ class $QizhengsiyuPanTableTable extends QizhengsiyuPanTable
   static TypeConverter<BasePanelModel, String> $converterpanelModel =
       const BasePanelModelConverter();
   static TypeConverter<DivinationDatetimeModel, String>
-      $converterdivinationDatetimeModel = const DivinationDatetimeConverter();
+  $converterdivinationDatetimeModel = const DivinationDatetimeConverter();
 }
 
 class QizhengsiyuPanTableCompanion
@@ -197,13 +264,13 @@ class QizhengsiyuPanTableCompanion
     required BasePanelModel panelModel,
     required DivinationDatetimeModel divinationDatetimeModel,
     this.rowid = const Value.absent(),
-  })  : uuid = Value(uuid),
-        createdAt = Value(createdAt),
-        lastUpdatedAt = Value(lastUpdatedAt),
-        divinationRequestInfoUuid = Value(divinationRequestInfoUuid),
-        panelConfig = Value(panelConfig),
-        panelModel = Value(panelModel),
-        divinationDatetimeModel = Value(divinationDatetimeModel);
+  }) : uuid = Value(uuid),
+       createdAt = Value(createdAt),
+       lastUpdatedAt = Value(lastUpdatedAt),
+       divinationRequestInfoUuid = Value(divinationRequestInfoUuid),
+       panelConfig = Value(panelConfig),
+       panelModel = Value(panelModel),
+       divinationDatetimeModel = Value(divinationDatetimeModel);
   static Insertable<QiZhengSiYuPanEntity> custom({
     Expression<String>? uuid,
     Expression<DateTime>? createdAt,
@@ -230,16 +297,17 @@ class QizhengsiyuPanTableCompanion
     });
   }
 
-  QizhengsiyuPanTableCompanion copyWith(
-      {Value<String>? uuid,
-      Value<DateTime>? createdAt,
-      Value<DateTime>? lastUpdatedAt,
-      Value<DateTime?>? deletedAt,
-      Value<String>? divinationRequestInfoUuid,
-      Value<BasePanelConfig>? panelConfig,
-      Value<BasePanelModel>? panelModel,
-      Value<DivinationDatetimeModel>? divinationDatetimeModel,
-      Value<int>? rowid}) {
+  QizhengsiyuPanTableCompanion copyWith({
+    Value<String>? uuid,
+    Value<DateTime>? createdAt,
+    Value<DateTime>? lastUpdatedAt,
+    Value<DateTime?>? deletedAt,
+    Value<String>? divinationRequestInfoUuid,
+    Value<BasePanelConfig>? panelConfig,
+    Value<BasePanelModel>? panelModel,
+    Value<DivinationDatetimeModel>? divinationDatetimeModel,
+    Value<int>? rowid,
+  }) {
     return QizhengsiyuPanTableCompanion(
       uuid: uuid ?? this.uuid,
       createdAt: createdAt ?? this.createdAt,
@@ -271,23 +339,28 @@ class QizhengsiyuPanTableCompanion
       map['deleted_at'] = Variable<DateTime>(deletedAt.value);
     }
     if (divinationRequestInfoUuid.present) {
-      map['divination_request_info_uuid'] =
-          Variable<String>(divinationRequestInfoUuid.value);
+      map['divination_request_info_uuid'] = Variable<String>(
+        divinationRequestInfoUuid.value,
+      );
     }
     if (panelConfig.present) {
-      map['panel_config_json'] = Variable<String>($QizhengsiyuPanTableTable
-          .$converterpanelConfig
-          .toSql(panelConfig.value));
+      map['panel_config_json'] = Variable<String>(
+        $QizhengsiyuPanTableTable.$converterpanelConfig.toSql(
+          panelConfig.value,
+        ),
+      );
     }
     if (panelModel.present) {
-      map['panel_data_json'] = Variable<String>($QizhengsiyuPanTableTable
-          .$converterpanelModel
-          .toSql(panelModel.value));
+      map['panel_data_json'] = Variable<String>(
+        $QizhengsiyuPanTableTable.$converterpanelModel.toSql(panelModel.value),
+      );
     }
     if (divinationDatetimeModel.present) {
       map['divination_datetime_json'] = Variable<String>(
-          $QizhengsiyuPanTableTable.$converterdivinationDatetimeModel
-              .toSql(divinationDatetimeModel.value));
+        $QizhengsiyuPanTableTable.$converterdivinationDatetimeModel.toSql(
+          divinationDatetimeModel.value,
+        ),
+      );
     }
     if (rowid.present) {
       map['rowid'] = Variable<int>(rowid.value);
@@ -320,85 +393,123 @@ class $GeJuRulesTableTable extends GeJuRulesTable
   $GeJuRulesTableTable(this.attachedDatabase, [this._alias]);
   static const VerificationMeta _idMeta = const VerificationMeta('id');
   @override
-  late final GeneratedColumn<String> id =
-      GeneratedColumn<String>('id', aliasedName, false,
-          additionalChecks: GeneratedColumn.checkTextLength(
-            minTextLength: 1,
-          ),
-          type: DriftSqlType.string,
-          requiredDuringInsert: true);
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+    'id',
+    aliasedName,
+    false,
+    additionalChecks: GeneratedColumn.checkTextLength(minTextLength: 1),
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
   static const VerificationMeta _nameMeta = const VerificationMeta('name');
   @override
   late final GeneratedColumn<String> name = GeneratedColumn<String>(
-      'name', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _aliasesJsonMeta =
-      const VerificationMeta('aliasesJson');
+    'name',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _aliasesJsonMeta = const VerificationMeta(
+    'aliasesJson',
+  );
   @override
   late final GeneratedColumn<String> aliasesJson = GeneratedColumn<String>(
-      'aliases_json', aliasedName, false,
-      type: DriftSqlType.string,
-      requiredDuringInsert: false,
-      defaultValue: const Constant('[]'));
+    'aliases_json',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant('[]'),
+  );
   static const VerificationMeta _disambiguationNoteMeta =
       const VerificationMeta('disambiguationNote');
   @override
   late final GeneratedColumn<String> disambiguationNote =
-      GeneratedColumn<String>('disambiguation_note', aliasedName, true,
-          type: DriftSqlType.string, requiredDuringInsert: false);
+      GeneratedColumn<String>(
+        'disambiguation_note',
+        aliasedName,
+        true,
+        type: DriftSqlType.string,
+        requiredDuringInsert: false,
+      );
   static const VerificationMeta _scopeMeta = const VerificationMeta('scope');
   @override
   late final GeneratedColumn<String> scope = GeneratedColumn<String>(
-      'scope', aliasedName, false,
-      type: DriftSqlType.string,
-      requiredDuringInsert: false,
-      defaultValue: const Constant('natal'));
-  static const VerificationMeta _coordinateSystemMeta =
-      const VerificationMeta('coordinateSystem');
+    'scope',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant('natal'),
+  );
+  static const VerificationMeta _coordinateSystemMeta = const VerificationMeta(
+    'coordinateSystem',
+  );
   @override
   late final GeneratedColumn<String> coordinateSystem = GeneratedColumn<String>(
-      'coordinate_system', aliasedName, true,
-      type: DriftSqlType.string, requiredDuringInsert: false);
-  static const VerificationMeta _authorTypeMeta =
-      const VerificationMeta('authorType');
+    'coordinate_system',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _authorTypeMeta = const VerificationMeta(
+    'authorType',
+  );
   @override
   late final GeneratedColumn<String> authorType = GeneratedColumn<String>(
-      'author_type', aliasedName, false,
-      type: DriftSqlType.string,
-      requiredDuringInsert: false,
-      defaultValue: const Constant('user'));
-  static const VerificationMeta _createdAtMeta =
-      const VerificationMeta('createdAt');
+    'author_type',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant('user'),
+  );
+  static const VerificationMeta _createdAtMeta = const VerificationMeta(
+    'createdAt',
+  );
   @override
   late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
-      'created_at', aliasedName, false,
-      type: DriftSqlType.dateTime, requiredDuringInsert: true);
-  static const VerificationMeta _updatedAtMeta =
-      const VerificationMeta('updatedAt');
+    'created_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _updatedAtMeta = const VerificationMeta(
+    'updatedAt',
+  );
   @override
   late final GeneratedColumn<DateTime> updatedAt = GeneratedColumn<DateTime>(
-      'updated_at', aliasedName, false,
-      type: DriftSqlType.dateTime, requiredDuringInsert: true);
+    'updated_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
   @override
   List<GeneratedColumn> get $columns => [
-        id,
-        name,
-        aliasesJson,
-        disambiguationNote,
-        scope,
-        coordinateSystem,
-        authorType,
-        createdAt,
-        updatedAt
-      ];
+    id,
+    name,
+    aliasesJson,
+    disambiguationNote,
+    scope,
+    coordinateSystem,
+    authorType,
+    createdAt,
+    updatedAt,
+  ];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
   String get actualTableName => $name;
   static const String $name = 't_ge_ju_rules';
   @override
-  VerificationContext validateIntegrity(Insertable<GeJuRulesTableData> instance,
-      {bool isInserting = false}) {
+  VerificationContext validateIntegrity(
+    Insertable<GeJuRulesTableData> instance, {
+    bool isInserting = false,
+  }) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
@@ -408,47 +519,64 @@ class $GeJuRulesTableTable extends GeJuRulesTable
     }
     if (data.containsKey('name')) {
       context.handle(
-          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
+        _nameMeta,
+        name.isAcceptableOrUnknown(data['name']!, _nameMeta),
+      );
     } else if (isInserting) {
       context.missing(_nameMeta);
     }
     if (data.containsKey('aliases_json')) {
       context.handle(
+        _aliasesJsonMeta,
+        aliasesJson.isAcceptableOrUnknown(
+          data['aliases_json']!,
           _aliasesJsonMeta,
-          aliasesJson.isAcceptableOrUnknown(
-              data['aliases_json']!, _aliasesJsonMeta));
+        ),
+      );
     }
     if (data.containsKey('disambiguation_note')) {
       context.handle(
+        _disambiguationNoteMeta,
+        disambiguationNote.isAcceptableOrUnknown(
+          data['disambiguation_note']!,
           _disambiguationNoteMeta,
-          disambiguationNote.isAcceptableOrUnknown(
-              data['disambiguation_note']!, _disambiguationNoteMeta));
+        ),
+      );
     }
     if (data.containsKey('scope')) {
       context.handle(
-          _scopeMeta, scope.isAcceptableOrUnknown(data['scope']!, _scopeMeta));
+        _scopeMeta,
+        scope.isAcceptableOrUnknown(data['scope']!, _scopeMeta),
+      );
     }
     if (data.containsKey('coordinate_system')) {
       context.handle(
+        _coordinateSystemMeta,
+        coordinateSystem.isAcceptableOrUnknown(
+          data['coordinate_system']!,
           _coordinateSystemMeta,
-          coordinateSystem.isAcceptableOrUnknown(
-              data['coordinate_system']!, _coordinateSystemMeta));
+        ),
+      );
     }
     if (data.containsKey('author_type')) {
       context.handle(
-          _authorTypeMeta,
-          authorType.isAcceptableOrUnknown(
-              data['author_type']!, _authorTypeMeta));
+        _authorTypeMeta,
+        authorType.isAcceptableOrUnknown(data['author_type']!, _authorTypeMeta),
+      );
     }
     if (data.containsKey('created_at')) {
-      context.handle(_createdAtMeta,
-          createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta));
+      context.handle(
+        _createdAtMeta,
+        createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
+      );
     } else if (isInserting) {
       context.missing(_createdAtMeta);
     }
     if (data.containsKey('updated_at')) {
-      context.handle(_updatedAtMeta,
-          updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta));
+      context.handle(
+        _updatedAtMeta,
+        updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta),
+      );
     } else if (isInserting) {
       context.missing(_updatedAtMeta);
     }
@@ -461,24 +589,42 @@ class $GeJuRulesTableTable extends GeJuRulesTable
   GeJuRulesTableData map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return GeJuRulesTableData(
-      id: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
-      name: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
-      aliasesJson: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}aliases_json'])!,
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}id'],
+      )!,
+      name: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}name'],
+      )!,
+      aliasesJson: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}aliases_json'],
+      )!,
       disambiguationNote: attachedDatabase.typeMapping.read(
-          DriftSqlType.string, data['${effectivePrefix}disambiguation_note']),
-      scope: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}scope'])!,
+        DriftSqlType.string,
+        data['${effectivePrefix}disambiguation_note'],
+      ),
+      scope: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}scope'],
+      )!,
       coordinateSystem: attachedDatabase.typeMapping.read(
-          DriftSqlType.string, data['${effectivePrefix}coordinate_system']),
-      authorType: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}author_type'])!,
-      createdAt: attachedDatabase.typeMapping
-          .read(DriftSqlType.dateTime, data['${effectivePrefix}created_at'])!,
-      updatedAt: attachedDatabase.typeMapping
-          .read(DriftSqlType.dateTime, data['${effectivePrefix}updated_at'])!,
+        DriftSqlType.string,
+        data['${effectivePrefix}coordinate_system'],
+      ),
+      authorType: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}author_type'],
+      )!,
+      createdAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}created_at'],
+      )!,
+      updatedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}updated_at'],
+      )!,
     );
   }
 
@@ -501,16 +647,17 @@ class GeJuRulesTableData extends DataClass
   final String authorType;
   final DateTime createdAt;
   final DateTime updatedAt;
-  const GeJuRulesTableData(
-      {required this.id,
-      required this.name,
-      required this.aliasesJson,
-      this.disambiguationNote,
-      required this.scope,
-      this.coordinateSystem,
-      required this.authorType,
-      required this.createdAt,
-      required this.updatedAt});
+  const GeJuRulesTableData({
+    required this.id,
+    required this.name,
+    required this.aliasesJson,
+    this.disambiguationNote,
+    required this.scope,
+    this.coordinateSystem,
+    required this.authorType,
+    required this.createdAt,
+    required this.updatedAt,
+  });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -548,15 +695,18 @@ class GeJuRulesTableData extends DataClass
     );
   }
 
-  factory GeJuRulesTableData.fromJson(Map<String, dynamic> json,
-      {ValueSerializer? serializer}) {
+  factory GeJuRulesTableData.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return GeJuRulesTableData(
       id: serializer.fromJson<String>(json['id']),
       name: serializer.fromJson<String>(json['name']),
       aliasesJson: serializer.fromJson<String>(json['aliasesJson']),
-      disambiguationNote:
-          serializer.fromJson<String?>(json['disambiguationNote']),
+      disambiguationNote: serializer.fromJson<String?>(
+        json['disambiguationNote'],
+      ),
       scope: serializer.fromJson<String>(json['scope']),
       coordinateSystem: serializer.fromJson<String?>(json['coordinateSystem']),
       authorType: serializer.fromJson<String>(json['authorType']),
@@ -580,37 +730,38 @@ class GeJuRulesTableData extends DataClass
     };
   }
 
-  GeJuRulesTableData copyWith(
-          {String? id,
-          String? name,
-          String? aliasesJson,
-          Value<String?> disambiguationNote = const Value.absent(),
-          String? scope,
-          Value<String?> coordinateSystem = const Value.absent(),
-          String? authorType,
-          DateTime? createdAt,
-          DateTime? updatedAt}) =>
-      GeJuRulesTableData(
-        id: id ?? this.id,
-        name: name ?? this.name,
-        aliasesJson: aliasesJson ?? this.aliasesJson,
-        disambiguationNote: disambiguationNote.present
-            ? disambiguationNote.value
-            : this.disambiguationNote,
-        scope: scope ?? this.scope,
-        coordinateSystem: coordinateSystem.present
-            ? coordinateSystem.value
-            : this.coordinateSystem,
-        authorType: authorType ?? this.authorType,
-        createdAt: createdAt ?? this.createdAt,
-        updatedAt: updatedAt ?? this.updatedAt,
-      );
+  GeJuRulesTableData copyWith({
+    String? id,
+    String? name,
+    String? aliasesJson,
+    Value<String?> disambiguationNote = const Value.absent(),
+    String? scope,
+    Value<String?> coordinateSystem = const Value.absent(),
+    String? authorType,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+  }) => GeJuRulesTableData(
+    id: id ?? this.id,
+    name: name ?? this.name,
+    aliasesJson: aliasesJson ?? this.aliasesJson,
+    disambiguationNote: disambiguationNote.present
+        ? disambiguationNote.value
+        : this.disambiguationNote,
+    scope: scope ?? this.scope,
+    coordinateSystem: coordinateSystem.present
+        ? coordinateSystem.value
+        : this.coordinateSystem,
+    authorType: authorType ?? this.authorType,
+    createdAt: createdAt ?? this.createdAt,
+    updatedAt: updatedAt ?? this.updatedAt,
+  );
   GeJuRulesTableData copyWithCompanion(GeJuRulesTableCompanion data) {
     return GeJuRulesTableData(
       id: data.id.present ? data.id.value : this.id,
       name: data.name.present ? data.name.value : this.name,
-      aliasesJson:
-          data.aliasesJson.present ? data.aliasesJson.value : this.aliasesJson,
+      aliasesJson: data.aliasesJson.present
+          ? data.aliasesJson.value
+          : this.aliasesJson,
       disambiguationNote: data.disambiguationNote.present
           ? data.disambiguationNote.value
           : this.disambiguationNote,
@@ -618,8 +769,9 @@ class GeJuRulesTableData extends DataClass
       coordinateSystem: data.coordinateSystem.present
           ? data.coordinateSystem.value
           : this.coordinateSystem,
-      authorType:
-          data.authorType.present ? data.authorType.value : this.authorType,
+      authorType: data.authorType.present
+          ? data.authorType.value
+          : this.authorType,
       createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
       updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
     );
@@ -642,8 +794,17 @@ class GeJuRulesTableData extends DataClass
   }
 
   @override
-  int get hashCode => Object.hash(id, name, aliasesJson, disambiguationNote,
-      scope, coordinateSystem, authorType, createdAt, updatedAt);
+  int get hashCode => Object.hash(
+    id,
+    name,
+    aliasesJson,
+    disambiguationNote,
+    scope,
+    coordinateSystem,
+    authorType,
+    createdAt,
+    updatedAt,
+  );
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -693,10 +854,10 @@ class GeJuRulesTableCompanion extends UpdateCompanion<GeJuRulesTableData> {
     required DateTime createdAt,
     required DateTime updatedAt,
     this.rowid = const Value.absent(),
-  })  : id = Value(id),
-        name = Value(name),
-        createdAt = Value(createdAt),
-        updatedAt = Value(updatedAt);
+  }) : id = Value(id),
+       name = Value(name),
+       createdAt = Value(createdAt),
+       updatedAt = Value(updatedAt);
   static Insertable<GeJuRulesTableData> custom({
     Expression<String>? id,
     Expression<String>? name,
@@ -723,17 +884,18 @@ class GeJuRulesTableCompanion extends UpdateCompanion<GeJuRulesTableData> {
     });
   }
 
-  GeJuRulesTableCompanion copyWith(
-      {Value<String>? id,
-      Value<String>? name,
-      Value<String>? aliasesJson,
-      Value<String?>? disambiguationNote,
-      Value<String>? scope,
-      Value<String?>? coordinateSystem,
-      Value<String>? authorType,
-      Value<DateTime>? createdAt,
-      Value<DateTime>? updatedAt,
-      Value<int>? rowid}) {
+  GeJuRulesTableCompanion copyWith({
+    Value<String>? id,
+    Value<String>? name,
+    Value<String>? aliasesJson,
+    Value<String?>? disambiguationNote,
+    Value<String>? scope,
+    Value<String?>? coordinateSystem,
+    Value<String>? authorType,
+    Value<DateTime>? createdAt,
+    Value<DateTime>? updatedAt,
+    Value<int>? rowid,
+  }) {
     return GeJuRulesTableCompanion(
       id: id ?? this.id,
       name: name ?? this.name,
@@ -810,154 +972,235 @@ class $GeJuAnnotationsTableTable extends GeJuAnnotationsTable
   $GeJuAnnotationsTableTable(this.attachedDatabase, [this._alias]);
   static const VerificationMeta _idMeta = const VerificationMeta('id');
   @override
-  late final GeneratedColumn<String> id =
-      GeneratedColumn<String>('id', aliasedName, false,
-          additionalChecks: GeneratedColumn.checkTextLength(
-            minTextLength: 1,
-          ),
-          type: DriftSqlType.string,
-          requiredDuringInsert: true);
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+    'id',
+    aliasedName,
+    false,
+    additionalChecks: GeneratedColumn.checkTextLength(minTextLength: 1),
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
   static const VerificationMeta _ruleIdMeta = const VerificationMeta('ruleId');
   @override
   late final GeneratedColumn<String> ruleId = GeneratedColumn<String>(
-      'rule_id', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _schoolsJsonMeta =
-      const VerificationMeta('schoolsJson');
+    'rule_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _schoolsJsonMeta = const VerificationMeta(
+    'schoolsJson',
+  );
   @override
   late final GeneratedColumn<String> schoolsJson = GeneratedColumn<String>(
-      'schools_json', aliasedName, true,
-      type: DriftSqlType.string, requiredDuringInsert: false);
-  static const VerificationMeta _sourceJsonMeta =
-      const VerificationMeta('sourceJson');
+    'schools_json',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _sourceJsonMeta = const VerificationMeta(
+    'sourceJson',
+  );
   @override
   late final GeneratedColumn<String> sourceJson = GeneratedColumn<String>(
-      'source_json', aliasedName, true,
-      type: DriftSqlType.string, requiredDuringInsert: false);
-  static const VerificationMeta _authorTypeMeta =
-      const VerificationMeta('authorType');
+    'source_json',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _authorTypeMeta = const VerificationMeta(
+    'authorType',
+  );
   @override
   late final GeneratedColumn<String> authorType = GeneratedColumn<String>(
-      'author_type', aliasedName, false,
-      type: DriftSqlType.string,
-      requiredDuringInsert: false,
-      defaultValue: const Constant('user'));
-  static const VerificationMeta _versionMeta =
-      const VerificationMeta('version');
+    'author_type',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant('user'),
+  );
+  static const VerificationMeta _versionMeta = const VerificationMeta(
+    'version',
+  );
   @override
   late final GeneratedColumn<String> version = GeneratedColumn<String>(
-      'version', aliasedName, false,
-      type: DriftSqlType.string,
-      requiredDuringInsert: false,
-      defaultValue: const Constant('1.0'));
-  static const VerificationMeta _descriptionMeta =
-      const VerificationMeta('description');
+    'version',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant('1.0'),
+  );
+  static const VerificationMeta _descriptionMeta = const VerificationMeta(
+    'description',
+  );
   @override
   late final GeneratedColumn<String> description = GeneratedColumn<String>(
-      'description', aliasedName, true,
-      type: DriftSqlType.string, requiredDuringInsert: false);
-  static const VerificationMeta _jiXiongMeta =
-      const VerificationMeta('jiXiong');
+    'description',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _jiXiongMeta = const VerificationMeta(
+    'jiXiong',
+  );
   @override
   late final GeneratedColumn<String> jiXiong = GeneratedColumn<String>(
-      'ji_xiong', aliasedName, true,
-      type: DriftSqlType.string, requiredDuringInsert: false);
-  static const VerificationMeta _geJuTypeMeta =
-      const VerificationMeta('geJuType');
+    'ji_xiong',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _geJuTypeMeta = const VerificationMeta(
+    'geJuType',
+  );
   @override
   late final GeneratedColumn<String> geJuType = GeneratedColumn<String>(
-      'ge_ju_type', aliasedName, true,
-      type: DriftSqlType.string, requiredDuringInsert: false);
-  static const VerificationMeta _classNameMeta =
-      const VerificationMeta('className');
+    'ge_ju_type',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _classNameMeta = const VerificationMeta(
+    'className',
+  );
   @override
   late final GeneratedColumn<String> className = GeneratedColumn<String>(
-      'class_name', aliasedName, true,
-      type: DriftSqlType.string, requiredDuringInsert: false);
+    'class_name',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
   static const VerificationMeta _parentAnnotationIdMeta =
       const VerificationMeta('parentAnnotationId');
   @override
   late final GeneratedColumn<String> parentAnnotationId =
-      GeneratedColumn<String>('parent_annotation_id', aliasedName, true,
-          type: DriftSqlType.string, requiredDuringInsert: false);
+      GeneratedColumn<String>(
+        'parent_annotation_id',
+        aliasedName,
+        true,
+        type: DriftSqlType.string,
+        requiredDuringInsert: false,
+      );
   static const VerificationMeta _parentMajorVersionMeta =
       const VerificationMeta('parentMajorVersion');
   @override
   late final GeneratedColumn<int> parentMajorVersion = GeneratedColumn<int>(
-      'parent_major_version', aliasedName, true,
-      type: DriftSqlType.int, requiredDuringInsert: false);
-  static const VerificationMeta _relationToParentMeta =
-      const VerificationMeta('relationToParent');
+    'parent_major_version',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _relationToParentMeta = const VerificationMeta(
+    'relationToParent',
+  );
   @override
   late final GeneratedColumn<String> relationToParent = GeneratedColumn<String>(
-      'relation_to_parent', aliasedName, true,
-      type: DriftSqlType.string, requiredDuringInsert: false);
-  static const VerificationMeta _referencesJsonMeta =
-      const VerificationMeta('referencesJson');
+    'relation_to_parent',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _referencesJsonMeta = const VerificationMeta(
+    'referencesJson',
+  );
   @override
   late final GeneratedColumn<String> referencesJson = GeneratedColumn<String>(
-      'references_json', aliasedName, false,
-      type: DriftSqlType.string,
-      requiredDuringInsert: false,
-      defaultValue: const Constant('[]'));
+    'references_json',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant('[]'),
+  );
   static const VerificationMeta _relatedConditionSetIdsJsonMeta =
       const VerificationMeta('relatedConditionSetIdsJson');
   @override
   late final GeneratedColumn<String> relatedConditionSetIdsJson =
       GeneratedColumn<String>(
-          'related_condition_set_ids_json', aliasedName, false,
-          type: DriftSqlType.string,
-          requiredDuringInsert: false,
-          defaultValue: const Constant('[]'));
-  static const VerificationMeta _visibilityMeta =
-      const VerificationMeta('visibility');
+        'related_condition_set_ids_json',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: false,
+        defaultValue: const Constant('[]'),
+      );
+  static const VerificationMeta _visibilityMeta = const VerificationMeta(
+    'visibility',
+  );
   @override
   late final GeneratedColumn<String> visibility = GeneratedColumn<String>(
-      'visibility', aliasedName, false,
-      type: DriftSqlType.string,
-      requiredDuringInsert: false,
-      defaultValue: const Constant('private'));
+    'visibility',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant('private'),
+  );
   static const VerificationMeta _localeMeta = const VerificationMeta('locale');
   @override
   late final GeneratedColumn<String> locale = GeneratedColumn<String>(
-      'locale', aliasedName, false,
-      type: DriftSqlType.string,
-      requiredDuringInsert: false,
-      defaultValue: const Constant('zh-Hans'));
-  static const VerificationMeta _createdAtMeta =
-      const VerificationMeta('createdAt');
+    'locale',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant('zh-Hans'),
+  );
+  static const VerificationMeta _createdAtMeta = const VerificationMeta(
+    'createdAt',
+  );
   @override
   late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
-      'created_at', aliasedName, false,
-      type: DriftSqlType.dateTime, requiredDuringInsert: true);
-  static const VerificationMeta _updatedAtMeta =
-      const VerificationMeta('updatedAt');
+    'created_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _updatedAtMeta = const VerificationMeta(
+    'updatedAt',
+  );
   @override
   late final GeneratedColumn<DateTime> updatedAt = GeneratedColumn<DateTime>(
-      'updated_at', aliasedName, false,
-      type: DriftSqlType.dateTime, requiredDuringInsert: true);
+    'updated_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
   @override
   List<GeneratedColumn> get $columns => [
-        id,
-        ruleId,
-        schoolsJson,
-        sourceJson,
-        authorType,
-        version,
-        description,
-        jiXiong,
-        geJuType,
-        className,
-        parentAnnotationId,
-        parentMajorVersion,
-        relationToParent,
-        referencesJson,
-        relatedConditionSetIdsJson,
-        visibility,
-        locale,
-        createdAt,
-        updatedAt
-      ];
+    id,
+    ruleId,
+    schoolsJson,
+    sourceJson,
+    authorType,
+    version,
+    description,
+    jiXiong,
+    geJuType,
+    className,
+    parentAnnotationId,
+    parentMajorVersion,
+    relationToParent,
+    referencesJson,
+    relatedConditionSetIdsJson,
+    visibility,
+    locale,
+    createdAt,
+    updatedAt,
+  ];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -965,8 +1208,9 @@ class $GeJuAnnotationsTableTable extends GeJuAnnotationsTable
   static const String $name = 't_ge_ju_annotations';
   @override
   VerificationContext validateIntegrity(
-      Insertable<GeJuAnnotationsTableData> instance,
-      {bool isInserting = false}) {
+    Insertable<GeJuAnnotationsTableData> instance, {
+    bool isInserting = false,
+  }) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
@@ -975,101 +1219,137 @@ class $GeJuAnnotationsTableTable extends GeJuAnnotationsTable
       context.missing(_idMeta);
     }
     if (data.containsKey('rule_id')) {
-      context.handle(_ruleIdMeta,
-          ruleId.isAcceptableOrUnknown(data['rule_id']!, _ruleIdMeta));
+      context.handle(
+        _ruleIdMeta,
+        ruleId.isAcceptableOrUnknown(data['rule_id']!, _ruleIdMeta),
+      );
     } else if (isInserting) {
       context.missing(_ruleIdMeta);
     }
     if (data.containsKey('schools_json')) {
       context.handle(
+        _schoolsJsonMeta,
+        schoolsJson.isAcceptableOrUnknown(
+          data['schools_json']!,
           _schoolsJsonMeta,
-          schoolsJson.isAcceptableOrUnknown(
-              data['schools_json']!, _schoolsJsonMeta));
+        ),
+      );
     }
     if (data.containsKey('source_json')) {
       context.handle(
-          _sourceJsonMeta,
-          sourceJson.isAcceptableOrUnknown(
-              data['source_json']!, _sourceJsonMeta));
+        _sourceJsonMeta,
+        sourceJson.isAcceptableOrUnknown(data['source_json']!, _sourceJsonMeta),
+      );
     }
     if (data.containsKey('author_type')) {
       context.handle(
-          _authorTypeMeta,
-          authorType.isAcceptableOrUnknown(
-              data['author_type']!, _authorTypeMeta));
+        _authorTypeMeta,
+        authorType.isAcceptableOrUnknown(data['author_type']!, _authorTypeMeta),
+      );
     }
     if (data.containsKey('version')) {
-      context.handle(_versionMeta,
-          version.isAcceptableOrUnknown(data['version']!, _versionMeta));
+      context.handle(
+        _versionMeta,
+        version.isAcceptableOrUnknown(data['version']!, _versionMeta),
+      );
     }
     if (data.containsKey('description')) {
       context.handle(
+        _descriptionMeta,
+        description.isAcceptableOrUnknown(
+          data['description']!,
           _descriptionMeta,
-          description.isAcceptableOrUnknown(
-              data['description']!, _descriptionMeta));
+        ),
+      );
     }
     if (data.containsKey('ji_xiong')) {
-      context.handle(_jiXiongMeta,
-          jiXiong.isAcceptableOrUnknown(data['ji_xiong']!, _jiXiongMeta));
+      context.handle(
+        _jiXiongMeta,
+        jiXiong.isAcceptableOrUnknown(data['ji_xiong']!, _jiXiongMeta),
+      );
     }
     if (data.containsKey('ge_ju_type')) {
-      context.handle(_geJuTypeMeta,
-          geJuType.isAcceptableOrUnknown(data['ge_ju_type']!, _geJuTypeMeta));
+      context.handle(
+        _geJuTypeMeta,
+        geJuType.isAcceptableOrUnknown(data['ge_ju_type']!, _geJuTypeMeta),
+      );
     }
     if (data.containsKey('class_name')) {
-      context.handle(_classNameMeta,
-          className.isAcceptableOrUnknown(data['class_name']!, _classNameMeta));
+      context.handle(
+        _classNameMeta,
+        className.isAcceptableOrUnknown(data['class_name']!, _classNameMeta),
+      );
     }
     if (data.containsKey('parent_annotation_id')) {
       context.handle(
+        _parentAnnotationIdMeta,
+        parentAnnotationId.isAcceptableOrUnknown(
+          data['parent_annotation_id']!,
           _parentAnnotationIdMeta,
-          parentAnnotationId.isAcceptableOrUnknown(
-              data['parent_annotation_id']!, _parentAnnotationIdMeta));
+        ),
+      );
     }
     if (data.containsKey('parent_major_version')) {
       context.handle(
+        _parentMajorVersionMeta,
+        parentMajorVersion.isAcceptableOrUnknown(
+          data['parent_major_version']!,
           _parentMajorVersionMeta,
-          parentMajorVersion.isAcceptableOrUnknown(
-              data['parent_major_version']!, _parentMajorVersionMeta));
+        ),
+      );
     }
     if (data.containsKey('relation_to_parent')) {
       context.handle(
+        _relationToParentMeta,
+        relationToParent.isAcceptableOrUnknown(
+          data['relation_to_parent']!,
           _relationToParentMeta,
-          relationToParent.isAcceptableOrUnknown(
-              data['relation_to_parent']!, _relationToParentMeta));
+        ),
+      );
     }
     if (data.containsKey('references_json')) {
       context.handle(
+        _referencesJsonMeta,
+        referencesJson.isAcceptableOrUnknown(
+          data['references_json']!,
           _referencesJsonMeta,
-          referencesJson.isAcceptableOrUnknown(
-              data['references_json']!, _referencesJsonMeta));
+        ),
+      );
     }
     if (data.containsKey('related_condition_set_ids_json')) {
       context.handle(
+        _relatedConditionSetIdsJsonMeta,
+        relatedConditionSetIdsJson.isAcceptableOrUnknown(
+          data['related_condition_set_ids_json']!,
           _relatedConditionSetIdsJsonMeta,
-          relatedConditionSetIdsJson.isAcceptableOrUnknown(
-              data['related_condition_set_ids_json']!,
-              _relatedConditionSetIdsJsonMeta));
+        ),
+      );
     }
     if (data.containsKey('visibility')) {
       context.handle(
-          _visibilityMeta,
-          visibility.isAcceptableOrUnknown(
-              data['visibility']!, _visibilityMeta));
+        _visibilityMeta,
+        visibility.isAcceptableOrUnknown(data['visibility']!, _visibilityMeta),
+      );
     }
     if (data.containsKey('locale')) {
-      context.handle(_localeMeta,
-          locale.isAcceptableOrUnknown(data['locale']!, _localeMeta));
+      context.handle(
+        _localeMeta,
+        locale.isAcceptableOrUnknown(data['locale']!, _localeMeta),
+      );
     }
     if (data.containsKey('created_at')) {
-      context.handle(_createdAtMeta,
-          createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta));
+      context.handle(
+        _createdAtMeta,
+        createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
+      );
     } else if (isInserting) {
       context.missing(_createdAtMeta);
     }
     if (data.containsKey('updated_at')) {
-      context.handle(_updatedAtMeta,
-          updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta));
+      context.handle(
+        _updatedAtMeta,
+        updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta),
+      );
     } else if (isInserting) {
       context.missing(_updatedAtMeta);
     }
@@ -1079,49 +1359,88 @@ class $GeJuAnnotationsTableTable extends GeJuAnnotationsTable
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  GeJuAnnotationsTableData map(Map<String, dynamic> data,
-      {String? tablePrefix}) {
+  GeJuAnnotationsTableData map(
+    Map<String, dynamic> data, {
+    String? tablePrefix,
+  }) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return GeJuAnnotationsTableData(
-      id: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
-      ruleId: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}rule_id'])!,
-      schoolsJson: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}schools_json']),
-      sourceJson: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}source_json']),
-      authorType: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}author_type'])!,
-      version: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}version'])!,
-      description: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}description']),
-      jiXiong: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}ji_xiong']),
-      geJuType: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}ge_ju_type']),
-      className: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}class_name']),
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}id'],
+      )!,
+      ruleId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}rule_id'],
+      )!,
+      schoolsJson: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}schools_json'],
+      ),
+      sourceJson: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}source_json'],
+      ),
+      authorType: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}author_type'],
+      )!,
+      version: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}version'],
+      )!,
+      description: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}description'],
+      ),
+      jiXiong: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}ji_xiong'],
+      ),
+      geJuType: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}ge_ju_type'],
+      ),
+      className: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}class_name'],
+      ),
       parentAnnotationId: attachedDatabase.typeMapping.read(
-          DriftSqlType.string, data['${effectivePrefix}parent_annotation_id']),
+        DriftSqlType.string,
+        data['${effectivePrefix}parent_annotation_id'],
+      ),
       parentMajorVersion: attachedDatabase.typeMapping.read(
-          DriftSqlType.int, data['${effectivePrefix}parent_major_version']),
+        DriftSqlType.int,
+        data['${effectivePrefix}parent_major_version'],
+      ),
       relationToParent: attachedDatabase.typeMapping.read(
-          DriftSqlType.string, data['${effectivePrefix}relation_to_parent']),
+        DriftSqlType.string,
+        data['${effectivePrefix}relation_to_parent'],
+      ),
       referencesJson: attachedDatabase.typeMapping.read(
-          DriftSqlType.string, data['${effectivePrefix}references_json'])!,
+        DriftSqlType.string,
+        data['${effectivePrefix}references_json'],
+      )!,
       relatedConditionSetIdsJson: attachedDatabase.typeMapping.read(
-          DriftSqlType.string,
-          data['${effectivePrefix}related_condition_set_ids_json'])!,
-      visibility: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}visibility'])!,
-      locale: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}locale'])!,
-      createdAt: attachedDatabase.typeMapping
-          .read(DriftSqlType.dateTime, data['${effectivePrefix}created_at'])!,
-      updatedAt: attachedDatabase.typeMapping
-          .read(DriftSqlType.dateTime, data['${effectivePrefix}updated_at'])!,
+        DriftSqlType.string,
+        data['${effectivePrefix}related_condition_set_ids_json'],
+      )!,
+      visibility: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}visibility'],
+      )!,
+      locale: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}locale'],
+      )!,
+      createdAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}created_at'],
+      )!,
+      updatedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}updated_at'],
+      )!,
     );
   }
 
@@ -1160,26 +1479,27 @@ class GeJuAnnotationsTableData extends DataClass
   final String locale;
   final DateTime createdAt;
   final DateTime updatedAt;
-  const GeJuAnnotationsTableData(
-      {required this.id,
-      required this.ruleId,
-      this.schoolsJson,
-      this.sourceJson,
-      required this.authorType,
-      required this.version,
-      this.description,
-      this.jiXiong,
-      this.geJuType,
-      this.className,
-      this.parentAnnotationId,
-      this.parentMajorVersion,
-      this.relationToParent,
-      required this.referencesJson,
-      required this.relatedConditionSetIdsJson,
-      required this.visibility,
-      required this.locale,
-      required this.createdAt,
-      required this.updatedAt});
+  const GeJuAnnotationsTableData({
+    required this.id,
+    required this.ruleId,
+    this.schoolsJson,
+    this.sourceJson,
+    required this.authorType,
+    required this.version,
+    this.description,
+    this.jiXiong,
+    this.geJuType,
+    this.className,
+    this.parentAnnotationId,
+    this.parentMajorVersion,
+    this.relationToParent,
+    required this.referencesJson,
+    required this.relatedConditionSetIdsJson,
+    required this.visibility,
+    required this.locale,
+    required this.createdAt,
+    required this.updatedAt,
+  });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -1215,8 +1535,9 @@ class GeJuAnnotationsTableData extends DataClass
       map['relation_to_parent'] = Variable<String>(relationToParent);
     }
     map['references_json'] = Variable<String>(referencesJson);
-    map['related_condition_set_ids_json'] =
-        Variable<String>(relatedConditionSetIdsJson);
+    map['related_condition_set_ids_json'] = Variable<String>(
+      relatedConditionSetIdsJson,
+    );
     map['visibility'] = Variable<String>(visibility);
     map['locale'] = Variable<String>(locale);
     map['created_at'] = Variable<DateTime>(createdAt);
@@ -1266,8 +1587,10 @@ class GeJuAnnotationsTableData extends DataClass
     );
   }
 
-  factory GeJuAnnotationsTableData.fromJson(Map<String, dynamic> json,
-      {ValueSerializer? serializer}) {
+  factory GeJuAnnotationsTableData.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return GeJuAnnotationsTableData(
       id: serializer.fromJson<String>(json['id']),
@@ -1280,13 +1603,15 @@ class GeJuAnnotationsTableData extends DataClass
       jiXiong: serializer.fromJson<String?>(json['jiXiong']),
       geJuType: serializer.fromJson<String?>(json['geJuType']),
       className: serializer.fromJson<String?>(json['className']),
-      parentAnnotationId:
-          serializer.fromJson<String?>(json['parentAnnotationId']),
+      parentAnnotationId: serializer.fromJson<String?>(
+        json['parentAnnotationId'],
+      ),
       parentMajorVersion: serializer.fromJson<int?>(json['parentMajorVersion']),
       relationToParent: serializer.fromJson<String?>(json['relationToParent']),
       referencesJson: serializer.fromJson<String>(json['referencesJson']),
-      relatedConditionSetIdsJson:
-          serializer.fromJson<String>(json['relatedConditionSetIdsJson']),
+      relatedConditionSetIdsJson: serializer.fromJson<String>(
+        json['relatedConditionSetIdsJson'],
+      ),
       visibility: serializer.fromJson<String>(json['visibility']),
       locale: serializer.fromJson<String>(json['locale']),
       createdAt: serializer.fromJson<DateTime>(json['createdAt']),
@@ -1311,8 +1636,9 @@ class GeJuAnnotationsTableData extends DataClass
       'parentMajorVersion': serializer.toJson<int?>(parentMajorVersion),
       'relationToParent': serializer.toJson<String?>(relationToParent),
       'referencesJson': serializer.toJson<String>(referencesJson),
-      'relatedConditionSetIdsJson':
-          serializer.toJson<String>(relatedConditionSetIdsJson),
+      'relatedConditionSetIdsJson': serializer.toJson<String>(
+        relatedConditionSetIdsJson,
+      ),
       'visibility': serializer.toJson<String>(visibility),
       'locale': serializer.toJson<String>(locale),
       'createdAt': serializer.toJson<DateTime>(createdAt),
@@ -1320,68 +1646,73 @@ class GeJuAnnotationsTableData extends DataClass
     };
   }
 
-  GeJuAnnotationsTableData copyWith(
-          {String? id,
-          String? ruleId,
-          Value<String?> schoolsJson = const Value.absent(),
-          Value<String?> sourceJson = const Value.absent(),
-          String? authorType,
-          String? version,
-          Value<String?> description = const Value.absent(),
-          Value<String?> jiXiong = const Value.absent(),
-          Value<String?> geJuType = const Value.absent(),
-          Value<String?> className = const Value.absent(),
-          Value<String?> parentAnnotationId = const Value.absent(),
-          Value<int?> parentMajorVersion = const Value.absent(),
-          Value<String?> relationToParent = const Value.absent(),
-          String? referencesJson,
-          String? relatedConditionSetIdsJson,
-          String? visibility,
-          String? locale,
-          DateTime? createdAt,
-          DateTime? updatedAt}) =>
-      GeJuAnnotationsTableData(
-        id: id ?? this.id,
-        ruleId: ruleId ?? this.ruleId,
-        schoolsJson: schoolsJson.present ? schoolsJson.value : this.schoolsJson,
-        sourceJson: sourceJson.present ? sourceJson.value : this.sourceJson,
-        authorType: authorType ?? this.authorType,
-        version: version ?? this.version,
-        description: description.present ? description.value : this.description,
-        jiXiong: jiXiong.present ? jiXiong.value : this.jiXiong,
-        geJuType: geJuType.present ? geJuType.value : this.geJuType,
-        className: className.present ? className.value : this.className,
-        parentAnnotationId: parentAnnotationId.present
-            ? parentAnnotationId.value
-            : this.parentAnnotationId,
-        parentMajorVersion: parentMajorVersion.present
-            ? parentMajorVersion.value
-            : this.parentMajorVersion,
-        relationToParent: relationToParent.present
-            ? relationToParent.value
-            : this.relationToParent,
-        referencesJson: referencesJson ?? this.referencesJson,
-        relatedConditionSetIdsJson:
-            relatedConditionSetIdsJson ?? this.relatedConditionSetIdsJson,
-        visibility: visibility ?? this.visibility,
-        locale: locale ?? this.locale,
-        createdAt: createdAt ?? this.createdAt,
-        updatedAt: updatedAt ?? this.updatedAt,
-      );
+  GeJuAnnotationsTableData copyWith({
+    String? id,
+    String? ruleId,
+    Value<String?> schoolsJson = const Value.absent(),
+    Value<String?> sourceJson = const Value.absent(),
+    String? authorType,
+    String? version,
+    Value<String?> description = const Value.absent(),
+    Value<String?> jiXiong = const Value.absent(),
+    Value<String?> geJuType = const Value.absent(),
+    Value<String?> className = const Value.absent(),
+    Value<String?> parentAnnotationId = const Value.absent(),
+    Value<int?> parentMajorVersion = const Value.absent(),
+    Value<String?> relationToParent = const Value.absent(),
+    String? referencesJson,
+    String? relatedConditionSetIdsJson,
+    String? visibility,
+    String? locale,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+  }) => GeJuAnnotationsTableData(
+    id: id ?? this.id,
+    ruleId: ruleId ?? this.ruleId,
+    schoolsJson: schoolsJson.present ? schoolsJson.value : this.schoolsJson,
+    sourceJson: sourceJson.present ? sourceJson.value : this.sourceJson,
+    authorType: authorType ?? this.authorType,
+    version: version ?? this.version,
+    description: description.present ? description.value : this.description,
+    jiXiong: jiXiong.present ? jiXiong.value : this.jiXiong,
+    geJuType: geJuType.present ? geJuType.value : this.geJuType,
+    className: className.present ? className.value : this.className,
+    parentAnnotationId: parentAnnotationId.present
+        ? parentAnnotationId.value
+        : this.parentAnnotationId,
+    parentMajorVersion: parentMajorVersion.present
+        ? parentMajorVersion.value
+        : this.parentMajorVersion,
+    relationToParent: relationToParent.present
+        ? relationToParent.value
+        : this.relationToParent,
+    referencesJson: referencesJson ?? this.referencesJson,
+    relatedConditionSetIdsJson:
+        relatedConditionSetIdsJson ?? this.relatedConditionSetIdsJson,
+    visibility: visibility ?? this.visibility,
+    locale: locale ?? this.locale,
+    createdAt: createdAt ?? this.createdAt,
+    updatedAt: updatedAt ?? this.updatedAt,
+  );
   GeJuAnnotationsTableData copyWithCompanion(
-      GeJuAnnotationsTableCompanion data) {
+    GeJuAnnotationsTableCompanion data,
+  ) {
     return GeJuAnnotationsTableData(
       id: data.id.present ? data.id.value : this.id,
       ruleId: data.ruleId.present ? data.ruleId.value : this.ruleId,
-      schoolsJson:
-          data.schoolsJson.present ? data.schoolsJson.value : this.schoolsJson,
-      sourceJson:
-          data.sourceJson.present ? data.sourceJson.value : this.sourceJson,
-      authorType:
-          data.authorType.present ? data.authorType.value : this.authorType,
+      schoolsJson: data.schoolsJson.present
+          ? data.schoolsJson.value
+          : this.schoolsJson,
+      sourceJson: data.sourceJson.present
+          ? data.sourceJson.value
+          : this.sourceJson,
+      authorType: data.authorType.present
+          ? data.authorType.value
+          : this.authorType,
       version: data.version.present ? data.version.value : this.version,
-      description:
-          data.description.present ? data.description.value : this.description,
+      description: data.description.present
+          ? data.description.value
+          : this.description,
       jiXiong: data.jiXiong.present ? data.jiXiong.value : this.jiXiong,
       geJuType: data.geJuType.present ? data.geJuType.value : this.geJuType,
       className: data.className.present ? data.className.value : this.className,
@@ -1400,8 +1731,9 @@ class GeJuAnnotationsTableData extends DataClass
       relatedConditionSetIdsJson: data.relatedConditionSetIdsJson.present
           ? data.relatedConditionSetIdsJson.value
           : this.relatedConditionSetIdsJson,
-      visibility:
-          data.visibility.present ? data.visibility.value : this.visibility,
+      visibility: data.visibility.present
+          ? data.visibility.value
+          : this.visibility,
       locale: data.locale.present ? data.locale.value : this.locale,
       createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
       updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
@@ -1436,25 +1768,26 @@ class GeJuAnnotationsTableData extends DataClass
 
   @override
   int get hashCode => Object.hash(
-      id,
-      ruleId,
-      schoolsJson,
-      sourceJson,
-      authorType,
-      version,
-      description,
-      jiXiong,
-      geJuType,
-      className,
-      parentAnnotationId,
-      parentMajorVersion,
-      relationToParent,
-      referencesJson,
-      relatedConditionSetIdsJson,
-      visibility,
-      locale,
-      createdAt,
-      updatedAt);
+    id,
+    ruleId,
+    schoolsJson,
+    sourceJson,
+    authorType,
+    version,
+    description,
+    jiXiong,
+    geJuType,
+    className,
+    parentAnnotationId,
+    parentMajorVersion,
+    relationToParent,
+    referencesJson,
+    relatedConditionSetIdsJson,
+    visibility,
+    locale,
+    createdAt,
+    updatedAt,
+  );
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -1545,10 +1878,10 @@ class GeJuAnnotationsTableCompanion
     required DateTime createdAt,
     required DateTime updatedAt,
     this.rowid = const Value.absent(),
-  })  : id = Value(id),
-        ruleId = Value(ruleId),
-        createdAt = Value(createdAt),
-        updatedAt = Value(updatedAt);
+  }) : id = Value(id),
+       ruleId = Value(ruleId),
+       createdAt = Value(createdAt),
+       updatedAt = Value(updatedAt);
   static Insertable<GeJuAnnotationsTableData> custom({
     Expression<String>? id,
     Expression<String>? ruleId,
@@ -1598,27 +1931,28 @@ class GeJuAnnotationsTableCompanion
     });
   }
 
-  GeJuAnnotationsTableCompanion copyWith(
-      {Value<String>? id,
-      Value<String>? ruleId,
-      Value<String?>? schoolsJson,
-      Value<String?>? sourceJson,
-      Value<String>? authorType,
-      Value<String>? version,
-      Value<String?>? description,
-      Value<String?>? jiXiong,
-      Value<String?>? geJuType,
-      Value<String?>? className,
-      Value<String?>? parentAnnotationId,
-      Value<int?>? parentMajorVersion,
-      Value<String?>? relationToParent,
-      Value<String>? referencesJson,
-      Value<String>? relatedConditionSetIdsJson,
-      Value<String>? visibility,
-      Value<String>? locale,
-      Value<DateTime>? createdAt,
-      Value<DateTime>? updatedAt,
-      Value<int>? rowid}) {
+  GeJuAnnotationsTableCompanion copyWith({
+    Value<String>? id,
+    Value<String>? ruleId,
+    Value<String?>? schoolsJson,
+    Value<String?>? sourceJson,
+    Value<String>? authorType,
+    Value<String>? version,
+    Value<String?>? description,
+    Value<String?>? jiXiong,
+    Value<String?>? geJuType,
+    Value<String?>? className,
+    Value<String?>? parentAnnotationId,
+    Value<int?>? parentMajorVersion,
+    Value<String?>? relationToParent,
+    Value<String>? referencesJson,
+    Value<String>? relatedConditionSetIdsJson,
+    Value<String>? visibility,
+    Value<String>? locale,
+    Value<DateTime>? createdAt,
+    Value<DateTime>? updatedAt,
+    Value<int>? rowid,
+  }) {
     return GeJuAnnotationsTableCompanion(
       id: id ?? this.id,
       ruleId: ruleId ?? this.ruleId,
@@ -1690,8 +2024,9 @@ class GeJuAnnotationsTableCompanion
       map['references_json'] = Variable<String>(referencesJson.value);
     }
     if (relatedConditionSetIdsJson.present) {
-      map['related_condition_set_ids_json'] =
-          Variable<String>(relatedConditionSetIdsJson.value);
+      map['related_condition_set_ids_json'] = Variable<String>(
+        relatedConditionSetIdsJson.value,
+      );
     }
     if (visibility.present) {
       map['visibility'] = Variable<String>(visibility.value);
@@ -1747,105 +2082,161 @@ class $GeJuConditionSetsTableTable extends GeJuConditionSetsTable
   $GeJuConditionSetsTableTable(this.attachedDatabase, [this._alias]);
   static const VerificationMeta _idMeta = const VerificationMeta('id');
   @override
-  late final GeneratedColumn<String> id =
-      GeneratedColumn<String>('id', aliasedName, false,
-          additionalChecks: GeneratedColumn.checkTextLength(
-            minTextLength: 1,
-          ),
-          type: DriftSqlType.string,
-          requiredDuringInsert: true);
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+    'id',
+    aliasedName,
+    false,
+    additionalChecks: GeneratedColumn.checkTextLength(minTextLength: 1),
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
   static const VerificationMeta _ruleIdMeta = const VerificationMeta('ruleId');
   @override
   late final GeneratedColumn<String> ruleId = GeneratedColumn<String>(
-      'rule_id', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
+    'rule_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
   static const VerificationMeta _labelMeta = const VerificationMeta('label');
   @override
   late final GeneratedColumn<String> label = GeneratedColumn<String>(
-      'label', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _schoolsJsonMeta =
-      const VerificationMeta('schoolsJson');
+    'label',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _schoolsJsonMeta = const VerificationMeta(
+    'schoolsJson',
+  );
   @override
   late final GeneratedColumn<String> schoolsJson = GeneratedColumn<String>(
-      'schools_json', aliasedName, true,
-      type: DriftSqlType.string, requiredDuringInsert: false);
-  static const VerificationMeta _sourceJsonMeta =
-      const VerificationMeta('sourceJson');
+    'schools_json',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _sourceJsonMeta = const VerificationMeta(
+    'sourceJson',
+  );
   @override
   late final GeneratedColumn<String> sourceJson = GeneratedColumn<String>(
-      'source_json', aliasedName, true,
-      type: DriftSqlType.string, requiredDuringInsert: false);
-  static const VerificationMeta _authorTypeMeta =
-      const VerificationMeta('authorType');
+    'source_json',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _authorTypeMeta = const VerificationMeta(
+    'authorType',
+  );
   @override
   late final GeneratedColumn<String> authorType = GeneratedColumn<String>(
-      'author_type', aliasedName, false,
-      type: DriftSqlType.string,
-      requiredDuringInsert: false,
-      defaultValue: const Constant('user'));
-  static const VerificationMeta _conditionsJsonMeta =
-      const VerificationMeta('conditionsJson');
+    'author_type',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant('user'),
+  );
+  static const VerificationMeta _conditionsJsonMeta = const VerificationMeta(
+    'conditionsJson',
+  );
   @override
   late final GeneratedColumn<String> conditionsJson = GeneratedColumn<String>(
-      'conditions_json', aliasedName, true,
-      type: DriftSqlType.string, requiredDuringInsert: false);
-  static const VerificationMeta _derivedFromMeta =
-      const VerificationMeta('derivedFrom');
+    'conditions_json',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _derivedFromMeta = const VerificationMeta(
+    'derivedFrom',
+  );
   @override
   late final GeneratedColumn<String> derivedFrom = GeneratedColumn<String>(
-      'derived_from', aliasedName, true,
-      type: DriftSqlType.string, requiredDuringInsert: false);
-  static const VerificationMeta _changeNoteMeta =
-      const VerificationMeta('changeNote');
+    'derived_from',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _changeNoteMeta = const VerificationMeta(
+    'changeNote',
+  );
   @override
   late final GeneratedColumn<String> changeNote = GeneratedColumn<String>(
-      'change_note', aliasedName, true,
-      type: DriftSqlType.string, requiredDuringInsert: false);
+    'change_note',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
   static const VerificationMeta _relatedAnnotationIdsJsonMeta =
       const VerificationMeta('relatedAnnotationIdsJson');
   @override
   late final GeneratedColumn<String> relatedAnnotationIdsJson =
-      GeneratedColumn<String>('related_annotation_ids_json', aliasedName, false,
-          type: DriftSqlType.string,
-          requiredDuringInsert: false,
-          defaultValue: const Constant('[]'));
-  static const VerificationMeta _visibilityMeta =
-      const VerificationMeta('visibility');
+      GeneratedColumn<String>(
+        'related_annotation_ids_json',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: false,
+        defaultValue: const Constant('[]'),
+      );
+  static const VerificationMeta _visibilityMeta = const VerificationMeta(
+    'visibility',
+  );
   @override
   late final GeneratedColumn<String> visibility = GeneratedColumn<String>(
-      'visibility', aliasedName, false,
-      type: DriftSqlType.string,
-      requiredDuringInsert: false,
-      defaultValue: const Constant('private'));
-  static const VerificationMeta _createdAtMeta =
-      const VerificationMeta('createdAt');
+    'visibility',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant('private'),
+  );
+  static const VerificationMeta _createdAtMeta = const VerificationMeta(
+    'createdAt',
+  );
   @override
   late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
-      'created_at', aliasedName, false,
-      type: DriftSqlType.dateTime, requiredDuringInsert: true);
-  static const VerificationMeta _updatedAtMeta =
-      const VerificationMeta('updatedAt');
+    'created_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _updatedAtMeta = const VerificationMeta(
+    'updatedAt',
+  );
   @override
   late final GeneratedColumn<DateTime> updatedAt = GeneratedColumn<DateTime>(
-      'updated_at', aliasedName, false,
-      type: DriftSqlType.dateTime, requiredDuringInsert: true);
+    'updated_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
   @override
   List<GeneratedColumn> get $columns => [
-        id,
-        ruleId,
-        label,
-        schoolsJson,
-        sourceJson,
-        authorType,
-        conditionsJson,
-        derivedFrom,
-        changeNote,
-        relatedAnnotationIdsJson,
-        visibility,
-        createdAt,
-        updatedAt
-      ];
+    id,
+    ruleId,
+    label,
+    schoolsJson,
+    sourceJson,
+    authorType,
+    conditionsJson,
+    derivedFrom,
+    changeNote,
+    relatedAnnotationIdsJson,
+    visibility,
+    createdAt,
+    updatedAt,
+  ];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -1853,8 +2244,9 @@ class $GeJuConditionSetsTableTable extends GeJuConditionSetsTable
   static const String $name = 't_ge_ju_condition_sets';
   @override
   VerificationContext validateIntegrity(
-      Insertable<GeJuConditionSetsTableData> instance,
-      {bool isInserting = false}) {
+    Insertable<GeJuConditionSetsTableData> instance, {
+    bool isInserting = false,
+  }) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
@@ -1863,75 +2255,94 @@ class $GeJuConditionSetsTableTable extends GeJuConditionSetsTable
       context.missing(_idMeta);
     }
     if (data.containsKey('rule_id')) {
-      context.handle(_ruleIdMeta,
-          ruleId.isAcceptableOrUnknown(data['rule_id']!, _ruleIdMeta));
+      context.handle(
+        _ruleIdMeta,
+        ruleId.isAcceptableOrUnknown(data['rule_id']!, _ruleIdMeta),
+      );
     } else if (isInserting) {
       context.missing(_ruleIdMeta);
     }
     if (data.containsKey('label')) {
       context.handle(
-          _labelMeta, label.isAcceptableOrUnknown(data['label']!, _labelMeta));
+        _labelMeta,
+        label.isAcceptableOrUnknown(data['label']!, _labelMeta),
+      );
     } else if (isInserting) {
       context.missing(_labelMeta);
     }
     if (data.containsKey('schools_json')) {
       context.handle(
+        _schoolsJsonMeta,
+        schoolsJson.isAcceptableOrUnknown(
+          data['schools_json']!,
           _schoolsJsonMeta,
-          schoolsJson.isAcceptableOrUnknown(
-              data['schools_json']!, _schoolsJsonMeta));
+        ),
+      );
     }
     if (data.containsKey('source_json')) {
       context.handle(
-          _sourceJsonMeta,
-          sourceJson.isAcceptableOrUnknown(
-              data['source_json']!, _sourceJsonMeta));
+        _sourceJsonMeta,
+        sourceJson.isAcceptableOrUnknown(data['source_json']!, _sourceJsonMeta),
+      );
     }
     if (data.containsKey('author_type')) {
       context.handle(
-          _authorTypeMeta,
-          authorType.isAcceptableOrUnknown(
-              data['author_type']!, _authorTypeMeta));
+        _authorTypeMeta,
+        authorType.isAcceptableOrUnknown(data['author_type']!, _authorTypeMeta),
+      );
     }
     if (data.containsKey('conditions_json')) {
       context.handle(
+        _conditionsJsonMeta,
+        conditionsJson.isAcceptableOrUnknown(
+          data['conditions_json']!,
           _conditionsJsonMeta,
-          conditionsJson.isAcceptableOrUnknown(
-              data['conditions_json']!, _conditionsJsonMeta));
+        ),
+      );
     }
     if (data.containsKey('derived_from')) {
       context.handle(
+        _derivedFromMeta,
+        derivedFrom.isAcceptableOrUnknown(
+          data['derived_from']!,
           _derivedFromMeta,
-          derivedFrom.isAcceptableOrUnknown(
-              data['derived_from']!, _derivedFromMeta));
+        ),
+      );
     }
     if (data.containsKey('change_note')) {
       context.handle(
-          _changeNoteMeta,
-          changeNote.isAcceptableOrUnknown(
-              data['change_note']!, _changeNoteMeta));
+        _changeNoteMeta,
+        changeNote.isAcceptableOrUnknown(data['change_note']!, _changeNoteMeta),
+      );
     }
     if (data.containsKey('related_annotation_ids_json')) {
       context.handle(
+        _relatedAnnotationIdsJsonMeta,
+        relatedAnnotationIdsJson.isAcceptableOrUnknown(
+          data['related_annotation_ids_json']!,
           _relatedAnnotationIdsJsonMeta,
-          relatedAnnotationIdsJson.isAcceptableOrUnknown(
-              data['related_annotation_ids_json']!,
-              _relatedAnnotationIdsJsonMeta));
+        ),
+      );
     }
     if (data.containsKey('visibility')) {
       context.handle(
-          _visibilityMeta,
-          visibility.isAcceptableOrUnknown(
-              data['visibility']!, _visibilityMeta));
+        _visibilityMeta,
+        visibility.isAcceptableOrUnknown(data['visibility']!, _visibilityMeta),
+      );
     }
     if (data.containsKey('created_at')) {
-      context.handle(_createdAtMeta,
-          createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta));
+      context.handle(
+        _createdAtMeta,
+        createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
+      );
     } else if (isInserting) {
       context.missing(_createdAtMeta);
     }
     if (data.containsKey('updated_at')) {
-      context.handle(_updatedAtMeta,
-          updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta));
+      context.handle(
+        _updatedAtMeta,
+        updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta),
+      );
     } else if (isInserting) {
       context.missing(_updatedAtMeta);
     }
@@ -1941,37 +2352,64 @@ class $GeJuConditionSetsTableTable extends GeJuConditionSetsTable
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  GeJuConditionSetsTableData map(Map<String, dynamic> data,
-      {String? tablePrefix}) {
+  GeJuConditionSetsTableData map(
+    Map<String, dynamic> data, {
+    String? tablePrefix,
+  }) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return GeJuConditionSetsTableData(
-      id: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
-      ruleId: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}rule_id'])!,
-      label: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}label'])!,
-      schoolsJson: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}schools_json']),
-      sourceJson: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}source_json']),
-      authorType: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}author_type'])!,
-      conditionsJson: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}conditions_json']),
-      derivedFrom: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}derived_from']),
-      changeNote: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}change_note']),
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}id'],
+      )!,
+      ruleId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}rule_id'],
+      )!,
+      label: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}label'],
+      )!,
+      schoolsJson: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}schools_json'],
+      ),
+      sourceJson: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}source_json'],
+      ),
+      authorType: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}author_type'],
+      )!,
+      conditionsJson: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}conditions_json'],
+      ),
+      derivedFrom: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}derived_from'],
+      ),
+      changeNote: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}change_note'],
+      ),
       relatedAnnotationIdsJson: attachedDatabase.typeMapping.read(
-          DriftSqlType.string,
-          data['${effectivePrefix}related_annotation_ids_json'])!,
-      visibility: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}visibility'])!,
-      createdAt: attachedDatabase.typeMapping
-          .read(DriftSqlType.dateTime, data['${effectivePrefix}created_at'])!,
-      updatedAt: attachedDatabase.typeMapping
-          .read(DriftSqlType.dateTime, data['${effectivePrefix}updated_at'])!,
+        DriftSqlType.string,
+        data['${effectivePrefix}related_annotation_ids_json'],
+      )!,
+      visibility: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}visibility'],
+      )!,
+      createdAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}created_at'],
+      )!,
+      updatedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}updated_at'],
+      )!,
     );
   }
 
@@ -2004,20 +2442,21 @@ class GeJuConditionSetsTableData extends DataClass
   final String visibility;
   final DateTime createdAt;
   final DateTime updatedAt;
-  const GeJuConditionSetsTableData(
-      {required this.id,
-      required this.ruleId,
-      required this.label,
-      this.schoolsJson,
-      this.sourceJson,
-      required this.authorType,
-      this.conditionsJson,
-      this.derivedFrom,
-      this.changeNote,
-      required this.relatedAnnotationIdsJson,
-      required this.visibility,
-      required this.createdAt,
-      required this.updatedAt});
+  const GeJuConditionSetsTableData({
+    required this.id,
+    required this.ruleId,
+    required this.label,
+    this.schoolsJson,
+    this.sourceJson,
+    required this.authorType,
+    this.conditionsJson,
+    this.derivedFrom,
+    this.changeNote,
+    required this.relatedAnnotationIdsJson,
+    required this.visibility,
+    required this.createdAt,
+    required this.updatedAt,
+  });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -2040,8 +2479,9 @@ class GeJuConditionSetsTableData extends DataClass
     if (!nullToAbsent || changeNote != null) {
       map['change_note'] = Variable<String>(changeNote);
     }
-    map['related_annotation_ids_json'] =
-        Variable<String>(relatedAnnotationIdsJson);
+    map['related_annotation_ids_json'] = Variable<String>(
+      relatedAnnotationIdsJson,
+    );
     map['visibility'] = Variable<String>(visibility);
     map['created_at'] = Variable<DateTime>(createdAt);
     map['updated_at'] = Variable<DateTime>(updatedAt);
@@ -2076,8 +2516,10 @@ class GeJuConditionSetsTableData extends DataClass
     );
   }
 
-  factory GeJuConditionSetsTableData.fromJson(Map<String, dynamic> json,
-      {ValueSerializer? serializer}) {
+  factory GeJuConditionSetsTableData.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return GeJuConditionSetsTableData(
       id: serializer.fromJson<String>(json['id']),
@@ -2089,8 +2531,9 @@ class GeJuConditionSetsTableData extends DataClass
       conditionsJson: serializer.fromJson<String?>(json['conditionsJson']),
       derivedFrom: serializer.fromJson<String?>(json['derivedFrom']),
       changeNote: serializer.fromJson<String?>(json['changeNote']),
-      relatedAnnotationIdsJson:
-          serializer.fromJson<String>(json['relatedAnnotationIdsJson']),
+      relatedAnnotationIdsJson: serializer.fromJson<String>(
+        json['relatedAnnotationIdsJson'],
+      ),
       visibility: serializer.fromJson<String>(json['visibility']),
       createdAt: serializer.fromJson<DateTime>(json['createdAt']),
       updatedAt: serializer.fromJson<DateTime>(json['updatedAt']),
@@ -2109,69 +2552,78 @@ class GeJuConditionSetsTableData extends DataClass
       'conditionsJson': serializer.toJson<String?>(conditionsJson),
       'derivedFrom': serializer.toJson<String?>(derivedFrom),
       'changeNote': serializer.toJson<String?>(changeNote),
-      'relatedAnnotationIdsJson':
-          serializer.toJson<String>(relatedAnnotationIdsJson),
+      'relatedAnnotationIdsJson': serializer.toJson<String>(
+        relatedAnnotationIdsJson,
+      ),
       'visibility': serializer.toJson<String>(visibility),
       'createdAt': serializer.toJson<DateTime>(createdAt),
       'updatedAt': serializer.toJson<DateTime>(updatedAt),
     };
   }
 
-  GeJuConditionSetsTableData copyWith(
-          {String? id,
-          String? ruleId,
-          String? label,
-          Value<String?> schoolsJson = const Value.absent(),
-          Value<String?> sourceJson = const Value.absent(),
-          String? authorType,
-          Value<String?> conditionsJson = const Value.absent(),
-          Value<String?> derivedFrom = const Value.absent(),
-          Value<String?> changeNote = const Value.absent(),
-          String? relatedAnnotationIdsJson,
-          String? visibility,
-          DateTime? createdAt,
-          DateTime? updatedAt}) =>
-      GeJuConditionSetsTableData(
-        id: id ?? this.id,
-        ruleId: ruleId ?? this.ruleId,
-        label: label ?? this.label,
-        schoolsJson: schoolsJson.present ? schoolsJson.value : this.schoolsJson,
-        sourceJson: sourceJson.present ? sourceJson.value : this.sourceJson,
-        authorType: authorType ?? this.authorType,
-        conditionsJson:
-            conditionsJson.present ? conditionsJson.value : this.conditionsJson,
-        derivedFrom: derivedFrom.present ? derivedFrom.value : this.derivedFrom,
-        changeNote: changeNote.present ? changeNote.value : this.changeNote,
-        relatedAnnotationIdsJson:
-            relatedAnnotationIdsJson ?? this.relatedAnnotationIdsJson,
-        visibility: visibility ?? this.visibility,
-        createdAt: createdAt ?? this.createdAt,
-        updatedAt: updatedAt ?? this.updatedAt,
-      );
+  GeJuConditionSetsTableData copyWith({
+    String? id,
+    String? ruleId,
+    String? label,
+    Value<String?> schoolsJson = const Value.absent(),
+    Value<String?> sourceJson = const Value.absent(),
+    String? authorType,
+    Value<String?> conditionsJson = const Value.absent(),
+    Value<String?> derivedFrom = const Value.absent(),
+    Value<String?> changeNote = const Value.absent(),
+    String? relatedAnnotationIdsJson,
+    String? visibility,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+  }) => GeJuConditionSetsTableData(
+    id: id ?? this.id,
+    ruleId: ruleId ?? this.ruleId,
+    label: label ?? this.label,
+    schoolsJson: schoolsJson.present ? schoolsJson.value : this.schoolsJson,
+    sourceJson: sourceJson.present ? sourceJson.value : this.sourceJson,
+    authorType: authorType ?? this.authorType,
+    conditionsJson: conditionsJson.present
+        ? conditionsJson.value
+        : this.conditionsJson,
+    derivedFrom: derivedFrom.present ? derivedFrom.value : this.derivedFrom,
+    changeNote: changeNote.present ? changeNote.value : this.changeNote,
+    relatedAnnotationIdsJson:
+        relatedAnnotationIdsJson ?? this.relatedAnnotationIdsJson,
+    visibility: visibility ?? this.visibility,
+    createdAt: createdAt ?? this.createdAt,
+    updatedAt: updatedAt ?? this.updatedAt,
+  );
   GeJuConditionSetsTableData copyWithCompanion(
-      GeJuConditionSetsTableCompanion data) {
+    GeJuConditionSetsTableCompanion data,
+  ) {
     return GeJuConditionSetsTableData(
       id: data.id.present ? data.id.value : this.id,
       ruleId: data.ruleId.present ? data.ruleId.value : this.ruleId,
       label: data.label.present ? data.label.value : this.label,
-      schoolsJson:
-          data.schoolsJson.present ? data.schoolsJson.value : this.schoolsJson,
-      sourceJson:
-          data.sourceJson.present ? data.sourceJson.value : this.sourceJson,
-      authorType:
-          data.authorType.present ? data.authorType.value : this.authorType,
+      schoolsJson: data.schoolsJson.present
+          ? data.schoolsJson.value
+          : this.schoolsJson,
+      sourceJson: data.sourceJson.present
+          ? data.sourceJson.value
+          : this.sourceJson,
+      authorType: data.authorType.present
+          ? data.authorType.value
+          : this.authorType,
       conditionsJson: data.conditionsJson.present
           ? data.conditionsJson.value
           : this.conditionsJson,
-      derivedFrom:
-          data.derivedFrom.present ? data.derivedFrom.value : this.derivedFrom,
-      changeNote:
-          data.changeNote.present ? data.changeNote.value : this.changeNote,
+      derivedFrom: data.derivedFrom.present
+          ? data.derivedFrom.value
+          : this.derivedFrom,
+      changeNote: data.changeNote.present
+          ? data.changeNote.value
+          : this.changeNote,
       relatedAnnotationIdsJson: data.relatedAnnotationIdsJson.present
           ? data.relatedAnnotationIdsJson.value
           : this.relatedAnnotationIdsJson,
-      visibility:
-          data.visibility.present ? data.visibility.value : this.visibility,
+      visibility: data.visibility.present
+          ? data.visibility.value
+          : this.visibility,
       createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
       updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
     );
@@ -2199,19 +2651,20 @@ class GeJuConditionSetsTableData extends DataClass
 
   @override
   int get hashCode => Object.hash(
-      id,
-      ruleId,
-      label,
-      schoolsJson,
-      sourceJson,
-      authorType,
-      conditionsJson,
-      derivedFrom,
-      changeNote,
-      relatedAnnotationIdsJson,
-      visibility,
-      createdAt,
-      updatedAt);
+    id,
+    ruleId,
+    label,
+    schoolsJson,
+    sourceJson,
+    authorType,
+    conditionsJson,
+    derivedFrom,
+    changeNote,
+    relatedAnnotationIdsJson,
+    visibility,
+    createdAt,
+    updatedAt,
+  );
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -2278,11 +2731,11 @@ class GeJuConditionSetsTableCompanion
     required DateTime createdAt,
     required DateTime updatedAt,
     this.rowid = const Value.absent(),
-  })  : id = Value(id),
-        ruleId = Value(ruleId),
-        label = Value(label),
-        createdAt = Value(createdAt),
-        updatedAt = Value(updatedAt);
+  }) : id = Value(id),
+       ruleId = Value(ruleId),
+       label = Value(label),
+       createdAt = Value(createdAt),
+       updatedAt = Value(updatedAt);
   static Insertable<GeJuConditionSetsTableData> custom({
     Expression<String>? id,
     Expression<String>? ruleId,
@@ -2318,21 +2771,22 @@ class GeJuConditionSetsTableCompanion
     });
   }
 
-  GeJuConditionSetsTableCompanion copyWith(
-      {Value<String>? id,
-      Value<String>? ruleId,
-      Value<String>? label,
-      Value<String?>? schoolsJson,
-      Value<String?>? sourceJson,
-      Value<String>? authorType,
-      Value<String?>? conditionsJson,
-      Value<String?>? derivedFrom,
-      Value<String?>? changeNote,
-      Value<String>? relatedAnnotationIdsJson,
-      Value<String>? visibility,
-      Value<DateTime>? createdAt,
-      Value<DateTime>? updatedAt,
-      Value<int>? rowid}) {
+  GeJuConditionSetsTableCompanion copyWith({
+    Value<String>? id,
+    Value<String>? ruleId,
+    Value<String>? label,
+    Value<String?>? schoolsJson,
+    Value<String?>? sourceJson,
+    Value<String>? authorType,
+    Value<String?>? conditionsJson,
+    Value<String?>? derivedFrom,
+    Value<String?>? changeNote,
+    Value<String>? relatedAnnotationIdsJson,
+    Value<String>? visibility,
+    Value<DateTime>? createdAt,
+    Value<DateTime>? updatedAt,
+    Value<int>? rowid,
+  }) {
     return GeJuConditionSetsTableCompanion(
       id: id ?? this.id,
       ruleId: ruleId ?? this.ruleId,
@@ -2383,8 +2837,9 @@ class GeJuConditionSetsTableCompanion
       map['change_note'] = Variable<String>(changeNote.value);
     }
     if (relatedAnnotationIdsJson.present) {
-      map['related_annotation_ids_json'] =
-          Variable<String>(relatedAnnotationIdsJson.value);
+      map['related_annotation_ids_json'] = Variable<String>(
+        relatedAnnotationIdsJson.value,
+      );
     }
     if (visibility.present) {
       map['visibility'] = Variable<String>(visibility.value);
@@ -2425,8 +2880,10 @@ class GeJuConditionSetsTableCompanion
 
 class $GeJuUserPreferencesTableTable extends GeJuUserPreferencesTable
     with
-        TableInfo<$GeJuUserPreferencesTableTable,
-            GeJuUserPreferencesTableData> {
+        TableInfo<
+          $GeJuUserPreferencesTableTable,
+          GeJuUserPreferencesTableData
+        > {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
@@ -2434,47 +2891,67 @@ class $GeJuUserPreferencesTableTable extends GeJuUserPreferencesTable
   static const VerificationMeta _idMeta = const VerificationMeta('id');
   @override
   late final GeneratedColumn<String> id = GeneratedColumn<String>(
-      'id', aliasedName, false,
-      type: DriftSqlType.string,
-      requiredDuringInsert: false,
-      defaultValue: const Constant('default'));
+    'id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant('default'),
+  );
   static const VerificationMeta _hiddenConditionSetIdsJsonMeta =
       const VerificationMeta('hiddenConditionSetIdsJson');
   @override
   late final GeneratedColumn<String> hiddenConditionSetIdsJson =
       GeneratedColumn<String>(
-          'hidden_condition_set_ids_json', aliasedName, false,
-          type: DriftSqlType.string,
-          requiredDuringInsert: false,
-          defaultValue: const Constant('[]'));
+        'hidden_condition_set_ids_json',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: false,
+        defaultValue: const Constant('[]'),
+      );
   static const VerificationMeta _conditionSetSchoolsJsonMeta =
       const VerificationMeta('conditionSetSchoolsJson');
   @override
   late final GeneratedColumn<String> conditionSetSchoolsJson =
-      GeneratedColumn<String>('condition_set_schools_json', aliasedName, true,
-          type: DriftSqlType.string, requiredDuringInsert: false);
+      GeneratedColumn<String>(
+        'condition_set_schools_json',
+        aliasedName,
+        true,
+        type: DriftSqlType.string,
+        requiredDuringInsert: false,
+      );
   static const VerificationMeta _hiddenAnnotationIdsJsonMeta =
       const VerificationMeta('hiddenAnnotationIdsJson');
   @override
   late final GeneratedColumn<String> hiddenAnnotationIdsJson =
-      GeneratedColumn<String>('hidden_annotation_ids_json', aliasedName, false,
-          type: DriftSqlType.string,
-          requiredDuringInsert: false,
-          defaultValue: const Constant('[]'));
+      GeneratedColumn<String>(
+        'hidden_annotation_ids_json',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: false,
+        defaultValue: const Constant('[]'),
+      );
   static const VerificationMeta _annotationSchoolsJsonMeta =
       const VerificationMeta('annotationSchoolsJson');
   @override
   late final GeneratedColumn<String> annotationSchoolsJson =
-      GeneratedColumn<String>('annotation_schools_json', aliasedName, true,
-          type: DriftSqlType.string, requiredDuringInsert: false);
+      GeneratedColumn<String>(
+        'annotation_schools_json',
+        aliasedName,
+        true,
+        type: DriftSqlType.string,
+        requiredDuringInsert: false,
+      );
   @override
   List<GeneratedColumn> get $columns => [
-        id,
-        hiddenConditionSetIdsJson,
-        conditionSetSchoolsJson,
-        hiddenAnnotationIdsJson,
-        annotationSchoolsJson
-      ];
+    id,
+    hiddenConditionSetIdsJson,
+    conditionSetSchoolsJson,
+    hiddenAnnotationIdsJson,
+    annotationSchoolsJson,
+  ];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -2482,8 +2959,9 @@ class $GeJuUserPreferencesTableTable extends GeJuUserPreferencesTable
   static const String $name = 't_ge_ju_user_preferences';
   @override
   VerificationContext validateIntegrity(
-      Insertable<GeJuUserPreferencesTableData> instance,
-      {bool isInserting = false}) {
+    Insertable<GeJuUserPreferencesTableData> instance, {
+    bool isInserting = false,
+  }) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
@@ -2491,30 +2969,39 @@ class $GeJuUserPreferencesTableTable extends GeJuUserPreferencesTable
     }
     if (data.containsKey('hidden_condition_set_ids_json')) {
       context.handle(
+        _hiddenConditionSetIdsJsonMeta,
+        hiddenConditionSetIdsJson.isAcceptableOrUnknown(
+          data['hidden_condition_set_ids_json']!,
           _hiddenConditionSetIdsJsonMeta,
-          hiddenConditionSetIdsJson.isAcceptableOrUnknown(
-              data['hidden_condition_set_ids_json']!,
-              _hiddenConditionSetIdsJsonMeta));
+        ),
+      );
     }
     if (data.containsKey('condition_set_schools_json')) {
       context.handle(
+        _conditionSetSchoolsJsonMeta,
+        conditionSetSchoolsJson.isAcceptableOrUnknown(
+          data['condition_set_schools_json']!,
           _conditionSetSchoolsJsonMeta,
-          conditionSetSchoolsJson.isAcceptableOrUnknown(
-              data['condition_set_schools_json']!,
-              _conditionSetSchoolsJsonMeta));
+        ),
+      );
     }
     if (data.containsKey('hidden_annotation_ids_json')) {
       context.handle(
+        _hiddenAnnotationIdsJsonMeta,
+        hiddenAnnotationIdsJson.isAcceptableOrUnknown(
+          data['hidden_annotation_ids_json']!,
           _hiddenAnnotationIdsJsonMeta,
-          hiddenAnnotationIdsJson.isAcceptableOrUnknown(
-              data['hidden_annotation_ids_json']!,
-              _hiddenAnnotationIdsJsonMeta));
+        ),
+      );
     }
     if (data.containsKey('annotation_schools_json')) {
       context.handle(
+        _annotationSchoolsJsonMeta,
+        annotationSchoolsJson.isAcceptableOrUnknown(
+          data['annotation_schools_json']!,
           _annotationSchoolsJsonMeta,
-          annotationSchoolsJson.isAcceptableOrUnknown(
-              data['annotation_schools_json']!, _annotationSchoolsJsonMeta));
+        ),
+      );
     }
     return context;
   }
@@ -2522,24 +3009,32 @@ class $GeJuUserPreferencesTableTable extends GeJuUserPreferencesTable
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  GeJuUserPreferencesTableData map(Map<String, dynamic> data,
-      {String? tablePrefix}) {
+  GeJuUserPreferencesTableData map(
+    Map<String, dynamic> data, {
+    String? tablePrefix,
+  }) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return GeJuUserPreferencesTableData(
-      id: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}id'],
+      )!,
       hiddenConditionSetIdsJson: attachedDatabase.typeMapping.read(
-          DriftSqlType.string,
-          data['${effectivePrefix}hidden_condition_set_ids_json'])!,
+        DriftSqlType.string,
+        data['${effectivePrefix}hidden_condition_set_ids_json'],
+      )!,
       conditionSetSchoolsJson: attachedDatabase.typeMapping.read(
-          DriftSqlType.string,
-          data['${effectivePrefix}condition_set_schools_json']),
+        DriftSqlType.string,
+        data['${effectivePrefix}condition_set_schools_json'],
+      ),
       hiddenAnnotationIdsJson: attachedDatabase.typeMapping.read(
-          DriftSqlType.string,
-          data['${effectivePrefix}hidden_annotation_ids_json'])!,
+        DriftSqlType.string,
+        data['${effectivePrefix}hidden_annotation_ids_json'],
+      )!,
       annotationSchoolsJson: attachedDatabase.typeMapping.read(
-          DriftSqlType.string,
-          data['${effectivePrefix}annotation_schools_json']),
+        DriftSqlType.string,
+        data['${effectivePrefix}annotation_schools_json'],
+      ),
     );
   }
 
@@ -2565,24 +3060,28 @@ class GeJuUserPreferencesTableData extends DataClass
 
   /// JSON: List<String>?
   final String? annotationSchoolsJson;
-  const GeJuUserPreferencesTableData(
-      {required this.id,
-      required this.hiddenConditionSetIdsJson,
-      this.conditionSetSchoolsJson,
-      required this.hiddenAnnotationIdsJson,
-      this.annotationSchoolsJson});
+  const GeJuUserPreferencesTableData({
+    required this.id,
+    required this.hiddenConditionSetIdsJson,
+    this.conditionSetSchoolsJson,
+    required this.hiddenAnnotationIdsJson,
+    this.annotationSchoolsJson,
+  });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     map['id'] = Variable<String>(id);
-    map['hidden_condition_set_ids_json'] =
-        Variable<String>(hiddenConditionSetIdsJson);
+    map['hidden_condition_set_ids_json'] = Variable<String>(
+      hiddenConditionSetIdsJson,
+    );
     if (!nullToAbsent || conditionSetSchoolsJson != null) {
-      map['condition_set_schools_json'] =
-          Variable<String>(conditionSetSchoolsJson);
+      map['condition_set_schools_json'] = Variable<String>(
+        conditionSetSchoolsJson,
+      );
     }
-    map['hidden_annotation_ids_json'] =
-        Variable<String>(hiddenAnnotationIdsJson);
+    map['hidden_annotation_ids_json'] = Variable<String>(
+      hiddenAnnotationIdsJson,
+    );
     if (!nullToAbsent || annotationSchoolsJson != null) {
       map['annotation_schools_json'] = Variable<String>(annotationSchoolsJson);
     }
@@ -2603,19 +3102,25 @@ class GeJuUserPreferencesTableData extends DataClass
     );
   }
 
-  factory GeJuUserPreferencesTableData.fromJson(Map<String, dynamic> json,
-      {ValueSerializer? serializer}) {
+  factory GeJuUserPreferencesTableData.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return GeJuUserPreferencesTableData(
       id: serializer.fromJson<String>(json['id']),
-      hiddenConditionSetIdsJson:
-          serializer.fromJson<String>(json['hiddenConditionSetIdsJson']),
-      conditionSetSchoolsJson:
-          serializer.fromJson<String?>(json['conditionSetSchoolsJson']),
-      hiddenAnnotationIdsJson:
-          serializer.fromJson<String>(json['hiddenAnnotationIdsJson']),
-      annotationSchoolsJson:
-          serializer.fromJson<String?>(json['annotationSchoolsJson']),
+      hiddenConditionSetIdsJson: serializer.fromJson<String>(
+        json['hiddenConditionSetIdsJson'],
+      ),
+      conditionSetSchoolsJson: serializer.fromJson<String?>(
+        json['conditionSetSchoolsJson'],
+      ),
+      hiddenAnnotationIdsJson: serializer.fromJson<String>(
+        json['hiddenAnnotationIdsJson'],
+      ),
+      annotationSchoolsJson: serializer.fromJson<String?>(
+        json['annotationSchoolsJson'],
+      ),
     );
   }
   @override
@@ -2623,38 +3128,43 @@ class GeJuUserPreferencesTableData extends DataClass
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
       'id': serializer.toJson<String>(id),
-      'hiddenConditionSetIdsJson':
-          serializer.toJson<String>(hiddenConditionSetIdsJson),
-      'conditionSetSchoolsJson':
-          serializer.toJson<String?>(conditionSetSchoolsJson),
-      'hiddenAnnotationIdsJson':
-          serializer.toJson<String>(hiddenAnnotationIdsJson),
-      'annotationSchoolsJson':
-          serializer.toJson<String?>(annotationSchoolsJson),
+      'hiddenConditionSetIdsJson': serializer.toJson<String>(
+        hiddenConditionSetIdsJson,
+      ),
+      'conditionSetSchoolsJson': serializer.toJson<String?>(
+        conditionSetSchoolsJson,
+      ),
+      'hiddenAnnotationIdsJson': serializer.toJson<String>(
+        hiddenAnnotationIdsJson,
+      ),
+      'annotationSchoolsJson': serializer.toJson<String?>(
+        annotationSchoolsJson,
+      ),
     };
   }
 
-  GeJuUserPreferencesTableData copyWith(
-          {String? id,
-          String? hiddenConditionSetIdsJson,
-          Value<String?> conditionSetSchoolsJson = const Value.absent(),
-          String? hiddenAnnotationIdsJson,
-          Value<String?> annotationSchoolsJson = const Value.absent()}) =>
-      GeJuUserPreferencesTableData(
-        id: id ?? this.id,
-        hiddenConditionSetIdsJson:
-            hiddenConditionSetIdsJson ?? this.hiddenConditionSetIdsJson,
-        conditionSetSchoolsJson: conditionSetSchoolsJson.present
-            ? conditionSetSchoolsJson.value
-            : this.conditionSetSchoolsJson,
-        hiddenAnnotationIdsJson:
-            hiddenAnnotationIdsJson ?? this.hiddenAnnotationIdsJson,
-        annotationSchoolsJson: annotationSchoolsJson.present
-            ? annotationSchoolsJson.value
-            : this.annotationSchoolsJson,
-      );
+  GeJuUserPreferencesTableData copyWith({
+    String? id,
+    String? hiddenConditionSetIdsJson,
+    Value<String?> conditionSetSchoolsJson = const Value.absent(),
+    String? hiddenAnnotationIdsJson,
+    Value<String?> annotationSchoolsJson = const Value.absent(),
+  }) => GeJuUserPreferencesTableData(
+    id: id ?? this.id,
+    hiddenConditionSetIdsJson:
+        hiddenConditionSetIdsJson ?? this.hiddenConditionSetIdsJson,
+    conditionSetSchoolsJson: conditionSetSchoolsJson.present
+        ? conditionSetSchoolsJson.value
+        : this.conditionSetSchoolsJson,
+    hiddenAnnotationIdsJson:
+        hiddenAnnotationIdsJson ?? this.hiddenAnnotationIdsJson,
+    annotationSchoolsJson: annotationSchoolsJson.present
+        ? annotationSchoolsJson.value
+        : this.annotationSchoolsJson,
+  );
   GeJuUserPreferencesTableData copyWithCompanion(
-      GeJuUserPreferencesTableCompanion data) {
+    GeJuUserPreferencesTableCompanion data,
+  ) {
     return GeJuUserPreferencesTableData(
       id: data.id.present ? data.id.value : this.id,
       hiddenConditionSetIdsJson: data.hiddenConditionSetIdsJson.present
@@ -2685,8 +3195,13 @@ class GeJuUserPreferencesTableData extends DataClass
   }
 
   @override
-  int get hashCode => Object.hash(id, hiddenConditionSetIdsJson,
-      conditionSetSchoolsJson, hiddenAnnotationIdsJson, annotationSchoolsJson);
+  int get hashCode => Object.hash(
+    id,
+    hiddenConditionSetIdsJson,
+    conditionSetSchoolsJson,
+    hiddenAnnotationIdsJson,
+    annotationSchoolsJson,
+  );
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -2744,13 +3259,14 @@ class GeJuUserPreferencesTableCompanion
     });
   }
 
-  GeJuUserPreferencesTableCompanion copyWith(
-      {Value<String>? id,
-      Value<String>? hiddenConditionSetIdsJson,
-      Value<String?>? conditionSetSchoolsJson,
-      Value<String>? hiddenAnnotationIdsJson,
-      Value<String?>? annotationSchoolsJson,
-      Value<int>? rowid}) {
+  GeJuUserPreferencesTableCompanion copyWith({
+    Value<String>? id,
+    Value<String>? hiddenConditionSetIdsJson,
+    Value<String?>? conditionSetSchoolsJson,
+    Value<String>? hiddenAnnotationIdsJson,
+    Value<String?>? annotationSchoolsJson,
+    Value<int>? rowid,
+  }) {
     return GeJuUserPreferencesTableCompanion(
       id: id ?? this.id,
       hiddenConditionSetIdsJson:
@@ -2772,20 +3288,24 @@ class GeJuUserPreferencesTableCompanion
       map['id'] = Variable<String>(id.value);
     }
     if (hiddenConditionSetIdsJson.present) {
-      map['hidden_condition_set_ids_json'] =
-          Variable<String>(hiddenConditionSetIdsJson.value);
+      map['hidden_condition_set_ids_json'] = Variable<String>(
+        hiddenConditionSetIdsJson.value,
+      );
     }
     if (conditionSetSchoolsJson.present) {
-      map['condition_set_schools_json'] =
-          Variable<String>(conditionSetSchoolsJson.value);
+      map['condition_set_schools_json'] = Variable<String>(
+        conditionSetSchoolsJson.value,
+      );
     }
     if (hiddenAnnotationIdsJson.present) {
-      map['hidden_annotation_ids_json'] =
-          Variable<String>(hiddenAnnotationIdsJson.value);
+      map['hidden_annotation_ids_json'] = Variable<String>(
+        hiddenAnnotationIdsJson.value,
+      );
     }
     if (annotationSchoolsJson.present) {
-      map['annotation_schools_json'] =
-          Variable<String>(annotationSchoolsJson.value);
+      map['annotation_schools_json'] = Variable<String>(
+        annotationSchoolsJson.value,
+      );
     }
     if (rowid.present) {
       map['rowid'] = Variable<int>(rowid.value);
@@ -2809,53 +3329,87 @@ class GeJuUserPreferencesTableCompanion
 
 class $GeJuDeletionRecordsTableTable extends GeJuDeletionRecordsTable
     with
-        TableInfo<$GeJuDeletionRecordsTableTable,
-            GeJuDeletionRecordsTableData> {
+        TableInfo<
+          $GeJuDeletionRecordsTableTable,
+          GeJuDeletionRecordsTableData
+        > {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
   $GeJuDeletionRecordsTableTable(this.attachedDatabase, [this._alias]);
   static const VerificationMeta _idMeta = const VerificationMeta('id');
   @override
-  late final GeneratedColumn<String> id =
-      GeneratedColumn<String>('id', aliasedName, false,
-          additionalChecks: GeneratedColumn.checkTextLength(
-            minTextLength: 1,
-          ),
-          type: DriftSqlType.string,
-          requiredDuringInsert: true);
-  static const VerificationMeta _deletedEntityTypeMeta =
-      const VerificationMeta('deletedEntityType');
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+    'id',
+    aliasedName,
+    false,
+    additionalChecks: GeneratedColumn.checkTextLength(minTextLength: 1),
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _deletedEntityTypeMeta = const VerificationMeta(
+    'deletedEntityType',
+  );
   @override
   late final GeneratedColumn<String> deletedEntityType =
-      GeneratedColumn<String>('deleted_entity_type', aliasedName, false,
-          type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _deletedEntityIdMeta =
-      const VerificationMeta('deletedEntityId');
+      GeneratedColumn<String>(
+        'deleted_entity_type',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: true,
+      );
+  static const VerificationMeta _deletedEntityIdMeta = const VerificationMeta(
+    'deletedEntityId',
+  );
   @override
   late final GeneratedColumn<String> deletedEntityId = GeneratedColumn<String>(
-      'deleted_entity_id', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _deletedAtMeta =
-      const VerificationMeta('deletedAt');
+    'deleted_entity_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _deletedAtMeta = const VerificationMeta(
+    'deletedAt',
+  );
   @override
   late final GeneratedColumn<DateTime> deletedAt = GeneratedColumn<DateTime>(
-      'deleted_at', aliasedName, false,
-      type: DriftSqlType.dateTime, requiredDuringInsert: true);
+    'deleted_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
   static const VerificationMeta _reasonMeta = const VerificationMeta('reason');
   @override
   late final GeneratedColumn<String> reason = GeneratedColumn<String>(
-      'reason', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _snapshotJsonMeta =
-      const VerificationMeta('snapshotJson');
+    'reason',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _snapshotJsonMeta = const VerificationMeta(
+    'snapshotJson',
+  );
   @override
   late final GeneratedColumn<String> snapshotJson = GeneratedColumn<String>(
-      'snapshot_json', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
+    'snapshot_json',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
   @override
-  List<GeneratedColumn> get $columns =>
-      [id, deletedEntityType, deletedEntityId, deletedAt, reason, snapshotJson];
+  List<GeneratedColumn> get $columns => [
+    id,
+    deletedEntityType,
+    deletedEntityId,
+    deletedAt,
+    reason,
+    snapshotJson,
+  ];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -2863,8 +3417,9 @@ class $GeJuDeletionRecordsTableTable extends GeJuDeletionRecordsTable
   static const String $name = 't_ge_ju_deletion_records';
   @override
   VerificationContext validateIntegrity(
-      Insertable<GeJuDeletionRecordsTableData> instance,
-      {bool isInserting = false}) {
+    Insertable<GeJuDeletionRecordsTableData> instance, {
+    bool isInserting = false,
+  }) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
@@ -2874,37 +3429,50 @@ class $GeJuDeletionRecordsTableTable extends GeJuDeletionRecordsTable
     }
     if (data.containsKey('deleted_entity_type')) {
       context.handle(
+        _deletedEntityTypeMeta,
+        deletedEntityType.isAcceptableOrUnknown(
+          data['deleted_entity_type']!,
           _deletedEntityTypeMeta,
-          deletedEntityType.isAcceptableOrUnknown(
-              data['deleted_entity_type']!, _deletedEntityTypeMeta));
+        ),
+      );
     } else if (isInserting) {
       context.missing(_deletedEntityTypeMeta);
     }
     if (data.containsKey('deleted_entity_id')) {
       context.handle(
+        _deletedEntityIdMeta,
+        deletedEntityId.isAcceptableOrUnknown(
+          data['deleted_entity_id']!,
           _deletedEntityIdMeta,
-          deletedEntityId.isAcceptableOrUnknown(
-              data['deleted_entity_id']!, _deletedEntityIdMeta));
+        ),
+      );
     } else if (isInserting) {
       context.missing(_deletedEntityIdMeta);
     }
     if (data.containsKey('deleted_at')) {
-      context.handle(_deletedAtMeta,
-          deletedAt.isAcceptableOrUnknown(data['deleted_at']!, _deletedAtMeta));
+      context.handle(
+        _deletedAtMeta,
+        deletedAt.isAcceptableOrUnknown(data['deleted_at']!, _deletedAtMeta),
+      );
     } else if (isInserting) {
       context.missing(_deletedAtMeta);
     }
     if (data.containsKey('reason')) {
-      context.handle(_reasonMeta,
-          reason.isAcceptableOrUnknown(data['reason']!, _reasonMeta));
+      context.handle(
+        _reasonMeta,
+        reason.isAcceptableOrUnknown(data['reason']!, _reasonMeta),
+      );
     } else if (isInserting) {
       context.missing(_reasonMeta);
     }
     if (data.containsKey('snapshot_json')) {
       context.handle(
+        _snapshotJsonMeta,
+        snapshotJson.isAcceptableOrUnknown(
+          data['snapshot_json']!,
           _snapshotJsonMeta,
-          snapshotJson.isAcceptableOrUnknown(
-              data['snapshot_json']!, _snapshotJsonMeta));
+        ),
+      );
     } else if (isInserting) {
       context.missing(_snapshotJsonMeta);
     }
@@ -2914,22 +3482,36 @@ class $GeJuDeletionRecordsTableTable extends GeJuDeletionRecordsTable
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  GeJuDeletionRecordsTableData map(Map<String, dynamic> data,
-      {String? tablePrefix}) {
+  GeJuDeletionRecordsTableData map(
+    Map<String, dynamic> data, {
+    String? tablePrefix,
+  }) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return GeJuDeletionRecordsTableData(
-      id: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}id'],
+      )!,
       deletedEntityType: attachedDatabase.typeMapping.read(
-          DriftSqlType.string, data['${effectivePrefix}deleted_entity_type'])!,
+        DriftSqlType.string,
+        data['${effectivePrefix}deleted_entity_type'],
+      )!,
       deletedEntityId: attachedDatabase.typeMapping.read(
-          DriftSqlType.string, data['${effectivePrefix}deleted_entity_id'])!,
-      deletedAt: attachedDatabase.typeMapping
-          .read(DriftSqlType.dateTime, data['${effectivePrefix}deleted_at'])!,
-      reason: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}reason'])!,
-      snapshotJson: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}snapshot_json'])!,
+        DriftSqlType.string,
+        data['${effectivePrefix}deleted_entity_id'],
+      )!,
+      deletedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}deleted_at'],
+      )!,
+      reason: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}reason'],
+      )!,
+      snapshotJson: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}snapshot_json'],
+      )!,
     );
   }
 
@@ -2947,13 +3529,14 @@ class GeJuDeletionRecordsTableData extends DataClass
   final DateTime deletedAt;
   final String reason;
   final String snapshotJson;
-  const GeJuDeletionRecordsTableData(
-      {required this.id,
-      required this.deletedEntityType,
-      required this.deletedEntityId,
-      required this.deletedAt,
-      required this.reason,
-      required this.snapshotJson});
+  const GeJuDeletionRecordsTableData({
+    required this.id,
+    required this.deletedEntityType,
+    required this.deletedEntityId,
+    required this.deletedAt,
+    required this.reason,
+    required this.snapshotJson,
+  });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -2977,8 +3560,10 @@ class GeJuDeletionRecordsTableData extends DataClass
     );
   }
 
-  factory GeJuDeletionRecordsTableData.fromJson(Map<String, dynamic> json,
-      {ValueSerializer? serializer}) {
+  factory GeJuDeletionRecordsTableData.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return GeJuDeletionRecordsTableData(
       id: serializer.fromJson<String>(json['id']),
@@ -3002,23 +3587,24 @@ class GeJuDeletionRecordsTableData extends DataClass
     };
   }
 
-  GeJuDeletionRecordsTableData copyWith(
-          {String? id,
-          String? deletedEntityType,
-          String? deletedEntityId,
-          DateTime? deletedAt,
-          String? reason,
-          String? snapshotJson}) =>
-      GeJuDeletionRecordsTableData(
-        id: id ?? this.id,
-        deletedEntityType: deletedEntityType ?? this.deletedEntityType,
-        deletedEntityId: deletedEntityId ?? this.deletedEntityId,
-        deletedAt: deletedAt ?? this.deletedAt,
-        reason: reason ?? this.reason,
-        snapshotJson: snapshotJson ?? this.snapshotJson,
-      );
+  GeJuDeletionRecordsTableData copyWith({
+    String? id,
+    String? deletedEntityType,
+    String? deletedEntityId,
+    DateTime? deletedAt,
+    String? reason,
+    String? snapshotJson,
+  }) => GeJuDeletionRecordsTableData(
+    id: id ?? this.id,
+    deletedEntityType: deletedEntityType ?? this.deletedEntityType,
+    deletedEntityId: deletedEntityId ?? this.deletedEntityId,
+    deletedAt: deletedAt ?? this.deletedAt,
+    reason: reason ?? this.reason,
+    snapshotJson: snapshotJson ?? this.snapshotJson,
+  );
   GeJuDeletionRecordsTableData copyWithCompanion(
-      GeJuDeletionRecordsTableCompanion data) {
+    GeJuDeletionRecordsTableCompanion data,
+  ) {
     return GeJuDeletionRecordsTableData(
       id: data.id.present ? data.id.value : this.id,
       deletedEntityType: data.deletedEntityType.present
@@ -3050,7 +3636,13 @@ class GeJuDeletionRecordsTableData extends DataClass
 
   @override
   int get hashCode => Object.hash(
-      id, deletedEntityType, deletedEntityId, deletedAt, reason, snapshotJson);
+    id,
+    deletedEntityType,
+    deletedEntityId,
+    deletedAt,
+    reason,
+    snapshotJson,
+  );
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -3089,12 +3681,12 @@ class GeJuDeletionRecordsTableCompanion
     required String reason,
     required String snapshotJson,
     this.rowid = const Value.absent(),
-  })  : id = Value(id),
-        deletedEntityType = Value(deletedEntityType),
-        deletedEntityId = Value(deletedEntityId),
-        deletedAt = Value(deletedAt),
-        reason = Value(reason),
-        snapshotJson = Value(snapshotJson);
+  }) : id = Value(id),
+       deletedEntityType = Value(deletedEntityType),
+       deletedEntityId = Value(deletedEntityId),
+       deletedAt = Value(deletedAt),
+       reason = Value(reason),
+       snapshotJson = Value(snapshotJson);
   static Insertable<GeJuDeletionRecordsTableData> custom({
     Expression<String>? id,
     Expression<String>? deletedEntityType,
@@ -3115,14 +3707,15 @@ class GeJuDeletionRecordsTableCompanion
     });
   }
 
-  GeJuDeletionRecordsTableCompanion copyWith(
-      {Value<String>? id,
-      Value<String>? deletedEntityType,
-      Value<String>? deletedEntityId,
-      Value<DateTime>? deletedAt,
-      Value<String>? reason,
-      Value<String>? snapshotJson,
-      Value<int>? rowid}) {
+  GeJuDeletionRecordsTableCompanion copyWith({
+    Value<String>? id,
+    Value<String>? deletedEntityType,
+    Value<String>? deletedEntityId,
+    Value<DateTime>? deletedAt,
+    Value<String>? reason,
+    Value<String>? snapshotJson,
+    Value<int>? rowid,
+  }) {
     return GeJuDeletionRecordsTableCompanion(
       id: id ?? this.id,
       deletedEntityType: deletedEntityType ?? this.deletedEntityType,
@@ -3184,31 +3777,44 @@ class $GeJuSchoolsTableTable extends GeJuSchoolsTable
   $GeJuSchoolsTableTable(this.attachedDatabase, [this._alias]);
   static const VerificationMeta _idMeta = const VerificationMeta('id');
   @override
-  late final GeneratedColumn<String> id =
-      GeneratedColumn<String>('id', aliasedName, false,
-          additionalChecks: GeneratedColumn.checkTextLength(
-            minTextLength: 1,
-          ),
-          type: DriftSqlType.string,
-          requiredDuringInsert: true);
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+    'id',
+    aliasedName,
+    false,
+    additionalChecks: GeneratedColumn.checkTextLength(minTextLength: 1),
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
   static const VerificationMeta _nameMeta = const VerificationMeta('name');
   @override
   late final GeneratedColumn<String> name = GeneratedColumn<String>(
-      'name', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
+    'name',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
   static const VerificationMeta _briefMeta = const VerificationMeta('brief');
   @override
   late final GeneratedColumn<String> brief = GeneratedColumn<String>(
-      'brief', aliasedName, true,
-      type: DriftSqlType.string, requiredDuringInsert: false);
-  static const VerificationMeta _featuresJsonMeta =
-      const VerificationMeta('featuresJson');
+    'brief',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _featuresJsonMeta = const VerificationMeta(
+    'featuresJson',
+  );
   @override
   late final GeneratedColumn<String> featuresJson = GeneratedColumn<String>(
-      'features_json', aliasedName, false,
-      type: DriftSqlType.string,
-      requiredDuringInsert: false,
-      defaultValue: const Constant('[]'));
+    'features_json',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant('[]'),
+  );
   @override
   List<GeneratedColumn> get $columns => [id, name, brief, featuresJson];
   @override
@@ -3218,8 +3824,9 @@ class $GeJuSchoolsTableTable extends GeJuSchoolsTable
   static const String $name = 't_ge_ju_schools';
   @override
   VerificationContext validateIntegrity(
-      Insertable<GeJuSchoolsTableData> instance,
-      {bool isInserting = false}) {
+    Insertable<GeJuSchoolsTableData> instance, {
+    bool isInserting = false,
+  }) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
@@ -3229,19 +3836,26 @@ class $GeJuSchoolsTableTable extends GeJuSchoolsTable
     }
     if (data.containsKey('name')) {
       context.handle(
-          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
+        _nameMeta,
+        name.isAcceptableOrUnknown(data['name']!, _nameMeta),
+      );
     } else if (isInserting) {
       context.missing(_nameMeta);
     }
     if (data.containsKey('brief')) {
       context.handle(
-          _briefMeta, brief.isAcceptableOrUnknown(data['brief']!, _briefMeta));
+        _briefMeta,
+        brief.isAcceptableOrUnknown(data['brief']!, _briefMeta),
+      );
     }
     if (data.containsKey('features_json')) {
       context.handle(
+        _featuresJsonMeta,
+        featuresJson.isAcceptableOrUnknown(
+          data['features_json']!,
           _featuresJsonMeta,
-          featuresJson.isAcceptableOrUnknown(
-              data['features_json']!, _featuresJsonMeta));
+        ),
+      );
     }
     return context;
   }
@@ -3252,14 +3866,22 @@ class $GeJuSchoolsTableTable extends GeJuSchoolsTable
   GeJuSchoolsTableData map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return GeJuSchoolsTableData(
-      id: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
-      name: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
-      brief: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}brief']),
-      featuresJson: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}features_json'])!,
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}id'],
+      )!,
+      name: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}name'],
+      )!,
+      brief: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}brief'],
+      ),
+      featuresJson: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}features_json'],
+      )!,
     );
   }
 
@@ -3277,11 +3899,12 @@ class GeJuSchoolsTableData extends DataClass
 
   /// JSON: List<String>
   final String featuresJson;
-  const GeJuSchoolsTableData(
-      {required this.id,
-      required this.name,
-      this.brief,
-      required this.featuresJson});
+  const GeJuSchoolsTableData({
+    required this.id,
+    required this.name,
+    this.brief,
+    required this.featuresJson,
+  });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -3298,14 +3921,17 @@ class GeJuSchoolsTableData extends DataClass
     return GeJuSchoolsTableCompanion(
       id: Value(id),
       name: Value(name),
-      brief:
-          brief == null && nullToAbsent ? const Value.absent() : Value(brief),
+      brief: brief == null && nullToAbsent
+          ? const Value.absent()
+          : Value(brief),
       featuresJson: Value(featuresJson),
     );
   }
 
-  factory GeJuSchoolsTableData.fromJson(Map<String, dynamic> json,
-      {ValueSerializer? serializer}) {
+  factory GeJuSchoolsTableData.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return GeJuSchoolsTableData(
       id: serializer.fromJson<String>(json['id']),
@@ -3325,17 +3951,17 @@ class GeJuSchoolsTableData extends DataClass
     };
   }
 
-  GeJuSchoolsTableData copyWith(
-          {String? id,
-          String? name,
-          Value<String?> brief = const Value.absent(),
-          String? featuresJson}) =>
-      GeJuSchoolsTableData(
-        id: id ?? this.id,
-        name: name ?? this.name,
-        brief: brief.present ? brief.value : this.brief,
-        featuresJson: featuresJson ?? this.featuresJson,
-      );
+  GeJuSchoolsTableData copyWith({
+    String? id,
+    String? name,
+    Value<String?> brief = const Value.absent(),
+    String? featuresJson,
+  }) => GeJuSchoolsTableData(
+    id: id ?? this.id,
+    name: name ?? this.name,
+    brief: brief.present ? brief.value : this.brief,
+    featuresJson: featuresJson ?? this.featuresJson,
+  );
   GeJuSchoolsTableData copyWithCompanion(GeJuSchoolsTableCompanion data) {
     return GeJuSchoolsTableData(
       id: data.id.present ? data.id.value : this.id,
@@ -3389,8 +4015,8 @@ class GeJuSchoolsTableCompanion extends UpdateCompanion<GeJuSchoolsTableData> {
     this.brief = const Value.absent(),
     this.featuresJson = const Value.absent(),
     this.rowid = const Value.absent(),
-  })  : id = Value(id),
-        name = Value(name);
+  }) : id = Value(id),
+       name = Value(name);
   static Insertable<GeJuSchoolsTableData> custom({
     Expression<String>? id,
     Expression<String>? name,
@@ -3407,12 +4033,13 @@ class GeJuSchoolsTableCompanion extends UpdateCompanion<GeJuSchoolsTableData> {
     });
   }
 
-  GeJuSchoolsTableCompanion copyWith(
-      {Value<String>? id,
-      Value<String>? name,
-      Value<String?>? brief,
-      Value<String>? featuresJson,
-      Value<int>? rowid}) {
+  GeJuSchoolsTableCompanion copyWith({
+    Value<String>? id,
+    Value<String>? name,
+    Value<String?>? brief,
+    Value<String>? featuresJson,
+    Value<int>? rowid,
+  }) {
     return GeJuSchoolsTableCompanion(
       id: id ?? this.id,
       name: name ?? this.name,
@@ -3470,50 +4097,52 @@ abstract class _$AppDatabase extends GeneratedDatabase {
       $GeJuUserPreferencesTableTable(this);
   late final $GeJuDeletionRecordsTableTable geJuDeletionRecordsTable =
       $GeJuDeletionRecordsTableTable(this);
-  late final $GeJuSchoolsTableTable geJuSchoolsTable =
-      $GeJuSchoolsTableTable(this);
-  late final QiZhengSiYuPanDao qiZhengSiYuPanDao =
-      QiZhengSiYuPanDao(this as AppDatabase);
+  late final $GeJuSchoolsTableTable geJuSchoolsTable = $GeJuSchoolsTableTable(
+    this,
+  );
+  late final QiZhengSiYuPanDao qiZhengSiYuPanDao = QiZhengSiYuPanDao(
+    this as AppDatabase,
+  );
   late final GeJuDao geJuDao = GeJuDao(this as AppDatabase);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
   @override
   List<DatabaseSchemaEntity> get allSchemaEntities => [
-        qizhengsiyuPanTable,
-        geJuRulesTable,
-        geJuAnnotationsTable,
-        geJuConditionSetsTable,
-        geJuUserPreferencesTable,
-        geJuDeletionRecordsTable,
-        geJuSchoolsTable
-      ];
+    qizhengsiyuPanTable,
+    geJuRulesTable,
+    geJuAnnotationsTable,
+    geJuConditionSetsTable,
+    geJuUserPreferencesTable,
+    geJuDeletionRecordsTable,
+    geJuSchoolsTable,
+  ];
 }
 
-typedef $$QizhengsiyuPanTableTableCreateCompanionBuilder
-    = QizhengsiyuPanTableCompanion Function({
-  required String uuid,
-  required DateTime createdAt,
-  required DateTime lastUpdatedAt,
-  Value<DateTime?> deletedAt,
-  required String divinationRequestInfoUuid,
-  required BasePanelConfig panelConfig,
-  required BasePanelModel panelModel,
-  required DivinationDatetimeModel divinationDatetimeModel,
-  Value<int> rowid,
-});
-typedef $$QizhengsiyuPanTableTableUpdateCompanionBuilder
-    = QizhengsiyuPanTableCompanion Function({
-  Value<String> uuid,
-  Value<DateTime> createdAt,
-  Value<DateTime> lastUpdatedAt,
-  Value<DateTime?> deletedAt,
-  Value<String> divinationRequestInfoUuid,
-  Value<BasePanelConfig> panelConfig,
-  Value<BasePanelModel> panelModel,
-  Value<DivinationDatetimeModel> divinationDatetimeModel,
-  Value<int> rowid,
-});
+typedef $$QizhengsiyuPanTableTableCreateCompanionBuilder =
+    QizhengsiyuPanTableCompanion Function({
+      required String uuid,
+      required DateTime createdAt,
+      required DateTime lastUpdatedAt,
+      Value<DateTime?> deletedAt,
+      required String divinationRequestInfoUuid,
+      required BasePanelConfig panelConfig,
+      required BasePanelModel panelModel,
+      required DivinationDatetimeModel divinationDatetimeModel,
+      Value<int> rowid,
+    });
+typedef $$QizhengsiyuPanTableTableUpdateCompanionBuilder =
+    QizhengsiyuPanTableCompanion Function({
+      Value<String> uuid,
+      Value<DateTime> createdAt,
+      Value<DateTime> lastUpdatedAt,
+      Value<DateTime?> deletedAt,
+      Value<String> divinationRequestInfoUuid,
+      Value<BasePanelConfig> panelConfig,
+      Value<BasePanelModel> panelModel,
+      Value<DivinationDatetimeModel> divinationDatetimeModel,
+      Value<int> rowid,
+    });
 
 class $$QizhengsiyuPanTableTableFilterComposer
     extends Composer<_$AppDatabase, $QizhengsiyuPanTableTable> {
@@ -3525,36 +4154,51 @@ class $$QizhengsiyuPanTableTableFilterComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnFilters<String> get uuid => $composableBuilder(
-      column: $table.uuid, builder: (column) => ColumnFilters(column));
+    column: $table.uuid,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<DateTime> get createdAt => $composableBuilder(
-      column: $table.createdAt, builder: (column) => ColumnFilters(column));
+    column: $table.createdAt,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<DateTime> get lastUpdatedAt => $composableBuilder(
-      column: $table.lastUpdatedAt, builder: (column) => ColumnFilters(column));
+    column: $table.lastUpdatedAt,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<DateTime> get deletedAt => $composableBuilder(
-      column: $table.deletedAt, builder: (column) => ColumnFilters(column));
+    column: $table.deletedAt,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get divinationRequestInfoUuid => $composableBuilder(
-      column: $table.divinationRequestInfoUuid,
-      builder: (column) => ColumnFilters(column));
+    column: $table.divinationRequestInfoUuid,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnWithTypeConverterFilters<BasePanelConfig, BasePanelConfig, String>
-      get panelConfig => $composableBuilder(
-          column: $table.panelConfig,
-          builder: (column) => ColumnWithTypeConverterFilters(column));
+  get panelConfig => $composableBuilder(
+    column: $table.panelConfig,
+    builder: (column) => ColumnWithTypeConverterFilters(column),
+  );
 
   ColumnWithTypeConverterFilters<BasePanelModel, BasePanelModel, String>
-      get panelModel => $composableBuilder(
-          column: $table.panelModel,
-          builder: (column) => ColumnWithTypeConverterFilters(column));
+  get panelModel => $composableBuilder(
+    column: $table.panelModel,
+    builder: (column) => ColumnWithTypeConverterFilters(column),
+  );
 
-  ColumnWithTypeConverterFilters<DivinationDatetimeModel,
-          DivinationDatetimeModel, String>
-      get divinationDatetimeModel => $composableBuilder(
-          column: $table.divinationDatetimeModel,
-          builder: (column) => ColumnWithTypeConverterFilters(column));
+  ColumnWithTypeConverterFilters<
+    DivinationDatetimeModel,
+    DivinationDatetimeModel,
+    String
+  >
+  get divinationDatetimeModel => $composableBuilder(
+    column: $table.divinationDatetimeModel,
+    builder: (column) => ColumnWithTypeConverterFilters(column),
+  );
 }
 
 class $$QizhengsiyuPanTableTableOrderingComposer
@@ -3567,31 +4211,44 @@ class $$QizhengsiyuPanTableTableOrderingComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnOrderings<String> get uuid => $composableBuilder(
-      column: $table.uuid, builder: (column) => ColumnOrderings(column));
+    column: $table.uuid,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<DateTime> get createdAt => $composableBuilder(
-      column: $table.createdAt, builder: (column) => ColumnOrderings(column));
+    column: $table.createdAt,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<DateTime> get lastUpdatedAt => $composableBuilder(
-      column: $table.lastUpdatedAt,
-      builder: (column) => ColumnOrderings(column));
+    column: $table.lastUpdatedAt,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<DateTime> get deletedAt => $composableBuilder(
-      column: $table.deletedAt, builder: (column) => ColumnOrderings(column));
+    column: $table.deletedAt,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get divinationRequestInfoUuid => $composableBuilder(
-      column: $table.divinationRequestInfoUuid,
-      builder: (column) => ColumnOrderings(column));
+    column: $table.divinationRequestInfoUuid,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get panelConfig => $composableBuilder(
-      column: $table.panelConfig, builder: (column) => ColumnOrderings(column));
+    column: $table.panelConfig,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get panelModel => $composableBuilder(
-      column: $table.panelModel, builder: (column) => ColumnOrderings(column));
+    column: $table.panelModel,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get divinationDatetimeModel => $composableBuilder(
-      column: $table.divinationDatetimeModel,
-      builder: (column) => ColumnOrderings(column));
+    column: $table.divinationDatetimeModel,
+    builder: (column) => ColumnOrderings(column),
+  );
 }
 
 class $$QizhengsiyuPanTableTableAnnotationComposer
@@ -3610,150 +4267,178 @@ class $$QizhengsiyuPanTableTableAnnotationComposer
       $composableBuilder(column: $table.createdAt, builder: (column) => column);
 
   GeneratedColumn<DateTime> get lastUpdatedAt => $composableBuilder(
-      column: $table.lastUpdatedAt, builder: (column) => column);
+    column: $table.lastUpdatedAt,
+    builder: (column) => column,
+  );
 
   GeneratedColumn<DateTime> get deletedAt =>
       $composableBuilder(column: $table.deletedAt, builder: (column) => column);
 
   GeneratedColumn<String> get divinationRequestInfoUuid => $composableBuilder(
-      column: $table.divinationRequestInfoUuid, builder: (column) => column);
+    column: $table.divinationRequestInfoUuid,
+    builder: (column) => column,
+  );
 
   GeneratedColumnWithTypeConverter<BasePanelConfig, String> get panelConfig =>
       $composableBuilder(
-          column: $table.panelConfig, builder: (column) => column);
+        column: $table.panelConfig,
+        builder: (column) => column,
+      );
 
   GeneratedColumnWithTypeConverter<BasePanelModel, String> get panelModel =>
       $composableBuilder(
-          column: $table.panelModel, builder: (column) => column);
+        column: $table.panelModel,
+        builder: (column) => column,
+      );
 
   GeneratedColumnWithTypeConverter<DivinationDatetimeModel, String>
-      get divinationDatetimeModel => $composableBuilder(
-          column: $table.divinationDatetimeModel, builder: (column) => column);
+  get divinationDatetimeModel => $composableBuilder(
+    column: $table.divinationDatetimeModel,
+    builder: (column) => column,
+  );
 }
 
-class $$QizhengsiyuPanTableTableTableManager extends RootTableManager<
-    _$AppDatabase,
-    $QizhengsiyuPanTableTable,
-    QiZhengSiYuPanEntity,
-    $$QizhengsiyuPanTableTableFilterComposer,
-    $$QizhengsiyuPanTableTableOrderingComposer,
-    $$QizhengsiyuPanTableTableAnnotationComposer,
-    $$QizhengsiyuPanTableTableCreateCompanionBuilder,
-    $$QizhengsiyuPanTableTableUpdateCompanionBuilder,
-    (
-      QiZhengSiYuPanEntity,
-      BaseReferences<_$AppDatabase, $QizhengsiyuPanTableTable,
-          QiZhengSiYuPanEntity>
-    ),
-    QiZhengSiYuPanEntity,
-    PrefetchHooks Function()> {
+class $$QizhengsiyuPanTableTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $QizhengsiyuPanTableTable,
+          QiZhengSiYuPanEntity,
+          $$QizhengsiyuPanTableTableFilterComposer,
+          $$QizhengsiyuPanTableTableOrderingComposer,
+          $$QizhengsiyuPanTableTableAnnotationComposer,
+          $$QizhengsiyuPanTableTableCreateCompanionBuilder,
+          $$QizhengsiyuPanTableTableUpdateCompanionBuilder,
+          (
+            QiZhengSiYuPanEntity,
+            BaseReferences<
+              _$AppDatabase,
+              $QizhengsiyuPanTableTable,
+              QiZhengSiYuPanEntity
+            >,
+          ),
+          QiZhengSiYuPanEntity,
+          PrefetchHooks Function()
+        > {
   $$QizhengsiyuPanTableTableTableManager(
-      _$AppDatabase db, $QizhengsiyuPanTableTable table)
-      : super(TableManagerState(
+    _$AppDatabase db,
+    $QizhengsiyuPanTableTable table,
+  ) : super(
+        TableManagerState(
           db: db,
           table: table,
           createFilteringComposer: () =>
               $$QizhengsiyuPanTableTableFilterComposer($db: db, $table: table),
           createOrderingComposer: () =>
               $$QizhengsiyuPanTableTableOrderingComposer(
-                  $db: db, $table: table),
+                $db: db,
+                $table: table,
+              ),
           createComputedFieldComposer: () =>
               $$QizhengsiyuPanTableTableAnnotationComposer(
-                  $db: db, $table: table),
-          updateCompanionCallback: ({
-            Value<String> uuid = const Value.absent(),
-            Value<DateTime> createdAt = const Value.absent(),
-            Value<DateTime> lastUpdatedAt = const Value.absent(),
-            Value<DateTime?> deletedAt = const Value.absent(),
-            Value<String> divinationRequestInfoUuid = const Value.absent(),
-            Value<BasePanelConfig> panelConfig = const Value.absent(),
-            Value<BasePanelModel> panelModel = const Value.absent(),
-            Value<DivinationDatetimeModel> divinationDatetimeModel =
-                const Value.absent(),
-            Value<int> rowid = const Value.absent(),
-          }) =>
-              QizhengsiyuPanTableCompanion(
-            uuid: uuid,
-            createdAt: createdAt,
-            lastUpdatedAt: lastUpdatedAt,
-            deletedAt: deletedAt,
-            divinationRequestInfoUuid: divinationRequestInfoUuid,
-            panelConfig: panelConfig,
-            panelModel: panelModel,
-            divinationDatetimeModel: divinationDatetimeModel,
-            rowid: rowid,
-          ),
-          createCompanionCallback: ({
-            required String uuid,
-            required DateTime createdAt,
-            required DateTime lastUpdatedAt,
-            Value<DateTime?> deletedAt = const Value.absent(),
-            required String divinationRequestInfoUuid,
-            required BasePanelConfig panelConfig,
-            required BasePanelModel panelModel,
-            required DivinationDatetimeModel divinationDatetimeModel,
-            Value<int> rowid = const Value.absent(),
-          }) =>
-              QizhengsiyuPanTableCompanion.insert(
-            uuid: uuid,
-            createdAt: createdAt,
-            lastUpdatedAt: lastUpdatedAt,
-            deletedAt: deletedAt,
-            divinationRequestInfoUuid: divinationRequestInfoUuid,
-            panelConfig: panelConfig,
-            panelModel: panelModel,
-            divinationDatetimeModel: divinationDatetimeModel,
-            rowid: rowid,
-          ),
+                $db: db,
+                $table: table,
+              ),
+          updateCompanionCallback:
+              ({
+                Value<String> uuid = const Value.absent(),
+                Value<DateTime> createdAt = const Value.absent(),
+                Value<DateTime> lastUpdatedAt = const Value.absent(),
+                Value<DateTime?> deletedAt = const Value.absent(),
+                Value<String> divinationRequestInfoUuid = const Value.absent(),
+                Value<BasePanelConfig> panelConfig = const Value.absent(),
+                Value<BasePanelModel> panelModel = const Value.absent(),
+                Value<DivinationDatetimeModel> divinationDatetimeModel =
+                    const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => QizhengsiyuPanTableCompanion(
+                uuid: uuid,
+                createdAt: createdAt,
+                lastUpdatedAt: lastUpdatedAt,
+                deletedAt: deletedAt,
+                divinationRequestInfoUuid: divinationRequestInfoUuid,
+                panelConfig: panelConfig,
+                panelModel: panelModel,
+                divinationDatetimeModel: divinationDatetimeModel,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String uuid,
+                required DateTime createdAt,
+                required DateTime lastUpdatedAt,
+                Value<DateTime?> deletedAt = const Value.absent(),
+                required String divinationRequestInfoUuid,
+                required BasePanelConfig panelConfig,
+                required BasePanelModel panelModel,
+                required DivinationDatetimeModel divinationDatetimeModel,
+                Value<int> rowid = const Value.absent(),
+              }) => QizhengsiyuPanTableCompanion.insert(
+                uuid: uuid,
+                createdAt: createdAt,
+                lastUpdatedAt: lastUpdatedAt,
+                deletedAt: deletedAt,
+                divinationRequestInfoUuid: divinationRequestInfoUuid,
+                panelConfig: panelConfig,
+                panelModel: panelModel,
+                divinationDatetimeModel: divinationDatetimeModel,
+                rowid: rowid,
+              ),
           withReferenceMapper: (p0) => p0
               .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
               .toList(),
           prefetchHooksCallback: null,
-        ));
+        ),
+      );
 }
 
-typedef $$QizhengsiyuPanTableTableProcessedTableManager = ProcessedTableManager<
-    _$AppDatabase,
-    $QizhengsiyuPanTableTable,
-    QiZhengSiYuPanEntity,
-    $$QizhengsiyuPanTableTableFilterComposer,
-    $$QizhengsiyuPanTableTableOrderingComposer,
-    $$QizhengsiyuPanTableTableAnnotationComposer,
-    $$QizhengsiyuPanTableTableCreateCompanionBuilder,
-    $$QizhengsiyuPanTableTableUpdateCompanionBuilder,
-    (
+typedef $$QizhengsiyuPanTableTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $QizhengsiyuPanTableTable,
       QiZhengSiYuPanEntity,
-      BaseReferences<_$AppDatabase, $QizhengsiyuPanTableTable,
-          QiZhengSiYuPanEntity>
-    ),
-    QiZhengSiYuPanEntity,
-    PrefetchHooks Function()>;
-typedef $$GeJuRulesTableTableCreateCompanionBuilder = GeJuRulesTableCompanion
-    Function({
-  required String id,
-  required String name,
-  Value<String> aliasesJson,
-  Value<String?> disambiguationNote,
-  Value<String> scope,
-  Value<String?> coordinateSystem,
-  Value<String> authorType,
-  required DateTime createdAt,
-  required DateTime updatedAt,
-  Value<int> rowid,
-});
-typedef $$GeJuRulesTableTableUpdateCompanionBuilder = GeJuRulesTableCompanion
-    Function({
-  Value<String> id,
-  Value<String> name,
-  Value<String> aliasesJson,
-  Value<String?> disambiguationNote,
-  Value<String> scope,
-  Value<String?> coordinateSystem,
-  Value<String> authorType,
-  Value<DateTime> createdAt,
-  Value<DateTime> updatedAt,
-  Value<int> rowid,
-});
+      $$QizhengsiyuPanTableTableFilterComposer,
+      $$QizhengsiyuPanTableTableOrderingComposer,
+      $$QizhengsiyuPanTableTableAnnotationComposer,
+      $$QizhengsiyuPanTableTableCreateCompanionBuilder,
+      $$QizhengsiyuPanTableTableUpdateCompanionBuilder,
+      (
+        QiZhengSiYuPanEntity,
+        BaseReferences<
+          _$AppDatabase,
+          $QizhengsiyuPanTableTable,
+          QiZhengSiYuPanEntity
+        >,
+      ),
+      QiZhengSiYuPanEntity,
+      PrefetchHooks Function()
+    >;
+typedef $$GeJuRulesTableTableCreateCompanionBuilder =
+    GeJuRulesTableCompanion Function({
+      required String id,
+      required String name,
+      Value<String> aliasesJson,
+      Value<String?> disambiguationNote,
+      Value<String> scope,
+      Value<String?> coordinateSystem,
+      Value<String> authorType,
+      required DateTime createdAt,
+      required DateTime updatedAt,
+      Value<int> rowid,
+    });
+typedef $$GeJuRulesTableTableUpdateCompanionBuilder =
+    GeJuRulesTableCompanion Function({
+      Value<String> id,
+      Value<String> name,
+      Value<String> aliasesJson,
+      Value<String?> disambiguationNote,
+      Value<String> scope,
+      Value<String?> coordinateSystem,
+      Value<String> authorType,
+      Value<DateTime> createdAt,
+      Value<DateTime> updatedAt,
+      Value<int> rowid,
+    });
 
 class $$GeJuRulesTableTableFilterComposer
     extends Composer<_$AppDatabase, $GeJuRulesTableTable> {
@@ -3765,33 +4450,49 @@ class $$GeJuRulesTableTableFilterComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnFilters<String> get id => $composableBuilder(
-      column: $table.id, builder: (column) => ColumnFilters(column));
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get name => $composableBuilder(
-      column: $table.name, builder: (column) => ColumnFilters(column));
+    column: $table.name,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get aliasesJson => $composableBuilder(
-      column: $table.aliasesJson, builder: (column) => ColumnFilters(column));
+    column: $table.aliasesJson,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get disambiguationNote => $composableBuilder(
-      column: $table.disambiguationNote,
-      builder: (column) => ColumnFilters(column));
+    column: $table.disambiguationNote,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get scope => $composableBuilder(
-      column: $table.scope, builder: (column) => ColumnFilters(column));
+    column: $table.scope,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get coordinateSystem => $composableBuilder(
-      column: $table.coordinateSystem,
-      builder: (column) => ColumnFilters(column));
+    column: $table.coordinateSystem,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get authorType => $composableBuilder(
-      column: $table.authorType, builder: (column) => ColumnFilters(column));
+    column: $table.authorType,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<DateTime> get createdAt => $composableBuilder(
-      column: $table.createdAt, builder: (column) => ColumnFilters(column));
+    column: $table.createdAt,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<DateTime> get updatedAt => $composableBuilder(
-      column: $table.updatedAt, builder: (column) => ColumnFilters(column));
+    column: $table.updatedAt,
+    builder: (column) => ColumnFilters(column),
+  );
 }
 
 class $$GeJuRulesTableTableOrderingComposer
@@ -3804,33 +4505,49 @@ class $$GeJuRulesTableTableOrderingComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnOrderings<String> get id => $composableBuilder(
-      column: $table.id, builder: (column) => ColumnOrderings(column));
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get name => $composableBuilder(
-      column: $table.name, builder: (column) => ColumnOrderings(column));
+    column: $table.name,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get aliasesJson => $composableBuilder(
-      column: $table.aliasesJson, builder: (column) => ColumnOrderings(column));
+    column: $table.aliasesJson,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get disambiguationNote => $composableBuilder(
-      column: $table.disambiguationNote,
-      builder: (column) => ColumnOrderings(column));
+    column: $table.disambiguationNote,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get scope => $composableBuilder(
-      column: $table.scope, builder: (column) => ColumnOrderings(column));
+    column: $table.scope,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get coordinateSystem => $composableBuilder(
-      column: $table.coordinateSystem,
-      builder: (column) => ColumnOrderings(column));
+    column: $table.coordinateSystem,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get authorType => $composableBuilder(
-      column: $table.authorType, builder: (column) => ColumnOrderings(column));
+    column: $table.authorType,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<DateTime> get createdAt => $composableBuilder(
-      column: $table.createdAt, builder: (column) => ColumnOrderings(column));
+    column: $table.createdAt,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<DateTime> get updatedAt => $composableBuilder(
-      column: $table.updatedAt, builder: (column) => ColumnOrderings(column));
+    column: $table.updatedAt,
+    builder: (column) => ColumnOrderings(column),
+  );
 }
 
 class $$GeJuRulesTableTableAnnotationComposer
@@ -3849,19 +4566,27 @@ class $$GeJuRulesTableTableAnnotationComposer
       $composableBuilder(column: $table.name, builder: (column) => column);
 
   GeneratedColumn<String> get aliasesJson => $composableBuilder(
-      column: $table.aliasesJson, builder: (column) => column);
+    column: $table.aliasesJson,
+    builder: (column) => column,
+  );
 
   GeneratedColumn<String> get disambiguationNote => $composableBuilder(
-      column: $table.disambiguationNote, builder: (column) => column);
+    column: $table.disambiguationNote,
+    builder: (column) => column,
+  );
 
   GeneratedColumn<String> get scope =>
       $composableBuilder(column: $table.scope, builder: (column) => column);
 
   GeneratedColumn<String> get coordinateSystem => $composableBuilder(
-      column: $table.coordinateSystem, builder: (column) => column);
+    column: $table.coordinateSystem,
+    builder: (column) => column,
+  );
 
   GeneratedColumn<String> get authorType => $composableBuilder(
-      column: $table.authorType, builder: (column) => column);
+    column: $table.authorType,
+    builder: (column) => column,
+  );
 
   GeneratedColumn<DateTime> get createdAt =>
       $composableBuilder(column: $table.createdAt, builder: (column) => column);
@@ -3870,24 +4595,33 @@ class $$GeJuRulesTableTableAnnotationComposer
       $composableBuilder(column: $table.updatedAt, builder: (column) => column);
 }
 
-class $$GeJuRulesTableTableTableManager extends RootTableManager<
-    _$AppDatabase,
-    $GeJuRulesTableTable,
-    GeJuRulesTableData,
-    $$GeJuRulesTableTableFilterComposer,
-    $$GeJuRulesTableTableOrderingComposer,
-    $$GeJuRulesTableTableAnnotationComposer,
-    $$GeJuRulesTableTableCreateCompanionBuilder,
-    $$GeJuRulesTableTableUpdateCompanionBuilder,
-    (
-      GeJuRulesTableData,
-      BaseReferences<_$AppDatabase, $GeJuRulesTableTable, GeJuRulesTableData>
-    ),
-    GeJuRulesTableData,
-    PrefetchHooks Function()> {
+class $$GeJuRulesTableTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $GeJuRulesTableTable,
+          GeJuRulesTableData,
+          $$GeJuRulesTableTableFilterComposer,
+          $$GeJuRulesTableTableOrderingComposer,
+          $$GeJuRulesTableTableAnnotationComposer,
+          $$GeJuRulesTableTableCreateCompanionBuilder,
+          $$GeJuRulesTableTableUpdateCompanionBuilder,
+          (
+            GeJuRulesTableData,
+            BaseReferences<
+              _$AppDatabase,
+              $GeJuRulesTableTable,
+              GeJuRulesTableData
+            >,
+          ),
+          GeJuRulesTableData,
+          PrefetchHooks Function()
+        > {
   $$GeJuRulesTableTableTableManager(
-      _$AppDatabase db, $GeJuRulesTableTable table)
-      : super(TableManagerState(
+    _$AppDatabase db,
+    $GeJuRulesTableTable table,
+  ) : super(
+        TableManagerState(
           db: db,
           table: table,
           createFilteringComposer: () =>
@@ -3896,122 +4630,125 @@ class $$GeJuRulesTableTableTableManager extends RootTableManager<
               $$GeJuRulesTableTableOrderingComposer($db: db, $table: table),
           createComputedFieldComposer: () =>
               $$GeJuRulesTableTableAnnotationComposer($db: db, $table: table),
-          updateCompanionCallback: ({
-            Value<String> id = const Value.absent(),
-            Value<String> name = const Value.absent(),
-            Value<String> aliasesJson = const Value.absent(),
-            Value<String?> disambiguationNote = const Value.absent(),
-            Value<String> scope = const Value.absent(),
-            Value<String?> coordinateSystem = const Value.absent(),
-            Value<String> authorType = const Value.absent(),
-            Value<DateTime> createdAt = const Value.absent(),
-            Value<DateTime> updatedAt = const Value.absent(),
-            Value<int> rowid = const Value.absent(),
-          }) =>
-              GeJuRulesTableCompanion(
-            id: id,
-            name: name,
-            aliasesJson: aliasesJson,
-            disambiguationNote: disambiguationNote,
-            scope: scope,
-            coordinateSystem: coordinateSystem,
-            authorType: authorType,
-            createdAt: createdAt,
-            updatedAt: updatedAt,
-            rowid: rowid,
-          ),
-          createCompanionCallback: ({
-            required String id,
-            required String name,
-            Value<String> aliasesJson = const Value.absent(),
-            Value<String?> disambiguationNote = const Value.absent(),
-            Value<String> scope = const Value.absent(),
-            Value<String?> coordinateSystem = const Value.absent(),
-            Value<String> authorType = const Value.absent(),
-            required DateTime createdAt,
-            required DateTime updatedAt,
-            Value<int> rowid = const Value.absent(),
-          }) =>
-              GeJuRulesTableCompanion.insert(
-            id: id,
-            name: name,
-            aliasesJson: aliasesJson,
-            disambiguationNote: disambiguationNote,
-            scope: scope,
-            coordinateSystem: coordinateSystem,
-            authorType: authorType,
-            createdAt: createdAt,
-            updatedAt: updatedAt,
-            rowid: rowid,
-          ),
+          updateCompanionCallback:
+              ({
+                Value<String> id = const Value.absent(),
+                Value<String> name = const Value.absent(),
+                Value<String> aliasesJson = const Value.absent(),
+                Value<String?> disambiguationNote = const Value.absent(),
+                Value<String> scope = const Value.absent(),
+                Value<String?> coordinateSystem = const Value.absent(),
+                Value<String> authorType = const Value.absent(),
+                Value<DateTime> createdAt = const Value.absent(),
+                Value<DateTime> updatedAt = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => GeJuRulesTableCompanion(
+                id: id,
+                name: name,
+                aliasesJson: aliasesJson,
+                disambiguationNote: disambiguationNote,
+                scope: scope,
+                coordinateSystem: coordinateSystem,
+                authorType: authorType,
+                createdAt: createdAt,
+                updatedAt: updatedAt,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String id,
+                required String name,
+                Value<String> aliasesJson = const Value.absent(),
+                Value<String?> disambiguationNote = const Value.absent(),
+                Value<String> scope = const Value.absent(),
+                Value<String?> coordinateSystem = const Value.absent(),
+                Value<String> authorType = const Value.absent(),
+                required DateTime createdAt,
+                required DateTime updatedAt,
+                Value<int> rowid = const Value.absent(),
+              }) => GeJuRulesTableCompanion.insert(
+                id: id,
+                name: name,
+                aliasesJson: aliasesJson,
+                disambiguationNote: disambiguationNote,
+                scope: scope,
+                coordinateSystem: coordinateSystem,
+                authorType: authorType,
+                createdAt: createdAt,
+                updatedAt: updatedAt,
+                rowid: rowid,
+              ),
           withReferenceMapper: (p0) => p0
               .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
               .toList(),
           prefetchHooksCallback: null,
-        ));
+        ),
+      );
 }
 
-typedef $$GeJuRulesTableTableProcessedTableManager = ProcessedTableManager<
-    _$AppDatabase,
-    $GeJuRulesTableTable,
-    GeJuRulesTableData,
-    $$GeJuRulesTableTableFilterComposer,
-    $$GeJuRulesTableTableOrderingComposer,
-    $$GeJuRulesTableTableAnnotationComposer,
-    $$GeJuRulesTableTableCreateCompanionBuilder,
-    $$GeJuRulesTableTableUpdateCompanionBuilder,
-    (
+typedef $$GeJuRulesTableTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $GeJuRulesTableTable,
       GeJuRulesTableData,
-      BaseReferences<_$AppDatabase, $GeJuRulesTableTable, GeJuRulesTableData>
-    ),
-    GeJuRulesTableData,
-    PrefetchHooks Function()>;
-typedef $$GeJuAnnotationsTableTableCreateCompanionBuilder
-    = GeJuAnnotationsTableCompanion Function({
-  required String id,
-  required String ruleId,
-  Value<String?> schoolsJson,
-  Value<String?> sourceJson,
-  Value<String> authorType,
-  Value<String> version,
-  Value<String?> description,
-  Value<String?> jiXiong,
-  Value<String?> geJuType,
-  Value<String?> className,
-  Value<String?> parentAnnotationId,
-  Value<int?> parentMajorVersion,
-  Value<String?> relationToParent,
-  Value<String> referencesJson,
-  Value<String> relatedConditionSetIdsJson,
-  Value<String> visibility,
-  Value<String> locale,
-  required DateTime createdAt,
-  required DateTime updatedAt,
-  Value<int> rowid,
-});
-typedef $$GeJuAnnotationsTableTableUpdateCompanionBuilder
-    = GeJuAnnotationsTableCompanion Function({
-  Value<String> id,
-  Value<String> ruleId,
-  Value<String?> schoolsJson,
-  Value<String?> sourceJson,
-  Value<String> authorType,
-  Value<String> version,
-  Value<String?> description,
-  Value<String?> jiXiong,
-  Value<String?> geJuType,
-  Value<String?> className,
-  Value<String?> parentAnnotationId,
-  Value<int?> parentMajorVersion,
-  Value<String?> relationToParent,
-  Value<String> referencesJson,
-  Value<String> relatedConditionSetIdsJson,
-  Value<String> visibility,
-  Value<String> locale,
-  Value<DateTime> createdAt,
-  Value<DateTime> updatedAt,
-  Value<int> rowid,
-});
+      $$GeJuRulesTableTableFilterComposer,
+      $$GeJuRulesTableTableOrderingComposer,
+      $$GeJuRulesTableTableAnnotationComposer,
+      $$GeJuRulesTableTableCreateCompanionBuilder,
+      $$GeJuRulesTableTableUpdateCompanionBuilder,
+      (
+        GeJuRulesTableData,
+        BaseReferences<_$AppDatabase, $GeJuRulesTableTable, GeJuRulesTableData>,
+      ),
+      GeJuRulesTableData,
+      PrefetchHooks Function()
+    >;
+typedef $$GeJuAnnotationsTableTableCreateCompanionBuilder =
+    GeJuAnnotationsTableCompanion Function({
+      required String id,
+      required String ruleId,
+      Value<String?> schoolsJson,
+      Value<String?> sourceJson,
+      Value<String> authorType,
+      Value<String> version,
+      Value<String?> description,
+      Value<String?> jiXiong,
+      Value<String?> geJuType,
+      Value<String?> className,
+      Value<String?> parentAnnotationId,
+      Value<int?> parentMajorVersion,
+      Value<String?> relationToParent,
+      Value<String> referencesJson,
+      Value<String> relatedConditionSetIdsJson,
+      Value<String> visibility,
+      Value<String> locale,
+      required DateTime createdAt,
+      required DateTime updatedAt,
+      Value<int> rowid,
+    });
+typedef $$GeJuAnnotationsTableTableUpdateCompanionBuilder =
+    GeJuAnnotationsTableCompanion Function({
+      Value<String> id,
+      Value<String> ruleId,
+      Value<String?> schoolsJson,
+      Value<String?> sourceJson,
+      Value<String> authorType,
+      Value<String> version,
+      Value<String?> description,
+      Value<String?> jiXiong,
+      Value<String?> geJuType,
+      Value<String?> className,
+      Value<String?> parentAnnotationId,
+      Value<int?> parentMajorVersion,
+      Value<String?> relationToParent,
+      Value<String> referencesJson,
+      Value<String> relatedConditionSetIdsJson,
+      Value<String> visibility,
+      Value<String> locale,
+      Value<DateTime> createdAt,
+      Value<DateTime> updatedAt,
+      Value<int> rowid,
+    });
 
 class $$GeJuAnnotationsTableTableFilterComposer
     extends Composer<_$AppDatabase, $GeJuAnnotationsTableTable> {
@@ -4023,66 +4760,99 @@ class $$GeJuAnnotationsTableTableFilterComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnFilters<String> get id => $composableBuilder(
-      column: $table.id, builder: (column) => ColumnFilters(column));
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get ruleId => $composableBuilder(
-      column: $table.ruleId, builder: (column) => ColumnFilters(column));
+    column: $table.ruleId,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get schoolsJson => $composableBuilder(
-      column: $table.schoolsJson, builder: (column) => ColumnFilters(column));
+    column: $table.schoolsJson,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get sourceJson => $composableBuilder(
-      column: $table.sourceJson, builder: (column) => ColumnFilters(column));
+    column: $table.sourceJson,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get authorType => $composableBuilder(
-      column: $table.authorType, builder: (column) => ColumnFilters(column));
+    column: $table.authorType,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get version => $composableBuilder(
-      column: $table.version, builder: (column) => ColumnFilters(column));
+    column: $table.version,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get description => $composableBuilder(
-      column: $table.description, builder: (column) => ColumnFilters(column));
+    column: $table.description,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get jiXiong => $composableBuilder(
-      column: $table.jiXiong, builder: (column) => ColumnFilters(column));
+    column: $table.jiXiong,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get geJuType => $composableBuilder(
-      column: $table.geJuType, builder: (column) => ColumnFilters(column));
+    column: $table.geJuType,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get className => $composableBuilder(
-      column: $table.className, builder: (column) => ColumnFilters(column));
+    column: $table.className,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get parentAnnotationId => $composableBuilder(
-      column: $table.parentAnnotationId,
-      builder: (column) => ColumnFilters(column));
+    column: $table.parentAnnotationId,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<int> get parentMajorVersion => $composableBuilder(
-      column: $table.parentMajorVersion,
-      builder: (column) => ColumnFilters(column));
+    column: $table.parentMajorVersion,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get relationToParent => $composableBuilder(
-      column: $table.relationToParent,
-      builder: (column) => ColumnFilters(column));
+    column: $table.relationToParent,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get referencesJson => $composableBuilder(
-      column: $table.referencesJson,
-      builder: (column) => ColumnFilters(column));
+    column: $table.referencesJson,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get relatedConditionSetIdsJson => $composableBuilder(
-      column: $table.relatedConditionSetIdsJson,
-      builder: (column) => ColumnFilters(column));
+    column: $table.relatedConditionSetIdsJson,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get visibility => $composableBuilder(
-      column: $table.visibility, builder: (column) => ColumnFilters(column));
+    column: $table.visibility,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get locale => $composableBuilder(
-      column: $table.locale, builder: (column) => ColumnFilters(column));
+    column: $table.locale,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<DateTime> get createdAt => $composableBuilder(
-      column: $table.createdAt, builder: (column) => ColumnFilters(column));
+    column: $table.createdAt,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<DateTime> get updatedAt => $composableBuilder(
-      column: $table.updatedAt, builder: (column) => ColumnFilters(column));
+    column: $table.updatedAt,
+    builder: (column) => ColumnFilters(column),
+  );
 }
 
 class $$GeJuAnnotationsTableTableOrderingComposer
@@ -4095,66 +4865,99 @@ class $$GeJuAnnotationsTableTableOrderingComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnOrderings<String> get id => $composableBuilder(
-      column: $table.id, builder: (column) => ColumnOrderings(column));
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get ruleId => $composableBuilder(
-      column: $table.ruleId, builder: (column) => ColumnOrderings(column));
+    column: $table.ruleId,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get schoolsJson => $composableBuilder(
-      column: $table.schoolsJson, builder: (column) => ColumnOrderings(column));
+    column: $table.schoolsJson,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get sourceJson => $composableBuilder(
-      column: $table.sourceJson, builder: (column) => ColumnOrderings(column));
+    column: $table.sourceJson,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get authorType => $composableBuilder(
-      column: $table.authorType, builder: (column) => ColumnOrderings(column));
+    column: $table.authorType,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get version => $composableBuilder(
-      column: $table.version, builder: (column) => ColumnOrderings(column));
+    column: $table.version,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get description => $composableBuilder(
-      column: $table.description, builder: (column) => ColumnOrderings(column));
+    column: $table.description,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get jiXiong => $composableBuilder(
-      column: $table.jiXiong, builder: (column) => ColumnOrderings(column));
+    column: $table.jiXiong,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get geJuType => $composableBuilder(
-      column: $table.geJuType, builder: (column) => ColumnOrderings(column));
+    column: $table.geJuType,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get className => $composableBuilder(
-      column: $table.className, builder: (column) => ColumnOrderings(column));
+    column: $table.className,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get parentAnnotationId => $composableBuilder(
-      column: $table.parentAnnotationId,
-      builder: (column) => ColumnOrderings(column));
+    column: $table.parentAnnotationId,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<int> get parentMajorVersion => $composableBuilder(
-      column: $table.parentMajorVersion,
-      builder: (column) => ColumnOrderings(column));
+    column: $table.parentMajorVersion,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get relationToParent => $composableBuilder(
-      column: $table.relationToParent,
-      builder: (column) => ColumnOrderings(column));
+    column: $table.relationToParent,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get referencesJson => $composableBuilder(
-      column: $table.referencesJson,
-      builder: (column) => ColumnOrderings(column));
+    column: $table.referencesJson,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get relatedConditionSetIdsJson => $composableBuilder(
-      column: $table.relatedConditionSetIdsJson,
-      builder: (column) => ColumnOrderings(column));
+    column: $table.relatedConditionSetIdsJson,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get visibility => $composableBuilder(
-      column: $table.visibility, builder: (column) => ColumnOrderings(column));
+    column: $table.visibility,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get locale => $composableBuilder(
-      column: $table.locale, builder: (column) => ColumnOrderings(column));
+    column: $table.locale,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<DateTime> get createdAt => $composableBuilder(
-      column: $table.createdAt, builder: (column) => ColumnOrderings(column));
+    column: $table.createdAt,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<DateTime> get updatedAt => $composableBuilder(
-      column: $table.updatedAt, builder: (column) => ColumnOrderings(column));
+    column: $table.updatedAt,
+    builder: (column) => ColumnOrderings(column),
+  );
 }
 
 class $$GeJuAnnotationsTableTableAnnotationComposer
@@ -4173,19 +4976,27 @@ class $$GeJuAnnotationsTableTableAnnotationComposer
       $composableBuilder(column: $table.ruleId, builder: (column) => column);
 
   GeneratedColumn<String> get schoolsJson => $composableBuilder(
-      column: $table.schoolsJson, builder: (column) => column);
+    column: $table.schoolsJson,
+    builder: (column) => column,
+  );
 
   GeneratedColumn<String> get sourceJson => $composableBuilder(
-      column: $table.sourceJson, builder: (column) => column);
+    column: $table.sourceJson,
+    builder: (column) => column,
+  );
 
   GeneratedColumn<String> get authorType => $composableBuilder(
-      column: $table.authorType, builder: (column) => column);
+    column: $table.authorType,
+    builder: (column) => column,
+  );
 
   GeneratedColumn<String> get version =>
       $composableBuilder(column: $table.version, builder: (column) => column);
 
   GeneratedColumn<String> get description => $composableBuilder(
-      column: $table.description, builder: (column) => column);
+    column: $table.description,
+    builder: (column) => column,
+  );
 
   GeneratedColumn<String> get jiXiong =>
       $composableBuilder(column: $table.jiXiong, builder: (column) => column);
@@ -4197,22 +5008,34 @@ class $$GeJuAnnotationsTableTableAnnotationComposer
       $composableBuilder(column: $table.className, builder: (column) => column);
 
   GeneratedColumn<String> get parentAnnotationId => $composableBuilder(
-      column: $table.parentAnnotationId, builder: (column) => column);
+    column: $table.parentAnnotationId,
+    builder: (column) => column,
+  );
 
   GeneratedColumn<int> get parentMajorVersion => $composableBuilder(
-      column: $table.parentMajorVersion, builder: (column) => column);
+    column: $table.parentMajorVersion,
+    builder: (column) => column,
+  );
 
   GeneratedColumn<String> get relationToParent => $composableBuilder(
-      column: $table.relationToParent, builder: (column) => column);
+    column: $table.relationToParent,
+    builder: (column) => column,
+  );
 
   GeneratedColumn<String> get referencesJson => $composableBuilder(
-      column: $table.referencesJson, builder: (column) => column);
+    column: $table.referencesJson,
+    builder: (column) => column,
+  );
 
   GeneratedColumn<String> get relatedConditionSetIdsJson => $composableBuilder(
-      column: $table.relatedConditionSetIdsJson, builder: (column) => column);
+    column: $table.relatedConditionSetIdsJson,
+    builder: (column) => column,
+  );
 
   GeneratedColumn<String> get visibility => $composableBuilder(
-      column: $table.visibility, builder: (column) => column);
+    column: $table.visibility,
+    builder: (column) => column,
+  );
 
   GeneratedColumn<String> get locale =>
       $composableBuilder(column: $table.locale, builder: (column) => column);
@@ -4224,181 +5047,198 @@ class $$GeJuAnnotationsTableTableAnnotationComposer
       $composableBuilder(column: $table.updatedAt, builder: (column) => column);
 }
 
-class $$GeJuAnnotationsTableTableTableManager extends RootTableManager<
-    _$AppDatabase,
-    $GeJuAnnotationsTableTable,
-    GeJuAnnotationsTableData,
-    $$GeJuAnnotationsTableTableFilterComposer,
-    $$GeJuAnnotationsTableTableOrderingComposer,
-    $$GeJuAnnotationsTableTableAnnotationComposer,
-    $$GeJuAnnotationsTableTableCreateCompanionBuilder,
-    $$GeJuAnnotationsTableTableUpdateCompanionBuilder,
-    (
-      GeJuAnnotationsTableData,
-      BaseReferences<_$AppDatabase, $GeJuAnnotationsTableTable,
-          GeJuAnnotationsTableData>
-    ),
-    GeJuAnnotationsTableData,
-    PrefetchHooks Function()> {
+class $$GeJuAnnotationsTableTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $GeJuAnnotationsTableTable,
+          GeJuAnnotationsTableData,
+          $$GeJuAnnotationsTableTableFilterComposer,
+          $$GeJuAnnotationsTableTableOrderingComposer,
+          $$GeJuAnnotationsTableTableAnnotationComposer,
+          $$GeJuAnnotationsTableTableCreateCompanionBuilder,
+          $$GeJuAnnotationsTableTableUpdateCompanionBuilder,
+          (
+            GeJuAnnotationsTableData,
+            BaseReferences<
+              _$AppDatabase,
+              $GeJuAnnotationsTableTable,
+              GeJuAnnotationsTableData
+            >,
+          ),
+          GeJuAnnotationsTableData,
+          PrefetchHooks Function()
+        > {
   $$GeJuAnnotationsTableTableTableManager(
-      _$AppDatabase db, $GeJuAnnotationsTableTable table)
-      : super(TableManagerState(
+    _$AppDatabase db,
+    $GeJuAnnotationsTableTable table,
+  ) : super(
+        TableManagerState(
           db: db,
           table: table,
           createFilteringComposer: () =>
               $$GeJuAnnotationsTableTableFilterComposer($db: db, $table: table),
           createOrderingComposer: () =>
               $$GeJuAnnotationsTableTableOrderingComposer(
-                  $db: db, $table: table),
+                $db: db,
+                $table: table,
+              ),
           createComputedFieldComposer: () =>
               $$GeJuAnnotationsTableTableAnnotationComposer(
-                  $db: db, $table: table),
-          updateCompanionCallback: ({
-            Value<String> id = const Value.absent(),
-            Value<String> ruleId = const Value.absent(),
-            Value<String?> schoolsJson = const Value.absent(),
-            Value<String?> sourceJson = const Value.absent(),
-            Value<String> authorType = const Value.absent(),
-            Value<String> version = const Value.absent(),
-            Value<String?> description = const Value.absent(),
-            Value<String?> jiXiong = const Value.absent(),
-            Value<String?> geJuType = const Value.absent(),
-            Value<String?> className = const Value.absent(),
-            Value<String?> parentAnnotationId = const Value.absent(),
-            Value<int?> parentMajorVersion = const Value.absent(),
-            Value<String?> relationToParent = const Value.absent(),
-            Value<String> referencesJson = const Value.absent(),
-            Value<String> relatedConditionSetIdsJson = const Value.absent(),
-            Value<String> visibility = const Value.absent(),
-            Value<String> locale = const Value.absent(),
-            Value<DateTime> createdAt = const Value.absent(),
-            Value<DateTime> updatedAt = const Value.absent(),
-            Value<int> rowid = const Value.absent(),
-          }) =>
-              GeJuAnnotationsTableCompanion(
-            id: id,
-            ruleId: ruleId,
-            schoolsJson: schoolsJson,
-            sourceJson: sourceJson,
-            authorType: authorType,
-            version: version,
-            description: description,
-            jiXiong: jiXiong,
-            geJuType: geJuType,
-            className: className,
-            parentAnnotationId: parentAnnotationId,
-            parentMajorVersion: parentMajorVersion,
-            relationToParent: relationToParent,
-            referencesJson: referencesJson,
-            relatedConditionSetIdsJson: relatedConditionSetIdsJson,
-            visibility: visibility,
-            locale: locale,
-            createdAt: createdAt,
-            updatedAt: updatedAt,
-            rowid: rowid,
-          ),
-          createCompanionCallback: ({
-            required String id,
-            required String ruleId,
-            Value<String?> schoolsJson = const Value.absent(),
-            Value<String?> sourceJson = const Value.absent(),
-            Value<String> authorType = const Value.absent(),
-            Value<String> version = const Value.absent(),
-            Value<String?> description = const Value.absent(),
-            Value<String?> jiXiong = const Value.absent(),
-            Value<String?> geJuType = const Value.absent(),
-            Value<String?> className = const Value.absent(),
-            Value<String?> parentAnnotationId = const Value.absent(),
-            Value<int?> parentMajorVersion = const Value.absent(),
-            Value<String?> relationToParent = const Value.absent(),
-            Value<String> referencesJson = const Value.absent(),
-            Value<String> relatedConditionSetIdsJson = const Value.absent(),
-            Value<String> visibility = const Value.absent(),
-            Value<String> locale = const Value.absent(),
-            required DateTime createdAt,
-            required DateTime updatedAt,
-            Value<int> rowid = const Value.absent(),
-          }) =>
-              GeJuAnnotationsTableCompanion.insert(
-            id: id,
-            ruleId: ruleId,
-            schoolsJson: schoolsJson,
-            sourceJson: sourceJson,
-            authorType: authorType,
-            version: version,
-            description: description,
-            jiXiong: jiXiong,
-            geJuType: geJuType,
-            className: className,
-            parentAnnotationId: parentAnnotationId,
-            parentMajorVersion: parentMajorVersion,
-            relationToParent: relationToParent,
-            referencesJson: referencesJson,
-            relatedConditionSetIdsJson: relatedConditionSetIdsJson,
-            visibility: visibility,
-            locale: locale,
-            createdAt: createdAt,
-            updatedAt: updatedAt,
-            rowid: rowid,
-          ),
+                $db: db,
+                $table: table,
+              ),
+          updateCompanionCallback:
+              ({
+                Value<String> id = const Value.absent(),
+                Value<String> ruleId = const Value.absent(),
+                Value<String?> schoolsJson = const Value.absent(),
+                Value<String?> sourceJson = const Value.absent(),
+                Value<String> authorType = const Value.absent(),
+                Value<String> version = const Value.absent(),
+                Value<String?> description = const Value.absent(),
+                Value<String?> jiXiong = const Value.absent(),
+                Value<String?> geJuType = const Value.absent(),
+                Value<String?> className = const Value.absent(),
+                Value<String?> parentAnnotationId = const Value.absent(),
+                Value<int?> parentMajorVersion = const Value.absent(),
+                Value<String?> relationToParent = const Value.absent(),
+                Value<String> referencesJson = const Value.absent(),
+                Value<String> relatedConditionSetIdsJson = const Value.absent(),
+                Value<String> visibility = const Value.absent(),
+                Value<String> locale = const Value.absent(),
+                Value<DateTime> createdAt = const Value.absent(),
+                Value<DateTime> updatedAt = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => GeJuAnnotationsTableCompanion(
+                id: id,
+                ruleId: ruleId,
+                schoolsJson: schoolsJson,
+                sourceJson: sourceJson,
+                authorType: authorType,
+                version: version,
+                description: description,
+                jiXiong: jiXiong,
+                geJuType: geJuType,
+                className: className,
+                parentAnnotationId: parentAnnotationId,
+                parentMajorVersion: parentMajorVersion,
+                relationToParent: relationToParent,
+                referencesJson: referencesJson,
+                relatedConditionSetIdsJson: relatedConditionSetIdsJson,
+                visibility: visibility,
+                locale: locale,
+                createdAt: createdAt,
+                updatedAt: updatedAt,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String id,
+                required String ruleId,
+                Value<String?> schoolsJson = const Value.absent(),
+                Value<String?> sourceJson = const Value.absent(),
+                Value<String> authorType = const Value.absent(),
+                Value<String> version = const Value.absent(),
+                Value<String?> description = const Value.absent(),
+                Value<String?> jiXiong = const Value.absent(),
+                Value<String?> geJuType = const Value.absent(),
+                Value<String?> className = const Value.absent(),
+                Value<String?> parentAnnotationId = const Value.absent(),
+                Value<int?> parentMajorVersion = const Value.absent(),
+                Value<String?> relationToParent = const Value.absent(),
+                Value<String> referencesJson = const Value.absent(),
+                Value<String> relatedConditionSetIdsJson = const Value.absent(),
+                Value<String> visibility = const Value.absent(),
+                Value<String> locale = const Value.absent(),
+                required DateTime createdAt,
+                required DateTime updatedAt,
+                Value<int> rowid = const Value.absent(),
+              }) => GeJuAnnotationsTableCompanion.insert(
+                id: id,
+                ruleId: ruleId,
+                schoolsJson: schoolsJson,
+                sourceJson: sourceJson,
+                authorType: authorType,
+                version: version,
+                description: description,
+                jiXiong: jiXiong,
+                geJuType: geJuType,
+                className: className,
+                parentAnnotationId: parentAnnotationId,
+                parentMajorVersion: parentMajorVersion,
+                relationToParent: relationToParent,
+                referencesJson: referencesJson,
+                relatedConditionSetIdsJson: relatedConditionSetIdsJson,
+                visibility: visibility,
+                locale: locale,
+                createdAt: createdAt,
+                updatedAt: updatedAt,
+                rowid: rowid,
+              ),
           withReferenceMapper: (p0) => p0
               .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
               .toList(),
           prefetchHooksCallback: null,
-        ));
+        ),
+      );
 }
 
-typedef $$GeJuAnnotationsTableTableProcessedTableManager
-    = ProcessedTableManager<
-        _$AppDatabase,
-        $GeJuAnnotationsTableTable,
+typedef $$GeJuAnnotationsTableTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $GeJuAnnotationsTableTable,
+      GeJuAnnotationsTableData,
+      $$GeJuAnnotationsTableTableFilterComposer,
+      $$GeJuAnnotationsTableTableOrderingComposer,
+      $$GeJuAnnotationsTableTableAnnotationComposer,
+      $$GeJuAnnotationsTableTableCreateCompanionBuilder,
+      $$GeJuAnnotationsTableTableUpdateCompanionBuilder,
+      (
         GeJuAnnotationsTableData,
-        $$GeJuAnnotationsTableTableFilterComposer,
-        $$GeJuAnnotationsTableTableOrderingComposer,
-        $$GeJuAnnotationsTableTableAnnotationComposer,
-        $$GeJuAnnotationsTableTableCreateCompanionBuilder,
-        $$GeJuAnnotationsTableTableUpdateCompanionBuilder,
-        (
-          GeJuAnnotationsTableData,
-          BaseReferences<_$AppDatabase, $GeJuAnnotationsTableTable,
-              GeJuAnnotationsTableData>
-        ),
-        GeJuAnnotationsTableData,
-        PrefetchHooks Function()>;
-typedef $$GeJuConditionSetsTableTableCreateCompanionBuilder
-    = GeJuConditionSetsTableCompanion Function({
-  required String id,
-  required String ruleId,
-  required String label,
-  Value<String?> schoolsJson,
-  Value<String?> sourceJson,
-  Value<String> authorType,
-  Value<String?> conditionsJson,
-  Value<String?> derivedFrom,
-  Value<String?> changeNote,
-  Value<String> relatedAnnotationIdsJson,
-  Value<String> visibility,
-  required DateTime createdAt,
-  required DateTime updatedAt,
-  Value<int> rowid,
-});
-typedef $$GeJuConditionSetsTableTableUpdateCompanionBuilder
-    = GeJuConditionSetsTableCompanion Function({
-  Value<String> id,
-  Value<String> ruleId,
-  Value<String> label,
-  Value<String?> schoolsJson,
-  Value<String?> sourceJson,
-  Value<String> authorType,
-  Value<String?> conditionsJson,
-  Value<String?> derivedFrom,
-  Value<String?> changeNote,
-  Value<String> relatedAnnotationIdsJson,
-  Value<String> visibility,
-  Value<DateTime> createdAt,
-  Value<DateTime> updatedAt,
-  Value<int> rowid,
-});
+        BaseReferences<
+          _$AppDatabase,
+          $GeJuAnnotationsTableTable,
+          GeJuAnnotationsTableData
+        >,
+      ),
+      GeJuAnnotationsTableData,
+      PrefetchHooks Function()
+    >;
+typedef $$GeJuConditionSetsTableTableCreateCompanionBuilder =
+    GeJuConditionSetsTableCompanion Function({
+      required String id,
+      required String ruleId,
+      required String label,
+      Value<String?> schoolsJson,
+      Value<String?> sourceJson,
+      Value<String> authorType,
+      Value<String?> conditionsJson,
+      Value<String?> derivedFrom,
+      Value<String?> changeNote,
+      Value<String> relatedAnnotationIdsJson,
+      Value<String> visibility,
+      required DateTime createdAt,
+      required DateTime updatedAt,
+      Value<int> rowid,
+    });
+typedef $$GeJuConditionSetsTableTableUpdateCompanionBuilder =
+    GeJuConditionSetsTableCompanion Function({
+      Value<String> id,
+      Value<String> ruleId,
+      Value<String> label,
+      Value<String?> schoolsJson,
+      Value<String?> sourceJson,
+      Value<String> authorType,
+      Value<String?> conditionsJson,
+      Value<String?> derivedFrom,
+      Value<String?> changeNote,
+      Value<String> relatedAnnotationIdsJson,
+      Value<String> visibility,
+      Value<DateTime> createdAt,
+      Value<DateTime> updatedAt,
+      Value<int> rowid,
+    });
 
 class $$GeJuConditionSetsTableTableFilterComposer
     extends Composer<_$AppDatabase, $GeJuConditionSetsTableTable> {
@@ -4410,45 +5250,69 @@ class $$GeJuConditionSetsTableTableFilterComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnFilters<String> get id => $composableBuilder(
-      column: $table.id, builder: (column) => ColumnFilters(column));
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get ruleId => $composableBuilder(
-      column: $table.ruleId, builder: (column) => ColumnFilters(column));
+    column: $table.ruleId,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get label => $composableBuilder(
-      column: $table.label, builder: (column) => ColumnFilters(column));
+    column: $table.label,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get schoolsJson => $composableBuilder(
-      column: $table.schoolsJson, builder: (column) => ColumnFilters(column));
+    column: $table.schoolsJson,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get sourceJson => $composableBuilder(
-      column: $table.sourceJson, builder: (column) => ColumnFilters(column));
+    column: $table.sourceJson,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get authorType => $composableBuilder(
-      column: $table.authorType, builder: (column) => ColumnFilters(column));
+    column: $table.authorType,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get conditionsJson => $composableBuilder(
-      column: $table.conditionsJson,
-      builder: (column) => ColumnFilters(column));
+    column: $table.conditionsJson,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get derivedFrom => $composableBuilder(
-      column: $table.derivedFrom, builder: (column) => ColumnFilters(column));
+    column: $table.derivedFrom,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get changeNote => $composableBuilder(
-      column: $table.changeNote, builder: (column) => ColumnFilters(column));
+    column: $table.changeNote,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get relatedAnnotationIdsJson => $composableBuilder(
-      column: $table.relatedAnnotationIdsJson,
-      builder: (column) => ColumnFilters(column));
+    column: $table.relatedAnnotationIdsJson,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get visibility => $composableBuilder(
-      column: $table.visibility, builder: (column) => ColumnFilters(column));
+    column: $table.visibility,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<DateTime> get createdAt => $composableBuilder(
-      column: $table.createdAt, builder: (column) => ColumnFilters(column));
+    column: $table.createdAt,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<DateTime> get updatedAt => $composableBuilder(
-      column: $table.updatedAt, builder: (column) => ColumnFilters(column));
+    column: $table.updatedAt,
+    builder: (column) => ColumnFilters(column),
+  );
 }
 
 class $$GeJuConditionSetsTableTableOrderingComposer
@@ -4461,45 +5325,69 @@ class $$GeJuConditionSetsTableTableOrderingComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnOrderings<String> get id => $composableBuilder(
-      column: $table.id, builder: (column) => ColumnOrderings(column));
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get ruleId => $composableBuilder(
-      column: $table.ruleId, builder: (column) => ColumnOrderings(column));
+    column: $table.ruleId,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get label => $composableBuilder(
-      column: $table.label, builder: (column) => ColumnOrderings(column));
+    column: $table.label,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get schoolsJson => $composableBuilder(
-      column: $table.schoolsJson, builder: (column) => ColumnOrderings(column));
+    column: $table.schoolsJson,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get sourceJson => $composableBuilder(
-      column: $table.sourceJson, builder: (column) => ColumnOrderings(column));
+    column: $table.sourceJson,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get authorType => $composableBuilder(
-      column: $table.authorType, builder: (column) => ColumnOrderings(column));
+    column: $table.authorType,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get conditionsJson => $composableBuilder(
-      column: $table.conditionsJson,
-      builder: (column) => ColumnOrderings(column));
+    column: $table.conditionsJson,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get derivedFrom => $composableBuilder(
-      column: $table.derivedFrom, builder: (column) => ColumnOrderings(column));
+    column: $table.derivedFrom,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get changeNote => $composableBuilder(
-      column: $table.changeNote, builder: (column) => ColumnOrderings(column));
+    column: $table.changeNote,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get relatedAnnotationIdsJson => $composableBuilder(
-      column: $table.relatedAnnotationIdsJson,
-      builder: (column) => ColumnOrderings(column));
+    column: $table.relatedAnnotationIdsJson,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get visibility => $composableBuilder(
-      column: $table.visibility, builder: (column) => ColumnOrderings(column));
+    column: $table.visibility,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<DateTime> get createdAt => $composableBuilder(
-      column: $table.createdAt, builder: (column) => ColumnOrderings(column));
+    column: $table.createdAt,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<DateTime> get updatedAt => $composableBuilder(
-      column: $table.updatedAt, builder: (column) => ColumnOrderings(column));
+    column: $table.updatedAt,
+    builder: (column) => ColumnOrderings(column),
+  );
 }
 
 class $$GeJuConditionSetsTableTableAnnotationComposer
@@ -4521,28 +5409,44 @@ class $$GeJuConditionSetsTableTableAnnotationComposer
       $composableBuilder(column: $table.label, builder: (column) => column);
 
   GeneratedColumn<String> get schoolsJson => $composableBuilder(
-      column: $table.schoolsJson, builder: (column) => column);
+    column: $table.schoolsJson,
+    builder: (column) => column,
+  );
 
   GeneratedColumn<String> get sourceJson => $composableBuilder(
-      column: $table.sourceJson, builder: (column) => column);
+    column: $table.sourceJson,
+    builder: (column) => column,
+  );
 
   GeneratedColumn<String> get authorType => $composableBuilder(
-      column: $table.authorType, builder: (column) => column);
+    column: $table.authorType,
+    builder: (column) => column,
+  );
 
   GeneratedColumn<String> get conditionsJson => $composableBuilder(
-      column: $table.conditionsJson, builder: (column) => column);
+    column: $table.conditionsJson,
+    builder: (column) => column,
+  );
 
   GeneratedColumn<String> get derivedFrom => $composableBuilder(
-      column: $table.derivedFrom, builder: (column) => column);
+    column: $table.derivedFrom,
+    builder: (column) => column,
+  );
 
   GeneratedColumn<String> get changeNote => $composableBuilder(
-      column: $table.changeNote, builder: (column) => column);
+    column: $table.changeNote,
+    builder: (column) => column,
+  );
 
   GeneratedColumn<String> get relatedAnnotationIdsJson => $composableBuilder(
-      column: $table.relatedAnnotationIdsJson, builder: (column) => column);
+    column: $table.relatedAnnotationIdsJson,
+    builder: (column) => column,
+  );
 
   GeneratedColumn<String> get visibility => $composableBuilder(
-      column: $table.visibility, builder: (column) => column);
+    column: $table.visibility,
+    builder: (column) => column,
+  );
 
   GeneratedColumn<DateTime> get createdAt =>
       $composableBuilder(column: $table.createdAt, builder: (column) => column);
@@ -4551,142 +5455,161 @@ class $$GeJuConditionSetsTableTableAnnotationComposer
       $composableBuilder(column: $table.updatedAt, builder: (column) => column);
 }
 
-class $$GeJuConditionSetsTableTableTableManager extends RootTableManager<
-    _$AppDatabase,
-    $GeJuConditionSetsTableTable,
-    GeJuConditionSetsTableData,
-    $$GeJuConditionSetsTableTableFilterComposer,
-    $$GeJuConditionSetsTableTableOrderingComposer,
-    $$GeJuConditionSetsTableTableAnnotationComposer,
-    $$GeJuConditionSetsTableTableCreateCompanionBuilder,
-    $$GeJuConditionSetsTableTableUpdateCompanionBuilder,
-    (
-      GeJuConditionSetsTableData,
-      BaseReferences<_$AppDatabase, $GeJuConditionSetsTableTable,
-          GeJuConditionSetsTableData>
-    ),
-    GeJuConditionSetsTableData,
-    PrefetchHooks Function()> {
+class $$GeJuConditionSetsTableTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $GeJuConditionSetsTableTable,
+          GeJuConditionSetsTableData,
+          $$GeJuConditionSetsTableTableFilterComposer,
+          $$GeJuConditionSetsTableTableOrderingComposer,
+          $$GeJuConditionSetsTableTableAnnotationComposer,
+          $$GeJuConditionSetsTableTableCreateCompanionBuilder,
+          $$GeJuConditionSetsTableTableUpdateCompanionBuilder,
+          (
+            GeJuConditionSetsTableData,
+            BaseReferences<
+              _$AppDatabase,
+              $GeJuConditionSetsTableTable,
+              GeJuConditionSetsTableData
+            >,
+          ),
+          GeJuConditionSetsTableData,
+          PrefetchHooks Function()
+        > {
   $$GeJuConditionSetsTableTableTableManager(
-      _$AppDatabase db, $GeJuConditionSetsTableTable table)
-      : super(TableManagerState(
+    _$AppDatabase db,
+    $GeJuConditionSetsTableTable table,
+  ) : super(
+        TableManagerState(
           db: db,
           table: table,
           createFilteringComposer: () =>
               $$GeJuConditionSetsTableTableFilterComposer(
-                  $db: db, $table: table),
+                $db: db,
+                $table: table,
+              ),
           createOrderingComposer: () =>
               $$GeJuConditionSetsTableTableOrderingComposer(
-                  $db: db, $table: table),
+                $db: db,
+                $table: table,
+              ),
           createComputedFieldComposer: () =>
               $$GeJuConditionSetsTableTableAnnotationComposer(
-                  $db: db, $table: table),
-          updateCompanionCallback: ({
-            Value<String> id = const Value.absent(),
-            Value<String> ruleId = const Value.absent(),
-            Value<String> label = const Value.absent(),
-            Value<String?> schoolsJson = const Value.absent(),
-            Value<String?> sourceJson = const Value.absent(),
-            Value<String> authorType = const Value.absent(),
-            Value<String?> conditionsJson = const Value.absent(),
-            Value<String?> derivedFrom = const Value.absent(),
-            Value<String?> changeNote = const Value.absent(),
-            Value<String> relatedAnnotationIdsJson = const Value.absent(),
-            Value<String> visibility = const Value.absent(),
-            Value<DateTime> createdAt = const Value.absent(),
-            Value<DateTime> updatedAt = const Value.absent(),
-            Value<int> rowid = const Value.absent(),
-          }) =>
-              GeJuConditionSetsTableCompanion(
-            id: id,
-            ruleId: ruleId,
-            label: label,
-            schoolsJson: schoolsJson,
-            sourceJson: sourceJson,
-            authorType: authorType,
-            conditionsJson: conditionsJson,
-            derivedFrom: derivedFrom,
-            changeNote: changeNote,
-            relatedAnnotationIdsJson: relatedAnnotationIdsJson,
-            visibility: visibility,
-            createdAt: createdAt,
-            updatedAt: updatedAt,
-            rowid: rowid,
-          ),
-          createCompanionCallback: ({
-            required String id,
-            required String ruleId,
-            required String label,
-            Value<String?> schoolsJson = const Value.absent(),
-            Value<String?> sourceJson = const Value.absent(),
-            Value<String> authorType = const Value.absent(),
-            Value<String?> conditionsJson = const Value.absent(),
-            Value<String?> derivedFrom = const Value.absent(),
-            Value<String?> changeNote = const Value.absent(),
-            Value<String> relatedAnnotationIdsJson = const Value.absent(),
-            Value<String> visibility = const Value.absent(),
-            required DateTime createdAt,
-            required DateTime updatedAt,
-            Value<int> rowid = const Value.absent(),
-          }) =>
-              GeJuConditionSetsTableCompanion.insert(
-            id: id,
-            ruleId: ruleId,
-            label: label,
-            schoolsJson: schoolsJson,
-            sourceJson: sourceJson,
-            authorType: authorType,
-            conditionsJson: conditionsJson,
-            derivedFrom: derivedFrom,
-            changeNote: changeNote,
-            relatedAnnotationIdsJson: relatedAnnotationIdsJson,
-            visibility: visibility,
-            createdAt: createdAt,
-            updatedAt: updatedAt,
-            rowid: rowid,
-          ),
+                $db: db,
+                $table: table,
+              ),
+          updateCompanionCallback:
+              ({
+                Value<String> id = const Value.absent(),
+                Value<String> ruleId = const Value.absent(),
+                Value<String> label = const Value.absent(),
+                Value<String?> schoolsJson = const Value.absent(),
+                Value<String?> sourceJson = const Value.absent(),
+                Value<String> authorType = const Value.absent(),
+                Value<String?> conditionsJson = const Value.absent(),
+                Value<String?> derivedFrom = const Value.absent(),
+                Value<String?> changeNote = const Value.absent(),
+                Value<String> relatedAnnotationIdsJson = const Value.absent(),
+                Value<String> visibility = const Value.absent(),
+                Value<DateTime> createdAt = const Value.absent(),
+                Value<DateTime> updatedAt = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => GeJuConditionSetsTableCompanion(
+                id: id,
+                ruleId: ruleId,
+                label: label,
+                schoolsJson: schoolsJson,
+                sourceJson: sourceJson,
+                authorType: authorType,
+                conditionsJson: conditionsJson,
+                derivedFrom: derivedFrom,
+                changeNote: changeNote,
+                relatedAnnotationIdsJson: relatedAnnotationIdsJson,
+                visibility: visibility,
+                createdAt: createdAt,
+                updatedAt: updatedAt,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String id,
+                required String ruleId,
+                required String label,
+                Value<String?> schoolsJson = const Value.absent(),
+                Value<String?> sourceJson = const Value.absent(),
+                Value<String> authorType = const Value.absent(),
+                Value<String?> conditionsJson = const Value.absent(),
+                Value<String?> derivedFrom = const Value.absent(),
+                Value<String?> changeNote = const Value.absent(),
+                Value<String> relatedAnnotationIdsJson = const Value.absent(),
+                Value<String> visibility = const Value.absent(),
+                required DateTime createdAt,
+                required DateTime updatedAt,
+                Value<int> rowid = const Value.absent(),
+              }) => GeJuConditionSetsTableCompanion.insert(
+                id: id,
+                ruleId: ruleId,
+                label: label,
+                schoolsJson: schoolsJson,
+                sourceJson: sourceJson,
+                authorType: authorType,
+                conditionsJson: conditionsJson,
+                derivedFrom: derivedFrom,
+                changeNote: changeNote,
+                relatedAnnotationIdsJson: relatedAnnotationIdsJson,
+                visibility: visibility,
+                createdAt: createdAt,
+                updatedAt: updatedAt,
+                rowid: rowid,
+              ),
           withReferenceMapper: (p0) => p0
               .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
               .toList(),
           prefetchHooksCallback: null,
-        ));
+        ),
+      );
 }
 
-typedef $$GeJuConditionSetsTableTableProcessedTableManager
-    = ProcessedTableManager<
-        _$AppDatabase,
-        $GeJuConditionSetsTableTable,
+typedef $$GeJuConditionSetsTableTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $GeJuConditionSetsTableTable,
+      GeJuConditionSetsTableData,
+      $$GeJuConditionSetsTableTableFilterComposer,
+      $$GeJuConditionSetsTableTableOrderingComposer,
+      $$GeJuConditionSetsTableTableAnnotationComposer,
+      $$GeJuConditionSetsTableTableCreateCompanionBuilder,
+      $$GeJuConditionSetsTableTableUpdateCompanionBuilder,
+      (
         GeJuConditionSetsTableData,
-        $$GeJuConditionSetsTableTableFilterComposer,
-        $$GeJuConditionSetsTableTableOrderingComposer,
-        $$GeJuConditionSetsTableTableAnnotationComposer,
-        $$GeJuConditionSetsTableTableCreateCompanionBuilder,
-        $$GeJuConditionSetsTableTableUpdateCompanionBuilder,
-        (
-          GeJuConditionSetsTableData,
-          BaseReferences<_$AppDatabase, $GeJuConditionSetsTableTable,
-              GeJuConditionSetsTableData>
-        ),
-        GeJuConditionSetsTableData,
-        PrefetchHooks Function()>;
-typedef $$GeJuUserPreferencesTableTableCreateCompanionBuilder
-    = GeJuUserPreferencesTableCompanion Function({
-  Value<String> id,
-  Value<String> hiddenConditionSetIdsJson,
-  Value<String?> conditionSetSchoolsJson,
-  Value<String> hiddenAnnotationIdsJson,
-  Value<String?> annotationSchoolsJson,
-  Value<int> rowid,
-});
-typedef $$GeJuUserPreferencesTableTableUpdateCompanionBuilder
-    = GeJuUserPreferencesTableCompanion Function({
-  Value<String> id,
-  Value<String> hiddenConditionSetIdsJson,
-  Value<String?> conditionSetSchoolsJson,
-  Value<String> hiddenAnnotationIdsJson,
-  Value<String?> annotationSchoolsJson,
-  Value<int> rowid,
-});
+        BaseReferences<
+          _$AppDatabase,
+          $GeJuConditionSetsTableTable,
+          GeJuConditionSetsTableData
+        >,
+      ),
+      GeJuConditionSetsTableData,
+      PrefetchHooks Function()
+    >;
+typedef $$GeJuUserPreferencesTableTableCreateCompanionBuilder =
+    GeJuUserPreferencesTableCompanion Function({
+      Value<String> id,
+      Value<String> hiddenConditionSetIdsJson,
+      Value<String?> conditionSetSchoolsJson,
+      Value<String> hiddenAnnotationIdsJson,
+      Value<String?> annotationSchoolsJson,
+      Value<int> rowid,
+    });
+typedef $$GeJuUserPreferencesTableTableUpdateCompanionBuilder =
+    GeJuUserPreferencesTableCompanion Function({
+      Value<String> id,
+      Value<String> hiddenConditionSetIdsJson,
+      Value<String?> conditionSetSchoolsJson,
+      Value<String> hiddenAnnotationIdsJson,
+      Value<String?> annotationSchoolsJson,
+      Value<int> rowid,
+    });
 
 class $$GeJuUserPreferencesTableTableFilterComposer
     extends Composer<_$AppDatabase, $GeJuUserPreferencesTableTable> {
@@ -4698,23 +5621,29 @@ class $$GeJuUserPreferencesTableTableFilterComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnFilters<String> get id => $composableBuilder(
-      column: $table.id, builder: (column) => ColumnFilters(column));
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get hiddenConditionSetIdsJson => $composableBuilder(
-      column: $table.hiddenConditionSetIdsJson,
-      builder: (column) => ColumnFilters(column));
+    column: $table.hiddenConditionSetIdsJson,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get conditionSetSchoolsJson => $composableBuilder(
-      column: $table.conditionSetSchoolsJson,
-      builder: (column) => ColumnFilters(column));
+    column: $table.conditionSetSchoolsJson,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get hiddenAnnotationIdsJson => $composableBuilder(
-      column: $table.hiddenAnnotationIdsJson,
-      builder: (column) => ColumnFilters(column));
+    column: $table.hiddenAnnotationIdsJson,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get annotationSchoolsJson => $composableBuilder(
-      column: $table.annotationSchoolsJson,
-      builder: (column) => ColumnFilters(column));
+    column: $table.annotationSchoolsJson,
+    builder: (column) => ColumnFilters(column),
+  );
 }
 
 class $$GeJuUserPreferencesTableTableOrderingComposer
@@ -4727,23 +5656,29 @@ class $$GeJuUserPreferencesTableTableOrderingComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnOrderings<String> get id => $composableBuilder(
-      column: $table.id, builder: (column) => ColumnOrderings(column));
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get hiddenConditionSetIdsJson => $composableBuilder(
-      column: $table.hiddenConditionSetIdsJson,
-      builder: (column) => ColumnOrderings(column));
+    column: $table.hiddenConditionSetIdsJson,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get conditionSetSchoolsJson => $composableBuilder(
-      column: $table.conditionSetSchoolsJson,
-      builder: (column) => ColumnOrderings(column));
+    column: $table.conditionSetSchoolsJson,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get hiddenAnnotationIdsJson => $composableBuilder(
-      column: $table.hiddenAnnotationIdsJson,
-      builder: (column) => ColumnOrderings(column));
+    column: $table.hiddenAnnotationIdsJson,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get annotationSchoolsJson => $composableBuilder(
-      column: $table.annotationSchoolsJson,
-      builder: (column) => ColumnOrderings(column));
+    column: $table.annotationSchoolsJson,
+    builder: (column) => ColumnOrderings(column),
+  );
 }
 
 class $$GeJuUserPreferencesTableTableAnnotationComposer
@@ -4759,124 +5694,151 @@ class $$GeJuUserPreferencesTableTableAnnotationComposer
       $composableBuilder(column: $table.id, builder: (column) => column);
 
   GeneratedColumn<String> get hiddenConditionSetIdsJson => $composableBuilder(
-      column: $table.hiddenConditionSetIdsJson, builder: (column) => column);
+    column: $table.hiddenConditionSetIdsJson,
+    builder: (column) => column,
+  );
 
   GeneratedColumn<String> get conditionSetSchoolsJson => $composableBuilder(
-      column: $table.conditionSetSchoolsJson, builder: (column) => column);
+    column: $table.conditionSetSchoolsJson,
+    builder: (column) => column,
+  );
 
   GeneratedColumn<String> get hiddenAnnotationIdsJson => $composableBuilder(
-      column: $table.hiddenAnnotationIdsJson, builder: (column) => column);
+    column: $table.hiddenAnnotationIdsJson,
+    builder: (column) => column,
+  );
 
   GeneratedColumn<String> get annotationSchoolsJson => $composableBuilder(
-      column: $table.annotationSchoolsJson, builder: (column) => column);
+    column: $table.annotationSchoolsJson,
+    builder: (column) => column,
+  );
 }
 
-class $$GeJuUserPreferencesTableTableTableManager extends RootTableManager<
-    _$AppDatabase,
-    $GeJuUserPreferencesTableTable,
-    GeJuUserPreferencesTableData,
-    $$GeJuUserPreferencesTableTableFilterComposer,
-    $$GeJuUserPreferencesTableTableOrderingComposer,
-    $$GeJuUserPreferencesTableTableAnnotationComposer,
-    $$GeJuUserPreferencesTableTableCreateCompanionBuilder,
-    $$GeJuUserPreferencesTableTableUpdateCompanionBuilder,
-    (
-      GeJuUserPreferencesTableData,
-      BaseReferences<_$AppDatabase, $GeJuUserPreferencesTableTable,
-          GeJuUserPreferencesTableData>
-    ),
-    GeJuUserPreferencesTableData,
-    PrefetchHooks Function()> {
+class $$GeJuUserPreferencesTableTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $GeJuUserPreferencesTableTable,
+          GeJuUserPreferencesTableData,
+          $$GeJuUserPreferencesTableTableFilterComposer,
+          $$GeJuUserPreferencesTableTableOrderingComposer,
+          $$GeJuUserPreferencesTableTableAnnotationComposer,
+          $$GeJuUserPreferencesTableTableCreateCompanionBuilder,
+          $$GeJuUserPreferencesTableTableUpdateCompanionBuilder,
+          (
+            GeJuUserPreferencesTableData,
+            BaseReferences<
+              _$AppDatabase,
+              $GeJuUserPreferencesTableTable,
+              GeJuUserPreferencesTableData
+            >,
+          ),
+          GeJuUserPreferencesTableData,
+          PrefetchHooks Function()
+        > {
   $$GeJuUserPreferencesTableTableTableManager(
-      _$AppDatabase db, $GeJuUserPreferencesTableTable table)
-      : super(TableManagerState(
+    _$AppDatabase db,
+    $GeJuUserPreferencesTableTable table,
+  ) : super(
+        TableManagerState(
           db: db,
           table: table,
           createFilteringComposer: () =>
               $$GeJuUserPreferencesTableTableFilterComposer(
-                  $db: db, $table: table),
+                $db: db,
+                $table: table,
+              ),
           createOrderingComposer: () =>
               $$GeJuUserPreferencesTableTableOrderingComposer(
-                  $db: db, $table: table),
+                $db: db,
+                $table: table,
+              ),
           createComputedFieldComposer: () =>
               $$GeJuUserPreferencesTableTableAnnotationComposer(
-                  $db: db, $table: table),
-          updateCompanionCallback: ({
-            Value<String> id = const Value.absent(),
-            Value<String> hiddenConditionSetIdsJson = const Value.absent(),
-            Value<String?> conditionSetSchoolsJson = const Value.absent(),
-            Value<String> hiddenAnnotationIdsJson = const Value.absent(),
-            Value<String?> annotationSchoolsJson = const Value.absent(),
-            Value<int> rowid = const Value.absent(),
-          }) =>
-              GeJuUserPreferencesTableCompanion(
-            id: id,
-            hiddenConditionSetIdsJson: hiddenConditionSetIdsJson,
-            conditionSetSchoolsJson: conditionSetSchoolsJson,
-            hiddenAnnotationIdsJson: hiddenAnnotationIdsJson,
-            annotationSchoolsJson: annotationSchoolsJson,
-            rowid: rowid,
-          ),
-          createCompanionCallback: ({
-            Value<String> id = const Value.absent(),
-            Value<String> hiddenConditionSetIdsJson = const Value.absent(),
-            Value<String?> conditionSetSchoolsJson = const Value.absent(),
-            Value<String> hiddenAnnotationIdsJson = const Value.absent(),
-            Value<String?> annotationSchoolsJson = const Value.absent(),
-            Value<int> rowid = const Value.absent(),
-          }) =>
-              GeJuUserPreferencesTableCompanion.insert(
-            id: id,
-            hiddenConditionSetIdsJson: hiddenConditionSetIdsJson,
-            conditionSetSchoolsJson: conditionSetSchoolsJson,
-            hiddenAnnotationIdsJson: hiddenAnnotationIdsJson,
-            annotationSchoolsJson: annotationSchoolsJson,
-            rowid: rowid,
-          ),
+                $db: db,
+                $table: table,
+              ),
+          updateCompanionCallback:
+              ({
+                Value<String> id = const Value.absent(),
+                Value<String> hiddenConditionSetIdsJson = const Value.absent(),
+                Value<String?> conditionSetSchoolsJson = const Value.absent(),
+                Value<String> hiddenAnnotationIdsJson = const Value.absent(),
+                Value<String?> annotationSchoolsJson = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => GeJuUserPreferencesTableCompanion(
+                id: id,
+                hiddenConditionSetIdsJson: hiddenConditionSetIdsJson,
+                conditionSetSchoolsJson: conditionSetSchoolsJson,
+                hiddenAnnotationIdsJson: hiddenAnnotationIdsJson,
+                annotationSchoolsJson: annotationSchoolsJson,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                Value<String> id = const Value.absent(),
+                Value<String> hiddenConditionSetIdsJson = const Value.absent(),
+                Value<String?> conditionSetSchoolsJson = const Value.absent(),
+                Value<String> hiddenAnnotationIdsJson = const Value.absent(),
+                Value<String?> annotationSchoolsJson = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => GeJuUserPreferencesTableCompanion.insert(
+                id: id,
+                hiddenConditionSetIdsJson: hiddenConditionSetIdsJson,
+                conditionSetSchoolsJson: conditionSetSchoolsJson,
+                hiddenAnnotationIdsJson: hiddenAnnotationIdsJson,
+                annotationSchoolsJson: annotationSchoolsJson,
+                rowid: rowid,
+              ),
           withReferenceMapper: (p0) => p0
               .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
               .toList(),
           prefetchHooksCallback: null,
-        ));
+        ),
+      );
 }
 
-typedef $$GeJuUserPreferencesTableTableProcessedTableManager
-    = ProcessedTableManager<
-        _$AppDatabase,
-        $GeJuUserPreferencesTableTable,
+typedef $$GeJuUserPreferencesTableTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $GeJuUserPreferencesTableTable,
+      GeJuUserPreferencesTableData,
+      $$GeJuUserPreferencesTableTableFilterComposer,
+      $$GeJuUserPreferencesTableTableOrderingComposer,
+      $$GeJuUserPreferencesTableTableAnnotationComposer,
+      $$GeJuUserPreferencesTableTableCreateCompanionBuilder,
+      $$GeJuUserPreferencesTableTableUpdateCompanionBuilder,
+      (
         GeJuUserPreferencesTableData,
-        $$GeJuUserPreferencesTableTableFilterComposer,
-        $$GeJuUserPreferencesTableTableOrderingComposer,
-        $$GeJuUserPreferencesTableTableAnnotationComposer,
-        $$GeJuUserPreferencesTableTableCreateCompanionBuilder,
-        $$GeJuUserPreferencesTableTableUpdateCompanionBuilder,
-        (
-          GeJuUserPreferencesTableData,
-          BaseReferences<_$AppDatabase, $GeJuUserPreferencesTableTable,
-              GeJuUserPreferencesTableData>
-        ),
-        GeJuUserPreferencesTableData,
-        PrefetchHooks Function()>;
-typedef $$GeJuDeletionRecordsTableTableCreateCompanionBuilder
-    = GeJuDeletionRecordsTableCompanion Function({
-  required String id,
-  required String deletedEntityType,
-  required String deletedEntityId,
-  required DateTime deletedAt,
-  required String reason,
-  required String snapshotJson,
-  Value<int> rowid,
-});
-typedef $$GeJuDeletionRecordsTableTableUpdateCompanionBuilder
-    = GeJuDeletionRecordsTableCompanion Function({
-  Value<String> id,
-  Value<String> deletedEntityType,
-  Value<String> deletedEntityId,
-  Value<DateTime> deletedAt,
-  Value<String> reason,
-  Value<String> snapshotJson,
-  Value<int> rowid,
-});
+        BaseReferences<
+          _$AppDatabase,
+          $GeJuUserPreferencesTableTable,
+          GeJuUserPreferencesTableData
+        >,
+      ),
+      GeJuUserPreferencesTableData,
+      PrefetchHooks Function()
+    >;
+typedef $$GeJuDeletionRecordsTableTableCreateCompanionBuilder =
+    GeJuDeletionRecordsTableCompanion Function({
+      required String id,
+      required String deletedEntityType,
+      required String deletedEntityId,
+      required DateTime deletedAt,
+      required String reason,
+      required String snapshotJson,
+      Value<int> rowid,
+    });
+typedef $$GeJuDeletionRecordsTableTableUpdateCompanionBuilder =
+    GeJuDeletionRecordsTableCompanion Function({
+      Value<String> id,
+      Value<String> deletedEntityType,
+      Value<String> deletedEntityId,
+      Value<DateTime> deletedAt,
+      Value<String> reason,
+      Value<String> snapshotJson,
+      Value<int> rowid,
+    });
 
 class $$GeJuDeletionRecordsTableTableFilterComposer
     extends Composer<_$AppDatabase, $GeJuDeletionRecordsTableTable> {
@@ -4888,24 +5850,34 @@ class $$GeJuDeletionRecordsTableTableFilterComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnFilters<String> get id => $composableBuilder(
-      column: $table.id, builder: (column) => ColumnFilters(column));
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get deletedEntityType => $composableBuilder(
-      column: $table.deletedEntityType,
-      builder: (column) => ColumnFilters(column));
+    column: $table.deletedEntityType,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get deletedEntityId => $composableBuilder(
-      column: $table.deletedEntityId,
-      builder: (column) => ColumnFilters(column));
+    column: $table.deletedEntityId,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<DateTime> get deletedAt => $composableBuilder(
-      column: $table.deletedAt, builder: (column) => ColumnFilters(column));
+    column: $table.deletedAt,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get reason => $composableBuilder(
-      column: $table.reason, builder: (column) => ColumnFilters(column));
+    column: $table.reason,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get snapshotJson => $composableBuilder(
-      column: $table.snapshotJson, builder: (column) => ColumnFilters(column));
+    column: $table.snapshotJson,
+    builder: (column) => ColumnFilters(column),
+  );
 }
 
 class $$GeJuDeletionRecordsTableTableOrderingComposer
@@ -4918,25 +5890,34 @@ class $$GeJuDeletionRecordsTableTableOrderingComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnOrderings<String> get id => $composableBuilder(
-      column: $table.id, builder: (column) => ColumnOrderings(column));
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get deletedEntityType => $composableBuilder(
-      column: $table.deletedEntityType,
-      builder: (column) => ColumnOrderings(column));
+    column: $table.deletedEntityType,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get deletedEntityId => $composableBuilder(
-      column: $table.deletedEntityId,
-      builder: (column) => ColumnOrderings(column));
+    column: $table.deletedEntityId,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<DateTime> get deletedAt => $composableBuilder(
-      column: $table.deletedAt, builder: (column) => ColumnOrderings(column));
+    column: $table.deletedAt,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get reason => $composableBuilder(
-      column: $table.reason, builder: (column) => ColumnOrderings(column));
+    column: $table.reason,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get snapshotJson => $composableBuilder(
-      column: $table.snapshotJson,
-      builder: (column) => ColumnOrderings(column));
+    column: $table.snapshotJson,
+    builder: (column) => ColumnOrderings(column),
+  );
 }
 
 class $$GeJuDeletionRecordsTableTableAnnotationComposer
@@ -4952,10 +5933,14 @@ class $$GeJuDeletionRecordsTableTableAnnotationComposer
       $composableBuilder(column: $table.id, builder: (column) => column);
 
   GeneratedColumn<String> get deletedEntityType => $composableBuilder(
-      column: $table.deletedEntityType, builder: (column) => column);
+    column: $table.deletedEntityType,
+    builder: (column) => column,
+  );
 
   GeneratedColumn<String> get deletedEntityId => $composableBuilder(
-      column: $table.deletedEntityId, builder: (column) => column);
+    column: $table.deletedEntityId,
+    builder: (column) => column,
+  );
 
   GeneratedColumn<DateTime> get deletedAt =>
       $composableBuilder(column: $table.deletedAt, builder: (column) => column);
@@ -4964,115 +5949,136 @@ class $$GeJuDeletionRecordsTableTableAnnotationComposer
       $composableBuilder(column: $table.reason, builder: (column) => column);
 
   GeneratedColumn<String> get snapshotJson => $composableBuilder(
-      column: $table.snapshotJson, builder: (column) => column);
+    column: $table.snapshotJson,
+    builder: (column) => column,
+  );
 }
 
-class $$GeJuDeletionRecordsTableTableTableManager extends RootTableManager<
-    _$AppDatabase,
-    $GeJuDeletionRecordsTableTable,
-    GeJuDeletionRecordsTableData,
-    $$GeJuDeletionRecordsTableTableFilterComposer,
-    $$GeJuDeletionRecordsTableTableOrderingComposer,
-    $$GeJuDeletionRecordsTableTableAnnotationComposer,
-    $$GeJuDeletionRecordsTableTableCreateCompanionBuilder,
-    $$GeJuDeletionRecordsTableTableUpdateCompanionBuilder,
-    (
-      GeJuDeletionRecordsTableData,
-      BaseReferences<_$AppDatabase, $GeJuDeletionRecordsTableTable,
-          GeJuDeletionRecordsTableData>
-    ),
-    GeJuDeletionRecordsTableData,
-    PrefetchHooks Function()> {
+class $$GeJuDeletionRecordsTableTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $GeJuDeletionRecordsTableTable,
+          GeJuDeletionRecordsTableData,
+          $$GeJuDeletionRecordsTableTableFilterComposer,
+          $$GeJuDeletionRecordsTableTableOrderingComposer,
+          $$GeJuDeletionRecordsTableTableAnnotationComposer,
+          $$GeJuDeletionRecordsTableTableCreateCompanionBuilder,
+          $$GeJuDeletionRecordsTableTableUpdateCompanionBuilder,
+          (
+            GeJuDeletionRecordsTableData,
+            BaseReferences<
+              _$AppDatabase,
+              $GeJuDeletionRecordsTableTable,
+              GeJuDeletionRecordsTableData
+            >,
+          ),
+          GeJuDeletionRecordsTableData,
+          PrefetchHooks Function()
+        > {
   $$GeJuDeletionRecordsTableTableTableManager(
-      _$AppDatabase db, $GeJuDeletionRecordsTableTable table)
-      : super(TableManagerState(
+    _$AppDatabase db,
+    $GeJuDeletionRecordsTableTable table,
+  ) : super(
+        TableManagerState(
           db: db,
           table: table,
           createFilteringComposer: () =>
               $$GeJuDeletionRecordsTableTableFilterComposer(
-                  $db: db, $table: table),
+                $db: db,
+                $table: table,
+              ),
           createOrderingComposer: () =>
               $$GeJuDeletionRecordsTableTableOrderingComposer(
-                  $db: db, $table: table),
+                $db: db,
+                $table: table,
+              ),
           createComputedFieldComposer: () =>
               $$GeJuDeletionRecordsTableTableAnnotationComposer(
-                  $db: db, $table: table),
-          updateCompanionCallback: ({
-            Value<String> id = const Value.absent(),
-            Value<String> deletedEntityType = const Value.absent(),
-            Value<String> deletedEntityId = const Value.absent(),
-            Value<DateTime> deletedAt = const Value.absent(),
-            Value<String> reason = const Value.absent(),
-            Value<String> snapshotJson = const Value.absent(),
-            Value<int> rowid = const Value.absent(),
-          }) =>
-              GeJuDeletionRecordsTableCompanion(
-            id: id,
-            deletedEntityType: deletedEntityType,
-            deletedEntityId: deletedEntityId,
-            deletedAt: deletedAt,
-            reason: reason,
-            snapshotJson: snapshotJson,
-            rowid: rowid,
-          ),
-          createCompanionCallback: ({
-            required String id,
-            required String deletedEntityType,
-            required String deletedEntityId,
-            required DateTime deletedAt,
-            required String reason,
-            required String snapshotJson,
-            Value<int> rowid = const Value.absent(),
-          }) =>
-              GeJuDeletionRecordsTableCompanion.insert(
-            id: id,
-            deletedEntityType: deletedEntityType,
-            deletedEntityId: deletedEntityId,
-            deletedAt: deletedAt,
-            reason: reason,
-            snapshotJson: snapshotJson,
-            rowid: rowid,
-          ),
+                $db: db,
+                $table: table,
+              ),
+          updateCompanionCallback:
+              ({
+                Value<String> id = const Value.absent(),
+                Value<String> deletedEntityType = const Value.absent(),
+                Value<String> deletedEntityId = const Value.absent(),
+                Value<DateTime> deletedAt = const Value.absent(),
+                Value<String> reason = const Value.absent(),
+                Value<String> snapshotJson = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => GeJuDeletionRecordsTableCompanion(
+                id: id,
+                deletedEntityType: deletedEntityType,
+                deletedEntityId: deletedEntityId,
+                deletedAt: deletedAt,
+                reason: reason,
+                snapshotJson: snapshotJson,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String id,
+                required String deletedEntityType,
+                required String deletedEntityId,
+                required DateTime deletedAt,
+                required String reason,
+                required String snapshotJson,
+                Value<int> rowid = const Value.absent(),
+              }) => GeJuDeletionRecordsTableCompanion.insert(
+                id: id,
+                deletedEntityType: deletedEntityType,
+                deletedEntityId: deletedEntityId,
+                deletedAt: deletedAt,
+                reason: reason,
+                snapshotJson: snapshotJson,
+                rowid: rowid,
+              ),
           withReferenceMapper: (p0) => p0
               .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
               .toList(),
           prefetchHooksCallback: null,
-        ));
+        ),
+      );
 }
 
-typedef $$GeJuDeletionRecordsTableTableProcessedTableManager
-    = ProcessedTableManager<
-        _$AppDatabase,
-        $GeJuDeletionRecordsTableTable,
+typedef $$GeJuDeletionRecordsTableTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $GeJuDeletionRecordsTableTable,
+      GeJuDeletionRecordsTableData,
+      $$GeJuDeletionRecordsTableTableFilterComposer,
+      $$GeJuDeletionRecordsTableTableOrderingComposer,
+      $$GeJuDeletionRecordsTableTableAnnotationComposer,
+      $$GeJuDeletionRecordsTableTableCreateCompanionBuilder,
+      $$GeJuDeletionRecordsTableTableUpdateCompanionBuilder,
+      (
         GeJuDeletionRecordsTableData,
-        $$GeJuDeletionRecordsTableTableFilterComposer,
-        $$GeJuDeletionRecordsTableTableOrderingComposer,
-        $$GeJuDeletionRecordsTableTableAnnotationComposer,
-        $$GeJuDeletionRecordsTableTableCreateCompanionBuilder,
-        $$GeJuDeletionRecordsTableTableUpdateCompanionBuilder,
-        (
-          GeJuDeletionRecordsTableData,
-          BaseReferences<_$AppDatabase, $GeJuDeletionRecordsTableTable,
-              GeJuDeletionRecordsTableData>
-        ),
-        GeJuDeletionRecordsTableData,
-        PrefetchHooks Function()>;
-typedef $$GeJuSchoolsTableTableCreateCompanionBuilder
-    = GeJuSchoolsTableCompanion Function({
-  required String id,
-  required String name,
-  Value<String?> brief,
-  Value<String> featuresJson,
-  Value<int> rowid,
-});
-typedef $$GeJuSchoolsTableTableUpdateCompanionBuilder
-    = GeJuSchoolsTableCompanion Function({
-  Value<String> id,
-  Value<String> name,
-  Value<String?> brief,
-  Value<String> featuresJson,
-  Value<int> rowid,
-});
+        BaseReferences<
+          _$AppDatabase,
+          $GeJuDeletionRecordsTableTable,
+          GeJuDeletionRecordsTableData
+        >,
+      ),
+      GeJuDeletionRecordsTableData,
+      PrefetchHooks Function()
+    >;
+typedef $$GeJuSchoolsTableTableCreateCompanionBuilder =
+    GeJuSchoolsTableCompanion Function({
+      required String id,
+      required String name,
+      Value<String?> brief,
+      Value<String> featuresJson,
+      Value<int> rowid,
+    });
+typedef $$GeJuSchoolsTableTableUpdateCompanionBuilder =
+    GeJuSchoolsTableCompanion Function({
+      Value<String> id,
+      Value<String> name,
+      Value<String?> brief,
+      Value<String> featuresJson,
+      Value<int> rowid,
+    });
 
 class $$GeJuSchoolsTableTableFilterComposer
     extends Composer<_$AppDatabase, $GeJuSchoolsTableTable> {
@@ -5084,16 +6090,24 @@ class $$GeJuSchoolsTableTableFilterComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnFilters<String> get id => $composableBuilder(
-      column: $table.id, builder: (column) => ColumnFilters(column));
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get name => $composableBuilder(
-      column: $table.name, builder: (column) => ColumnFilters(column));
+    column: $table.name,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get brief => $composableBuilder(
-      column: $table.brief, builder: (column) => ColumnFilters(column));
+    column: $table.brief,
+    builder: (column) => ColumnFilters(column),
+  );
 
   ColumnFilters<String> get featuresJson => $composableBuilder(
-      column: $table.featuresJson, builder: (column) => ColumnFilters(column));
+    column: $table.featuresJson,
+    builder: (column) => ColumnFilters(column),
+  );
 }
 
 class $$GeJuSchoolsTableTableOrderingComposer
@@ -5106,17 +6120,24 @@ class $$GeJuSchoolsTableTableOrderingComposer
     super.$removeJoinBuilderFromRootComposer,
   });
   ColumnOrderings<String> get id => $composableBuilder(
-      column: $table.id, builder: (column) => ColumnOrderings(column));
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get name => $composableBuilder(
-      column: $table.name, builder: (column) => ColumnOrderings(column));
+    column: $table.name,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get brief => $composableBuilder(
-      column: $table.brief, builder: (column) => ColumnOrderings(column));
+    column: $table.brief,
+    builder: (column) => ColumnOrderings(column),
+  );
 
   ColumnOrderings<String> get featuresJson => $composableBuilder(
-      column: $table.featuresJson,
-      builder: (column) => ColumnOrderings(column));
+    column: $table.featuresJson,
+    builder: (column) => ColumnOrderings(column),
+  );
 }
 
 class $$GeJuSchoolsTableTableAnnotationComposer
@@ -5138,28 +6159,38 @@ class $$GeJuSchoolsTableTableAnnotationComposer
       $composableBuilder(column: $table.brief, builder: (column) => column);
 
   GeneratedColumn<String> get featuresJson => $composableBuilder(
-      column: $table.featuresJson, builder: (column) => column);
+    column: $table.featuresJson,
+    builder: (column) => column,
+  );
 }
 
-class $$GeJuSchoolsTableTableTableManager extends RootTableManager<
-    _$AppDatabase,
-    $GeJuSchoolsTableTable,
-    GeJuSchoolsTableData,
-    $$GeJuSchoolsTableTableFilterComposer,
-    $$GeJuSchoolsTableTableOrderingComposer,
-    $$GeJuSchoolsTableTableAnnotationComposer,
-    $$GeJuSchoolsTableTableCreateCompanionBuilder,
-    $$GeJuSchoolsTableTableUpdateCompanionBuilder,
-    (
-      GeJuSchoolsTableData,
-      BaseReferences<_$AppDatabase, $GeJuSchoolsTableTable,
-          GeJuSchoolsTableData>
-    ),
-    GeJuSchoolsTableData,
-    PrefetchHooks Function()> {
+class $$GeJuSchoolsTableTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $GeJuSchoolsTableTable,
+          GeJuSchoolsTableData,
+          $$GeJuSchoolsTableTableFilterComposer,
+          $$GeJuSchoolsTableTableOrderingComposer,
+          $$GeJuSchoolsTableTableAnnotationComposer,
+          $$GeJuSchoolsTableTableCreateCompanionBuilder,
+          $$GeJuSchoolsTableTableUpdateCompanionBuilder,
+          (
+            GeJuSchoolsTableData,
+            BaseReferences<
+              _$AppDatabase,
+              $GeJuSchoolsTableTable,
+              GeJuSchoolsTableData
+            >,
+          ),
+          GeJuSchoolsTableData,
+          PrefetchHooks Function()
+        > {
   $$GeJuSchoolsTableTableTableManager(
-      _$AppDatabase db, $GeJuSchoolsTableTable table)
-      : super(TableManagerState(
+    _$AppDatabase db,
+    $GeJuSchoolsTableTable table,
+  ) : super(
+        TableManagerState(
           db: db,
           table: table,
           createFilteringComposer: () =>
@@ -5168,57 +6199,63 @@ class $$GeJuSchoolsTableTableTableManager extends RootTableManager<
               $$GeJuSchoolsTableTableOrderingComposer($db: db, $table: table),
           createComputedFieldComposer: () =>
               $$GeJuSchoolsTableTableAnnotationComposer($db: db, $table: table),
-          updateCompanionCallback: ({
-            Value<String> id = const Value.absent(),
-            Value<String> name = const Value.absent(),
-            Value<String?> brief = const Value.absent(),
-            Value<String> featuresJson = const Value.absent(),
-            Value<int> rowid = const Value.absent(),
-          }) =>
-              GeJuSchoolsTableCompanion(
-            id: id,
-            name: name,
-            brief: brief,
-            featuresJson: featuresJson,
-            rowid: rowid,
-          ),
-          createCompanionCallback: ({
-            required String id,
-            required String name,
-            Value<String?> brief = const Value.absent(),
-            Value<String> featuresJson = const Value.absent(),
-            Value<int> rowid = const Value.absent(),
-          }) =>
-              GeJuSchoolsTableCompanion.insert(
-            id: id,
-            name: name,
-            brief: brief,
-            featuresJson: featuresJson,
-            rowid: rowid,
-          ),
+          updateCompanionCallback:
+              ({
+                Value<String> id = const Value.absent(),
+                Value<String> name = const Value.absent(),
+                Value<String?> brief = const Value.absent(),
+                Value<String> featuresJson = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => GeJuSchoolsTableCompanion(
+                id: id,
+                name: name,
+                brief: brief,
+                featuresJson: featuresJson,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String id,
+                required String name,
+                Value<String?> brief = const Value.absent(),
+                Value<String> featuresJson = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => GeJuSchoolsTableCompanion.insert(
+                id: id,
+                name: name,
+                brief: brief,
+                featuresJson: featuresJson,
+                rowid: rowid,
+              ),
           withReferenceMapper: (p0) => p0
               .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
               .toList(),
           prefetchHooksCallback: null,
-        ));
+        ),
+      );
 }
 
-typedef $$GeJuSchoolsTableTableProcessedTableManager = ProcessedTableManager<
-    _$AppDatabase,
-    $GeJuSchoolsTableTable,
-    GeJuSchoolsTableData,
-    $$GeJuSchoolsTableTableFilterComposer,
-    $$GeJuSchoolsTableTableOrderingComposer,
-    $$GeJuSchoolsTableTableAnnotationComposer,
-    $$GeJuSchoolsTableTableCreateCompanionBuilder,
-    $$GeJuSchoolsTableTableUpdateCompanionBuilder,
-    (
+typedef $$GeJuSchoolsTableTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $GeJuSchoolsTableTable,
       GeJuSchoolsTableData,
-      BaseReferences<_$AppDatabase, $GeJuSchoolsTableTable,
-          GeJuSchoolsTableData>
-    ),
-    GeJuSchoolsTableData,
-    PrefetchHooks Function()>;
+      $$GeJuSchoolsTableTableFilterComposer,
+      $$GeJuSchoolsTableTableOrderingComposer,
+      $$GeJuSchoolsTableTableAnnotationComposer,
+      $$GeJuSchoolsTableTableCreateCompanionBuilder,
+      $$GeJuSchoolsTableTableUpdateCompanionBuilder,
+      (
+        GeJuSchoolsTableData,
+        BaseReferences<
+          _$AppDatabase,
+          $GeJuSchoolsTableTable,
+          GeJuSchoolsTableData
+        >,
+      ),
+      GeJuSchoolsTableData,
+      PrefetchHooks Function()
+    >;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -5231,13 +6268,19 @@ class $AppDatabaseManager {
       $$GeJuAnnotationsTableTableTableManager(_db, _db.geJuAnnotationsTable);
   $$GeJuConditionSetsTableTableTableManager get geJuConditionSetsTable =>
       $$GeJuConditionSetsTableTableTableManager(
-          _db, _db.geJuConditionSetsTable);
+        _db,
+        _db.geJuConditionSetsTable,
+      );
   $$GeJuUserPreferencesTableTableTableManager get geJuUserPreferencesTable =>
       $$GeJuUserPreferencesTableTableTableManager(
-          _db, _db.geJuUserPreferencesTable);
+        _db,
+        _db.geJuUserPreferencesTable,
+      );
   $$GeJuDeletionRecordsTableTableTableManager get geJuDeletionRecordsTable =>
       $$GeJuDeletionRecordsTableTableTableManager(
-          _db, _db.geJuDeletionRecordsTable);
+        _db,
+        _db.geJuDeletionRecordsTable,
+      );
   $$GeJuSchoolsTableTableTableManager get geJuSchoolsTable =>
       $$GeJuSchoolsTableTableTableManager(_db, _db.geJuSchoolsTable);
 }

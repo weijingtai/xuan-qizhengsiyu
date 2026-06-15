@@ -8,27 +8,39 @@ part of 'panel_system_dateset.dart';
 
 PanelSystemDataSet _$PanelSystemDataSetFromJson(Map<String, dynamic> json) =>
     PanelSystemDataSet(
-      name: json['name'] as String,
-      calenderName: json['calenderName'] as String,
-      features: json['features'] as String,
-      coordinateSystem: $enumDecode(
-          _$CelestialCoordinateSystemEnumMap, json['coordinateSystem']),
-      panelSystemType:
-          $enumDecode(_$PanelSystemTypeEnumMap, json['panelSystemType']),
-      constellationSystemType: $enumDecode(
-          _$ConstellationSystemTypeEnumMap, json['constellationSystemType']),
-      originPoint:
-          EnteredInfo.fromJson(json['originPoint'] as Map<String, dynamic>),
-      originPointJieQi:
-          $enumDecode(_$TwentyFourJieQiEnumMap, json['originPointJieQi']),
-      descriptionList: (json['descriptionList'] as List<dynamic>)
-          .map((e) => e as String)
-          .toList(),
-    )..starInnGongDegreeMap =
+        name: json['name'] as String,
+        calenderName: json['calenderName'] as String,
+        features: json['features'] as String,
+        coordinateSystem: $enumDecode(
+          _$CelestialCoordinateSystemEnumMap,
+          json['coordinateSystem'],
+        ),
+        panelSystemType: $enumDecode(
+          _$PanelSystemTypeEnumMap,
+          json['panelSystemType'],
+        ),
+        constellationSystemType: $enumDecode(
+          _$ConstellationSystemTypeEnumMap,
+          json['constellationSystemType'],
+        ),
+        originPoint: EnteredInfo.fromJson(
+          json['originPoint'] as Map<String, dynamic>,
+        ),
+        originPointJieQi: $enumDecode(
+          _$TwentyFourJieQiEnumMap,
+          json['originPointJieQi'],
+        ),
+        descriptionList: (json['descriptionList'] as List<dynamic>)
+            .map((e) => e as String)
+            .toList(),
+      )
+      ..starInnGongDegreeMap =
           (json['starInnGongDegreeMap'] as Map<String, dynamic>).map(
-        (k, e) => MapEntry($enumDecode(_$Enum28ConstellationsEnumMap, k),
-            ConstellationGongDegreeInfo.fromJson(e as Map<String, dynamic>)),
-      );
+            (k, e) => MapEntry(
+              $enumDecode(_$Enum28ConstellationsEnumMap, k),
+              ConstellationGongDegreeInfo.fromJson(e as Map<String, dynamic>),
+            ),
+          );
 
 Map<String, dynamic> _$PanelSystemDataSetToJson(PanelSystemDataSet instance) =>
     <String, dynamic>{
@@ -43,26 +55,27 @@ Map<String, dynamic> _$PanelSystemDataSetToJson(PanelSystemDataSet instance) =>
       'originPoint': instance.originPoint,
       'originPointJieQi': _$TwentyFourJieQiEnumMap[instance.originPointJieQi]!,
       'descriptionList': instance.descriptionList,
-      'starInnGongDegreeMap': instance.starInnGongDegreeMap
-          .map((k, e) => MapEntry(_$Enum28ConstellationsEnumMap[k]!, e)),
+      'starInnGongDegreeMap': instance.starInnGongDegreeMap.map(
+        (k, e) => MapEntry(_$Enum28ConstellationsEnumMap[k]!, e),
+      ),
     };
 
 const _$CelestialCoordinateSystemEnumMap = {
-  CelestialCoordinateSystem.ecliptic: '黄道制',
-  CelestialCoordinateSystem.equatorial: '赤道制',
-  CelestialCoordinateSystem.skyEquatorial: '天赤道制',
-  CelestialCoordinateSystem.pseudoEcliptic: '似黄道恒星制',
+  CelestialCoordinateSystem.Ecliptic: '黄道制',
+  CelestialCoordinateSystem.Equatorial: '赤道制',
+  CelestialCoordinateSystem.SkyEquatorial: '天赤道制',
+  CelestialCoordinateSystem.PseudoEcliptic: '似黄道恒星制',
 };
 
 const _$PanelSystemTypeEnumMap = {
-  PanelSystemType.tropical: '回归制',
-  PanelSystemType.sidereal: '恒星制',
+  PanelSystemType.Tropical: '回归制',
+  PanelSystemType.Sidereal: '恒星制',
 };
 
 const _$ConstellationSystemTypeEnumMap = {
-  ConstellationSystemType.classical: '古宿制',
-  ConstellationSystemType.adjustedClassical: '矫正古宿制',
-  ConstellationSystemType.modern: '今宿制',
+  ConstellationSystemType.Classical: '古宿制',
+  ConstellationSystemType.AdjustedClassical: '矫正古宿制',
+  ConstellationSystemType.Modern: '今宿制',
 };
 
 const _$TwentyFourJieQiEnumMap = {

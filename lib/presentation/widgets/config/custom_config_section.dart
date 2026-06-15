@@ -48,9 +48,9 @@ class _CustomConfigSectionState extends State<CustomConfigSection> {
 
     // 初始化配置
     _coordinateSystem = widget.initialConfig?.celestialCoordinateSystem ??
-        CelestialCoordinateSystem.ecliptic;
+        CelestialCoordinateSystem.Ecliptic;
     _panelSystem =
-        widget.initialConfig?.panelSystemType ?? PanelSystemType.tropical;
+        widget.initialConfig?.panelSystemType ?? PanelSystemType.Tropical;
     _classicBook = ["七政四余星道要诀"]; // 暂时硬编码，因为PanelConfig暂时不支持
     // _showGods = widget.initialConfig?.sh ?? true;
     // _showPalaces = widget.initialConfig?.showPalaces ?? true;
@@ -106,7 +106,7 @@ class _CustomConfigSectionState extends State<CustomConfigSection> {
                     child: _buildRadioTile(
                       title: '黄道制',
                       subtitle: '以黄道十二宫为基础',
-                      value: CelestialCoordinateSystem.ecliptic,
+                      value: CelestialCoordinateSystem.Ecliptic,
                       groupValue: _coordinateSystem,
                       onChanged: (value) {
                         setState(() {
@@ -120,7 +120,7 @@ class _CustomConfigSectionState extends State<CustomConfigSection> {
                     child: _buildRadioTile(
                       title: '赤道制',
                       subtitle: '以赤道十二宫为基础',
-                      value: CelestialCoordinateSystem.equatorial,
+                      value: CelestialCoordinateSystem.Equatorial,
                       groupValue: _coordinateSystem,
                       onChanged: (value) {
                         setState(() {
@@ -161,7 +161,7 @@ class _CustomConfigSectionState extends State<CustomConfigSection> {
                     child: _buildRadioTile(
                       title: '回归制',
                       subtitle: '春分点为起点',
-                      value: PanelSystemType.tropical,
+                      value: PanelSystemType.Tropical,
                       groupValue: _panelSystem,
                       onChanged: (value) {
                         setState(() {
@@ -175,7 +175,7 @@ class _CustomConfigSectionState extends State<CustomConfigSection> {
                     child: _buildRadioTile(
                       title: '恒星制',
                       subtitle: '以实际星座为基础',
-                      value: PanelSystemType.sidereal,
+                      value: PanelSystemType.Sidereal,
                       groupValue: _panelSystem,
                       onChanged: (value) {
                         setState(() {

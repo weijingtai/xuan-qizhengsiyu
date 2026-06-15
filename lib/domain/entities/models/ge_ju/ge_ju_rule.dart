@@ -253,8 +253,8 @@ const _$GeJuScopeEnumMap = {
 };
 
 const _$CelestialCoordinateSystemEnumMap = {
-  CelestialCoordinateSystem.ecliptic: '黄道制',
-  CelestialCoordinateSystem.equatorial: '赤道制',
-  CelestialCoordinateSystem.skyEquatorial: '天赤道制',
-  CelestialCoordinateSystem.pseudoEcliptic: '似黄道恒星制',
+  CelestialCoordinateSystem.Ecliptic: '黄道制',
+  CelestialCoordinateSystem.Equatorial: '赤道制',
+  CelestialCoordinateSystem.SkyEquatorial: '天赤道制',
+  CelestialCoordinateSystem.PseudoEcliptic: '似黄道恒星制',
 };

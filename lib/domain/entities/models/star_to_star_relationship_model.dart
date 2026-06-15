@@ -1,5 +1,5 @@
 import 'package:metaphysics_core/enums.dart';
-import 'package:flutter/foundation.dart';
+import 'package:collection/collection.dart' show SetEquality;
 import 'package:qizhengsiyu/enums/enum_twelve_gong.dart';
 
 import 'eleven_stars_info.dart';
@@ -256,7 +256,7 @@ class StarToStarRelationshipModel {
       throw ArgumentError('星体集合必须包含11颗星体，当前包含 ${starsSet.length} 颗');
     }
     // 验证是否为全部星体
-    if (setEquals(verifyStarEnum, EnumStars.values.toSet())) {
+    if (verifyStarEnum.length == EnumStars.values.length) {
       throw ArgumentError('星体集合必须包含所有11颗星体');
     }
     // 进行排序，确保顺序为 日、月、五星、四余

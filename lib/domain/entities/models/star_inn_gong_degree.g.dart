@@ -7,28 +7,30 @@ part of 'star_inn_gong_degree.dart';
 // **************************************************************************
 
 ConstellationGongDegreeInfo _$ConstellationGongDegreeInfoFromJson(
-        Map<String, dynamic> json) =>
-    ConstellationGongDegreeInfo(
-      starType: $enumDecode(_$StarPanelTypeEnumMap, json['starType']),
-      starXiu: $enumDecode(_$Enum28ConstellationsEnumMap, json['starXiu']),
-      degreeStartAt: (json['degreeStartAt'] as num).toDouble(),
-      totalDegree: (json['totalDegree'] as num).toDouble(),
-      startAtGongDegree: GongDegree.fromJson(
-          json['startAtGongDegree'] as Map<String, dynamic>),
-      endAtGongDegree:
-          GongDegree.fromJson(json['endAtGongDegree'] as Map<String, dynamic>),
-    );
+  Map<String, dynamic> json,
+) => ConstellationGongDegreeInfo(
+  starType: $enumDecode(_$StarPanelTypeEnumMap, json['starType']),
+  starXiu: $enumDecode(_$Enum28ConstellationsEnumMap, json['starXiu']),
+  degreeStartAt: (json['degreeStartAt'] as num).toDouble(),
+  totalDegree: (json['totalDegree'] as num).toDouble(),
+  startAtGongDegree: GongDegree.fromJson(
+    json['startAtGongDegree'] as Map<String, dynamic>,
+  ),
+  endAtGongDegree: GongDegree.fromJson(
+    json['endAtGongDegree'] as Map<String, dynamic>,
+  ),
+);
 
 Map<String, dynamic> _$ConstellationGongDegreeInfoToJson(
-        ConstellationGongDegreeInfo instance) =>
-    <String, dynamic>{
-      'starType': _$StarPanelTypeEnumMap[instance.starType]!,
-      'starXiu': _$Enum28ConstellationsEnumMap[instance.starXiu]!,
-      'degreeStartAt': instance.degreeStartAt,
-      'startAtGongDegree': instance.startAtGongDegree,
-      'endAtGongDegree': instance.endAtGongDegree,
-      'totalDegree': instance.totalDegree,
-    };
+  ConstellationGongDegreeInfo instance,
+) => <String, dynamic>{
+  'starType': _$StarPanelTypeEnumMap[instance.starType]!,
+  'starXiu': _$Enum28ConstellationsEnumMap[instance.starXiu]!,
+  'degreeStartAt': instance.degreeStartAt,
+  'startAtGongDegree': instance.startAtGongDegree,
+  'endAtGongDegree': instance.endAtGongDegree,
+  'totalDegree': instance.totalDegree,
+};
 
 const _$StarPanelTypeEnumMap = {
   StarPanelType.ZodiacTropicalOriginalClassicStarsInnSystemMapper: '黄道回归制古宿',

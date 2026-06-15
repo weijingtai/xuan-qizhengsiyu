@@ -1,12 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_school.dart';
-import 'package:qizhengsiyu/domain/services/ge_ju_school_service.dart';
+import 'package:qizhengsiyu/domain/services/ge_ju_school_service_adapter.dart';
 
 /// 流派列表 ViewModel
 class GeJuSchoolListViewModel extends ChangeNotifier {
-  final GeJuSchoolService _schoolService;
+  final GeJuSchoolServiceAdapter _schoolService;
 
-  GeJuSchoolListViewModel({required GeJuSchoolService schoolService})
+  GeJuSchoolListViewModel({required GeJuSchoolServiceAdapter schoolService})
       : _schoolService = schoolService;
 
   List<GeJuSchool> _schools = [];

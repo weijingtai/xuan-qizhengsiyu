@@ -170,21 +170,6 @@ class CalculateFateDongWeiUseCase {
 
   /// 验证输入参数
   bool _validateParams(CalculateFateDongWeiParams params) {
-    // 检查身命模型是否为空
-    if (params.bodyLifeModel == null) {
-      return false;
-    }
-
-    // 检查命宫信息是否完整
-    if (params.bodyLifeModel.lifeGongInfo == null) {
-      return false;
-    }
-
-    // 检查身宫信息是否完整
-    if (params.bodyLifeModel.bodyGongInfo == null) {
-      return false;
-    }
-
     return true;
   }
 }

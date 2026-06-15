@@ -2,7 +2,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:metaphysics_core/enums.dart';
 import 'package:metaphysics_core/models/shen_sha_tian_gan.dart';
 import 'package:metaphysics_core/models/shen_sha_gan_zhi.dart';
-import 'package:metaphysics_core/models/shen_sha_di_zhi.dart';
 import 'package:metaphysics_core/models/shen_sha_bundled.dart';
 import 'package:qizhengsiyu/domain/entities/models/di_zhi_shen_sha.dart';
 import 'package:qizhengsiyu/domain/entities/models/hua_yao.dart';
@@ -22,24 +21,43 @@ import 'package:qizhengsiyu/domain/services/shen_sha_service.dart';
 import 'package:qizhengsiyu/domain/services/hua_yao_service.dart';
 import 'package:qizhengsiyu/domain/usecases/calculate_qizheng_base_panel_usecase.dart';
 import 'package:qizhengsiyu/enums/enum_twelve_gong.dart';
-import 'package:qizhengsiyu/enums/enum_panel_system_type.dart';
+import 'package:qizhengsiyu/enums/enum_hua_yao_shen_sha.dart';
 import 'package:qizhengsiyu/enums/enum_settle_life_body.dart';
-import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest_all.dart' as tz_data;
+
+List<BundledShenSha> _fakeBundledShenSha() {
+  return [
+    BundledShenSha(BundledShenShaType.afterJia, '红鸾', JiXiongEnum.JI, 0, <String>[], <String>[]),
+  ];
+}
+
+List<OtherShenSha> _fakeOtherShenSha() {
+  final names = ['斗杓', '卦气', '禄卦', '岁殿', '月廉'];
+  return names
+      .map((n) => OtherShenSha(n, JiXiongEnum.JI, <String>[], <String>[]))
+      .toList();
+}
 
 class FakeShenShaRepository implements ShenShaRepository {
   @override Future<List<TianGanShenSha>> getTianGanShenSha() async => const [];
   @override Future<List<YearDiZhiShenSha>> getYearDiZhiShenSha() async => const [];
   @override Future<List<MonthDiZhiShenSha>> getMonthDiZhiShenSha() async => const [];
   @override Future<List<GanZhiShenSha>> getGanZhiShenSha() async => const [];
-  @override Future<List<BundledShenSha>> getBundledShenSha() async => const [];
-  @override Future<List<OtherShenSha>> getOtherShenSha() async => const [];
+  @override Future<List<BundledShenSha>> getBundledShenSha() async => _fakeBundledShenSha();
+  @override Future<List<OtherShenSha>> getOtherShenSha() async => _fakeOtherShenSha();
+}
+
+List<OthersHuaYao> _fakeOthersHuaYao() {
+  final names = ['科甲', '天经', '地纬', '天元禄', '人元禄', '地元禄', '职元', '局主', '马元', '寿元'];
+  return names
+      .map((n) => OthersHuaYao(n, JiXiongEnum.JI, <String>[], <String>[], ShenShaType.Others))
+      .toList();
 }
 
 class FakeHuaYaoRepository implements HuaYaoRepository {
   @override Future<List<TianGanHuaYao>> getTianGanHuaYao() async => const [];
   @override Future<List<DiZhiHuaYao>> getDiZhiHuaYao() async => const [];
-  @override Future<List<OthersHuaYao>> getOthersHuaYao() async => const [];
+  @override Future<List<OthersHuaYao>> getOthersHuaYao() async => _fakeOthersHuaYao();
 }
 
 ZhouTianModel _eclipticModel() {

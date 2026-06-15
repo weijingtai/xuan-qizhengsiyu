@@ -12,6 +12,10 @@ class QiZhengSiYuStorageDependencies {
     required this.geJuSchoolService,
     required this.shenSha,
     required this.huaYao,
+    required this.starPositionStatus,
+    required this.historicalEphemeris,
+    required this.ephemerisResource,
+    required this.zhouTianModelRepository,
   });
 
   final IQiZhengSiYuPanRepository panRepository;
@@ -20,4 +24,8 @@ class QiZhengSiYuStorageDependencies {
   final GeJuSchoolServicePort geJuSchoolService;
   final QiZhengShenShaRepository shenSha;
   final QiZhengHuaYaoRepository huaYao;
+  final QiZhengStarPositionStatusRepository starPositionStatus;
+  final QiZhengHistoricalEphemerisRepository historicalEphemeris;
+  final QiZhengEphemerisResourceRepository ephemerisResource;
+  final QiZhengZhouTianModelRepository zhouTianModelRepository;
 }

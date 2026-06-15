@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'package:repository_interface_qizhengsiyu/repository_interface_qizhengsiyu.dart';
 import 'package:metaphysics_core/models/divination_datetime.dart';
 import 'package:qizhengsiyu/domain/entities/models/panel_config.dart';
 
@@ -46,6 +48,35 @@ class QiZhengSiYuPanEntity {
           divinationDatetimeModel ?? this.divinationDatetimeModel,
       panelConfig: panelConfig ?? this.panelConfig,
       panelModel: panelModel ?? this.panelModel,
+    );
+  }
+
+  QiZhengSiYuPanContract toContract() {
+    return QiZhengSiYuPanContract(
+      uuid: uuid,
+      createdAt: createdAt,
+      lastUpdatedAt: lastUpdatedAt,
+      deletedAt: deletedAt,
+      divinationRequestInfoUuid: divinationRequestInfoUuid,
+      divinationDatetimeJson: jsonEncode(divinationDatetimeModel.toJson()),
+      panelConfigJson: jsonEncode(panelConfig.toJson()),
+      panelModelJson: jsonEncode(panelModel.toJson()),
+    );
+  }
+
+  factory QiZhengSiYuPanEntity.fromContract(QiZhengSiYuPanContract contract) {
+    return QiZhengSiYuPanEntity(
+      uuid: contract.uuid,
+      createdAt: contract.createdAt,
+      lastUpdatedAt: contract.lastUpdatedAt,
+      deletedAt: contract.deletedAt,
+      divinationRequestInfoUuid: contract.divinationRequestInfoUuid,
+      divinationDatetimeModel: DivinationDatetimeModel.fromJson(
+          jsonDecode(contract.divinationDatetimeJson) as Map<String, dynamic>),
+      panelConfig: BasePanelConfig.fromJson(
+          jsonDecode(contract.panelConfigJson) as Map<String, dynamic>),
+      panelModel: BasePanelModel.fromJson(
+          jsonDecode(contract.panelModelJson) as Map<String, dynamic>),
     );
   }
 }

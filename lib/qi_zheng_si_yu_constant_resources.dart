@@ -1156,9 +1156,9 @@ class PanelCelesticalInfo {
 
   /// 黄道恒星古宿制
   static PanelCelesticalInfo eclipticSiderealClassical = PanelCelesticalInfo(
-    eclipticEquatorialType: CelestialCoordinateSystem.ecliptic,
-    siderealTropicalSystem: PanelSystemType.sidereal,
-    constellationCorrectionType: ConstellationSystemType.classical,
+    eclipticEquatorialType: CelestialCoordinateSystem.Ecliptic,
+    siderealTropicalSystem: PanelSystemType.Sidereal,
+    constellationCorrectionType: ConstellationSystemType.Classical,
     starPanelType:
         StarPanelType.ZodiacTropicalOriginalClassicStarsInnSystemMapper,
     name: "黄道恒星古宿制",
@@ -1168,9 +1168,9 @@ class PanelCelesticalInfo {
   /// 黄道回归矫正古宿制
   static PanelCelesticalInfo eclipticTropicalCorrectedClassical =
       PanelCelesticalInfo(
-    eclipticEquatorialType: CelestialCoordinateSystem.ecliptic,
-    siderealTropicalSystem: PanelSystemType.tropical,
-    constellationCorrectionType: ConstellationSystemType.adjustedClassical,
+    eclipticEquatorialType: CelestialCoordinateSystem.Ecliptic,
+    siderealTropicalSystem: PanelSystemType.Tropical,
+    constellationCorrectionType: ConstellationSystemType.AdjustedClassical,
     starPanelType:
         StarPanelType.ZodiacTropicalCorrectedClassicStarsInnSystemMapper,
     name: "黄道回归矫正古宿制",
@@ -1179,9 +1179,9 @@ class PanelCelesticalInfo {
 
   /// 黄道回归今宿制
   static final PanelCelesticalInfo eclipticTropicalModern = PanelCelesticalInfo(
-    eclipticEquatorialType: CelestialCoordinateSystem.ecliptic,
-    siderealTropicalSystem: PanelSystemType.tropical,
-    constellationCorrectionType: ConstellationSystemType.modern,
+    eclipticEquatorialType: CelestialCoordinateSystem.Ecliptic,
+    siderealTropicalSystem: PanelSystemType.Tropical,
+    constellationCorrectionType: ConstellationSystemType.Modern,
     starPanelType: StarPanelType.ZodiacTropicalModernStarsInnSystemMapper,
     name: "黄道回归今宿制",
     description: "采用现代天文观测数据，以2024年1月1日为基准时间，角宿位于戌宫6.5度起",
@@ -1190,9 +1190,9 @@ class PanelCelesticalInfo {
 
   /// 赤道恒星古宿制
   static PanelCelesticalInfo equatorialSiderealClassical = PanelCelesticalInfo(
-    eclipticEquatorialType: CelestialCoordinateSystem.equatorial,
-    siderealTropicalSystem: PanelSystemType.sidereal,
-    constellationCorrectionType: ConstellationSystemType.classical,
+    eclipticEquatorialType: CelestialCoordinateSystem.Equatorial,
+    siderealTropicalSystem: PanelSystemType.Sidereal,
+    constellationCorrectionType: ConstellationSystemType.Classical,
     starPanelType:
         StarPanelType.ZodiacTropicalOriginalClassicStarsInnSystemMapper,
     name: "赤道恒星古宿制",
@@ -1209,21 +1209,21 @@ class PanelCelesticalInfo {
     required PanelSystemType siderealTropicalSystem,
     required ConstellationSystemType correctionType,
   }) {
-    if (eclipticEquatorialType == CelestialCoordinateSystem.ecliptic) {
-      if (siderealTropicalSystem == PanelSystemType.sidereal) {
-        if (correctionType == ConstellationSystemType.classical) {
+    if (eclipticEquatorialType == CelestialCoordinateSystem.Ecliptic) {
+      if (siderealTropicalSystem == PanelSystemType.Sidereal) {
+        if (correctionType == ConstellationSystemType.Classical) {
           return eclipticSiderealClassical;
         }
-      } else if (siderealTropicalSystem == PanelSystemType.tropical) {
-        if (correctionType == ConstellationSystemType.adjustedClassical) {
+      } else if (siderealTropicalSystem == PanelSystemType.Tropical) {
+        if (correctionType == ConstellationSystemType.AdjustedClassical) {
           return eclipticTropicalCorrectedClassical;
-        } else if (correctionType == ConstellationSystemType.modern) {
+        } else if (correctionType == ConstellationSystemType.Modern) {
           return eclipticTropicalModern;
         }
       }
-    } else if (eclipticEquatorialType == CelestialCoordinateSystem.equatorial) {
-      if (siderealTropicalSystem == PanelSystemType.sidereal) {
-        if (correctionType == ConstellationSystemType.classical) {
+    } else if (eclipticEquatorialType == CelestialCoordinateSystem.Equatorial) {
+      if (siderealTropicalSystem == PanelSystemType.Sidereal) {
+        if (correctionType == ConstellationSystemType.Classical) {
           return equatorialSiderealClassical;
         }
       }
@@ -1305,36 +1305,36 @@ enum StarPanelType {
   static Map<Enum28Constellations, ConstellationGongDegreeInfo>
       getStarXiuMapper(PanelCelesticalInfo panelCelesticalInfo) {
     if (panelCelesticalInfo.eclipticEquatorialType ==
-        CelestialCoordinateSystem.ecliptic) {
+        CelestialCoordinateSystem.Ecliptic) {
       if (panelCelesticalInfo.siderealTropicalSystem ==
-              PanelSystemType.sidereal ||
+              PanelSystemType.Sidereal ||
           panelCelesticalInfo.constellationCorrectionType ==
-              ConstellationSystemType.classical) {
+              ConstellationSystemType.Classical) {
         throw UnimplementedError(
             "安身立命时，确定命度。位置的命盘制式，[赤道制、黄道制、似黄道回归制]，当前进提供<黄道制>没有黄道恒星制");
       } else {
         if (panelCelesticalInfo.constellationCorrectionType ==
-            ConstellationSystemType.classical) {
+            ConstellationSystemType.Classical) {
           /// 古宿
           return QiZhengSiYuConstantResources
               .ZodiacTropicalOriginalClassicStarsInnSystemMapper;
         } else if (panelCelesticalInfo.constellationCorrectionType ==
-            ConstellationSystemType.adjustedClassical) {
+            ConstellationSystemType.AdjustedClassical) {
           /// 古宿矫正
           return QiZhengSiYuConstantResources
               .ZodiacTropicalCorrectedClassicStarsInnSystemMapper;
         } else if (panelCelesticalInfo.constellationCorrectionType ==
-            ConstellationSystemType.modern) {
+            ConstellationSystemType.Modern) {
           /// 今宿
           return QiZhengSiYuConstantResources
               .ZodiacTropicalModernStarsInnSystemMapper;
         }
       }
     } else if (panelCelesticalInfo.eclipticEquatorialType ==
-        CelestialCoordinateSystem.equatorial) {
+        CelestialCoordinateSystem.Equatorial) {
       throw UnimplementedError("安身立命时，确定命度。当前并没有提供<赤道制>");
     } else if (panelCelesticalInfo.eclipticEquatorialType ==
-        CelestialCoordinateSystem.pseudoEcliptic) {
+        CelestialCoordinateSystem.PseudoEcliptic) {
       throw UnimplementedError("安身立命时，确定命度。当前并没有提供<似黄道回归制>");
     } else {
       throw UnimplementedError(

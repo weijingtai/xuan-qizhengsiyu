@@ -13,6 +13,7 @@ import 'package:qizhengsiyu/domain/entities/models/zhou_tian_model.dart';
 import 'package:qizhengsiyu/domain/managers/zhou_tian_calculator.dart';
 import 'package:qizhengsiyu/domain/managers/zhou_tian_model_manager.dart';
 import 'package:qizhengsiyu/enums/enum_panel_system_type.dart';
+import 'package:repository_interface_qizhengsiyu/repository_interface_qizhengsiyu.dart';
 import 'package:qizhengsiyu/enums/enum_settle_life_body.dart';
 import 'package:qizhengsiyu/enums/enum_twelve_gong.dart';
 import 'package:metaphysics_core/models/year_month.dart';
@@ -22,7 +23,13 @@ import 'package:qizhengsiyu/xing_xian/fei_xian_calculator.dart';
 import 'package:qizhengsiyu/xing_xian/fei_xian_detail_palace.dart';
 import 'package:timezone/data/latest.dart' as tz;
 
+class _FakeZhouTianRepo implements QiZhengZhouTianModelRepository {
+  @override
+  Future<List<QiZhengZhouTianModelContract>> loadBuiltInZhouTianModels() async => const [];
+}
+
 void main() {
+  late ZhouTianModelManager zhouTianModelMgr;
   late PanelConfig panelConfig = PanelConfig(
     panelSystemType: PanelSystemType.Tropical,
     celestialCoordinateSystem: CelestialCoordinateSystem.Ecliptic,
@@ -87,16 +94,17 @@ void main() {
 
     try {
       final projectRoot = Directory.current.path;
-      final projectAssetsPath = "$projectRoot/../assets/qizhengsiyu";
+      final projectAssetsPath = "$projectRoot/example/assets/qizhengsiyu";
 
-      await ZhouTianModelManager.instance.loadFromFiles([
+      zhouTianModelMgr = ZhouTianModelManager(repository: _FakeZhouTianRepo());
+      await zhouTianModelMgr.loadFromFiles([
         "$projectAssetsPath/ecliptic_tropical_classical_adjusted.json",
         "$projectAssetsPath/ecliptic_tropical_classical.json",
         "$projectAssetsPath/ecliptic_tropical_morden.json",
       ]);
-      // ZhouTianModelManager.instance.setModelsForTesting(testMapper);
+      // zhouTianModelMgr.setModelsForTesting(testMapper);
 
-      zhouTianModel = ZhouTianModelManager.instance.getZhouTianModelBy(
+      zhouTianModel = zhouTianModelMgr.getZhouTianModelBy(
         panelConfig,
       );
     } catch (e) {
@@ -107,7 +115,7 @@ void main() {
       final testJsonFile = "$projectRoot/test/resources/base_panel_model.json";
       final basePanelJsonStr = await File(testJsonFile).readAsString();
       basePanel = BasePanelModel.fromJson(jsonDecode(basePanelJsonStr));
-      // ZhouTianModelManager.instance.setModelsForTesting(testMapper);
+      // zhouTianModelMgr.setModelsForTesting(testMapper);
     } catch (e) {
       print("load base_panel_model.json encounter error :$e");
     }
@@ -115,10 +123,10 @@ void main() {
 
   group("", () {
     test("获取对应的tiZhouTianModel, 黄道回归古宿", () async {
-      ZhouTianModel? zhouTianModel = ZhouTianModelManager.instance
+      ZhouTianModel? zhouTianModel = zhouTianModelMgr
           .getZhouTianModelBy(panelConfig);
       expect(zhouTianModel, isNotNull);
-      expect(zhouTianModel!.panelSystemType, PanelSystemType.tropical);
+      expect(zhouTianModel!.panelSystemType, PanelSystemType.Tropical);
       expect(
         zhouTianModel.constellationSystemType,
         ConstellationSystemType.Classical,
@@ -130,7 +138,7 @@ void main() {
   group("calculator", () {
     test("test", skip: true, () {
       final calculator = ZhouTianCalculator(
-        zhouTianModel: ZhouTianModelManager.instance.getZhouTianModelBy(
+        zhouTianModel: zhouTianModelMgr.getZhouTianModelBy(
           panelConfig,
         ),
       );
@@ -152,7 +160,7 @@ void main() {
     test("计算洞微大限 v3", skip: true, () {
       try {
         final zhouTianCalculator = ZhouTianCalculator(
-          zhouTianModel: ZhouTianModelManager.instance.getZhouTianModelBy(
+          zhouTianModel: zhouTianModelMgr.getZhouTianModelBy(
             panelConfig,
           ),
         );
@@ -160,7 +168,7 @@ void main() {
         final palaceMapper = zhouTianCalculator.calculatePalaceAngles();
 
         final dongWeiCalculator = DongWeiDaXianCalculator(
-          zhouTianModel: ZhouTianModelManager.instance.getZhouTianModelBy(
+          zhouTianModel: zhouTianModelMgr.getZhouTianModelBy(
             panelConfig,
           ), // 你的静态周天模型
           basePanel: basePanel,
@@ -203,7 +211,7 @@ void main() {
       );
 
       final feiXianCalculator = FeiXianCalculator(
-        zhouTianModel: ZhouTianModelManager.instance.getZhouTianModelBy(
+        zhouTianModel: zhouTianModelMgr.getZhouTianModelBy(
           panelConfig,
         ),
         daxianPalaceOrder: daxianOrder,
@@ -237,7 +245,7 @@ void main() {
       );
 
       final feiXianCalculator = FeiXianCalculator(
-        zhouTianModel: ZhouTianModelManager.instance.getZhouTianModelBy(
+        zhouTianModel: zhouTianModelMgr.getZhouTianModelBy(
           panelConfig,
         ),
         daxianPalaceOrder: daxianOrder,
@@ -271,7 +279,7 @@ void main() {
       );
 
       final feiXianCalculator = FeiXianCalculator(
-        zhouTianModel: ZhouTianModelManager.instance.getZhouTianModelBy(
+        zhouTianModel: zhouTianModelMgr.getZhouTianModelBy(
           panelConfig,
         ),
         daxianPalaceOrder: daxianOrder,
@@ -310,7 +318,7 @@ void main() {
       );
 
       final feiXianCalculator = FeiXianCalculator(
-        zhouTianModel: ZhouTianModelManager.instance.getZhouTianModelBy(
+        zhouTianModel: zhouTianModelMgr.getZhouTianModelBy(
           panelConfig,
         ),
         daxianPalaceOrder: daxianOrder,
@@ -350,7 +358,7 @@ void main() {
       );
 
       final feiXianCalculator = FeiXianCalculator(
-        zhouTianModel: ZhouTianModelManager.instance.getZhouTianModelBy(
+        zhouTianModel: zhouTianModelMgr.getZhouTianModelBy(
           panelConfig,
         ),
         daxianPalaceOrder: daxianOrder,
@@ -390,7 +398,7 @@ void main() {
       );
 
       final feiXianCalculator = FeiXianCalculator(
-        zhouTianModel: ZhouTianModelManager.instance.getZhouTianModelBy(
+        zhouTianModel: zhouTianModelMgr.getZhouTianModelBy(
           panelConfig,
         ),
         daxianPalaceOrder: daxianOrder,
@@ -430,7 +438,7 @@ void main() {
       );
 
       final feiXianCalculator = FeiXianCalculator(
-        zhouTianModel: ZhouTianModelManager.instance.getZhouTianModelBy(
+        zhouTianModel: zhouTianModelMgr.getZhouTianModelBy(
           panelConfig,
         ),
         daxianPalaceOrder: daxianOrder,
@@ -470,7 +478,7 @@ void main() {
       );
 
       final feiXianCalculator = FeiXianCalculator(
-        zhouTianModel: ZhouTianModelManager.instance.getZhouTianModelBy(
+        zhouTianModel: zhouTianModelMgr.getZhouTianModelBy(
           panelConfig,
         ),
         daxianPalaceOrder: daxianOrder,
@@ -507,7 +515,7 @@ void main() {
       );
 
       final feiXianCalculator = FeiXianCalculator(
-        zhouTianModel: ZhouTianModelManager.instance.getZhouTianModelBy(
+        zhouTianModel: zhouTianModelMgr.getZhouTianModelBy(
           panelConfig,
         ),
         daxianPalaceOrder: daxianOrder,
@@ -550,7 +558,7 @@ void main() {
       );
 
       final feiXianCalculator = FeiXianCalculator(
-        zhouTianModel: ZhouTianModelManager.instance.getZhouTianModelBy(
+        zhouTianModel: zhouTianModelMgr.getZhouTianModelBy(
           panelConfig,
         ),
         daxianPalaceOrder: daxianOrder,

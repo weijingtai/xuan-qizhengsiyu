@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:math';
 
 import 'package:metaphysics_core/datamodel/datetime_divination_datamodel.dart';
 import 'package:metaphysics_core/datamodel/location.dart';
@@ -8,7 +7,6 @@ import 'package:metaphysics_core/enums.dart';
 import 'package:metaphysics_core/helpers/solar_lunar_datetime_helper.dart';
 import 'package:metaphysics_core/models/divination_datetime.dart';
 import 'package:metaphysics_core/models/divination_info_model.dart';
-import 'package:metaphysics_core/models/shen_sha.dart';
 import 'package:xuan_logger/xuan_logger.dart';
 import 'package:flutter/foundation.dart'; // 使用 @visibleForTesting
 import 'package:flutter/material.dart'; // ChangeNotifier 仍然需要
@@ -45,19 +43,8 @@ class BeautyPageViewModel extends ChangeNotifier {
   // static DivinationDatetimeModel? divinationDatetimeModel;
   ObserverDataModel? observer;
 
-  /// 紫气计算的基准时间点 (上海时区)。
-  /// 此计算方法基于特定术数规则，非标准天文计算。
-  static final tz.TZDateTime _ziQiBaseShangHaiTime =
-      tz.TZDateTime(tz.getLocation('Asia/Shanghai'), 2013, 4, 9, 2, 58);
   late final SaveCalculatedPanelUseCase saveCalculatedPanelUseCase;
   late final CalculateFateDongWeiUseCase calculateFateDongWeiUseCase;
-
-  /// 紫气每日运行角度 (度)。
-  /// 每24小时运行 02′07″，约等于 0.0352 度。
-  static const double _ziQiAnglePerDay = 0.0352;
-
-  /// 紫气每分钟运行角度 (度)。
-  static const double _ziQiAnglePerMinute = _ziQiAnglePerDay / (24 * 60);
 
   // MARK: - Star Data
 
@@ -525,53 +512,6 @@ class BeautyPageViewModel extends ChangeNotifier {
     await calculateDongWeiFate(bodyLifeModel: bodyLifeModel);
   }
 
-  /// 计算紫气在黄道坐标系中的位置。
-  /// 这个计算方法基于特定术数规则，非标准天文计算。
-  /// [datetime]: 计算紫气位置的时间 (UTC)。
-  /// 返回: 紫气在黄道上的角度 (度)。
-  double _calculateZiQi(DateTime datetime) {
-    // 将目标时间转换为上海时区，以便与基准时间比较
-    // 注意：Sweph计算使用UTC时间，但紫气基准是上海时间。
-    // 这里假设紫气的运行速度是相对于地球自转的相对速度，因此与本地时间差相关。
-    // 如果紫气运行速度是恒定的，与时区无关，则应直接使用UTC时间差。
-    // 原代码使用了UTC时间差与上海基准时间比较，这里沿用此逻辑，但需注意其合理性。
-    // 更严谨的做法可能是将datetime转换为tz.TZDateTime后再比较
-    // 但为了与 Sweph 计算的输入 (UTC DateTime) 一致，且原逻辑使用了UTC时间差，这里保留UTC时间差计算。
-
-    // 假设输入的 datetime 已经是 UTC 时间
-    final utcDateTime = datetime;
-    // 将上海基准时间转换为 UTC
-    final ziQiBaseUtcTime = _ziQiBaseShangHaiTime.toUtc();
-
-    if (utcDateTime.isAtSameMomentAs(ziQiBaseUtcTime)) {
-      return 0.0; // 在基准时间点，角度为 0
-    }
-
-    // 计算与基准时间的分钟差
-    var diffInMinutes = utcDateTime.isBefore(ziQiBaseUtcTime)
-        ? ziQiBaseUtcTime.difference(utcDateTime)
-        : utcDateTime.difference(ziQiBaseUtcTime);
-
-    // 计算运行角度
-    double result = diffInMinutes.inMinutes * _ziQiAnglePerMinute;
-
-    // 如果目标时间早于基准时间，角度应该倒退
-    if (utcDateTime.isBefore(ziQiBaseUtcTime)) {
-      result = -result;
-    }
-
-    // 规范化角度到 [0, 360) 范围
-    result = result % 360;
-    if (result < 0) {
-      result += 360;
-    }
-
-    // 保留小数点后两位
-    num factor = pow(10, 2);
-    result = ((result * factor).round() / factor);
-
-    return result;
-  }
 
   DivinationInfoModel? _divinationInfoModel;
 
@@ -777,86 +717,4 @@ class BeautyPageViewModel extends ChangeNotifier {
   }
 
   // MARK: - Data Loading
-
-  // _loadShenShaManager() and _loadHuaYaoManager() removed — managers are now injected via constructor.
-
-  // MARK: - New Calculation using Service
-
-  /// 使用 GenerateBasePanelService 计算星盘数据。
-  /// 这是新的计算流程，calculate 方法将调用此方法。
-  /// [calculateTime]: 需要计算星盘的时间 (UTC)。
-  /// 返回: BasePanelModel 包含计算出的星体角度和速度等基础信息。
-  Future<BasePanelModel> _calculatePanelWithService(
-      {required DateTime calculateTime}) async {
-    // 确保服务已初始化
-    if (baseObserverPositionNotifier.value == null) {
-      throw StateError(
-          'ViewModel not fully initialized before calling _calculatePanelWithService.');
-    }
-
-    // 1. 创建计算引擎
-    final engine = CalculationEngineFactory.create(panelConfig);
-
-    // 2. 获取周天模型定义
-    final ZhouTianModel zhouTianModel =
-        await engine.getSystemDefinition(panelConfig);
-
-    // 3. 计算星体位置
-    final observerPosition = baseObserverPositionNotifier.value!;
-    final starPositions = await engine.calculateStarPositions(
-      calculateTime,
-      observerPosition,
-      panelConfig,
-    );
-
-    // 4. 转换星体位置为 starAngleMapper
-    final Map<EnumStars, StarAngleSpeed> starAngleMapper = {};
-    for (var pos in starPositions) {
-      final rawInfo = pos.angleRawInfoSet.firstWhere(
-        (info) =>
-            info.panelSystemType == panelConfig.panelSystemType &&
-            info.coordinateSystem == panelConfig.celestialCoordinateSystem,
-        orElse: () => pos.angleRawInfoSet.first,
-      );
-      starAngleMapper[pos.starType] = StarAngleSpeed(
-        angle: rawInfo.angle,
-        speed: rawInfo.speed,
-      );
-    }
-
-    return _generateBasePanelService.calculate(
-      zhouTianModel: zhouTianModel,
-      starAngleMapper: starAngleMapper,
-    );
-  }
-
-  // late final App74Database _database;
-
-  // 在构造函数或初始化方法中初始化
-  // void _initializeUseCases() {
-  //   _database = App74Database();
-  //   _saveCalculatedPanelUseCase =
-  //       SaveCalculatedPanelUseCase(_database.basePanelDao);
-  // }
-
-  // 修改现有的计算方法
-  // Future<void> calculatePanel() async {
-  //   try {
-  //     basicPanelModel = await _generateBasePanelService.calculate();
-
-  //     // 保存计算结果到数据库
-  //     final savedUuid = await _saveCalculatedPanelUseCase.execute(
-  //       basicPanelModel: basicPanelModel,
-  //       panelConfig: panelConfig, // 需要传入当前的配置
-  //       observerPosition: observerPosition, // 需要传入当前的观测位置
-  //       divinationUuid: currentDivinationUuid, // 如果有的话
-  //       seekerUuid: currentSeekerUuid, // 如果有的话
-  //     );
-
-  //     print('面板数据已保存，UUID: $savedUuid');
-  //   } catch (e) {
-  //     print('保存面板数据失败: $e');
-  //     // 处理错误
-  //   }
-  // }
 }

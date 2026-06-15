@@ -1,0 +1,16 @@
+schema: spec-driven
+
+context: |
+  Project: xuan-qizhengsiyu
+  Stack: Flutter, Dart, Provider, repository-interface packages, xuan-storage assets/drift adapters.
+  Architecture goal: UI -> ViewModel -> UseCase -> repository-interface ports -> storage implementations.
+
+rules:
+  proposal:
+    - Include goals, non-goals, current evidence, and approval state.
+  design:
+    - Include machine-verifiable boundary scans for each affected layer.
+    - Include behavior preservation and rollback gates.
+  tasks:
+    - Keep phases independently verifiable.
+    - Do not delete legacy behavior before characterization tests pass.

@@ -8,10 +8,14 @@ part of 'star_angle_raw_info.dart';
 
 StarAngleRawInfo _$StarAngleRawInfoFromJson(Map<String, dynamic> json) =>
     StarAngleRawInfo(
-      panelSystemType:
-          $enumDecode(_$PanelSystemTypeEnumMap, json['panelSystemType']),
+      panelSystemType: $enumDecode(
+        _$PanelSystemTypeEnumMap,
+        json['panelSystemType'],
+      ),
       coordinateSystem: $enumDecode(
-          _$CelestialCoordinateSystemEnumMap, json['coordinateSystem']),
+        _$CelestialCoordinateSystemEnumMap,
+        json['coordinateSystem'],
+      ),
       angle: (json['angle'] as num).toDouble(),
       speed: (json['speed'] as num).toDouble(),
     );
@@ -26,13 +30,13 @@ Map<String, dynamic> _$StarAngleRawInfoToJson(StarAngleRawInfo instance) =>
     };
 
 const _$PanelSystemTypeEnumMap = {
-  PanelSystemType.tropical: '回归制',
-  PanelSystemType.sidereal: '恒星制',
+  PanelSystemType.Tropical: '回归制',
+  PanelSystemType.Sidereal: '恒星制',
 };
 
 const _$CelestialCoordinateSystemEnumMap = {
-  CelestialCoordinateSystem.ecliptic: '黄道制',
-  CelestialCoordinateSystem.equatorial: '赤道制',
-  CelestialCoordinateSystem.skyEquatorial: '天赤道制',
-  CelestialCoordinateSystem.pseudoEcliptic: '似黄道恒星制',
+  CelestialCoordinateSystem.Ecliptic: '黄道制',
+  CelestialCoordinateSystem.Equatorial: '赤道制',
+  CelestialCoordinateSystem.SkyEquatorial: '天赤道制',
+  CelestialCoordinateSystem.PseudoEcliptic: '似黄道恒星制',
 };

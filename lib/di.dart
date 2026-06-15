@@ -1,8 +1,10 @@
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
-import 'package:repository_interface_qizhengsiyu/repository_interface_qizhengsiyu.dart';
 import 'package:qizhengsiyu/qizhengsiyu_storage_dependencies.dart';
-import 'package:qizhengsiyu/data/contract_mappers/qizhengsiyu_contract_mappers.dart';
+import 'package:qizhengsiyu/domain/repositories/shen_sha_repository_adapter.dart';
+import 'package:qizhengsiyu/domain/repositories/hua_yao_repository_adapter.dart';
+import 'package:qizhengsiyu/domain/repositories/ge_ju_repository_adapter.dart';
+import 'package:qizhengsiyu/domain/services/ge_ju_school_service_adapter.dart';
 import 'package:qizhengsiyu/domain/repositories/ge_ju_product_repository.dart';
 import 'package:qizhengsiyu/domain/managers/zhou_tian_model_manager.dart';
 import 'package:qizhengsiyu/domain/managers/shen_sha_manager.dart';
@@ -12,7 +14,6 @@ import 'package:qizhengsiyu/domain/repositories/hua_yao_repository.dart';
 import 'package:qizhengsiyu/domain/services/shen_sha_service.dart';
 import 'package:qizhengsiyu/domain/services/hua_yao_service.dart';
 import 'package:qizhengsiyu/presentation/viewmodels/qi_zheng_si_yu_viewmodel.dart';
-import 'package:metaphysics_core/enums.dart';
 import 'package:qizhengsiyu/domain/entities/models/panel_config.dart';
 import 'package:qizhengsiyu/domain/engines/calculation_engine_factory.dart';
 import 'package:qizhengsiyu/domain/engines/i_calculation_engine.dart';
@@ -174,7 +175,6 @@ List<SingleChildWidget> createProviders(QiZhengSiYuStorageDependencies deps) {
         calculateBasePanelUseCase: context.read<CalculateQiZhengBasePanelUseCase>(),
         evaluateGeJuUseCase: context.read<EvaluateQiZhengGeJuUseCase>(),
         buildTimelineUseCase: context.read<BuildQiZhengTimelineUseCase>(),
-        saveCalculatedPanelUseCase: context.read<SaveCalculatedPanelUseCase>(),
       ),
     ),
 

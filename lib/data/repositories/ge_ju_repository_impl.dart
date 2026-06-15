@@ -4,7 +4,7 @@ import 'package:repository_interface_qizhengsiyu/repository_interface_qizhengsiy
 import 'package:qizhengsiyu/data/datasources/local/daos/ge_ju_dao.dart';
 import 'package:qizhengsiyu/data/datasources/local/ge_ju_legacy_migrator.dart';
 import 'package:qizhengsiyu/data/datasources/local/ge_ju_local_data_source.dart';
-import 'package:qizhengsiyu/data/contract_mappers/qizhengsiyu_contract_mappers.dart';
+import 'package:qizhengsiyu/domain/repositories/ge_ju_repository_adapter.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_annotation.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_condition_set.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_deletion_record.dart';

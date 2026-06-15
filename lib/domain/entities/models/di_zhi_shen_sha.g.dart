@@ -18,7 +18,9 @@ MonthDiZhiShenSha _$MonthDiZhiShenShaFromJson(Map<String, dynamic> json) =>
           .toList(),
       (json['locationMapper'] as Map<String, dynamic>).map(
         (k, e) => MapEntry(
-            $enumDecode(_$DiZhiEnumMap, k), $enumDecode(_$DiZhiEnumMap, e)),
+          $enumDecode(_$DiZhiEnumMap, k),
+          $enumDecode(_$DiZhiEnumMap, e),
+        ),
       ),
     );
 
@@ -26,8 +28,9 @@ Map<String, dynamic> _$MonthDiZhiShenShaToJson(MonthDiZhiShenSha instance) =>
     <String, dynamic>{
       'name': instance.name,
       'jiXiong': _$JiXiongEnumEnumMap[instance.jiXiong]!,
-      'locationMapper': instance.locationMapper
-          .map((k, e) => MapEntry(_$DiZhiEnumMap[k]!, _$DiZhiEnumMap[e]!)),
+      'locationMapper': instance.locationMapper.map(
+        (k, e) => MapEntry(_$DiZhiEnumMap[k]!, _$DiZhiEnumMap[e]!),
+      ),
     };
 
 const _$JiXiongEnumEnumMap = {
@@ -68,7 +71,9 @@ YearDiZhiShenSha _$YearDiZhiShenShaFromJson(Map<String, dynamic> json) =>
           .toList(),
       (json['locationMapper'] as Map<String, dynamic>).map(
         (k, e) => MapEntry(
-            $enumDecode(_$DiZhiEnumMap, k), $enumDecode(_$DiZhiEnumMap, e)),
+          $enumDecode(_$DiZhiEnumMap, k),
+          $enumDecode(_$DiZhiEnumMap, e),
+        ),
       ),
     );
 
@@ -76,35 +81,36 @@ Map<String, dynamic> _$YearDiZhiShenShaToJson(YearDiZhiShenSha instance) =>
     <String, dynamic>{
       'name': instance.name,
       'jiXiong': _$JiXiongEnumEnumMap[instance.jiXiong]!,
-      'locationMapper': instance.locationMapper
-          .map((k, e) => MapEntry(_$DiZhiEnumMap[k]!, _$DiZhiEnumMap[e]!)),
+      'locationMapper': instance.locationMapper.map(
+        (k, e) => MapEntry(_$DiZhiEnumMap[k]!, _$DiZhiEnumMap[e]!),
+      ),
     };
 
 JiaZiShenSha _$JiaZiShenShaFromJson(Map<String, dynamic> json) => JiaZiShenSha(
-      json['name'] as String,
-      $enumDecode(_$JiXiongEnumEnumMap, json['jiXiong']),
-      (json['descriptionList'] as List<dynamic>)
-          .map((e) => e as String)
-          .toList(),
-      (json['locationDescriptionList'] as List<dynamic>)
-          .map((e) => e as String)
-          .toList(),
-      (json['locationMapper'] as Map<String, dynamic>).map(
-        (k, e) => MapEntry(
-            $enumDecode(_$JiaZiEnumMap, k),
-            (e as List<dynamic>)
-                .map((e) => $enumDecode(_$DiZhiEnumMap, e))
-                .toSet()),
-      ),
-    );
+  json['name'] as String,
+  $enumDecode(_$JiXiongEnumEnumMap, json['jiXiong']),
+  (json['descriptionList'] as List<dynamic>).map((e) => e as String).toList(),
+  (json['locationDescriptionList'] as List<dynamic>)
+      .map((e) => e as String)
+      .toList(),
+  (json['locationMapper'] as Map<String, dynamic>).map(
+    (k, e) => MapEntry(
+      $enumDecode(_$JiaZiEnumMap, k),
+      (e as List<dynamic>).map((e) => $enumDecode(_$DiZhiEnumMap, e)).toSet(),
+    ),
+  ),
+);
 
-Map<String, dynamic> _$JiaZiShenShaToJson(JiaZiShenSha instance) =>
-    <String, dynamic>{
-      'name': instance.name,
-      'jiXiong': _$JiXiongEnumEnumMap[instance.jiXiong]!,
-      'locationMapper': instance.locationMapper.map((k, e) => MapEntry(
-          _$JiaZiEnumMap[k]!, e.map((e) => _$DiZhiEnumMap[e]!).toList())),
-    };
+Map<String, dynamic> _$JiaZiShenShaToJson(
+  JiaZiShenSha instance,
+) => <String, dynamic>{
+  'name': instance.name,
+  'jiXiong': _$JiXiongEnumEnumMap[instance.jiXiong]!,
+  'locationMapper': instance.locationMapper.map(
+    (k, e) =>
+        MapEntry(_$JiaZiEnumMap[k]!, e.map((e) => _$DiZhiEnumMap[e]!).toList()),
+  ),
+};
 
 const _$JiaZiEnumMap = {
   JiaZi.JIA_ZI: '甲子',

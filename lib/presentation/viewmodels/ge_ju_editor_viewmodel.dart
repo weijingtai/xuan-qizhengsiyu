@@ -9,7 +9,7 @@ import 'package:qizhengsiyu/domain/entities/models/ge_ju_model.dart';
 import 'package:qizhengsiyu/domain/errors/ge_ju_errors.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_school.dart';
 import 'package:qizhengsiyu/domain/services/ge_ju_crud_service.dart';
-import 'package:qizhengsiyu/domain/services/ge_ju_school_service.dart';
+import 'package:qizhengsiyu/domain/services/ge_ju_school_service_adapter.dart';
 import 'package:qizhengsiyu/domain/services/ge_ju_validation.dart';
 import 'package:qizhengsiyu/presentation/models/condition_editor_node.dart';
 
@@ -41,11 +41,11 @@ class SaveResult {
 /// 以"格局"为单位操作，内部管理 Rule + Annotation + ConditionSet 三个实体的字段
 class GeJuEditorViewModel extends ChangeNotifier {
   final GeJuCrudService _crudService;
-  final GeJuSchoolService? _schoolService;
+  final GeJuSchoolServiceAdapter? _schoolService;
 
   GeJuEditorViewModel({
     required GeJuCrudService crudService,
-    GeJuSchoolService? schoolService,
+    GeJuSchoolServiceAdapter? schoolService,
   })  : _crudService = crudService,
         _schoolService = schoolService;
 
@@ -371,8 +371,8 @@ class GeJuEditorViewModel extends ChangeNotifier {
   /// 重新加载可选流派列表
   Future<void> reloadSchools() async {
     if (_schoolService != null) {
-      _schoolService!.clearCache();
-      _allSchools = await _schoolService!.getAllSchools();
+      _schoolService.clearCache();
+      _allSchools = await _schoolService.getAllSchools();
       notifyListeners();
     }
   }

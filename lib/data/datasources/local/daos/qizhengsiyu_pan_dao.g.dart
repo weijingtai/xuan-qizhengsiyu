@@ -14,5 +14,7 @@ class QiZhengSiYuPanDaoManager {
   QiZhengSiYuPanDaoManager(this._db);
   $$QizhengsiyuPanTableTableTableManager get qizhengsiyuPanTable =>
       $$QizhengsiyuPanTableTableTableManager(
-          _db.attachedDatabase, _db.qizhengsiyuPanTable);
+        _db.attachedDatabase,
+        _db.qizhengsiyuPanTable,
+      );
 }

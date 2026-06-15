@@ -3,7 +3,7 @@ import 'package:qizhengsiyu/enums/enum_panel_system_type.dart';
 
 part 'star_angle_raw_info.g.dart';
 
-/// 星体坐标系统信息
+/// 星体坐标系统信息 (Force rebuild)
 ///
 /// 封装星体的坐标系统、星制、角度和速度等基本信息
 @JsonSerializable()

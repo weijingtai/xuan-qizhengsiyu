@@ -112,11 +112,11 @@ class BasePanelConfig {
   /// 返回: PanelConfig 对象。
   static BasePanelConfig defaultBasicPanelConfig() {
     return BasePanelConfig(
-        celestialCoordinateSystem: CelestialCoordinateSystem.ecliptic, // 黄道坐标系
+        celestialCoordinateSystem: CelestialCoordinateSystem.Ecliptic, // 黄道坐标系
         houseDivisionSystem: HouseDivisionSystem.equal, // 等宫制
-        panelSystemType: PanelSystemType.tropical, // 回归制
+        panelSystemType: PanelSystemType.Tropical, // 回归制
         constellationSystemType:
-            ConstellationSystemType.classical, // 经典黄道十二宫/二十八宿 (需确认具体含义)
+            ConstellationSystemType.Classical, // 经典黄道十二宫/二十八宿 (需确认具体含义)
         settleLifeType: EnumSettleLifeType.Mao, // 定命宫方法 (需确认具体含义)
         settleBodyType: EnumSettleBodyType.moon, // 定身宫方法 (需确认具体含义)
         islifeGongBySunRealTimeLocation: true); // 是否根据太阳实时位置定命宫 (需确认具体含义)
@@ -159,10 +159,10 @@ class PanelConfig extends BasePanelConfig {
 
   static PanelConfig defaultPanelConfig() {
     return PanelConfig(
-      celestialCoordinateSystem: CelestialCoordinateSystem.ecliptic,
+      celestialCoordinateSystem: CelestialCoordinateSystem.Ecliptic,
       houseDivisionSystem: HouseDivisionSystem.equal,
-      panelSystemType: PanelSystemType.tropical,
-      constellationSystemType: ConstellationSystemType.classical,
+      panelSystemType: PanelSystemType.Tropical,
+      constellationSystemType: ConstellationSystemType.Classical,
       settleLifeType: EnumSettleLifeType.Mao,
       settleBodyType: EnumSettleBodyType.moon,
       islifeGongBySunRealTimeLocation: true,

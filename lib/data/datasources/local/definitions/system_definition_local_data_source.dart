@@ -3,9 +3,10 @@ import 'dart:convert';
 import 'package:xuan_logger/xuan_logger.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:qizhengsiyu/domain/entities/models/zhou_tian_model.dart';
+import 'package:qizhengsiyu/domain/engines/historical_engine.dart';
 
 /// 本地数据源，用于加载和解析存储在assets中的坐标系定义文件。
-class SystemDefinitionLocalDataSource {
+class SystemDefinitionLocalDataSource implements ISystemDefinitionSource {
   /// 从assets加载指定的JSON定义文件并将其解析为 [ZhouTianModel]。
   ///
   /// @param fileName The name of the JSON file in the 'assets/historical_definitions/' directory.

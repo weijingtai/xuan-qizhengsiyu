@@ -11,8 +11,9 @@ GeJuConditionSet _$GeJuConditionSetFromJson(Map<String, dynamic> json) =>
       id: json['id'] as String,
       ruleId: json['ruleId'] as String,
       label: json['label'] as String,
-      schools:
-          (json['schools'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      schools: (json['schools'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
       source: json['source'] == null
           ? null
           : GeJuSource.fromJson(json['source'] as Map<String, dynamic>),
@@ -22,7 +23,8 @@ GeJuConditionSet _$GeJuConditionSetFromJson(Map<String, dynamic> json) =>
           : GeJuCondition.fromJson(json['conditions'] as Map<String, dynamic>),
       derivedFrom: json['derivedFrom'] as String?,
       changeNote: json['changeNote'] as String?,
-      relatedAnnotationIds: (json['relatedAnnotationIds'] as List<dynamic>?)
+      relatedAnnotationIds:
+          (json['relatedAnnotationIds'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
           [],

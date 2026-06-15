@@ -1,9 +1,9 @@
 import 'dart:math';
+import 'dart:convert';
 
+import 'package:repository_interface_qizhengsiyu/repository_interface_qizhengsiyu.dart';
 import 'package:qizhengsiyu/domain/entities/models/observer_position.dart';
 import 'package:qizhengsiyu/domain/entities/models/star_position_raw_data.dart';
-import 'dart:convert';
-import 'package:flutter/services.dart' show rootBundle;
 import 'package:qizhengsiyu/domain/entities/models/panel_config.dart';
 import 'package:qizhengsiyu/enums/enum_panel_system_type.dart';
 import 'package:qizhengsiyu/domain/entities/models/zhou_tian_model.dart';
@@ -16,22 +16,27 @@ import 'i_calculation_engine.dart';
 
 /// 基于SWEPH（瑞士星历表）的现代计算引擎。
 ///
-/// 封装了所有使用`sweph`库的计算逻辑。
+/// 域层核心逻辑；资源加载通过 [_ephemerisRes] 委托到存储适配器。
 class SwephEngine implements ICalculationEngine {
+  final QiZhengEphemerisResourceRepository _ephemerisRes;
+
+  SwephEngine({required QiZhengEphemerisResourceRepository ephemerisRes})
+      : _ephemerisRes = ephemerisRes;
+
   @override
   Future<ZhouTianModel> getSystemDefinition(BasePanelConfig panelConfig) async {
     final String assertName;
     if (panelConfig.celestialCoordinateSystem ==
-        CelestialCoordinateSystem.ecliptic) {
-      if (panelConfig.panelSystemType == PanelSystemType.tropical) {
+        CelestialCoordinateSystem.Ecliptic) {
+      if (panelConfig.panelSystemType == PanelSystemType.Tropical) {
         switch (panelConfig.constellationSystemType) {
-          case ConstellationSystemType.classical:
+          case ConstellationSystemType.Classical:
             assertName = 'ecliptic_tropical_classical.json';
             break;
-          case ConstellationSystemType.adjustedClassical:
+          case ConstellationSystemType.AdjustedClassical:
             assertName = 'ecliptic_tropical_classical_adjested.json';
             break;
-          case ConstellationSystemType.modern:
+          case ConstellationSystemType.Modern:
             assertName = 'ecplictic_tropical_morden.json';
             break;
         }
@@ -43,8 +48,7 @@ class SwephEngine implements ICalculationEngine {
         throw UnimplementedError(
             'Unsupported panel system type: ${panelConfig.celestialCoordinateSystem.name} ${panelConfig.panelSystemType.name}');
     }
-    final jsonString =
-        await rootBundle.loadString('assets/qizhengsiyu/$assertName');
+    final jsonString = await _ephemerisRes.loadEphemerisResource(assertName);
     return ZhouTianModel.fromJson(jsonDecode(jsonString));
   }
 

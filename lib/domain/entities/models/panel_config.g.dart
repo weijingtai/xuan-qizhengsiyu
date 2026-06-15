@@ -8,52 +8,68 @@ part of 'panel_config.dart';
 
 BasePanelConfig _$BasePanelConfigFromJson(Map<String, dynamic> json) =>
     BasePanelConfig(
-      celestialCoordinateSystem: $enumDecode(_$CelestialCoordinateSystemEnumMap,
-          json['celestialCoordinateSystem']),
+      celestialCoordinateSystem: $enumDecode(
+        _$CelestialCoordinateSystemEnumMap,
+        json['celestialCoordinateSystem'],
+      ),
       houseDivisionSystem: $enumDecode(
-          _$HouseDivisionSystemEnumMap, json['houseDivisionSystem']),
-      panelSystemType:
-          $enumDecode(_$PanelSystemTypeEnumMap, json['panelSystemType']),
+        _$HouseDivisionSystemEnumMap,
+        json['houseDivisionSystem'],
+      ),
+      panelSystemType: $enumDecode(
+        _$PanelSystemTypeEnumMap,
+        json['panelSystemType'],
+      ),
       constellationSystemType: $enumDecode(
-          _$ConstellationSystemTypeEnumMap, json['constellationSystemType']),
-      settleLifeType:
-          $enumDecode(_$EnumSettleLifeTypeEnumMap, json['settleLifeType']),
-      settleBodyType:
-          $enumDecode(_$EnumSettleBodyTypeEnumMap, json['settleBodyType']),
+        _$ConstellationSystemTypeEnumMap,
+        json['constellationSystemType'],
+      ),
+      settleLifeType: $enumDecode(
+        _$EnumSettleLifeTypeEnumMap,
+        json['settleLifeType'],
+      ),
+      settleBodyType: $enumDecode(
+        _$EnumSettleBodyTypeEnumMap,
+        json['settleBodyType'],
+      ),
       islifeGongBySunRealTimeLocation:
           json['islifeGongBySunRealTimeLocation'] as bool,
-      lifeCountingToGong: $enumDecodeNullable(
-              _$EnumTwelveGongEnumMap, json['lifeCountingToGong']) ??
+      lifeCountingToGong:
+          $enumDecodeNullable(
+            _$EnumTwelveGongEnumMap,
+            json['lifeCountingToGong'],
+          ) ??
           EnumTwelveGong.Mao,
-      bodyCountingToGong: $enumDecodeNullable(
-              _$EnumTwelveGongEnumMap, json['bodyCountingToGong']) ??
+      bodyCountingToGong:
+          $enumDecodeNullable(
+            _$EnumTwelveGongEnumMap,
+            json['bodyCountingToGong'],
+          ) ??
           EnumTwelveGong.You,
     );
 
-Map<String, dynamic> _$BasePanelConfigToJson(BasePanelConfig instance) =>
-    <String, dynamic>{
-      'celestialCoordinateSystem': _$CelestialCoordinateSystemEnumMap[
-          instance.celestialCoordinateSystem]!,
-      'panelSystemType': _$PanelSystemTypeEnumMap[instance.panelSystemType]!,
-      'constellationSystemType':
-          _$ConstellationSystemTypeEnumMap[instance.constellationSystemType]!,
-      'houseDivisionSystem':
-          _$HouseDivisionSystemEnumMap[instance.houseDivisionSystem]!,
-      'settleLifeType': _$EnumSettleLifeTypeEnumMap[instance.settleLifeType]!,
-      'lifeCountingToGong':
-          _$EnumTwelveGongEnumMap[instance.lifeCountingToGong]!,
-      'settleBodyType': _$EnumSettleBodyTypeEnumMap[instance.settleBodyType]!,
-      'bodyCountingToGong':
-          _$EnumTwelveGongEnumMap[instance.bodyCountingToGong]!,
-      'islifeGongBySunRealTimeLocation':
-          instance.islifeGongBySunRealTimeLocation,
-    };
+Map<String, dynamic> _$BasePanelConfigToJson(
+  BasePanelConfig instance,
+) => <String, dynamic>{
+  'celestialCoordinateSystem':
+      _$CelestialCoordinateSystemEnumMap[instance.celestialCoordinateSystem]!,
+  'panelSystemType': _$PanelSystemTypeEnumMap[instance.panelSystemType]!,
+  'constellationSystemType':
+      _$ConstellationSystemTypeEnumMap[instance.constellationSystemType]!,
+  'houseDivisionSystem':
+      _$HouseDivisionSystemEnumMap[instance.houseDivisionSystem]!,
+  'settleLifeType': _$EnumSettleLifeTypeEnumMap[instance.settleLifeType]!,
+  'lifeCountingToGong': _$EnumTwelveGongEnumMap[instance.lifeCountingToGong]!,
+  'settleBodyType': _$EnumSettleBodyTypeEnumMap[instance.settleBodyType]!,
+  'bodyCountingToGong': _$EnumTwelveGongEnumMap[instance.bodyCountingToGong]!,
+  'islifeGongBySunRealTimeLocation': instance.islifeGongBySunRealTimeLocation,
+};
 
 const _$CelestialCoordinateSystemEnumMap = {
-  CelestialCoordinateSystem.ecliptic: '黄道制',
-  CelestialCoordinateSystem.equatorial: '赤道制',
-  CelestialCoordinateSystem.skyEquatorial: '天赤道制',
-  CelestialCoordinateSystem.pseudoEcliptic: '似黄道恒星制',
+  CelestialCoordinateSystem.Ecliptic: '黄道制',
+  CelestialCoordinateSystem.Equatorial: '赤道制',
+  CelestialCoordinateSystem.SkyEquatorial: '天赤道制',
+  CelestialCoordinateSystem.PseudoEcliptic: '似黄道恒星制',
 };
 
 const _$HouseDivisionSystemEnumMap = {
@@ -66,14 +82,14 @@ const _$HouseDivisionSystemEnumMap = {
 };
 
 const _$PanelSystemTypeEnumMap = {
-  PanelSystemType.tropical: '回归制',
-  PanelSystemType.sidereal: '恒星制',
+  PanelSystemType.Tropical: '回归制',
+  PanelSystemType.Sidereal: '恒星制',
 };
 
 const _$ConstellationSystemTypeEnumMap = {
-  ConstellationSystemType.classical: '古宿制',
-  ConstellationSystemType.adjustedClassical: '矫正古宿制',
-  ConstellationSystemType.modern: '今宿制',
+  ConstellationSystemType.Classical: '古宿制',
+  ConstellationSystemType.AdjustedClassical: '矫正古宿制',
+  ConstellationSystemType.Modern: '今宿制',
 };
 
 const _$EnumSettleLifeTypeEnumMap = {
@@ -106,14 +122,17 @@ const _$EnumTwelveGongEnumMap = {
 FatePanelConfig _$FatePanelConfigFromJson(Map<String, dynamic> json) =>
     FatePanelConfig(
       mingCountingType: $enumDecode(
-          _$DongWeiDaXianMingGongCountingTypeEnumMap, json['mingCountingType']),
+        _$DongWeiDaXianMingGongCountingTypeEnumMap,
+        json['mingCountingType'],
+      ),
     );
 
-Map<String, dynamic> _$FatePanelConfigToJson(FatePanelConfig instance) =>
-    <String, dynamic>{
-      'mingCountingType': _$DongWeiDaXianMingGongCountingTypeEnumMap[
-          instance.mingCountingType]!,
-    };
+Map<String, dynamic> _$FatePanelConfigToJson(
+  FatePanelConfig instance,
+) => <String, dynamic>{
+  'mingCountingType':
+      _$DongWeiDaXianMingGongCountingTypeEnumMap[instance.mingCountingType]!,
+};
 
 const _$DongWeiDaXianMingGongCountingTypeEnumMap = {
   DongWeiDaXianMingGongCountingType.HundredSix: 'hundredSix',
@@ -122,43 +141,59 @@ const _$DongWeiDaXianMingGongCountingTypeEnumMap = {
 };
 
 PanelConfig _$PanelConfigFromJson(Map<String, dynamic> json) => PanelConfig(
-      celestialCoordinateSystem: $enumDecode(_$CelestialCoordinateSystemEnumMap,
-          json['celestialCoordinateSystem']),
-      houseDivisionSystem: $enumDecode(
-          _$HouseDivisionSystemEnumMap, json['houseDivisionSystem']),
-      panelSystemType:
-          $enumDecode(_$PanelSystemTypeEnumMap, json['panelSystemType']),
-      constellationSystemType: $enumDecode(
-          _$ConstellationSystemTypeEnumMap, json['constellationSystemType']),
-      settleLifeType:
-          $enumDecode(_$EnumSettleLifeTypeEnumMap, json['settleLifeType']),
-      settleBodyType:
-          $enumDecode(_$EnumSettleBodyTypeEnumMap, json['settleBodyType']),
-      islifeGongBySunRealTimeLocation:
-          json['islifeGongBySunRealTimeLocation'] as bool,
-      lifeCountingToGong: $enumDecodeNullable(
-              _$EnumTwelveGongEnumMap, json['lifeCountingToGong']) ??
-          EnumTwelveGong.Mao,
-      bodyCountingToGong: $enumDecodeNullable(
-              _$EnumTwelveGongEnumMap, json['bodyCountingToGong']) ??
-          EnumTwelveGong.You,
-    );
+  celestialCoordinateSystem: $enumDecode(
+    _$CelestialCoordinateSystemEnumMap,
+    json['celestialCoordinateSystem'],
+  ),
+  houseDivisionSystem: $enumDecode(
+    _$HouseDivisionSystemEnumMap,
+    json['houseDivisionSystem'],
+  ),
+  panelSystemType: $enumDecode(
+    _$PanelSystemTypeEnumMap,
+    json['panelSystemType'],
+  ),
+  constellationSystemType: $enumDecode(
+    _$ConstellationSystemTypeEnumMap,
+    json['constellationSystemType'],
+  ),
+  settleLifeType: $enumDecode(
+    _$EnumSettleLifeTypeEnumMap,
+    json['settleLifeType'],
+  ),
+  settleBodyType: $enumDecode(
+    _$EnumSettleBodyTypeEnumMap,
+    json['settleBodyType'],
+  ),
+  islifeGongBySunRealTimeLocation:
+      json['islifeGongBySunRealTimeLocation'] as bool,
+  lifeCountingToGong:
+      $enumDecodeNullable(
+        _$EnumTwelveGongEnumMap,
+        json['lifeCountingToGong'],
+      ) ??
+      EnumTwelveGong.Mao,
+  bodyCountingToGong:
+      $enumDecodeNullable(
+        _$EnumTwelveGongEnumMap,
+        json['bodyCountingToGong'],
+      ) ??
+      EnumTwelveGong.You,
+);
 
-Map<String, dynamic> _$PanelConfigToJson(PanelConfig instance) =>
-    <String, dynamic>{
-      'celestialCoordinateSystem': _$CelestialCoordinateSystemEnumMap[
-          instance.celestialCoordinateSystem]!,
-      'panelSystemType': _$PanelSystemTypeEnumMap[instance.panelSystemType]!,
-      'constellationSystemType':
-          _$ConstellationSystemTypeEnumMap[instance.constellationSystemType]!,
-      'houseDivisionSystem':
-          _$HouseDivisionSystemEnumMap[instance.houseDivisionSystem]!,
-      'settleLifeType': _$EnumSettleLifeTypeEnumMap[instance.settleLifeType]!,
-      'lifeCountingToGong':
-          _$EnumTwelveGongEnumMap[instance.lifeCountingToGong]!,
-      'settleBodyType': _$EnumSettleBodyTypeEnumMap[instance.settleBodyType]!,
-      'bodyCountingToGong':
-          _$EnumTwelveGongEnumMap[instance.bodyCountingToGong]!,
-      'islifeGongBySunRealTimeLocation':
-          instance.islifeGongBySunRealTimeLocation,
-    };
+Map<String, dynamic> _$PanelConfigToJson(
+  PanelConfig instance,
+) => <String, dynamic>{
+  'celestialCoordinateSystem':
+      _$CelestialCoordinateSystemEnumMap[instance.celestialCoordinateSystem]!,
+  'panelSystemType': _$PanelSystemTypeEnumMap[instance.panelSystemType]!,
+  'constellationSystemType':
+      _$ConstellationSystemTypeEnumMap[instance.constellationSystemType]!,
+  'houseDivisionSystem':
+      _$HouseDivisionSystemEnumMap[instance.houseDivisionSystem]!,
+  'settleLifeType': _$EnumSettleLifeTypeEnumMap[instance.settleLifeType]!,
+  'lifeCountingToGong': _$EnumTwelveGongEnumMap[instance.lifeCountingToGong]!,
+  'settleBodyType': _$EnumSettleBodyTypeEnumMap[instance.settleBodyType]!,
+  'bodyCountingToGong': _$EnumTwelveGongEnumMap[instance.bodyCountingToGong]!,
+  'islifeGongBySunRealTimeLocation': instance.islifeGongBySunRealTimeLocation,
+};

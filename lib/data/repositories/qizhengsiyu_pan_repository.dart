@@ -1,10 +1,10 @@
-
+import 'package:repository_interface_qizhengsiyu/repository_interface_qizhengsiyu.dart';
 import '../../domain/entities/models/pan_entity.dart';
 import '../datasources/local/app_database.dart';
 import '../datasources/local/daos/qizhengsiyu_pan_dao.dart';
 import 'interfaces/i_qizhengsiyu_pan_repository.dart';
 
-class QiZhengSiYuPanRepository extends IQiZhengSiYuPanRepository {
+class QiZhengSiYuPanRepository implements IQiZhengSiYuPanRepository {
   QiZhengSiYuPanDao get _localStorage => _appDatabase.qiZhengSiYuPanDao;
   late final AppDatabase _appDatabase;
   QiZhengSiYuPanRepository({required AppDatabase appDatabase}) {
@@ -14,8 +14,10 @@ class QiZhengSiYuPanRepository extends IQiZhengSiYuPanRepository {
   // 基础CRUD操作
 
   /// 保存盘数据
-  Future<void> save(QiZhengSiYuPanEntity entity) async {
+  @override
+  Future<void> save(QiZhengSiYuPanContract contract) async {
     try {
+      final entity = QiZhengSiYuPanEntity.fromContract(contract);
       await _localStorage.insertPan(entity);
     } catch (e) {
       throw RepositoryException('保存盘数据失败: $e');
@@ -23,17 +25,21 @@ class QiZhengSiYuPanRepository extends IQiZhengSiYuPanRepository {
   }
 
   /// 根据UUID获取盘数据
-  Future<QiZhengSiYuPanEntity?> findByUuid(String uuid) async {
+  @override
+  Future<QiZhengSiYuPanContract?> findByUuid(String uuid) async {
     try {
-      return await _localStorage.getPanByUuid(uuid);
+      final entity = await _localStorage.getPanByUuid(uuid);
+      return entity?.toContract();
     } catch (e) {
       throw RepositoryException('获取盘数据失败: $e');
     }
   }
 
   /// 更新盘数据
-  Future<void> update(QiZhengSiYuPanEntity entity) async {
+  @override
+  Future<void> update(QiZhengSiYuPanContract contract) async {
     try {
+      final entity = QiZhengSiYuPanEntity.fromContract(contract);
       await _localStorage.updatePan(entity);
     } catch (e) {
       throw RepositoryException('更新盘数据失败: $e');
@@ -41,6 +47,7 @@ class QiZhengSiYuPanRepository extends IQiZhengSiYuPanRepository {
   }
 
   /// 删除盘数据（软删除）
+  @override
   Future<void> delete(String uuid) async {
     try {
       await _localStorage.softDeletePan(uuid);
@@ -50,6 +57,7 @@ class QiZhengSiYuPanRepository extends IQiZhengSiYuPanRepository {
   }
 
   /// 永久删除盘数据
+  @override
   Future<void> permanentlyDelete(String uuid) async {
     try {
       await _localStorage.deletePan(uuid);
@@ -61,36 +69,43 @@ class QiZhengSiYuPanRepository extends IQiZhengSiYuPanRepository {
   // 查询和搜索功能
 
   /// 获取所有活跃的盘数据
-  Future<List<QiZhengSiYuPanEntity>> findAllActive() async {
+  @override
+  Future<List<QiZhengSiYuPanContract>> findAllActive() async {
     try {
-      return await _localStorage.getAllActivePans();
+      final entities = await _localStorage.getAllActivePans();
+      return entities.map((e) => e.toContract()).toList();
     } catch (e) {
       throw RepositoryException('获取活跃盘数据失败: $e');
     }
   }
 
   /// 根据占卜请求UUID查找盘数据
-  Future<List<QiZhengSiYuPanEntity>> findByDivinationUuid(
+  @override
+  Future<List<QiZhengSiYuPanContract>> findByDivinationUuid(
       String divinationUuid) async {
     try {
-      return await _localStorage.getPansByDivinationUuid(divinationUuid);
+      final entities = await _localStorage.getPansByDivinationUuid(divinationUuid);
+      return entities.map((e) => e.toContract()).toList();
     } catch (e) {
       throw RepositoryException('根据占卜UUID查找盘数据失败: $e');
     }
   }
 
   /// 按时间范围搜索盘数据
-  Future<List<QiZhengSiYuPanEntity>> findByDateRange(
+  @override
+  Future<List<QiZhengSiYuPanContract>> findByDateRange(
       DateTime startDate, DateTime endDate) async {
     try {
-      return await _localStorage.getPansByDateRange(startDate, endDate);
+      final entities = await _localStorage.getPansByDateRange(startDate, endDate);
+      return entities.map((e) => e.toContract()).toList();
     } catch (e) {
       throw RepositoryException('按时间范围搜索失败: $e');
     }
   }
 
   /// 分页获取盘数据
-  Future<PaginatedResult<QiZhengSiYuPanEntity>> findWithPagination({
+  @override
+  Future<PaginatedResult<QiZhengSiYuPanContract>> findWithPagination({
     int page = 1,
     int pageSize = 20,
   }) async {
@@ -102,8 +117,8 @@ class QiZhengSiYuPanRepository extends IQiZhengSiYuPanRepository {
       );
       final totalCount = await _localStorage.getPansCount();
 
-      return PaginatedResult<QiZhengSiYuPanEntity>(
-        items: items,
+      return PaginatedResult<QiZhengSiYuPanContract>(
+        items: items.map((e) => e.toContract()).toList(),
         totalCount: totalCount,
         page: page,
         pageSize: pageSize,
@@ -115,14 +130,15 @@ class QiZhengSiYuPanRepository extends IQiZhengSiYuPanRepository {
   }
 
   /// 搜索功能 - 根据多个条件搜索
-  Future<List<QiZhengSiYuPanEntity>> search({
+  @override
+  Future<List<QiZhengSiYuPanContract>> search({
     String? divinationUuid,
     DateTime? startDate,
     DateTime? endDate,
     int? limit,
   }) async {
     try {
-      List<QiZhengSiYuPanEntity> results;
+      List<QiZhengSiYuPanContract> results;
 
       if (divinationUuid != null) {
         results = await findByDivinationUuid(divinationUuid);
@@ -145,6 +161,7 @@ class QiZhengSiYuPanRepository extends IQiZhengSiYuPanRepository {
   // 统计功能
 
   /// 获取盘数据总数
+  @override
   Future<int> getTotalCount() async {
     try {
       return await _localStorage.getPansCount();
@@ -154,6 +171,7 @@ class QiZhengSiYuPanRepository extends IQiZhengSiYuPanRepository {
   }
 
   /// 获取今日创建的盘数据数量
+  @override
   Future<int> getTodayCount() async {
     try {
       final today = DateTime.now();
@@ -168,9 +186,11 @@ class QiZhengSiYuPanRepository extends IQiZhengSiYuPanRepository {
   }
 
   /// 获取最近的盘数据
-  Future<List<QiZhengSiYuPanEntity>> getRecent({int limit = 10}) async {
+  @override
+  Future<List<QiZhengSiYuPanContract>> getRecent({int limit = 10}) async {
     try {
-      return await _localStorage.getPansWithPagination(limit: limit, offset: 0);
+      final entities = await _localStorage.getPansWithPagination(limit: limit, offset: 0);
+      return entities.map((e) => e.toContract()).toList();
     } catch (e) {
       throw RepositoryException('获取最近数据失败: $e');
     }
@@ -179,19 +199,22 @@ class QiZhengSiYuPanRepository extends IQiZhengSiYuPanRepository {
   // 业务逻辑方法
 
   /// 检查UUID是否存在
+  @override
   Future<bool> existsByUuid(String uuid) async {
     try {
-      final entity = await findByUuid(uuid);
-      return entity != null;
+      final contract = await findByUuid(uuid);
+      return contract != null;
     } catch (e) {
       return false;
     }
   }
 
   /// 批量保存
-  Future<void> saveBatch(List<QiZhengSiYuPanEntity> entities) async {
+  @override
+  Future<void> saveBatch(List<QiZhengSiYuPanContract> contracts) async {
     try {
-      for (final entity in entities) {
+      for (final contract in contracts) {
+        final entity = QiZhengSiYuPanEntity.fromContract(contract);
         await _localStorage.insertPan(entity);
       }
     } catch (e) {
@@ -200,6 +223,7 @@ class QiZhengSiYuPanRepository extends IQiZhengSiYuPanRepository {
   }
 
   /// 清理过期数据（删除指定天数前的软删除数据）
+  @override
   Future<int> cleanupExpiredData({int daysOld = 30}) async {
     try {
       final cutoffDate = DateTime.now().subtract(Duration(days: daysOld));
@@ -221,26 +245,6 @@ class QiZhengSiYuPanRepository extends IQiZhengSiYuPanRepository {
       throw RepositoryException('清理过期数据失败: $e');
     }
   }
-}
-
-/// 分页结果类
-class PaginatedResult<T> {
-  final List<T> items;
-  final int totalCount;
-  final int page;
-  final int pageSize;
-  final int totalPages;
-
-  const PaginatedResult({
-    required this.items,
-    required this.totalCount,
-    required this.page,
-    required this.pageSize,
-    required this.totalPages,
-  });
-
-  bool get hasNextPage => page < totalPages;
-  bool get hasPreviousPage => page > 1;
 }
 
 /// Repository异常类

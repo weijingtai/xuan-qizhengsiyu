@@ -1,0 +1,125 @@
+{
+  "caseId": "golden_base_star_positions_v1",
+  "source": "Extracted from test/resources/base_panel_model.json to characterize the current correct star-position logic.",
+  "starAngles": {
+    "日": {
+      "angle": 68.116,
+      "speed": 0.959826407841934
+    },
+    "月": {
+      "angle": 97.287,
+      "speed": 14.451425331661754
+    },
+    "木": {
+      "angle": 87.381,
+      "speed": 0.22264454248178192
+    },
+    "土": {
+      "angle": 0.297,
+      "speed": 0.07010272268326567
+    },
+    "火": {
+      "angle": 139.59,
+      "speed": 0.5276752850781726
+    },
+    "水": {
+      "angle": 66.947,
+      "speed": 2.1955616584416826
+    },
+    "金": {
+      "angle": 22.297,
+      "speed": 0.9402402756971094
+    },
+    "孛": {
+      "angle": 217.032,
+      "speed": 0.11142161679826283
+    },
+    "计": {
+      "angle": 353.648,
+      "speed": -0.052899414402162545
+    },
+    "罗": {
+      "angle": 173.648,
+      "speed": -0.052899414402162545
+    },
+    "炁": {
+      "angle": 156.057,
+      "speed": 0.0352
+    }
+  },
+  "enteredPositions": {
+    "日": {
+      "gong": "申",
+      "gongDegree": 8.116,
+      "constellation": "毕",
+      "constellationDegree": 14.916
+    },
+    "月": {
+      "gong": "未",
+      "gongDegree": 7.287,
+      "constellation": "井",
+      "constellationDegree": 15.487
+    },
+    "木": {
+      "gong": "申",
+      "gongDegree": 27.381,
+      "constellation": "井",
+      "constellationDegree": 5.581
+    },
+    "土": {
+      "gong": "戌",
+      "gongDegree": 0.297,
+      "constellation": "奎",
+      "constellationDegree": 1.997
+    },
+    "火": {
+      "gong": "午",
+      "gongDegree": 19.59,
+      "constellation": "张",
+      "constellationDegree": 3.19
+    },
+    "水": {
+      "gong": "申",
+      "gongDegree": 6.947,
+      "constellation": "毕",
+      "constellationDegree": 13.747
+    },
+    "金": {
+      "gong": "戌",
+      "gongDegree": 22.297,
+      "constellation": "娄",
+      "constellationDegree": 6.397
+    },
+    "孛": {
+      "gong": "卯",
+      "gongDegree": 7.032,
+      "constellation": "氐",
+      "constellationDegree": 8.132
+    },
+    "计": {
+      "gong": "亥",
+      "gongDegree": 23.648,
+      "constellation": "壁",
+      "constellationDegree": 4.248
+    },
+    "罗": {
+      "gong": "巳",
+      "gongDegree": 23.648,
+      "constellation": "轸",
+      "constellationDegree": 3.548
+    },
+    "炁": {
+      "gong": "巳",
+      "gongDegree": 6.057,
+      "constellation": "翼",
+      "constellationDegree": 4.657
+    }
+  },
+  "fiveStarWalkingTypes": {
+    "木": "常",
+    "土": "常",
+    "火": "常",
+    "水": "速",
+    "金": "常"
+  }
+}

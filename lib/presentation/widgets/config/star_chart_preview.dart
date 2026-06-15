@@ -120,7 +120,7 @@ class StarChartPreview extends StatelessWidget {
             const Icon(Icons.settings_outlined, size: 16),
             const SizedBox(width: AppTheme.spacing8),
             Text(
-              '星道制式: ${config.celestialCoordinateSystem == CelestialCoordinateSystem.ecliptic ? '黄道制' : '赤道制'}',
+              '星道制式: ${config.celestialCoordinateSystem == CelestialCoordinateSystem.Ecliptic ? '黄道制' : '赤道制'}',
               style: Theme.of(context).textTheme.bodyMedium,
             ),
           ],

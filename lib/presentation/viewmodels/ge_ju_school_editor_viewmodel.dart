@@ -1,15 +1,15 @@
 import 'package:flutter/foundation.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_school.dart';
-import 'package:qizhengsiyu/domain/services/ge_ju_school_service.dart';
+import 'package:qizhengsiyu/domain/services/ge_ju_school_service_adapter.dart';
 
 /// 流派编辑器模式
 enum SchoolEditorMode { create, edit }
 
 /// 流派编辑器 ViewModel
 class GeJuSchoolEditorViewModel extends ChangeNotifier {
-  final GeJuSchoolService _schoolService;
+  final GeJuSchoolServiceAdapter _schoolService;
 
-  GeJuSchoolEditorViewModel({required GeJuSchoolService schoolService})
+  GeJuSchoolEditorViewModel({required GeJuSchoolServiceAdapter schoolService})
       : _schoolService = schoolService;
 
   SchoolEditorMode _mode = SchoolEditorMode.create;

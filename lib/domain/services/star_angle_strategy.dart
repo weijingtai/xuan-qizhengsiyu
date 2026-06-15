@@ -32,8 +32,8 @@ class EquatorialSiderealStrategy implements StarAngleStrategy {
             SwephFlag.SEFLG_EQUATORIAL);
 
     return StarAngleRawInfo(
-      panelSystemType: PanelSystemType.sidereal,
-      coordinateSystem: CelestialCoordinateSystem.equatorial,
+      panelSystemType: PanelSystemType.Sidereal,
+      coordinateSystem: CelestialCoordinateSystem.Equatorial,
       angle: result.longitude, // 赤经
       speed: result.speedInLongitude, // 赤经速度
     );
@@ -58,8 +58,8 @@ class EquatorialTropicalStrategy implements StarAngleStrategy {
             SwephFlag.SEFLG_EQUATORIAL);
 
     return StarAngleRawInfo(
-      panelSystemType: PanelSystemType.tropical,
-      coordinateSystem: CelestialCoordinateSystem.equatorial,
+      panelSystemType: PanelSystemType.Tropical,
+      coordinateSystem: CelestialCoordinateSystem.Equatorial,
       angle: result.longitude, // 赤经
       speed: result.speedInLongitude, // 赤经速度
     );
@@ -85,8 +85,8 @@ class EclipticSiderealStrategy implements StarAngleStrategy {
             SwephFlag.SEFLG_XYZ); // 使用黄道坐标标志和恒星制标志
 
     return StarAngleRawInfo(
-      panelSystemType: PanelSystemType.sidereal,
-      coordinateSystem: CelestialCoordinateSystem.ecliptic,
+      panelSystemType: PanelSystemType.Sidereal,
+      coordinateSystem: CelestialCoordinateSystem.Ecliptic,
       angle: result.longitude, // 黄经
       speed: result.speedInLongitude, // 黄经速度
     );
@@ -108,8 +108,8 @@ class EclipticTropicalStrategy implements StarAngleStrategy {
     // double degrees = result.longitude * 180 / math.pi;
 
     return StarAngleRawInfo(
-      panelSystemType: PanelSystemType.tropical,
-      coordinateSystem: CelestialCoordinateSystem.ecliptic,
+      panelSystemType: PanelSystemType.Tropical,
+      coordinateSystem: CelestialCoordinateSystem.Ecliptic,
       angle: result.longitude, // 黄经
       speed: result.speedInLongitude, // 黄经速度
     );
