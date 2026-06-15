@@ -23,20 +23,32 @@ class GeJuDaoManager {
   GeJuDaoManager(this._db);
   $$GeJuRulesTableTableTableManager get geJuRulesTable =>
       $$GeJuRulesTableTableTableManager(
-          _db.attachedDatabase, _db.geJuRulesTable);
+        _db.attachedDatabase,
+        _db.geJuRulesTable,
+      );
   $$GeJuAnnotationsTableTableTableManager get geJuAnnotationsTable =>
       $$GeJuAnnotationsTableTableTableManager(
-          _db.attachedDatabase, _db.geJuAnnotationsTable);
+        _db.attachedDatabase,
+        _db.geJuAnnotationsTable,
+      );
   $$GeJuConditionSetsTableTableTableManager get geJuConditionSetsTable =>
       $$GeJuConditionSetsTableTableTableManager(
-          _db.attachedDatabase, _db.geJuConditionSetsTable);
+        _db.attachedDatabase,
+        _db.geJuConditionSetsTable,
+      );
   $$GeJuUserPreferencesTableTableTableManager get geJuUserPreferencesTable =>
       $$GeJuUserPreferencesTableTableTableManager(
-          _db.attachedDatabase, _db.geJuUserPreferencesTable);
+        _db.attachedDatabase,
+        _db.geJuUserPreferencesTable,
+      );
   $$GeJuDeletionRecordsTableTableTableManager get geJuDeletionRecordsTable =>
       $$GeJuDeletionRecordsTableTableTableManager(
-          _db.attachedDatabase, _db.geJuDeletionRecordsTable);
+        _db.attachedDatabase,
+        _db.geJuDeletionRecordsTable,
+      );
   $$GeJuSchoolsTableTableTableManager get geJuSchoolsTable =>
       $$GeJuSchoolsTableTableTableManager(
-          _db.attachedDatabase, _db.geJuSchoolsTable);
+        _db.attachedDatabase,
+        _db.geJuSchoolsTable,
+      );
 }

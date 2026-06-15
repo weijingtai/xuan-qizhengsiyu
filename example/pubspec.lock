@@ -510,6 +510,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.0-dev.3"
+  freezed_annotation:
+    dependency: transitive
+    description:
+      name: freezed_annotation
+      sha256: c2e2d632dd9b8a2b7751117abcfc2b4888ecfe181bd9fca7170d9ef02e595fe2
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.4.4"
   geoclue:
     dependency: transitive
     description:
@@ -783,7 +791,7 @@ packages:
     source: hosted
     version: "1.17.0"
   metaphysics_core:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       path: "../../xuan-metaphysics-core"
       relative: true
@@ -909,6 +917,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.0"
+  persistence_assets:
+    dependency: "direct overridden"
+    description:
+      path: "../../xuan-storage/assets"
+      relative: true
+    source: path
+    version: "0.0.1"
   persistence_core:
     dependency: "direct overridden"
     description:
@@ -923,6 +938,13 @@ packages:
       relative: true
     source: path
     version: "0.1.0"
+  persistence_drift:
+    dependency: "direct overridden"
+    description:
+      path: "../../xuan-storage/drift"
+      relative: true
+    source: path
+    version: "0.0.1"
   petitparser:
     dependency: transitive
     description:
@@ -1009,7 +1031,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "1.0.0+1"
+    version: "1.0.1+2"
   rational:
     dependency: transitive
     description:
@@ -1026,6 +1048,20 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.1.0"
+  repository_interface_account:
+    dependency: transitive
+    description:
+      path: "../../repository-interface-account"
+      relative: true
+    source: path
+    version: "0.0.0"
+  repository_interface_ai:
+    dependency: transitive
+    description:
+      path: "../../repository-interface-ai"
+      relative: true
+    source: path
+    version: "0.0.0"
   repository_interface_four_zhu_card:
     dependency: transitive
     description:
@@ -1033,10 +1069,38 @@ packages:
       relative: true
     source: path
     version: "0.0.0"
+  repository_interface_meihuayishu:
+    dependency: transitive
+    description:
+      path: "../../repository-interface-meihuayishu"
+      relative: true
+    source: path
+    version: "0.0.0"
+  repository_interface_qimendunjia:
+    dependency: transitive
+    description:
+      path: "../../repository-interface-qimendunjia"
+      relative: true
+    source: path
+    version: "0.0.0"
   repository_interface_qizhengsiyu:
     dependency: transitive
     description:
       path: "../../repository-interface-qizhengsiyu"
+      relative: true
+    source: path
+    version: "0.0.0"
+  repository_interface_taiyishenshu:
+    dependency: transitive
+    description:
+      path: "../../repository-interface-taiyishenshu"
+      relative: true
+    source: path
+    version: "0.0.0"
+  repository_interface_tiebanshenshu:
+    dependency: transitive
+    description:
+      path: "../../repository-interface-tiebanshenshu"
       relative: true
     source: path
     version: "0.0.0"
@@ -1237,6 +1301,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.2.1+2.10.3"
+  taiyishenshu:
+    dependency: transitive
+    description:
+      path: "../../xuan-taiyishenshu"
+      relative: true
+    source: path
+    version: "1.1.0+2"
   term_glyph:
     dependency: transitive
     description:
@@ -1416,6 +1487,13 @@ packages:
     dependency: transitive
     description:
       path: "../../xuan-four-zhu-card"
+      relative: true
+    source: path
+    version: "0.1.0"
+  xuan_gua_core:
+    dependency: "direct overridden"
+    description:
+      path: "../../xuan-gua-core"
       relative: true
     source: path
     version: "0.1.0"

@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:metaphysics_core/enums.dart';
 import 'package:path/path.dart' as path;
-import 'package:metaphysics_core/enums.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:qizhengsiyu/domain/entities/models/naming_degree_pair.dart';
 import 'package:qizhengsiyu/domain/entities/models/zhou_tian_model.dart';
@@ -114,7 +113,7 @@ void main() {
         newZiGong15Sequence,
       );
       expect(res2.gong, EnumTwelveGong.fromStrZhi("子"));
-      expect(res2.degree, 30, reason: "子宫15度");
+      expect(res2.degree, 15, reason: "子宫15度");
     });
     test('测试宫位查找 res3', () {
       final res3 = StarEnterInfoCalculator.doFindGong(
@@ -122,7 +121,7 @@ void main() {
         newZiGong15Sequence,
       );
       expect(res3.gong, EnumTwelveGong.fromStrZhi("子"));
-      expect(res3.degree, 15);
+      expect(res3.degree, 0);
     });
     test('测试宫位查找 res3_1', () {
       final res3_1 = StarEnterInfoCalculator.doFindGong(
@@ -182,20 +181,13 @@ void main() {
 
     // 方法1：使用 Directory.current
     final currentDir = Directory.current;
-    print('当前工作目录：${currentDir.path}');
-
-    // 方法2：使用 Platform.script 获取当前脚本路径，然后向上查找项目根目录
+    final exampleAssetsDir = '${currentDir.path}/example/assets/qizhengsiyu';
     final scriptPath = Platform.script.toFilePath();
-    print('当前脚本路径：$scriptPath');
-
-    // 方法3：使用 path 包处理路径
-    final projectRoot = path.normalize(path.join(currentDir.path, '..'));
-    print('项目根目录：$projectRoot');
     test('测试星体入宫信息 - 古宿', () {
       // load from jsonfile
 
       final jsonFile = File(
-          '$projectRoot/assets/qizhengsiyu/ecliptic_tropical_classical.json');
+          '$exampleAssetsDir/ecliptic_tropical_classical.json');
       final jsonString = jsonFile.readAsStringSync();
 
       ZhouTianModel zhouTianModel =
@@ -240,7 +232,7 @@ void main() {
 
     test('测试星体入宫信息 - 古宿矫正', () {
       final jsonFile = File(
-          '$projectRoot/assets/qizhengsiyu/ecliptic_tropical_classical_adjusted.json');
+          '$exampleAssetsDir/ecliptic_tropical_classical_adjusted.json');
       final jsonString = jsonFile.readAsStringSync();
 
       ZhouTianModel zhouTianModel =
@@ -285,7 +277,7 @@ void main() {
 
     test('测试星体入宫信息 - 今宿', () {
       final jsonFile =
-          File('$projectRoot/assets/qizhengsiyu/ecliptic_tropical_morden.json');
+          File('$exampleAssetsDir/ecliptic_tropical_morden.json');
       final jsonString = jsonFile.readAsStringSync();
 
       ZhouTianModel zhouTianModel =

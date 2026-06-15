@@ -3,7 +3,6 @@ import 'dart:ui' as ui;
 
 import 'package:el_tooltip/el_tooltip.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
@@ -1979,7 +1978,7 @@ class _BeautyViewPageState extends State<BeautyViewPage>
   }
 
   Future<ui.Image> loadImage() async {
-    var data = await rootBundle.load(
+    var data = await DefaultAssetBundle.of(context).load(
       'assets/planets/mars-bubbles-50.png',
     ); // Replace with your image path
     ui.Codec codec = await ui.instantiateImageCodec(

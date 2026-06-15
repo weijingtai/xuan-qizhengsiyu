@@ -98,3 +98,11 @@ dependency_overrides:
     path: ..
   persistence_core:
     path: ../../xuan-storage/core
+  persistence_drift:
+    path: ../../xuan-storage/drift
+  persistence_assets:
+    path: ../../xuan-storage/assets
+  metaphysics_core:
+    path: ../../xuan-metaphysics-core
+  xuan_gua_core:
+    path: ../../xuan-gua-core

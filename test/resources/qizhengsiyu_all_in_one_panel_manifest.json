@@ -1,0 +1,33 @@
+{
+  "caseSetId": "qizhengsiyu_all_in_one_panel_cases_v1",
+  "description": "All-in-one full QiZhengSiYu panel fixtures. Each case contains input time/location/config plus the complete panel output in one object.",
+  "precision": {
+    "angleAndDegreeDecimals": 3
+  },
+  "cases": [
+    {
+      "id": "shanghai_1990_new_year_noon_full_panel",
+      "sourcePanelPath": "test/resources/base_panel_model.json",
+      "input": {
+        "birthDateTime": "1990-01-01T12:00:00.000+08:00",
+        "location": {
+          "name": "Shanghai",
+          "timezone": "Asia/Shanghai",
+          "longitude": 121.4737,
+          "latitude": 31.2304,
+          "altitude": 0
+        },
+        "config": {
+          "celestialCoordinateSystem": "ecliptic",
+          "houseDivisionSystem": "equal",
+          "panelSystemType": "tropical",
+          "constellationSystemType": "modern",
+          "settleLifeType": "Mao",
+          "settleBodyType": "moon",
+          "islifeGongBySunRealTimeLocation": true,
+          "projectionStrategy": "linear"
+        }
+      }
+    }
+  ]
+}

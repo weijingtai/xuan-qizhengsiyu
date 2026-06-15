@@ -1,6 +1,5 @@
 import 'package:metaphysics_core/enums.dart';
 import 'package:metaphysics_core/enums.dart';
-import 'package:flutter/foundation.dart';
 import 'package:qizhengsiyu/dataset/star_position_status_model.dart';
 import 'package:qizhengsiyu/domain/entities/models/base_panel_model.dart';
 import 'package:qizhengsiyu/domain/entities/models/di_zhi_shen_sha.dart';
@@ -33,7 +32,7 @@ class GeJuInputBuilder {
     required Set<ElevenStarsInfo> starsSet,
     required DiZhi monthZhi,
     required JiaZi yearJiaZi,
-    CelestialCoordinateSystem coordinateSystem = CelestialCoordinateSystem.ecliptic,
+    CelestialCoordinateSystem coordinateSystem = CelestialCoordinateSystem.Ecliptic,
     Set<String> preferredSchools = const {'guo_lao'},
     List<StarPositionStatusDatasetModel<EnumTwelveGong>>? starStatusDataList,
     EnumTwelveGong? currentXianGong,
@@ -100,10 +99,10 @@ class GeJuInputBuilder {
     required Set<ElevenStarsInfo> starsSet,
     required DiZhi monthZhi,
     required JiaZi yearJiaZi,
-    CelestialCoordinateSystem coordinateSystem = CelestialCoordinateSystem.ecliptic,
+    CelestialCoordinateSystem coordinateSystem = CelestialCoordinateSystem.Ecliptic,
     Set<String> preferredSchools = const {'guo_lao'},
   }) {
-    debugPrint('GeJu: starGongStatusMapper not provided — '
+    print('GeJu: starGongStatusMapper not provided — '
         'starGongStatus conditions will evaluate to false');
     return build(
       panelModel: panelModel,
@@ -123,7 +122,7 @@ class GeJuInputBuilder {
     required JiaZi yearJiaZi,
     required EnumTwelveGong xianGong,
     required Enum28Constellations xianConstellation,
-    CelestialCoordinateSystem coordinateSystem = CelestialCoordinateSystem.ecliptic,
+    CelestialCoordinateSystem coordinateSystem = CelestialCoordinateSystem.Ecliptic,
     Set<String> preferredSchools = const {'guo_lao'},
   }) {
     // 计算行限宫内的星曜

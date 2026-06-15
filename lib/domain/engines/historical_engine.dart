@@ -1,27 +1,34 @@
-import 'dart:convert';
 import 'package:metaphysics_core/enums.dart';
-import 'package:flutter/services.dart' show rootBundle;
-import 'package:qizhengsiyu/data/datasources/local/definitions/system_definition_local_data_source.dart';
 import 'package:qizhengsiyu/domain/entities/models/observer_position.dart';
 import 'package:qizhengsiyu/domain/entities/models/star_position_raw_data.dart';
 import 'package:qizhengsiyu/domain/entities/models/zhou_tian_model.dart';
+import 'package:repository_interface_qizhengsiyu/repository_interface_qizhengsiyu.dart';
 
 import '../entities/models/panel_config.dart';
 import '../entities/models/star_angle_raw_info.dart';
 import 'i_calculation_engine.dart';
 
+abstract interface class ISystemDefinitionSource {
+  Future<ZhouTianModel> getSystemDefinition(String fileName);
+}
+
 /// “天赤道制”计算引擎。
 ///
 /// 负责加载天赤道制的坐标系定义，并根据其特有的规则（查表、迭代）进行计算。
 class HistoricalEngine implements ICalculationEngine {
-  final SystemDefinitionLocalDataSource _dataSource;
+  final ISystemDefinitionSource _systemDefinitionSource;
+  final QiZhengHistoricalEphemerisRepository _ephemerisRepository;
 
-  HistoricalEngine() : _dataSource = SystemDefinitionLocalDataSource();
+  HistoricalEngine({
+    required ISystemDefinitionSource systemDefinitionSource,
+    required QiZhengHistoricalEphemerisRepository ephemerisRepository,
+  })  : _systemDefinitionSource = systemDefinitionSource,
+        _ephemerisRepository = ephemerisRepository;
 
   @override
   Future<ZhouTianModel> getSystemDefinition(BasePanelConfig config) {
     // For the historical engine, we always load the specific definition file.
-    return _dataSource.getSystemDefinition('tian_chi_dao_system.json');
+    return _systemDefinitionSource.getSystemDefinition('tian_chi_dao_system.json');
   }
 
   @override
@@ -30,8 +37,7 @@ class HistoricalEngine implements ICalculationEngine {
     final zhouTianModel = await getSystemDefinition(config);
 
     // 1. Load the sun speeds data
-    final sunSpeedsString = await rootBundle.loadString('assets/historical_ephemeris/sun_speeds.json');
-    final sunSpeeds = json.decode(sunSpeedsString) as Map<String, dynamic>;
+    final sunSpeeds = await _ephemerisRepository.loadHistoricalEphemeris();
 
     // 2. Find the start of the year (simplified)
     // TODO: This is a major simplification. A real implementation needs a robust solar term calculator.

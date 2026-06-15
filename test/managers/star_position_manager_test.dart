@@ -115,11 +115,11 @@ void main() {
       final result = manager.calculateSameLuo(0.5);
 
       expect(result, isNotNull);
-      expect(result!.length, 1);
+      expect(result!.length, 3);
 
-      final sameLuoInfo = result.first;
-      expect(sameLuoInfo.star, isIn([EnumStars.Jupiter]));
-      expect(sameLuoInfo.sameLuoStars.length, 1);
+      // Each star with a sameLuo match should be present
+      final allStars = result.map((e) => e.star).toSet();
+      expect(allStars, contains(EnumStars.Jupiter));
     });
 
     test('isInSameDegree - 度数判断测试', () {

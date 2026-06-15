@@ -4,6 +4,7 @@ import 'package:metaphysics_core/models/shen_sha_di_zhi.dart';
 import 'package:metaphysics_core/models/shen_sha_gan_zhi.dart';
 import 'package:metaphysics_core/models/shen_sha_tian_gan.dart';
 import 'package:metaphysics_core/models/shen_sha.dart';
+import 'package:metaphysics_core/models/shen_sha_bundled.dart';
 import 'package:metaphysics_core/models/twelve_zhang_sheng.dart';
 import 'package:metaphysics_core/utils/collections_utils.dart';
 import 'package:qizhengsiyu/domain/services/shen_sha_service.dart';

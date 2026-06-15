@@ -3,7 +3,6 @@ import 'package:metaphysics_core/enums.dart';
 import 'package:metaphysics_core/datamodel/basic_diviation_info.dart';
 import 'package:metaphysics_core/datamodel/basic_person_info.dart';
 import 'package:flutter/widgets.dart';
-import 'package:qizhengsiyu/enums/enum_panel_ring.dart';
 import 'package:qizhengsiyu/enums/enum_panel_system_type.dart';
 import 'package:qizhengsiyu/enums/enum_school.dart';
 import 'package:qizhengsiyu/enums/enum_settle_life_body.dart';
@@ -127,7 +126,7 @@ class PanelConfigViewModel extends ChangeNotifier {
     // switch (schoolType) {
     //   case EnumSchoolType.QinTang:
     //     _customConfig = _customConfig.copyWith(
-    //       coordinateSystem: CelestialCoordinateSystem.equatorial,
+    //       coordinateSystem: CelestialCoordinateSystem.Equatorial,
     //       classicBooks: ['星学大成'],
     //     );
     //     break;
@@ -179,10 +178,10 @@ class PanelConfigViewModel extends ChangeNotifier {
   static PanelConfig getPreviousPanelConfig() {
     // TODO: 从数据库恢复用户上次配置；当前返回默认配置
     return PanelConfig(
-      celestialCoordinateSystem: CelestialCoordinateSystem.ecliptic,
+      celestialCoordinateSystem: CelestialCoordinateSystem.Ecliptic,
       houseDivisionSystem: HouseDivisionSystem.equal,
-      panelSystemType: PanelSystemType.tropical,
-      constellationSystemType: ConstellationSystemType.classical,
+      panelSystemType: PanelSystemType.Tropical,
+      constellationSystemType: ConstellationSystemType.Classical,
       settleLifeType: EnumSettleLifeType.Mao,
       settleBodyType: EnumSettleBodyType.moon,
       islifeGongBySunRealTimeLocation: true,

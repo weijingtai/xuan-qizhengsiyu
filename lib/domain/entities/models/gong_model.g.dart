@@ -7,44 +7,48 @@ part of 'gong_model.dart';
 // **************************************************************************
 
 GongModel _$GongModelFromJson(Map<String, dynamic> json) => GongModel(
-      gong: $enumDecode(_$EnumTwelveGongEnumMap, json['gong']),
-      destinyGong:
-          $enumDecode(_$EnumDestinyTwelveGongEnumMap, json['destinyGong']),
-      enteredStars: (json['enteredStars'] as List<dynamic>)
-          .map((e) => ElevenStarsInfo.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      masterStars:
-          ElevenStarsInfo.fromJson(json['masterStars'] as Map<String, dynamic>),
-      zhangSheng: $enumDecode(_$TwelveZhangShengEnumMap, json['zhangSheng']),
-      beforeTaiSuiCirclingSha: $enumDecode(
-          _$EnumBeforeTaiSuiShenShaEnumMap, json['beforeTaiSuiCirclingSha']),
-      afterTaiSuiCirclingSha: $enumDecode(
-          _$EnumAfterTaiSuiShenShaEnumMap, json['afterTaiSuiCirclingSha']),
-      diZhiShenShaSet: (json['diZhiShenShaSet'] as List<dynamic>)
-          .map((e) => DiZhiShenSha.fromJson(e as Map<String, dynamic>))
-          .toSet(),
-      tianGanShenShaSet: (json['tianGanShenShaSet'] as List<dynamic>)
-          .map((e) => TianGanShenSha.fromJson(e as Map<String, dynamic>))
-          .toSet(),
-      otherShenShaSet: (json['otherShenShaSet'] as List<dynamic>)
-          .map((e) => ShenSha.fromJson(e as Map<String, dynamic>))
-          .toSet(),
-    );
+  gong: $enumDecode(_$EnumTwelveGongEnumMap, json['gong']),
+  destinyGong: $enumDecode(_$EnumDestinyTwelveGongEnumMap, json['destinyGong']),
+  enteredStars: (json['enteredStars'] as List<dynamic>)
+      .map((e) => ElevenStarsInfo.fromJson(e as Map<String, dynamic>))
+      .toList(),
+  masterStars: ElevenStarsInfo.fromJson(
+    json['masterStars'] as Map<String, dynamic>,
+  ),
+  zhangSheng: $enumDecode(_$TwelveZhangShengEnumMap, json['zhangSheng']),
+  beforeTaiSuiCirclingSha: $enumDecode(
+    _$EnumBeforeTaiSuiShenShaEnumMap,
+    json['beforeTaiSuiCirclingSha'],
+  ),
+  afterTaiSuiCirclingSha: $enumDecode(
+    _$EnumAfterTaiSuiShenShaEnumMap,
+    json['afterTaiSuiCirclingSha'],
+  ),
+  diZhiShenShaSet: (json['diZhiShenShaSet'] as List<dynamic>)
+      .map((e) => DiZhiShenSha.fromJson(e as Map<String, dynamic>))
+      .toSet(),
+  tianGanShenShaSet: (json['tianGanShenShaSet'] as List<dynamic>)
+      .map((e) => TianGanShenSha.fromJson(e as Map<String, dynamic>))
+      .toSet(),
+  otherShenShaSet: (json['otherShenShaSet'] as List<dynamic>)
+      .map((e) => ShenSha.fromJson(e as Map<String, dynamic>))
+      .toSet(),
+);
 
 Map<String, dynamic> _$GongModelToJson(GongModel instance) => <String, dynamic>{
-      'gong': _$EnumTwelveGongEnumMap[instance.gong]!,
-      'destinyGong': _$EnumDestinyTwelveGongEnumMap[instance.destinyGong]!,
-      'enteredStars': instance.enteredStars,
-      'masterStars': instance.masterStars,
-      'zhangSheng': _$TwelveZhangShengEnumMap[instance.zhangSheng]!,
-      'beforeTaiSuiCirclingSha':
-          _$EnumBeforeTaiSuiShenShaEnumMap[instance.beforeTaiSuiCirclingSha]!,
-      'afterTaiSuiCirclingSha':
-          _$EnumAfterTaiSuiShenShaEnumMap[instance.afterTaiSuiCirclingSha]!,
-      'tianGanShenShaSet': instance.tianGanShenShaSet.toList(),
-      'diZhiShenShaSet': instance.diZhiShenShaSet.toList(),
-      'otherShenShaSet': instance.otherShenShaSet.toList(),
-    };
+  'gong': _$EnumTwelveGongEnumMap[instance.gong]!,
+  'destinyGong': _$EnumDestinyTwelveGongEnumMap[instance.destinyGong]!,
+  'enteredStars': instance.enteredStars,
+  'masterStars': instance.masterStars,
+  'zhangSheng': _$TwelveZhangShengEnumMap[instance.zhangSheng]!,
+  'beforeTaiSuiCirclingSha':
+      _$EnumBeforeTaiSuiShenShaEnumMap[instance.beforeTaiSuiCirclingSha]!,
+  'afterTaiSuiCirclingSha':
+      _$EnumAfterTaiSuiShenShaEnumMap[instance.afterTaiSuiCirclingSha]!,
+  'tianGanShenShaSet': instance.tianGanShenShaSet.toList(),
+  'diZhiShenShaSet': instance.diZhiShenShaSet.toList(),
+  'otherShenShaSet': instance.otherShenShaSet.toList(),
+};
 
 const _$EnumTwelveGongEnumMap = {
   EnumTwelveGong.Zi: '子',

@@ -66,6 +66,10 @@ dependencies:
   sqlite3_flutter_libs: ^0.5.41
   path_provider: ^2.1.5
   path: ^1.8.3
+  persistence_drift:
+    path: ../xuan-storage/drift
+  persistence_assets:
+    path: ../xuan-storage/assets
 
 dev_dependencies:
   flutter_test:
@@ -129,3 +133,11 @@ flutter:
 dependency_overrides:
   persistence_core:
     path: ../xuan-storage/core
+  persistence_drift:
+    path: ../xuan-storage/drift
+  persistence_assets:
+    path: ../xuan-storage/assets
+  metaphysics_core:
+    path: ../xuan-metaphysics-core
+  xuan_gua_core:
+    path: ../xuan-gua-core

@@ -1,5 +1,4 @@
 import 'package:metaphysics_core/enums.dart';
-import 'package:flutter/foundation.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_annotation.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_condition_set.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_input.dart';
@@ -269,7 +268,7 @@ class GeJuEvaluator {
             : GeJuEvaluationStatus.unmatched,
       );
     } catch (e) {
-      debugPrint('GeJu: evaluationError for rule "${rule.name}" (${rule.id}): $e');
+      print('GeJu: evaluationError for rule "${rule.name}" (${rule.id}): $e');
       return GeJuResult.fromConditionSet(
         rule,
         targetCs,

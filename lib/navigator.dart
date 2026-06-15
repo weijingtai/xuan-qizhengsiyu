@@ -22,28 +22,18 @@ class NavigatorGenerator {
     // ============ 根路由 ============
     "/": (context, {arguments}) => const QiZhengSiYuHomePage(),
 
-    "/qizhengsiyu/panel": (context, {arguments}) => MultiProvider(providers: [
-          // ============ 核心依赖注入 ============
-          ...createProviders(context.read<QiZhengSiYuStorageDependencies>()),
-        ], child: const BeautyViewPage()
-            ),
+    "/qizhengsiyu/panel": (context, {arguments}) => const BeautyViewPage(),
 
     // ============ 七政四余首页 ============
     "/qizhengsiyu/home": (context, {arguments}) => const QiZhengSiYuHomePage(),
 
     // ============ 格局管理路由 ============
-    "/qizhengsiyu/ge_ju/list": (context, {arguments}) => MultiProvider(
-          providers: createProviders(context.read<QiZhengSiYuStorageDependencies>()),
-          child: const GeJuListPage(),
-        ),
+    "/qizhengsiyu/ge_ju/list": (context, {arguments}) => const GeJuListPage(),
 
     "/qizhengsiyu/ge_ju/detail": (context, {arguments}) {
       // arguments is a ruleId (String)
       if (arguments is String) {
-        return MultiProvider(
-          providers: createProviders(context.read<QiZhengSiYuStorageDependencies>()),
-          child: GeJuDetailPage(ruleId: arguments),
-        );
+        return GeJuDetailPage(ruleId: arguments);
       }
       return const Scaffold(body: Center(child: Text('参数错误')));
     },
@@ -55,35 +45,23 @@ class NavigatorGenerator {
         duplicateFromId = arguments['duplicate'] as String?;
         saveAsFromId = arguments['saveAs'] as String?;
       }
-      return MultiProvider(
-        providers: createProviders(context.read<QiZhengSiYuStorageDependencies>()),
-        child: GeJuEditorPage(
-          duplicateFromId: duplicateFromId,
-          saveAsFromId: saveAsFromId,
-        ),
+      return GeJuEditorPage(
+        duplicateFromId: duplicateFromId,
+        saveAsFromId: saveAsFromId,
       );
     },
 
     "/qizhengsiyu/ge_ju/edit": (context, {arguments}) {
       final ruleId = arguments as String?;
-      return MultiProvider(
-        providers: createProviders(context.read<QiZhengSiYuStorageDependencies>()),
-        child: GeJuEditorPage(ruleId: ruleId),
-      );
+      return GeJuEditorPage(ruleId: ruleId);
     },
 
     // ============ 流派管理路由 ============
-    "/qizhengsiyu/ge_ju/school/list": (context, {arguments}) => MultiProvider(
-          providers: createProviders(context.read<QiZhengSiYuStorageDependencies>()),
-          child: const GeJuSchoolListPage(),
-        ),
+    "/qizhengsiyu/ge_ju/school/list": (context, {arguments}) => const GeJuSchoolListPage(),
 
     "/qizhengsiyu/ge_ju/school/edit": (context, {arguments}) {
       final schoolId = arguments as String?;
-      return MultiProvider(
-        providers: createProviders(context.read<QiZhengSiYuStorageDependencies>()),
-        child: GeJuSchoolEditorPage(schoolId: schoolId),
-      );
+      return GeJuSchoolEditorPage(schoolId: schoolId);
     },
   };
 

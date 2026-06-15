@@ -7,22 +7,22 @@ part of 'ge_ju_variant.dart';
 // **************************************************************************
 
 GeJuVariant _$GeJuVariantFromJson(Map<String, dynamic> json) => GeJuVariant(
-      source: json['source'] as String,
-      description: json['description'] as String,
-      conditions: json['conditions'] == null
-          ? null
-          : GeJuCondition.fromJson(json['conditions'] as Map<String, dynamic>),
-      books: json['books'] as String? ?? "",
-      className: json['className'] as String? ?? '未分类',
-      jiXiong: $enumDecodeNullable(_$JiXiongEnumEnumMap, json['jiXiong']) ??
-          JiXiongEnum.PING,
-      geJuType: $enumDecodeNullable(_$GeJuTypeEnumMap, json['geJuType']) ??
-          GeJuType.pin,
-      schools: (json['schools'] as List<dynamic>?)
-              ?.map((e) => e as String)
-              .toList() ??
-          ['guolao'],
-    );
+  source: json['source'] as String,
+  description: json['description'] as String,
+  conditions: json['conditions'] == null
+      ? null
+      : GeJuCondition.fromJson(json['conditions'] as Map<String, dynamic>),
+  books: json['books'] as String? ?? "",
+  className: json['className'] as String? ?? '未分类',
+  jiXiong:
+      $enumDecodeNullable(_$JiXiongEnumEnumMap, json['jiXiong']) ??
+      JiXiongEnum.PING,
+  geJuType:
+      $enumDecodeNullable(_$GeJuTypeEnumMap, json['geJuType']) ?? GeJuType.pin,
+  schools:
+      (json['schools'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+      ['guolao'],
+);
 
 Map<String, dynamic> _$GeJuVariantToJson(GeJuVariant instance) =>
     <String, dynamic>{

@@ -36,6 +36,7 @@ class YuanLeResultPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final vm = context.read<QiZhengSiYuViewModel>();
+    final builder = context.read<YuanLePanelBuilder>();
 
     return ValueListenableBuilder<BasePanelModel?>(
       valueListenable: vm.uiBasePanelNotifier,
@@ -50,7 +51,7 @@ class YuanLeResultPanel extends StatelessWidget {
           builder: (context, transitPanel, _) {
             // 构建垣乐面板是异步操作
             return FutureBuilder<YuanLePanel>(
-              future: YuanLePanelBuilder.build(
+              future: builder.build(
                 natalPanel,
                 transitPanel: transitPanel,
               ),

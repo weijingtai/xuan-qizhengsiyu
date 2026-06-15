@@ -1,8 +1,7 @@
 import 'dart:convert';
 
 import 'package:metaphysics_core/enums.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/services.dart';
+import 'package:repository_interface_qizhengsiyu/repository_interface_qizhengsiyu.dart';
 import 'package:qizhengsiyu/dataset/star_position_status_model.dart';
 import 'package:qizhengsiyu/domain/entities/models/base_panel_model.dart';
 import 'package:qizhengsiyu/domain/entities/models/passage_year_panel_model.dart';
@@ -16,48 +15,43 @@ import 'package:qizhengsiyu/enums/enum_star_position_status.dart';
 
 import '../../enums/enum_twelve_gong.dart';
 
-/// 构建垣乐面板的 Builder 服务
 class YuanLePanelBuilder {
-  /// 缓存星体位置状态数据
-  static List<StarPositionStatusDatasetModel<EnumTwelveGong>>? _cachedStatusData;
+  final QiZhengStarPositionStatusRepository _positionStatusRepo;
+  List<StarPositionStatusDatasetModel<EnumTwelveGong>>? _cachedStatusData;
 
-  /// 加载星体位置状态数据（从 JSON 资源）
-  static Future<List<StarPositionStatusDatasetModel<EnumTwelveGong>>> _loadStarPositionStatusData() async {
-    if (_cachedStatusData != null) {
-      return _cachedStatusData!;
-    }
+  YuanLePanelBuilder({required QiZhengStarPositionStatusRepository positionStatusRepo})
+      : _positionStatusRepo = positionStatusRepo;
+
+  Future<List<StarPositionStatusDatasetModel<EnumTwelveGong>>> _loadStarPositionStatusData() async {
+    if (_cachedStatusData != null) return _cachedStatusData!;
 
     try {
-      final jsonString =
-          await rootBundle.loadString('assets/qizhengsiyu/star_position_status.json');
-      final jsonList = JsonDecoder().convert(jsonString) as List<dynamic>;
+      final contracts = await _positionStatusRepo.loadStarPositionStatus();
 
       final statusDataList = <StarPositionStatusDatasetModel<EnumTwelveGong>>[];
-      for (final json in jsonList) {
+      for (final contract in contracts) {
         try {
-          final model = StarPositionStatusDatasetModel<EnumTwelveGong>.fromJson(
-              json as Map<String, dynamic>);
+          final model = StarPositionStatusDatasetModel<EnumTwelveGong>.fromJson(contract.raw);
           statusDataList.add(model);
         } catch (e) {
-          // 跳过非宫位记录（如二十八宿数据），静默忽略
+          // 跳过非宫位记录
         }
       }
 
       _cachedStatusData = statusDataList;
       return statusDataList;
     } catch (e) {
-      debugPrint('[YuanLePanelBuilder] Error loading status data: $e');
+      // debugPrint 已移除，静默忽略
       return [];
     }
   }
 
   /// 从本命盘和流年盘构建垣乐面板
-  static Future<YuanLePanel> build(
+  Future<YuanLePanel> build(
     BasePanelModel natalPanel, {
     PassageYearPanelModel? transitPanel,
     ZhouTianModel? zhouTianModel,
   }) async {
-    // 加载星体位置状态数据
     final statusDataList = await _loadStarPositionStatusData();
 
     final natalStars =
@@ -73,7 +67,7 @@ class YuanLePanelBuilder {
   }
 
   /// 从 BasePanelModel 构建星体列表
-  static List<YuanLeStarInfo> _buildStarListFromBasePanel(
+  List<YuanLeStarInfo> _buildStarListFromBasePanel(
     BasePanelModel panelModel,
     List<StarPositionStatusDatasetModel<EnumTwelveGong>> statusDataList,
     ZhouTianModel? zhouTianModel,
@@ -158,7 +152,7 @@ class YuanLePanelBuilder {
   }
 
   /// 从 PassageYearPanelModel 构建星体列表
-  static List<YuanLeStarInfo> _buildStarListFromTransitPanel(
+  List<YuanLeStarInfo> _buildStarListFromTransitPanel(
     PassageYearPanelModel panelModel,
     List<StarPositionStatusDatasetModel<EnumTwelveGong>> statusDataList,
   ) {
@@ -211,7 +205,7 @@ class YuanLePanelBuilder {
   }
 
   /// 构建命主/身主信息
-  static YuanLeStarInfo _buildBodyLifeMasterInfo(
+  YuanLeStarInfo _buildBodyLifeMasterInfo(
     BodyLifeModel bodyLifeModel, {
     required bool isLife,
   }) {
@@ -241,7 +235,7 @@ class YuanLePanelBuilder {
   }
 
   /// 构建普通星体信息
-  static YuanLeStarInfo _buildStarInfo({
+  YuanLeStarInfo _buildStarInfo({
     required EnumStars star,
     required EnteredInfo enteredInfo,
     required BaseFiveStarWalkingInfo? fiveStarWalkingInfo,
@@ -272,7 +266,7 @@ class YuanLePanelBuilder {
 
   /// 从数据库查询星体在宫位或星宿的垣位状态
   /// 返回第一个匹配的状态（按优先级）
-  static EnumStarGongPositionStatusType? _queryPositionStatus<T extends Enum>(
+  EnumStarGongPositionStatusType? _queryPositionStatus<T extends Enum>(
     EnumStars star,
     T position,
     List<StarPositionStatusDatasetModel<EnumTwelveGong>> statusDataList,
@@ -324,7 +318,7 @@ class YuanLePanelBuilder {
   }
 
   /// 格式化星体运行状态（迟/留/伏/逆）
-  static String? _formatWalkingStatus(BaseFiveStarWalkingInfo? walkingInfo) {
+  String? _formatWalkingStatus(BaseFiveStarWalkingInfo? walkingInfo) {
     if (walkingInfo == null) return null;
 
     final walkingType = walkingInfo.walkingType;

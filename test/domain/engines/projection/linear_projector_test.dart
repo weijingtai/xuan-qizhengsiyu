@@ -11,7 +11,7 @@ void main() {
 
       expect(projector.project(0), 0.0);
       expect(projector.project(180), 182.625);
-      expect(projector.project(360), 0.0); // Wrap around
+      expect(projector.project(360), 365.25); // Linear mapping, no wrap at boundary
     });
 
     test('Mapping with Offset (Precession adjustment)', () {

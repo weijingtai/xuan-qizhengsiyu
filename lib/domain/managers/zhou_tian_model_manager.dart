@@ -1,23 +1,19 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:metaphysics_core/enums.dart';
-import 'package:flutter/services.dart';
-import 'package:tuple/tuple.dart';
+import 'package:xuan_logger/xuan_logger.dart';
 
-import 'package:qizhengsiyu/enums/enum_twelve_gong.dart';
+import 'package:repository_interface_qizhengsiyu/repository_interface_qizhengsiyu.dart';
 
-import '../../enums/enum_panel_system_type.dart';
 import '../../xing_xian/gong_constellation_mapping.dart';
 import '../entities/models/panel_config.dart';
 import '../entities/models/zhou_tian_model.dart';
 import 'zhou_tian_calculator.dart';
 
 class ZhouTianModelManager {
-  static ZhouTianModelManager? _instance;
-  static ZhouTianModelManager get instance =>
-      _instance ??= ZhouTianModelManager._();
+  final QiZhengZhouTianModelRepository _repository;
 
-  ZhouTianModelManager._();
+  ZhouTianModelManager({required QiZhengZhouTianModelRepository repository})
+      : _repository = repository;
 
   // 使用Map存储加载的ZhouTianModel
   final Map<String, ZhouTianModel> _mapper = {};
@@ -41,40 +37,22 @@ class ZhouTianModelManager {
     return _mapper; // Return the mapper as the resul
   }
 
-  /// 异步加载周天模型数据
+  /// 异步加载周天模型数据（通过注入的 repository）
   Future<void> load() async {
     if (_isLoaded) return;
 
     try {
-      // 1. 加载官方内置预设
-      await _loadBuiltinPresets();
+      final models = await _repository.loadBuiltInZhouTianModels();
+      for (final contract in models) {
+        final model = ZhouTianModel.fromJson(contract.raw);
+        _addModelToMapper(model);
+      }
       
-      // 2. 加载用户自定义预设 (如果环境允许)
       await loadUserSchemes();
 
       _isLoaded = true;
     } catch (e) {
       throw Exception('Failed to load ZhouTianModel data: $e');
-    }
-  }
-
-  Future<void> _loadBuiltinPresets() async {
-    // 定义需要加载的JSON文件列表
-    final List<String> jsonFiles = [
-      'assets/qizhengsiyu/ecliptic_tropical_morden.json',
-      'assets/qizhengsiyu/ecliptic_tropical_classical_adjusted.json',
-      'assets/qizhengsiyu/ecliptic_tropical_classical.json',
-    ];
-
-    // 并行加载所有JSON文件
-    final List<String> jsonContents = await Future.wait(
-        jsonFiles.map((file) => rootBundle.loadString(file)));
-
-    // 解析JSON并存储到映射器中
-    for (int i = 0; i < jsonContents.length; i++) {
-      final jsonData = json.decode(jsonContents[i]);
-      final model = ZhouTianModel.fromJson(jsonData);
-      _addModelToMapper(model);
     }
   }
 
@@ -182,11 +160,13 @@ class ZhouTianModelManager {
 
     return _mapper.values.where((model) {
       if (systemType != null && model.systemType != systemType) return false;
-      if (panelSystemType != null && model.panelSystemType != panelSystemType)
+      if (panelSystemType != null && model.panelSystemType != panelSystemType) {
         return false;
+      }
       if (constellationSystemType != null &&
-          model.constellationSystemType != constellationSystemType)
+          model.constellationSystemType != constellationSystemType) {
         return false;
+      }
       return true;
     }).toList();
   }
@@ -211,7 +191,7 @@ class ZhouTianModelManager {
     _isLoaded = false;
   }
 
-  /// 用于测试：从外部设置Map<String, ZhouTianModel>
+  /// 用于测试：从外部设置 `Map<String, ZhouTianModel>`
   void setModelsForTesting(Map<String, ZhouTianModel> models) {
     _mapper.clear();
     _mapper.addAll(models);

@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:math';
 
 import 'package:metaphysics_core/datamodel/datetime_divination_datamodel.dart';
 import 'package:metaphysics_core/datamodel/location.dart';
@@ -8,21 +7,13 @@ import 'package:metaphysics_core/enums.dart';
 import 'package:metaphysics_core/helpers/solar_lunar_datetime_helper.dart';
 import 'package:metaphysics_core/models/divination_datetime.dart';
 import 'package:metaphysics_core/models/divination_info_model.dart';
-import 'package:metaphysics_core/models/shen_sha.dart';
 import 'package:xuan_logger/xuan_logger.dart';
 import 'package:flutter/foundation.dart'; // 使用 @visibleForTesting
 import 'package:flutter/material.dart'; // ChangeNotifier 仍然需要
-import 'package:flutter/services.dart';
-import 'package:qizhengsiyu/data/datasources/local/hua_yao_local_data_source.dart';
-import 'package:qizhengsiyu/data/repositories/hua_yao_repository_impl.dart';
-import 'package:qizhengsiyu/domain/services/hua_yao_service.dart';
-import 'package:qizhengsiyu/domain/services/shen_sha_service.dart';
 
 import 'package:timezone/timezone.dart' as tz;
 import 'package:uuid/v7.dart';
 
-import '../../data/datasources/local/shen_sha_local_data_source.dart';
-import '../../data/repositories/shen_sha_repository_impl.dart';
 import '../../domain/entities/models/base_panel_model.dart';
 import '../../domain/entities/models/body_life_model.dart';
 import '../../domain/entities/models/observer_position.dart';
@@ -52,19 +43,8 @@ class BeautyPageViewModel extends ChangeNotifier {
   // static DivinationDatetimeModel? divinationDatetimeModel;
   ObserverDataModel? observer;
 
-  /// 紫气计算的基准时间点 (上海时区)。
-  /// 此计算方法基于特定术数规则，非标准天文计算。
-  static final tz.TZDateTime _ziQiBaseShangHaiTime =
-      tz.TZDateTime(tz.getLocation('Asia/Shanghai'), 2013, 4, 9, 2, 58);
   late final SaveCalculatedPanelUseCase saveCalculatedPanelUseCase;
   late final CalculateFateDongWeiUseCase calculateFateDongWeiUseCase;
-
-  /// 紫气每日运行角度 (度)。
-  /// 每24小时运行 02′07″，约等于 0.0352 度。
-  static const double _ziQiAnglePerDay = 0.0352;
-
-  /// 紫气每分钟运行角度 (度)。
-  static const double _ziQiAnglePerMinute = _ziQiAnglePerDay / (24 * 60);
 
   // MARK: - Star Data
 
@@ -112,29 +92,13 @@ class BeautyPageViewModel extends ChangeNotifier {
   double _fateMiniSafetyAngle = 7;
 
   /// 神煞数据管理器。
-  ShenShaManager? _shenShaManager;
-  ShenShaManager get shenShaManager {
-    // 提供一个默认值或抛出错误，如果在使用前未初始化
-    if (_shenShaManager == null) {
-      // 应该在init()中初始化
-      throw StateError('ShenShaManager not initialized. Call init() first.');
-    }
-    return _shenShaManager!;
-  }
+  final ShenShaManager shenShaManager;
 
-  ZhouTianModelManager get zhouTianModelManager =>
-      ZhouTianModelManager.instance;
+  /// 周天模型数据管理器。
+  final ZhouTianModelManager zhouTianModelManager;
 
   /// 化曜数据管理器。
-  HuaYaoManager? _huaYaoManager;
-  HuaYaoManager get huaYaoManager {
-    // 提供一个默认值或抛出错误，如果在使用前未初始化
-    if (_huaYaoManager == null) {
-      // 应该在init()中初始化
-      throw StateError('HuaYaoManager not initialized. Call init() first.');
-    }
-    return _huaYaoManager!;
-  }
+  final HuaYaoManager huaYaoManager;
 
   // MARK: - Services
 
@@ -146,29 +110,24 @@ class BeautyPageViewModel extends ChangeNotifier {
 
   /// QiZhengSiYuViewModel 构造函数。
   /// 注意: 移除了 BuildContext 参数，ViewModel 不应持有 UI Context。
-  BeautyPageViewModel(
-      {required this.saveCalculatedPanelUseCase,
-      required this.calculateFateDongWeiUseCase});
+  BeautyPageViewModel({
+      required this.saveCalculatedPanelUseCase,
+      required this.calculateFateDongWeiUseCase,
+      required this.shenShaManager,
+      required this.huaYaoManager,
+      required this.zhouTianModelManager,
+  });
 
   // MARK: - Initialization
 
   /// 异步初始化 ViewModel，加载神煞和化曜数据。
   Future<void> init() async {
     try {
-      final result = await Future.wait([
-        _loadShenShaManager(),
-        _loadHuaYaoManager(),
-        ZhouTianModelManager.instance.load(), // 添加周天模型加载
-      ]);
-      _shenShaManager = result[0] as ShenShaManager;
-      _huaYaoManager = result[1] as HuaYaoManager;
-      // 第三个结果是 void，不需要赋值
-      // 初始化服务，因为它依赖于 Manager
-      debugPrint("ViewModel init complete: Managers loaded.");
+      await zhouTianModelManager.load();
+      debugPrint("ViewModel init complete: ZhouTianModel loaded.");
     } catch (e) {
       debugPrint("Error initializing ViewModel: $e");
-      // 根据需要处理错误，例如显示一个错误消息
-      rethrow; // 重新抛出错误以便调用者处理
+      rethrow;
     }
   }
 
@@ -244,8 +203,9 @@ class BeautyPageViewModel extends ChangeNotifier {
   /// [observerPosition]: 包含出生信息、行限时间、经纬度、时区等观测者信息。
   Future<void> calculate(ObserverPosition observerPosition) async {
     // // 确保管理器和服务已初始化
-    // if (_shenShaManager == null || _huaYaoManager == null) {
-    //   await init(); // 如果未初始化则先初始化
+    // // Managers are now injected via constructor; no need to init here.
+    // if (false) {
+    //   await init();
     // }
     // 更新服务中的观测者位置
     _generateBasePanelService = GenerateBasePanelService(
@@ -552,53 +512,6 @@ class BeautyPageViewModel extends ChangeNotifier {
     await calculateDongWeiFate(bodyLifeModel: bodyLifeModel);
   }
 
-  /// 计算紫气在黄道坐标系中的位置。
-  /// 这个计算方法基于特定术数规则，非标准天文计算。
-  /// [datetime]: 计算紫气位置的时间 (UTC)。
-  /// 返回: 紫气在黄道上的角度 (度)。
-  double _calculateZiQi(DateTime datetime) {
-    // 将目标时间转换为上海时区，以便与基准时间比较
-    // 注意：Sweph计算使用UTC时间，但紫气基准是上海时间。
-    // 这里假设紫气的运行速度是相对于地球自转的相对速度，因此与本地时间差相关。
-    // 如果紫气运行速度是恒定的，与时区无关，则应直接使用UTC时间差。
-    // 原代码使用了UTC时间差与上海基准时间比较，这里沿用此逻辑，但需注意其合理性。
-    // 更严谨的做法可能是将datetime转换为tz.TZDateTime后再比较
-    // 但为了与 Sweph 计算的输入 (UTC DateTime) 一致，且原逻辑使用了UTC时间差，这里保留UTC时间差计算。
-
-    // 假设输入的 datetime 已经是 UTC 时间
-    final utcDateTime = datetime;
-    // 将上海基准时间转换为 UTC
-    final ziQiBaseUtcTime = _ziQiBaseShangHaiTime.toUtc();
-
-    if (utcDateTime.isAtSameMomentAs(ziQiBaseUtcTime)) {
-      return 0.0; // 在基准时间点，角度为 0
-    }
-
-    // 计算与基准时间的分钟差
-    var diffInMinutes = utcDateTime.isBefore(ziQiBaseUtcTime)
-        ? ziQiBaseUtcTime.difference(utcDateTime)
-        : utcDateTime.difference(ziQiBaseUtcTime);
-
-    // 计算运行角度
-    double result = diffInMinutes.inMinutes * _ziQiAnglePerMinute;
-
-    // 如果目标时间早于基准时间，角度应该倒退
-    if (utcDateTime.isBefore(ziQiBaseUtcTime)) {
-      result = -result;
-    }
-
-    // 规范化角度到 [0, 360) 范围
-    result = result % 360;
-    if (result < 0) {
-      result += 360;
-    }
-
-    // 保留小数点后两位
-    num factor = pow(10, 2);
-    result = ((result * factor).round() / factor);
-
-    return result;
-  }
 
   DivinationInfoModel? _divinationInfoModel;
 
@@ -804,151 +717,4 @@ class BeautyPageViewModel extends ChangeNotifier {
   }
 
   // MARK: - Data Loading
-
-  /// 异步加载神煞数据。
-  /// 从 asset 文件读取 JSON 并解析为 ShenShaManager。
-  /// 返回: ShenShaManager 实例。
-  Future<ShenShaManager> _loadShenShaManager() async {
-    debugPrint("Loading ShenSha data...");
-    try {
-      // 并行加载所有神煞数据文件
-      await Future.wait([
-        rootBundle.loadString('assets/shen_sha/74_shensha_tiangan.json'),
-        rootBundle.loadString('assets/shen_sha/74_shensha_dizhi_year.json'),
-        rootBundle.loadString('assets/shen_sha/74_shensha_dizhi_month.json'),
-        rootBundle.loadString('assets/shen_sha/74_shensha_ganzhi.json'),
-        rootBundle.loadString('assets/shen_sha/74_shensha_bundle.json'),
-        rootBundle.loadString('assets/shen_sha/74_shensha_others.json'),
-      ]);
-
-      debugPrint("ShenSha data loaded successfully.");
-      return ShenShaManager(
-          shenShaService: ShenShaService(
-              repository: ShenShaRepositoryImpl(
-                  localDataSource: ShenShaLocalDataSourceImpl())));
-      // return ShenShaManager(
-      //     tianGanShenSha: tianGanShenSha,
-      //     yearDiZhiShenSha: yearDiZhiShenSha,
-      //     monthDiZhiShenSha: monthDiZhiShenSha,
-      //     ganZhiShenSha: ganzhiShenSha,
-      //     bundledShenSha: bundledShenSha,
-      //     otherShenSha: otherShenSha);
-    } catch (e) {
-      debugPrint("Error loading ShenSha data: $e");
-      // 加载失败，可能需要抛出错误或返回一个空管理器
-      throw Exception("Failed to load ShenSha data: $e");
-    }
-  }
-
-  /// 异步加载化曜数据。
-  /// 从 asset 文件读取 JSON 并解析为 HuaYaoManager。
-  /// 返回: HuaYaoManager 实例。
-  Future<HuaYaoManager> _loadHuaYaoManager() async {
-    debugPrint("Loading HuaYao data...");
-    try {
-      await Future.wait([
-        rootBundle.loadString('assets/shen_sha/74_huayao_tiangan.json'),
-        rootBundle.loadString('assets/shen_sha/74_huayao_dizhi.json'),
-        rootBundle.loadString('assets/shen_sha/74_huayao_others.json'),
-      ]);
-
-      debugPrint("HuaYao data loaded successfully.");
-
-      return HuaYaoManager(
-          huaYaoService: HuaYaoService(
-              repository: HuaYaoRepositoryImpl(
-                  localDataSource: HuaYaoLocalDataSourceImpl())));
-      // return HuaYaoManager(
-      //   tianGanHuaYao: tianGanHuaYao,
-      //   diZhiHuaYao: diZhiHuaYao,
-      //   othersHuaYao: othersHuaYao,
-      // );
-    } catch (e) {
-      debugPrint("Error loading HuaYao data: $e");
-      // 加载失败，可能需要抛出错误或返回一个空管理器
-      throw Exception("Failed to load HuaYao data: $e");
-    }
-  }
-
-  // MARK: - New Calculation using Service
-
-  /// 使用 GenerateBasePanelService 计算星盘数据。
-  /// 这是新的计算流程，calculate 方法将调用此方法。
-  /// [calculateTime]: 需要计算星盘的时间 (UTC)。
-  /// 返回: BasePanelModel 包含计算出的星体角度和速度等基础信息。
-  Future<BasePanelModel> _calculatePanelWithService(
-      {required DateTime calculateTime}) async {
-    // 确保服务已初始化
-    if (_shenShaManager == null ||
-        _huaYaoManager == null ||
-        baseObserverPositionNotifier.value == null) {
-      throw StateError(
-          'ViewModel not fully initialized before calling _calculatePanelWithService.');
-    }
-
-    // 1. 创建计算引擎
-    final engine = CalculationEngineFactory.create(panelConfig);
-
-    // 2. 获取周天模型定义
-    final ZhouTianModel zhouTianModel =
-        await engine.getSystemDefinition(panelConfig);
-
-    // 3. 计算星体位置
-    final observerPosition = baseObserverPositionNotifier.value!;
-    final starPositions = await engine.calculateStarPositions(
-      calculateTime,
-      observerPosition,
-      panelConfig,
-    );
-
-    // 4. 转换星体位置为 starAngleMapper
-    final Map<EnumStars, StarAngleSpeed> starAngleMapper = {};
-    for (var pos in starPositions) {
-      final rawInfo = pos.angleRawInfoSet.firstWhere(
-        (info) =>
-            info.panelSystemType == panelConfig.panelSystemType &&
-            info.coordinateSystem == panelConfig.celestialCoordinateSystem,
-        orElse: () => pos.angleRawInfoSet.first,
-      );
-      starAngleMapper[pos.starType] = StarAngleSpeed(
-        angle: rawInfo.angle,
-        speed: rawInfo.speed,
-      );
-    }
-
-    return _generateBasePanelService.calculate(
-      zhouTianModel: zhouTianModel,
-      starAngleMapper: starAngleMapper,
-    );
-  }
-
-  // late final App74Database _database;
-
-  // 在构造函数或初始化方法中初始化
-  // void _initializeUseCases() {
-  //   _database = App74Database();
-  //   _saveCalculatedPanelUseCase =
-  //       SaveCalculatedPanelUseCase(_database.basePanelDao);
-  // }
-
-  // 修改现有的计算方法
-  // Future<void> calculatePanel() async {
-  //   try {
-  //     basicPanelModel = await _generateBasePanelService.calculate();
-
-  //     // 保存计算结果到数据库
-  //     final savedUuid = await _saveCalculatedPanelUseCase.execute(
-  //       basicPanelModel: basicPanelModel,
-  //       panelConfig: panelConfig, // 需要传入当前的配置
-  //       observerPosition: observerPosition, // 需要传入当前的观测位置
-  //       divinationUuid: currentDivinationUuid, // 如果有的话
-  //       seekerUuid: currentSeekerUuid, // 如果有的话
-  //     );
-
-  //     print('面板数据已保存，UUID: $savedUuid');
-  //   } catch (e) {
-  //     print('保存面板数据失败: $e');
-  //     // 处理错误
-  //   }
-  // }
 }

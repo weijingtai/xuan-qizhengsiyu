@@ -1,0 +1,145 @@
+{
+  "caseSetId": "qizhengsiyu_time_calculation_cases_v1",
+  "description": "Time-based regression cases for QiZhengSiYu calculation migration. Each case fixes the input time/location/config and records deterministic outputs that future engine, UseCase, ViewModel and Repository tests can compare.",
+  "engine": {
+    "defaultEngine": "SwephEngine",
+    "nativeBindingStatus": "full 11-star snapshots require SWEPH bindings; ziQiAngle is pure Dart and currently locked for every case"
+  },
+  "starSnapshotContract": [
+    "starAngles",
+    "enteredPositions",
+    "fiveStarWalkingTypes",
+    "bodyLife",
+    "twelveGong",
+    "shenSha",
+    "huaYao",
+    "twelveZhangSheng"
+  ],
+  "cases": [
+    {
+      "id": "shanghai_1990_new_year_noon",
+      "input": {
+        "birthDateTime": "1990-01-01T12:00:00.000+08:00",
+        "timezone": "Asia/Shanghai",
+        "longitude": 121.4737,
+        "latitude": 31.2304,
+        "panelSystem": "zodiac_tropical_modern",
+        "projectionStrategy": "linear"
+      },
+      "expected": {
+        "ziQiAngle": 344.848,
+        "goldenSnapshotRef": "golden_base_star_positions_v1",
+        "starSnapshotContract": [
+          "starAngles",
+          "enteredPositions",
+          "fiveStarWalkingTypes",
+          "bodyLife",
+          "twelveGong",
+          "shenSha",
+          "huaYao",
+          "twelveZhangSheng"
+        ]
+      }
+    },
+    {
+      "id": "ziqi_reference_2013_shanghai",
+      "input": {
+        "birthDateTime": "2013-04-09T02:58:00.000+08:00",
+        "timezone": "Asia/Shanghai",
+        "longitude": 121.4737,
+        "latitude": 31.2304,
+        "panelSystem": "zodiac_tropical_modern",
+        "projectionStrategy": "linear"
+      },
+      "expected": {
+        "ziQiAngle": 284.0,
+        "goldenSnapshotRef": null,
+        "starSnapshotContract": [
+          "starAngles",
+          "enteredPositions",
+          "fiveStarWalkingTypes",
+          "bodyLife",
+          "twelveGong",
+          "shenSha",
+          "huaYao",
+          "twelveZhangSheng"
+        ]
+      }
+    },
+    {
+      "id": "spring_equinox_2024_beijing",
+      "input": {
+        "birthDateTime": "2024-03-20T08:00:00.000+08:00",
+        "timezone": "Asia/Shanghai",
+        "longitude": 116.4074,
+        "latitude": 39.9042,
+        "panelSystem": "zodiac_tropical_modern",
+        "projectionStrategy": "linear"
+      },
+      "expected": {
+        "ziQiAngle": 64.737,
+        "goldenSnapshotRef": null,
+        "starSnapshotContract": [
+          "starAngles",
+          "enteredPositions",
+          "fiveStarWalkingTypes",
+          "bodyLife",
+          "twelveGong",
+          "shenSha",
+          "huaYao",
+          "twelveZhangSheng"
+        ]
+      }
+    },
+    {
+      "id": "summer_solstice_2024_chengdu_noon",
+      "input": {
+        "birthDateTime": "2024-06-21T12:00:00.000+08:00",
+        "timezone": "Asia/Shanghai",
+        "longitude": 104.0665,
+        "latitude": 30.5728,
+        "panelSystem": "zodiac_tropical_modern",
+        "projectionStrategy": "linear"
+      },
+      "expected": {
+        "ziQiAngle": 68.016,
+        "goldenSnapshotRef": null,
+        "starSnapshotContract": [
+          "starAngles",
+          "enteredPositions",
+          "fiveStarWalkingTypes",
+          "bodyLife",
+          "twelveGong",
+          "shenSha",
+          "huaYao",
+          "twelveZhangSheng"
+        ]
+      }
+    },
+    {
+      "id": "future_2030_year_end_london",
+      "input": {
+        "birthDateTime": "2030-12-31T15:30:00.000Z",
+        "timezone": "Europe/London",
+        "longitude": -0.1276,
+        "latitude": 51.5072,
+        "panelSystem": "zodiac_tropical_modern",
+        "projectionStrategy": "linear"
+      },
+      "expected": {
+        "ziQiAngle": 151.95,
+        "goldenSnapshotRef": null,
+        "starSnapshotContract": [
+          "starAngles",
+          "enteredPositions",
+          "fiveStarWalkingTypes",
+          "bodyLife",
+          "twelveGong",
+          "shenSha",
+          "huaYao",
+          "twelveZhangSheng"
+        ]
+      }
+    }
+  ]
+}

@@ -80,7 +80,7 @@ class _YuanLeResultPanelV2State extends State<YuanLeResultPanelV2> {
     }
     _lastNatalPanel = natalPanel;
     _lastTransitPanel = transitPanel;
-    _cachedFuture = YuanLePanelBuilder.build(
+    _cachedFuture = context.read<YuanLePanelBuilder>().build(
       natalPanel,
       transitPanel: transitPanel,
     );

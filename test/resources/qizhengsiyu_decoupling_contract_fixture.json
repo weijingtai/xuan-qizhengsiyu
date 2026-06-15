@@ -1,0 +1,102 @@
+{
+  "caseId": "qizhengsiyu_decoupling_contract_v1",
+  "description": "Layer-oriented fixture for future QiZhengSiYu decoupling tests. It keeps UI, ViewModel, UseCase and Repository inputs separate while referencing the same golden calculation snapshot.",
+  "goldenSnapshotRef": "golden_base_star_positions_v1",
+  "uiLayerInput": {
+    "allowedConsumer": "UI",
+    "purpose": "Widget tests and view rendering should consume display-ready primitives and notify ViewModel commands without knowing calculation or storage details.",
+    "forbiddenDependencies": [
+      "Repository",
+      "UseCase",
+      "Drift",
+      "Database"
+    ],
+    "screen": "QiZhengSiYuHomePage",
+    "displayState": {
+      "birthDateTimeText": "1990-01-01 12:00",
+      "locationText": "Shanghai",
+      "selectedPanelSystem": "zodiac_tropical_modern",
+      "selectedProjection": "linear",
+      "showGeJu": true,
+      "showFatePanel": false
+    },
+    "commandIntent": {
+      "name": "calculateBasePanel",
+      "target": "ViewModel",
+      "payloadRef": "viewModelCommand"
+    }
+  },
+  "viewModelCommand": {
+    "allowedConsumer": "ViewModel",
+    "purpose": "ViewModel tests should verify UI state is translated into a UseCase request and that calculated snapshots are exposed back as view state.",
+    "forbiddenDependencies": [
+      "Drift",
+      "Sqlite",
+      "BuildContext-owned persistence"
+    ],
+    "emitsUseCase": "CalculateBasePanelUseCase",
+    "command": {
+      "birthDateTime": "1990-01-01T12:00:00.000+08:00",
+      "timezone": "Asia/Shanghai",
+      "longitude": 121.4737,
+      "latitude": 31.2304,
+      "panelSystem": "zodiac_tropical_modern",
+      "projectionStrategy": "linear",
+      "shouldPersistResult": false
+    },
+    "expectedViewState": {
+      "status": "calculated",
+      "starSnapshotRef": "golden_base_star_positions_v1",
+      "visibleStarCount": 11,
+      "visibleWalkingTypeCount": 5
+    }
+  },
+  "useCaseRequest": {
+    "allowedConsumer": "UseCase",
+    "purpose": "UseCase tests should verify orchestration of calculation services and repository ports without depending on Flutter widgets or concrete storage adapters.",
+    "forbiddenDependencies": [
+      "BuildContext",
+      "Widget",
+      "ChangeNotifier",
+      "DriftTable"
+    ],
+    "repositoryPort": "QiZhengSiYuPanRepository",
+    "input": {
+      "birthDateTime": "1990-01-01T12:00:00.000+08:00",
+      "observer": {
+        "longitude": 121.4737,
+        "latitude": 31.2304,
+        "timezone": "Asia/Shanghai"
+      },
+      "panelSystem": "zodiac_tropical_modern",
+      "projectionStrategy": "linear"
+    },
+    "expectedOutput": {
+      "snapshotRef": "golden_base_star_positions_v1",
+      "starCount": 11,
+      "walkingTypeCount": 5
+    }
+  },
+  "repositorySeed": {
+    "allowedConsumer": "Repository",
+    "purpose": "Repository tests should verify persistence mapping for calculated panel snapshots without invoking UI, ViewModel, or calculation services.",
+    "forbiddenDependencies": [
+      "BuildContext",
+      "Widget",
+      "ChangeNotifier",
+      "CalculateBasePanelUseCase"
+    ],
+    "storageContract": "panel_snapshot_json",
+    "entity": {
+      "id": "fixture-panel-19900101-shanghai",
+      "createdAt": "2026-06-14T00:00:00.000Z",
+      "schemaVersion": 1
+    },
+    "payload": {
+      "snapshotRef": "golden_base_star_positions_v1",
+      "sourceFixture": "test/resources/golden_base_star_positions.json",
+      "panelSystem": "zodiac_tropical_modern",
+      "projectionStrategy": "linear"
+    }
+  }
+}

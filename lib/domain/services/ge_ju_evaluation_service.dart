@@ -1,5 +1,4 @@
 import 'package:metaphysics_core/enums.dart';
-import 'package:flutter/foundation.dart';
 import 'package:qizhengsiyu/domain/entities/models/base_panel_model.dart';
 import 'package:qizhengsiyu/domain/entities/models/eleven_stars_info.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_input.dart';
@@ -9,14 +8,14 @@ import 'package:qizhengsiyu/domain/managers/ge_ju/ge_ju_input_builder.dart';
 import 'package:qizhengsiyu/domain/repositories/ge_ju_repository.dart';
 import 'package:qizhengsiyu/enums/enum_panel_system_type.dart';
 import 'package:qizhengsiyu/enums/enum_twelve_gong.dart';
-import 'package:qizhengsiyu/data/contract_mappers/qizhengsiyu_contract_mappers.dart';
+import 'package:qizhengsiyu/domain/repositories/ge_ju_product_repository.dart';
 
 /// 格局评估服务
 ///
-/// 连接 [GeJuRepositoryAdapter]（数据层）与 [GeJuEvaluator]（评估引擎）。
+/// 连接 [GeJuProductRepository]（仓储接口）与 [GeJuEvaluator]（评估引擎）。
 /// 负责从 Repository 加载并组装 [RuleEvaluationData]，然后调用评估器。
 class GeJuEvaluationService {
-  final GeJuRepositoryAdapter _repository;
+  final GeJuProductRepository _repository;
 
   /// 组装好的规则数据缓存（避免每次评估重复加载）
   List<RuleEvaluationData>? _assembledRuleDataCache;
@@ -24,7 +23,7 @@ class GeJuEvaluationService {
   /// 是否启用预过滤器（debug 用，可运行时切换）
   bool usePreFilter = true;
 
-  GeJuEvaluationService({required GeJuRepositoryAdapter repository})
+  GeJuEvaluationService({required GeJuProductRepository repository})
       : _repository = repository;
 
   /// 使缓存失效（CRUD 操作后调用）
@@ -47,7 +46,7 @@ class GeJuEvaluationService {
     required DiZhi monthZhi,
     required JiaZi yearJiaZi,
     CelestialCoordinateSystem coordinateSystem =
-        CelestialCoordinateSystem.ecliptic,
+        CelestialCoordinateSystem.Ecliptic,
     Set<String> preferredSchools = const {'guo_lao'},
     bool onlyMatched = false,
   }) async {
@@ -88,7 +87,7 @@ class GeJuEvaluationService {
     required EnumTwelveGong xianGong,
     required Enum28Constellations xianConstellation,
     CelestialCoordinateSystem coordinateSystem =
-        CelestialCoordinateSystem.ecliptic,
+        CelestialCoordinateSystem.Ecliptic,
     Set<String> preferredSchools = const {'guo_lao'},
     bool onlyMatched = false,
   }) async {
@@ -137,7 +136,7 @@ class GeJuEvaluationService {
   /// 输出评估汇总日志
   void _printEvaluationSummary(String label, GeJuEvaluationSummary summary) {
     final mode = usePreFilter ? 'optimized' : 'classic';
-    debugPrint('GeJu[$label|$mode] ${summary.matchedCount}/${summary.totalCount} matched '
+    print('GeJu[$label|$mode] ${summary.matchedCount}/${summary.totalCount} matched '
         '| preFilterRejected=${summary.totalPreFilterRejected} '
         '| conditionMissing=${summary.totalConditionMissing} '
         '| errors=${summary.totalEvaluationErrors} '
