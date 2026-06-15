@@ -3,6 +3,7 @@ import 'package:provider/single_child_widget.dart';
 import 'package:repository_interface_qizhengsiyu/repository_interface_qizhengsiyu.dart';
 import 'package:qizhengsiyu/qizhengsiyu_storage_dependencies.dart';
 import 'package:qizhengsiyu/data/contract_mappers/qizhengsiyu_contract_mappers.dart';
+import 'package:qizhengsiyu/domain/repositories/ge_ju_product_repository.dart';
 import 'package:qizhengsiyu/domain/managers/zhou_tian_model_manager.dart';
 import 'package:qizhengsiyu/domain/managers/shen_sha_manager.dart';
 import 'package:qizhengsiyu/domain/managers/hua_yao_manager.dart';
@@ -11,17 +12,57 @@ import 'package:qizhengsiyu/domain/repositories/hua_yao_repository.dart';
 import 'package:qizhengsiyu/domain/services/shen_sha_service.dart';
 import 'package:qizhengsiyu/domain/services/hua_yao_service.dart';
 import 'package:qizhengsiyu/presentation/viewmodels/qi_zheng_si_yu_viewmodel.dart';
+import 'package:metaphysics_core/enums.dart';
+import 'package:qizhengsiyu/domain/entities/models/panel_config.dart';
+import 'package:qizhengsiyu/domain/engines/calculation_engine_factory.dart';
+import 'package:qizhengsiyu/domain/engines/i_calculation_engine.dart';
+import 'package:qizhengsiyu/domain/engines/sweph_engine.dart';
+import 'package:qizhengsiyu/domain/engines/historical_engine.dart';
+import 'package:qizhengsiyu/data/datasources/local/definitions/system_definition_local_data_source.dart';
+import 'package:qizhengsiyu/enums/enum_panel_system_type.dart';
+
+// UseCase 导入
+import 'package:qizhengsiyu/domain/usecases/initialize_qizheng_official_data_usecase.dart';
+import 'package:qizhengsiyu/domain/usecases/calculate_qizheng_base_panel_usecase.dart';
+import 'package:qizhengsiyu/domain/usecases/evaluate_qizheng_ge_ju_usecase.dart';
+import 'package:qizhengsiyu/domain/usecases/build_qizheng_timeline_usecase.dart';
+import 'package:qizhengsiyu/domain/usecases/save_calculated_panel_usecase.dart';
 
 // GeJu 相关导入
 import 'package:qizhengsiyu/domain/services/ge_ju_crud_service.dart';
 import 'package:qizhengsiyu/domain/services/ge_ju_evaluation_service.dart';
+import 'package:qizhengsiyu/domain/services/yuan_le_panel_builder.dart';
 import 'package:qizhengsiyu/presentation/viewmodels/ge_ju_list_viewmodel.dart';
 import 'package:qizhengsiyu/presentation/viewmodels/ge_ju_editor_viewmodel.dart';
 import 'package:qizhengsiyu/presentation/viewmodels/ge_ju_detail_viewmodel.dart';
 import 'package:qizhengsiyu/presentation/viewmodels/ge_ju_school_list_viewmodel.dart';
 import 'package:qizhengsiyu/presentation/viewmodels/ge_ju_school_editor_viewmodel.dart';
 
+class AppCalculationEngineProvider implements ICalculationEngineProvider {
+  final QiZhengSiYuStorageDependencies _deps;
+
+  AppCalculationEngineProvider(this._deps);
+
+  @override
+  ICalculationEngine getEngine(BasePanelConfig config) {
+    if (config.celestialCoordinateSystem == CelestialCoordinateSystem.SkyEquatorial) {
+      return HistoricalEngine(
+        systemDefinitionSource: SystemDefinitionLocalDataSource(),
+        ephemerisRepository: _deps.historicalEphemeris,
+      );
+    } else {
+      return SwephEngine(ephemerisRes: _deps.ephemerisResource);
+    }
+  }
+}
+
 List<SingleChildWidget> createProviders(QiZhengSiYuStorageDependencies deps) {
+  // Initialize calculation engine factory provider
+  CalculationEngineFactory.setProvider(AppCalculationEngineProvider(deps));
+
+  // Construct injectable ZhouTianModelManager
+  final zhouTianModelManager = ZhouTianModelManager(repository: deps.zhouTianModelRepository);
+
   // Create adapters that bridge contract ports → product types
   final shenShaRepo = ShenShaRepositoryAdapter(deps.shenSha);
   final huaYaoRepo = HuaYaoRepositoryAdapter(deps.huaYao);
@@ -51,7 +92,7 @@ List<SingleChildWidget> createProviders(QiZhengSiYuStorageDependencies deps) {
 
     // ============ Managers ============
     Provider<ZhouTianModelManager>(
-      create: (_) => ZhouTianModelManager.instance,
+      create: (_) => zhouTianModelManager,
     ),
     Provider<ShenShaManager>(
       create: (context) => ShenShaManager(
@@ -67,21 +108,21 @@ List<SingleChildWidget> createProviders(QiZhengSiYuStorageDependencies deps) {
     // ============ GeJu 格局管理 (port-injected) ============
 
     // GeJu Repository (adapter wrapping contract port)
-    Provider<GeJuRepositoryAdapter>(
+    Provider<GeJuProductRepository>(
       create: (_) => geJuRepo,
     ),
 
     // GeJu CRUD Service
     Provider<GeJuCrudService>(
       create: (context) => GeJuCrudService(
-        repository: context.read<GeJuRepositoryAdapter>(),
+        repository: context.read<GeJuProductRepository>(),
       ),
     ),
 
     // GeJu Evaluation Service
     Provider<GeJuEvaluationService>(
       create: (context) => GeJuEvaluationService(
-        repository: context.read<GeJuRepositoryAdapter>(),
+        repository: context.read<GeJuProductRepository>(),
       ),
     ),
 
@@ -90,13 +131,50 @@ List<SingleChildWidget> createProviders(QiZhengSiYuStorageDependencies deps) {
       create: (_) => geJuSchool,
     ),
 
+    // ============ Domain Services (non-static) ============
+    Provider<YuanLePanelBuilder>(
+      create: (context) => YuanLePanelBuilder(
+        positionStatusRepo: deps.starPositionStatus,
+      ),
+    ),
+
+    // ============ UseCases ============
+    Provider<InitializeQiZhengOfficialDataUseCase>(
+      create: (context) => InitializeQiZhengOfficialDataUseCase(
+        zhouTianModelManager: context.read<ZhouTianModelManager>(),
+      ),
+    ),
+    Provider<CalculateQiZhengBasePanelUseCase>(
+      create: (context) => CalculateQiZhengBasePanelUseCase(
+        shenShaManager: context.read<ShenShaManager>(),
+        huaYaoManager: context.read<HuaYaoManager>(),
+      ),
+    ),
+    Provider<EvaluateQiZhengGeJuUseCase>(
+      create: (context) => EvaluateQiZhengGeJuUseCase(
+        geJuEvaluationService: context.read<GeJuEvaluationService>(),
+      ),
+    ),
+    Provider<BuildQiZhengTimelineUseCase>(
+      create: (context) => BuildQiZhengTimelineUseCase(
+        shenShaManager: context.read<ShenShaManager>(),
+        huaYaoManager: context.read<HuaYaoManager>(),
+      ),
+    ),
+    Provider<SaveCalculatedPanelUseCase>(
+      create: (context) => SaveCalculatedPanelUseCase(
+        qiZhengSiYuPanRepository: deps.panRepository,
+      ),
+    ),
+
     // ============ ViewModels ============
     ChangeNotifierProvider<QiZhengSiYuViewModel>(
       create: (context) => QiZhengSiYuViewModel(
-        shenShaManager: context.read<ShenShaManager>(),
-        huaYaoManager: context.read<HuaYaoManager>(),
-        zhouTianModelManager: context.read<ZhouTianModelManager>(),
-        geJuEvaluationService: context.read<GeJuEvaluationService>(),
+        initializeOfficialDataUseCase: context.read<InitializeQiZhengOfficialDataUseCase>(),
+        calculateBasePanelUseCase: context.read<CalculateQiZhengBasePanelUseCase>(),
+        evaluateGeJuUseCase: context.read<EvaluateQiZhengGeJuUseCase>(),
+        buildTimelineUseCase: context.read<BuildQiZhengTimelineUseCase>(),
+        saveCalculatedPanelUseCase: context.read<SaveCalculatedPanelUseCase>(),
       ),
     ),
 

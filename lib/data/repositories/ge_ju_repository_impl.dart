@@ -1,14 +1,16 @@
 import 'package:flutter/foundation.dart';
+import 'package:repository_interface_qizhengsiyu/repository_interface_qizhengsiyu.dart'
+    hide GeJuBuiltInDataSource;
 import 'package:qizhengsiyu/data/datasources/local/daos/ge_ju_dao.dart';
 import 'package:qizhengsiyu/data/datasources/local/ge_ju_legacy_migrator.dart';
 import 'package:qizhengsiyu/data/datasources/local/ge_ju_local_data_source.dart';
+import 'package:qizhengsiyu/data/contract_mappers/qizhengsiyu_contract_mappers.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_annotation.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_condition_set.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_deletion_record.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_rule.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_user_preference.dart';
 import 'package:qizhengsiyu/domain/errors/ge_ju_errors.dart';
-import 'package:qizhengsiyu/domain/repositories/ge_ju_repository.dart';
 
 /// 格局仓库实现（三实体模型）
 ///
@@ -49,31 +51,34 @@ class GeJuRepositoryImpl implements IGeJuRepository {
   // ══════════════════════════════════════════
 
   @override
-  Future<List<GeJuRule>> loadAllRules() async {
+  Future<List<GeJuRuleContract>> loadAllRules() async {
     await _ensureMigrated();
     final builtIn = await _ensureBuiltInRulesLoaded();
     final userRules = await _queryDb(() => _dao.getAllRules(), <GeJuRule>[]);
-    return [...builtIn, ...userRules];
+    final result = [...builtIn, ...userRules];
+    return result.map(geJuRuleToContract).toList();
   }
 
   @override
-  Future<GeJuRule?> getRuleById(String id) async {
+  Future<GeJuRuleContract?> getRuleById(String id) async {
     // 先查内置
     final builtIn = await _ensureBuiltInRulesLoaded();
     for (final rule in builtIn) {
-      if (rule.id == id) return rule;
+      if (rule.id == id) return geJuRuleToContract(rule);
     }
     // 再查用户库
-    return await _queryDb(() => _dao.getRuleById(id), null);
+    final rule = await _queryDb(() => _dao.getRuleById(id), null);
+    return rule != null ? geJuRuleToContract(rule) : null;
   }
 
   @override
-  Future<void> saveUserRule(GeJuRule rule) async {
+  Future<void> saveUserRule(GeJuRuleContract rule) async {
     _requireDb();
-    if (isBuiltInRule(rule.id)) {
-      throw BuiltInRuleModificationError(rule.id);
+    final productRule = geJuRuleFromContract(rule);
+    if (isBuiltInRule(productRule.id)) {
+      throw BuiltInRuleModificationError(productRule.id);
     }
-    await _dao.insertRule(rule);
+    await _dao.insertRule(productRule);
   }
 
   @override
@@ -98,32 +103,35 @@ class GeJuRepositoryImpl implements IGeJuRepository {
   // ══════════════════════════════════════════
 
   @override
-  Future<List<GeJuConditionSet>> getConditionSetsForRule(String ruleId) async {
+  Future<List<GeJuConditionSetContract>> getConditionSetsForRule(String ruleId) async {
     await _ensureBuiltInConditionSetsLoaded();
     final builtIn = _builtInConditionSetsByRuleId?[ruleId] ?? [];
     final user = await _queryDb(
         () => _dao.getConditionSetsForRule(ruleId), <GeJuConditionSet>[]);
-    return [...builtIn, ...user];
+    final result = [...builtIn, ...user];
+    return result.map(geJuConditionSetToContract).toList();
   }
 
   @override
-  Future<GeJuConditionSet?> getConditionSetById(String id) async {
+  Future<GeJuConditionSetContract?> getConditionSetById(String id) async {
     // 先查内置
     final builtInAll = await _ensureBuiltInConditionSetsLoaded();
     for (final cs in builtInAll) {
-      if (cs.id == id) return cs;
+      if (cs.id == id) return geJuConditionSetToContract(cs);
     }
     // 再查用户库
-    return await _queryDb(() => _dao.getConditionSetById(id), null);
+    final cs = await _queryDb(() => _dao.getConditionSetById(id), null);
+    return cs != null ? geJuConditionSetToContract(cs) : null;
   }
 
   @override
-  Future<void> saveUserConditionSet(GeJuConditionSet cs) async {
+  Future<void> saveUserConditionSet(GeJuConditionSetContract cs) async {
     _requireDb();
-    if (cs.isBuiltIn) {
-      throw BuiltInRuleModificationError(cs.id);
+    final productCs = geJuConditionSetFromContract(cs);
+    if (productCs.isBuiltIn) {
+      throw BuiltInRuleModificationError(productCs.id);
     }
-    await _dao.insertConditionSet(cs);
+    await _dao.insertConditionSet(productCs);
   }
 
   @override
@@ -143,32 +151,35 @@ class GeJuRepositoryImpl implements IGeJuRepository {
   // ══════════════════════════════════════════
 
   @override
-  Future<List<GeJuAnnotation>> getAnnotationsForRule(String ruleId) async {
+  Future<List<GeJuAnnotationContract>> getAnnotationsForRule(String ruleId) async {
     await _ensureBuiltInAnnotationsLoaded();
     final builtIn = _builtInAnnotationsByRuleId?[ruleId] ?? [];
     final user = await _queryDb(
         () => _dao.getAnnotationsForRule(ruleId), <GeJuAnnotation>[]);
-    return [...builtIn, ...user];
+    final result = [...builtIn, ...user];
+    return result.map(geJuAnnotationToContract).toList();
   }
 
   @override
-  Future<GeJuAnnotation?> getAnnotationById(String id) async {
+  Future<GeJuAnnotationContract?> getAnnotationById(String id) async {
     // 先查内置
     final builtInAll = await _ensureBuiltInAnnotationsLoaded();
     for (final ann in builtInAll) {
-      if (ann.id == id) return ann;
+      if (ann.id == id) return geJuAnnotationToContract(ann);
     }
     // 再查用户库
-    return await _queryDb(() => _dao.getAnnotationById(id), null);
+    final ann = await _queryDb(() => _dao.getAnnotationById(id), null);
+    return ann != null ? geJuAnnotationToContract(ann) : null;
   }
 
   @override
-  Future<void> saveUserAnnotation(GeJuAnnotation ann) async {
+  Future<void> saveUserAnnotation(GeJuAnnotationContract ann) async {
     _requireDb();
-    if (ann.isBuiltIn) {
-      throw BuiltInRuleModificationError(ann.id);
+    final productAnn = geJuAnnotationFromContract(ann);
+    if (productAnn.isBuiltIn) {
+      throw BuiltInRuleModificationError(productAnn.id);
     }
-    await _dao.insertAnnotation(ann);
+    await _dao.insertAnnotation(productAnn);
   }
 
   @override
@@ -188,15 +199,17 @@ class GeJuRepositoryImpl implements IGeJuRepository {
   // ══════════════════════════════════════════
 
   @override
-  Future<GeJuUserPreference> getPreference() async {
-    return await _queryDb(
+  Future<Map<String, dynamic>> getPreference() async {
+    final pref = await _queryDb(
         () => _dao.getPreference(), GeJuUserPreference.defaultPreference);
+    return pref.toJson();
   }
 
   @override
-  Future<void> savePreference(GeJuUserPreference pref) async {
+  Future<void> savePreference(Map<String, dynamic> pref) async {
     _requireDb();
-    await _dao.savePreference(pref);
+    final productPref = GeJuUserPreference.fromJson(pref);
+    await _dao.savePreference(productPref);
   }
 
   // ══════════════════════════════════════════
@@ -204,9 +217,10 @@ class GeJuRepositoryImpl implements IGeJuRepository {
   // ══════════════════════════════════════════
 
   @override
-  Future<void> recordDeletion(GeJuDeletionRecord record) async {
+  Future<void> recordDeletion(Map<String, dynamic> record) async {
     _requireDb();
-    await _dao.insertDeletionRecord(record);
+    final productRecord = GeJuDeletionRecord.fromJson(record);
+    await _dao.insertDeletionRecord(productRecord);
   }
 
   // ══════════════════════════════════════════
@@ -227,13 +241,15 @@ class GeJuRepositoryImpl implements IGeJuRepository {
   // ══════════════════════════════════════════
 
   @override
-  Future<List<GeJuRule>> loadBuiltInRules() async {
-    return await _ensureBuiltInRulesLoaded();
+  Future<List<GeJuRuleContract>> loadBuiltInRules() async {
+    final rules = await _ensureBuiltInRulesLoaded();
+    return rules.map(geJuRuleToContract).toList();
   }
 
   @override
-  Future<List<GeJuRule>> loadUserRules() async {
-    return await _queryDb(() => _dao.getAllRules(), <GeJuRule>[]);
+  Future<List<GeJuRuleContract>> loadUserRules() async {
+    final rules = await _queryDb(() => _dao.getAllRules(), <GeJuRule>[]);
+    return rules.map(geJuRuleToContract).toList();
   }
 
   // ══════════════════════════════════════════
@@ -317,7 +333,7 @@ class GeJuRepositoryImpl implements IGeJuRepository {
   // ══════════════════════════════════════════
 
   @override
-  Future<Map<String, List<GeJuConditionSet>>> loadAllConditionSetsGrouped() async {
+  Future<Map<String, List<GeJuConditionSetContract>>> loadAllConditionSetsGrouped() async {
     await _ensureBuiltInConditionSetsLoaded();
     final result = <String, List<GeJuConditionSet>>{};
     // 复制 built-in 索引
@@ -329,11 +345,13 @@ class GeJuRepositoryImpl implements IGeJuRepository {
     for (final cs in userAll) {
       result.putIfAbsent(cs.ruleId, () => []).add(cs);
     }
-    return result;
+    // Map to contract types
+    return result.map((key, value) =>
+        MapEntry(key, value.map(geJuConditionSetToContract).toList()));
   }
 
   @override
-  Future<Map<String, List<GeJuAnnotation>>> loadAllAnnotationsGrouped() async {
+  Future<Map<String, List<GeJuAnnotationContract>>> loadAllAnnotationsGrouped() async {
     await _ensureBuiltInAnnotationsLoaded();
     final result = <String, List<GeJuAnnotation>>{};
     // 复制 built-in 索引
@@ -345,6 +363,8 @@ class GeJuRepositoryImpl implements IGeJuRepository {
     for (final ann in userAll) {
       result.putIfAbsent(ann.ruleId, () => []).add(ann);
     }
-    return result;
+    // Map to contract types
+    return result.map((key, value) =>
+        MapEntry(key, value.map(geJuAnnotationToContract).toList()));
   }
 }

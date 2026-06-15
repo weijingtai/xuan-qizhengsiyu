@@ -12,17 +12,10 @@ import 'package:metaphysics_core/models/shen_sha.dart';
 import 'package:xuan_logger/xuan_logger.dart';
 import 'package:flutter/foundation.dart'; // 使用 @visibleForTesting
 import 'package:flutter/material.dart'; // ChangeNotifier 仍然需要
-import 'package:flutter/services.dart';
-import 'package:qizhengsiyu/data/datasources/local/hua_yao_local_data_source.dart';
-import 'package:qizhengsiyu/data/repositories/hua_yao_repository_impl.dart';
-import 'package:qizhengsiyu/domain/services/hua_yao_service.dart';
-import 'package:qizhengsiyu/domain/services/shen_sha_service.dart';
 
 import 'package:timezone/timezone.dart' as tz;
 import 'package:uuid/v7.dart';
 
-import '../../data/datasources/local/shen_sha_local_data_source.dart';
-import '../../data/repositories/shen_sha_repository_impl.dart';
 import '../../domain/entities/models/base_panel_model.dart';
 import '../../domain/entities/models/body_life_model.dart';
 import '../../domain/entities/models/observer_position.dart';
@@ -112,29 +105,13 @@ class BeautyPageViewModel extends ChangeNotifier {
   double _fateMiniSafetyAngle = 7;
 
   /// 神煞数据管理器。
-  ShenShaManager? _shenShaManager;
-  ShenShaManager get shenShaManager {
-    // 提供一个默认值或抛出错误，如果在使用前未初始化
-    if (_shenShaManager == null) {
-      // 应该在init()中初始化
-      throw StateError('ShenShaManager not initialized. Call init() first.');
-    }
-    return _shenShaManager!;
-  }
+  final ShenShaManager shenShaManager;
 
-  ZhouTianModelManager get zhouTianModelManager =>
-      ZhouTianModelManager.instance;
+  /// 周天模型数据管理器。
+  final ZhouTianModelManager zhouTianModelManager;
 
   /// 化曜数据管理器。
-  HuaYaoManager? _huaYaoManager;
-  HuaYaoManager get huaYaoManager {
-    // 提供一个默认值或抛出错误，如果在使用前未初始化
-    if (_huaYaoManager == null) {
-      // 应该在init()中初始化
-      throw StateError('HuaYaoManager not initialized. Call init() first.');
-    }
-    return _huaYaoManager!;
-  }
+  final HuaYaoManager huaYaoManager;
 
   // MARK: - Services
 
@@ -146,29 +123,24 @@ class BeautyPageViewModel extends ChangeNotifier {
 
   /// QiZhengSiYuViewModel 构造函数。
   /// 注意: 移除了 BuildContext 参数，ViewModel 不应持有 UI Context。
-  BeautyPageViewModel(
-      {required this.saveCalculatedPanelUseCase,
-      required this.calculateFateDongWeiUseCase});
+  BeautyPageViewModel({
+      required this.saveCalculatedPanelUseCase,
+      required this.calculateFateDongWeiUseCase,
+      required this.shenShaManager,
+      required this.huaYaoManager,
+      required this.zhouTianModelManager,
+  });
 
   // MARK: - Initialization
 
   /// 异步初始化 ViewModel，加载神煞和化曜数据。
   Future<void> init() async {
     try {
-      final result = await Future.wait([
-        _loadShenShaManager(),
-        _loadHuaYaoManager(),
-        ZhouTianModelManager.instance.load(), // 添加周天模型加载
-      ]);
-      _shenShaManager = result[0] as ShenShaManager;
-      _huaYaoManager = result[1] as HuaYaoManager;
-      // 第三个结果是 void，不需要赋值
-      // 初始化服务，因为它依赖于 Manager
-      debugPrint("ViewModel init complete: Managers loaded.");
+      await zhouTianModelManager.load();
+      debugPrint("ViewModel init complete: ZhouTianModel loaded.");
     } catch (e) {
       debugPrint("Error initializing ViewModel: $e");
-      // 根据需要处理错误，例如显示一个错误消息
-      rethrow; // 重新抛出错误以便调用者处理
+      rethrow;
     }
   }
 
@@ -244,8 +216,9 @@ class BeautyPageViewModel extends ChangeNotifier {
   /// [observerPosition]: 包含出生信息、行限时间、经纬度、时区等观测者信息。
   Future<void> calculate(ObserverPosition observerPosition) async {
     // // 确保管理器和服务已初始化
-    // if (_shenShaManager == null || _huaYaoManager == null) {
-    //   await init(); // 如果未初始化则先初始化
+    // // Managers are now injected via constructor; no need to init here.
+    // if (false) {
+    //   await init();
     // }
     // 更新服务中的观测者位置
     _generateBasePanelService = GenerateBasePanelService(
@@ -805,70 +778,7 @@ class BeautyPageViewModel extends ChangeNotifier {
 
   // MARK: - Data Loading
 
-  /// 异步加载神煞数据。
-  /// 从 asset 文件读取 JSON 并解析为 ShenShaManager。
-  /// 返回: ShenShaManager 实例。
-  Future<ShenShaManager> _loadShenShaManager() async {
-    debugPrint("Loading ShenSha data...");
-    try {
-      // 并行加载所有神煞数据文件
-      await Future.wait([
-        rootBundle.loadString('assets/shen_sha/74_shensha_tiangan.json'),
-        rootBundle.loadString('assets/shen_sha/74_shensha_dizhi_year.json'),
-        rootBundle.loadString('assets/shen_sha/74_shensha_dizhi_month.json'),
-        rootBundle.loadString('assets/shen_sha/74_shensha_ganzhi.json'),
-        rootBundle.loadString('assets/shen_sha/74_shensha_bundle.json'),
-        rootBundle.loadString('assets/shen_sha/74_shensha_others.json'),
-      ]);
-
-      debugPrint("ShenSha data loaded successfully.");
-      return ShenShaManager(
-          shenShaService: ShenShaService(
-              repository: ShenShaRepositoryImpl(
-                  localDataSource: ShenShaLocalDataSourceImpl())));
-      // return ShenShaManager(
-      //     tianGanShenSha: tianGanShenSha,
-      //     yearDiZhiShenSha: yearDiZhiShenSha,
-      //     monthDiZhiShenSha: monthDiZhiShenSha,
-      //     ganZhiShenSha: ganzhiShenSha,
-      //     bundledShenSha: bundledShenSha,
-      //     otherShenSha: otherShenSha);
-    } catch (e) {
-      debugPrint("Error loading ShenSha data: $e");
-      // 加载失败，可能需要抛出错误或返回一个空管理器
-      throw Exception("Failed to load ShenSha data: $e");
-    }
-  }
-
-  /// 异步加载化曜数据。
-  /// 从 asset 文件读取 JSON 并解析为 HuaYaoManager。
-  /// 返回: HuaYaoManager 实例。
-  Future<HuaYaoManager> _loadHuaYaoManager() async {
-    debugPrint("Loading HuaYao data...");
-    try {
-      await Future.wait([
-        rootBundle.loadString('assets/shen_sha/74_huayao_tiangan.json'),
-        rootBundle.loadString('assets/shen_sha/74_huayao_dizhi.json'),
-        rootBundle.loadString('assets/shen_sha/74_huayao_others.json'),
-      ]);
-
-      debugPrint("HuaYao data loaded successfully.");
-
-      return HuaYaoManager(
-          huaYaoService: HuaYaoService(
-              repository: HuaYaoRepositoryImpl(
-                  localDataSource: HuaYaoLocalDataSourceImpl())));
-      // return HuaYaoManager(
-      //   tianGanHuaYao: tianGanHuaYao,
-      //   diZhiHuaYao: diZhiHuaYao,
-      //   othersHuaYao: othersHuaYao,
-      // );
-    } catch (e) {
-      debugPrint("Error loading HuaYao data: $e");
-      // 加载失败，可能需要抛出错误或返回一个空管理器
-      throw Exception("Failed to load HuaYao data: $e");
-    }
-  }
+  // _loadShenShaManager() and _loadHuaYaoManager() removed — managers are now injected via constructor.
 
   // MARK: - New Calculation using Service
 
@@ -879,9 +789,7 @@ class BeautyPageViewModel extends ChangeNotifier {
   Future<BasePanelModel> _calculatePanelWithService(
       {required DateTime calculateTime}) async {
     // 确保服务已初始化
-    if (_shenShaManager == null ||
-        _huaYaoManager == null ||
-        baseObserverPositionNotifier.value == null) {
+    if (baseObserverPositionNotifier.value == null) {
       throw StateError(
           'ViewModel not fully initialized before calling _calculatePanelWithService.');
     }

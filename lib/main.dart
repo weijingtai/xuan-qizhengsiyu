@@ -22,8 +22,18 @@ import 'package:qizhengsiyu/domain/entities/models/body_life_model.dart';
 import 'package:qizhengsiyu/domain/entities/models/naming_degree_pair.dart';
 import 'package:qizhengsiyu/domain/usecases/calculate_fate_dong_wei_usecase.dart';
 import 'package:qizhengsiyu/domain/usecases/save_calculated_panel_usecase.dart';
+import 'package:qizhengsiyu/domain/managers/shen_sha_manager.dart';
+import 'package:qizhengsiyu/domain/managers/hua_yao_manager.dart';
+import 'package:qizhengsiyu/domain/managers/zhou_tian_model_manager.dart';
 import 'di.dart';
 import 'navigator.dart';
+import 'package:qizhengsiyu/data/datasources/local/app_database.dart';
+import 'package:qizhengsiyu/data/datasources/local/ge_ju_builtin_database.dart';
+import 'package:qizhengsiyu/data/datasources/local/ge_ju_sqlite_data_source.dart';
+import 'package:qizhengsiyu/data/datasources/local/daos/ge_ju_dao.dart';
+import 'package:qizhengsiyu/data/repositories/qizhengsiyu_pan_repository.dart';
+import 'package:qizhengsiyu/data/repositories/ge_ju_repository_impl.dart';
+import 'package:qizhengsiyu/data/datasources/local/services/ge_ju_school_service.dart';
 
 void main() {
   final appDatabase = AppDatabase();
@@ -38,6 +48,10 @@ void main() {
     geJuSchoolService: GeJuSchoolService(dao: geJuDao),
     shenSha: AssetsQiZhengShenShaRepository(),
     huaYao: AssetsQiZhengHuaYaoRepository(),
+    starPositionStatus: const AssetsQiZhengStarPositionStatusRepository(),
+    historicalEphemeris: const AssetsQiZhengHistoricalEphemerisRepository(),
+    ephemerisResource: const AssetsQiZhengEphemerisResourceRepository(),
+    zhouTianModelRepository: const AssetsQiZhengZhouTianModelRepository(),
   );
   runApp(MultiProvider(
     providers: [
@@ -46,8 +60,11 @@ void main() {
       ChangeNotifierProvider<BeautyPageViewModel>(
           create: (ctx) => BeautyPageViewModel(
               calculateFateDongWeiUseCase: CalculateFateDongWeiUseCase(),
-              saveCalculatedPanelUseCase:
-                  ctx.read<SaveCalculatedPanelUseCase>())),
+              saveCalculatedPanelUseCase: ctx.read<SaveCalculatedPanelUseCase>(),
+              shenShaManager: ctx.read<ShenShaManager>(),
+              huaYaoManager: ctx.read<HuaYaoManager>(),
+              zhouTianModelManager: ctx.read<ZhouTianModelManager>(),
+          )),
     ],
     child: const MyApp(),
   ));

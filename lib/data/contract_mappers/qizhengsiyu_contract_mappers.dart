@@ -17,6 +17,7 @@ import 'package:qizhengsiyu/domain/entities/models/pan_entity.dart';
 import 'package:qizhengsiyu/domain/entities/models/panel_config.dart';
 import 'package:qizhengsiyu/domain/repositories/shen_sha_repository.dart';
 import 'package:qizhengsiyu/domain/repositories/hua_yao_repository.dart';
+import 'package:qizhengsiyu/domain/repositories/ge_ju_product_repository.dart';
 
 // ═══════════════════════════════════════════════════════
 // ShenSha Mappers (contract → product)
@@ -133,32 +134,11 @@ GeJuSchool geJuSchoolFromContract(GeJuSchoolContract contract) {
 // ═══════════════════════════════════════════════════════
 
 QiZhengSiYuPanContract panEntityToContract(QiZhengSiYuPanEntity entity) {
-  return QiZhengSiYuPanContract(
-    uuid: entity.uuid,
-    createdAt: entity.createdAt,
-    lastUpdatedAt: entity.lastUpdatedAt,
-    deletedAt: entity.deletedAt,
-    divinationRequestInfoUuid: entity.divinationRequestInfoUuid,
-    divinationDatetimeJson: jsonEncode(entity.divinationDatetimeModel.toJson()),
-    panelConfigJson: jsonEncode(entity.panelConfig.toJson()),
-    panelModelJson: jsonEncode(entity.panelModel.toJson()),
-  );
+  return entity.toContract();
 }
 
 QiZhengSiYuPanEntity panEntityFromContract(QiZhengSiYuPanContract contract) {
-  return QiZhengSiYuPanEntity(
-    uuid: contract.uuid,
-    createdAt: contract.createdAt,
-    lastUpdatedAt: contract.lastUpdatedAt,
-    deletedAt: contract.deletedAt,
-    divinationRequestInfoUuid: contract.divinationRequestInfoUuid,
-    divinationDatetimeModel: DivinationDatetimeModel.fromJson(
-        jsonDecode(contract.divinationDatetimeJson) as Map<String, dynamic>),
-    panelConfig: BasePanelConfig.fromJson(
-        jsonDecode(contract.panelConfigJson) as Map<String, dynamic>),
-    panelModel: BasePanelModel.fromJson(
-        jsonDecode(contract.panelModelJson) as Map<String, dynamic>),
-  );
+  return QiZhengSiYuPanEntity.fromContract(contract);
 }
 
 // ═══════════════════════════════════════════════════════
@@ -225,91 +205,112 @@ class HuaYaoRepositoryAdapter implements HuaYaoRepository {
 
 /// Wraps the contract-typed [IGeJuRepository] port and presents
 /// product-typed methods (GeJuRule ↔ GeJuRuleContract, etc.)
-class GeJuRepositoryAdapter {
+class GeJuRepositoryAdapter implements GeJuProductRepository {
   final IGeJuRepository _port;
   GeJuRepositoryAdapter(this._port);
 
   // ── Rule ──
 
+  @override
   Future<List<GeJuRule>> loadAllRules() async {
     final contracts = await _port.loadAllRules();
     return contracts.map(geJuRuleFromContract).toList();
   }
 
+  @override
   Future<GeJuRule?> getRuleById(String id) async {
     final contract = await _port.getRuleById(id);
     return contract != null ? geJuRuleFromContract(contract) : null;
   }
 
+  @override
   Future<void> saveUserRule(GeJuRule rule) =>
       _port.saveUserRule(geJuRuleToContract(rule));
 
+  @override
   Future<void> deleteUserRule(String id) => _port.deleteUserRule(id);
 
+  @override
   bool isBuiltInRule(String ruleId) => _port.isBuiltInRule(ruleId);
 
+  @override
   Set<String> get builtInRuleIds => _port.builtInRuleIds;
 
   // ── ConditionSet ──
 
+  @override
   Future<List<GeJuConditionSet>> getConditionSetsForRule(String ruleId) async {
     final contracts = await _port.getConditionSetsForRule(ruleId);
     return contracts.map(geJuConditionSetFromContract).toList();
   }
 
+  @override
   Future<GeJuConditionSet?> getConditionSetById(String id) async {
     final contract = await _port.getConditionSetById(id);
     return contract != null ? geJuConditionSetFromContract(contract) : null;
   }
 
+  @override
   Future<void> saveUserConditionSet(GeJuConditionSet cs) =>
       _port.saveUserConditionSet(geJuConditionSetToContract(cs));
 
+  @override
   Future<void> deleteUserConditionSet(String id) =>
       _port.deleteUserConditionSet(id);
 
+  @override
   Future<void> deleteUserConditionSetsForRule(String ruleId) =>
       _port.deleteUserConditionSetsForRule(ruleId);
 
   // ── Annotation ──
 
+  @override
   Future<List<GeJuAnnotation>> getAnnotationsForRule(String ruleId) async {
     final contracts = await _port.getAnnotationsForRule(ruleId);
     return contracts.map(geJuAnnotationFromContract).toList();
   }
 
+  @override
   Future<GeJuAnnotation?> getAnnotationById(String id) async {
     final contract = await _port.getAnnotationById(id);
     return contract != null ? geJuAnnotationFromContract(contract) : null;
   }
 
+  @override
   Future<void> saveUserAnnotation(GeJuAnnotation ann) =>
       _port.saveUserAnnotation(geJuAnnotationToContract(ann));
 
+  @override
   Future<void> deleteUserAnnotation(String id) =>
       _port.deleteUserAnnotation(id);
 
+  @override
   Future<void> deleteUserAnnotationsForRule(String ruleId) =>
       _port.deleteUserAnnotationsForRule(ruleId);
 
   // ── Preference ──
 
+  @override
   Future<Map<String, dynamic>> getPreference() => _port.getPreference();
 
+  @override
   Future<void> savePreference(Map<String, dynamic> pref) =>
       _port.savePreference(pref);
 
   // ── DeletionRecord ──
 
+  @override
   Future<void> recordDeletion(Map<String, dynamic> record) =>
       _port.recordDeletion(record);
 
   // ── Cache ──
 
+  @override
   void clearCache() => _port.clearCache();
 
   // ── Batch loading ──
 
+  @override
   Future<Map<String, List<GeJuConditionSet>>>
       loadAllConditionSetsGrouped() async {
     final contractMap = await _port.loadAllConditionSetsGrouped();
@@ -317,6 +318,7 @@ class GeJuRepositoryAdapter {
         MapEntry(key, value.map(geJuConditionSetFromContract).toList()));
   }
 
+  @override
   Future<Map<String, List<GeJuAnnotation>>>
       loadAllAnnotationsGrouped() async {
     final contractMap = await _port.loadAllAnnotationsGrouped();
@@ -326,11 +328,13 @@ class GeJuRepositoryAdapter {
 
   // ── Legacy ──
 
+  @override
   Future<List<GeJuRule>> loadBuiltInRules() async {
     final contracts = await _port.loadBuiltInRules();
     return contracts.map(geJuRuleFromContract).toList();
   }
 
+  @override
   Future<List<GeJuRule>> loadUserRules() async {
     final contracts = await _port.loadUserRules();
     return contracts.map(geJuRuleFromContract).toList();
