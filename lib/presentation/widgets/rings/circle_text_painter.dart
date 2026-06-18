@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:qizhengsiyu/painter/chart_style/qi_zheng_chart_style.dart';
 
 import '../../../enums/enum_twelve_gong.dart';
 import 'enum_ring_text_direction.dart';
@@ -19,6 +20,7 @@ class CircleTextPainter extends CustomPainter {
   List<EnumTwelveGong> gongOrderedSeq;
 
   final TextStyle textStyle;
+  final QiZhengChartStyle? style;
 
   CircleTextPainter({
     required this.startAngle,
@@ -31,6 +33,7 @@ class CircleTextPainter extends CustomPainter {
     this.borderWidth = 1.0, // 默认边框宽度
     required this.textStyle,
     required this.gongOrderedSeq,
+    this.style,
   }) : baseRadian = startAngle * math.pi / 180;
 
   @override
@@ -94,7 +97,7 @@ class CircleTextPainter extends CustomPainter {
       required double outerRadius,
       required int index}) {
     final Paint borderPaint = Paint()
-      ..color = borderColor
+      ..color = style?.colors.sectorFill ?? borderColor
       ..style = PaintingStyle.stroke
       ..strokeWidth = borderWidth;
 
@@ -316,7 +319,8 @@ class CircleTextPainter extends CustomPainter {
         oldDelegate.color != color ||
         oldDelegate.outerRadius != outerRadius ||
         oldDelegate.innerRadius != innerRadius ||
-        oldDelegate.borderColor != borderColor || // 检查边框颜色是否变化
-        oldDelegate.borderWidth != borderWidth; // 检查边框宽度是否变化
+        oldDelegate.borderColor != borderColor ||
+        oldDelegate.borderWidth != borderWidth ||
+        oldDelegate.style != style;
   }
 }

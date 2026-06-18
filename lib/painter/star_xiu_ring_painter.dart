@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:qizhengsiyu/enums/enum_qi_zheng.dart';
+import 'package:qizhengsiyu/painter/chart_style/qi_zheng_chart_style.dart';
 import 'dart:math' as math;
 
 import '../domain/entities/models/star_inn_gong_degree.dart'; // 使用domain层的模型
@@ -16,6 +17,7 @@ class StarXiuRingPainter extends CustomPainter {
   double tickLength;
   double longTickLength;
   double get ringWidth => (outerSize - innerSize) * .5;
+  final QiZhengChartStyle? style;
 
   StarXiuRingPainter(
       {
@@ -25,7 +27,8 @@ class StarXiuRingPainter extends CustomPainter {
       required this.mapper,
       required this.sevenZhengColorMapper,
       this.tickLength = 5,
-      this.longTickLength = 10});
+      this.longTickLength = 10,
+      this.style});
   @override
   void paint(Canvas canvas, Size size) {
     final double centerX = size.width / 2;
@@ -36,7 +39,7 @@ class StarXiuRingPainter extends CustomPainter {
     final double innerRadius = outerRadius - ringWidth;
 
     final Paint ringPaint = Paint()
-      ..color = Colors.black
+      ..color = style?.colors.ringStroke ?? Colors.black
       ..strokeWidth = .5
       ..style = PaintingStyle.stroke;
 
@@ -47,7 +50,7 @@ class StarXiuRingPainter extends CustomPainter {
     canvas.drawCircle(canvasCenter, innerRadius, ringPaint);
 
     final Paint scalePaint = Paint()
-      ..color = Colors.blueAccent
+      ..color = style?.colors.scaleTickAccent ?? Colors.blueAccent
       ..strokeWidth = .5
       ..style = PaintingStyle.stroke;
 
@@ -76,7 +79,7 @@ class StarXiuRingPainter extends CustomPainter {
   void drawScale(
       Canvas canvas, Offset center, double outerRadius, double innerRadius) {
     Paint scalePaint = Paint()
-      ..color = Colors.black87
+      ..color = style?.colors.scaleTick ?? Colors.black87
       ..strokeWidth = .5
       ..style = PaintingStyle.stroke;
 
@@ -141,10 +144,10 @@ class StarXiuRingPainter extends CustomPainter {
           style: GoogleFonts.maShanZheng(
               fontSize: 16.0,
               height: 1,
-              color: const Color.fromRGBO(55, 53, 52, 1),
+              color: style?.colors.labelDefault ?? const Color.fromRGBO(55, 53, 52, 1),
               shadows: [
                 BoxShadow(
-                  color: Colors.black38.withOpacity(.1),
+                  color: (style?.colors.shadow ?? Colors.black38).withOpacity(.1),
                   spreadRadius: 1,
                   blurRadius: 1,
                   offset: const Offset(1, 1), // changes position of shadow
@@ -335,6 +338,7 @@ class StarXiuRingPainter extends CustomPainter {
         innerSize != oldDelegate.innerSize ||
         tickLength != oldDelegate.tickLength ||
         longTickLength != oldDelegate.longTickLength ||
+        style != oldDelegate.style ||
         !mapEquals(mapper, oldDelegate.mapper) ||
         !mapEquals(sevenZhengColorMapper, oldDelegate.sevenZhengColorMapper);
   }

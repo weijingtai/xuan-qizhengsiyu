@@ -12,6 +12,7 @@ class MyCirclePainter extends CustomPainter {
   final TextStyle textStyle;
   int offsetTimes;
   bool toOuter;
+  final QiZhengChartStyle? style;
   MyCirclePainter(
       {required this.radians,
       required this.starAngle,
@@ -19,7 +20,8 @@ class MyCirclePainter extends CustomPainter {
       required this.textStyle,
       required this.offsetTimes,
       required this.backgroundColor,
-      this.toOuter = false});
+      this.toOuter = false,
+      this.style});
   @override
   void paint(Canvas canvas, Size size) {
     // final center = Offset(size.width / 2, size.height / 2);
@@ -63,14 +65,14 @@ class MyCirclePainter extends CustomPainter {
           center,
           Offset(size.width * .5, -size.height * .2),
           Paint()
-            ..color = Colors.black38.withOpacity(.1)
+            ..color = (style?.colors.shadow ?? Colors.black38).withOpacity(.1)
             ..strokeWidth = 3);
     } else {
       canvas.drawLine(
           center,
           Offset(size.width * .5, size.height),
           Paint()
-            ..color = Colors.black38.withOpacity(.1)
+            ..color = (style?.colors.shadow ?? Colors.black38).withOpacity(.1)
             ..strokeWidth = 3);
       canvas.drawLine(
           center,
@@ -127,7 +129,7 @@ class MyCirclePainter extends CustomPainter {
     var typeTextPainter = TextPainter(
       text: TextSpan(
         text: "荫",
-        style: textStyle.copyWith(color: Colors.black45, fontSize: 12),
+        style: textStyle.copyWith(color: style?.colors.annotationYin ?? Colors.black45, fontSize: 12),
       ),
       textAlign: TextAlign.left,
       textDirection: TextDirection.ltr,
@@ -158,7 +160,7 @@ class MyCirclePainter extends CustomPainter {
       var typeTextPainter = TextPainter(
         text: TextSpan(
           text: "速",
-          style: textStyle.copyWith(color: Colors.red, fontSize: 12),
+          style: textStyle.copyWith(color: style?.colors.annotationSu ?? Colors.red, fontSize: 12),
         ),
         textAlign: TextAlign.left,
         textDirection: TextDirection.ltr,
@@ -193,7 +195,8 @@ class MyCirclePainter extends CustomPainter {
         offsetTimes != oldDelegate.offsetTimes ||
         toOuter != oldDelegate.toOuter ||
         textStyle != oldDelegate.textStyle ||
-        backgroundColor != oldDelegate.backgroundColor;
+        backgroundColor != oldDelegate.backgroundColor ||
+        style != oldDelegate.style;
   }
 }
 
@@ -286,13 +289,15 @@ class StarBodyPainter extends CustomPainter {
   final Color backgroundColor;
   final TextStyle textStyle;
   bool toOuter;
+  final QiZhengChartStyle? style;
   StarBodyPainter(
       {required this.star,
       // required this.starInfo,
       required this.radians,
       required this.textStyle,
       required this.backgroundColor,
-      this.toOuter = false});
+      this.toOuter = false,
+      this.style});
   @override
   void paint(Canvas canvas, Size size) {
     // final center = Offset(size.width / 2, size.height / 2);
@@ -331,20 +336,20 @@ class StarBodyPainter extends CustomPainter {
           Offset(size.width * .5, -size.height * .2),
           Paint()
             // ..color = textStyle.color!
-            ..color = Colors.red
+            ..color = style?.colors.northLine ?? Colors.red
             ..strokeWidth = .5);
       canvas.drawLine(
           center,
           Offset(size.width * .5, -size.height * .2),
           Paint()
-            ..color = Colors.black38.withOpacity(.1)
+            ..color = (style?.colors.shadow ?? Colors.black38).withOpacity(.1)
             ..strokeWidth = 3);
     } else {
       canvas.drawLine(
           center,
           Offset(size.width * .5, size.height),
           Paint()
-            ..color = Colors.black38.withOpacity(.1)
+            ..color = (style?.colors.shadow ?? Colors.black38).withOpacity(.1)
             ..strokeWidth = 3);
       canvas.drawLine(
           center,
@@ -352,7 +357,7 @@ class StarBodyPainter extends CustomPainter {
           Paint()
             // ..color = textStyle.color!
             // ..strokeWidth = .5
-            ..color = Colors.red
+            ..color = style?.colors.northLine ?? Colors.red
             ..strokeWidth = .5);
     }
 
@@ -403,7 +408,7 @@ class StarBodyPainter extends CustomPainter {
     var typeTextPainter = TextPainter(
       text: TextSpan(
         text: "荫",
-        style: textStyle.copyWith(color: Colors.black45, fontSize: 12),
+        style: textStyle.copyWith(color: style?.colors.annotationYin ?? Colors.black45, fontSize: 12),
       ),
       textAlign: TextAlign.left,
       textDirection: TextDirection.ltr,
@@ -434,7 +439,7 @@ class StarBodyPainter extends CustomPainter {
       var typeTextPainter = TextPainter(
         text: TextSpan(
           text: "速",
-          style: textStyle.copyWith(color: Colors.red, fontSize: 12),
+          style: textStyle.copyWith(color: style?.colors.annotationSu ?? Colors.red, fontSize: 12),
         ),
         textAlign: TextAlign.left,
         textDirection: TextDirection.ltr,
@@ -468,6 +473,7 @@ class StarBodyPainter extends CustomPainter {
         radians != oldDelegate.radians ||
         toOuter != oldDelegate.toOuter ||
         textStyle != oldDelegate.textStyle ||
-        backgroundColor != oldDelegate.backgroundColor;
+        backgroundColor != oldDelegate.backgroundColor ||
+        style != oldDelegate.style;
   }
 }

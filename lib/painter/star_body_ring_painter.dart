@@ -20,6 +20,7 @@ class OuterLifeStarRangePainter extends CustomPainter {
   Map<EnumStars, Color> starsColorMap;
   bool showStarTrackLine;
   bool showText;
+  final QiZhengChartStyle? style;
 
   // ElevenStarsInfo starInfo;
   OuterLifeStarRangePainter({
@@ -31,6 +32,7 @@ class OuterLifeStarRangePainter extends CustomPainter {
     required this.outerSize,
     this.showText = false,
     this.showStarTrackLine = false,
+    this.style,
   });
 // 定义一个函数来计算圆上某一角度对应的点的坐标
   Offset calculatePointOnCircle(double radius, double angle) {
@@ -66,7 +68,7 @@ class OuterLifeStarRangePainter extends CustomPainter {
     // canvas.drawLine(Offset(center.dx, center.dy), Offset(center.dx*2, center.dy), zeroLinePaint);
     if (showStarTrackLine) {
       final paintStarsTrack = Paint()
-        ..color = Colors.grey
+        ..color = style?.colors.border ?? Colors.grey
         ..style = PaintingStyle.stroke
         ..strokeWidth = .5;
       canvas.drawCircle(center, trackRadius, paintStarsTrack);
@@ -141,7 +143,7 @@ class OuterLifeStarRangePainter extends CustomPainter {
     var typeTextPainter = TextPainter(
       text: TextSpan(
         text: "荫",
-        style: textStyle.copyWith(color: Colors.black45, fontSize: 12),
+        style: textStyle.copyWith(color: style?.colors.annotationYin ?? Colors.black45, fontSize: 12),
       ),
       textAlign: TextAlign.left,
       textDirection: TextDirection.ltr,
@@ -162,7 +164,7 @@ class OuterLifeStarRangePainter extends CustomPainter {
       var typeTextPainter = TextPainter(
         text: TextSpan(
           text: "速",
-          style: textStyle.copyWith(color: Colors.red, fontSize: 12),
+          style: textStyle.copyWith(color: style?.colors.annotationSu ?? Colors.red, fontSize: 12),
         ),
         textAlign: TextAlign.left,
         textDirection: TextDirection.ltr,
@@ -187,6 +189,7 @@ class OuterLifeStarRangePainter extends CustomPainter {
         showStarTrackLine != oldDelegate.showStarTrackLine ||
         showText != oldDelegate.showText ||
         textStyle != oldDelegate.textStyle ||
+        style != oldDelegate.style ||
         !listEquals(stars, oldDelegate.stars) ||
         !mapEquals(starsColorMap, oldDelegate.starsColorMap);
   }
@@ -214,6 +217,7 @@ class InnerLifeStarRangePainter extends CustomPainter {
   // String get starName=>star.star.singleName;
 
   double innerPadding;
+  final QiZhengChartStyle? style;
 
   InnerLifeStarRangePainter(
       {required this.stars,
@@ -224,7 +228,8 @@ class InnerLifeStarRangePainter extends CustomPainter {
       required this.outerSize,
       this.showStarTrackLine = false,
       this.showText = false,
-      this.innerPadding = 16.0});
+      this.innerPadding = 16.0,
+      this.style});
 // 定义一个函数来计算圆上某一角度对应的点的坐标
   Offset calculatePointOnCircle(double radius, double angle) {
     // 将角度转换为弧度，因为三角函数接受的参数是弧度制
@@ -271,7 +276,7 @@ class InnerLifeStarRangePainter extends CustomPainter {
     // final radius = trackSize;
     if (showStarTrackLine) {
       final paintStarsTrack = Paint()
-        ..color = Colors.grey
+        ..color = style?.colors.border ?? Colors.grey
         ..style = PaintingStyle.stroke
         ..strokeWidth = .5;
       canvas.drawCircle(center, trackRadius, paintStarsTrack);
@@ -351,7 +356,7 @@ class InnerLifeStarRangePainter extends CustomPainter {
     var typeTextPainter = TextPainter(
       text: TextSpan(
         text: "荫",
-        style: textStyle.copyWith(color: Colors.black45, fontSize: 12),
+        style: textStyle.copyWith(color: style?.colors.annotationYin ?? Colors.black45, fontSize: 12),
       ),
       textAlign: TextAlign.left,
       textDirection: TextDirection.ltr,
@@ -372,7 +377,7 @@ class InnerLifeStarRangePainter extends CustomPainter {
       var typeTextPainter = TextPainter(
         text: TextSpan(
           text: "速",
-          style: textStyle.copyWith(color: Colors.red, fontSize: 12),
+          style: textStyle.copyWith(color: style?.colors.annotationSu ?? Colors.red, fontSize: 12),
         ),
         textAlign: TextAlign.left,
         textDirection: TextDirection.ltr,
@@ -398,6 +403,7 @@ class InnerLifeStarRangePainter extends CustomPainter {
         showStarTrackLine != oldDelegate.showStarTrackLine ||
         showText != oldDelegate.showText ||
         textStyle != oldDelegate.textStyle ||
+        style != oldDelegate.style ||
         !listEquals(stars, oldDelegate.stars) ||
         !mapEquals(starsColorMap, oldDelegate.starsColorMap);
   }
