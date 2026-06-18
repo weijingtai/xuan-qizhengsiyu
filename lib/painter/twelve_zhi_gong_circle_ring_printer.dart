@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:metaphysics_core/enums.dart';
 import 'package:qizhengsiyu/enums/enum_twelve_gong.dart';
 import 'package:flutter/foundation.dart';
+import 'package:qizhengsiyu/painter/chart_style/qi_zheng_chart_style.dart';
 
 class TwelveZhiGongCircleRingPrinter extends CustomPainter {
   final double innerRadius;
@@ -19,6 +20,7 @@ class TwelveZhiGongCircleRingPrinter extends CustomPainter {
   double outerPadding = 12;
   bool withBackgroundColor = true;
   Map<EnumStars, Color> starColorMapper;
+  final QiZhengChartStyle? style;
 
   // Map<String,Color> fiveElementsColorMap = {
   //   "金":Color(0xffFFD700),
@@ -42,6 +44,7 @@ class TwelveZhiGongCircleRingPrinter extends CustomPainter {
     this.withBackgroundColor = true,
     this.innerPadding = 12,
     this.outerPadding = 12,
+    this.style,
     this.textStyle =
         const TextStyle(color: Colors.black, fontSize: 18, height: 1.2),
   }) {
@@ -114,7 +117,7 @@ class TwelveZhiGongCircleRingPrinter extends CustomPainter {
     // canvas.rotate(pi + pi/4);
 
     final Paint borderPaint = Paint()
-      ..color = Colors.grey
+      ..color = style?.colors.border ?? Colors.grey
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1;
 
@@ -298,6 +301,7 @@ class TwelveZhiGongCircleRingPrinter extends CustomPainter {
         innerPadding != old.innerPadding ||
         outerPadding != old.outerPadding ||
         textStyle != old.textStyle ||
+        style != old.style ||
         !listEquals(twelveGongList, old.twelveGongList) ||
         !mapEquals(starColorMapper, old.starColorMapper);
   }

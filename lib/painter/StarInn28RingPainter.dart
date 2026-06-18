@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:metaphysics_core/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:tuple/tuple.dart';
+import 'package:qizhengsiyu/painter/chart_style/qi_zheng_chart_style.dart';
 
 class Starinn28ringPainter extends CustomPainter {
   static const int TOTAL = 28;
@@ -17,6 +18,7 @@ class Starinn28ringPainter extends CustomPainter {
 
   double innerPadding = 12;
   double outerPadding = 12;
+  final QiZhengChartStyle? style;
 
   Starinn28ringPainter({
     required this.innerRadius,
@@ -26,6 +28,7 @@ class Starinn28ringPainter extends CustomPainter {
     this.isReverseOrderSequence = false,
     this.innerPadding = 12,
     this.outerPadding = 12,
+    this.style,
     this.textStyle =
         const TextStyle(color: Colors.black, fontSize: 18, height: 1.2),
   });
@@ -168,6 +171,15 @@ class Starinn28ringPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(CustomPainter old) {
-    return false;
+    return old is! Starinn28ringPainter ||
+        innerRadius != old.innerRadius ||
+        outerRadius != old.outerRadius ||
+        isReverseText != old.isReverseText ||
+        isReverseOrderSequence != old.isReverseOrderSequence ||
+        innerPadding != old.innerPadding ||
+        outerPadding != old.outerPadding ||
+        textStyle != old.textStyle ||
+        style != old.style ||
+        twentyEightStarsList != old.twentyEightStarsList;
   }
 }

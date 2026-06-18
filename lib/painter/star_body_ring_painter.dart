@@ -4,6 +4,7 @@ import 'package:metaphysics_core/enums.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter/foundation.dart';
+import 'package:qizhengsiyu/painter/chart_style/qi_zheng_chart_style.dart';
 import 'package:qizhengsiyu/presentation/models/ui_star_model.dart';
 
 class OuterLifeStarRangePainter extends CustomPainter {
@@ -405,10 +406,12 @@ class InnerLifeStarRangePainter extends CustomPainter {
 class RingSheetPainter extends CustomPainter {
   double innerRadius;
   double outerRadius;
+  final QiZhengChartStyle? style;
 
   RingSheetPainter({
     required this.innerRadius,
     required this.outerRadius,
+    this.style,
   });
 
 // 定义一个函数来计算圆上某一角度对应的点的坐标
@@ -431,9 +434,9 @@ class RingSheetPainter extends CustomPainter {
       // paint guid line side dot at ring inner border
       // UIStarModel star = stars[i];
       // Color color = starsColorMap[star.star]!;
-      Color color = Colors.black87;
+      Color color = style?.colors.divider ?? Colors.black87;
       if (i == 0) {
-        color = Colors.red;
+        color = style?.colors.northLine ?? Colors.red;
       }
 
       Offset inRingXY = calculatePointOnCircle(innerRadius, angle - 15);
@@ -448,9 +451,10 @@ class RingSheetPainter extends CustomPainter {
     canvas.restore();
   }
 
-  @override
+@override
   bool shouldRepaint(covariant RingSheetPainter oldDelegate) {
     return innerRadius != oldDelegate.innerRadius ||
-        outerRadius != oldDelegate.outerRadius;
+        outerRadius != oldDelegate.outerRadius ||
+        style != oldDelegate.style;
   }
 }

@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:qizhengsiyu/painter/chart_style/qi_zheng_chart_style.dart';
 import 'package:qizhengsiyu/presentation/models/ui_star_model.dart';
 
 class MyCirclePainter extends CustomPainter {
@@ -200,11 +201,13 @@ class IndicatorScalePainter extends CustomPainter {
   final double ringWidth;
   final double tickLength;
   final double indicatorAngle;
+  final QiZhengChartStyle? style;
 
   IndicatorScalePainter({
     required this.indicatorAngle,
     required this.ringWidth,
     required this.tickLength,
+    this.style,
   });
 
   @override
@@ -225,7 +228,7 @@ class IndicatorScalePainter extends CustomPainter {
     // canvas.drawCircle(Offset(centerX, centerY), innerRadius, ringPaint);
 
     final Paint scalePaint = Paint()
-      ..color = Colors.red
+      ..color = style?.colors.northLine ?? Colors.red
       ..strokeWidth = 2
       ..style = PaintingStyle.stroke;
 
@@ -267,7 +270,8 @@ class IndicatorScalePainter extends CustomPainter {
   bool shouldRepaint(covariant IndicatorScalePainter oldDelegate) {
     return indicatorAngle != oldDelegate.indicatorAngle ||
         ringWidth != oldDelegate.ringWidth ||
-        tickLength != oldDelegate.tickLength;
+        tickLength != oldDelegate.tickLength ||
+        style != oldDelegate.style;
   }
 }
 
