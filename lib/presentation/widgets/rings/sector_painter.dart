@@ -28,7 +28,7 @@ class SectorPainter extends CustomPainter {
   });
 
   Color get _effectiveBorderColor =>
-      style?.colors.sectorFill ?? borderColor;
+      style?.colors.sectorBorder ?? borderColor;
 
   @override
   void paint(Canvas canvas, Size size) {

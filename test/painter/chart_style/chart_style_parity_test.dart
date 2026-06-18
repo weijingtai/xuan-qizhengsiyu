@@ -26,7 +26,7 @@ void main() {
       expect(style.colors.labelMuted, Colors.black45);
       expect(style.colors.annotationYin, Colors.black45);
       expect(style.colors.annotationSu, Colors.red);
-      expect(style.colors.sectorFill, Colors.black12);
+      expect(style.colors.sectorBorder, Colors.black12);
       expect(style.colors.northLine, Colors.red);
     });
 
@@ -184,7 +184,7 @@ void main() {
 
     test('sector border anchor (sector_painter.dart:22)', () {
       final style = QiZhengChartStyle.fallback();
-      expect(style.colors.sectorFill, Colors.black12);
+      expect(style.colors.sectorBorder, Colors.black12);
     });
   });
 }

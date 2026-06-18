@@ -2,7 +2,6 @@ import 'dart:math' as math;
 
 import 'package:metaphysics_core/models/year_month.dart';
 import 'package:flutter/material.dart';
-import 'package:qizhengsiyu/painter/chart_style/qi_zheng_chart_style.dart';
 import 'package:qizhengsiyu/utils/da_xian_calculate_helper.dart';
 
 import '../../../enums/enum_twelve_gong.dart';
@@ -27,7 +26,6 @@ class DaXianRingPainter extends CustomPainter {
   final Color? slotBackgroundColor;
 
   final TextStyle? textStyle;
-  final QiZhengChartStyle? style;
   // 修改：使用YearMonth类型
   final YearMonth startFromYear;
 
@@ -49,7 +47,6 @@ class DaXianRingPainter extends CustomPainter {
     required this.textStyle,
     required this.gongOrderedSeq,
     required this.startFromYear,
-    this.style,
   }) : baseRadian = startAngle * math.pi / 180;
 
   @override
@@ -421,7 +418,7 @@ class DaXianRingPainter extends CustomPainter {
         oldDelegate.outerRadius != outerRadius ||
         oldDelegate.innerRadius != innerRadius ||
         oldDelegate.gongBorder != gongBorder ||
-        oldDelegate.slotBorder != slotBorder ||
-        oldDelegate.style != style;
+        oldDelegate.slotBorder != slotBorder;
+
   }
 }

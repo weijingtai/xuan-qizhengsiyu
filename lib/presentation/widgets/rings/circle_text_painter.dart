@@ -97,7 +97,7 @@ class CircleTextPainter extends CustomPainter {
       required double outerRadius,
       required int index}) {
     final Paint borderPaint = Paint()
-      ..color = style?.colors.sectorFill ?? borderColor
+      ..color = style?.colors.sectorBorder ?? borderColor
       ..style = PaintingStyle.stroke
       ..strokeWidth = borderWidth;
 

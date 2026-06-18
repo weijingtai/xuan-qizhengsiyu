@@ -12,7 +12,7 @@ class ChartSemanticColors {
   final Color labelMuted;
   final Color annotationYin;
   final Color annotationSu;
-  final Color sectorFill;
+  final Color sectorBorder;
   final Color northLine;
 
   const ChartSemanticColors({
@@ -26,7 +26,7 @@ class ChartSemanticColors {
     required this.labelMuted,
     required this.annotationYin,
     required this.annotationSu,
-    required this.sectorFill,
+    required this.sectorBorder,
     required this.northLine,
   });
 
@@ -44,7 +44,7 @@ class ChartSemanticColors {
           labelMuted == other.labelMuted &&
           annotationYin == other.annotationYin &&
           annotationSu == other.annotationSu &&
-          sectorFill == other.sectorFill &&
+          sectorBorder == other.sectorBorder &&
           northLine == other.northLine;
 
   @override
@@ -59,7 +59,7 @@ class ChartSemanticColors {
         labelMuted,
         annotationYin,
         annotationSu,
-        sectorFill,
+        sectorBorder,
         northLine,
       );
 
@@ -74,7 +74,7 @@ class ChartSemanticColors {
     Color? labelMuted,
     Color? annotationYin,
     Color? annotationSu,
-    Color? sectorFill,
+    Color? sectorBorder,
     Color? northLine,
   }) {
     return ChartSemanticColors(
@@ -88,7 +88,7 @@ class ChartSemanticColors {
       labelMuted: labelMuted ?? this.labelMuted,
       annotationYin: annotationYin ?? this.annotationYin,
       annotationSu: annotationSu ?? this.annotationSu,
-      sectorFill: sectorFill ?? this.sectorFill,
+      sectorBorder: sectorBorder ?? this.sectorBorder,
       northLine: northLine ?? this.northLine,
     );
   }
@@ -104,7 +104,7 @@ class ChartSemanticColors {
         labelMuted: Colors.black45,
         annotationYin: Colors.black45,
         annotationSu: Colors.red,
-        sectorFill: Colors.black12,
+        sectorBorder: Colors.black12,
         northLine: Colors.red,
       );
 }
