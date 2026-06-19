@@ -99,7 +99,7 @@ class OuterLifeStarRangePainter extends CustomPainter {
       canvas.drawCircle(inRingXY, 2, guidDot);
 
       final starHolderDot = Paint()
-        ..color = color.withOpacity(.4)
+        ..color = color.withValues(alpha: 0.4)
         ..style = PaintingStyle.fill
         ..strokeWidth = 2.0;
       canvas.drawCircle(outRingXY, 6, starHolderDot);
@@ -317,7 +317,7 @@ class InnerLifeStarRangePainter extends CustomPainter {
       canvas.drawCircle(inRingXY, 2, guidDot);
 
       final starHolderDot = Paint()
-        ..color = color.withOpacity(.4)
+        ..color = color.withValues(alpha: 0.4)
         ..style = PaintingStyle.fill
         ..strokeWidth = 2.0;
       canvas.drawCircle(outRingXY, 6, starHolderDot);

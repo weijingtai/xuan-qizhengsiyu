@@ -1,4 +1,3 @@
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:metaphysics_core/enums.dart';
@@ -159,7 +158,7 @@ void main() {
         color: const Color.fromRGBO(55, 53, 52, 1),
         shadows: [
           BoxShadow(
-            color: Colors.black38.withOpacity(.1),
+            color: Colors.black38.withValues(alpha: 0.1),
             spreadRadius: 1,
             blurRadius: 1,
             offset: const Offset(1, 1),

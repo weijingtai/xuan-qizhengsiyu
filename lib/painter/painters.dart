@@ -66,14 +66,14 @@ class MyCirclePainter extends CustomPainter {
           center,
           Offset(size.width * .5, -size.height * .2),
           Paint()
-            ..color = _effectiveStyle.colors.shadow.withOpacity(.1)
+            ..color = _effectiveStyle.colors.shadow.withValues(alpha: 0.1)
             ..strokeWidth = 3);
     } else {
       canvas.drawLine(
           center,
           Offset(size.width * .5, size.height),
           Paint()
-            ..color = _effectiveStyle.colors.shadow.withOpacity(.1)
+            ..color = _effectiveStyle.colors.shadow.withValues(alpha: 0.1)
             ..strokeWidth = 3);
       canvas.drawLine(
           center,
@@ -97,9 +97,9 @@ class MyCirclePainter extends CustomPainter {
     // canvas.rotate((360-108) * pi / 180);
 
     canvas.drawCircle(Offset.zero, radius * .3,
-        Paint()..color = textStyle.color!.withOpacity(.3));
+        Paint()..color = textStyle.color!.withValues(alpha: 0.3));
     canvas.drawCircle(const Offset(1, 1), radius * .3,
-        Paint()..color = textStyle.color!.withOpacity(.1));
+        Paint()..color = textStyle.color!.withValues(alpha: 0.1));
 
     // canvas draw image from assets
     // ui.Image.asset("assets/planets/mars-bubbles-50.png")
@@ -345,14 +345,14 @@ class StarBodyPainter extends CustomPainter {
           center,
           Offset(size.width * .5, -size.height * .2),
           Paint()
-            ..color = _effectiveStyle.colors.shadow.withOpacity(.1)
+            ..color = _effectiveStyle.colors.shadow.withValues(alpha: 0.1)
             ..strokeWidth = 3);
     } else {
       canvas.drawLine(
           center,
           Offset(size.width * .5, size.height),
           Paint()
-            ..color = _effectiveStyle.colors.shadow.withOpacity(.1)
+            ..color = _effectiveStyle.colors.shadow.withValues(alpha: 0.1)
             ..strokeWidth = 3);
       canvas.drawLine(
           center,
@@ -378,9 +378,9 @@ class StarBodyPainter extends CustomPainter {
     // canvas.rotate((360-108) * pi / 180);
 
     canvas.drawCircle(Offset.zero, radius * .3,
-        Paint()..color = textStyle.color!.withOpacity(.3));
+        Paint()..color = textStyle.color!.withValues(alpha: 0.3));
     canvas.drawCircle(const Offset(1, 1), radius * .3,
-        Paint()..color = textStyle.color!.withOpacity(.1));
+        Paint()..color = textStyle.color!.withValues(alpha: 0.1));
 
     // canvas draw image from assets
     // ui.Image.asset("assets/planets/mars-bubbles-50.png")

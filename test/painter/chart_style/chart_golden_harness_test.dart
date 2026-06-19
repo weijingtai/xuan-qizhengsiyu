@@ -39,7 +39,7 @@ void main() {
           painter: SectorPainter(
             startAngle: 0,
             sweepRadian: math.pi / 6,
-            color: Colors.blue.withOpacity(0.3),
+            color: Colors.blue.withValues(alpha: 0.3),
             outerRadius: 180,
             innerRadius: 140,
             borderColor: Colors.black12,
@@ -140,7 +140,7 @@ void main() {
           painter: SectorPainter(
             startAngle: 0,
             sweepRadian: math.pi / 6,
-            color: Colors.blue.withOpacity(0.3),
+            color: Colors.blue.withValues(alpha: 0.3),
             outerRadius: 180,
             innerRadius: 140,
             style: alteredStyle,

@@ -149,7 +149,7 @@ class StarXiuRingPainter extends CustomPainter {
               color: _effectiveStyle.colors.labelDefault,
               shadows: [
                 BoxShadow(
-                  color: _effectiveStyle.colors.shadow.withOpacity(.1),
+                  color: _effectiveStyle.colors.shadow.withValues(alpha: 0.1),
                   spreadRadius: 1,
                   blurRadius: 1,
                   offset: const Offset(1, 1), // changes position of shadow
