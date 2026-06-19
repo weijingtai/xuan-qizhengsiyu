@@ -34,6 +34,7 @@ class OuterLifeStarRangePainter extends CustomPainter {
     this.showStarTrackLine = false,
     this.style,
   });
+  QiZhengChartStyle get _effectiveStyle => style ?? QiZhengChartStyle.fallback();
 // 定义一个函数来计算圆上某一角度对应的点的坐标
   Offset calculatePointOnCircle(double radius, double angle) {
     // 将角度转换为弧度，因为三角函数接受的参数是弧度制
@@ -68,7 +69,7 @@ class OuterLifeStarRangePainter extends CustomPainter {
     // canvas.drawLine(Offset(center.dx, center.dy), Offset(center.dx*2, center.dy), zeroLinePaint);
     if (showStarTrackLine) {
       final paintStarsTrack = Paint()
-        ..color = style?.colors.border ?? Colors.grey
+        ..color = _effectiveStyle.colors.border
         ..style = PaintingStyle.stroke
         ..strokeWidth = .5;
       canvas.drawCircle(center, trackRadius, paintStarsTrack);
@@ -143,7 +144,7 @@ class OuterLifeStarRangePainter extends CustomPainter {
     var typeTextPainter = TextPainter(
       text: TextSpan(
         text: "荫",
-        style: textStyle.copyWith(color: style?.colors.annotationYin ?? Colors.black45, fontSize: 12),
+        style: textStyle.copyWith(color: _effectiveStyle.colors.annotationYin, fontSize: 12),
       ),
       textAlign: TextAlign.left,
       textDirection: TextDirection.ltr,
@@ -164,7 +165,7 @@ class OuterLifeStarRangePainter extends CustomPainter {
       var typeTextPainter = TextPainter(
         text: TextSpan(
           text: "速",
-          style: textStyle.copyWith(color: style?.colors.annotationSu ?? Colors.red, fontSize: 12),
+          style: textStyle.copyWith(color: _effectiveStyle.colors.annotationSu, fontSize: 12),
         ),
         textAlign: TextAlign.left,
         textDirection: TextDirection.ltr,
@@ -230,6 +231,7 @@ class InnerLifeStarRangePainter extends CustomPainter {
       this.showText = false,
       this.innerPadding = 16.0,
       this.style});
+  QiZhengChartStyle get _effectiveStyle => style ?? QiZhengChartStyle.fallback();
 // 定义一个函数来计算圆上某一角度对应的点的坐标
   Offset calculatePointOnCircle(double radius, double angle) {
     // 将角度转换为弧度，因为三角函数接受的参数是弧度制
@@ -276,7 +278,7 @@ class InnerLifeStarRangePainter extends CustomPainter {
     // final radius = trackSize;
     if (showStarTrackLine) {
       final paintStarsTrack = Paint()
-        ..color = style?.colors.border ?? Colors.grey
+        ..color = _effectiveStyle.colors.border
         ..style = PaintingStyle.stroke
         ..strokeWidth = .5;
       canvas.drawCircle(center, trackRadius, paintStarsTrack);
@@ -356,7 +358,7 @@ class InnerLifeStarRangePainter extends CustomPainter {
     var typeTextPainter = TextPainter(
       text: TextSpan(
         text: "荫",
-        style: textStyle.copyWith(color: style?.colors.annotationYin ?? Colors.black45, fontSize: 12),
+        style: textStyle.copyWith(color: _effectiveStyle.colors.annotationYin, fontSize: 12),
       ),
       textAlign: TextAlign.left,
       textDirection: TextDirection.ltr,
@@ -377,7 +379,7 @@ class InnerLifeStarRangePainter extends CustomPainter {
       var typeTextPainter = TextPainter(
         text: TextSpan(
           text: "速",
-          style: textStyle.copyWith(color: style?.colors.annotationSu ?? Colors.red, fontSize: 12),
+          style: textStyle.copyWith(color: _effectiveStyle.colors.annotationSu, fontSize: 12),
         ),
         textAlign: TextAlign.left,
         textDirection: TextDirection.ltr,
@@ -419,6 +421,7 @@ class RingSheetPainter extends CustomPainter {
     required this.outerRadius,
     this.style,
   });
+  QiZhengChartStyle get _effectiveStyle => style ?? QiZhengChartStyle.fallback();
 
 // 定义一个函数来计算圆上某一角度对应的点的坐标
   Offset calculatePointOnCircle(double radius, double angle) {
@@ -440,9 +443,9 @@ class RingSheetPainter extends CustomPainter {
       // paint guid line side dot at ring inner border
       // UIStarModel star = stars[i];
       // Color color = starsColorMap[star.star]!;
-      Color color = style?.colors.divider ?? Colors.black87;
+      Color color = _effectiveStyle.colors.divider;
       if (i == 0) {
-        color = style?.colors.northLine ?? Colors.red;
+        color = _effectiveStyle.colors.northLine;
       }
 
       Offset inRingXY = calculatePointOnCircle(innerRadius, angle - 15);
