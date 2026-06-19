@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:collection/collection.dart';
 
 class ChartSemanticColors {
   final Color ringStroke;

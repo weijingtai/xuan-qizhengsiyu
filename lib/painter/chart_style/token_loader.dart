@@ -6,8 +6,64 @@ import 'package:metaphysics_core/enums.dart';
 import 'qi_zheng_chart_style.dart';
 import 'qi_zheng_star_palette.dart';
 
+/// Utility class with static parsing helpers for theme tokens.
+///
+/// Public static methods [parseColor] and [parseFontWeight] are reused by
+/// [ThemeChartStyleResolver] to convert raw token values to typed Dart objects.
+class TokenLoader {
+  TokenLoader._();
+
+  /// Parses a hex color string to [Color].
+  ///
+  /// Supports formats:
+  /// - `#RRGGBB` (6-digit, fully opaque, alpha = 0xFF)
+  /// - `#AARRGGBB` (8-digit, with alpha channel)
+  ///
+  /// Returns null if [hex] is null.
+  static Color? parseColor(dynamic hex) {
+    if (hex == null) return null;
+    if (hex is! String) return null;
+    var h = hex.startsWith('#') ? hex.substring(1) : hex;
+    if (h.length == 6) {
+      h = 'FF$h'; // default fully opaque
+    } else if (h.length != 8) {
+      throw FormatException('Invalid hex color format: $hex');
+    }
+    final value = int.tryParse(h, radix: 16);
+    if (value == null) {
+      throw FormatException('Invalid hex color value: $hex');
+    }
+    return Color(value);
+  }
+
+  /// Parses a font weight string to [FontWeight].
+  ///
+  /// Mapping rules:
+  /// - `normal` → [FontWeight.w400]
+  /// - `bold` → [FontWeight.w700]
+  /// - `w100` ~ `w900` → corresponding [FontWeight]
+  static FontWeight parseFontWeight(dynamic value) {
+    if (value is! String) return FontWeight.normal;
+    return switch (value) {
+      'normal' => FontWeight.w400,
+      'bold' => FontWeight.w700,
+      'w100' => FontWeight.w100,
+      'w200' => FontWeight.w200,
+      'w300' => FontWeight.w300,
+      'w400' => FontWeight.w400,
+      'w500' => FontWeight.w500,
+      'w600' => FontWeight.w600,
+      'w700' => FontWeight.w700,
+      'w800' => FontWeight.w800,
+      'w900' => FontWeight.w900,
+      _ => throw FormatException('Unknown fontWeight value: $value'),
+    };
+  }
+}
+
 /// 十四政图表令牌加载器
 /// 从 YAML 字符串解析 [QiZhengChartStyle]。
+@Deprecated('Use ThemeChartStyleResolver with the unified theme pipeline instead.')
 class ChartTokenLoader {
   ChartTokenLoader._();
 
@@ -106,7 +162,7 @@ class ChartTokenLoader {
     return ChartTypographyRole(
       family: family,
       fontSize: fontSize.toDouble(),
-      fontWeight: _parseFontWeight(fontWeightStr),
+      fontWeight: TokenLoader.parseFontWeight(fontWeightStr),
       height: height.toDouble(),
     );
   }
@@ -145,7 +201,11 @@ class ChartTokenLoader {
     if (value is! String) {
       throw FormatException("Missing or invalid color value for '$key'");
     }
-    return _parseColor(value);
+    final color = TokenLoader.parseColor(value);
+    if (color == null) {
+      throw FormatException("Missing or invalid color value for '$key'");
+    }
+    return color;
   }
 
   static double _requireDouble(YamlMap map, String key) {
@@ -159,6 +219,7 @@ class ChartTokenLoader {
 
 /// 十四政星曜色板加载器
 /// 从 YAML 字符串解析 [QiZhengStarPalette]。
+@Deprecated('Use ThemeChartStyleResolver with the unified theme pipeline instead.')
 class ChartStarPaletteLoader {
   ChartStarPaletteLoader._();
 
@@ -204,7 +265,11 @@ class ChartStarPaletteLoader {
       if (entry.value is! String) {
         throw FormatException("Invalid color value for star '$starName'");
       }
-      result[star] = _parseColor(entry.value as String);
+      final color = TokenLoader.parseColor(entry.value as String);
+      if (color == null) {
+        throw FormatException("Invalid color value for star '$starName'");
+      }
+      result[star] = color;
     }
     return result;
   }
@@ -226,48 +291,4 @@ class ChartStarPaletteLoader {
       _ => null,
     };
   }
-}
-
-// ── 私有辅助函数 ─────────────────────────────────────────────────────
-
-/// 解析十六进制颜色字符串为 [Color]。
-///
-/// 支持格式:
-/// - `#RRGGBB` (6位，完全不透明，alpha = 0xFF)
-/// - `#AARRGGBB` (8位，含 alpha 通道)
-Color _parseColor(String hex) {
-  var h = hex.startsWith('#') ? hex.substring(1) : hex;
-  if (h.length == 6) {
-    h = 'FF$h'; // 默认完全不透明
-  } else if (h.length != 8) {
-    throw FormatException('Invalid hex color format: $hex');
-  }
-  final value = int.tryParse(h, radix: 16);
-  if (value == null) {
-    throw FormatException('Invalid hex color value: $hex');
-  }
-  return Color(value);
-}
-
-/// 解析字重字符串为 [FontWeight]。
-///
-/// 映射规则:
-/// - `normal` → [FontWeight.w400]
-/// - `bold` → [FontWeight.w700]
-/// - `w100` ~ `w900` → 对应 [FontWeight]
-FontWeight _parseFontWeight(String value) {
-  return switch (value) {
-    'normal' => FontWeight.w400,
-    'bold' => FontWeight.w700,
-    'w100' => FontWeight.w100,
-    'w200' => FontWeight.w200,
-    'w300' => FontWeight.w300,
-    'w400' => FontWeight.w400,
-    'w500' => FontWeight.w500,
-    'w600' => FontWeight.w600,
-    'w700' => FontWeight.w700,
-    'w800' => FontWeight.w800,
-    'w900' => FontWeight.w900,
-    _ => throw FormatException('Unknown fontWeight value: $value'),
-  };
 }

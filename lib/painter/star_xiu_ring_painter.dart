@@ -2,7 +2,6 @@ import 'package:metaphysics_core/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:qizhengsiyu/enums/enum_qi_zheng.dart';
 import 'package:qizhengsiyu/painter/chart_style/qi_zheng_chart_style.dart';
 import 'dart:math' as math;
 
@@ -51,6 +50,7 @@ class StarXiuRingPainter extends CustomPainter {
     // Draw inner ring
     canvas.drawCircle(canvasCenter, innerRadius, ringPaint);
 
+    // ignore: unused_local_variable
     final Paint scalePaint = Paint()
       ..color = _effectiveStyle.colors.scaleTickAccent
       ..strokeWidth = .5

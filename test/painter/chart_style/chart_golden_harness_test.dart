@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:metaphysics_core/enums.dart';
 import 'package:qizhengsiyu/enums/enum_twelve_gong.dart';
 import 'package:qizhengsiyu/painter/chart_style/chart_style.dart';
 import 'package:qizhengsiyu/painter/painters.dart';
