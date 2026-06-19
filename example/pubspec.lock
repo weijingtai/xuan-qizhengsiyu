@@ -790,6 +790,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.17.0"
+  metaphysics_chart_ui:
+    dependency: transitive
+    description:
+      path: "../../metaphysics-chart-ui"
+      relative: true
+    source: path
+    version: "0.0.1"
   metaphysics_core:
     dependency: "direct overridden"
     description:
