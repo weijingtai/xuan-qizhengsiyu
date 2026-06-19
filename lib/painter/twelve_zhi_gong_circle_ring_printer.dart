@@ -22,6 +22,8 @@ class TwelveZhiGongCircleRingPrinter extends CustomPainter {
   Map<EnumStars, Color> starColorMapper;
   final QiZhengChartStyle? style;
 
+  QiZhengChartStyle get _effectiveStyle => style ?? QiZhengChartStyle.fallback();
+
   // Map<String,Color> fiveElementsColorMap = {
   //   "金":Color(0xffFFD700),
   //   "木":Color(0xff228B22),
@@ -117,7 +119,7 @@ class TwelveZhiGongCircleRingPrinter extends CustomPainter {
     // canvas.rotate(pi + pi/4);
 
     final Paint borderPaint = Paint()
-      ..color = style?.colors.border ?? Colors.grey
+      ..color = _effectiveStyle.colors.border
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1;
 

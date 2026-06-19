@@ -13,6 +13,8 @@ class SectorPainter extends CustomPainter {
   final double borderWidth; // 新增边框宽度参数
   final QiZhengChartStyle? style;
 
+  QiZhengChartStyle get _effectiveStyle => style ?? QiZhengChartStyle.fallback();
+
   Text? singleText;
 
   SectorPainter({
@@ -28,7 +30,7 @@ class SectorPainter extends CustomPainter {
   });
 
   Color get _effectiveBorderColor =>
-      style?.colors.sectorBorder ?? borderColor;
+      _effectiveStyle.colors.sectorBorder;
 
   @override
   void paint(Canvas canvas, Size size) {

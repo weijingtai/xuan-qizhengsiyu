@@ -22,6 +22,8 @@ class CircleTextPainter extends CustomPainter {
   final TextStyle textStyle;
   final QiZhengChartStyle? style;
 
+  QiZhengChartStyle get _effectiveStyle => style ?? QiZhengChartStyle.fallback();
+
   CircleTextPainter({
     required this.startAngle,
     required this.sweepRadian,
@@ -97,7 +99,7 @@ class CircleTextPainter extends CustomPainter {
       required double outerRadius,
       required int index}) {
     final Paint borderPaint = Paint()
-      ..color = style?.colors.sectorBorder ?? borderColor
+      ..color = _effectiveStyle.colors.sectorBorder
       ..style = PaintingStyle.stroke
       ..strokeWidth = borderWidth;
 

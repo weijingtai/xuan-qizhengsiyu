@@ -19,6 +19,8 @@ class StarXiuRingPainter extends CustomPainter {
   double get ringWidth => (outerSize - innerSize) * .5;
   final QiZhengChartStyle? style;
 
+  QiZhengChartStyle get _effectiveStyle => style ?? QiZhengChartStyle.fallback();
+
   StarXiuRingPainter(
       {
       // required this.ringWidth,
@@ -39,7 +41,7 @@ class StarXiuRingPainter extends CustomPainter {
     final double innerRadius = outerRadius - ringWidth;
 
     final Paint ringPaint = Paint()
-      ..color = style?.colors.ringStroke ?? Colors.black
+      ..color = _effectiveStyle.colors.ringStroke
       ..strokeWidth = .5
       ..style = PaintingStyle.stroke;
 
@@ -50,7 +52,7 @@ class StarXiuRingPainter extends CustomPainter {
     canvas.drawCircle(canvasCenter, innerRadius, ringPaint);
 
     final Paint scalePaint = Paint()
-      ..color = style?.colors.scaleTickAccent ?? Colors.blueAccent
+      ..color = _effectiveStyle.colors.scaleTickAccent
       ..strokeWidth = .5
       ..style = PaintingStyle.stroke;
 
@@ -79,7 +81,7 @@ class StarXiuRingPainter extends CustomPainter {
   void drawScale(
       Canvas canvas, Offset center, double outerRadius, double innerRadius) {
     Paint scalePaint = Paint()
-      ..color = style?.colors.scaleTick ?? Colors.black87
+      ..color = _effectiveStyle.colors.scaleTick
       ..strokeWidth = .5
       ..style = PaintingStyle.stroke;
 
@@ -144,10 +146,10 @@ class StarXiuRingPainter extends CustomPainter {
           style: GoogleFonts.maShanZheng(
               fontSize: 16.0,
               height: 1,
-              color: style?.colors.labelDefault ?? const Color.fromRGBO(55, 53, 52, 1),
+              color: _effectiveStyle.colors.labelDefault,
               shadows: [
                 BoxShadow(
-                  color: (style?.colors.shadow ?? Colors.black38).withOpacity(.1),
+                  color: _effectiveStyle.colors.shadow.withOpacity(.1),
                   spreadRadius: 1,
                   blurRadius: 1,
                   offset: const Offset(1, 1), // changes position of shadow
