@@ -1,12 +1,10 @@
 import 'dart:math';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:metaphysics_chart_ui/metaphysics_chart_ui.dart' hide
-    PanelWidget,
-    RingLayer,
-    StarRingLayer,
-    TwelveGongGridRingWidget;
+import 'package:metaphysics_chart_ui/metaphysics_chart_ui.dart'
+    hide PanelWidget, RingLayer, StarRingLayer, TwelveGongGridRingWidget;
 import 'package:qizhengsiyu/presentation/widgets/panel_widget.dart';
 import 'package:qizhengsiyu/presentation/widgets/ring_layer.dart';
 import 'package:qizhengsiyu/presentation/widgets/twelve_gong_grid_ring.dart';
@@ -42,7 +40,9 @@ class QiZhengLegacyBoard extends StatelessWidget {
   final List<String>? destinyContentList;
   final TextStyle? destinyTextStyle;
   final ValueNotifier<bool>? showTaiJiButtonNotifier;
+  final ValueListenable<List<String>?>? selectedTaiJiContentListenable;
   final void Function(String gongName)? onSelectTaiJiByGongName;
+  final void Function(int selectedIndex)? onSelectTaiJi;
   final VoidCallback? onUnselectTaiJi;
 
   // --- 二十八星宿环 data ---
@@ -65,7 +65,9 @@ class QiZhengLegacyBoard extends StatelessWidget {
     this.destinyContentList,
     this.destinyTextStyle,
     this.showTaiJiButtonNotifier,
+    this.selectedTaiJiContentListenable,
     this.onSelectTaiJiByGongName,
+    this.onSelectTaiJi,
     this.onUnselectTaiJi,
     this.chartStyle,
     this.starPalette,
@@ -129,7 +131,8 @@ class QiZhengLegacyBoard extends StatelessWidget {
   // ---------------------------------------------------------------------------
 
   QiZhengChartStyle get _effectiveChartStyle =>
-      chartStyle ?? const FallbackChartStyleResolver().resolve(Brightness.light);
+      chartStyle ??
+      const FallbackChartStyleResolver().resolve(Brightness.light);
 
   QiZhengStarPalette get _effectivePalette =>
       starPalette ??
@@ -143,10 +146,7 @@ class QiZhengLegacyBoard extends StatelessWidget {
         alignment: Alignment.center,
         children: [
           // ── Center content (Rotated) ─────────────────────────────
-          Transform.rotate(
-            angle: -30 * pi / 180,
-            child: centerWidget,
-          ),
+          Transform.rotate(angle: -30 * pi / 180, child: centerWidget),
 
           // ── 1. 十二地支宫 (RingLayer) ─────────────────────────────
           RingLayer(
@@ -268,7 +268,7 @@ class QiZhengLegacyBoard extends StatelessWidget {
                       spreadRadius: 1,
                       blurRadius: 1,
                       offset: const Offset(1, 1),
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -282,33 +282,33 @@ class QiZhengLegacyBoard extends StatelessWidget {
               outerSize: panelSizeDataModel.innerLifeStarRingOuterSize,
               trackSize: panelSizeDataModel.innerLifeStarRingTrackSize,
               starBodySize: panelSizeDataModel.starBodyRadius * 2,
-              items: innerStars
-                  .map((star) {
-                    final textStyle = GoogleFonts.notoSans(
-                      fontSize: 24.0,
-                      height: 1,
-                      color: QiZhengSiYuUIConstantResources.starsColorMap[star.star]!,
-                      fontWeight: FontWeight.normal,
-                      shadows: [
-                        BoxShadow(
-                          color: Colors.black38.withValues(alpha: 0.3),
-                          spreadRadius: 1,
-                          blurRadius: 1,
-                          offset: const Offset(1, 1),
-                        )
-                      ],
-                    );
-                    return StarRingItemData(
-                      angle: star.angle,
-                      child: StarBody(
-                        starBody: star,
-                        starSize: panelSizeDataModel.starBodyRadius * 2,
-                        allStarsShowNotifier: allStarsShowNotifier ?? ValueNotifier<bool>(false),
-                        textStyle: textStyle,
-                      ),
-                    );
-                  })
-                  .toList(),
+              items: innerStars.map((star) {
+                final textStyle = GoogleFonts.notoSans(
+                  fontSize: 24.0,
+                  height: 1,
+                  color:
+                      QiZhengSiYuUIConstantResources.starsColorMap[star.star]!,
+                  fontWeight: FontWeight.normal,
+                  shadows: [
+                    BoxShadow(
+                      color: Colors.black38.withValues(alpha: 0.3),
+                      spreadRadius: 1,
+                      blurRadius: 1,
+                      offset: const Offset(1, 1),
+                    ),
+                  ],
+                );
+                return StarRingItemData(
+                  angle: star.angle,
+                  child: StarBody(
+                    starBody: star,
+                    starSize: panelSizeDataModel.starBodyRadius * 2,
+                    allStarsShowNotifier:
+                        allStarsShowNotifier ?? ValueNotifier<bool>(false),
+                    textStyle: textStyle,
+                  ),
+                );
+              }).toList(),
             ),
           ),
 
@@ -334,7 +334,7 @@ class QiZhengLegacyBoard extends StatelessWidget {
                       spreadRadius: 1,
                       blurRadius: 1,
                       offset: const Offset(1, 1),
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -348,33 +348,33 @@ class QiZhengLegacyBoard extends StatelessWidget {
               outerSize: panelSizeDataModel.outerLifeStarRingOuterSize,
               trackSize: panelSizeDataModel.outerLifeStarRingTrackSize,
               starBodySize: panelSizeDataModel.starBodyRadius * 2,
-              items: outerStars
-                  .map((star) {
-                    final textStyle = GoogleFonts.notoSans(
-                      fontSize: 24.0,
-                      height: 1,
-                      color: QiZhengSiYuUIConstantResources.starsColorMap[star.star]!,
-                      fontWeight: FontWeight.normal,
-                      shadows: [
-                        BoxShadow(
-                          color: Colors.black38.withValues(alpha: 0.3),
-                          spreadRadius: 1,
-                          blurRadius: 1,
-                          offset: const Offset(1, 1),
-                        )
-                      ],
-                    );
-                    return StarRingItemData(
-                      angle: star.angle,
-                      child: StarBody(
-                        starBody: star,
-                        starSize: panelSizeDataModel.starBodyRadius * 2,
-                        allStarsShowNotifier: allStarsShowNotifier ?? ValueNotifier<bool>(false),
-                        textStyle: textStyle,
-                      ),
-                    );
-                  })
-                  .toList(),
+              items: outerStars.map((star) {
+                final textStyle = GoogleFonts.notoSans(
+                  fontSize: 24.0,
+                  height: 1,
+                  color:
+                      QiZhengSiYuUIConstantResources.starsColorMap[star.star]!,
+                  fontWeight: FontWeight.normal,
+                  shadows: [
+                    BoxShadow(
+                      color: Colors.black38.withValues(alpha: 0.3),
+                      spreadRadius: 1,
+                      blurRadius: 1,
+                      offset: const Offset(1, 1),
+                    ),
+                  ],
+                );
+                return StarRingItemData(
+                  angle: star.angle,
+                  child: StarBody(
+                    starBody: star,
+                    starSize: panelSizeDataModel.starBodyRadius * 2,
+                    allStarsShowNotifier:
+                        allStarsShowNotifier ?? ValueNotifier<bool>(false),
+                    textStyle: textStyle,
+                  ),
+                );
+              }).toList(),
             ),
           ),
 
@@ -547,31 +547,45 @@ class QiZhengLegacyBoard extends StatelessWidget {
   // Ring builder: 命理十二宫
   // ---------------------------------------------------------------------------
   Widget _buildMingLi12GongRing(double innerSize, double outerSize) {
-    final List<String> contentList =
-        destinyContentList ?? defaultDestinyList;
-    final TextStyle textStyle = destinyTextStyle ??
+    final List<String> contentList = destinyContentList ?? defaultDestinyList;
+    final TextStyle textStyle =
+        destinyTextStyle ??
         GoogleFonts.maShanZheng(
           color: Colors.black87,
           fontSize: 28,
           fontWeight: FontWeight.normal,
           height: 1.0,
           shadows: const [
-            Shadow(
-              color: Colors.black26,
-              offset: Offset(1, 1),
-              blurRadius: 3,
-            ),
+            Shadow(color: Colors.black26, offset: Offset(1, 1), blurRadius: 3),
           ],
         );
-    return DestinyTwelveGongRingWidget(
-      innerSize: innerSize,
-      outerSize: outerSize,
-      contentList: contentList,
-      textStyle: textStyle,
-      showTaiJiButtonNotifier: showTaiJiButtonNotifier,
-      onSelectTaiJiByGongName:
-          onSelectTaiJiByGongName ?? (_) {},
-      onUnselectTaiJi: onUnselectTaiJi ?? () {},
+    return Stack(
+      children: [
+        DestinyTwelveGongRingWidget(
+          innerSize: innerSize,
+          outerSize: outerSize,
+          contentList: contentList,
+          textStyle: textStyle,
+          showTaiJiButtonNotifier: showTaiJiButtonNotifier,
+          onSelectTaiJiByGongName: onSelectTaiJiByGongName ?? (_) {},
+          onUnselectTaiJi: onUnselectTaiJi ?? () {},
+        ),
+        if (selectedTaiJiContentListenable != null)
+          ValueListenableBuilder<List<String>?>(
+            valueListenable: selectedTaiJiContentListenable!,
+            builder: (context, selectedList, _) {
+              return SelectedTaiJiDestinyTwelveGongRingWidget(
+                innerSize: innerSize,
+                outerSize: outerSize,
+                contentList: selectedList,
+                textStyle: textStyle,
+                showTaiJiDianButtonNotifier: showTaiJiButtonNotifier,
+                onSelectTaiJi: onSelectTaiJi ?? (_) {},
+                onUnselectTaiJi: onUnselectTaiJi ?? () {},
+              );
+            },
+          ),
+      ],
     );
   }
 
@@ -586,7 +600,10 @@ class QiZhengLegacyBoard extends StatelessWidget {
         height: size,
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey.withValues(alpha: 0.4), width: 1),
+          border: Border.all(
+            color: Colors.grey.withValues(alpha: 0.4),
+            width: 1,
+          ),
           borderRadius: BorderRadius.circular(outerRadius),
         ),
         child: CustomPaint(

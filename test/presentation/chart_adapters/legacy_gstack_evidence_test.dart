@@ -1,7 +1,7 @@
 /// gStack visual evidence for QiZheng Board Phase 5 canary.
 ///
-/// Generates golden screenshots proving both production and legacy-adapter
-/// renderers produce correct output across all required scenarios.
+/// Verifies the production fallback contract and captures candidate-renderer
+/// goldens across the required visual scenarios.
 library;
 
 import 'dart:convert';
@@ -16,6 +16,7 @@ import 'package:qizhengsiyu/domain/entities/models/panel_ui_size.dart';
 import 'package:qizhengsiyu/presentation/adapters/legacy/qizheng_board_switch.dart';
 import 'package:qizhengsiyu/presentation/adapters/legacy/qizheng_legacy_board.dart';
 import 'package:qizhengsiyu/presentation/models/ui_star_model.dart';
+import 'package:qizhengsiyu/presentation/widgets/destiny_twelve_gong_ring.dart';
 
 // ---------------------------------------------------------------------------
 // Deterministic fixture (same as parity test)
@@ -38,20 +39,65 @@ QiZhengSiYuPanSizeDataModel _defaultPanelSize() {
 
 List<UIStarModel> _sampleInnerStars() {
   return [
-    UIStarModel(star: EnumStars.Sun, priority: 4, originalAngle: 45.0, rangeAngleEachSide: 10.0),
-    UIStarModel(star: EnumStars.Moon, priority: 3, originalAngle: 120.0, rangeAngleEachSide: 10.0),
-    UIStarModel(star: EnumStars.Mercury, priority: 2, originalAngle: 200.0, rangeAngleEachSide: 10.0),
-    UIStarModel(star: EnumStars.Venus, priority: 2, originalAngle: 300.0, rangeAngleEachSide: 10.0),
+    UIStarModel(
+      star: EnumStars.Sun,
+      priority: 4,
+      originalAngle: 45.0,
+      rangeAngleEachSide: 10.0,
+    ),
+    UIStarModel(
+      star: EnumStars.Moon,
+      priority: 3,
+      originalAngle: 120.0,
+      rangeAngleEachSide: 10.0,
+    ),
+    UIStarModel(
+      star: EnumStars.Mercury,
+      priority: 2,
+      originalAngle: 200.0,
+      rangeAngleEachSide: 10.0,
+    ),
+    UIStarModel(
+      star: EnumStars.Venus,
+      priority: 2,
+      originalAngle: 300.0,
+      rangeAngleEachSide: 10.0,
+    ),
   ];
 }
 
 List<UIStarModel> _sampleOuterStars() {
   return [
-    UIStarModel(star: EnumStars.Mars, priority: 2, originalAngle: 10.0, rangeAngleEachSide: 10.0),
-    UIStarModel(star: EnumStars.Jupiter, priority: 2, originalAngle: 80.0, rangeAngleEachSide: 10.0),
-    UIStarModel(star: EnumStars.Saturn, priority: 1, originalAngle: 180.0, rangeAngleEachSide: 10.0),
-    UIStarModel(star: EnumStars.Qi, priority: 1, originalAngle: 270.0, rangeAngleEachSide: 10.0),
-    UIStarModel(star: EnumStars.Luo, priority: 1, originalAngle: 330.0, rangeAngleEachSide: 10.0),
+    UIStarModel(
+      star: EnumStars.Mars,
+      priority: 2,
+      originalAngle: 10.0,
+      rangeAngleEachSide: 10.0,
+    ),
+    UIStarModel(
+      star: EnumStars.Jupiter,
+      priority: 2,
+      originalAngle: 80.0,
+      rangeAngleEachSide: 10.0,
+    ),
+    UIStarModel(
+      star: EnumStars.Saturn,
+      priority: 1,
+      originalAngle: 180.0,
+      rangeAngleEachSide: 10.0,
+    ),
+    UIStarModel(
+      star: EnumStars.Qi,
+      priority: 1,
+      originalAngle: 270.0,
+      rangeAngleEachSide: 10.0,
+    ),
+    UIStarModel(
+      star: EnumStars.Luo,
+      priority: 1,
+      originalAngle: 330.0,
+      rangeAngleEachSide: 10.0,
+    ),
   ];
 }
 
@@ -75,11 +121,7 @@ Widget _wrapBoard(Widget board, {double size = 600}) {
     themeMode: ThemeMode.light,
     home: Scaffold(
       body: Center(
-        child: SizedBox(
-          width: size,
-          height: size,
-          child: board,
-        ),
+        child: SizedBox(width: size, height: size, child: board),
       ),
     ),
   );
@@ -88,13 +130,8 @@ Widget _wrapBoard(Widget board, {double size = 600}) {
 Widget _buildBoardSwitch(BoardRenderer renderer, {double rotating = 0}) {
   return QiZhengBoardSwitch(
     renderer: renderer,
-    productionBuilder: () => QiZhengLegacyBoard(
-      panelSizeDataModel: _defaultPanelSize(),
-      innerStars: _sampleInnerStars(),
-      outerStars: _sampleOuterStars(),
-      centerWidget: _centerWidget(),
-      rotating: rotating,
-    ),
+    productionBuilder: () =>
+        const ColoredBox(key: Key('production-board'), color: Colors.white),
     panelSizeDataModel: _defaultPanelSize(),
     innerStars: _sampleInnerStars(),
     outerStars: _sampleOuterStars(),
@@ -108,28 +145,35 @@ Widget _buildBoardSwitch(BoardRenderer renderer, {double rotating = 0}) {
 // ---------------------------------------------------------------------------
 void main() {
   setUpAll(() async {
-    final systemFont = File('/System/Library/Fonts/Supplemental/Arial Unicode.ttf');
+    final systemFont = File(
+      '/System/Library/Fonts/Supplemental/Arial Unicode.ttf',
+    );
     final fontFile = systemFont.existsSync()
         ? systemFont
-        : File('/Users/jingtaiwei/Git/Public/xuan-migration/xuan-qizhengsiyu/build/unit_test_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf');
+        : File(
+            '/Users/jingtaiwei/Git/Public/xuan-migration/xuan-qizhengsiyu/build/unit_test_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf',
+          );
     final fontBytes = fontFile.readAsBytesSync();
 
     final manifestBytes = const StandardMessageCodec().encodeMessage({
       'google_fonts/NotoSans-Regular.ttf': [
-        {'asset': 'google_fonts/NotoSans-Regular.ttf'}
+        {'asset': 'google_fonts/NotoSans-Regular.ttf'},
       ],
       'google_fonts/MaShanZheng-Regular.ttf': [
-        {'asset': 'google_fonts/MaShanZheng-Regular.ttf'}
+        {'asset': 'google_fonts/MaShanZheng-Regular.ttf'},
       ],
     });
 
-    final messenger = TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger;
+    final messenger =
+        TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger;
     Future<ByteData?>? Function(ByteData?)? handler;
 
     handler = (ByteData? message) async {
       if (message == null) return null;
       final list = message.buffer.asUint8List(
-          message.offsetInBytes, message.lengthInBytes);
+        message.offsetInBytes,
+        message.lengthInBytes,
+      );
       final key = utf8.decode(list);
       if (key == 'AssetManifest.bin' || key.contains('AssetManifest.bin')) {
         return manifestBytes;
@@ -150,8 +194,12 @@ void main() {
     GoogleFonts.config.allowRuntimeFetching = false;
 
     for (final name in [
-      'NotoSans', 'NotoSans_regular', 'MaShanZheng', 'MaShanZheng_regular',
-      'Noto Sans', 'Ma Shan Zheng',
+      'NotoSans',
+      'NotoSans_regular',
+      'MaShanZheng',
+      'MaShanZheng_regular',
+      'Noto Sans',
+      'Ma Shan Zheng',
     ]) {
       final loader = FontLoader(name);
       loader.addFont(Future.value(fontBytes.buffer.asByteData()));
@@ -160,69 +208,57 @@ void main() {
   });
 
   // ===========================================================================
-  // Scenario 1: Desktop viewport – production vs legacy
+  // Scenario 1: Production branch contract and legacy desktop golden
   // ===========================================================================
   testWidgets(
-    'gStack: desktop viewport production board',
+    'gStack: production branch renders the supplied production builder',
     (tester) async {
       await tester.binding.setSurfaceSize(const Size(1200, 900));
-      await tester.pumpWidget(_wrapBoard(
-        _buildBoardSwitch(BoardRenderer.production),
-        size: 800,
-      ));
+      await tester.pumpWidget(
+        _wrapBoard(_buildBoardSwitch(BoardRenderer.production), size: 800),
+      );
       await tester.pumpAndSettle();
 
-      await expectLater(
-        find.byType(QiZhengBoardSwitch),
-        matchesGoldenFile('goldens/gstack/phase5/desktop_production.png'),
-      );
+      expect(find.byKey(const Key('production-board')), findsOneWidget);
+      expect(find.byType(QiZhengLegacyBoard), findsNothing);
     },
   );
 
-  testWidgets(
-    'gStack: desktop viewport legacy adapter',
-    (tester) async {
-      await tester.binding.setSurfaceSize(const Size(1200, 900));
-      await tester.pumpWidget(_wrapBoard(
-        _buildBoardSwitch(BoardRenderer.qiZhengLegacy),
-        size: 800,
-      ));
-      await tester.pumpAndSettle();
+  testWidgets('gStack: desktop viewport legacy adapter', (tester) async {
+    await tester.binding.setSurfaceSize(const Size(1200, 900));
+    await tester.pumpWidget(
+      _wrapBoard(_buildBoardSwitch(BoardRenderer.qiZhengLegacy), size: 800),
+    );
+    await tester.pumpAndSettle();
 
-      await expectLater(
-        find.byType(QiZhengBoardSwitch),
-        matchesGoldenFile('goldens/gstack/phase5/desktop_legacy_adapter.png'),
-      );
-    },
-  );
+    await expectLater(
+      find.byType(QiZhengBoardSwitch),
+      matchesGoldenFile('goldens/gstack/phase5/desktop_legacy_adapter.png'),
+    );
+  });
 
   // ===========================================================================
   // Scenario 2: Minimum supported viewport
   // ===========================================================================
-  testWidgets(
-    'gStack: minimum viewport legacy adapter',
-    (tester) async {
-      await tester.binding.setSurfaceSize(const Size(400, 700));
-      await tester.pumpWidget(_wrapBoard(
-        _buildBoardSwitch(BoardRenderer.qiZhengLegacy),
-        size: 360,
-      ));
-      await tester.pumpAndSettle();
+  testWidgets('gStack: minimum viewport legacy adapter', (tester) async {
+    await tester.binding.setSurfaceSize(const Size(400, 700));
+    await tester.pumpWidget(
+      _wrapBoard(_buildBoardSwitch(BoardRenderer.qiZhengLegacy), size: 360),
+    );
+    await tester.pumpAndSettle();
 
-      await expectLater(
-        find.byType(QiZhengBoardSwitch),
-        matchesGoldenFile('goldens/gstack/phase5/min_viewport_legacy.png'),
-      );
-    },
-  );
+    await expectLater(
+      find.byType(QiZhengBoardSwitch),
+      matchesGoldenFile('goldens/gstack/phase5/min_viewport_legacy.png'),
+    );
+  });
 
   // ===========================================================================
   // Scenario 3: Dark theme
   // ===========================================================================
-  testWidgets(
-    'gStack: dark theme legacy adapter',
-    (tester) async {
-      await tester.pumpWidget(MaterialApp(
+  testWidgets('gStack: dark theme legacy adapter', (tester) async {
+    await tester.pumpWidget(
+      MaterialApp(
         theme: ThemeData.light(),
         darkTheme: ThemeData.dark(),
         themeMode: ThemeMode.dark,
@@ -235,44 +271,42 @@ void main() {
             ),
           ),
         ),
-      ));
-      await tester.pumpAndSettle();
+      ),
+    );
+    await tester.pumpAndSettle();
 
-      await expectLater(
-        find.byType(QiZhengBoardSwitch),
-        matchesGoldenFile('goldens/gstack/phase5/dark_theme_legacy.png'),
-      );
-    },
-  );
+    await expectLater(
+      find.byType(QiZhengBoardSwitch),
+      matchesGoldenFile('goldens/gstack/phase5/dark_theme_legacy.png'),
+    );
+  });
 
   // ===========================================================================
   // Scenario 4: Full board rotation (rotating: 45°)
   // ===========================================================================
-  testWidgets(
-    'gStack: rotated board legacy adapter',
-    (tester) async {
-      await tester.pumpWidget(_wrapBoard(
-        _buildBoardSwitch(BoardRenderer.qiZhengLegacy, rotating: 45),
-      ));
-      await tester.pumpAndSettle();
+  testWidgets('gStack: rotated board legacy adapter', (tester) async {
+    await tester.pumpWidget(
+      _wrapBoard(_buildBoardSwitch(BoardRenderer.qiZhengLegacy, rotating: 45)),
+    );
+    await tester.pumpAndSettle();
 
-      await expectLater(
-        find.byType(QiZhengBoardSwitch),
-        matchesGoldenFile('goldens/gstack/phase5/rotated_45_legacy.png'),
-      );
-    },
-  );
+    await expectLater(
+      find.byType(QiZhengBoardSwitch),
+      matchesGoldenFile('goldens/gstack/phase5/rotated_45_legacy.png'),
+    );
+  });
 
   // ===========================================================================
-  // Scenario 5: Side-by-side with runtime renderer switch (pixel capture)
+  // Scenario 5: Runtime renderer switch with distinct subtree assertions
   // ===========================================================================
-  testWidgets(
-    'gStack: runtime renderer switch renders both paths',
-    (tester) async {
-      final renderer = ValueNotifier<BoardRenderer>(BoardRenderer.production);
+  testWidgets('gStack: runtime renderer switch renders both paths', (
+    tester,
+  ) async {
+    final renderer = ValueNotifier<BoardRenderer>(BoardRenderer.production);
 
-      // Widget that switches between renderers at runtime
-      await tester.pumpWidget(MaterialApp(
+    // Widget that switches between renderers at runtime
+    await tester.pumpWidget(
+      MaterialApp(
         theme: ThemeData.light(),
         home: Scaffold(
           body: Center(
@@ -284,19 +318,10 @@ void main() {
                 builder: (ctx, r, _) {
                   return QiZhengBoardSwitch(
                     renderer: r,
-                    productionBuilder: () {
-                      return MaterialApp(
-                        home: Scaffold(
-                          body: Center(
-                            child: SizedBox(
-                              width: 600,
-                              height: 600,
-                              child: Text('production fallback'),
-                            ),
-                          ),
-                        ),
-                      );
-                    },
+                    productionBuilder: () => const ColoredBox(
+                      key: Key('production-board'),
+                      color: Colors.white,
+                    ),
                     panelSizeDataModel: _defaultPanelSize(),
                     innerStars: _sampleInnerStars(),
                     outerStars: _sampleOuterStars(),
@@ -307,28 +332,31 @@ void main() {
             ),
           ),
         ),
-      ));
-      await tester.pumpAndSettle();
+      ),
+    );
+    await tester.pumpAndSettle();
 
-      // Verify production path renders (no error)
-      expect(find.byType(QiZhengBoardSwitch), findsOneWidget);
+    // Verify production path renders (no error)
+    expect(find.byKey(const Key('production-board')), findsOneWidget);
+    expect(find.byType(QiZhengLegacyBoard), findsNothing);
 
-      // Switch to legacy adapter path at runtime
-      renderer.value = BoardRenderer.qiZhengLegacy;
-      await tester.pumpAndSettle();
+    // Switch to legacy adapter path at runtime
+    renderer.value = BoardRenderer.qiZhengLegacy;
+    await tester.pumpAndSettle();
 
-      // Verify legacy adapter path renders (no error)
-      expect(find.byType(QiZhengBoardSwitch), findsOneWidget);
-    },
-  );
+    // Verify the candidate subtree replaced the production subtree.
+    expect(find.byKey(const Key('production-board')), findsNothing);
+    expect(find.byType(QiZhengLegacyBoard), findsOneWidget);
+  });
 
   // ===========================================================================
   // Scenario 6: productionBuilder must be provided for production mode
   // ===========================================================================
-  testWidgets(
-    'gStack: production mode asserts without productionBuilder',
-    (tester) async {
-      await tester.pumpWidget(MaterialApp(
+  testWidgets('gStack: production mode rejects a missing productionBuilder', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      MaterialApp(
         home: Scaffold(
           body: Center(
             child: SizedBox(
@@ -344,10 +372,37 @@ void main() {
             ),
           ),
         ),
-      ));
-      await tester.pumpAndSettle();
-      // Should render an empty SizedBox (productionBuilder == null)
-      expect(find.byType(QiZhengBoardSwitch), findsOneWidget);
-    },
-  );
+      ),
+    );
+    expect(tester.takeException(), isA<FlutterError>());
+  });
+
+  testWidgets('gStack: candidate forwards secondary TaiJi selection', (
+    tester,
+  ) async {
+    final selectedContent = ValueNotifier<List<String>?>(null);
+    int? selectedIndex;
+
+    await tester.pumpWidget(
+      _wrapBoard(
+        QiZhengBoardSwitch(
+          renderer: BoardRenderer.qiZhengLegacy,
+          panelSizeDataModel: _defaultPanelSize(),
+          innerStars: _sampleInnerStars(),
+          outerStars: _sampleOuterStars(),
+          centerWidget: _centerWidget(),
+          selectedTaiJiContentListenable: selectedContent,
+          onSelectTaiJi: (index) => selectedIndex = index,
+        ),
+      ),
+    );
+
+    final selectedRing = tester
+        .widget<SelectedTaiJiDestinyTwelveGongRingWidget>(
+          find.byType(SelectedTaiJiDestinyTwelveGongRingWidget),
+        );
+    selectedRing.onSelectTaiJi(4);
+
+    expect(selectedIndex, 4);
+  });
 }

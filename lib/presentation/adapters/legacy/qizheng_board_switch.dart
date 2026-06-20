@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:qizhengsiyu/domain/entities/models/panel_ui_size.dart';
 import 'package:qizhengsiyu/domain/entities/models/zhou_tian_model.dart';
@@ -50,7 +51,9 @@ class QiZhengBoardSwitch extends StatelessWidget {
   final List<String>? destinyContentList;
   final TextStyle? destinyTextStyle;
   final ValueNotifier<bool>? showTaiJiButtonNotifier;
+  final ValueListenable<List<String>?>? selectedTaiJiContentListenable;
   final void Function(String gongName)? onSelectTaiJiByGongName;
+  final void Function(int selectedIndex)? onSelectTaiJi;
   final VoidCallback? onUnselectTaiJi;
   final QiZhengChartStyle? chartStyle;
   final QiZhengStarPalette? starPalette;
@@ -71,7 +74,9 @@ class QiZhengBoardSwitch extends StatelessWidget {
     this.destinyContentList,
     this.destinyTextStyle,
     this.showTaiJiButtonNotifier,
+    this.selectedTaiJiContentListenable,
     this.onSelectTaiJiByGongName,
+    this.onSelectTaiJi,
     this.onUnselectTaiJi,
     this.chartStyle,
     this.starPalette,
@@ -85,7 +90,13 @@ class QiZhengBoardSwitch extends StatelessWidget {
   Widget build(BuildContext context) {
     switch (renderer) {
       case BoardRenderer.production:
-        return productionBuilder?.call() ?? const SizedBox();
+        final builder = productionBuilder;
+        if (builder == null) {
+          throw FlutterError(
+            'QiZhengBoardSwitch.production requires productionBuilder.',
+          );
+        }
+        return builder();
       case BoardRenderer.qiZhengLegacy:
         return QiZhengLegacyBoard(
           panelSizeDataModel: panelSizeDataModel,
@@ -96,7 +107,9 @@ class QiZhengBoardSwitch extends StatelessWidget {
           destinyContentList: destinyContentList,
           destinyTextStyle: destinyTextStyle,
           showTaiJiButtonNotifier: showTaiJiButtonNotifier,
+          selectedTaiJiContentListenable: selectedTaiJiContentListenable,
           onSelectTaiJiByGongName: onSelectTaiJiByGongName,
+          onSelectTaiJi: onSelectTaiJi,
           onUnselectTaiJi: onUnselectTaiJi,
           chartStyle: chartStyle,
           starPalette: starPalette,
