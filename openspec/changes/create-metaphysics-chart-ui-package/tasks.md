@@ -22,6 +22,8 @@
 - [ ] P0.9 Produce P0 go/no-go note in this change directory.
 - [ ] P0.10 Sequence against the in-flight `QiZhengChartStyle` / YAML-token migration (`docs/superpowers/specs/2026-06-17-qizhengsiyu-chart-theme-token-migration-plan.md`); record which theme system survives end-state and confirm the same painters are not re-migrated in parallel.
 - [ ] P0.11 Build read-only `buildBoard()` + geometry snapshots against the real data models of all five modules (QiZhengSiYu, TaiYiShenShu, ZiWeiDouShu, DaLiuRen, QiMenDunJia), OR mark the public API experimental and add a gate forbidding a second production migration until a multi-module conformance suite passes.
+- [ ] P0.12 Record non-360 coordinate ownership: QiZhengSiYu adapter owns the versioned `365.25 -> 360` cumulative-boundary mapping; package core accepts normalized millidegrees only.
+- [ ] P0.13 Record Zhu-Luo-San-Xian sparse fixtures, including disjoint, adjacent, overlapping-overlay, and split wrap-around ranges.
 
 **Exit Criteria**
 
@@ -45,12 +47,13 @@
 - [ ] P1.1 Create sibling Flutter package `metaphysics_chart_ui`.
 - [ ] P1.2 Add public barrel `lib/metaphysics_chart_ui.dart`.
 - [ ] P1.3 Add immutable core contracts: `ChartBoard`, `ChartLayer` (with `semanticsMode` and a `behavior` block), `ChartSector`, `ChartItem`, `ItemGroup`, `AngularPoint`, `ChartBoardAdapter`, `BoardSemantics`.
-- [ ] P1.4 Add layout spec contracts: `CircularLayerSpec`, `RectGridLayoutSpec`, `RectPerimeterLayoutSpec`, including per-ring behavior parameters (radius anchor, annotation side, start-angle offset, direction, text orientation).
+- [ ] P1.4 Add layout spec contracts: `CircularLayerSpec`, `FullCircleCoverage`, `SparseArcCoverage`, `SparseArcRange` (stable id, integer start/end, local partition, caps, logical target), overlay ring reference, z/hit priority, disabled block/pass-through, `owner(targetId, semanticsOrder)` / `merge(targetId)` / `none` semantics policy, `RectGridLayoutSpec`, and `RectPerimeterLayoutSpec`.
 - [ ] P1.5 Add `BoardInteractionController`, `BoardInteractionState`, and callback contracts; resolve a child hit up to its owning `ItemGroup` id.
 - [ ] P1.6 Add `BoardTheme`, renderer token groups, module palette contracts, and fallback values; include the role-mapping destinations for the existing chart-style roles.
 - [ ] P1.7 Add architecture tests enforcing the import allow-list (core/layouts/renderers may import only Flutter, `dart:ui`, `dart:math`, `yaml`, and named utilities) and explicitly failing on `package:metaphysics_core`, `package:theme`, and `package:xuan_config`.
 - [ ] P1.8 Add no-`xuan_`/`xuan-` identifier scan for package pubspec, library declarations, import keys, and public identifiers.
 - [ ] P1.9 Run `flutter analyze` and package tests.
+- [ ] P1.10 Add an API/identifier test proving core exposes no source-domain span, `365.25`, mapping table, or projection callback.
 
 **Exit Criteria**
 
@@ -71,7 +74,7 @@
 - P1 tests pass.
 
 - [ ] P2.1 Implement `CircularRingLayoutEngine` for equal sectors.
-- [ ] P2.2 Implement circular custom arc geometry for non-uniform layers such as 28 constellations.
+- [ ] P2.2 Implement circular full and sparse custom arc geometry for non-uniform layers such as 28 constellations and partial Zhu-Luo-San-Xian ranges.
 - [ ] P2.3 Implement tick geometry for 360-degree and configurable major/minor ticks.
 - [ ] P2.4 Implement point/angle geometry for stars/items with two radius bands and dual `originalAngle`/`displayAngle` plus leader line.
 - [ ] P2.5 Implement `RectGridLayoutEngine` for matrix grids.
@@ -79,7 +82,12 @@
 - [ ] P2.7 Implement `BoardGeometry` and `BoardHitRegion` generation. Hit regions are filled, closed geometry (annular wedge polygons for sectors/arcs), authored independently of the stroked draw path; tick scales default to non-interactive.
 - [ ] P2.8 Add snapshot tests for all geometry types.
 - [ ] P2.9 Add hit-test tests for circular sector, custom arc band, point item, grid cell, and perimeter cell; assert an arc-band hit uses the wedge area (not the stroke path) and that an interactive tick scale resolves by angular bucket.
-- [ ] P2.10 Implement a mandatory spatial/angular index for layers above 64 regions and add a benchmark asserting sub-linear pointer-move cost within the documented frame-time budget.
+- [ ] P2.10 Implement a mandatory spatial/angular index for layers above 64 regions and the documented deterministic benchmark: 5 x 1,000 warm-ups, 10 x 10,000 measured seeded lookups, p95 below 2 ms on the registered target, and fitted log-log slope below `0.85` for 128/256/512/1024 regions; record complete environment metadata.
+- [ ] P2.11 Add sparse coverage tests: single/disjoint/adjacent ranges; reject same-layer overlap, zero sweep, out-of-range and implicit wrap-around; accept explicit split wrap-around; assert full radial reservation, blank-angle hit/semantics exclusion, and deterministic overlay z-order.
+- [ ] P2.12 Add Canvas/Widget geometry conformance fixtures for sparse inner/outer borders, radial start/end borders, and `butt`/`round` caps.
+- [ ] P2.13 Add canonical-transform and boundary tests: validate before direction/offset/rotation, normalize point `360000` to `0`, probe `b-1/b/b+1`, and map split fragments to one logical target/semantics node.
+- [ ] P2.14 Add deterministic overlay tests for paint order, hit order, equal-priority declaration tie-break, disabled block/pass-through, paint-only round-cap protrusion, and single-owner adjacent seams.
+- [ ] P2.15 Add semantics policy tests: one owner per target; owner-only role/primary label/state/activate; declaration-ordered merged descriptions; unique non-activate action IDs; reject missing/duplicate owners, duplicate actions, and owner-field overrides.
 
 **Exit Criteria**
 
@@ -130,7 +138,7 @@
 - [ ] P4.2 Implement YAML loader with schema version and package fallback; reconcile field names with the existing `assets/theme/chart_tokens.yaml` schema (`colors`/`typography`/`geometry`/`starPalette`).
 - [ ] P4.3 Implement module palette loading without adding module enum dependencies.
 - [ ] P4.4 Add theme precedence tests: fallback, base tokens (host `XuanThemeData.chartTokens` or standalone YAML), module, renderer, instance override.
-- [ ] P4.5 Add invalid YAML tests proving per-token fallback and clear diagnostics.
+- [ ] P4.5 Add invalid YAML tests proving optional per-token fallback, plus strict production failure and clear diagnostics for missing `invalidRingFill`, `invalidRingBorder`, `invalidRingLabel`, or `invalidRingBorderWidth`.
 - [ ] P4.6 Add light/dark theme fixture tests.
 - [ ] P4.7 Implement the host bridge in the adapter/host layer that feeds `XuanThemeData.chartTokens` to a board as base tokens, and add the role-mapping table test asserting each existing chart-style role lands in its single destination (core semantic / renderer token / module palette).
 
@@ -143,7 +151,8 @@
 **Stop-The-Line**
 
 - YAML parser requires module-specific classes.
-- A missing YAML key crashes rendering instead of falling back.
+- An optional YAML key crashes instead of falling back, or a required
+  `invalidRing*` key silently falls back in strict production mode.
 - Package core imports `package:theme`, or a chart-style role has no mapped destination.
 
 ## P5 · Example App And gStack Validation Surface
@@ -159,6 +168,7 @@
 - [ ] P5.5 Add theme switch or YAML-loaded theme control.
 - [ ] P5.6 Add visible hover/selected interaction demo for Canvas and Widget renderers.
 - [ ] P5.7 Run browser/manual QA and collect gStack evidence after implementation.
+- [ ] P5.8 Add a sparse circular demo with blank angles and two overlapping Zhu-Luo-San-Xian overlays, exposing cap styles and hover/selection for gStack verification.
 
 **Exit Criteria**
 
@@ -182,6 +192,7 @@
 - [ ] P6.5 Migrate one low-risk layer first, such as a divider/tick layer.
 - [ ] P6.6 Produce migration evidence before replacing any user-facing board.
 - [ ] P6.7 Add an angle-parity fixture asserting both `originalAngle` and resolved `displayAngle` survive the adapter unchanged and that building the board triggers no solver mutation.
+- [ ] P6.8 Implement the QiZhengSiYu-owned, versioned cumulative-boundary normalization policy using three-decimal source fixed point, integer rational arithmetic, and round-half-up; test `0/182.625/365.25 -> 0/180000/360000`, exact-half boundaries, monotonic properties, invalid full-coverage source closure/order/range/finiteness, quantization collapse, and sparse ranges without aggregate closure preserving gaps.
 
 **Exit Criteria**
 
@@ -206,6 +217,10 @@
 - [ ] P7.6 Run independent code review focused on public API lock-in, irreversible migration risk, accessibility, and renderer divergence.
 - [ ] P7.7 Approve or revise OpenSpec before production migration continues.
 - [ ] P7.8 Attach hit-test performance-budget evidence and a bounded-node accessibility traversal result for the reference board.
+- [ ] P7.9 Attach sparse-arc Canvas/Widget parity evidence covering blank angles, caps, overlay hit priority, semantics, and responsive clipping.
+- [ ] P7.10 Run failure injection for geometry, strict-theme, hit-index, and renderer initialization; prove Legacy fallback preserves selection, rotation, and module state.
+- [ ] P7.11 Generate a commit-SHA evidence manifest and verify a deliberately missing runtime artifact fails production readiness even when OpenSpec reports artifact completion.
+- [ ] P7.12 Implement and test `tool/verify_production_readiness.dart` against `evidence/production-readiness-manifest.yaml`; require schema v1, exact HEAD, the closed 16-ID catalog from `design.md`, `passed` statuses, existing files, and matching SHA-256 hashes in CI; catalog changes require a schema-version change.
 
 **Exit Criteria**
 

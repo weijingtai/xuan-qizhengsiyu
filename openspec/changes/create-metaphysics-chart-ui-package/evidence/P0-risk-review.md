@@ -6,7 +6,7 @@
 - Branch under review: `codex/metaphysics-chart-ui-openspec`
 - Artifacts reviewed: `proposal.md`, `design.md`, `tasks.md`, `specs/metaphysics-chart-ui/spec.md`, `acceptance.md`, `evidence/doc-validation.md`, SuperPowers plan `docs/superpowers/plans/2026-06-19-metaphysics-chart-ui-package.md`
 - Code grounded against: live QiZhengSiYu painter/style/model source and sibling-package layout (see Method).
-- **Current verdict: GO for implementation planning under phase gates.** The original P0 blockers are preserved below as review evidence; the Resolution Log records where each documentation-level blocker is now resolved. Runtime-evidence items still gate public API stabilization and any user-facing board replacement.
+- **Current verdict: GO for implementation planning under phase gates after the 2026-06-20 supplemental review.** The original and supplemental blockers are preserved below as review evidence; the resolution logs record where each documentation-level blocker is now resolved. Runtime evidence still gates public API stabilization and any user-facing board replacement.
 
 ## Original Verdict Summary
 
@@ -233,3 +233,38 @@ Update 2026-06-18: the spec package was revised to address all twelve stop-the-l
 | G2 — resolved immutable snapshot + parity | `design.md` Adapter Contracts; `tasks.md` P6.2, P6.7 |
 
 Revised verdict: the documentation-level blockers are resolved; the change is approved to proceed to implementation under the existing phase gates, provided the runtime-evidence items (A1 real adapters, C2 budget, F1 traversal, G2 parity) are demonstrated at their phase gates before public API stabilization and before any user-facing board replacement.
+
+---
+
+## Supplemental Review: Coordinate Ownership And Sparse Coverage
+
+- Review date: 2026-06-20
+- Reviewers: OpenSpec architecture role, independent gStack-style adversarial
+  reviewer, and gStack plan engineering review role
+- Trigger: move `365.25 -> 360` normalization to the QiZhengSiYu consuming
+  adapter and add sparse partial-arc coverage for Zhu-Luo-San-Xian
+- Initial verdict: BLOCKED pending deterministic contracts
+
+### Supplemental Findings And Resolution
+
+| Area | Resolution |
+| --- | --- |
+| Projection ownership | Package accepts integer display millidegrees only; QiZhengSiYu owns versioned fixed-point cumulative-boundary mapping |
+| Numeric reproducibility | Three-decimal source fixed point, integer rational arithmetic, round-half-up, source validation before full-coverage endpoint pinning |
+| Sparse coverage | Explicit full/sparse modes, half-open canonical ranges, explicit split wrap-around, preserved radial band and transparent gaps |
+| Overlap and ordering | Same-layer overlap invalid; intentional overlap uses overlays with deterministic paint/hit/disabled policies |
+| Fragmented identity | Multiple geometry/hit fragments may resolve to one logical target and at most one semantics node |
+| Borders and caps | Shared seams have one owner; round-cap protrusion is paint-only and cannot create blank-angle interaction |
+| Semantics merge | One owner supplies primary semantics; merges only append ordered descriptions and unique non-activate actions |
+| Validation severity | Invalid radial allocation/duplicate IDs/theme schema are board-fatal; valid-band coverage defects are ring-local |
+| Theme contradiction | Optional tokens fall back; strict production requires all `invalidRing*` roles with one ownership destination |
+| Performance evidence | Seeded warm-up/measured protocol, p95 target, scaling matrix, and recorded environment replace an unrepeatable “under 2 ms” claim |
+| Rollback | Normative pre/post-activation failure scenarios atomically retain/restore Legacy and preserve instance state |
+| False completion | Closed schema-v1 16-ID manifest catalog, exact commit and SHA-256 verifier, CI negative fixture |
+
+The gStack role's final reported contradiction was an example manifest ID
+(`package-tests`) not present in the closed catalog; it was corrected to
+`package-unit`. A requested final zero-blocker rerun was interrupted by the
+external role's usage limit. No CLEAR response is claimed. Final local gates
+are OpenSpec strict validation, diff/placeholder/contradiction scans, numeric
+fixture checks, and exact catalog/example consistency.

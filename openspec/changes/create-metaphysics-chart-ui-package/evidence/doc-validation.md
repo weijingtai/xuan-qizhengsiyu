@@ -45,7 +45,40 @@ wc -l openspec/changes/create-metaphysics-chart-ui-package/proposal.md openspec/
   - P0 risk review: 235
   - document validation: 90
   - SuperPowers plan: 491
-  - total after this validation refresh: 2160
+- total after this validation refresh: 2160
+
+## 2026-06-20 Supplemental Validation
+
+The coordinate and sparse-coverage revision updated the Superpowers geometry
+spec and implementation plan plus OpenSpec proposal, design, tasks, normative
+spec, acceptance, and P0 risk evidence.
+
+Validated decisions:
+
+- `365.25 -> 360` normalization is owned by the QiZhengSiYu consuming adapter,
+  using deterministic fixed-point cumulative-boundary mapping; package core
+  accepts normalized integer millidegrees only.
+- Circular coverage distinguishes exact full-circle closure from legal sparse
+  partial arcs; blank angles remain unpainted/unaddressable and the complete
+  radial band remains reserved.
+- Overlap, wrap, caps, seams, fragmented logical identity, semantics ownership,
+  validation severity, renderer parity, Legacy rollback, and false-completion
+  evidence all have normative rules and executable gates.
+- The schema-v1 production evidence manifest has a closed 16-ID catalog and a
+  verifier contract tied to exact commit SHA and artifact hashes.
+
+Commands rerun:
+
+```bash
+openspec validate create-metaphysics-chart-ui-package --strict --no-interactive
+openspec status --change create-metaphysics-chart-ui-package
+git diff --check -- docs/superpowers openspec/changes/create-metaphysics-chart-ui-package
+rg placeholder and stale-contract patterns across all revised artifacts
+```
+
+OpenSpec strict validation passed. `4/4 artifacts complete` is interpreted only
+as document presence; it is explicitly forbidden as runtime or production
+completion evidence.
 
 ## SuperPowers Validation
 
@@ -74,6 +107,10 @@ The required gStack gates are explicitly defined:
 - tap/selected evidence for all four renderers
 - theme/YAML switch evidence
 - accessibility/keyboard smoke evidence for selectable regions
+- sparse Canvas/Widget evidence for blank angles, caps, ordered overlap,
+  disabled pass-through, semantics, and responsive clipping
+- Legacy rollback failure-injection evidence
+- commit-SHA production evidence manifest verification
 
 These gates are mandatory before production replacement or readiness claims.
 
@@ -81,7 +118,11 @@ These gates are mandatory before production replacement or readiness claims.
 
 The documentation package is structurally valid. The external P0 architecture/risk review is recorded in `evidence/P0-risk-review.md`, and its documentation-level blockers are resolved or converted into explicit phase gates.
 
-This is approval to proceed to implementation planning and package scaffolding on the feature branch. It is not approval to replace production boards until runtime evidence passes: package tests, renderer conformance, geometry parity, hit-test budget, accessibility traversal, gStack screenshots/interactions, and QiZhengSiYu golden parity.
+This is approval to proceed to implementation on the feature branch under the
+revised plan. It is not approval to replace production boards until runtime
+evidence passes: package/adapter tests, renderer and sparse conformance, geometry
+and Legacy parity, reproducible hit-test budget, accessibility traversal,
+gStack screenshots/interactions, rollback injection, and manifest verification.
 
 ## Known Remaining Work Before Implementation
 

@@ -60,6 +60,13 @@ Required fields:
 
 No field may contain a module domain object. Use `metadata` maps only for adapter-owned opaque ids needed by callbacks.
 
+Validation distinguishes board-fatal from ring-local failures. Duplicate stable
+IDs, negative/non-finite radial allocation, and unresolved required theme schema
+are board-fatal because reliable geometry cannot be allocated. Partition or
+coverage defects are ring-local only when radial allocation is valid: the band
+remains reserved and becomes the invalid-ring annulus, neighboring rings remain
+interactive, and invalid content emits no hit regions or semantics.
+
 ### ChartLayer
 
 Layer variants:
@@ -81,6 +88,32 @@ Each layer has:
 - `semanticsMode`: `none`, `group`, `perItem` — chosen independently of `hitTestMode` (see Accessibility)
 - `items` or geometry source
 - `behavior`: explicit per-instance rendering parameters (see Layer Behavior Parameters)
+
+Circular layers additionally declare `coverage`: `FullCircleCoverage` or
+`SparseArcCoverage`. `FullCircleCoverage` must resolve exactly to integer
+display millidegrees `0..360000`. `SparseArcCoverage` contains one or more
+half-open ranges `[startMilliDegree, endMilliDegree)` and deliberately leaves
+the remaining angles blank while preserving the layer's complete radial band.
+
+The neutral contracts are:
+
+- `CircularCoverage.fullCircle(partition)`
+- `CircularCoverage.sparse(List<SparseArcRange>)`
+- `SparseArcRange`: stable `id`, integer `startMilliDegree`, integer
+  `endMilliDegree`, range-local `partition`, `startCap`, `endCap`, and logical
+  target ID
+- `OverlayLayer`: referenced ring/band ID, unique ID, `zIndex`, `hitPriority`,
+  disabled-hit policy (`block` or `passThrough`), and semantics ownership
+  (`owner(targetId, semanticsOrder)`, `merge(targetId)`, or `none`)
+
+Exactly one semantics owner may exist per logical target. `merge(targetId)`
+creates no node. The owner exclusively supplies role, primary label,
+selected/disabled state, and activate action. A merge may append only a
+description fragment and uniquely keyed non-activate custom actions;
+description fragments concatenate in declaration order. Missing/duplicate
+owners, duplicate action IDs, or merge attempts to override owner fields are
+invalid. Owner traversal is ordered by `semanticsOrder`, then declaration order,
+then stable target ID.
 
 ### Layer Behavior Parameters
 
@@ -112,6 +145,18 @@ Neutral sector/cell object:
 
 Equal-sector layouts may derive angles from `index` and `count`. Custom arc layouts must provide explicit start/sweep values.
 
+All public circular geometry is already normalized display geometry. Package
+types do not expose `sourceDomainSpan` or a domain projection callback. Sparse
+ranges require `0 <= start < end <= 360000`; same-layer ranges may be adjacent
+but may not overlap. Wrap-around is represented explicitly as two ranges.
+Intentional overlap uses distinct `OverlayLayer` instances with deterministic
+`zIndex`, hit-test priority, and semantics ownership.
+
+Coverage is authored and validated in canonical clockwise display coordinates
+before direction, start-angle offset, or overlay rotation. `360000` is legal
+only as an exclusive interval end and aliases `0` for point lookup. At a shared
+half-open boundary the range starting there owns the boundary and seam.
+
 ### ChartItem
 
 Item variants:
@@ -138,10 +183,14 @@ Some board marks are visually a cluster of primitives but logically one addressa
 
 - `id`: stable logical id (e.g. `star:Sun`).
 - `children`: the primitive items that render the group.
-- `hitItemId`: which child (or the group bounds) owns the single hit region.
+- `hitItemId`: which child or logical target owns contiguous or fragmented hit regions.
 - `semanticsLabel`: the one label announced for the whole group.
 
-`BoardGeometry` emits exactly one `BoardHitRegion` and at most one semantics node per `ItemGroup`, even when the group paints many primitives. Renderers MUST resolve a child hit/selection up to its owning group id.
+`BoardGeometry` normally emits one `BoardHitRegion` and at most one semantics
+node per contiguous `ItemGroup`. One logical target may own multiple geometry
+and hit-region fragments, including split wrap-around ranges; every fragment
+resolves to the same logical target ID and at most one semantics node. Renderers
+MUST resolve a child or fragment hit/selection up to its owning logical id.
 
 ### AngularPoint (dual-angle item)
 
@@ -164,6 +213,8 @@ Supports:
 - 16 sectors for TaiYiShenShu.
 - 360 tick marks for degree scales.
 - 28 non-uniform arcs for QiZhengSiYu constellations.
+- sparse partial-arc ranges; overlapping Zhu-Luo-San-Xian examples `0..60`
+  and `58..72` are separate overlays sharing one radial band.
 - point layers with `AngularPoint` dual-angle geometry, radius bands, and leader-line support.
 - clockwise and anti-clockwise orientation.
 - start-angle offset.
@@ -175,6 +226,21 @@ Supports:
   - counter-rotated
 
 The engine returns `BoardGeometry` containing paths, arcs, label anchors, item anchors, and hit regions.
+
+For sparse coverage, the engine creates paths, labels, hit regions, and
+semantics only inside painted ranges. It paints inner/outer arc borders plus
+range start/end radial borders with configured `butt` or `round` caps. It does
+not merge adjacent ranges, infer wrap-around, expand sparse input to 360
+degrees, or allocate hit regions in blank angles. Every child partition must
+close against its containing range, while the ranges collectively need not
+close against the full circle.
+
+Round-cap protrusion is paint-only and included in clipping/paint envelopes,
+not hit or semantics coverage. Adjacent ranges paint one radial seam owned by
+the range starting there. Paint order is `(zIndex, declarationOrder)`; hit order
+is `(hitPriority, zIndex, declarationOrder)`, highest/later first. Disabled
+overlays obey their declared block/pass-through policy. Canvas and Widget
+renderers consume these same resolved paths and orderings.
 
 ### RectGridLayoutEngine
 
@@ -313,16 +379,30 @@ class BoardHitRegion {
 Hit geometry is authored independently of the draw path:
 
 - A hit region's `path` MUST be a **filled, closed** shape. Sector/arc hit regions are annular wedge polygons (inner arc + outer arc + two radial edges), not the stroked open `addArc` path used to paint the band. A stroked arc or a 1px tick line has effectively zero fill area, so `path.contains` on the draw path is unsound and is forbidden for hit geometry.
+- Minimum-touch-target expansion for sparse ranges is clipped to declared
+  half-open angular coverage. Round-cap paint protrusion never expands hit or
+  semantics coverage into a blank angle.
 - Degree-scale / tick layers default to `hitTestMode: none`. When a tick scale must be interactive, it is hit-tested by angular bucket (degree → region), never by `path.contains` on tick lines.
 
 Hit-test resolution:
 
-- Hit-test order is highest z-index first.
+- Hit-test order is the total order `(hitPriority, zIndex, declarationOrder)`,
+  highest/later first. Disabled overlays obey their declared `block` or
+  `passThrough` policy.
 - `bounds.contains(position)` is checked before `path.contains(position)`.
 - A spatial index is **mandatory** (not optional) for any layer that produces more than 64 hit regions. The circular engine indexes regions by angular bucket; the rect engines index by cell grid. Per-hover cost MUST be sub-linear in region count.
 - A resolved hit returns its `groupId` when the region belongs to an `ItemGroup`, so selection/hover act on the logical entity.
 
-Performance budget (hard gate): on the reference QiZheng-like board (12 sectors + 360 ticks + 28 arcs + ~11 star groups), a pointer-move hit-test resolves in under 2 ms on the demo target device, verified in the example app. Exceeding this is a stop-the-line (R3).
+Performance budget (hard gate): run a profile/release benchmark with deterministic
+seeded pointer positions, 5 x 1,000 warm-up lookups and 10 x 10,000 measured
+lookups. Record hardware model, OS, Flutter/Dart versions, build mode, seed, and
+p50/p95/max in the evidence manifest. On the registered gStack target, the
+reference QiZheng-like board (12 sectors + 360 ticks + 28 arcs + around 11 star
+groups) must remain below 2 ms p95. A second seeded matrix at 64, 128, 256, 512,
+and 1024 hit regions must have a fitted log-log lookup-time slope below `0.85`
+from 128 through 1024, demonstrating indexed rather than linear growth.
+Warm-up samples are excluded; any run with background-throttling warnings is
+discarded and rerun. Exceeding either gate is stop-the-line R3.
 
 ### Hover And Selected Painting
 
@@ -362,6 +442,7 @@ Every role the existing chart painters require has exactly one destination, so Q
 |------------------------------------------------------------|------------------------|
 | `divider`, `border`, `shadow`, `labelDefault`→`label`, `labelMuted`→`mutedLabel` | `BoardSemanticColors` (core) |
 | `ringStroke`, `sectorBorder`, `scaleTick`, `scaleTickAccent` | `CircularRendererTokens` / `BoardGeometryTokens` (renderer) |
+| `invalidRingFill`, `invalidRingBorder`, `invalidRingLabel`, `invalidRingBorderWidth` | required invalid-ring roles in `BoardSemanticColors` / `BoardGeometryTokens` |
 | `northLine`, `annotationYin`, `annotationSu` | `ModulePalette` (business/cultural marks, not generic semantic UI) |
 | `starPalette.zheng`, `starPalette.stars` | `ModulePalette` (module-defined keys) |
 | `typography.*` (constellationName/starName/gongName/degree/yearMonth/shenSha) | `BoardTypography` (core), with module-named roles supplied by the adapter |
@@ -371,12 +452,17 @@ Every role the existing chart painters require has exactly one destination, so Q
 
 ### Token Groups
 
-- `BoardSemanticColors`: surface, divider, border, label, mutedLabel, hover, selected, focus, disabled.
+- `BoardSemanticColors`: surface, divider, border, label, mutedLabel, hover, selected, focus, disabled, invalidRingFill, invalidRingBorder, invalidRingLabel.
 - `BoardTypography`: palaceTitle, palaceBody, smallLabel, degreeTick, badge.
-- `BoardGeometryTokens`: stroke widths, gap, minimum hit target, radius, tick lengths.
+- `BoardGeometryTokens`: stroke widths, gap, minimum hit target, radius, tick lengths, invalidRingBorderWidth.
 - `CircularRendererTokens`: ring padding, default sector divider, tick styles, label orientation defaults.
 - `RectRendererTokens`: cell gap, cell radius, perimeter corner radius, grid border.
 - `ModulePalette`: business/cultural colors by module-defined palette keys.
+
+Fallback-only themes contain every required token. Optional YAML omissions use
+fallback values. Strict production loading rejects any missing or malformed
+required invalid-ring role before painting; renderers never invent local
+fallback colors.
 
 ### YAML Example
 
@@ -451,6 +537,22 @@ Adapter rules:
 - Must assign stable ids for sectors/items so interactions survive rebuilds.
 - Must pass module-specific meaning through `metadata` or callback payloads, not through renderer-specific classes.
 - Must consume a **resolved, immutable snapshot** of the source model, never the live solver model. QiZhengSiYu star positions come from a stateful, mutated-in-place collision solver (`UIStarModel.adjustedAngle/adjustedEdges/inRangeStar`, `UIConstellationModel` grouping). The adapter reads a post-collision snapshot exposing `originalAngle`, resolved `displayAngle`, leader-line pairs, and group membership; it must not trigger or depend on solver mutation. A parity fixture asserts both `originalAngle` and resolved `displayAngle` survive the adapter unchanged.
+- Must normalize non-360 source coordinates before constructing package data.
+  QiZhengSiYu owns a versioned mapping policy such as
+  `equatorial-365.25-to-display-360-v1`. It converts non-negative domain
+  degrees to three-decimal fixed-point source millidegrees using
+  round-half-up, represents `365.25` exactly as `365250`, and projects every
+  shared cumulative boundary once with integer rational arithmetic:
+  `roundHalfUp(sourceBoundaryMilliDegree * 360000 / 365250)`. It validates
+  finite/order/range before projection; full coverage additionally validates
+  source closure before endpoint pinning, while sparse coverage validates each
+  range without aggregate closure. It derives sweeps by subtraction and rejects
+  positive source segments collapsed by projection. Sparse ranges preserve
+  gaps. Binary floating-point multiplication does not decide boundaries.
+- Original source coordinates, units, span, and mapping revision remain in
+  consuming-module state or adapter diagnostics outside package geometry. If
+  copied to neutral metadata they are optional scalar/serializable diagnostics
+  ignored by layout, paint, interaction, equality, and cache keys.
 
 Initial adapters:
 
@@ -477,7 +579,7 @@ Initial adapters:
 
 ### M2: Layout Engines
 
-- Implement circular equal sectors, custom arcs, ticks, and angle points.
+- Implement circular equal sectors, full/sparse custom arcs, ticks, and angle points.
 - Implement rectangular matrix grid.
 - Implement rectangular perimeter layout.
 - Add geometry snapshot tests.
@@ -510,6 +612,9 @@ Initial adapters:
 - Create adapter in QiZhengSiYu without deleting old painters.
 - Run old and new renderers side by side in golden harness.
 - Migrate one ring/layer at a time.
+- Keep activation instance-safe and reversible. Geometry, strict-theme,
+  hit-index, or renderer initialization failure retains/restores Legacy while
+  preserving selection, rotation, and module state.
 
 ## Risk Register
 
@@ -533,6 +638,9 @@ Initial adapters:
 | R16 | Theme ownership collides with `package:theme` | High | Medium | Ownership decision: host `XuanThemeData.chartTokens` as base tokens, package `BoardTheme` for standalone; role-mapping table; schema reconciled with `chart_tokens.yaml` | Package introduces a third theme system disconnected from `ChartThemeTokens` |
 | R17 | Business enums leak into core via deny-list scan | High | Medium | Allow-list boundary scan including `package:metaphysics_core`/`theme`/`xuan_config` | A core file imports `package:metaphysics_core` and the scan still passes |
 | R18 | Double migration collides on the same painters | High | Medium | Sequence after / fold in the in-flight token migration; state surviving theme owner | Both migrations edit the same painter files concurrently, or `BoardTheme` orphans `ChartThemeTokens` |
+| R19 | Domain projection leaks into generic package or accumulates rounding drift | High | Medium | Adapter-owned, versioned cumulative-boundary mapping; integer display millidegrees; boundary tests | Core exposes source-span/projection API, or `365.25` does not map exactly to `360000` |
+| R20 | Sparse arcs are treated as invalid incomplete circles or gain phantom interaction | High | Medium | Explicit coverage mode; half-open range validation; shared resolved geometry | Sparse range expands to full circle, shifts another ring, or blank angle is hit/announced |
+| R21 | Sparse range overlap/wrap/caps diverge across renderers | High | Medium | Same-layer overlap forbidden; wrap split explicitly; shared cap geometry and conformance goldens | Canvas/Widget disagree on paths, hit ids, z-order, or border caps |
 
 ## Boundary Rules
 
@@ -566,6 +674,7 @@ The import-boundary test enumerates the allow-list and fails on any import outsi
 - call private package internals under `src/`
 - mutate package geometry
 - pass domain objects into renderer public fields
+- pass non-normalized source angles or delegate domain projection to package core
 
 ## Validation Gates
 
@@ -582,12 +691,21 @@ The import-boundary test enumerates the allow-list and fails on any import outsi
 - Package name and identifiers avoid `xuan_`/`xuan-`.
 - Core import scan finds no module package imports.
 - Adapter import scan confirms module dependencies stay in adapter layer.
-- YAML fixtures parse with fallback behavior.
+- YAML fixtures use fallback for optional roles and strict production failure
+  for missing required `invalidRing*` roles.
+- Package-core API and imports contain no source-domain span or QiZhengSiYu
+  projection policy.
 
 ### Unit Gates
 
-- Geometry snapshot tests for circular equal sectors, custom arcs, ticks, angle points, matrix grid, and perimeter layout.
+- Geometry snapshot tests for circular equal sectors, full custom arcs, sparse
+  partial arcs, ticks, angle points, matrix grid, and perimeter layout.
 - Hit-test tests for sector, tick, point item, matrix cell, and perimeter cell.
+- Sparse tests cover disjoint and adjacent ranges, reject overlap/zero-length/
+  out-of-range/implicit-wrap input, preserve blank hit/semantics regions, and
+  verify split wrap-around plus cap/border geometry across Canvas and Widget.
+- QiZhengSiYu adapter tests map `0/182.625/365.25` to
+  `0/180000/360000` by cumulative boundaries and preserve sparse gaps.
 - Interaction state tests for hover, selected, pressed, focus, disabled.
 - Theme resolution precedence tests.
 
@@ -609,12 +727,74 @@ After implementation creates an example app, gStack/browser QA must collect:
 - tap/selected evidence for all four renderers
 - theme switch or YAML-loaded theme evidence
 - accessibility/keyboard smoke evidence for selectable regions
+- sparse arc evidence in both circular renderers: blank angles, caps, overlap
+  hit priority, disabled pass-through, semantics, and responsive clipping
+
+All evidence is recorded against one commit SHA. OpenSpec “artifact complete”
+means only that required documents exist; it is not implementation or production
+completion. Implementation readiness requires all P0 evidence. Production
+readiness requires all static, unit, golden, gStack, rollback, and evidence-
+manifest gates against the same commit.
+
+The machine-readable manifest is
+`openspec/changes/create-metaphysics-chart-ui-package/evidence/production-readiness-manifest.yaml`:
+
+```yaml
+schemaVersion: 1
+changeId: create-metaphysics-chart-ui-package
+commitSha: <40-character tested commit>
+artifacts:
+  - id: package-unit
+    category: unit
+    path: evidence/package-tests.txt
+    sha256: <64 lowercase hex characters>
+    command: flutter test
+    status: passed
+```
+
+The closed required artifact catalog is:
+
+| ID | Category |
+| --- | --- |
+| `openspec-strict` | documentation |
+| `package-analyze` | static |
+| `import-api-boundary` | architecture |
+| `package-unit` | unit |
+| `adapter-unit` | unit |
+| `theme-strict` | theme |
+| `geometry-goldens` | golden |
+| `renderer-conformance` | conformance |
+| `sparse-conformance` | conformance |
+| `qizheng-legacy-parity` | migration |
+| `hit-performance` | performance |
+| `accessibility-traversal` | accessibility |
+| `gstack-desktop` | gstack |
+| `gstack-mobile` | gstack |
+| `gstack-interaction` | gstack |
+| `rollback-failure-injection` | rollback |
+
+Schema version changes are required to add/remove/rename a required ID.
+`tool/verify_production_readiness.dart` validates schema,
+exact HEAD commit, required IDs, `passed` status, file existence, and SHA-256:
+
+```bash
+dart run tool/verify_production_readiness.dart \
+  --manifest openspec/changes/create-metaphysics-chart-ui-package/evidence/production-readiness-manifest.yaml \
+  --expected-commit "$(git rev-parse HEAD)"
+```
+
+CI runs the verifier. Missing/duplicate IDs, stale commit, missing files, hash
+mismatch, or non-passed status fail readiness. A negative fixture deliberately
+omits one required runtime artifact and must fail even when OpenSpec reports
+all document artifacts present.
 
 ## Not Done Conditions
 
 The change is not ready for implementation if:
 
 - The data model cannot represent 12-sector, 16-sector, 360-tick, 28-arc, 3x3 grid, and 12-perimeter examples on paper.
+- The data model cannot represent sparse partial-arc coverage without fake
+  transparent sectors, or package core must know a `365.25` source span.
 - The data model cannot express a composite star (`ItemGroup`) or its dual-angle leader line (`AngularPoint`).
 - The hybrid Canvas+Widget composition is not specified, so the real QiZhengSiYu board has no renderer target.
 - Canvas hit-testing is not specified before code begins, or hit geometry is derived from the stroked/open draw path.
@@ -623,6 +803,8 @@ The change is not ready for implementation if:
 - The boundary scan is a deny-list rather than an allow-list, so `package:metaphysics_core` could leak into core.
 - The adapter is not specified to consume a resolved immutable snapshot.
 - No external-agent risk review has been requested.
+- Sparse overlap, wrap-around, border caps, blank-angle interaction, and
+  adapter-owned normalization do not have executable acceptance scenarios.
 
 The change is not ready for production if:
 

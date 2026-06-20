@@ -20,9 +20,23 @@ The chart UI package SHALL expose a neutral `ChartBoard` model that represents c
 - **THEN** only that board's `instanceId` and interaction controller update
 - **AND** the other board keeps its own hover and selected state
 
+#### Scenario: Validation severity preserves only trustworthy geometry
+
+- **GIVEN** duplicate stable IDs, negative/non-finite radial allocation, or unresolved required theme schema
+- **WHEN** board validation runs
+- **THEN** validation is board-fatal and no guessed geometry is painted
+- **GIVEN** instead one partition or sparse coverage is invalid but its radial allocation is valid
+- **WHEN** board validation runs
+- **THEN** only that ring becomes the invalid-ring annulus
+- **AND** neighboring rings retain geometry and interaction while invalid content emits no hit regions or semantics
+
 ### Requirement: Composite marks are single addressable entities
 
-The package SHALL represent a mark composed of multiple primitives (such as a star drawn as guide dot, leader line, holder dot, name, and annotations) as one logical entity with a single id, a single hit region, and a single semantics node.
+The package SHALL represent a mark composed of multiple primitives (such as a
+star drawn as guide dot, leader line, holder dot, name, and annotations) as one
+logical entity with a single id and at most one semantics node. A contiguous
+mark normally has one hit region; one logical target MAY own multiple hit-region
+fragments when its declared coverage is disjoint or split across zero.
 
 #### Scenario: Star group resolves to one logical id
 
@@ -31,9 +45,20 @@ The package SHALL represent a mark composed of multiple primitives (such as a st
 - **THEN** the interaction controller reports the star's group id, not a sub-primitive id
 - **AND** the board exposes at most one semantics node for that star
 
-### Requirement: Circular layouts support equal sectors, custom arcs, ticks, and points
+#### Scenario: Split sparse fragments retain one logical identity
 
-The circular layout engine SHALL support equal sector rings, non-uniform custom arc rings, configurable tick rings, and angle-positioned point/item layers in the same board.
+- **GIVEN** one logical interval is represented by `[350000,360000)` and `[0,20000)`
+- **WHEN** either geometry fragment is tapped or focused
+- **THEN** both resolve to the same logical target id and selection state
+- **AND** semantics traversal exposes at most one node for the target
+
+### Requirement: Circular layouts support full and sparse coverage
+
+The circular layout engine SHALL support equal sector rings, non-uniform custom
+arc rings, configurable tick rings, angle-positioned point/item layers, and
+explicit full-circle or sparse partial-arc coverage in the same board. It SHALL
+consume integer display millidegrees only and SHALL NOT project source-domain
+coordinate systems.
 
 #### Scenario: QiZhengSiYu mixed circular board resolves geometry
 
@@ -55,6 +80,48 @@ The circular layout engine SHALL support equal sector rings, non-uniform custom 
 - **GIVEN** a TaiYi-like circular board has 16 equal sectors
 - **WHEN** the circular layout engine resolves geometry
 - **THEN** the sectors occupy the full circle according to the configured start angle and direction
+
+#### Scenario: QiZhengSiYu adapter normalizes 365.25 before package entry
+
+- **GIVEN** QiZhengSiYu owns source boundaries `0`, `182.625`, and `365.25`
+- **WHEN** its consuming adapter builds package circular geometry
+- **THEN** the adapter supplies display boundaries `0`, `180000`, and `360000`
+- **AND** it uses three-decimal source fixed point, integer rational arithmetic, and round-half-up on each shared cumulative boundary exactly once
+- **AND** invalid full-coverage source closure, ordering, range, finiteness, or collapsed positive segments fail before package construction
+- **AND** sparse source ranges require no aggregate closure and preserve their gaps
+- **AND** package core receives no source span, mapping table, or projection callback
+- **AND** full-circle validation is performed only against normalized `360000`
+
+#### Scenario: Sparse partial arc leaves the rest of the ring blank
+
+- **GIVEN** a ring reserves one radial band and declares sparse ranges `[0,60000)` and `[58000,72000)` on separate overlays
+- **WHEN** the circular layout engine resolves geometry
+- **THEN** each overlay paints only its declared range without expanding to a full circle
+- **AND** the complete radial band remains reserved for ring ordering
+- **AND** blank angles produce no hit region or semantics node
+
+#### Scenario: Same-layer sparse input has deterministic validity
+
+- **GIVEN** sparse ranges use half-open normalized millidegree boundaries
+- **WHEN** ranges are disjoint or adjacent
+- **THEN** they resolve without automatic merging
+- **WHEN** ranges overlap, have zero sweep, leave `0..360000`, or encode wrap-around with `start > end`
+- **THEN** the owning ring is invalid and package validation does not repair it
+- **AND** valid wrap-around is represented by two explicit ranges
+
+#### Scenario: Intentional partial-arc overlap uses overlays
+
+- **GIVEN** Zhu-Luo-San-Xian needs independently addressable overlapping angular intervals
+- **WHEN** the adapter creates separate overlays with explicit `zIndex`
+- **THEN** paint order, hit-test priority, and semantics ownership follow overlay order
+- **AND** Canvas and Widget renderers resolve the same paths, cap geometry, and logical ids
+- **AND** paint order is `(zIndex, declarationOrder)`
+- **AND** hit order is `(hitPriority, zIndex, declarationOrder)` with the declared disabled block/pass-through policy
+- **AND** round-cap protrusion is paint-only and does not create blank-angle hit or semantics coverage
+- **AND** exactly one `owner(targetId, semanticsOrder)` creates the logical semantics node
+- **AND** the owner exclusively supplies role, primary label, selected/disabled state, and activate action
+- **AND** `merge(targetId)` appends description fragments in declaration order and uniquely keyed non-activate actions without creating a node
+- **AND** missing/duplicate owners, duplicate action IDs, or merge overrides of owner fields fail validation
 
 ### Requirement: Rectangular layouts support matrix grid and rounded perimeter boards
 
@@ -136,20 +203,28 @@ Canvas renderers SHALL handle hover, tap, selection, pressed, focus, and disable
 #### Scenario: Dense board hit-test stays within budget
 
 - **GIVEN** the reference board has a 12-sector layer, a 360-tick layer, a 28-arc layer, and around eleven star groups
-- **WHEN** the pointer moves over the board
+- **WHEN** the documented profile/release benchmark runs deterministic seeded positions after 5 x 1,000 warm-ups for 10 x 10,000 measured lookups
 - **THEN** hit-test resolution uses a spatial or angular index
-- **AND** per pointer-move resolution stays within the documented frame-time budget
+- **AND** p95 is below 2 ms on the registered target whose hardware, OS, Flutter/Dart versions, build mode, and seed are recorded
+- **AND** the 128/256/512/1024-region matrix has fitted log-log lookup-time slope below `0.85`
 
 ### Requirement: Theme and YAML resolution are deterministic
 
 The package SHALL provide ThemeExtension and YAML-driven token loading with deterministic fallback and precedence.
 
-#### Scenario: Missing YAML token falls back
+#### Scenario: Missing optional YAML token falls back
 
-- **GIVEN** a YAML theme omits a renderer token
+- **GIVEN** a YAML theme omits an optional renderer token
 - **WHEN** the theme is resolved
 - **THEN** the missing token uses the package fallback
 - **AND** rendering does not throw
+
+#### Scenario: Missing required invalid-ring token fails strict validation
+
+- **GIVEN** a production YAML theme omits `invalidRingFill`, `invalidRingBorder`, `invalidRingLabel`, or `invalidRingBorderWidth`
+- **WHEN** the theme is resolved in strict production mode
+- **THEN** theme validation fails before painting with the missing semantic key
+- **AND** no renderer substitutes a module-local color
 
 #### Scenario: Module palette does not become semantic UI color
 
@@ -213,3 +288,26 @@ Migration from existing module UI SHALL be protected by geometry tests, hit-test
 - **GIVEN** the package example app exists
 - **WHEN** production readiness is claimed
 - **THEN** gStack/browser QA evidence includes screenshots and interaction checks for all four renderers
+
+### Requirement: QiZhengSiYu activation is atomic and reversible
+
+QiZhengSiYu SHALL keep Legacy as the production renderer until the new board is
+fully initialized for the current instance. Activation SHALL transfer only
+normalized render state and SHALL be reversible without recalculation or loss
+of module state.
+
+#### Scenario: Initialization failure retains Legacy
+
+- **GIVEN** Legacy is active with current selection and rotation state
+- **WHEN** geometry, strict-theme, hit-index, or renderer initialization fails before activation
+- **THEN** the new board is not mounted as active
+- **AND** Legacy remains visible with the same selection, rotation, and module state
+- **AND** one structured failure is emitted for the current instance
+
+#### Scenario: Failure after mount atomically restores Legacy
+
+- **GIVEN** the new board is active and a guarded runtime initialization dependency fails
+- **WHEN** the host activation controller handles the failure
+- **THEN** it atomically restores Legacy before exposing an empty or partial board
+- **AND** selection, rotation, and module state are transferred unchanged
+- **AND** retry requires a new validation revision rather than an automatic render loop

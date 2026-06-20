@@ -13,6 +13,7 @@ Current chart-board UI code is duplicated and module-specific:
 - QiZhengSiYu circular chart rendering is assembled in `lib/presentation/pages/beauty_view_page.dart` and mixes `CustomPaint`, `RingLayer`, `StarRingLayer`, ViewModel listenables, domain models, style tokens, and module-specific enums.
 - QiZhengSiYu Canvas painters depend on module types such as `UIStarModel`, `EnumStars`, `EnumTwelveGong`, `ZhouTianModel`, and `BodyLifeModel`, so copying painters into a new package would drag product/domain dependencies with them.
 - QiZhengSiYu rings are not all 12 equal sectors. Some layers are 360-degree tick scales, 28 non-uniform arcs, or point/angle item layers.
+- Some domain coordinate systems are not 360 degrees (for example QiZhengSiYu equatorial `365.25`), while some rings intentionally paint only sparse ranges such as `0..60` or `58..72` for Zhu-Luo-San-Xian. Domain normalization belongs to the consuming adapter; sparse display coverage belongs to the neutral layout model. Because those example ranges overlap, they are separate ordered overlays sharing one radial band, not two ranges in one sparse layer.
 - QiMenDunJia already has a widget-grid style (`SmartQiMenGrid`) that uses Row/Column/Grid composition and token-like theme lookup.
 - DaLiuRen uses Row/Column/Table/Grid layouts for rectangular board-like views and may also need a circular 12-sector representation.
 - ZiWeiDouShu can be circular 12 sectors or a rounded-rectangle perimeter with 12 palace cells.
@@ -28,7 +29,7 @@ Current chart-board UI code is duplicated and module-specific:
   - `CircularWidgetBoard`
   - `RectGridCanvasBoard`
   - `RectGridWidgetBoard`
-- Support equal sector layers, non-uniform arc layers, 360-degree tick layers, point/angle item layers, matrix grid layouts, and rounded-rectangle perimeter layouts.
+- Support equal sector layers, non-uniform full-circle and sparse partial-arc layers, 360-degree tick layers, point/angle item layers, matrix grid layouts, and rounded-rectangle perimeter layouts.
 - Provide shared interaction state for Canvas and Widget renderers: hover, selected, pressed, focus, disabled, and semantic labels.
 - Provide Canvas hit-testing through generated `BoardHitRegion` geometry, not ad hoc pointer math inside each painter.
 - Provide ThemeExtension and YAML loading with explicit precedence:
@@ -38,6 +39,7 @@ Current chart-board UI code is duplicated and module-specific:
   4. renderer tokens
   5. chart-board instance overrides
 - Keep module data ownership outside the package. Each module adapts its domain model into neutral `ChartBoard` data and keeps `moduleId` + `instanceId`.
+- Require consuming adapters to normalize non-360 domain coordinates into integer display millidegrees before calling the package; package core validates but never projects source-domain coordinates.
 - Preserve current visual behavior during migration with golden tests and characterization fixtures before replacing existing module UI.
 - Make future interactive Canvas palace features possible without changing every module adapter.
 
@@ -50,6 +52,7 @@ Current chart-board UI code is duplicated and module-specific:
 - Do not introduce a generic business model for "palace meaning." The UI package knows only sectors, cells, layers, items, geometry, style, and interaction.
 - Do not replace all module UI in the first implementation phase.
 - Do not encode business palettes as generic semantic colors. Module palettes stay separate from global UI semantic tokens.
+- Do not place source coordinate spans, ephemeris units, or `365.25 -> 360` mapping tables in package core.
 
 ## Current Evidence
 
