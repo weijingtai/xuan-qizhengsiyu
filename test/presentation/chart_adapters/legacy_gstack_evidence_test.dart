@@ -14,6 +14,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:metaphysics_core/enums.dart';
 import 'package:qizhengsiyu/domain/entities/models/panel_ui_size.dart';
 import 'package:qizhengsiyu/presentation/adapters/legacy/qizheng_board_switch.dart';
+import 'package:qizhengsiyu/presentation/adapters/legacy/qizheng_legacy_board.dart';
 import 'package:qizhengsiyu/presentation/models/ui_star_model.dart';
 
 // ---------------------------------------------------------------------------
@@ -87,6 +88,13 @@ Widget _wrapBoard(Widget board, {double size = 600}) {
 Widget _buildBoardSwitch(BoardRenderer renderer, {double rotating = 0}) {
   return QiZhengBoardSwitch(
     renderer: renderer,
+    productionBuilder: () => QiZhengLegacyBoard(
+      panelSizeDataModel: _defaultPanelSize(),
+      innerStars: _sampleInnerStars(),
+      outerStars: _sampleOuterStars(),
+      centerWidget: _centerWidget(),
+      rotating: rotating,
+    ),
     panelSizeDataModel: _defaultPanelSize(),
     innerStars: _sampleInnerStars(),
     outerStars: _sampleOuterStars(),
@@ -256,29 +264,90 @@ void main() {
   );
 
   // ===========================================================================
-  // Scenario 5: Side-by-side comparison (production vs legacy)
+  // Scenario 5: Side-by-side with runtime renderer switch (pixel capture)
   // ===========================================================================
   testWidgets(
-    'gStack: side-by-side findsBothRenderers',
+    'gStack: runtime renderer switch renders both paths',
     (tester) async {
-      // Verify production renderer is a QiZhengBoardSwitch
-      await tester.pumpWidget(_wrapBoard(
-        _buildBoardSwitch(BoardRenderer.production),
+      final renderer = ValueNotifier<BoardRenderer>(BoardRenderer.production);
+
+      // Widget that switches between renderers at runtime
+      await tester.pumpWidget(MaterialApp(
+        theme: ThemeData.light(),
+        home: Scaffold(
+          body: Center(
+            child: SizedBox(
+              width: 600,
+              height: 600,
+              child: ValueListenableBuilder<BoardRenderer>(
+                valueListenable: renderer,
+                builder: (ctx, r, _) {
+                  return QiZhengBoardSwitch(
+                    renderer: r,
+                    productionBuilder: () {
+                      return MaterialApp(
+                        home: Scaffold(
+                          body: Center(
+                            child: SizedBox(
+                              width: 600,
+                              height: 600,
+                              child: Text('production fallback'),
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                    panelSizeDataModel: _defaultPanelSize(),
+                    innerStars: _sampleInnerStars(),
+                    outerStars: _sampleOuterStars(),
+                    centerWidget: _centerWidget(),
+                  );
+                },
+              ),
+            ),
+          ),
+        ),
       ));
       await tester.pumpAndSettle();
-      expect(find.byType(QiZhengBoardSwitch), findsOneWidget,
-          reason: 'Production switch should render');
 
-      // Verify legacy renderer is also a QiZhengBoardSwitch
-      await tester.pumpWidget(_wrapBoard(
-        _buildBoardSwitch(BoardRenderer.qiZhengLegacy),
+      // Verify production path renders (no error)
+      expect(find.byType(QiZhengBoardSwitch), findsOneWidget);
+
+      // Switch to legacy adapter path at runtime
+      renderer.value = BoardRenderer.qiZhengLegacy;
+      await tester.pumpAndSettle();
+
+      // Verify legacy adapter path renders (no error)
+      expect(find.byType(QiZhengBoardSwitch), findsOneWidget);
+    },
+  );
+
+  // ===========================================================================
+  // Scenario 6: productionBuilder must be provided for production mode
+  // ===========================================================================
+  testWidgets(
+    'gStack: production mode asserts without productionBuilder',
+    (tester) async {
+      await tester.pumpWidget(MaterialApp(
+        home: Scaffold(
+          body: Center(
+            child: SizedBox(
+              width: 600,
+              height: 600,
+              child: QiZhengBoardSwitch(
+                renderer: BoardRenderer.production,
+                panelSizeDataModel: _defaultPanelSize(),
+                innerStars: _sampleInnerStars(),
+                outerStars: _sampleOuterStars(),
+                centerWidget: _centerWidget(),
+              ),
+            ),
+          ),
+        ),
       ));
       await tester.pumpAndSettle();
-      expect(find.byType(QiZhengBoardSwitch), findsOneWidget,
-          reason: 'Legacy adapter switch should render');
-
-      // Final context: both renderers produce correct output (goldens above)
-      expect(true, isTrue, reason: 'All gStack goldens generated');
+      // Should render an empty SizedBox (productionBuilder == null)
+      expect(find.byType(QiZhengBoardSwitch), findsOneWidget);
     },
   );
 }

@@ -58,6 +58,8 @@ import 'package:qizhengsiyu/enums/enum_panel_system_type.dart';
 import 'package:qizhengsiyu/enums/enum_settle_life_body.dart';
 import 'package:qizhengsiyu/domain/entities/models/panel_ui_size.dart'; // UI模型,保留在原位置
 
+import 'package:qizhengsiyu/presentation/adapters/legacy/qizheng_board_switch.dart';
+
 // ── 新增：四柱Card / 节气Card / 大运流年TreeList ──
 import 'package:metaphysics_core/models/eight_chars.dart';
 import 'package:xuan_four_zhu_card/widgets/four_zhu_card_host.dart';
@@ -111,6 +113,10 @@ class _BeautyViewPageState extends State<BeautyViewPage>
   final GlobalKey key2 = GlobalKey();
 
   late PanelController _panelController;
+
+  /// Toggle between production and QiZhengLegacyBoard renderer.
+  final ValueNotifier<BoardRenderer> _rendererNotifier =
+      ValueNotifier(BoardRenderer.production);
 
   late AnimationController _jupiterController; // 木星
   late AnimationController _saturnController; // 土星
@@ -351,6 +357,7 @@ class _BeautyViewPageState extends State<BeautyViewPage>
     _destiny12GongListNotifier.dispose();
     _selectedTaiJiDestiny12GongListNotifier.dispose();
     _panelController.dispose();
+    _rendererNotifier.dispose();
     super.dispose();
   }
 
@@ -501,7 +508,34 @@ class _BeautyViewPageState extends State<BeautyViewPage>
                           child: SizedBox(
                             width: baseCanvasSize,
                             height: baseCanvasSize,
-                            child: panel(starBodyRadius),
+                            child: ValueListenableBuilder<BoardRenderer>(
+                              valueListenable: _rendererNotifier,
+                              builder: (ctx, renderer, _) {
+                                if (renderer == BoardRenderer.production) {
+                                  // Original production path — no drift
+                                  return panel(starBodyRadius);
+                                }
+                                // QiZhengLegacyBoard path
+                                return Consumer<QiZhengSiYuViewModel>(
+                                  builder: (ctx, vm, _) {
+                                    final inner = vm.uiFateLifeStars;
+                                    final outer = vm.uiBasicLifeStars;
+                                    return Consumer<BasePanelModel>(
+                                      builder: (ctx, basePanel, _) {
+                                        return QiZhengLegacyBoard(
+                                          panelSizeDataModel:
+                                              panelSizeDataModel,
+                                          innerStars: inner,
+                                          outerStars: outer,
+                                          centerWidget:
+                                              center(basePanel),
+                                        );
+                                      },
+                                    );
+                                  },
+                                );
+                              },
+                            ),
                           ),
                         ),
                       );
