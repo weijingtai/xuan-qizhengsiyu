@@ -64,7 +64,8 @@ Validated decisions:
 - Overlap, wrap, caps, seams, fragmented logical identity, semantics ownership,
   validation severity, renderer parity, Legacy rollback, and false-completion
   evidence all have normative rules and executable gates.
-- The schema-v1 production evidence manifest has a closed 16-ID catalog and a
+- The schema-v1 production evidence manifest has a closed 17-ID catalog,
+  including `p0-go-no-go`, and a
   verifier contract tied to exact commit SHA and artifact hashes.
 
 Commands rerun:
@@ -118,11 +119,13 @@ These gates are mandatory before production replacement or readiness claims.
 
 The documentation package is structurally valid. The external P0 architecture/risk review is recorded in `evidence/P0-risk-review.md`, and its documentation-level blockers are resolved or converted into explicit phase gates.
 
-This is approval to proceed to implementation on the feature branch under the
-revised plan. It is not approval to replace production boards until runtime
-evidence passes: package/adapter tests, renderer and sparse conformance, geometry
-and Legacy parity, reproducible hit-test budget, accessibility traversal,
-gStack screenshots/interactions, rollback injection, and manifest verification.
+This validates the design documents for continued P0 work only. It does not
+authorize P1 package implementation: P0.1-P0.14 must first have concrete
+evidence and `evidence/P0-go-no-go.md` must record GO. Production remains blocked
+until package/adapter tests, renderer and sparse conformance, center and
+track/body parity, geometry and Legacy parity, reproducible hit-test budget,
+accessibility traversal, gStack evidence, rollback injection, and manifest
+verification all pass against one commit.
 
 ## Known Remaining Work Before Implementation
 

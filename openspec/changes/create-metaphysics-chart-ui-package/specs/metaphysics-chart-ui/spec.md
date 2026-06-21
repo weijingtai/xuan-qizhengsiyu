@@ -30,6 +30,37 @@ The chart UI package SHALL expose a neutral `ChartBoard` model that represents c
 - **THEN** only that ring becomes the invalid-ring annulus
 - **AND** neighboring rings retain geometry and interaction while invalid content emits no hit regions or semantics
 
+### Requirement: Circular center content is independent from rings
+
+The package SHALL model circular center content as `BoardCenterSpec`, not as a
+ring or partition. Its radius SHALL establish the first ring's inner boundary
+and its Canvas, Widget, or hybrid content SHALL use the board's shared instance,
+interaction, semantics, clipping, and paint-envelope contracts.
+
+#### Scenario: Center variants preserve the first ring boundary
+
+- **GIVEN** absent, Canvas, Widget, and hybrid center fixtures with the same configured radius
+- **WHEN** circular geometry is resolved
+- **THEN** the first ring begins at that radius for every non-absent fixture
+- **AND** an absent center reserves zero radius
+- **AND** center content participates in no angular coverage validation
+
+### Requirement: Optional zero-width rings preserve source identity
+
+An optional ring with zero width SHALL remain identifiable in source-plan order
+but SHALL resolve as a skipped entry that allocates no radius and emits no paint,
+hit region, or semantics. A required zero-width ring SHALL be board-fatal
+because no trustworthy radial band exists for an invalid-ring annulus.
+
+#### Scenario: Optional ring can be enabled without losing order
+
+- **GIVEN** an optional zero-width `star-sequence` ring between two positive-width rings
+- **WHEN** the plan resolves
+- **THEN** it produces `SkippedRingGeometry(reason: zeroWidth)` with its stable id
+- **AND** the adjacent positive-width boundaries remain continuous
+- **WHEN** its width becomes positive
+- **THEN** it resolves at the same source-plan position
+
 ### Requirement: Composite marks are single addressable entities
 
 The package SHALL represent a mark composed of multiple primitives (such as a
@@ -122,6 +153,15 @@ coordinate systems.
 - **AND** the owner exclusively supplies role, primary label, selected/disabled state, and activate action
 - **AND** `merge(targetId)` appends description fragments in declaration order and uniquely keyed non-activate actions without creating a node
 - **AND** missing/duplicate owners, duplicate action IDs, or merge overrides of owner fields fail validation
+
+#### Scenario: Track and body `RingOverlaySpec` values rotate independently on one ring
+
+- **GIVEN** one continuous star-orbit ring with track and body overlays
+- **WHEN** track rotation changes while body rotation remains fixed
+- **THEN** only track geometry and hit transforms change
+- **WHEN** body rotation changes while track rotation remains fixed
+- **THEN** only body geometry and hit transforms change
+- **AND** both overlays retain the same resolved ring radii and stable logical ids
 
 ### Requirement: Rectangular layouts support matrix grid and rounded perimeter boards
 

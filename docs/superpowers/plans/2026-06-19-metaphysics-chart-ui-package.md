@@ -57,14 +57,15 @@ Create a sibling package:
 
 Do not modify production QiZhengSiYu renderer files until the package examples and tests pass.
 
-## Task 1: External Risk Review Before Code
+## Task 1: Complete P0 Baseline And Go/No-Go Before Code
 
 **Files:**
 
 - Read: `openspec/changes/create-metaphysics-chart-ui-package/proposal.md`
 - Read: `openspec/changes/create-metaphysics-chart-ui-package/design.md`
 - Read: `openspec/changes/create-metaphysics-chart-ui-package/tasks.md`
-- Create: `openspec/changes/create-metaphysics-chart-ui-package/evidence/P0-risk-review.md`
+- Modify: `openspec/changes/create-metaphysics-chart-ui-package/evidence/P0-risk-review.md`
+- Create: `openspec/changes/create-metaphysics-chart-ui-package/evidence/P0-go-no-go.md`
 
 - [ ] **Step 1: Dispatch or request an external AI architecture review**
 
@@ -94,7 +95,39 @@ Create `openspec/changes/create-metaphysics-chart-ui-package/evidence/P0-risk-re
 
 Only proceed when blocking public API or migration risks are resolved in `design.md` and `tasks.md`.
 
+- [ ] **Step 4: Complete baseline discovery**
+
+Record the real QiZhengSiYu painter/ring inventory, QiMen and DaLiuRen widget
+grids, ZiWei circular/perimeter layouts, and TaiYi 16-sector layout. Exercise
+the neutral model against real read-only data shapes for all five modules, or
+formally mark the API experimental and enforce the second-migration gate.
+
+- [ ] **Step 5: Lock migration and contract boundaries**
+
+Record the surviving Theme/YAML owner and sequencing against the in-flight
+token migration. Verify that `BoardCenterSpec`, optional zero-width skip
+semantics, independent track/body transforms, adapter-owned `365.25 -> 360`
+normalization, and sparse overlap fixtures appear in OpenSpec, this plan, and
+acceptance cases.
+
+- [ ] **Step 6: Run P0 documentation gates**
+
+```bash
+openspec validate create-metaphysics-chart-ui-package --strict --no-interactive
+```
+
+Expected: pass with no unresolved P0/P1 documentation blocker.
+
+- [ ] **Step 7: Publish P0 go/no-go**
+
+Create `evidence/P0-go-no-go.md` mapping P0.1-P0.14 to concrete artifacts and
+record either `GO` or `NO-GO`. Do not mark OpenSpec checkboxes complete without
+the referenced evidence. Task 2 is blocked unless this result is `GO`.
+
 ## Task 2: Create Package Skeleton
+
+**Entry Criteria:** `evidence/P0-go-no-go.md` records `GO` and P0.1-P0.14 have
+evidence-backed completion.
 
 **Files:**
 
@@ -174,9 +207,9 @@ git commit -m "feat: scaffold metaphysics chart ui package"
 - [ ] **Step 1: Define immutable board data**
 
 Create immutable data classes for `ChartBoard`, `ChartLayer`, `ChartSector`,
-`ChartItem`, `ItemGroup`, fragmented logical targets, `AngularPoint`,
+`BoardCenterSpec`, `ChartItem`, `ItemGroup`, fragmented logical targets, `AngularPoint`,
 `CircularCoverage`, `FullCircleCoverage`, `SparseArcCoverage`,
-`SparseArcRange`, `OverlayLayer`, `ChartBoardAdapter`, and
+`SparseArcRange`, `OverlayLayer`, `RingOverlaySpec`, `SkippedRingGeometry`, `ChartBoardAdapter`, and
 `ChartBoardAdapterContext`. Circular boundaries are integer millidegrees.
 `SparseArcRange` includes stable ID, start/end, local partition, caps, and
 logical target. Overlay data includes ring reference, z/hit priority, disabled
@@ -251,6 +284,13 @@ Tests must assert:
   node; blank angles and round-cap protrusions have no interaction/semantics.
 - duplicate IDs and invalid radial allocation are board-fatal; malformed
   coverage with valid radial allocation is ring-local.
+- absent/Canvas/Widget/hybrid centers establish the first ring boundary and do
+  not participate in angular validation.
+- optional zero-width rings retain source identity/order as skipped entries,
+  emit nothing, and return at the same position when enabled; required zero is
+  board-fatal because no error annulus can be allocated.
+- track and body overlays share one ring but resolve independent rotations,
+  inverse hit transforms, and paint outsets.
 
 - [ ] **Step 2: Implement circular layout**
 
@@ -394,6 +434,8 @@ expose the same logical IDs, and update shared interaction state. Circular
 Canvas/Widget must match exactly on integer geometry, transforms, sparse paths,
 boundary ownership, hit results, overlay ordering, fragmented identities, and
 semantics structure. Raster goldens use declared pixel/text-baseline tolerances.
+Circular renderer tests also assert center parity and independent track/body
+rotation parity without changing shared ring radii.
 
 - [ ] **Step 2: Implement Canvas wrappers**
 
@@ -497,6 +539,9 @@ Tests must assert adapter creates:
 - stable `instanceId`.
 - complete source-derived center/ring/overlay inventory from the geometry spec.
 - package output contains integer display millidegrees only.
+- `centerSize` maps to `BoardCenterSpec`, not a ring.
+- zero-width `star-sequence` maps to a skipped optional entry with stable order.
+- Legacy track/body rotations map to independent `RingOverlaySpec` transforms.
 
 Normalization tests must assert:
 
@@ -585,8 +630,9 @@ IDs, `passed` status, existing files, and matching hashes. Negative tests cover
 missing/duplicate IDs, stale commit, missing file, hash mismatch, failed status,
 and OpenSpec `4/4` with a missing runtime artifact.
 
-The schema-v1 required IDs are the closed 16-ID catalog in OpenSpec `design.md`
-and `acceptance.md`; changing the catalog requires a schema-version change.
+The schema-v1 required IDs are the closed 17-ID catalog, including
+`p0-go-no-go`, defined in OpenSpec `design.md` and `acceptance.md`; changing the
+catalog requires a schema-version change.
 
 - [ ] **Step 7: Decide go/no-go**
 
@@ -615,10 +661,10 @@ Only proceed to production replacement when all evidence exists.
 |--------|---------|-----|------|--------|----------|
 | CEO Review | `/plan-ceo-review` | Scope & strategy | 0 | Not run | Scope decisions were user-approved directly |
 | Codex/OpenSpec Review | OpenSpec architecture roles | Independent contract challenge | 2 | CLEAR after revision | 10 edge-case groups resolved in normative docs |
-| Eng Review | `/plan-eng-review` | Architecture & tests | 3 | FIXED; final rerun quota-limited | 7 findings fixed, last reported catalog mismatch corrected |
+| Eng Review | `/plan-eng-review` | Architecture & tests | 4 | P0 REQUIRED | External review exposed missing center/track-body propagation and incomplete P0 execution gate; plan corrected |
 | Design Review | `/plan-design-review` | UI/UX gaps | 0 | Deferred to runtime demo | No rendered implementation exists yet |
 | DX Review | `/plan-devex-review` | Developer experience gaps | 0 | Not run | Not required for this documentation revision |
 
 - **CROSS-MODEL:** Both architecture and gStack reviewers required adapter-owned fixed-point normalization, canonical sparse coverage, deterministic interaction/semantics, and machine-verifiable evidence.
-- **UNRESOLVED:** No known documentation blocker; the external gStack zero-blocker rerun was interrupted by its usage limit after its final reported mismatch was fixed.
-- **VERDICT:** OpenSpec strict and local consistency gates are clear for implementation planning. Production remains blocked on every runtime gate and the schema-v1 evidence manifest.
+- **UNRESOLVED:** P0.1-P0.14 require evidence-backed execution and a recorded go/no-go; no P1 implementation may start before `GO`.
+- **VERDICT:** Design documents may proceed through P0 only. P1 implementation and production are blocked.

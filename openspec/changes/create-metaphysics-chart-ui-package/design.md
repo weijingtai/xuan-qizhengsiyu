@@ -54,6 +54,7 @@ Required fields:
 - `instanceId`: stable current pan/board instance id.
 - `themeId`: resolved theme name.
 - `layout`: top-level board layout family and sizing policy.
+- `center`: optional `BoardCenterSpec` for circular boards.
 - `layers`: ordered list of visual layers.
 - `interaction`: optional per-board interaction config.
 - `semantics`: board-level accessibility metadata.
@@ -61,11 +62,20 @@ Required fields:
 No field may contain a module domain object. Use `metadata` maps only for adapter-owned opaque ids needed by callbacks.
 
 Validation distinguishes board-fatal from ring-local failures. Duplicate stable
-IDs, negative/non-finite radial allocation, and unresolved required theme schema
+IDs, negative/non-finite radial allocation, required zero-width rings, and unresolved required theme schema
 are board-fatal because reliable geometry cannot be allocated. Partition or
 coverage defects are ring-local only when radial allocation is valid: the band
 remains reserved and becomes the invalid-ring annulus, neighboring rings remain
 interactive, and invalid content emits no hit regions or semantics.
+
+### BoardCenterSpec
+
+Circular center content is an independent `BoardCenterSpec`, never a ring. It
+reserves `radius`; the first ordered ring starts at that boundary. It may host
+Canvas content, a Widget child, or both through hybrid composition, with its own
+clip, fit, semantics, interaction, background/border, and declared paint
+outsets. A missing center is valid and reserves radius zero. Center content does
+not participate in angular partition or ring-coverage validation.
 
 ### ChartLayer
 
@@ -95,6 +105,12 @@ display millidegrees `0..360000`. `SparseArcCoverage` contains one or more
 half-open ranges `[startMilliDegree, endMilliDegree)` and deliberately leaves
 the remaining angles blank while preserving the layer's complete radial band.
 
+An explicitly optional ring may have width zero. It remains in source-plan
+ordering and identity but resolves as `SkippedRingGeometry(reason: zeroWidth)`;
+it allocates no radius and emits no paint, hit region, or semantics. A required
+ring with zero width is invalid. Enabling an optional ring with positive width
+restores it at the same source position.
+
 The neutral contracts are:
 
 - `CircularCoverage.fullCircle(partition)`
@@ -105,6 +121,9 @@ The neutral contracts are:
 - `OverlayLayer`: referenced ring/band ID, unique ID, `zIndex`, `hitPriority`,
   disabled-hit policy (`block` or `passThrough`), and semantics ownership
   (`owner(targetId, semanticsOrder)`, `merge(targetId)`, or `none`)
+- `RingOverlaySpec`: referenced ring ID, stable ID, role (`track`, `body`, or
+  custom), independent `rotationMilliDegrees`, direction, zero-angle offset,
+  radial anchor, `zIndex`, hit/semantics policy, and declared paint outset
 
 Exactly one semantics owner may exist per logical target. `merge(targetId)`
 creates no node. The owner exclusively supplies role, primary label,
@@ -114,6 +133,12 @@ description fragments concatenate in declaration order. Missing/duplicate
 owners, duplicate action IDs, or merge attempts to override owner fields are
 invalid. Owner traversal is ordered by `semanticsOrder`, then declaration order,
 then stable target ID.
+
+Track and body are overlays on one resolved `ContinuousPartition` ring, not
+separate radial bands. Their transforms are resolved independently; neither may
+inherit the other's rotation. Hit testing applies each overlay's inverse
+transform before lookup. This preserves Legacy `trackRotationAngle` and
+`bodyRotationAngle` while keeping shared ring radii stable.
 
 ### Layer Behavior Parameters
 
@@ -685,6 +710,8 @@ The import-boundary test enumerates the allow-list and fails on any import outsi
 - Every risk has a mitigation and stop-the-line condition.
 - Every renderer has at least one acceptance scenario.
 - Every module family has at least one mapping scenario.
+- P0.1-P0.14 map to concrete evidence and `evidence/P0-go-no-go.md` records GO
+  before P1 begins.
 
 ### Static Gates
 
@@ -700,6 +727,12 @@ The import-boundary test enumerates the allow-list and fails on any import outsi
 
 - Geometry snapshot tests for circular equal sectors, full custom arcs, sparse
   partial arcs, ticks, angle points, matrix grid, and perimeter layout.
+- Center tests cover absent, Canvas, Widget, and hybrid `BoardCenterSpec` and
+  verify the first ring boundary plus paint envelope.
+- Optional zero-width tests cover skipped identity/order/no-output, re-enable at
+  the same position, and required-zero rejection.
+- Track/body tests cover independent transforms and inverse hit testing while
+  preserving one ring's resolved radii.
 - Hit-test tests for sector, tick, point item, matrix cell, and perimeter cell.
 - Sparse tests cover disjoint and adjacent ranges, reject overlap/zero-length/
   out-of-range/implicit-wrap input, preserve blank hit/semantics regions, and
@@ -757,6 +790,7 @@ The closed required artifact catalog is:
 | ID | Category |
 | --- | --- |
 | `openspec-strict` | documentation |
+| `p0-go-no-go` | documentation |
 | `package-analyze` | static |
 | `import-api-boundary` | architecture |
 | `package-unit` | unit |

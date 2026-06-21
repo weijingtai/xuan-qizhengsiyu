@@ -6,7 +6,7 @@
 - Branch under review: `codex/metaphysics-chart-ui-openspec`
 - Artifacts reviewed: `proposal.md`, `design.md`, `tasks.md`, `specs/metaphysics-chart-ui/spec.md`, `acceptance.md`, `evidence/doc-validation.md`, SuperPowers plan `docs/superpowers/plans/2026-06-19-metaphysics-chart-ui-package.md`
 - Code grounded against: live QiZhengSiYu painter/style/model source and sibling-package layout (see Method).
-- **Current verdict: GO for implementation planning under phase gates after the 2026-06-20 supplemental review.** The original and supplemental blockers are preserved below as review evidence; the resolution logs record where each documentation-level blocker is now resolved. Runtime evidence still gates public API stabilization and any user-facing board replacement.
+- **Current verdict: documentation design accepted for continued P0 work; NO-GO for P1 implementation until P0.1-P0.14 have evidence and `P0-go-no-go.md` records GO.** The original and supplemental blockers are preserved below as review evidence. Runtime evidence still gates public API stabilization and any user-facing board replacement.
 
 ## Original Verdict Summary
 
@@ -202,7 +202,7 @@ Implementation MUST NOT start until each is resolved in the spec (all change pub
 
 ## Approval
 
-**Approved to proceed to implementation planning under the existing phase gates.** This is not approval to replace production boards until runtime evidence passes.
+**Approved to continue P0 baseline work and implementation planning only.** This is not approval to start P1 package implementation or replace production boards.
 
 The original conditional GO criteria have been addressed at the documentation level:
 
@@ -232,7 +232,10 @@ Update 2026-06-18: the spec package was revised to address all twelve stop-the-l
 | G1 — sequencing vs token migration | `design.md` M0 + R18; `tasks.md` P0.10 |
 | G2 — resolved immutable snapshot + parity | `design.md` Adapter Contracts; `tasks.md` P6.2, P6.7 |
 
-Revised verdict: the documentation-level blockers are resolved; the change is approved to proceed to implementation under the existing phase gates, provided the runtime-evidence items (A1 real adapters, C2 budget, F1 traversal, G2 parity) are demonstrated at their phase gates before public API stabilization and before any user-facing board replacement.
+Revised verdict: the original documentation findings are represented in the
+design, but P0 execution remains a hard gate. P1 starts only after P0.1-P0.14
+have evidence-backed completion and `P0-go-no-go.md` records GO. Runtime items
+remain mandatory before API stabilization and user-facing replacement.
 
 ---
 
@@ -260,7 +263,7 @@ Revised verdict: the documentation-level blockers are resolved; the change is ap
 | Theme contradiction | Optional tokens fall back; strict production requires all `invalidRing*` roles with one ownership destination |
 | Performance evidence | Seeded warm-up/measured protocol, p95 target, scaling matrix, and recorded environment replace an unrepeatable “under 2 ms” claim |
 | Rollback | Normative pre/post-activation failure scenarios atomically retain/restore Legacy and preserve instance state |
-| False completion | Closed schema-v1 16-ID manifest catalog, exact commit and SHA-256 verifier, CI negative fixture |
+| False completion | Closed schema-v1 17-ID manifest catalog including `p0-go-no-go`, exact commit and SHA-256 verifier, CI negative fixture |
 
 The gStack role's final reported contradiction was an example manifest ID
 (`package-tests`) not present in the closed catalog; it was corrected to
@@ -268,3 +271,18 @@ The gStack role's final reported contradiction was an example manifest ID
 external role's usage limit. No CLEAR response is claimed. Final local gates
 are OpenSpec strict validation, diff/placeholder/contradiction scans, numeric
 fixture checks, and exact catalog/example consistency.
+
+## Adjudication Of External `f41ba82` Readiness Report
+
+The external report's “ENGINEERING IMPLEMENTATION READY” and “machine-verified”
+phrasing is rejected. Commit `f41ba82` contains documentation only; the verifier,
+manifest, and runtime artifacts are future implementation work. OpenSpec strict
+validation proves schema consistency, not runtime evidence.
+
+The report also treated G-5 and G-6 as closed because they existed in the
+Superpowers geometry spec, while the OpenSpec public contract and implementation
+plan did not require `BoardCenterSpec` or independent track/body transforms.
+Those contracts and tests are now propagated across design/spec/tasks/
+acceptance/plan. Optional zero-width rings now have one unambiguous rule:
+preserved source identity/order, skipped resolved output, and no radial or
+interactive allocation.

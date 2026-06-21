@@ -106,4 +106,6 @@ The first production migration should keep adapters in consuming modules until t
 
 ## Approval State
 
-This proposal is ready for design review and external agent risk discovery. It is not approval to implement production package code until the OpenSpec design, task plan, and acceptance package are reviewed.
+The design package is ready to execute P0 baseline discovery and go/no-go only.
+It is not approval to begin P1 package implementation: P0.1-P0.14 require
+evidence-backed completion and `evidence/P0-go-no-go.md` must record GO first.

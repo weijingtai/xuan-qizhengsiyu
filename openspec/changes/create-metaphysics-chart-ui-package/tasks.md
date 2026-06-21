@@ -24,6 +24,7 @@
 - [ ] P0.11 Build read-only `buildBoard()` + geometry snapshots against the real data models of all five modules (QiZhengSiYu, TaiYiShenShu, ZiWeiDouShu, DaLiuRen, QiMenDunJia), OR mark the public API experimental and add a gate forbidding a second production migration until a multi-module conformance suite passes.
 - [ ] P0.12 Record non-360 coordinate ownership: QiZhengSiYu adapter owns the versioned `365.25 -> 360` cumulative-boundary mapping; package core accepts normalized millidegrees only.
 - [ ] P0.13 Record Zhu-Luo-San-Xian sparse fixtures, including disjoint, adjacent, overlapping-overlay, and split wrap-around ranges.
+- [ ] P0.14 Verify `BoardCenterSpec`, optional zero-width skip semantics, and independent track/body overlay transforms are represented in OpenSpec, the Superpowers plan, and executable acceptance cases.
 
 **Exit Criteria**
 
@@ -46,8 +47,8 @@
 
 - [ ] P1.1 Create sibling Flutter package `metaphysics_chart_ui`.
 - [ ] P1.2 Add public barrel `lib/metaphysics_chart_ui.dart`.
-- [ ] P1.3 Add immutable core contracts: `ChartBoard`, `ChartLayer` (with `semanticsMode` and a `behavior` block), `ChartSector`, `ChartItem`, `ItemGroup`, `AngularPoint`, `ChartBoardAdapter`, `BoardSemantics`.
-- [ ] P1.4 Add layout spec contracts: `CircularLayerSpec`, `FullCircleCoverage`, `SparseArcCoverage`, `SparseArcRange` (stable id, integer start/end, local partition, caps, logical target), overlay ring reference, z/hit priority, disabled block/pass-through, `owner(targetId, semanticsOrder)` / `merge(targetId)` / `none` semantics policy, `RectGridLayoutSpec`, and `RectPerimeterLayoutSpec`.
+- [ ] P1.3 Add immutable core contracts: `ChartBoard`, `BoardCenterSpec`, `ChartLayer` (with `semanticsMode` and a `behavior` block), `ChartSector`, `ChartItem`, `ItemGroup`, `AngularPoint`, `SkippedRingGeometry`, `ChartBoardAdapter`, `BoardSemantics`.
+- [ ] P1.4 Add layout spec contracts: `CircularLayerSpec`, `FullCircleCoverage`, `SparseArcCoverage`, `SparseArcRange` (stable id, integer start/end, local partition, caps, logical target), `RingOverlaySpec` (ring reference, role, independent rotation/direction/offset/radial anchor/outset), z/hit priority, disabled block/pass-through, `owner(targetId, semanticsOrder)` / `merge(targetId)` / `none` semantics policy, `RectGridLayoutSpec`, and `RectPerimeterLayoutSpec`.
 - [ ] P1.5 Add `BoardInteractionController`, `BoardInteractionState`, and callback contracts; resolve a child hit up to its owning `ItemGroup` id.
 - [ ] P1.6 Add `BoardTheme`, renderer token groups, module palette contracts, and fallback values; include the role-mapping destinations for the existing chart-style roles.
 - [ ] P1.7 Add architecture tests enforcing the import allow-list (core/layouts/renderers may import only Flutter, `dart:ui`, `dart:math`, `yaml`, and named utilities) and explicitly failing on `package:metaphysics_core`, `package:theme`, and `package:xuan_config`.
@@ -88,6 +89,9 @@
 - [ ] P2.13 Add canonical-transform and boundary tests: validate before direction/offset/rotation, normalize point `360000` to `0`, probe `b-1/b/b+1`, and map split fragments to one logical target/semantics node.
 - [ ] P2.14 Add deterministic overlay tests for paint order, hit order, equal-priority declaration tie-break, disabled block/pass-through, paint-only round-cap protrusion, and single-owner adjacent seams.
 - [ ] P2.15 Add semantics policy tests: one owner per target; owner-only role/primary label/state/activate; declaration-ordered merged descriptions; unique non-activate action IDs; reject missing/duplicate owners, duplicate actions, and owner-field overrides.
+- [ ] P2.16 Add center geometry tests for absent/Canvas/Widget/hybrid content, first-ring boundary, paint outsets, and exclusion from angular validation.
+- [ ] P2.17 Add optional zero-width ring tests for skipped identity/order/no-output behavior, re-enable-at-same-position behavior, and board-fatal required zero-width rejection.
+- [ ] P2.18 Add independent track/body overlay tests proving shared radii, independent transforms, inverse-transform hit testing, stable ids, and declared outset inclusion.
 
 **Exit Criteria**
 
@@ -115,6 +119,7 @@
 - [ ] P3.7 Add semantics tests for interactive regions, asserting bounded node count and `ItemGroup` collapsing (no node for tick scales).
 - [ ] P3.8 Add golden tests for all four renderers with deterministic fixtures.
 - [ ] P3.9 Implement the hybrid Canvas+Widget composition (widget overlay items positioned on shared geometry anchors, sharing the controller and hit ids) and test that a Canvas ring plus widget star badges resolve one consistent selection.
+- [ ] P3.10 Add Canvas/Widget conformance tests for `BoardCenterSpec` and independently rotated track/body overlays.
 
 **Exit Criteria**
 
@@ -220,7 +225,7 @@
 - [ ] P7.9 Attach sparse-arc Canvas/Widget parity evidence covering blank angles, caps, overlay hit priority, semantics, and responsive clipping.
 - [ ] P7.10 Run failure injection for geometry, strict-theme, hit-index, and renderer initialization; prove Legacy fallback preserves selection, rotation, and module state.
 - [ ] P7.11 Generate a commit-SHA evidence manifest and verify a deliberately missing runtime artifact fails production readiness even when OpenSpec reports artifact completion.
-- [ ] P7.12 Implement and test `tool/verify_production_readiness.dart` against `evidence/production-readiness-manifest.yaml`; require schema v1, exact HEAD, the closed 16-ID catalog from `design.md`, `passed` statuses, existing files, and matching SHA-256 hashes in CI; catalog changes require a schema-version change.
+- [ ] P7.12 Implement and test `tool/verify_production_readiness.dart` against `evidence/production-readiness-manifest.yaml`; require schema v1, exact HEAD, the closed 17-ID catalog from `design.md` including `p0-go-no-go`, `passed` statuses, existing files, and matching SHA-256 hashes in CI; catalog changes require a schema-version change.
 
 **Exit Criteria**
 

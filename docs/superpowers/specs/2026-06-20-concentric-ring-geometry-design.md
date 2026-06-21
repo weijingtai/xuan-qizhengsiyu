@@ -2,10 +2,10 @@
 
 ## Status
 
-Revised after the production-readiness gap review on 2026-06-20. The design is
-implementation-ready only when the acceptance gates in this document are
-represented by executable tests; document approval alone is not production
-approval.
+Revised after the production-readiness gap review on 2026-06-20. The design
+documents are ready for P0 baseline execution only. P1 implementation remains
+blocked until every P0 task and its go/no-go evidence are complete. Document
+approval alone is neither implementation nor production approval.
 
 ## Review Gap Closure
 
@@ -71,10 +71,15 @@ Each `RingSpec` contains:
 - interaction and semantics configuration
 - module-neutral metadata
 
-Duplicate ring IDs, negative widths, and non-finite values are invalid.
+Duplicate ring IDs, negative widths, and non-finite values are invalid. A zero
+width is legal only for an explicitly optional ring. Such a ring retains its
+stable ID and source-plan position but resolves as `SkippedRingGeometry` with
+reason `zeroWidth`: it allocates no radius and emits no paint, hit region, or
+semantics. Changing it to a positive width restores it at the same ordered
+position without changing neighboring IDs.
 
 Validation severity is explicit. Duplicate stable IDs, negative/non-finite
-radial allocations, and an unresolved required theme schema are board-fatal
+radial allocations, required zero-width rings, and an unresolved required theme schema are board-fatal
 because trustworthy geometry cannot be allocated. Partition or coverage defects
 are ring-local only when that ring's radial band is valid; neighboring geometry
 and interaction remain available. Invalid rings expose no content hit regions
@@ -436,7 +441,7 @@ from `BeautyViewPage`.
 | C | `center` | `centerSize = 140` diameter | radius `70` | independent `BoardCenterSpec` |
 | 1 | `earthly-branches` | `diZhi12GongHeight` | `50` | equal 12 |
 | 2 | `zodiac` | `zodiac12GongHeight` | `24` | equal 12 |
-| 3 | `star-sequence` | `starSeq12GongHeight` | `0` | optional equal 12; omitted when width is zero |
+| 3 | `star-sequence` | `starSeq12GongHeight` | `0` | optional equal 12; retained in source order and skipped from resolved paint when zero |
 | 4 | `destiny-palaces` | `destiny12GongHeight` | `70` | equal 12 |
 | 5 | `fate-star-orbit` | `lifeStarRingHeight` | `48` | continuous; independent track/body overlays |
 | 6 | `constellations` | `starXiu28RingHeight` | `36` | 28 explicit mansions plus scale tick overlay |
@@ -447,7 +452,8 @@ from `BeautyViewPage`.
 | 11 | `daxian-inner` | `DaXianRing.outerRadius - 32` | `16` | hierarchical 12 x variable slots; not connected |
 
 This is one center slot plus nine named model bands, of which the star-sequence
-band is currently zero-width, plus two currently unconnected DaXian bands.
+band currently resolves as a zero-width skipped entry, plus two currently
+unconnected DaXian bands.
 Track/body and 360-degree ticks are visual overlays and do not increase the
 radial-band count. This counting rule is normative for migration inventory and
 prevents either hidden overlays or zero-width optional bands from being lost.
@@ -504,6 +510,8 @@ hover, selection, validation, or Toast-deduplication state accidentally.
 - absent, Canvas, Widget, and hybrid center configurations reserve the expected
   center radius and place the first ring at its boundary
 - reordered input produces reordered, continuous radial bands
+- an optional zero-width ring preserves source order and stable ID, allocates no
+  radius/paint/hit/semantics, and returns to the same position when enabled
 - every configured width is preserved exactly in design units
 - inner and outer borders stay inside their owning ring
 - adjacent ring boundaries are equal with no gap or overlap

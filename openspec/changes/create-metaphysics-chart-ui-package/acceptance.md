@@ -29,6 +29,27 @@ This package creates reusable chart-board UI infrastructure for circular Canvas,
 - **AND** blank angles remain transparent, non-interactive, and absent from semantics
 - **AND** both overlays retain deterministic z-order and the ring retains its full radial allocation
 
+### Scenario: `BoardCenterSpec` is not treated as a ring
+
+- **GIVEN** Canvas, Widget, and hybrid center fixtures reserve the same radius
+- **WHEN** the circular board resolves
+- **THEN** each first ring starts at the center boundary
+- **AND** center content has no angular partition or ring-coverage validation
+
+### Scenario: Optional zero-width ring is skipped without losing identity
+
+- **GIVEN** `star-sequence` is optional and has width zero
+- **WHEN** geometry resolves
+- **THEN** it retains its stable source-plan id and order as `SkippedRingGeometry(reason: zeroWidth)`
+- **AND** it allocates no radius, paint, hit region, or semantics
+
+### Scenario: Star track and body have independent transforms
+
+- **GIVEN** track and body `RingOverlaySpec` values reference one continuous star-orbit ring
+- **WHEN** either overlay rotates independently
+- **THEN** the other overlay and shared ring radii remain unchanged
+- **AND** Canvas and Widget hit testing apply the corresponding inverse transform
+
 ### Scenario: New-renderer failure atomically preserves Legacy
 
 - **GIVEN** Legacy holds current selection, rotation, and module state
@@ -123,6 +144,9 @@ rg -n "xuan_|xuan-" ../metaphysics-chart-ui/pubspec.yaml ../metaphysics-chart-ui
 Expected: no program identifier matches. Directory/Git URL references, if any, must be explicitly reviewed.
 
 - Geometry tests:
+  - absent, Canvas, Widget, and hybrid circular center fixtures
+  - optional zero-width skip/enable ordering and required zero-width rejection
+  - required zero-width is board-fatal rather than an invisible ring-local error
   - circular 12 equal sectors
   - circular 16 equal sectors
   - circular 360 ticks
@@ -135,6 +159,7 @@ Expected: no program identifier matches. Directory/Git URL references, if any, m
   - rectangular 12 perimeter
   - arc-band hit region uses the filled wedge area, not the stroked draw path
   - dense reference board resolves pointer-move within the frame-time budget via spatial/angular index
+  - independent track/body overlay rotation, shared radii, and inverse-transform hit testing
   - performance protocol uses deterministic seed, 5 x 1,000 warm-ups and 10 x 10,000 measured lookups; registered environment metadata is recorded, p95 is below 2 ms, and 128/256/512/1024 scaling slope is below `0.85`
 
 - Adapter normalization tests:
@@ -212,7 +237,7 @@ required evidence IDs, `passed` statuses, files, and SHA-256 hashes validate.
 Required IDs are closed for schema v1:
 
 ```text
-openspec-strict, package-analyze, import-api-boundary, package-unit,
+openspec-strict, p0-go-no-go, package-analyze, import-api-boundary, package-unit,
 adapter-unit, theme-strict, geometry-goldens, renderer-conformance,
 sparse-conformance, qizheng-legacy-parity, hit-performance,
 accessibility-traversal, gstack-desktop, gstack-mobile, gstack-interaction,
@@ -244,6 +269,8 @@ No ZenTao update is required by this OpenSpec change unless the user assigns it 
   - `docs/superpowers/plans/2026-06-19-metaphysics-chart-ui-package.md`
 - gStack evidence directory after implementation.
 - External AI risk review notes before implementation starts.
+- `evidence/P0-go-no-go.md` mapping P0.1-P0.14 to concrete evidence and
+  recording GO before P1 implementation begins.
 
 ## Residual Risk
 
