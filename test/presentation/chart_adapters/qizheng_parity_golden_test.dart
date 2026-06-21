@@ -124,7 +124,7 @@ ChartBoard buildParityBoard(QiZhengChartBoardSnapshot fixture) {
         styleRole: layer.styleRole,
         hitTestMode: layer.hitTestMode,
         semanticsMode: layer.semanticsMode,
-        behavior: const LayerBehavior(startAngleOffset: -15),
+        behavior: LayerBehavior(startAngleOffset: -15),
         metadata: layer.metadata,
         sectors: layer.sectors,
       ));

@@ -33,9 +33,9 @@ class QiZhengChartBoardAdapter
     return ChartBoard(
       moduleId: ModuleId.qizhengsiyu,
       instanceId: context.instanceId,
-      layout: const BoardLayout(
+      layout: BoardLayout(
         family: BoardLayoutFamily.circular,
-        metadata: {'totalDegree': 360.0},
+        metadata: const {'totalDegree': 360.0},
       ),
       layers: [
         _buildPalaceLayer(input),
