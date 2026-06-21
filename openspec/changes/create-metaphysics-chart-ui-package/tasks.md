@@ -7,24 +7,24 @@
 
 **Entry Criteria**
 
-- Current branch is not `main` or `master`.
-- No production package code has been created.
-- OpenSpec proposal/design/tasks/spec exist.
+- [x] Current branch is not `main` or `master`.
+- [x] Recovery baseline recorded: package implementation already exists at parent-repository commit `ea37cd7c85fd`; P0 does not retroactively approve that implementation, and later phases must audit existing code before checking their tasks.
+- [x] OpenSpec proposal/design/tasks/spec exist.
 
-- [ ] P0.1 Review this OpenSpec change with at least one external AI agent focused on architecture risks.
-- [ ] P0.2 Record current QiZhengSiYu Canvas painter inventory and mark which layers are equal-sector, custom-arc, tick, point, or widget-composed.
-- [ ] P0.3 Record QiMenDunJia `SmartQiMenGrid` rectangular widget-grid behavior and theme usage.
-- [ ] P0.4 Record DaLiuRen rectangular/table/grid UI examples that should migrate to `RectGridWidgetBoard`.
-- [ ] P0.5 Record candidate ZiWei and TaiYi board layouts: circular 12, circular 16, and 12-cell perimeter.
-- [ ] P0.6 Validate that the neutral model can represent all recorded examples without module-specific renderer branches, including a composite star (`ItemGroup`), dual-angle stars (`AngularPoint`), and the inner/outer mirror rings expressed as `behavior` data.
-- [ ] P0.7 Decide final sibling package location and package name. Default: `../metaphysics-chart-ui` directory with pubspec name `metaphysics_chart_ui`.
-- [ ] P0.8 Run documentation unfinished-marker scan and fix any incomplete marker terms or incomplete acceptance statements.
-- [ ] P0.9 Produce P0 go/no-go note in this change directory.
-- [ ] P0.10 Sequence against the in-flight `QiZhengChartStyle` / YAML-token migration (`docs/superpowers/specs/2026-06-17-qizhengsiyu-chart-theme-token-migration-plan.md`); record which theme system survives end-state and confirm the same painters are not re-migrated in parallel.
-- [ ] P0.11 Build read-only `buildBoard()` + geometry snapshots against the real data models of all five modules (QiZhengSiYu, TaiYiShenShu, ZiWeiDouShu, DaLiuRen, QiMenDunJia), OR mark the public API experimental and add a gate forbidding a second production migration until a multi-module conformance suite passes.
-- [ ] P0.12 Record non-360 coordinate ownership: QiZhengSiYu adapter owns the versioned `365.25 -> 360` cumulative-boundary mapping; package core accepts normalized millidegrees only.
-- [ ] P0.13 Record Zhu-Luo-San-Xian sparse fixtures, including disjoint, adjacent, overlapping-overlay, and split wrap-around ranges.
-- [ ] P0.14 Verify `BoardCenterSpec`, optional zero-width skip semantics, and independent track/body overlay transforms are represented in OpenSpec, the Superpowers plan, and executable acceptance cases.
+- [x] P0.1 Review this OpenSpec change with at least one external AI agent focused on architecture risks.
+- [x] P0.2 Record current QiZhengSiYu Canvas painter inventory and mark which layers are equal-sector, custom-arc, tick, point, or widget-composed.
+- [x] P0.3 Record QiMenDunJia `SmartQiMenGrid` rectangular widget-grid behavior and theme usage.
+- [x] P0.4 Record DaLiuRen rectangular/table/grid UI examples that should migrate to `RectGridWidgetBoard`.
+- [x] P0.5 Record candidate ZiWei and TaiYi board layouts: circular 12, circular 16, and 12-cell perimeter.
+- [x] P0.6 Validate that the neutral model can represent all recorded examples without module-specific renderer branches, including a composite star (`ItemGroup`), dual-angle stars (`AngularPoint`), and the inner/outer mirror rings expressed as `behavior` data.
+- [x] P0.7 Decide final sibling package location and package name. Default: `../metaphysics-chart-ui` directory with pubspec name `metaphysics_chart_ui`.
+- [x] P0.8 Run documentation unfinished-marker scan and fix any incomplete marker terms or incomplete acceptance statements.
+- [x] P0.9 Produce P0 go/no-go note in this change directory.
+- [x] P0.10 Sequence against the in-flight `QiZhengChartStyle` / YAML-token migration (`docs/superpowers/specs/2026-06-17-qizhengsiyu-chart-theme-token-migration-plan.md`); record which theme system survives end-state and confirm the same painters are not re-migrated in parallel.
+- [x] P0.11 Build read-only `buildBoard()` + geometry snapshots against the real data models of all five modules (QiZhengSiYu, TaiYiShenShu, ZiWeiDouShu, DaLiuRen, QiMenDunJia), OR mark the public API experimental and add a gate forbidding a second production migration until a multi-module conformance suite passes.
+- [x] P0.12 Record non-360 coordinate ownership: QiZhengSiYu adapter owns the versioned `365.25 -> 360` cumulative-boundary mapping; package core accepts normalized millidegrees only.
+- [x] P0.13 Record Zhu-Luo-San-Xian sparse fixtures, including disjoint, adjacent, overlapping-overlay, and split wrap-around ranges.
+- [x] P0.14 Verify `BoardCenterSpec`, optional zero-width skip semantics, and independent track/body overlay transforms are represented in OpenSpec, the Superpowers plan, and executable acceptance cases.
 
 **Exit Criteria**
 

@@ -1,38 +1,58 @@
 # P0 Go/No-Go
 
 - Change: `create-metaphysics-chart-ui-package`
-- Review commit baseline: `f41ba82`
-- Decision: **NO-GO for P1 implementation**
-- Meaning: design work may continue; package scaffolding and production code may
-  not start until every pending item below has evidence and this decision is
-  revised to GO.
+- QiZheng evidence baseline: `f130449`
+- Package implementation baseline: `ea37cd7c85fd`
+- Package gate fix: `977211ac98fe`
+- Decision: **GO for controlled P1 reconciliation**
+
+## Recovery Meaning
+
+The package was implemented before this P0 gate was closed. This GO does not
+retroactively approve P1-P7 and does not mean those tasks are complete. It
+authorizes comparing the existing package against each later task, retaining
+verified work and repairing missing behavior under the existing gates.
 
 ## Evidence Matrix
 
-| Item | Status | Evidence or missing work |
+| Item | Status | Evidence |
 | --- | --- | --- |
-| P0.1 External architecture review | Complete | `evidence/P0-risk-review.md` plus Antigravity reviews recorded in its adjudication section |
-| P0.2 QiZhengSiYu painter/ring inventory | Complete | Superpowers concentric-ring geometry spec, Source-Derived Legacy Inventory |
-| P0.3 QiMen real widget-grid baseline | Pending | Record real `SmartQiMenGrid` behavior and theme usage |
-| P0.4 DaLiuRen real rectangular baseline | Pending | Record real Row/Column/Table/Grid examples and adapter constraints |
-| P0.5 ZiWei and TaiYi real layout baseline | Pending | Record circular/perimeter/16-sector examples from real modules |
-| P0.6 Neutral-model real-shape proof | Pending | Exercise all recorded real module shapes without renderer branches |
-| P0.7 Package location/name decision | Pending | Record final sibling path and `metaphysics_chart_ui` approval |
-| P0.8 Unfinished-marker/document scan | Complete | `evidence/doc-validation.md`; rerun before changing this decision |
-| P0.9 P0 go/no-go note | Complete | This file |
-| P0.10 Theme migration sequencing | Complete | OpenSpec design M0 and theme ownership sections |
-| P0.11 Five-module adapters or experimental gate | Pending | Build read-only real-model snapshots or record experimental API and second-migration prohibition |
-| P0.12 Non-360 coordinate ownership | Complete | Adapter-owned fixed-point normalization across spec/design/tasks/acceptance/plan |
-| P0.13 Zhu-Luo-San-Xian sparse fixtures | Complete | Sparse coverage and ordered-overlay acceptance matrices |
-| P0.14 Center/zero-width/track-body propagation | Complete | `BoardCenterSpec`, `SkippedRingGeometry`, and `RingOverlaySpec` contracts plus tests in all execution documents |
+| P0.1 | Complete | `evidence/P0-risk-review.md` |
+| P0.2 | Complete | Concentric-ring geometry spec, source-derived Legacy inventory |
+| P0.3 | Complete | `evidence/P0.3-qimen-grid-baseline.md` |
+| P0.4 | Complete | `evidence/P0.4-daliuren-grid-baseline.md` |
+| P0.5 | Complete | `evidence/P0.5-ziwei-taiyi-layout-baseline.md` |
+| P0.6 | Complete | `evidence/P0.6-neutral-model-validation.md`; proof levels explicitly separated |
+| P0.7 | Complete | `evidence/P0.7-package-location-name.md` |
+| P0.8 | Complete | `evidence/doc-validation.md`; closure rerun appended |
+| P0.9 | Complete | This file |
+| P0.10 | Complete | Design M0 and Theme/YAML ownership sections |
+| P0.11 | Complete | `evidence/P0.11-five-module-adapters.md`; package gate `977211ac98fe` |
+| P0.12 | Complete | Adapter-owned fixed-point `365.25 -> 360` normalization contract |
+| P0.13 | Complete | Sparse coverage and ordered-overlay acceptance matrices |
+| P0.14 | Complete | Center/zero-width/track-body contracts propagated; later implementation tasks remain unchecked |
 
-## GO Requirements
+## Stop-The-Line Results
 
-1. Resolve P0.3-P0.7 and P0.11 with repository-grounded evidence.
-2. Rerun OpenSpec strict validation and unfinished-marker/contradiction scans.
-3. Confirm no stop-the-line item remains.
-4. Change this decision to GO and check P0.1-P0.14 in `tasks.md` only after each
-   row points to its final evidence.
+| Condition | Result |
+| --- | --- |
+| A required board family has no neutral representation | PASS: five-module matrix records one without renderer module branches |
+| Package name violates identifier governance | PASS: `metaphysics_chart_ui` |
+| Architecture review leaves a blocking public-core flaw | PASS for P0 design; later runtime tasks remain gated |
+| API is stabilized from QiZheng plus synthetic examples | PASS: API remains `@experimental`; executable gate permits only the real QiZheng consumer |
 
-Until then, OpenSpec artifact completion and documentation review results do not
-authorize P1 implementation.
+## Required Verification
+
+```bash
+# In xuan-qizhengsiyu
+openspec validate create-metaphysics-chart-ui-package --strict --no-interactive
+git diff --check
+git status --short -- openspec/changes/create-metaphysics-chart-ui-package
+
+# In metaphysics-chart-ui at package commit 977211ac98fe
+flutter analyze
+flutter test
+```
+
+The P0 evidence files must be tracked in the final QiZheng commit. A dirty or
+untracked P0 evidence file invalidates this GO.

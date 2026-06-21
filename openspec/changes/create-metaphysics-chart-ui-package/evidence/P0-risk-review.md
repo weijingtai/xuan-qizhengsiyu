@@ -6,7 +6,7 @@
 - Branch under review: `codex/metaphysics-chart-ui-openspec`
 - Artifacts reviewed: `proposal.md`, `design.md`, `tasks.md`, `specs/metaphysics-chart-ui/spec.md`, `acceptance.md`, `evidence/doc-validation.md`, SuperPowers plan `docs/superpowers/plans/2026-06-19-metaphysics-chart-ui-package.md`
 - Code grounded against: live QiZhengSiYu painter/style/model source and sibling-package layout (see Method).
-- **Current verdict: documentation design accepted for continued P0 work; NO-GO for P1 implementation until P0.1-P0.14 have evidence and `P0-go-no-go.md` records GO.** The original and supplemental blockers are preserved below as review evidence. Runtime evidence still gates public API stabilization and any user-facing board replacement.
+- **Current verdict: P0 risk review closed for controlled P1 reconciliation.** The original NO-GO and supplemental blockers are preserved below as historical review evidence. `P0-go-no-go.md` records the current decision and pins the experimental gate commit; runtime evidence still gates public API stabilization and any user-facing board replacement.
 
 ## Original Verdict Summary
 
@@ -293,5 +293,7 @@ P6 projection math and rejection/sparse tests split; `daXian106` documented as
 a configuration ID producing 104 slots; literal color bypass prohibited by API
 and theme tests; stale-commit verifier negatives added; benchmark target
 registration made versioned and exact-match-only; and 64 made a non-overridable
-maximum indexing threshold while permitting earlier indexing. These fixes do
-not change the P0 NO-GO decision.
+maximum indexing threshold while permitting earlier indexing. These fixes did
+not change the P0 NO-GO decision at that review baseline. The later P0 closure
+is recorded separately in `P0-go-no-go.md`; it does not retroactively alter
+this review's findings.
