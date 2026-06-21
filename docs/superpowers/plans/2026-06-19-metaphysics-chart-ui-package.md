@@ -27,7 +27,6 @@ Create a sibling package:
 - Create: `../metaphysics-chart-ui/lib/src/core/board_layer.dart`
 - Create: `../metaphysics-chart-ui/lib/src/core/circular_coverage.dart`
 - Create: `../metaphysics-chart-ui/lib/src/core/board_item.dart`
-- Create: `../metaphysics-chart-ui/lib/src/core/circular_coverage.dart`
 - Create: `../metaphysics-chart-ui/lib/src/core/board_geometry.dart`
 - Create: `../metaphysics-chart-ui/lib/src/core/board_interaction.dart`
 - Create: `../metaphysics-chart-ui/lib/src/core/board_theme.dart`
@@ -230,7 +229,10 @@ Flutter, dart:ui, dart:math, yaml, and explicitly approved pure-Dart utilities
 Explicitly assert `qizhengsiyu`, other consuming modules,
 `metaphysics_core`, `theme`, and `xuan_config` are rejected. Add an API scan
 asserting core exposes no `sourceDomainSpan`, `365.25`, mapping table, or
-projection callback. Expected: all allow-list and API-boundary tests pass.
+projection callback. Also assert geometry/layer/ring-border/item-style contracts
+accept semantic style roles only and reject concrete `Color`, ARGB, or hex
+values; renderers may not interpret metadata as styling. Expected: all
+allow-list and API-boundary tests pass.
 
 - [ ] **Step 4: Run tests**
 
@@ -326,6 +328,12 @@ measured seeded lookups, p95 below 2 ms on the registered target, and fitted
 log-log slope below `0.85` for 128/256/512/1024 regions. Record hardware, OS,
 Flutter/Dart versions, build mode, seed, and p50/p95/max.
 
+Add a versioned `BenchmarkTargetProfile` fixture. Only an exact profile match
+may emit passing evidence; unregistered runs are informational. Re-registration
+requires review and a full protocol/baseline rerun. Treat 64 regions as the
+non-overridable maximum indexing threshold: implementations may index earlier,
+but consumers may not raise or disable it.
+
 - [ ] **Step 6: Commit**
 
 ```bash
@@ -387,6 +395,8 @@ Tests must assert fallback-only theme completeness, YAML load, optional-token
 fallback, strict production failure for each missing/malformed required
 `invalidRing*` role, light/dark fixtures, module palette separation, host base
 tokens, renderer override, and instance override precedence.
+They must also prove concrete colors appear only in `ResolvedBoardTheme` and
+module palettes cannot bypass resolution through geometry metadata.
 
 - [ ] **Step 2: Implement theme contracts**
 
@@ -543,17 +553,24 @@ Tests must assert adapter creates:
 - zero-width `star-sequence` maps to a skipped optional entry with stable order.
 - Legacy track/body rotations map to independent `RingOverlaySpec` transforms.
 
-Normalization tests must assert:
+- [ ] **Step 2: Write projection-math tests**
+
+Projection tests must assert:
 
 - source fixed-point `0/182625/365250` maps to display
   `0/180000/360000` using integer rational round-half-up;
 - cumulative boundaries are mapped once and sweeps are derived by subtraction;
 - exact-half behavior and monotonic property fixtures are deterministic;
+
+- [ ] **Step 3: Write rejection and sparse-preservation tests**
+
+Rejection tests must assert:
+
 - non-finite, non-monotonic, out-of-range, invalid full-coverage closure, and collapsed
   positive segments fail before package construction;
 - sparse source ranges preserve gaps and do not expand to a full circle.
 
-- [ ] **Step 2: Implement adapter without deleting old painters**
+- [ ] **Step 4: Implement adapter without deleting old painters**
 
 Use existing QiZhengSiYu data models only in adapter file. Return neutral `ChartBoard`.
 
@@ -562,11 +579,11 @@ QiZhengSiYu adapter directory, never in `metaphysics_chart_ui`. Keep source
 coordinates and mapping revision in module-owned diagnostics outside package
 geometry/equality/cache keys.
 
-- [ ] **Step 3: Add parity fixture**
+- [ ] **Step 5: Add parity fixture**
 
 Use one stable panel fixture to compare old painter geometry assumptions against new `ChartBoard` geometry.
 
-- [ ] **Step 4: Run adapter tests**
+- [ ] **Step 6: Run adapter tests**
 
 ```bash
 flutter test test/presentation/chart_adapters
@@ -574,7 +591,7 @@ flutter test test/presentation/chart_adapters
 
 Expected: pass.
 
-- [ ] **Step 5: Commit**
+- [ ] **Step 7: Commit**
 
 ```bash
 git add lib/presentation/chart_adapters test/presentation/chart_adapters

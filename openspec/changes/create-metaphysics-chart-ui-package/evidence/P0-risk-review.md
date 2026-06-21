@@ -286,3 +286,12 @@ Those contracts and tests are now propagated across design/spec/tasks/
 acceptance/plan. Optional zero-width rings now have one unambiguous rule:
 preserved source identity/order, skipped resolved output, and no radial or
 interactive allocation.
+
+The subsequent gStack Eng Review was also based on stale commit `f41ba82`. Its
+remaining findings were adjudicated as follows: duplicate plan path removed;
+P6 projection math and rejection/sparse tests split; `daXian106` documented as
+a configuration ID producing 104 slots; literal color bypass prohibited by API
+and theme tests; stale-commit verifier negatives added; benchmark target
+registration made versioned and exact-match-only; and 64 made a non-overridable
+maximum indexing threshold while permitting earlier indexing. These fixes do
+not change the P0 NO-GO decision.

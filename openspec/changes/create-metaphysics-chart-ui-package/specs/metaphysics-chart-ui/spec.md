@@ -242,11 +242,15 @@ Canvas renderers SHALL handle hover, tap, selection, pressed, focus, and disable
 
 #### Scenario: Dense board hit-test stays within budget
 
-- **GIVEN** the reference board has a 12-sector layer, a 360-tick layer, a 28-arc layer, and around eleven star groups
+- **GIVEN** a versioned `BenchmarkTargetProfile` records hardware, OS, Flutter/Dart versions, build mode, and seed
+- **AND** the reference board has a 12-sector layer, a 360-tick layer, a 28-arc layer, and around eleven star groups
 - **WHEN** the documented profile/release benchmark runs deterministic seeded positions after 5 x 1,000 warm-ups for 10 x 10,000 measured lookups
 - **THEN** hit-test resolution uses a spatial or angular index
 - **AND** p95 is below 2 ms on the registered target whose hardware, OS, Flutter/Dart versions, build mode, and seed are recorded
 - **AND** the 128/256/512/1024-region matrix has fitted log-log lookup-time slope below `0.85`
+- **AND** only an exact versioned target-profile match can produce passing performance evidence
+- **AND** unregistered environments are informational and require reviewed re-registration plus a full rerun before gating
+- **AND** consumers cannot raise the mandatory indexing threshold above 64, though implementations may index earlier
 
 ### Requirement: Theme and YAML resolution are deterministic
 
@@ -272,6 +276,15 @@ The package SHALL provide ThemeExtension and YAML-driven token loading with dete
 - **WHEN** renderer semantic colors are resolved
 - **THEN** semantic UI tokens and module palette tokens remain separate objects
 - **AND** package core does not require module enums
+
+#### Scenario: Geometry cannot bypass theme resolution with literal colors
+
+- **GIVEN** package geometry, layer, ring-border, and item-style public contracts
+- **WHEN** architecture/API tests inspect their fields and serialized fixtures
+- **THEN** styling is represented only by semantic role or token keys
+- **AND** no contract accepts Flutter `Color`, ARGB integers, or hex color strings
+- **AND** renderers never interpret opaque metadata as styling
+- **AND** concrete colors appear only in `ResolvedBoardTheme`
 
 #### Scenario: Host theme tokens supply base tokens without coupling core
 

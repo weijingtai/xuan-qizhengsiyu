@@ -99,6 +99,13 @@ Each layer has:
 - `items` or geometry source
 - `behavior`: explicit per-instance rendering parameters (see Layer Behavior Parameters)
 
+Geometry and layer contracts reference semantic `styleRole`/token keys only.
+They do not accept Flutter `Color`, ARGB integers, or hex color strings. Concrete
+colors exist only inside `ResolvedBoardTheme` after theme resolution. Opaque
+metadata may contain diagnostic strings, but geometry/renderers must never
+interpret metadata as styling. Module palettes enter through the theme resolver,
+not through ring or item geometry.
+
 Circular layers additionally declare `coverage`: `FullCircleCoverage` or
 `SparseArcCoverage`. `FullCircleCoverage` must resolve exactly to integer
 display millidegrees `0..360000`. `SparseArcCoverage` contains one or more
@@ -428,6 +435,18 @@ and 1024 hit regions must have a fitted log-log lookup-time slope below `0.85`
 from 128 through 1024, demonstrating indexed rather than linear growth.
 Warm-up samples are excluded; any run with background-throttling warnings is
 discarded and rerun. Exceeding either gate is stop-the-line R3.
+
+The registered target is a versioned `BenchmarkTargetProfile` containing
+hardware, OS, Flutter/Dart versions, build mode, and benchmark seed. Only an
+exact profile match may produce a passing `hit-performance` artifact.
+Unregistered-environment results are informational and cannot pass or fail the
+production gate. Re-registration requires a reviewed profile-version change and
+a complete rerun of the protocol and baseline artifacts.
+
+The 64-region indexing threshold is a package maximum, not a consumer tuning
+knob. Implementations may index at a lower count, but adapters, boards, themes,
+or runtime configuration may not raise it above 64 or disable indexing where it
+is mandatory. The performance budget still applies below the threshold.
 
 ### Hover And Selected Painting
 

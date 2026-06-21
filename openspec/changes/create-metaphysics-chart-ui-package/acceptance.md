@@ -160,7 +160,13 @@ Expected: no program identifier matches. Directory/Git URL references, if any, m
   - arc-band hit region uses the filled wedge area, not the stroked draw path
   - dense reference board resolves pointer-move within the frame-time budget via spatial/angular index
   - independent track/body overlay rotation, shared radii, and inverse-transform hit testing
+  - `DaXianRing.daXian106` is treated as a configuration id whose fixture
+    resolves 104 child slots and twelve `30000`-millidegree parents
   - performance protocol uses deterministic seed, 5 x 1,000 warm-ups and 10 x 10,000 measured lookups; registered environment metadata is recorded, p95 is below 2 ms, and 128/256/512/1024 scaling slope is below `0.85`
+  - only an exact versioned `BenchmarkTargetProfile` match can pass; unregistered
+    runs are informational and re-registration requires review plus full rerun
+  - the mandatory spatial-index threshold cannot be raised above 64 by any
+    adapter, board, theme, or runtime configuration
 
 - Adapter normalization tests:
   - QiZhengSiYu cumulative boundaries `0/182.625/365.25` map exactly to `0/180000/360000`
@@ -193,6 +199,9 @@ Expected: no program identifier matches. Directory/Git URL references, if any, m
   - instance override precedence
   - host `XuanThemeData.chartTokens` feed board as base tokens without core importing `package:theme`
   - each existing chart-style role maps to exactly one destination (core semantic / renderer token / module palette)
+  - public geometry/style contracts reject concrete `Color`, ARGB, and hex
+    values; concrete colors appear only in `ResolvedBoardTheme`
+  - opaque metadata is never interpreted as renderer styling
 
 - Accessibility tests:
   - bounded semantics node count on the reference board (proportional to logical entities, not draw primitives)
@@ -233,6 +242,10 @@ dart run tool/verify_production_readiness.dart \
 
 Expected: exit `0` only when schema v1, change id, exact commit, all unique
 required evidence IDs, `passed` statuses, files, and SHA-256 hashes validate.
+
+Negative verifier fixtures must fail for missing or duplicate IDs, stale commit
+SHA, missing artifact files, SHA-256 mismatch, non-passed status, wrong schema or
+change id, and OpenSpec document completion with any runtime artifact absent.
 
 Required IDs are closed for schema v1:
 

@@ -55,6 +55,7 @@
 - [ ] P1.8 Add no-`xuan_`/`xuan-` identifier scan for package pubspec, library declarations, import keys, and public identifiers.
 - [ ] P1.9 Run `flutter analyze` and package tests.
 - [ ] P1.10 Add an API/identifier test proving core exposes no source-domain span, `365.25`, mapping table, or projection callback.
+- [ ] P1.11 Add an API/fixture test proving geometry/layer/ring-border/item-style contracts accept semantic style roles only, reject concrete `Color`/ARGB/hex values, and renderers never consume metadata as styling.
 
 **Exit Criteria**
 
@@ -83,7 +84,8 @@
 - [ ] P2.7 Implement `BoardGeometry` and `BoardHitRegion` generation. Hit regions are filled, closed geometry (annular wedge polygons for sectors/arcs), authored independently of the stroked draw path; tick scales default to non-interactive.
 - [ ] P2.8 Add snapshot tests for all geometry types.
 - [ ] P2.9 Add hit-test tests for circular sector, custom arc band, point item, grid cell, and perimeter cell; assert an arc-band hit uses the wedge area (not the stroke path) and that an interactive tick scale resolves by angular bucket.
-- [ ] P2.10 Implement a mandatory spatial/angular index for layers above 64 regions and the documented deterministic benchmark: 5 x 1,000 warm-ups, 10 x 10,000 measured seeded lookups, p95 below 2 ms on the registered target, and fitted log-log slope below `0.85` for 128/256/512/1024 regions; record complete environment metadata.
+- [ ] P2.10 Implement a mandatory spatial/angular index with a non-overridable maximum threshold of 64 regions (implementations may index earlier) and the documented deterministic benchmark: 5 x 1,000 warm-ups, 10 x 10,000 measured seeded lookups, p95 below 2 ms on the registered target, and fitted log-log slope below `0.85` for 128/256/512/1024 regions; record complete environment metadata.
+- [ ] P2.10a Add `BenchmarkTargetProfile` validation: only an exact versioned environment match can emit passing evidence; unregistered runs are informational; re-registration requires reviewed profile-version change and a complete protocol/baseline rerun.
 - [ ] P2.11 Add sparse coverage tests: single/disjoint/adjacent ranges; reject same-layer overlap, zero sweep, out-of-range and implicit wrap-around; accept explicit split wrap-around; assert full radial reservation, blank-angle hit/semantics exclusion, and deterministic overlay z-order.
 - [ ] P2.12 Add Canvas/Widget geometry conformance fixtures for sparse inner/outer borders, radial start/end borders, and `butt`/`round` caps.
 - [ ] P2.13 Add canonical-transform and boundary tests: validate before direction/offset/rotation, normalize point `360000` to `0`, probe `b-1/b/b+1`, and map split fragments to one logical target/semantics node.
@@ -92,6 +94,7 @@
 - [ ] P2.16 Add center geometry tests for absent/Canvas/Widget/hybrid content, first-ring boundary, paint outsets, and exclusion from angular validation.
 - [ ] P2.17 Add optional zero-width ring tests for skipped identity/order/no-output behavior, re-enable-at-same-position behavior, and board-fatal required zero-width rejection.
 - [ ] P2.18 Add independent track/body overlay tests proving shared radii, independent transforms, inverse-transform hit testing, stable ids, and declared outset inclusion.
+- [ ] P2.19 Add the exact `DaXianRing.daXian106` fixture test: configuration id is not a count, transformed child count is 104, each parent sums to `30000`, and total sums to `360000`.
 
 **Exit Criteria**
 
@@ -146,6 +149,7 @@
 - [ ] P4.5 Add invalid YAML tests proving optional per-token fallback, plus strict production failure and clear diagnostics for missing `invalidRingFill`, `invalidRingBorder`, `invalidRingLabel`, or `invalidRingBorderWidth`.
 - [ ] P4.6 Add light/dark theme fixture tests.
 - [ ] P4.7 Implement the host bridge in the adapter/host layer that feeds `XuanThemeData.chartTokens` to a board as base tokens, and add the role-mapping table test asserting each existing chart-style role lands in its single destination (core semantic / renderer token / module palette).
+- [ ] P4.8 Add resolver tests proving concrete colors appear only after `ResolvedBoardTheme` resolution and module palettes cannot bypass the resolver through geometry metadata.
 
 **Exit Criteria**
 
@@ -197,7 +201,8 @@
 - [ ] P6.5 Migrate one low-risk layer first, such as a divider/tick layer.
 - [ ] P6.6 Produce migration evidence before replacing any user-facing board.
 - [ ] P6.7 Add an angle-parity fixture asserting both `originalAngle` and resolved `displayAngle` survive the adapter unchanged and that building the board triggers no solver mutation.
-- [ ] P6.8 Implement the QiZhengSiYu-owned, versioned cumulative-boundary normalization policy using three-decimal source fixed point, integer rational arithmetic, and round-half-up; test `0/182.625/365.25 -> 0/180000/360000`, exact-half boundaries, monotonic properties, invalid full-coverage source closure/order/range/finiteness, quantization collapse, and sparse ranges without aggregate closure preserving gaps.
+- [ ] P6.8 Implement and test QiZhengSiYu-owned projection math: versioned policy, three-decimal source fixed point, integer rational arithmetic, round-half-up, `0/182.625/365.25 -> 0/180000/360000`, exact-half boundaries, and monotonic cumulative-boundary properties.
+- [ ] P6.9 Add adapter rejection and sparse-preservation tests: invalid full-coverage closure/order/range/finiteness, projected positive-segment collapse, no package construction on failure, and sparse ranges without aggregate closure preserving gaps.
 
 **Exit Criteria**
 

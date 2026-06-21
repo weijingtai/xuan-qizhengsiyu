@@ -467,6 +467,11 @@ The first mandatory `HierarchicalPartition` fixture is exported from
 `DaXianRing.daXian106` in palace order Zi through Hai. Each parent covers
 exactly `30000` millidegrees. Input durations are:
 
+`daXian106` is the Legacy configuration identifier, not a promised child count.
+After quarter-carry transformation this fixture contains exactly 104 child
+slots; tests assert the vectors and sums below rather than inferring 106 slots
+from the identifier.
+
 ```text
 [15y, 10y, 11y, 15y, 8y, 7y, 11y, 4y6m, 4y6m, 4y6m, 5y, 5y]
 ```
@@ -526,6 +531,8 @@ hover, selection, validation, or Toast-deduplication state accidentally.
 - hierarchical child sums equal their parent sweep
 - the DaXian 106 fixture matches every child sweep above and preserves
   cross-parent quarter carry
+- the `daXian106` identifier resolves to 104 child slots and is never interpreted
+  as a cardinality assertion
 - full-circle package input under or over `360000` is rejected without repair
 - sparse fixtures `[0,60000)` and `[58000,72000)` are rejected in one layer but
   succeed as separate ordered overlays sharing one complete radial band
