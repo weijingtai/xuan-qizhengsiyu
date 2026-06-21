@@ -45,17 +45,17 @@
 
 - P0 go/no-go is approved.
 
-- [ ] P1.1 Create sibling Flutter package `metaphysics_chart_ui`.
-- [ ] P1.2 Add public barrel `lib/metaphysics_chart_ui.dart`.
-- [ ] P1.3 Add immutable core contracts: `ChartBoard`, `BoardCenterSpec`, `ChartLayer` (with `semanticsMode` and a `behavior` block), `ChartSector`, `ChartItem`, `ItemGroup`, `AngularPoint`, `SkippedRingGeometry`, `ChartBoardAdapter`, `BoardSemantics`.
-- [ ] P1.4 Add layout spec contracts: `CircularLayerSpec`, `FullCircleCoverage`, `SparseArcCoverage`, `SparseArcRange` (stable id, integer start/end, local partition, caps, logical target), `RingOverlaySpec` (ring reference, role, independent rotation/direction/offset/radial anchor/outset), z/hit priority, disabled block/pass-through, `owner(targetId, semanticsOrder)` / `merge(targetId)` / `none` semantics policy, `RectGridLayoutSpec`, and `RectPerimeterLayoutSpec`.
-- [ ] P1.5 Add `BoardInteractionController`, `BoardInteractionState`, and callback contracts; resolve a child hit up to its owning `ItemGroup` id.
-- [ ] P1.6 Add `BoardTheme`, renderer token groups, module palette contracts, and fallback values; include the role-mapping destinations for the existing chart-style roles.
-- [ ] P1.7 Add architecture tests enforcing the import allow-list (core/layouts/renderers may import only Flutter, `dart:ui`, `dart:math`, `yaml`, and named utilities) and explicitly failing on `package:metaphysics_core`, `package:theme`, and `package:xuan_config`.
-- [ ] P1.8 Add no-`xuan_`/`xuan-` identifier scan for package pubspec, library declarations, import keys, and public identifiers.
-- [ ] P1.9 Run `flutter analyze` and package tests.
-- [ ] P1.10 Add an API/identifier test proving core exposes no source-domain span, `365.25`, mapping table, or projection callback.
-- [ ] P1.11 Add an API/fixture test proving geometry/layer/ring-border/item-style contracts accept semantic style roles only, reject concrete `Color`/ARGB/hex values, and renderers never consume metadata as styling.
+- [x] P1.1 Create sibling Flutter package `metaphysics_chart_ui`.
+- [x] P1.2 Add public barrel `lib/metaphysics_chart_ui.dart`.
+- [x] P1.3 Add immutable core contracts: `ChartBoard`, `BoardCenterSpec`, `ChartLayer` (with `semanticsMode` and a `behavior` block), `ChartSector`, `ChartItem`, `ItemGroup`, `AngularPoint`, `SkippedRingGeometry`, `ChartBoardAdapter`, `BoardSemantics`.
+- [x] P1.4 Add layout spec contracts: `CircularLayerSpec`, `FullCircleCoverage`, `SparseArcCoverage`, `SparseArcRange` (stable id, integer start/end, local partition, caps, logical target), `RingOverlaySpec` (ring reference, role, independent rotation/direction/offset/radial anchor/outset), z/hit priority, disabled block/pass-through, `owner(targetId, semanticsOrder)` / `merge(targetId)` / `none` semantics policy, `RectGridLayoutSpec`, and `RectPerimeterLayoutSpec`.
+- [x] P1.5 Add `BoardInteractionController`, `BoardInteractionState`, and callback contracts; resolve a child hit up to its owning `ItemGroup` id.
+- [x] P1.6 Add `BoardTheme`, renderer token groups, module palette contracts, and fallback values; include the role-mapping destinations for the existing chart-style roles.
+- [x] P1.7 Add architecture tests enforcing the import allow-list (core/layouts/renderers may import only Flutter, `dart:ui`, `dart:math`, `yaml`, and named utilities) and explicitly failing on `package:metaphysics_core`, `package:theme`, and `package:xuan_config`.
+- [x] P1.8 Add no-`xuan_`/`xuan-` identifier scan for package pubspec, library declarations, import keys, and public identifiers.
+- [x] P1.9 Run `flutter analyze` and package tests.
+- [x] P1.10 Add an API/identifier test proving core exposes no source-domain span, `365.25`, mapping table, or projection callback.
+- [x] P1.11 Add an API/fixture test proving geometry/layer/ring-border/item-style contracts accept semantic style roles only, reject concrete `Color`/ARGB/hex values, and renderers never consume metadata as styling.
 
 **Exit Criteria**
 
