@@ -75,26 +75,26 @@
 
 - P1 tests pass.
 
-- [ ] P2.1 Implement `CircularRingLayoutEngine` for equal sectors.
-- [ ] P2.2 Implement circular full and sparse custom arc geometry for non-uniform layers such as 28 constellations and partial Zhu-Luo-San-Xian ranges.
-- [ ] P2.3 Implement tick geometry for 360-degree and configurable major/minor ticks.
-- [ ] P2.4 Implement point/angle geometry for stars/items with two radius bands and dual `originalAngle`/`displayAngle` plus leader line.
-- [ ] P2.5 Implement `RectGridLayoutEngine` for matrix grids.
-- [ ] P2.6 Implement `RectPerimeterLayoutEngine` for rounded-rectangle perimeter layouts.
-- [ ] P2.7 Implement `BoardGeometry` and `BoardHitRegion` generation. Hit regions are filled, closed geometry (annular wedge polygons for sectors/arcs), authored independently of the stroked draw path; tick scales default to non-interactive.
-- [ ] P2.8 Add snapshot tests for all geometry types.
-- [ ] P2.9 Add hit-test tests for circular sector, custom arc band, point item, grid cell, and perimeter cell; assert an arc-band hit uses the wedge area (not the stroke path) and that an interactive tick scale resolves by angular bucket.
-- [ ] P2.10 Implement a mandatory spatial/angular index with a non-overridable maximum threshold of 64 regions (implementations may index earlier) and the documented deterministic benchmark: 5 x 1,000 warm-ups, 10 x 10,000 measured seeded lookups, p95 below 2 ms on the registered target, and fitted log-log slope below `0.85` for 128/256/512/1024 regions; record complete environment metadata.
-- [ ] P2.10a Add `BenchmarkTargetProfile` validation: only an exact versioned environment match can emit passing evidence; unregistered runs are informational; re-registration requires reviewed profile-version change and a complete protocol/baseline rerun.
-- [ ] P2.11 Add sparse coverage tests: single/disjoint/adjacent ranges; reject same-layer overlap, zero sweep, out-of-range and implicit wrap-around; accept explicit split wrap-around; assert full radial reservation, blank-angle hit/semantics exclusion, and deterministic overlay z-order.
-- [ ] P2.12 Add Canvas/Widget geometry conformance fixtures for sparse inner/outer borders, radial start/end borders, and `butt`/`round` caps.
-- [ ] P2.13 Add canonical-transform and boundary tests: validate before direction/offset/rotation, normalize point `360000` to `0`, probe `b-1/b/b+1`, and map split fragments to one logical target/semantics node.
-- [ ] P2.14 Add deterministic overlay tests for paint order, hit order, equal-priority declaration tie-break, disabled block/pass-through, paint-only round-cap protrusion, and single-owner adjacent seams.
-- [ ] P2.15 Add semantics policy tests: one owner per target; owner-only role/primary label/state/activate; declaration-ordered merged descriptions; unique non-activate action IDs; reject missing/duplicate owners, duplicate actions, and owner-field overrides.
-- [ ] P2.16 Add center geometry tests for absent/Canvas/Widget/hybrid content, first-ring boundary, paint outsets, and exclusion from angular validation.
-- [ ] P2.17 Add optional zero-width ring tests for skipped identity/order/no-output behavior, re-enable-at-same-position behavior, and board-fatal required zero-width rejection.
-- [ ] P2.18 Add independent track/body overlay tests proving shared radii, independent transforms, inverse-transform hit testing, stable ids, and declared outset inclusion.
-- [ ] P2.19 Add the exact `DaXianRing.daXian106` fixture test: configuration id is not a count, transformed child count is 104, each parent sums to `30000`, and total sums to `360000`.
+- [x] P2.1 Implement `CircularRingLayoutEngine` for equal sectors.
+- [x] P2.2 Implement circular full and sparse custom arc geometry for non-uniform layers such as 28 constellations and partial Zhu-Luo-San-Xian ranges.
+- [x] P2.3 Implement tick geometry for 360-degree and configurable major/minor ticks.
+- [x] P2.4 Implement point/angle geometry for stars/items with two radius bands and dual `originalAngle`/`displayAngle` plus leader line.
+- [x] P2.5 Implement `RectGridLayoutEngine` for matrix grids.
+- [x] P2.6 Implement `RectPerimeterLayoutEngine` for rounded-rectangle perimeter layouts.
+- [x] P2.7 Implement `BoardGeometry` and `BoardHitRegion` generation. Hit regions are filled, closed geometry (annular wedge polygons for sectors/arcs), authored independently of the stroked draw path; tick scales default to non-interactive.
+- [x] P2.8 Add snapshot tests for all geometry types.
+- [x] P2.9 Add hit-test tests for circular sector, custom arc band, point item, grid cell, and perimeter cell; assert an arc-band hit uses the wedge area (not the stroke path) and that an interactive tick scale resolves by angular bucket.
+- [x] P2.10 Implement a mandatory spatial/angular index with a non-overridable maximum threshold of 64 regions (implementations may index earlier) and the documented deterministic benchmark: 5 x 1,000 warm-ups, 10 x 10,000 measured seeded lookups, p95 below 2 ms on the registered target, and fitted log-log slope below `0.85` for 128/256/512/1024 regions; record complete environment metadata.
+- [x] P2.10a Add `BenchmarkTargetProfile` validation: only an exact versioned environment match can emit passing evidence; unregistered runs are informational; re-registration requires reviewed profile-version change and a complete protocol/baseline rerun.
+- [x] P2.11 Add sparse coverage tests: single/disjoint/adjacent ranges; reject same-layer overlap, zero sweep, out-of-range and implicit wrap-around; accept explicit split wrap-around; assert full radial reservation, blank-angle hit/semantics exclusion, and deterministic overlay z-order.
+- [x] P2.12 Add Canvas/Widget geometry conformance fixtures for sparse inner/outer borders, radial start/end borders, and `butt`/`round` caps.
+- [x] P2.13 Add canonical-transform and boundary tests: validate before direction/offset/rotation, normalize point `360000` to `0`, probe `b-1/b/b+1`, and map split fragments to one logical target/semantics node.
+- [x] P2.14 Add deterministic overlay tests for paint order, hit order, equal-priority declaration tie-break, disabled block/pass-through, paint-only round-cap protrusion, and single-owner adjacent seams.
+- [x] P2.15 Add semantics policy tests: one owner per target; owner-only role/primary label/state/activate; declaration-ordered merged descriptions; unique non-activate action IDs; reject missing/duplicate owners, duplicate actions, and owner-field overrides.
+- [x] P2.16 Add center geometry tests for absent/Canvas/Widget/hybrid content, first-ring boundary, paint outsets, and exclusion from angular validation.
+- [x] P2.17 Add optional zero-width ring tests for skipped identity/order/no-output behavior, re-enable-at-same-position behavior, and board-fatal required zero-width rejection.
+- [x] P2.18 Add independent track/body overlay tests proving shared radii, independent transforms, inverse-transform hit testing, stable ids, and declared outset inclusion.
+- [x] P2.19 Add the exact `DaXianRing.daXian106` fixture test: configuration id is not a count, transformed child count is 104, each parent sums to `30000`, and total sums to `360000`.
 
 **Exit Criteria**
 
