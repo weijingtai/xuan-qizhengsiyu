@@ -70,10 +70,12 @@ import 'package:xuan_four_zhu_card/features/liu_yun/widgets/yun_liu_list_tile_ca
 
 class BeautyViewPage extends StatefulWidget {
   final BoardRenderer boardRenderer;
+  final bool initializeOnMount;
 
   const BeautyViewPage({
     super.key,
-    this.boardRenderer = BoardRenderer.production,
+    this.boardRenderer = BoardRenderer.qiZhengLegacy,
+    this.initializeOnMount = true,
   });
 
   @override
@@ -183,9 +185,11 @@ class _BeautyViewPageState extends State<BeautyViewPage>
     super.initState();
     _chartStyle = _chartStyleResolver.resolve(Brightness.light);
     _palette = _chartStyleResolver.resolvePalette(Brightness.light);
-    devInit().then((value) {
-      logger.d("devInit finished");
-    });
+    if (widget.initializeOnMount) {
+      devInit().then((value) {
+        logger.d("devInit finished");
+      });
+    }
     // 0°02′02‘’ 一天
     _jupiterController =
         AnimationController(
@@ -436,6 +440,14 @@ class _BeautyViewPageState extends State<BeautyViewPage>
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     double minSize = height > width ? width : height;
+    final mediaPadding = MediaQuery.paddingOf(context);
+    final double panelViewportExtent = min(
+      width,
+      max(
+        0.0,
+        height - kToolbarHeight - mediaPadding.top - mediaPadding.bottom,
+      ),
+    );
     // double panelMaxSize = minSize * .8;
     double panelMaxSize = 1700;
     logger.d("盘最大Size为$panelMaxSize");
@@ -449,7 +461,7 @@ class _BeautyViewPageState extends State<BeautyViewPage>
 
     // double fateLifeStarCenterCircleSize= starInnRangeMiddleSize+starBodyRadius*2+12;
 
-    if (isFirst) {
+    if (widget.initializeOnMount && isFirst) {
       Future.delayed(const Duration(seconds: 3), () {
         isFirst = false;
         // calculatePanel();
@@ -487,34 +499,26 @@ class _BeautyViewPageState extends State<BeautyViewPage>
             //     },
             //   ),
             // ),
-            AspectRatio(
-              aspectRatio: 1,
-              child: LayoutBuilder(
-                builder: (ctx, constraints) {
-                  final panelSize = constraints.biggest.shortestSide;
-                  logger.d("面板计算尺寸为$panelSize");
-                  // 计算缩放比例，确保整个面板在画布内完整可见
-                  final baseCanvasSize =
-                      panelSizeDataModel.outerShenShaSizeOuter;
-                  final scale = panelSize / baseCanvasSize;
-                  return ValueListenableBuilder<double>(
-                    valueListenable: _panelController.rotationDeg,
-                    builder: (ctx, rotation, _) {
-                      return PanelWidget(
-                        canvasSize: panelSize,
-                        rotationDeg: rotation,
-                        child: Transform.scale(
-                          scale: scale < 1 ? scale : 1,
-                          child: SizedBox(
-                            width: baseCanvasSize,
-                            height: baseCanvasSize,
-                            child: _buildBoardSwitch(starBodyRadius),
-                          ),
-                        ),
-                      );
-                    },
-                  );
-                },
+            Center(
+              child: SizedBox.square(
+                dimension: panelViewportExtent,
+                child: LayoutBuilder(
+                  builder: (ctx, constraints) {
+                    final panelSize = constraints.biggest.shortestSide;
+                    logger.d("面板计算尺寸为$panelSize");
+                    // 计算缩放比例，确保整个面板在画布内完整可见
+                    return ValueListenableBuilder<double>(
+                      valueListenable: _panelController.rotationDeg,
+                      builder: (ctx, rotation, _) {
+                        return PanelWidget(
+                          canvasSize: panelSize,
+                          rotationDeg: rotation,
+                          child: _buildBoardSwitch(starBodyRadius),
+                        );
+                      },
+                    );
+                  },
+                ),
               ),
             ),
 
