@@ -11,7 +11,6 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:qizhengsiyu/presentation/widgets/panel_widget.dart';
 import 'package:qizhengsiyu/presentation/widgets/ring_layer.dart';
-import 'package:qizhengsiyu/presentation/widgets/star_ring_layer.dart';
 import 'package:qizhengsiyu/domain/entities/models/naming_degree_pair.dart';
 import 'package:metaphysics_core/enums.dart';
 import 'package:metaphysics_core/models/shen_sha.dart';
@@ -28,33 +27,50 @@ import 'package:qizhengsiyu/presentation/widgets/twelve_gong_default_ring.dart';
 import 'package:qizhengsiyu/presentation/widgets/twelve_gong_grid_ring.dart';
 import 'package:qizhengsiyu/painter/painters.dart';
 import 'package:qizhengsiyu/painter/star_xiu_ring_painter.dart';
-import 'package:qizhengsiyu/presentation/widgets/star_track_ring.dart';
-import 'package:qizhengsiyu/presentation/widgets/star_body_ring.dart';
 import 'package:qizhengsiyu/qi_zheng_si_yu_constant_resources.dart';
+import 'package:metaphysics_chart_ui/metaphysics_chart_ui.dart'
+    hide
+        InnerStarBodyRotatingWidget,
+        InnerStarTrackRingWidget,
+        OuterStarBodyRotatingWidget,
+        OuterStarTrackRingWidget,
+        PanelWidget,
+        RingLayer,
+        StarRingLayer,
+        TwelveGongGridRingWidget;
+import 'package:qizhengsiyu/presentation/widgets/star_body.dart';
 
 void main() {
   setUpAll(() async {
-    final systemFont = File('/System/Library/Fonts/Supplemental/Arial Unicode.ttf');
+    final systemFont = File(
+      '/System/Library/Fonts/Supplemental/Arial Unicode.ttf',
+    );
     final fontFile = systemFont.existsSync()
         ? systemFont
-        : File('/Users/jingtaiwei/Git/Public/xuan-migration/xuan-qizhengsiyu/build/unit_test_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf');
+        : File(
+            '/Users/jingtaiwei/Git/Public/xuan-migration/xuan-qizhengsiyu/build/unit_test_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf',
+          );
     final fontBytes = fontFile.readAsBytesSync();
 
     final manifestBytes = const StandardMessageCodec().encodeMessage({
       'google_fonts/NotoSans-Regular.ttf': [
-        {'asset': 'google_fonts/NotoSans-Regular.ttf'}
+        {'asset': 'google_fonts/NotoSans-Regular.ttf'},
       ],
       'google_fonts/MaShanZheng-Regular.ttf': [
-        {'asset': 'google_fonts/MaShanZheng-Regular.ttf'}
+        {'asset': 'google_fonts/MaShanZheng-Regular.ttf'},
       ],
     });
 
-    final messenger = TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger;
+    final messenger =
+        TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger;
     Future<ByteData?>? Function(ByteData?)? handler;
 
     handler = (ByteData? message) async {
       if (message == null) return null;
-      final list = message.buffer.asUint8List(message.offsetInBytes, message.lengthInBytes);
+      final list = message.buffer.asUint8List(
+        message.offsetInBytes,
+        message.lengthInBytes,
+      );
       final key = utf8.decode(list);
       if (key == 'AssetManifest.bin' || key.contains('AssetManifest.bin')) {
         return manifestBytes;
@@ -62,7 +78,7 @@ void main() {
       if (key.endsWith('.ttf') || key.contains('.ttf')) {
         return fontBytes.buffer.asByteData();
       }
-      
+
       // Temporarily remove mock handler and delegate to real channel
       messenger.setMockMessageHandler('flutter/assets', null);
       try {
@@ -118,13 +134,33 @@ void main() {
     );
 
     final innerStars = [
-      UIStarModel(star: EnumStars.Sun, priority: 4, originalAngle: 45.0, rangeAngleEachSide: 10.0),
-      UIStarModel(star: EnumStars.Moon, priority: 3, originalAngle: 120.0, rangeAngleEachSide: 10.0),
+      UIStarModel(
+        star: EnumStars.Sun,
+        priority: 4,
+        originalAngle: 45.0,
+        rangeAngleEachSide: 10.0,
+      ),
+      UIStarModel(
+        star: EnumStars.Moon,
+        priority: 3,
+        originalAngle: 120.0,
+        rangeAngleEachSide: 10.0,
+      ),
     ];
 
     final outerStars = [
-      UIStarModel(star: EnumStars.Mercury, priority: 2, originalAngle: 90.0, rangeAngleEachSide: 10.0),
-      UIStarModel(star: EnumStars.Venus, priority: 2, originalAngle: 270.0, rangeAngleEachSide: 10.0),
+      UIStarModel(
+        star: EnumStars.Mercury,
+        priority: 2,
+        originalAngle: 90.0,
+        rangeAngleEachSide: 10.0,
+      ),
+      UIStarModel(
+        star: EnumStars.Venus,
+        priority: 2,
+        originalAngle: 270.0,
+        rangeAngleEachSide: 10.0,
+      ),
     ];
 
     final zhouTianModel = ZhouTianModel(
@@ -133,15 +169,27 @@ void main() {
       panelSystemType: PanelSystemType.Tropical,
       epochCorrection: 'default',
       totalDegree: 360.0,
-      gongDegreeSeq: List.generate(12, (i) => GongDegree(gong: EnumTwelveGong.listAll[i], degree: 30.0)),
-      starInnDegreeSeq: List.generate(28, (i) => ConstellationDegree(
-        constellation: Enum28Constellations.values[i],
-        degree: i < 27 ? 12.86 : 12.78,
-      )),
-      alignmentPointAtConstellation: ConstellationDegree(constellation: Enum28Constellations.Xu_Ri_Shu, degree: 6.0),
+      gongDegreeSeq: List.generate(
+        12,
+        (i) => GongDegree(gong: EnumTwelveGong.listAll[i], degree: 30.0),
+      ),
+      starInnDegreeSeq: List.generate(
+        28,
+        (i) => ConstellationDegree(
+          constellation: Enum28Constellations.values[i],
+          degree: i < 27 ? 12.86 : 12.78,
+        ),
+      ),
+      alignmentPointAtConstellation: ConstellationDegree(
+        constellation: Enum28Constellations.Xu_Ri_Shu,
+        degree: 6.0,
+      ),
       alignmentPointAtGong: GongDegree(gong: EnumTwelveGong.Zi, degree: 0.0),
       zeroPointJieQi: TwentyFourJieQi.CHUN_FEN,
-      zeroPointAtConstellation: ConstellationDegree(constellation: Enum28Constellations.Shi_Huo_Zhu, degree: 6.5),
+      zeroPointAtConstellation: ConstellationDegree(
+        constellation: Enum28Constellations.Shi_Huo_Zhu,
+        degree: 6.5,
+      ),
       zeroPointAtGong: GongDegree(gong: EnumTwelveGong.Xu, degree: 0.0),
       celestialLongitude: 0.0,
       zeroPointOffsetToNow: 0.0,
@@ -163,95 +211,115 @@ void main() {
 
     final allStarsShowNotifier = ValueNotifier<bool>(true);
 
-    testWidgets('Live visual parity between old composition and unified adapter', (WidgetTester tester) async {
-      await tester.binding.setSurfaceSize(const Size(1052, 1052));
-      final boundaryKeyRef = GlobalKey();
-      final boundaryKeyCand = GlobalKey();
+    testWidgets(
+      'Live visual parity between old composition and unified adapter',
+      (WidgetTester tester) async {
+        await tester.binding.setSurfaceSize(const Size(1052, 1052));
+        final boundaryKeyRef = GlobalKey();
+        final boundaryKeyCand = GlobalKey();
 
-      // Render the Legacy Production Board (Reference)
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: Center(
-              child: RepaintBoundary(
-                key: boundaryKeyRef,
-                child: SizedBox(
-                  width: 1052,
-                  height: 1052,
-                  child: LegacyProductionBoard(
-                    panelSizeDataModel: panelSizeDataModel,
-                    innerStars: innerStars,
-                    outerStars: outerStars,
-                    centerWidget: const Text('Center'),
-                    zhouTianModel: zhouTianModel,
-                    innerShenShaMapper: innerShenShaMapper,
-                    outerShenShaMapper: outerShenShaMapper,
-                    allStarsShowNotifier: allStarsShowNotifier,
-                    rotating: 15.0,
+        // Render the Legacy Production Board (Reference)
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: Center(
+                child: RepaintBoundary(
+                  key: boundaryKeyRef,
+                  child: SizedBox(
+                    width: 1052,
+                    height: 1052,
+                    child: LegacyProductionBoard(
+                      panelSizeDataModel: panelSizeDataModel,
+                      innerStars: innerStars,
+                      outerStars: outerStars,
+                      centerWidget: const Text('Center'),
+                      zhouTianModel: zhouTianModel,
+                      innerShenShaMapper: innerShenShaMapper,
+                      outerShenShaMapper: outerShenShaMapper,
+                      allStarsShowNotifier: allStarsShowNotifier,
+                      rotating: 15.0,
+                    ),
                   ),
                 ),
               ),
             ),
           ),
-        ),
-      );
-      await tester.pumpAndSettle();
+        );
+        await tester.pumpAndSettle();
 
-      final Uint8List refBytes = await tester.runAsync(() async {
-        final boundary = boundaryKeyRef.currentContext!.findRenderObject() as RenderRepaintBoundary;
-        final ui.Image img = await boundary.toImage(pixelRatio: 1.0);
-        final ByteData? bd = await img.toByteData(format: ui.ImageByteFormat.rawRgba);
-        return bd!.buffer.asUint8List();
-      }) as Uint8List;
+        final Uint8List refBytes =
+            await tester.runAsync(() async {
+                  final boundary =
+                      boundaryKeyRef.currentContext!.findRenderObject()
+                          as RenderRepaintBoundary;
+                  final ui.Image img = await boundary.toImage(pixelRatio: 1.0);
+                  final ByteData? bd = await img.toByteData(
+                    format: ui.ImageByteFormat.rawRgba,
+                  );
+                  return bd!.buffer.asUint8List();
+                })
+                as Uint8List;
 
-      // Render the QiZhengLegacyBoard (Candidate)
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: Center(
-              child: RepaintBoundary(
-                key: boundaryKeyCand,
-                child: SizedBox(
-                  width: 1052,
-                  height: 1052,
-                  child: QiZhengLegacyBoard(
-                    panelSizeDataModel: panelSizeDataModel,
-                    innerStars: innerStars,
-                    outerStars: outerStars,
-                    centerWidget: const Text('Center'),
-                    zhouTianModel: zhouTianModel,
-                    innerShenShaMapper: innerShenShaMapper,
-                    outerShenShaMapper: outerShenShaMapper,
-                    allStarsShowNotifier: allStarsShowNotifier,
-                    rotating: 15.0,
+        // Render the QiZhengLegacyBoard (Candidate)
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: Center(
+                child: RepaintBoundary(
+                  key: boundaryKeyCand,
+                  child: SizedBox(
+                    width: 1052,
+                    height: 1052,
+                    child: QiZhengLegacyBoard(
+                      panelSizeDataModel: panelSizeDataModel,
+                      innerStars: innerStars,
+                      outerStars: outerStars,
+                      centerWidget: const Text('Center'),
+                      zhouTianModel: zhouTianModel,
+                      innerShenShaMapper: innerShenShaMapper,
+                      outerShenShaMapper: outerShenShaMapper,
+                      allStarsShowNotifier: allStarsShowNotifier,
+                      rotating: 15.0,
+                    ),
                   ),
                 ),
               ),
             ),
           ),
-        ),
-      );
-      await tester.pumpAndSettle();
+        );
+        await tester.pumpAndSettle();
 
-      final Uint8List candBytes = await tester.runAsync(() async {
-        final boundary = boundaryKeyCand.currentContext!.findRenderObject() as RenderRepaintBoundary;
-        final ui.Image img = await boundary.toImage(pixelRatio: 1.0);
-        final ByteData? bd = await img.toByteData(format: ui.ImageByteFormat.rawRgba);
-        return bd!.buffer.asUint8List();
-      }) as Uint8List;
+        final Uint8List candBytes =
+            await tester.runAsync(() async {
+                  final boundary =
+                      boundaryKeyCand.currentContext!.findRenderObject()
+                          as RenderRepaintBoundary;
+                  final ui.Image img = await boundary.toImage(pixelRatio: 1.0);
+                  final ByteData? bd = await img.toByteData(
+                    format: ui.ImageByteFormat.rawRgba,
+                  );
+                  return bd!.buffer.asUint8List();
+                })
+                as Uint8List;
 
-      // Assert strict pixel equivalence: exactly zero differing bytes
-      int diffCount = 0;
-      for (int i = 0; i < candBytes.length; i++) {
-        if ((candBytes[i] - refBytes[i]).abs() > 0) {
-          diffCount++;
+        // Assert strict pixel equivalence: exactly zero differing bytes
+        int diffCount = 0;
+        for (int i = 0; i < candBytes.length; i++) {
+          if ((candBytes[i] - refBytes[i]).abs() > 0) {
+            diffCount++;
+          }
         }
-      }
-      expect(diffCount, equals(0),
-          reason: 'Pixel parity failed: $diffCount differing bytes');
-    });
+        expect(
+          diffCount,
+          equals(0),
+          reason: 'Pixel parity failed: $diffCount differing bytes',
+        );
+      },
+    );
 
-    testWidgets('Sensitivity Test: visual parity fails when inputs differ', (WidgetTester tester) async {
+    testWidgets('Sensitivity Test: visual parity fails when inputs differ', (
+      WidgetTester tester,
+    ) async {
       await tester.binding.setSurfaceSize(const Size(1052, 1052));
       final boundaryKeyRef = GlobalKey();
       final boundaryKeyCand = GlobalKey();
@@ -285,12 +353,18 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      final Uint8List refBytes = await tester.runAsync(() async {
-        final boundary = boundaryKeyRef.currentContext!.findRenderObject() as RenderRepaintBoundary;
-        final ui.Image img = await boundary.toImage(pixelRatio: 1.0);
-        final ByteData? bd = await img.toByteData(format: ui.ImageByteFormat.rawRgba);
-        return bd!.buffer.asUint8List();
-      }) as Uint8List;
+      final Uint8List refBytes =
+          await tester.runAsync(() async {
+                final boundary =
+                    boundaryKeyRef.currentContext!.findRenderObject()
+                        as RenderRepaintBoundary;
+                final ui.Image img = await boundary.toImage(pixelRatio: 1.0);
+                final ByteData? bd = await img.toByteData(
+                  format: ui.ImageByteFormat.rawRgba,
+                );
+                return bd!.buffer.asUint8List();
+              })
+              as Uint8List;
 
       // QiZhengLegacyBoard with rotating = 45.0 (differs)
       await tester.pumpWidget(
@@ -321,52 +395,27 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      final Uint8List candBytes = await tester.runAsync(() async {
-        final boundary = boundaryKeyCand.currentContext!.findRenderObject() as RenderRepaintBoundary;
-        final ui.Image img = await boundary.toImage(pixelRatio: 1.0);
-        final ByteData? bd = await img.toByteData(format: ui.ImageByteFormat.rawRgba);
-        return bd!.buffer.asUint8List();
-      }) as Uint8List;
+      final Uint8List candBytes =
+          await tester.runAsync(() async {
+                final boundary =
+                    boundaryKeyCand.currentContext!.findRenderObject()
+                        as RenderRepaintBoundary;
+                final ui.Image img = await boundary.toImage(pixelRatio: 1.0);
+                final ByteData? bd = await img.toByteData(
+                  format: ui.ImageByteFormat.rawRgba,
+                );
+                return bd!.buffer.asUint8List();
+              })
+              as Uint8List;
 
       // Assert that differences are captured
       expect(candBytes, isNot(equals(refBytes)));
     });
 
-    testWidgets('Legacy board golden matches reference', (WidgetTester tester) async {
-      await tester.binding.setSurfaceSize(const Size(1052, 1052));
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: Center(
-              child: SizedBox(
-                width: 1052,
-                height: 1052,
-                child: QiZhengLegacyBoard(
-                  panelSizeDataModel: panelSizeDataModel,
-                  innerStars: innerStars,
-                  outerStars: outerStars,
-                  centerWidget: const Text('Center'),
-                  zhouTianModel: zhouTianModel,
-                  innerShenShaMapper: innerShenShaMapper,
-                  outerShenShaMapper: outerShenShaMapper,
-                  allStarsShowNotifier: allStarsShowNotifier,
-                  rotating: 15.0,
-                ),
-              ),
-            ),
-          ),
-        ),
-      );
-      await tester.pumpAndSettle();
-
-      await expectLater(
-        find.byType(QiZhengLegacyBoard),
-        matchesGoldenFile('goldens/legacy_board_parity.png'),
-      );
-    });
-
     // Star-sequence ring enabled scenario
-    testWidgets('Parity with star-sequence ring enabled', (WidgetTester tester) async {
+    testWidgets('Parity with star-sequence ring enabled', (
+      WidgetTester tester,
+    ) async {
       final starSeqPanelSizeDataModel = QiZhengSiYuPanSizeDataModel(
         starBodyRadius: 16,
         centerSize: 140,
@@ -415,12 +464,18 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      final Uint8List refBytes = await tester.runAsync(() async {
-        final boundary = boundaryKeyRef.currentContext!.findRenderObject() as RenderRepaintBoundary;
-        final ui.Image img = await boundary.toImage(pixelRatio: 1.0);
-        final ByteData? bd = await img.toByteData(format: ui.ImageByteFormat.rawRgba);
-        return bd!.buffer.asUint8List();
-      }) as Uint8List;
+      final Uint8List refBytes =
+          await tester.runAsync(() async {
+                final boundary =
+                    boundaryKeyRef.currentContext!.findRenderObject()
+                        as RenderRepaintBoundary;
+                final ui.Image img = await boundary.toImage(pixelRatio: 1.0);
+                final ByteData? bd = await img.toByteData(
+                  format: ui.ImageByteFormat.rawRgba,
+                );
+                return bd!.buffer.asUint8List();
+              })
+              as Uint8List;
 
       // QiZhengLegacyBoard with star-seq enabled
       await tester.pumpWidget(
@@ -451,12 +506,18 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      final Uint8List candBytes = await tester.runAsync(() async {
-        final boundary = boundaryKeyCand.currentContext!.findRenderObject() as RenderRepaintBoundary;
-        final ui.Image img = await boundary.toImage(pixelRatio: 1.0);
-        final ByteData? bd = await img.toByteData(format: ui.ImageByteFormat.rawRgba);
-        return bd!.buffer.asUint8List();
-      }) as Uint8List;
+      final Uint8List candBytes =
+          await tester.runAsync(() async {
+                final boundary =
+                    boundaryKeyCand.currentContext!.findRenderObject()
+                        as RenderRepaintBoundary;
+                final ui.Image img = await boundary.toImage(pixelRatio: 1.0);
+                final ByteData? bd = await img.toByteData(
+                  format: ui.ImageByteFormat.rawRgba,
+                );
+                return bd!.buffer.asUint8List();
+              })
+              as Uint8List;
 
       // Strict pixel parity: exactly zero differing pixels
       int diffCount = 0;
@@ -465,9 +526,78 @@ void main() {
           diffCount++;
         }
       }
-      expect(diffCount, equals(0),
-          reason: 'Star-seq ring parity: $diffCount differing bytes');
+      expect(
+        diffCount,
+        equals(0),
+        reason: 'Star-seq ring parity: $diffCount differing bytes',
+      );
     });
+
+    testWidgets(
+      'StarTrackBand migration preserves innerStars and outerStars on separate sides with correct properties',
+      (WidgetTester tester) async {
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: QiZhengLegacyBoard(
+                panelSizeDataModel: panelSizeDataModel,
+                innerStars: innerStars,
+                outerStars: outerStars,
+                centerWidget: const Text('Center'),
+                zhouTianModel: zhouTianModel,
+                rotating: 15.0,
+              ),
+            ),
+          ),
+        );
+        await tester.pumpAndSettle();
+
+        final bands = tester.widgetList<StarTrackBand>(find.byType(StarTrackBand)).toList();
+        expect(bands, hasLength(2), reason: 'Should have two StarTrackBand instances');
+
+        final innerBand = bands[0];
+        final outerBand = bands[1];
+
+        // Verify inner band properties
+        expect(innerBand.innerRadius, equals(panelSizeDataModel.innerLifeStarRingInnerSize / 2));
+        expect(innerBand.degreeTrackWidth, equals((panelSizeDataModel.innerLifeStarRingOuterSize - panelSizeDataModel.innerLifeStarRingTrackSize) / 2));
+        expect(innerBand.innerStarRing, isNotNull);
+        expect(innerBand.outerStarRing, isNull);
+        expect(innerBand.startAngleOffset, equals(15.0));
+        expect(innerBand.direction, equals(AngularDirection.counterClockwise));
+
+        final innerItems = innerBand.innerStarRing!.items;
+        expect(innerItems, hasLength(innerStars.length));
+        for (int i = 0; i < innerStars.length; i++) {
+          final star = innerStars[i];
+          final item = innerItems.firstWhere((it) => it.id == star.star.name);
+          expect(item.displayDegree, equals(star.angle));
+          expect(item.markerDegree, equals(star.originalAngle));
+          expect(item.indicatorStyle, isNotNull);
+          // Verify child is StarBody
+          expect(find.descendant(of: find.byWidget(innerBand), matching: find.byType(StarBody)), findsNWidgets(2));
+        }
+
+        // Verify outer band properties
+        expect(outerBand.innerRadius, equals(panelSizeDataModel.outerLifeStarRingInnerSize / 2));
+        expect(outerBand.degreeTrackWidth, equals((panelSizeDataModel.outerLifeStarRingTrackSize - panelSizeDataModel.outerLifeStarRingInnerSize) / 2));
+        expect(outerBand.innerStarRing, isNull);
+        expect(outerBand.outerStarRing, isNotNull);
+        expect(outerBand.startAngleOffset, equals(15.0));
+        expect(outerBand.direction, equals(AngularDirection.counterClockwise));
+
+        final outerItems = outerBand.outerStarRing!.items;
+        expect(outerItems, hasLength(outerStars.length));
+        for (int i = 0; i < outerStars.length; i++) {
+          final star = outerStars[i];
+          final item = outerItems.firstWhere((it) => it.id == star.star.name);
+          expect(item.displayDegree, equals(star.angle));
+          expect(item.markerDegree, equals(star.originalAngle));
+          expect(item.indicatorStyle, isNotNull);
+          expect(find.descendant(of: find.byWidget(outerBand), matching: find.byType(StarBody)), findsNWidgets(2));
+        }
+      },
+    );
   });
 }
 
@@ -530,10 +660,7 @@ class LegacyProductionBoard extends StatelessWidget {
       child: Stack(
         alignment: Alignment.center,
         children: [
-          Transform.rotate(
-            angle: -30 * pi / 180,
-            child: centerWidget,
-          ),
+          Transform.rotate(angle: -30 * pi / 180, child: centerWidget),
 
           // 1. 十二地支宫
           RingLayer(
@@ -659,8 +786,10 @@ class LegacyProductionBoard extends StatelessWidget {
             ),
             bodyRotationAngle: -30 * pi / 180,
             bodyBuilder: () {
-              final contentList = destinyContentList ?? QiZhengLegacyBoard.defaultDestinyList;
-              final style = destinyTextStyle ??
+              final contentList =
+                  destinyContentList ?? QiZhengLegacyBoard.defaultDestinyList;
+              final style =
+                  destinyTextStyle ??
                   GoogleFonts.maShanZheng(
                     color: Colors.black87,
                     fontSize: 28,
@@ -718,8 +847,13 @@ class LegacyProductionBoard extends StatelessWidget {
                 height: panelSizeDataModel.starXiu28RingSizeOuter,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey.withValues(alpha: 0.4), width: 1),
-                  borderRadius: BorderRadius.circular(panelSizeDataModel.starXiu28RingSizeOuter * 0.5),
+                  border: Border.all(
+                    color: Colors.grey.withValues(alpha: 0.4),
+                    width: 1,
+                  ),
+                  borderRadius: BorderRadius.circular(
+                    panelSizeDataModel.starXiu28RingSizeOuter * 0.5,
+                  ),
                 ),
                 child: CustomPaint(
                   size: Size(
@@ -729,7 +863,8 @@ class LegacyProductionBoard extends StatelessWidget {
                   painter: StarXiuRingPainter(
                     outerSize: panelSizeDataModel.starXiu28RingSizeOuter,
                     innerSize: panelSizeDataModel.starXiu28RingSizeInner,
-                    mapper: QiZhengSiYuConstantResources.ZodiacTropicalModernStarsInnSystemMapper,
+                    mapper: QiZhengSiYuConstantResources
+                        .ZodiacTropicalModernStarsInnSystemMapper,
                     sevenZhengColorMapper: palette.zhengColorMap,
                     style: chartStyle,
                   ),
@@ -739,53 +874,115 @@ class LegacyProductionBoard extends StatelessWidget {
           ),
 
           // 5 & 6. Inner Star Track & Body (represented by fateLifeStars in old code)
-          StarRingLayer(
-            starsListenable: ValueNotifier(innerStars),
-            outerSize: panelSizeDataModel.innerLifeStarRingOuterSize,
-            innerSize: panelSizeDataModel.innerLifeStarRingInnerSize,
-            showTrack: true,
-            showGrid: false,
-            trackRotationAngle: rotating * pi / 180,
-            bodyRotationAngle: -(rotating - 90) * pi / 180,
-            trackBuilder: (stars) => InnerStarTrackRingWidget(
-              stars: stars,
-              outerSize: panelSizeDataModel.innerLifeStarRingOuterSize,
-              innerSize: panelSizeDataModel.innerLifeStarRingInnerSize,
-              trackSize: panelSizeDataModel.innerLifeStarRingTrackSize,
+          StarTrackBand(
+            innerRadius: panelSizeDataModel.innerLifeStarRingInnerSize / 2,
+            degreeTrackWidth: (panelSizeDataModel.innerLifeStarRingOuterSize -
+                    panelSizeDataModel.innerLifeStarRingTrackSize) /
+                2,
+            innerStarRing: StarBodyRingSpec(
+              width: (panelSizeDataModel.innerLifeStarRingTrackSize -
+                      panelSizeDataModel.innerLifeStarRingInnerSize) /
+                  2,
+              items: innerStars.map((s) {
+                final color = palette.starColor(s.star);
+                final textStyle = GoogleFonts.notoSans(
+                  fontSize: 24.0,
+                  height: 1,
+                  color: color,
+                  fontWeight: FontWeight.normal,
+                  shadows: [
+                    BoxShadow(
+                      color: Colors.black38.withValues(alpha: .3),
+                      spreadRadius: 1,
+                      blurRadius: 1,
+                      offset: const Offset(1, 1),
+                    )
+                  ],
+                );
+                return StarBodyRingItem(
+                  id: s.star.name,
+                  child: StarBody(
+                    starBody: s,
+                    starSize: panelSizeDataModel.starBodyRadius * 2,
+                    allStarsShowNotifier:
+                        allStarsShowNotifier ?? ValueNotifier<bool>(false),
+                    textStyle: textStyle,
+                  ),
+                  displayDegree: s.angle,
+                  markerDegree: s.originalAngle,
+                  indicatorStyle: StarIndicatorStyle(
+                    color: color,
+                    strokeWidth: 0.5,
+                    markerRadius: 2.0,
+                  ),
+                );
+              }).toList(),
             ),
-            gridBuilder: twelveGongGridBuilder,
-            bodyBuilder: (stars) => InnerStarBodyRotatingWidget(
-              stars: stars,
-              outerSize: panelSizeDataModel.innerLifeStarRingOuterSize,
-              trackSize: panelSizeDataModel.innerLifeStarRingTrackSize,
-              starBodySize: panelSizeDataModel.starBodyRadius * 2,
-              allStarsShowNotifier: allStarsShowNotifier ?? ValueNotifier<bool>(false),
+            degreeTrackStyle: DegreeTrackStyle(
+              minorLength: 0,
+              mediumLength: 0,
+              majorLength: 0,
+              color: chartStyle.colors.border,
+              strokeWidth: 0.5,
             ),
+            startAngleOffset: rotating,
+            direction: AngularDirection.counterClockwise,
           ),
 
           // 7 & 8. Outer Star Track & Body (represented by basicLifeStars in old code)
-          StarRingLayer(
-            starsListenable: ValueNotifier(outerStars),
-            outerSize: panelSizeDataModel.outerLifeStarRingOuterSize,
-            innerSize: panelSizeDataModel.outerLifeStarRingInnerSize,
-            showTrack: true,
-            showGrid: false,
-            trackRotationAngle: rotating * pi / 180,
-            bodyRotationAngle: -(rotating - 90) * pi / 180,
-            trackBuilder: (stars) => OuterStarTrackRingWidget(
-              stars: stars,
-              outerSize: panelSizeDataModel.outerLifeStarRingOuterSize,
-              innerSize: panelSizeDataModel.outerLifeStarRingInnerSize,
-              trackSize: panelSizeDataModel.outerLifeStarRingTrackSize,
+          StarTrackBand(
+            innerRadius: panelSizeDataModel.outerLifeStarRingInnerSize / 2,
+            degreeTrackWidth: (panelSizeDataModel.outerLifeStarRingTrackSize -
+                    panelSizeDataModel.outerLifeStarRingInnerSize) /
+                2,
+            outerStarRing: StarBodyRingSpec(
+              width: (panelSizeDataModel.outerLifeStarRingOuterSize -
+                      panelSizeDataModel.outerLifeStarRingTrackSize) /
+                  2,
+              items: outerStars.map((s) {
+                final color = palette.starColor(s.star);
+                final textStyle = GoogleFonts.notoSans(
+                  fontSize: 24.0,
+                  height: 1,
+                  color: color,
+                  fontWeight: FontWeight.normal,
+                  shadows: [
+                    BoxShadow(
+                      color: Colors.black38.withValues(alpha: .3),
+                      spreadRadius: 1,
+                      blurRadius: 1,
+                      offset: const Offset(1, 1),
+                    )
+                  ],
+                );
+                return StarBodyRingItem(
+                  id: s.star.name,
+                  child: StarBody(
+                    starBody: s,
+                    starSize: panelSizeDataModel.starBodyRadius * 2,
+                    allStarsShowNotifier:
+                        allStarsShowNotifier ?? ValueNotifier<bool>(false),
+                    textStyle: textStyle,
+                  ),
+                  displayDegree: s.angle,
+                  markerDegree: s.originalAngle,
+                  indicatorStyle: StarIndicatorStyle(
+                    color: color,
+                    strokeWidth: 0.5,
+                    markerRadius: 2.0,
+                  ),
+                );
+              }).toList(),
             ),
-            gridBuilder: twelveGongGridBuilder,
-            bodyBuilder: (stars) => OuterStarBodyRotatingWidget(
-              stars: stars,
-              outerSize: panelSizeDataModel.outerLifeStarRingOuterSize,
-              trackSize: panelSizeDataModel.outerLifeStarRingTrackSize,
-              starBodySize: panelSizeDataModel.starBodyRadius * 2,
-              allStarsShowNotifier: allStarsShowNotifier ?? ValueNotifier<bool>(false),
+            degreeTrackStyle: DegreeTrackStyle(
+              minorLength: 0,
+              mediumLength: 0,
+              majorLength: 0,
+              color: chartStyle.colors.border,
+              strokeWidth: 0.5,
             ),
+            startAngleOffset: rotating,
+            direction: AngularDirection.counterClockwise,
           ),
 
           // 9. Inner ShenSha
@@ -919,7 +1116,8 @@ class TestHttpClientRequest implements HttpClientRequest {
   void writeln([Object? object = ""]) {}
 
   @override
-  Future<HttpClientResponse> get done async => TestHttpClientResponse(fontBytes);
+  Future<HttpClientResponse> get done async =>
+      TestHttpClientResponse(fontBytes);
 
   @override
   Future<HttpClientResponse> close() async {

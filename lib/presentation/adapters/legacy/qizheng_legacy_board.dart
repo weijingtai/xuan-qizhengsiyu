@@ -4,7 +4,15 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:metaphysics_chart_ui/metaphysics_chart_ui.dart'
-    hide PanelWidget, RingLayer, StarRingLayer, TwelveGongGridRingWidget;
+    hide
+        InnerStarBodyRotatingWidget,
+        InnerStarTrackRingWidget,
+        OuterStarBodyRotatingWidget,
+        OuterStarTrackRingWidget,
+        PanelWidget,
+        RingLayer,
+        StarRingLayer,
+        TwelveGongGridRingWidget;
 import 'package:qizhengsiyu/presentation/widgets/panel_widget.dart';
 import 'package:qizhengsiyu/presentation/widgets/ring_layer.dart';
 import 'package:qizhengsiyu/presentation/widgets/twelve_gong_grid_ring.dart';
@@ -16,18 +24,18 @@ import 'package:qizhengsiyu/painter/chart_style/chart_style_resolver.dart';
 import 'package:qizhengsiyu/painter/chart_style/qi_zheng_chart_style.dart';
 import 'package:qizhengsiyu/painter/chart_style/qi_zheng_star_palette.dart';
 import 'package:qizhengsiyu/painter/painters.dart';
-import 'package:qizhengsiyu/painter/star_body_ring_painter.dart';
 import 'package:qizhengsiyu/painter/star_xiu_ring_painter.dart';
 import 'package:qizhengsiyu/presentation/models/ui_star_model.dart';
+import 'package:qizhengsiyu/presentation/chart_adapters/qizheng_chart_board_adapter.dart';
 import 'package:qizhengsiyu/presentation/widgets/destiny_twelve_gong_ring.dart';
 import 'package:qizhengsiyu/presentation/widgets/rings/gong_12_dizhi.dart';
 import 'package:qizhengsiyu/presentation/widgets/rings/gong_shen_sha_ring.dart';
 import 'package:qizhengsiyu/presentation/widgets/star_body.dart';
 import 'package:qizhengsiyu/presentation/widgets/twelve_gong_default_ring.dart';
 import 'package:qizhengsiyu/qi_zheng_si_yu_constant_resources.dart';
-import 'package:qizhengsiyu/qi_zheng_si_yu_ui_constant_resources.dart';
 
 class QiZhengLegacyBoard extends StatelessWidget {
+  final ChartBoard? chartBoard;
   final QiZhengSiYuPanSizeDataModel panelSizeDataModel;
   final List<UIStarModel> innerStars;
   final List<UIStarModel> outerStars;
@@ -57,6 +65,7 @@ class QiZhengLegacyBoard extends StatelessWidget {
 
   const QiZhengLegacyBoard({
     super.key,
+    this.chartBoard,
     required this.panelSizeDataModel,
     required this.innerStars,
     required this.outerStars,
@@ -113,17 +122,17 @@ class QiZhengLegacyBoard extends StatelessWidget {
 
   static const List<String> defaultDestinyList = <String>[
     "命宫",
-    "财帛",
-    "兄弟",
-    "田宅",
-    "男女",
-    "奴仆",
-    "夫妻",
-    "疾厄",
-    "迁移",
-    "官禄",
-    "福德",
     "相貌",
+    "福德",
+    "官禄",
+    "迁移",
+    "疾厄",
+    "夫妻",
+    "奴仆",
+    "男女",
+    "田宅",
+    "兄弟",
+    "财帛",
   ];
 
   // ---------------------------------------------------------------------------
@@ -138,6 +147,29 @@ class QiZhengLegacyBoard extends StatelessWidget {
       starPalette ??
       const FallbackChartStyleResolver().resolvePalette(Brightness.light);
 
+  bool _isLayerVisible(String id) {
+    return _effectiveBoard.layers.any(
+      (layer) => layer.id == id && layer.visible,
+    );
+  }
+
+  ChartBoard get _effectiveBoard =>
+      chartBoard ??
+      buildQiZhengChartBoardFromLegacyInputs(
+        panelSize: panelSizeDataModel,
+        innerStars: innerStars,
+        outerStars: outerStars,
+        zhouTianModel: zhouTianModel,
+      );
+
+  Widget _chartLayer(String id, Widget child) {
+    assert(
+      _effectiveBoard.layers.any((layer) => layer.id == id),
+      'Missing ChartBoard layer: $id',
+    );
+    return KeyedSubtree(key: ValueKey('chart-layer:$id'), child: child);
+  }
+
   @override
   Widget build(BuildContext context) {
     return PanelWidget(
@@ -146,282 +178,307 @@ class QiZhengLegacyBoard extends StatelessWidget {
         alignment: Alignment.center,
         children: [
           // ── Center content (Rotated) ─────────────────────────────
-          Transform.rotate(angle: -30 * pi / 180, child: centerWidget),
+          KeyedSubtree(
+            key: const ValueKey('chart-center'),
+            child: Transform.rotate(angle: -30 * pi / 180, child: centerWidget),
+          ),
 
           // ── 1. 十二地支宫 (RingLayer) ─────────────────────────────
-          RingLayer(
-            showTrack: false,
-            showGrid: false,
-            gridBuilder: () => TwelveGongGridRingWidget(
-              innerSize: panelSizeDataModel.diZhi12GongInner,
-              outerSize: panelSizeDataModel.diZhi12GongOuter,
-            ),
-            bodyRotationAngle: -30 * pi / 180,
-            bodyBuilder: () {
-              if (zhouTianModel == null) return const SizedBox();
-              return _build12DiZhiGong(
-                panelSizeDataModel.diZhi12GongOuter * 0.5,
-                panelSizeDataModel.diZhi12GongInner * 0.5,
-                zhouTianModel!,
-              );
-            },
-          ),
-
-          // ── 2. 黄道十二宫 (RingLayer) ─────────────────────────────
-          RingLayer(
-            showTrack: false,
-            showGrid: false,
-            gridBuilder: () => TwelveGongGridRingWidget(
-              innerSize: panelSizeDataModel.zodiac12GongSizeInner,
-              outerSize: panelSizeDataModel.zodiac12GongSizeOuter,
-            ),
-            bodyRotationAngle: -30 * pi / 180,
-            bodyBuilder: () => _buildZodiac12GongRing(
-              panelSizeDataModel.zodiac12GongSizeInner * 0.5,
-              panelSizeDataModel.zodiac12GongSizeOuter * 0.5,
-            ),
-          ),
-
-          // ── 3. 星序宫 (RingLayer, enabled when starSeq12GongHeight > 0) ─
-          if (panelSizeDataModel.starSeq12GongHeight > 0)
+          _chartLayer(
+            'earth-branch-ring',
             RingLayer(
               showTrack: false,
               showGrid: false,
               gridBuilder: () => TwelveGongGridRingWidget(
-                innerSize: panelSizeDataModel.starSeq12GongSizeInner,
-                outerSize: panelSizeDataModel.starSeq12GongSizeOuter,
+                innerSize: panelSizeDataModel.diZhi12GongInner,
+                outerSize: panelSizeDataModel.diZhi12GongOuter,
               ),
               bodyRotationAngle: -30 * pi / 180,
-              bodyBuilder: () => _buildStarSeq12GongRing(
-                panelSizeDataModel.starSeq12GongSizeInner * 0.5,
-                panelSizeDataModel.starSeq12GongSizeOuter * 0.5,
+              bodyBuilder: () {
+                if (zhouTianModel == null) return const SizedBox();
+                return _build12DiZhiGong(
+                  panelSizeDataModel.diZhi12GongOuter * 0.5,
+                  panelSizeDataModel.diZhi12GongInner * 0.5,
+                  zhouTianModel!,
+                );
+              },
+            ),
+          ),
+
+          // ── 2. 黄道十二宫 (RingLayer) ─────────────────────────────
+          _chartLayer(
+            'zodiac-ring',
+            RingLayer(
+              showTrack: false,
+              showGrid: false,
+              gridBuilder: () => TwelveGongGridRingWidget(
+                innerSize: panelSizeDataModel.zodiac12GongSizeInner,
+                outerSize: panelSizeDataModel.zodiac12GongSizeOuter,
+              ),
+              bodyRotationAngle: -30 * pi / 180,
+              bodyBuilder: () => _buildZodiac12GongRing(
+                panelSizeDataModel.zodiac12GongSizeInner * 0.5,
+                panelSizeDataModel.zodiac12GongSizeOuter * 0.5,
+              ),
+            ),
+          ),
+
+          // ── 3. 星序宫 (RingLayer, enabled when starSeq12GongHeight > 0) ─
+          if (_isLayerVisible('star-sequence-ring'))
+            _chartLayer(
+              'star-sequence-ring',
+              RingLayer(
+                showTrack: false,
+                showGrid: false,
+                gridBuilder: () => TwelveGongGridRingWidget(
+                  innerSize: panelSizeDataModel.starSeq12GongSizeInner,
+                  outerSize: panelSizeDataModel.starSeq12GongSizeOuter,
+                ),
+                bodyRotationAngle: -30 * pi / 180,
+                bodyBuilder: () => _buildStarSeq12GongRing(
+                  panelSizeDataModel.starSeq12GongSizeInner * 0.5,
+                  panelSizeDataModel.starSeq12GongSizeOuter * 0.5,
+                ),
               ),
             ),
 
           // ── 4. 命理十二宫 (RingLayer) ─────────────────────────────
-          RingLayer(
-            showTrack: false,
-            showGrid: true,
-            gridBuilder: () => TwelveGongGridRingWidget(
-              innerSize: panelSizeDataModel.destiny12GongSizeInner,
-              outerSize: panelSizeDataModel.destiny12GongSizeOuter,
-            ),
-            bodyRotationAngle: -30 * pi / 180,
-            bodyBuilder: () => _buildMingLi12GongRing(
-              panelSizeDataModel.destiny12GongSizeInner,
-              panelSizeDataModel.destiny12GongSizeOuter,
+          _chartLayer(
+            'destiny-ring',
+            RingLayer(
+              showTrack: false,
+              showGrid: true,
+              gridBuilder: () => TwelveGongGridRingWidget(
+                innerSize: panelSizeDataModel.destiny12GongSizeInner,
+                outerSize: panelSizeDataModel.destiny12GongSizeOuter,
+              ),
+              bodyRotationAngle: -30 * pi / 180,
+              bodyBuilder: () => _buildMingLi12GongRing(
+                panelSizeDataModel.destiny12GongSizeInner,
+                panelSizeDataModel.destiny12GongSizeOuter,
+              ),
             ),
           ),
 
           // ── 5. 二十八星宿环 (RingLayer) ───────────────────────────
-          RingLayer(
-            showTrack: true,
-            showGrid: false,
-            trackRotationAngle: rotating * pi / 180,
-            trackBuilder: () => Container(
-              width: panelSizeDataModel.starXiu28RingSizeOuter,
-              height: panelSizeDataModel.starXiu28RingSizeOuter,
-              alignment: Alignment.center,
-              child: CustomPaint(
-                size: Size(
-                  panelSizeDataModel.starXiu28RingSizeOuter,
-                  panelSizeDataModel.starXiu28RingSizeOuter,
-                ),
-                painter: IndicatorScalePainter(
-                  ringWidth: 40,
-                  tickLength: 7,
-                  indicatorAngle: 45.1,
-                  style: _effectiveChartStyle,
+          _chartLayer(
+            'constellation-ring',
+            RingLayer(
+              showTrack: true,
+              showGrid: false,
+              trackRotationAngle: rotating * pi / 180,
+              trackBuilder: () => _chartLayer(
+                'degree-ticks',
+                Container(
+                  width: panelSizeDataModel.starXiu28RingSizeOuter,
+                  height: panelSizeDataModel.starXiu28RingSizeOuter,
+                  alignment: Alignment.center,
+                  child: CustomPaint(
+                    size: Size(
+                      panelSizeDataModel.starXiu28RingSizeOuter,
+                      panelSizeDataModel.starXiu28RingSizeOuter,
+                    ),
+                    painter: IndicatorScalePainter(
+                      ringWidth: 40,
+                      tickLength: 7,
+                      indicatorAngle: 45.1,
+                      style: _effectiveChartStyle,
+                    ),
+                  ),
                 ),
               ),
-            ),
-            gridBuilder: () => TwelveGongGridRingWidget(
-              innerSize: panelSizeDataModel.starXiu28RingSizeInner,
-              outerSize: panelSizeDataModel.starXiu28RingSizeOuter,
-            ),
-            bodyRotationAngle: rotating * pi / 180,
-            bodyBuilder: () => _buildStarXiuRing(
-              panelSizeDataModel.starXiu28RingSizeOuter,
-              40,
+              gridBuilder: () => TwelveGongGridRingWidget(
+                innerSize: panelSizeDataModel.starXiu28RingSizeInner,
+                outerSize: panelSizeDataModel.starXiu28RingSizeOuter,
+              ),
+              bodyRotationAngle: rotating * pi / 180,
+              bodyBuilder: () => _buildStarXiuRing(
+                panelSizeDataModel.starXiu28RingSizeOuter,
+                40,
+              ),
             ),
           ),
 
           // ── 5. Inner Star Track Ring ──────────────────────────────
-          Transform.rotate(
-            angle: rotating * pi / 180,
-            child: UnifiedStarTrackRing(
-              outerSize: panelSizeDataModel.innerLifeStarRingOuterSize,
-              trackPainter: InnerLifeStarRangePainter(
-                stars: innerStars,
-                starsColorMap: QiZhengSiYuUIConstantResources.starsColorMap,
-                outerSize: panelSizeDataModel.innerLifeStarRingOuterSize,
-                innerSize: panelSizeDataModel.innerLifeStarRingInnerSize,
-                trackSize: panelSizeDataModel.innerLifeStarRingTrackSize,
-                textStyle: GoogleFonts.notoSans(
-                  fontSize: 24.0,
-                  height: 1,
-                  color: Colors.black87,
-                  fontWeight: FontWeight.normal,
-                  shadows: [
-                    BoxShadow(
-                      color: Colors.black38.withValues(alpha: 0.3),
-                      spreadRadius: 1,
-                      blurRadius: 1,
-                      offset: const Offset(1, 1),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+          _chartLayer(
+            'inner-star-track-ring',
+            const SizedBox.shrink(),
           ),
 
           // ── 6. Inner Star Body Ring ───────────────────────────────
-          Transform.rotate(
-            angle: -(rotating - 90) * pi / 180,
-            child: UnifiedStarBodyRing(
-              outerSize: panelSizeDataModel.innerLifeStarRingOuterSize,
-              trackSize: panelSizeDataModel.innerLifeStarRingTrackSize,
-              starBodySize: panelSizeDataModel.starBodyRadius * 2,
-              items: innerStars.map((star) {
-                final textStyle = GoogleFonts.notoSans(
-                  fontSize: 24.0,
-                  height: 1,
-                  color:
-                      QiZhengSiYuUIConstantResources.starsColorMap[star.star]!,
-                  fontWeight: FontWeight.normal,
-                  shadows: [
-                    BoxShadow(
-                      color: Colors.black38.withValues(alpha: 0.3),
-                      spreadRadius: 1,
-                      blurRadius: 1,
-                      offset: const Offset(1, 1),
+          _chartLayer(
+            'inner-star-body-ring',
+            StarTrackBand(
+              innerRadius: panelSizeDataModel.innerLifeStarRingInnerSize / 2,
+              degreeTrackWidth: (panelSizeDataModel.innerLifeStarRingOuterSize -
+                      panelSizeDataModel.innerLifeStarRingTrackSize) /
+                  2,
+              innerStarRing: StarBodyRingSpec(
+                width: (panelSizeDataModel.innerLifeStarRingTrackSize -
+                        panelSizeDataModel.innerLifeStarRingInnerSize) /
+                    2,
+                items: innerStars.map((s) {
+                  final color = _effectivePalette.starColor(s.star);
+                  final textStyle = GoogleFonts.notoSans(
+                    fontSize: 24.0,
+                    height: 1,
+                    color: color,
+                    fontWeight: FontWeight.normal,
+                    shadows: [
+                      BoxShadow(
+                        color: Colors.black38.withValues(alpha: .3),
+                        spreadRadius: 1,
+                        blurRadius: 1,
+                        offset: const Offset(1, 1),
+                      )
+                    ],
+                  );
+                  return StarBodyRingItem(
+                    id: s.star.name,
+                    child: StarBody(
+                      starBody: s,
+                      starSize: panelSizeDataModel.starBodyRadius * 2,
+                      allStarsShowNotifier:
+                          allStarsShowNotifier ?? ValueNotifier<bool>(false),
+                      textStyle: textStyle,
                     ),
-                  ],
-                );
-                return StarRingItemData(
-                  angle: star.angle,
-                  child: StarBody(
-                    starBody: star,
-                    starSize: panelSizeDataModel.starBodyRadius * 2,
-                    allStarsShowNotifier:
-                        allStarsShowNotifier ?? ValueNotifier<bool>(false),
-                    textStyle: textStyle,
-                  ),
-                );
-              }).toList(),
+                    displayDegree: s.angle,
+                    markerDegree: s.originalAngle,
+                    indicatorStyle: StarIndicatorStyle(
+                      color: color,
+                      strokeWidth: 0.5,
+                      markerRadius: 2.0,
+                    ),
+                  );
+                }).toList(),
+              ),
+              degreeTrackStyle: DegreeTrackStyle(
+                minorLength: 0,
+                mediumLength: 0,
+                majorLength: 0,
+                color: _effectiveChartStyle.colors.border,
+                strokeWidth: 0.5,
+              ),
+              startAngleOffset: rotating,
+              direction: AngularDirection.counterClockwise,
             ),
           ),
 
           // ── 7. Outer Star Track Ring ──────────────────────────────
-          Transform.rotate(
-            angle: rotating * pi / 180,
-            child: UnifiedStarTrackRing(
-              outerSize: panelSizeDataModel.outerLifeStarRingOuterSize,
-              trackPainter: OuterLifeStarRangePainter(
-                stars: outerStars,
-                starsColorMap: QiZhengSiYuUIConstantResources.starsColorMap,
-                outerSize: panelSizeDataModel.outerLifeStarRingOuterSize,
-                innerSize: panelSizeDataModel.outerLifeStarRingInnerSize,
-                trackSize: panelSizeDataModel.outerLifeStarRingTrackSize,
-                textStyle: GoogleFonts.notoSans(
-                  fontSize: 24.0,
-                  height: 1,
-                  color: Colors.black87,
-                  fontWeight: FontWeight.normal,
-                  shadows: [
-                    BoxShadow(
-                      color: Colors.black38.withValues(alpha: 0.3),
-                      spreadRadius: 1,
-                      blurRadius: 1,
-                      offset: const Offset(1, 1),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+          _chartLayer(
+            'outer-star-track-ring',
+            const SizedBox.shrink(),
           ),
 
           // ── 8. Outer Star Body Ring ───────────────────────────────
-          Transform.rotate(
-            angle: -(rotating - 90) * pi / 180,
-            child: UnifiedStarBodyRing(
-              outerSize: panelSizeDataModel.outerLifeStarRingOuterSize,
-              trackSize: panelSizeDataModel.outerLifeStarRingTrackSize,
-              starBodySize: panelSizeDataModel.starBodyRadius * 2,
-              items: outerStars.map((star) {
-                final textStyle = GoogleFonts.notoSans(
-                  fontSize: 24.0,
-                  height: 1,
-                  color:
-                      QiZhengSiYuUIConstantResources.starsColorMap[star.star]!,
-                  fontWeight: FontWeight.normal,
-                  shadows: [
-                    BoxShadow(
-                      color: Colors.black38.withValues(alpha: 0.3),
-                      spreadRadius: 1,
-                      blurRadius: 1,
-                      offset: const Offset(1, 1),
+          _chartLayer(
+            'outer-star-body-ring',
+            StarTrackBand(
+              innerRadius: panelSizeDataModel.outerLifeStarRingInnerSize / 2,
+              degreeTrackWidth: (panelSizeDataModel.outerLifeStarRingTrackSize -
+                      panelSizeDataModel.outerLifeStarRingInnerSize) /
+                  2,
+              outerStarRing: StarBodyRingSpec(
+                width: (panelSizeDataModel.outerLifeStarRingOuterSize -
+                        panelSizeDataModel.outerLifeStarRingTrackSize) /
+                    2,
+                items: outerStars.map((s) {
+                  final color = _effectivePalette.starColor(s.star);
+                  final textStyle = GoogleFonts.notoSans(
+                    fontSize: 24.0,
+                    height: 1,
+                    color: color,
+                    fontWeight: FontWeight.normal,
+                    shadows: [
+                      BoxShadow(
+                        color: Colors.black38.withValues(alpha: .3),
+                        spreadRadius: 1,
+                        blurRadius: 1,
+                        offset: const Offset(1, 1),
+                      )
+                    ],
+                  );
+                  return StarBodyRingItem(
+                    id: s.star.name,
+                    child: StarBody(
+                      starBody: s,
+                      starSize: panelSizeDataModel.starBodyRadius * 2,
+                      allStarsShowNotifier:
+                          allStarsShowNotifier ?? ValueNotifier<bool>(false),
+                      textStyle: textStyle,
                     ),
-                  ],
-                );
-                return StarRingItemData(
-                  angle: star.angle,
-                  child: StarBody(
-                    starBody: star,
-                    starSize: panelSizeDataModel.starBodyRadius * 2,
-                    allStarsShowNotifier:
-                        allStarsShowNotifier ?? ValueNotifier<bool>(false),
-                    textStyle: textStyle,
-                  ),
-                );
-              }).toList(),
+                    displayDegree: s.angle,
+                    markerDegree: s.originalAngle,
+                    indicatorStyle: StarIndicatorStyle(
+                      color: color,
+                      strokeWidth: 0.5,
+                      markerRadius: 2.0,
+                    ),
+                  );
+                }).toList(),
+              ),
+              degreeTrackStyle: DegreeTrackStyle(
+                minorLength: 0,
+                mediumLength: 0,
+                majorLength: 0,
+                color: _effectiveChartStyle.colors.border,
+                strokeWidth: 0.5,
+              ),
+              startAngleOffset: rotating,
+              direction: AngularDirection.counterClockwise,
             ),
           ),
 
           // ── 9. Inner ShenSha Ring (RingLayer) ─────────────────────
-          RingLayer(
-            showTrack: false,
-            showGrid: false,
-            gridBuilder: () => TwelveGongGridRingWidget(
-              innerSize: panelSizeDataModel.innerShenShaSizeInner,
-              outerSize: panelSizeDataModel.innerShenShaSizeOuter,
+          _chartLayer(
+            'inner-shensha-ring',
+            RingLayer(
+              showTrack: false,
+              showGrid: false,
+              gridBuilder: () => TwelveGongGridRingWidget(
+                innerSize: panelSizeDataModel.innerShenShaSizeInner,
+                outerSize: panelSizeDataModel.innerShenShaSizeOuter,
+              ),
+              bodyRotationAngle: -30 * pi / 180,
+              bodyBuilder: () {
+                if (innerShenShaMapper == null || zhouTianModel == null) {
+                  return const SizedBox();
+                }
+                return AllShenShaRing(
+                  outerRadius: panelSizeDataModel.innerShenShaSizeOuter * 0.5,
+                  innerRadius: panelSizeDataModel.innerShenShaSizeInner * 0.5,
+                  shenShaMapper: innerShenShaMapper!,
+                  gongOrder: EnumTwelveGong.listAll,
+                  zhouTianModel: zhouTianModel!,
+                );
+              },
             ),
-            bodyRotationAngle: -30 * pi / 180,
-            bodyBuilder: () {
-              if (innerShenShaMapper == null || zhouTianModel == null) {
-                return const SizedBox();
-              }
-              return AllShenShaRing(
-                outerRadius: panelSizeDataModel.innerShenShaSizeOuter * 0.5,
-                innerRadius: panelSizeDataModel.innerShenShaSizeInner * 0.5,
-                shenShaMapper: innerShenShaMapper!,
-                gongOrder: EnumTwelveGong.listAll,
-                zhouTianModel: zhouTianModel!,
-              );
-            },
           ),
 
           // ── 10. Outer ShenSha Ring (RingLayer) ────────────────────
-          RingLayer(
-            showTrack: false,
-            showGrid: false,
-            gridBuilder: () => TwelveGongGridRingWidget(
-              innerSize: panelSizeDataModel.outerShenShaSizeInner,
-              outerSize: panelSizeDataModel.outerShenShaSizeOuter,
+          _chartLayer(
+            'outer-shensha-ring',
+            RingLayer(
+              showTrack: false,
+              showGrid: false,
+              gridBuilder: () => TwelveGongGridRingWidget(
+                innerSize: panelSizeDataModel.outerShenShaSizeInner,
+                outerSize: panelSizeDataModel.outerShenShaSizeOuter,
+              ),
+              bodyRotationAngle: -30 * pi / 180,
+              bodyBuilder: () {
+                if (outerShenShaMapper == null || zhouTianModel == null) {
+                  return const SizedBox();
+                }
+                return AllShenShaRing(
+                  outerRadius: panelSizeDataModel.outerShenShaSizeOuter * 0.5,
+                  innerRadius: panelSizeDataModel.outerShenShaSizeInner * 0.5,
+                  shenShaMapper: outerShenShaMapper!,
+                  gongOrder: EnumTwelveGong.listAll,
+                  zhouTianModel: zhouTianModel!,
+                );
+              },
             ),
-            bodyRotationAngle: -30 * pi / 180,
-            bodyBuilder: () {
-              if (outerShenShaMapper == null || zhouTianModel == null) {
-                return const SizedBox();
-              }
-              return AllShenShaRing(
-                outerRadius: panelSizeDataModel.outerShenShaSizeOuter * 0.5,
-                innerRadius: panelSizeDataModel.outerShenShaSizeInner * 0.5,
-                shenShaMapper: outerShenShaMapper!,
-                gongOrder: EnumTwelveGong.listAll,
-                zhouTianModel: zhouTianModel!,
-              );
-            },
           ),
         ],
       ),
