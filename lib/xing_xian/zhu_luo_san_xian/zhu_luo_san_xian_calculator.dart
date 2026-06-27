@@ -44,7 +44,6 @@ class ZhuLuoYearResult {
 List<ZhuLuoYearResult> calculateZhuLuoSanXian(ZhuLuoInput input) {
   final rulers = zhuLuoLimitRulers(input.lifePalace, input.birthSect);
   
-  // Collect stage records for all three stages.
   final stageRecordsList = <List<ZhuLuoYearResult>>[];
   var nextStageStartAge = 1;
 
@@ -53,180 +52,387 @@ List<ZhuLuoYearResult> calculateZhuLuoSanXian(ZhuLuoInput input) {
     final stage = LimitStage.values[stageIdx];
     final startPalace = input.rulerPalaces[ruler];
     if (startPalace == null) {
-      // If the ruler's palace is not provided, we cannot calculate this stage.
       break;
     }
     final dur = rulerDuration(ruler);
     final N = rulerNumber(ruler);
     final startAge = stageIdx == 0 ? 1 : nextStageStartAge;
     
-    // Safety check: if startAge has exceeded maxAge, no need to calculate this stage.
     if (startAge > input.maxAge) {
       break;
     }
 
     final stageRecords = <ZhuLuoYearResult>[];
+    
+    // 标准段：本宫静守 N 年 + 顺行充满 T 年
+    // 所有方案的标准段完全一致 (Doc B §3)
+    for (var t = 1; t <= dur; t++) {
+      final age = startAge + t - 1;
+      if (age > input.maxAge) break;
 
-    if (input.config.usesInverseSections) {
-      // A 法: 起宫停星数年、逆节 10 年、再逆节 10 年、零年顺行，遇下一限主交限，未交则延行
-      for (var t = 1; ; t++) {
-        final age = startAge + t - 1;
-        if (age > input.maxAge) break;
+      EnumTwelveGong palace;
+      String phase;
 
-        EnumTwelveGong palace;
-        String phase;
-
-        if (t <= N) {
-          palace = startPalace;
-          phase = "hold";
-        } else if (t <= N + 10) {
-          palace = movePalace(startPalace, -2);
-          phase = "inverse";
-        } else if (t <= N + 20) {
-          palace = movePalace(startPalace, -4);
-          phase = "inverse";
-        } else {
-          palace = movePalace(startPalace, -4 + (t - N - 20) * input.config.annualDirection);
-          phase = "direct";
-        }
-
-        stageRecords.add(ZhuLuoYearResult(
-          age: age,
-          stage: stage,
-          ruler: ruler,
-          palace: palace,
-          algorithmId: input.config.id,
-          phase: phase,
-          isTransitionYear: t == 1,
-          usedBridge: false,
-        ));
-
-        // Check for transition to next stage (stageIdx < 2)
-        if (stageIdx < 2) {
-          final nextRuler = rulers[stageIdx + 1];
-          final nextRulerPalace = input.rulerPalaces[nextRuler];
-          if (nextRulerPalace != null) {
-            if (t >= dur && palace == nextRulerPalace) {
-              nextStageStartAge = age;
-              break;
-            }
-          } else {
-            if (t >= dur) {
-              nextStageStartAge = age + 1;
-              break;
-            }
-          }
-        } else {
-          // Last stage
-          if (t >= dur && age >= input.maxAge) {
-            break;
-          }
-        }
+      if (t <= N) {
+        // 本宫静守：等分本宫为 N 段
+        palace = startPalace;
+        phase = "hold";
+      } else {
+        // 顺行充满标准年限：每年顺行一宫
+        palace = movePalace(startPalace, t - N);
+        phase = "direct";
       }
+
+      stageRecords.add(ZhuLuoYearResult(
+        age: age,
+        stage: stage,
+        ruler: ruler,
+        palace: palace,
+        algorithmId: input.config.id,
+        phase: phase,
+        isTransitionYear: false,
+        usedBridge: false,
+      ));
+    }
+
+    // 交限段（age >= startAge + T 起，四套方案分歧，见 Doc B §4）
+    if (stageIdx < 2) {
+      final nextRuler = rulers[stageIdx + 1];
+      final nextRulerPalace = input.rulerPalaces[nextRuler];
+      if (nextRulerPalace == null) {
+        stageRecordsList.add(stageRecords);
+        nextStageStartAge = startAge + dur;
+        continue;
+      }
+
+      final pEnd = movePalace(startPalace, dur - N);
+      final ageEnd = startAge + dur - 1;
+
+      // 根据方案执行不同的交限策略
+      final transitionResult = _planTransition(
+        config: input.config,
+        p0: startPalace,
+        N: N,
+        T: dur,
+        startAge: startAge,
+        pEnd: pEnd,
+        ageEnd: ageEnd,
+        pNext: nextRulerPalace,
+        nextRuler: nextRuler,
+        stage: stage,
+        ruler: ruler,
+        maxAge: input.maxAge,
+      );
+
+      stageRecords.addAll(transitionResult.segments);
+      nextStageStartAge = transitionResult.nextStageStartAge;
     } else {
-      // B 法: 起宫停星数年，顺排行年，交限，补桥
-      var bridgeTriggered = false;
-      var bridgeStartT = 0;
-      var bridgePalaces = <EnumTwelveGong>[];
-
-      for (var t = 1; ; t++) {
-        final age = startAge + t - 1;
-        if (age > input.maxAge) break;
-
-        EnumTwelveGong palace;
-        String phase;
-        var usedBridge = false;
-
-        if (bridgeTriggered) {
-          final nextRuler = stageIdx < 2 ? rulers[stageIdx + 1] : null;
-          final m = nextRuler != null ? rulerNumber(nextRuler) : 1;
-          final bridgePalaceIndex = (t - bridgeStartT) ~/ m;
-          
-          if (bridgePalaceIndex < bridgePalaces.length) {
-            palace = bridgePalaces[bridgePalaceIndex];
-          } else {
-            palace = bridgePalaces.last;
-          }
-          phase = "bridge";
-          usedBridge = true;
-        } else {
-          if (t <= N) {
-            palace = startPalace;
-            phase = "hold";
-          } else {
-            palace = movePalace(startPalace, (t - N) * input.config.annualDirection);
-            phase = "direct";
-          }
-        }
-
-        // Check if we should trigger bridge for subsequent years
-        if (!bridgeTriggered && input.config.bridgeMode == BridgeMode.nextRulerNumberBridge && stageIdx < 2) {
-          final nextRuler = rulers[stageIdx + 1];
-          final nextRulerPalace = input.rulerPalaces[nextRuler];
-          if (nextRulerPalace != null) {
-            final m = rulerNumber(nextRuler);
-            final d = forwardDistance(palace, nextRulerPalace);
-            final R = dur - t;
-            if (d > 0 && R == d * m) {
-              bridgeTriggered = true;
-              bridgeStartT = t + 1;
-              bridgePalaces = List.generate(
-                d,
-                (idx) => movePalace(palace, (idx + 1) * input.config.annualDirection),
-              );
-            }
-          }
-        }
-
-        stageRecords.add(ZhuLuoYearResult(
-          age: age,
-          stage: stage,
-          ruler: ruler,
-          palace: palace,
-          algorithmId: input.config.id,
-          phase: phase,
-          isTransitionYear: t == 1,
-          usedBridge: usedBridge,
-        ));
-
-        // Check for transition to next stage (stageIdx < 2)
-        if (stageIdx < 2) {
-          final nextRuler = rulers[stageIdx + 1];
-          final nextRulerPalace = input.rulerPalaces[nextRuler];
-          if (nextRulerPalace != null) {
-            if (bridgeTriggered) {
-              if (t == dur) {
-                final d = bridgePalaces.length;
-                final m = rulerNumber(nextRuler);
-                final targetT = bridgeStartT + (d - 1) * m;
-                nextStageStartAge = startAge + targetT - 1;
-                break;
-              }
-            } else {
-              if (t >= dur && palace == nextRulerPalace) {
-                nextStageStartAge = age;
-                break;
-              }
-            }
-          } else {
-            if (t >= dur) {
-              nextStageStartAge = age + 1;
-              break;
-            }
-          }
-        } else {
-          // Last stage
-          if (t >= dur && age >= input.maxAge) {
-            break;
-          }
-        }
-      }
+      // 最后一限
+      nextStageStartAge = startAge + dur;
     }
 
     stageRecordsList.add(stageRecords);
   }
 
-  // Merge/deduplicate records by age
+  // 合并/去重记录
+  return _mergeRecords(stageRecordsList);
+}
+
+class _TransitionResult {
+  final List<ZhuLuoYearResult> segments;
+  final int nextStageStartAge;
+
+  const _TransitionResult({
+    required this.segments,
+    required this.nextStageStartAge,
+  });
+}
+
+/// 根据方案执行交限策略 (Doc B §4)
+_TransitionResult _planTransition({
+  required ZhuLuoAlgorithmConfig config,
+  required EnumTwelveGong p0,
+  required int N,
+  required int T,
+  required int startAge,
+  required EnumTwelveGong pEnd,
+  required int ageEnd,
+  required EnumTwelveGong pNext,
+  required ZhuLuoRuler nextRuler,
+  required LimitStage stage,
+  required ZhuLuoRuler ruler,
+  required int maxAge,
+}) {
+  switch (config.id) {
+    case ZhuLuoAlgorithmId.classicForwardUntilTarget:
+      return _planClassicForward(
+        p0: p0, N: N, T: T, startAge: startAge,
+        pEnd: pEnd, ageEnd: ageEnd, pNext: pNext,
+        nextRuler: nextRuler, stage: stage, ruler: ruler, maxAge: maxAge,
+      );
+    case ZhuLuoAlgorithmId.forceCut:
+      return _planForceCut(
+        p0: p0, N: N, T: T, startAge: startAge,
+        pEnd: pEnd, ageEnd: ageEnd, pNext: pNext,
+        nextRuler: nextRuler, stage: stage, ruler: ruler, maxAge: maxAge,
+      );
+    case ZhuLuoAlgorithmId.retrace:
+      return _planRetrace(
+        p0: p0, N: N, T: T, startAge: startAge,
+        pEnd: pEnd, ageEnd: ageEnd, pNext: pNext,
+        nextRuler: nextRuler, stage: stage, ruler: ruler, maxAge: maxAge,
+      );
+    case ZhuLuoAlgorithmId.bridgeWithFallback:
+      return _planBridgeWithFallback(
+        p0: p0, N: N, T: T, startAge: startAge,
+        pEnd: pEnd, ageEnd: ageEnd, pNext: pNext,
+        nextRuler: nextRuler, stage: stage, ruler: ruler, maxAge: maxAge,
+      );
+  }
+}
+
+/// 方案1: 候星逐宫延交法 (A法·古籍正统)
+/// 触发条件：行限落宫 == pNext
+/// 三场景：
+/// 1. pEnd == pNext：当年交限
+/// 2. 未到 pNext：继续顺行一年一宫，逐年候至落宫==pNext
+/// 3. 已过 pNext：不折返，继续顺行循环十二宫，下一圈重逢 pNext
+_TransitionResult _planClassicForward({
+  required EnumTwelveGong p0,
+  required int N,
+  required int T,
+  required int startAge,
+  required EnumTwelveGong pEnd,
+  required int ageEnd,
+  required EnumTwelveGong pNext,
+  required ZhuLuoRuler nextRuler,
+  required LimitStage stage,
+  required ZhuLuoRuler ruler,
+  required int maxAge,
+}) {
+  final segments = <ZhuLuoYearResult>[];
+  
+  // 场景1: pEnd == pNext，当年交限
+  if (pEnd == pNext) {
+    // 交限发生，不需要尾段
+    return _TransitionResult(
+      segments: segments,
+      nextStageStartAge: ageEnd,
+    );
+  }
+
+  // 场景2/3: 继续顺行一年一宫，直到落宫==pNext
+  var currentPalace = pEnd;
+  var age = ageEnd + 1;
+  
+  while (age <= maxAge) {
+    currentPalace = movePalace(currentPalace, 1);
+    
+    segments.add(ZhuLuoYearResult(
+      age: age,
+      stage: stage,
+      ruler: ruler,
+      palace: currentPalace,
+      algorithmId: ZhuLuoAlgorithmId.classicForwardUntilTarget,
+      phase: "yanJiao",
+      isTransitionYear: currentPalace == pNext,
+      usedBridge: false,
+    ));
+
+    if (currentPalace == pNext) {
+      return _TransitionResult(
+        segments: segments,
+        nextStageStartAge: age,
+      );
+    }
+    
+    age++;
+  }
+
+  // 未找到交限点，返回当前状态
+  return _TransitionResult(
+    segments: segments,
+    nextStageStartAge: age,
+  );
+}
+
+/// 方案2: 年限强制切换法 (商用简化)
+/// 触发条件：标准年限 T 到期直接强制换限
+_TransitionResult _planForceCut({
+  required EnumTwelveGong p0,
+  required int N,
+  required int T,
+  required int startAge,
+  required EnumTwelveGong pEnd,
+  required int ageEnd,
+  required EnumTwelveGong pNext,
+  required ZhuLuoRuler nextRuler,
+  required LimitStage stage,
+  required ZhuLuoRuler ruler,
+  required int maxAge,
+}) {
+  // 强制截断：在 ageEnd 处给一个 forced 截断标记
+  final segments = <ZhuLuoYearResult>[];
+  
+  segments.add(ZhuLuoYearResult(
+    age: ageEnd,
+    stage: stage,
+    ruler: ruler,
+    palace: pEnd,
+    algorithmId: ZhuLuoAlgorithmId.forceCut,
+    phase: "forcedCut",
+    isTransitionYear: true,
+    usedBridge: false,
+  ));
+
+  return _TransitionResult(
+    segments: segments,
+    nextStageStartAge: ageEnd,
+  );
+}
+
+/// 方案3: 折返补救交限法 (小众私传，考据否定)
+/// 场景1/2 同方案1（到则交、未到则延交顺行候星）
+/// 独有场景3：标准年限走完已过 pNext → 逆行折返倒回 pNext
+_TransitionResult _planRetrace({
+  required EnumTwelveGong p0,
+  required int N,
+  required int T,
+  required int startAge,
+  required EnumTwelveGong pEnd,
+  required int ageEnd,
+  required EnumTwelveGong pNext,
+  required ZhuLuoRuler nextRuler,
+  required LimitStage stage,
+  required ZhuLuoRuler ruler,
+  required int maxAge,
+}) {
+  final segments = <ZhuLuoYearResult>[];
+  
+  // 场景1: pEnd == pNext，当年交限
+  if (pEnd == pNext) {
+    return _TransitionResult(
+      segments: segments,
+      nextStageStartAge: ageEnd,
+    );
+  }
+
+  // 计算 pEnd 到 pNext 的顺行距离
+  final forwardDist = forwardDistance(pEnd, pNext);
+  
+  // 如果 forwardDist > 0，说明还没到 pNext，需要顺行延交（同方案1）
+  if (forwardDist > 0 && forwardDist <= 6) {
+    // 场景2: 未到 pNext，继续顺行
+    return _planClassicForward(
+      p0: p0, N: N, T: T, startAge: startAge,
+      pEnd: pEnd, ageEnd: ageEnd, pNext: pNext,
+      nextRuler: nextRuler, stage: stage, ruler: ruler, maxAge: maxAge,
+    );
+  }
+
+  // 场景3: 已过 pNext，逆行折返
+  final retraceDist = (12 - forwardDist) % 12;
+  var currentPalace = pEnd;
+  var age = ageEnd + 1;
+  
+  for (var i = 0; i < retraceDist; i++) {
+    if (age > maxAge) break;
+    
+    currentPalace = movePalace(currentPalace, -1);
+    
+    segments.add(ZhuLuoYearResult(
+      age: age,
+      stage: stage,
+      ruler: ruler,
+      palace: currentPalace,
+      algorithmId: ZhuLuoAlgorithmId.retrace,
+      phase: "zheFan",
+      isTransitionYear: currentPalace == pNext,
+      usedBridge: false,
+    ));
+
+    if (currentPalace == pNext) {
+      return _TransitionResult(
+        segments: segments,
+        nextStageStartAge: age,
+      );
+    }
+    
+    age++;
+  }
+
+  return _TransitionResult(
+    segments: segments,
+    nextStageStartAge: age,
+  );
+}
+
+/// 方案4: 补桥年限双轨交限法 (B法·西洋改良)
+/// 优先触发（补桥）：若满足补桥公式，走完补桥段刚好抵达 pNext
+/// 兜底触发：不满足补桥条件 → 年限到期强制切换
+_TransitionResult _planBridgeWithFallback({
+  required EnumTwelveGong p0,
+  required int N,
+  required int T,
+  required int startAge,
+  required EnumTwelveGong pEnd,
+  required int ageEnd,
+  required EnumTwelveGong pNext,
+  required ZhuLuoRuler nextRuler,
+  required LimitStage stage,
+  required ZhuLuoRuler ruler,
+  required int maxAge,
+}) {
+  final segments = <ZhuLuoYearResult>[];
+  
+  // 检查补桥条件：剩余年限 = 宫数 × nextStarYears
+  final d = forwardDistance(pEnd, pNext);
+  final m = rulerNumber(nextRuler);
+  final R = T - (T - N);  // 剩余年限 = T - (已走年限)
+  
+  // 补桥条件：d * m == R
+  if (d > 0 && d * m == R) {
+    // 补桥段：跨 d 个宫，每年 m 个年龄
+    var currentPalace = pEnd;
+    var age = ageEnd + 1;
+    
+    for (var i = 0; i < d; i++) {
+      currentPalace = movePalace(currentPalace, 1);
+      
+      for (var j = 0; j < m; j++) {
+        if (age > maxAge) break;
+        
+        segments.add(ZhuLuoYearResult(
+          age: age,
+          stage: stage,
+          ruler: ruler,
+          palace: currentPalace,
+          algorithmId: ZhuLuoAlgorithmId.bridgeWithFallback,
+          phase: "buQiao",
+          isTransitionYear: i == d - 1 && j == m - 1,
+          usedBridge: true,
+        ));
+        
+        age++;
+      }
+    }
+
+    return _TransitionResult(
+      segments: segments,
+      nextStageStartAge: ageEnd + d * m,
+    );
+  }
+
+  // 兜底：强制切换（同方案2）
+  return _planForceCut(
+    p0: p0, N: N, T: T, startAge: startAge,
+    pEnd: pEnd, ageEnd: ageEnd, pNext: pNext,
+    nextRuler: nextRuler, stage: stage, ruler: ruler, maxAge: maxAge,
+  );
+}
+
+/// 合并/去重记录 (Doc B §5 三限串接)
+List<ZhuLuoYearResult> _mergeRecords(List<List<ZhuLuoYearResult>> stageRecordsList) {
   final allRecords = <ZhuLuoYearResult>[];
   final recordsByAge = <int, List<ZhuLuoYearResult>>{};
   
@@ -236,7 +442,7 @@ List<ZhuLuoYearResult> calculateZhuLuoSanXian(ZhuLuoInput input) {
     }
   }
 
-  for (var age = 1; age <= input.maxAge; age++) {
+  for (var age = 1; age <= (recordsByAge.keys.isEmpty ? 0 : recordsByAge.keys.last); age++) {
     final recs = recordsByAge[age];
     if (recs == null || recs.isEmpty) {
       continue;
@@ -244,6 +450,7 @@ List<ZhuLuoYearResult> calculateZhuLuoSanXian(ZhuLuoInput input) {
     if (recs.length == 1) {
       allRecords.add(recs.first);
     } else {
+      // 多个记录（交限年），取最新限的记录
       recs.sort((a, b) => a.stage.index.compareTo(b.stage.index));
       final base = recs.last;
       

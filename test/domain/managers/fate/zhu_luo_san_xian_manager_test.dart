@@ -101,7 +101,7 @@ void main() {
         birthSect: BirthSect.day,
         rulerPalaces: _frederickRulerPalaces,
         maxAge: 80,
-        config: directAnnualWithBridgeConfig,
+        config: bridgeWithFallbackConfig,
       );
       expect(results, isNotEmpty);
       expect(results.firstWhere((r) => r.age == 61).palace, EnumTwelveGong.Wu);
@@ -116,7 +116,7 @@ void main() {
         birthSect: BirthSect.day,
         starPalaces: _frederickStarPalaces,
         maxAge: 80,
-        config: directAnnualWithBridgeConfig,
+        config: bridgeWithFallbackConfig,
       );
       expect(results.firstWhere((r) => r.age == 61).palace, EnumTwelveGong.Wu);
     });
@@ -127,7 +127,7 @@ void main() {
         birthSect: BirthSect.day,
         starPalaces: _frederickStarPalaces,
         maxAge: 80,
-        config: directAnnualWithBridgeConfig,
+        config: bridgeWithFallbackConfig,
       );
       expect(results.firstWhere((r) => r.age == 75).palace, EnumTwelveGong.Shen);
     });
@@ -139,7 +139,7 @@ void main() {
           birthSect: BirthSect.day,
           starPalaces: {EnumStars.Sun: EnumTwelveGong.Wu},
           maxAge: 80,
-          config: directAnnualWithBridgeConfig,
+          config: bridgeWithFallbackConfig,
         ),
         throwsA(isA<StateError>()),
       );
@@ -153,7 +153,7 @@ void main() {
         panel: panel,
         birthSect: BirthSect.day,
         maxAge: 80,
-        config: directAnnualWithBridgeConfig,
+        config: bridgeWithFallbackConfig,
       );
       expect(results.firstWhere((r) => r.age == 75).palace, EnumTwelveGong.Shen);
     });
@@ -164,7 +164,7 @@ void main() {
         panel: panel,
         birthSect: BirthSect.day,
         maxAge: 80,
-        config: directAnnualWithBridgeConfig,
+        config: bridgeWithFallbackConfig,
       );
       expect(results.firstWhere((r) => r.age == 61).palace, EnumTwelveGong.Wu);
     });
