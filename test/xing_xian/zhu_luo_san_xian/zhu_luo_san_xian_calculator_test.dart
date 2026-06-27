@@ -88,6 +88,9 @@ void main() {
       // 11→亥(11), 12→子(0), 13→丑(1), 14→寅(2), 15→卯(3)
       expect(results.firstWhere((r) => r.age == 15).palace, EnumTwelveGong.Mao);
       
+      // 断言 age 16 → 辰 (继续顺行)
+      expect(results.firstWhere((r) => r.age == 16).palace, EnumTwelveGong.Chen);
+      
       // 断言 age 25 → 丑
       expect(results.firstWhere((r) => r.age == 25).palace, EnumTwelveGong.Chou);
       
