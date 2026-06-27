@@ -257,7 +257,15 @@ _TransitionResult _planClassicForward({
 }
 
 /// 方案2: 年限强制切换法 (商用简化)
-/// 触发条件：标准年限 T 到期直接强制换限
+///
+/// 特点：标准年限一到，不管有没有走到、有没有错过下一限主星本宫，立刻强制切换。
+///
+/// 行为：
+/// - 土星初限满26年，到达26岁
+/// - 不看当年落在未宫、去年已经路过午宫这件事，不等待、不回头
+/// - 26岁直接作废土星初限，强制切换为月亮中限
+/// - 25岁午宫错过的交限窗口直接作废，不再处理
+/// - 全程只顺行、不等待
 _TransitionResult _planForceCut({
   required EnumTwelveGong p0,
   required int N,
@@ -272,6 +280,7 @@ _TransitionResult _planForceCut({
   required int maxAge,
 }) {
   // 强制截断：在 ageEnd 处给一个 forced 截断标记
+  // 26岁直接作废初限，强制切换为中限
   final segments = <ZhuLuoYearResult>[];
   
   segments.add(ZhuLuoYearResult(
@@ -292,8 +301,16 @@ _TransitionResult _planForceCut({
 }
 
 /// 方案3: 折返补救交限法 (小众私传，考据否定)
-/// 场景1/2 同方案1（到则交、未到则延交顺行候星）
-/// 独有场景3：标准年限走完已过 pNext → 逆行折返倒回 pNext
+///
+/// 特点：年限到期没到下星宫会顺行等候，一旦走过下星宫就逆行倒退回到星宫再交限。
+///
+/// 行为：
+/// - 土星初限满26年，当年落在未宫，发现已经走过月亮本宫午
+/// - 打破行限只能顺行的规则，流年宫位逆行倒退一格，从未倒回午
+/// - 认定26岁行限实质落在午宫，在当年完成初限转中限
+/// - 交限完成后，往后年份继续恢复顺行流转
+///
+/// 注意：违背古籍"零年顺转逐宫移"单向规定，主流考据派不认可。
 _TransitionResult _planRetrace({
   required EnumTwelveGong p0,
   required int N,
@@ -320,7 +337,7 @@ _TransitionResult _planRetrace({
   // 计算 pEnd 到 pNext 的顺行距离
   final forwardDist = forwardDistance(pEnd, pNext);
   
-  // 如果 forwardDist > 0，说明还没到 pNext，需要顺行延交（同方案1）
+  // 如果 forwardDist > 0 且 <= 6，说明还没到 pNext，需要顺行延交（同方案1）
   if (forwardDist > 0 && forwardDist <= 6) {
     // 场景2: 未到 pNext，继续顺行
     return _planClassicForward(
@@ -331,39 +348,37 @@ _TransitionResult _planRetrace({
   }
 
   // 场景3: 已过 pNext，逆行折返
+  // 关键：折返发生在 ageEnd 当年，不是 ageEnd+1
+  // 例如：26岁在未宫，已过午宫，折返一格到午宫，认定26岁行限实质落在午宫
+  
+  // 计算需要折返的距离
   final retraceDist = (12 - forwardDist) % 12;
+  
+  // 在 ageEnd 当年进行折返
+  // 从 pEnd 开始，逆行 retraceDist 步到 pNext
   var currentPalace = pEnd;
-  var age = ageEnd + 1;
   
   for (var i = 0; i < retraceDist; i++) {
-    if (age > maxAge) break;
-    
     currentPalace = movePalace(currentPalace, -1);
-    
-    segments.add(ZhuLuoYearResult(
-      age: age,
-      stage: stage,
-      ruler: ruler,
-      palace: currentPalace,
-      algorithmId: ZhuLuoAlgorithmId.retrace,
-      phase: "zheFan",
-      isTransitionYear: currentPalace == pNext,
-      usedBridge: false,
-    ));
-
-    if (currentPalace == pNext) {
-      return _TransitionResult(
-        segments: segments,
-        nextStageStartAge: age,
-      );
-    }
-    
-    age++;
   }
+  
+  // 折返完成后，ageEnd 当年认定落在 pNext
+  segments.add(ZhuLuoYearResult(
+    age: ageEnd,
+    stage: stage,
+    ruler: ruler,
+    palace: currentPalace,
+    algorithmId: ZhuLuoAlgorithmId.retrace,
+    phase: "zheFan",
+    isTransitionYear: true,
+    usedBridge: false,
+  ));
 
+  // 交限完成后，往后年份继续恢复顺行流转
+  // nextStageStartAge = ageEnd，中限从 ageEnd 开始
   return _TransitionResult(
     segments: segments,
-    nextStageStartAge: age,
+    nextStageStartAge: ageEnd,
   );
 }
 

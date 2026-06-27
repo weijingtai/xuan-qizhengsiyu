@@ -215,12 +215,36 @@ void main() {
     });
 
     test("方案3: 折返补救交限法 - 已过pNext则逆行折返", () {
+      // 用户描述的场景：
+      // 土星起巳(N=5,T=26)，月亮本命宫午(6)
+      // 初限26年：1-5守巳，6-26顺行
+      // age 25: movePalace(Si, 20) = 亥(11)
+      // age 26: movePalace(Si, 21) = 子(0)
+      // pNext = 午(6)，pEnd = 子(0)
+      // forwardDistance(子, 午) = (6-0+12)%12 = 6
+      // 6 <= 6，未到pNext，需要顺行延交（同方案1）
+      
+      // 构造一个"已过pNext"的场景：
+      // 土星起巳(N=5,T=26)，月亮本命宫寅(2)
+      // age 26: movePalace(Si, 21) = 子(0)
+      // pNext = 寅(2)，pEnd = 子(0)
+      // forwardDistance(子, 寅) = (2-0+12)%12 = 2
+      // 2 <= 6，未到pNext，需要顺行延交（同方案1）
+      
+      // 构造一个"已过pNext"的场景：
+      // 土星起巳(N=5,T=26)，月亮本命宫亥(11)
+      // age 26: movePalace(Si, 21) = 子(0)
+      // pNext = 亥(11)，pEnd = 子(0)
+      // forwardDistance(子, 亥) = (11-0+12)%12 = 11
+      // 11 > 6，已过pNext，需要逆行折返
+      // retraceDist = (12-11)%12 = 1
+      // 从子(0)折返1步到亥(11)
       final input = ZhuLuoInput(
         lifePalace: EnumTwelveGong.Zi,
         birthSect: BirthSect.day,
         rulerPalaces: {
           ZhuLuoRuler.saturn: EnumTwelveGong.Si,
-          ZhuLuoRuler.sun: EnumTwelveGong.Zi,
+          ZhuLuoRuler.sun: EnumTwelveGong.Hai,  // pNext = 亥(11)
           ZhuLuoRuler.jupiter: EnumTwelveGong.Mao,
         },
         maxAge: 60,
@@ -228,12 +252,10 @@ void main() {
       );
       final results = calculateZhuLuoSanXian(input);
       
-      // 方案3：age 26 后，pEnd=寅 已过 pNext=子，逆行折返
-      // age 27: 丑(1), age 28: 子(0) → 交限
-      expect(results.firstWhere((r) => r.age == 27).palace, EnumTwelveGong.Chou);
-      expect(results.firstWhere((r) => r.age == 27).phase, "zheFan");
-      expect(results.firstWhere((r) => r.age == 28).palace, EnumTwelveGong.Zi);
-      expect(results.firstWhere((r) => r.age == 28).isTransitionYear, true);
+      // 方案3：age 26 在子(0)宫，已过 pNext=亥(11)，逆行折返1步到亥
+      expect(results.firstWhere((r) => r.age == 26).palace, EnumTwelveGong.Hai);
+      expect(results.firstWhere((r) => r.age == 26).phase, "zheFan");
+      expect(results.firstWhere((r) => r.age == 26).isTransitionYear, true);
     });
 
     test("方案4: 补桥年限双轨交限法 - 满足补桥公式", () {
