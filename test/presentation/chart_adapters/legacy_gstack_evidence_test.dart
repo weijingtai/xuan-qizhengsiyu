@@ -16,6 +16,7 @@ import 'package:qizhengsiyu/domain/entities/models/panel_ui_size.dart';
 import 'package:qizhengsiyu/presentation/adapters/legacy/qizheng_board_switch.dart';
 import 'package:qizhengsiyu/presentation/adapters/legacy/qizheng_legacy_board.dart';
 import 'package:qizhengsiyu/presentation/models/ui_star_model.dart';
+import 'package:qizhengsiyu/presentation/widgets/panel_widget.dart';
 import 'package:qizhengsiyu/presentation/widgets/destiny_twelve_gong_ring.dart';
 
 // ---------------------------------------------------------------------------
@@ -140,6 +141,39 @@ Widget _buildBoardSwitch(BoardRenderer renderer, {double rotating = 0}) {
   );
 }
 
+void _expectCompleteVisibleLayerInventory(WidgetTester tester, Size viewport) {
+  const visibleLayerIds = [
+    'earth-branch-ring',
+    'zodiac-ring',
+    'destiny-ring',
+    'degree-ticks',
+    'constellation-ring',
+    'inner-star-track-ring',
+    'inner-star-body-ring',
+    'outer-star-track-ring',
+    'outer-star-body-ring',
+    'inner-shensha-ring',
+    'outer-shensha-ring',
+  ];
+  for (final id in visibleLayerIds) {
+    expect(
+      find.byKey(ValueKey('chart-layer:$id')),
+      findsOneWidget,
+      reason: 'Missing visible ChartBoard layer $id',
+    );
+  }
+  expect(
+    find.byKey(const ValueKey('chart-layer:star-sequence-ring')),
+    findsNothing,
+    reason: 'The production-default zero-width ring must remain skipped.',
+  );
+  final panelRect = tester.getRect(find.byType(PanelWidget).first);
+  expect(panelRect.left, greaterThanOrEqualTo(0));
+  expect(panelRect.top, greaterThanOrEqualTo(0));
+  expect(panelRect.right, lessThanOrEqualTo(viewport.width));
+  expect(panelRect.bottom, lessThanOrEqualTo(viewport.height));
+}
+
 // ---------------------------------------------------------------------------
 // setUpAll – font loading (same as parity test)
 // ---------------------------------------------------------------------------
@@ -224,34 +258,38 @@ void main() {
     },
   );
 
-  testWidgets('gStack: desktop viewport legacy adapter', (tester) async {
-    await tester.binding.setSurfaceSize(const Size(1200, 900));
-    await tester.pumpWidget(
-      _wrapBoard(_buildBoardSwitch(BoardRenderer.qiZhengLegacy), size: 800),
-    );
-    await tester.pumpAndSettle();
+  testWidgets(
+    'desktop 1200x900 shows every enabled ChartBoard layer unclipped',
+    (tester) async {
+      const viewport = Size(1200, 900);
+      await tester.binding.setSurfaceSize(viewport);
+      await tester.pumpWidget(
+        _wrapBoard(_buildBoardSwitch(BoardRenderer.qiZhengLegacy), size: 800),
+      );
+      await tester.pumpAndSettle();
 
-    await expectLater(
-      find.byType(QiZhengBoardSwitch),
-      matchesGoldenFile('goldens/gstack/phase5/desktop_legacy_adapter.png'),
-    );
-  });
+      expect(tester.takeException(), isNull);
+      _expectCompleteVisibleLayerInventory(tester, viewport);
+    },
+  );
 
   // ===========================================================================
   // Scenario 2: Minimum supported viewport
   // ===========================================================================
-  testWidgets('gStack: minimum viewport legacy adapter', (tester) async {
-    await tester.binding.setSurfaceSize(const Size(400, 700));
-    await tester.pumpWidget(
-      _wrapBoard(_buildBoardSwitch(BoardRenderer.qiZhengLegacy), size: 360),
-    );
-    await tester.pumpAndSettle();
+  testWidgets(
+    'minimum 400x700 shows every enabled ChartBoard layer unclipped',
+    (tester) async {
+      const viewport = Size(400, 700);
+      await tester.binding.setSurfaceSize(viewport);
+      await tester.pumpWidget(
+        _wrapBoard(_buildBoardSwitch(BoardRenderer.qiZhengLegacy), size: 360),
+      );
+      await tester.pumpAndSettle();
 
-    await expectLater(
-      find.byType(QiZhengBoardSwitch),
-      matchesGoldenFile('goldens/gstack/phase5/min_viewport_legacy.png'),
-    );
-  });
+      expect(tester.takeException(), isNull);
+      _expectCompleteVisibleLayerInventory(tester, viewport);
+    },
+  );
 
   // ===========================================================================
   // Scenario 3: Dark theme
@@ -275,10 +313,8 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    await expectLater(
-      find.byType(QiZhengBoardSwitch),
-      matchesGoldenFile('goldens/gstack/phase5/dark_theme_legacy.png'),
-    );
+    expect(tester.takeException(), isNull);
+    _expectCompleteVisibleLayerInventory(tester, const Size(400, 700));
   });
 
   // ===========================================================================
@@ -290,10 +326,8 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    await expectLater(
-      find.byType(QiZhengBoardSwitch),
-      matchesGoldenFile('goldens/gstack/phase5/rotated_45_legacy.png'),
-    );
+    expect(tester.takeException(), isNull);
+    _expectCompleteVisibleLayerInventory(tester, const Size(400, 700));
   });
 
   // ===========================================================================

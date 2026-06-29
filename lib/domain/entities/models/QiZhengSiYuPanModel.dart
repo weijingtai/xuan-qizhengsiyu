@@ -57,7 +57,11 @@ class QiZhengsSiYuPanelModel {
       double starAngle,
       StarPanelType type,
       Map<Enum28Constellations, ConstellationGongDegreeInfo> mapper) {
-    int tmpStarAngle = ((starAngle + type.firstAtZeroDegree) * 100).round();
+    double angleVal = (starAngle + type.firstAtZeroDegree) % 360.0;
+    if (angleVal < 0) {
+      angleVal += 360.0;
+    }
+    int tmpStarAngle = (angleVal * 100).round();
 
     int previousAngle = tmpStarAngle;
     for (int i = 0; i < 28; i++) {

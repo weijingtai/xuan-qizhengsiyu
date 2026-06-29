@@ -7,31 +7,30 @@ part of 'enum_qi_zheng.dart';
 // **************************************************************************
 
 StarWalkingTypeThreshold _$StarWalkingTypeThresholdFromJson(
-        Map<String, dynamic> json) =>
-    StarWalkingTypeThreshold(
-      star: $enumDecode(_$EnumStarsEnumMap, json['star']),
-      thresholdName: json['thresholdName'] as String,
-      maxSpeed: (json['maxSpeed'] as num).toDouble(),
-      maxRetrogradeThreshold:
-          (json['maxRetrogradeThreshold'] as num).toDouble(),
-      retrogradeThreshold: (json['retrogradeThreshold'] as num).toDouble(),
-      stayThreshold: (json['stayThreshold'] as num).toDouble(),
-      fastThreshold: (json['fastThreshold'] as num?)?.toDouble(),
-      slowThreshold: (json['slowThreshold'] as num?)?.toDouble(),
-    );
+  Map<String, dynamic> json,
+) => StarWalkingTypeThreshold(
+  star: $enumDecode(_$EnumStarsEnumMap, json['star']),
+  thresholdName: json['thresholdName'] as String,
+  maxSpeed: (json['maxSpeed'] as num).toDouble(),
+  maxRetrogradeThreshold: (json['maxRetrogradeThreshold'] as num).toDouble(),
+  retrogradeThreshold: (json['retrogradeThreshold'] as num).toDouble(),
+  stayThreshold: (json['stayThreshold'] as num).toDouble(),
+  fastThreshold: (json['fastThreshold'] as num?)?.toDouble(),
+  slowThreshold: (json['slowThreshold'] as num?)?.toDouble(),
+);
 
 Map<String, dynamic> _$StarWalkingTypeThresholdToJson(
-        StarWalkingTypeThreshold instance) =>
-    <String, dynamic>{
-      'star': _$EnumStarsEnumMap[instance.star]!,
-      'thresholdName': instance.thresholdName,
-      'maxSpeed': instance.maxSpeed,
-      'maxRetrogradeThreshold': instance.maxRetrogradeThreshold,
-      'retrogradeThreshold': instance.retrogradeThreshold,
-      'stayThreshold': instance.stayThreshold,
-      'fastThreshold': instance.fastThreshold,
-      'slowThreshold': instance.slowThreshold,
-    };
+  StarWalkingTypeThreshold instance,
+) => <String, dynamic>{
+  'star': _$EnumStarsEnumMap[instance.star]!,
+  'thresholdName': instance.thresholdName,
+  'maxSpeed': instance.maxSpeed,
+  'maxRetrogradeThreshold': instance.maxRetrogradeThreshold,
+  'retrogradeThreshold': instance.retrogradeThreshold,
+  'stayThreshold': instance.stayThreshold,
+  'fastThreshold': instance.fastThreshold,
+  'slowThreshold': instance.slowThreshold,
+};
 
 const _$EnumStarsEnumMap = {
   EnumStars.Sun: '日',

@@ -8,6 +8,7 @@ import 'package:qizhengsiyu/painter/chart_style/qi_zheng_star_palette.dart';
 import 'package:qizhengsiyu/presentation/adapters/legacy/qizheng_legacy_board.dart';
 import 'package:qizhengsiyu/presentation/models/ui_star_model.dart';
 import 'package:metaphysics_core/models/shen_sha.dart';
+import 'package:qizhengsiyu/presentation/chart_adapters/qizheng_chart_board_adapter.dart';
 
 /// Renderer mode for the QiZheng board.
 enum BoardRenderer {
@@ -88,6 +89,7 @@ class QiZhengBoardSwitch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Widget board;
     switch (renderer) {
       case BoardRenderer.production:
         final builder = productionBuilder;
@@ -96,9 +98,16 @@ class QiZhengBoardSwitch extends StatelessWidget {
             'QiZhengBoardSwitch.production requires productionBuilder.',
           );
         }
-        return builder();
+        board = builder();
       case BoardRenderer.qiZhengLegacy:
-        return QiZhengLegacyBoard(
+        final chartBoard = buildQiZhengChartBoardFromLegacyInputs(
+          panelSize: panelSizeDataModel,
+          innerStars: innerStars,
+          outerStars: outerStars,
+          zhouTianModel: zhouTianModel,
+        );
+        board = QiZhengLegacyBoard(
+          chartBoard: chartBoard,
           panelSizeDataModel: panelSizeDataModel,
           innerStars: innerStars,
           outerStars: outerStars,
@@ -119,5 +128,12 @@ class QiZhengBoardSwitch extends StatelessWidget {
           allStarsShowNotifier: allStarsShowNotifier,
         );
     }
+    final canvasSize = panelSizeDataModel.outerShenShaSizeOuter;
+    return Center(
+      child: FittedBox(
+        fit: BoxFit.contain,
+        child: SizedBox.square(dimension: canvasSize, child: board),
+      ),
+    );
   }
 }

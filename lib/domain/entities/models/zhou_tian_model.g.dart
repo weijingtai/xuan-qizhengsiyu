@@ -8,16 +8,16 @@ part of 'zhou_tian_model.dart';
 
 ZhouTianModel _$ZhouTianModelFromJson(Map<String, dynamic> json) =>
     ZhouTianModel(
-      systemType:
-          CelestialCoordinateSystem.fromJson(json['systemType']),
+      systemType: CelestialCoordinateSystem.fromJson(json['systemType']),
       projectionConfig: json['projectionConfig'] == null
           ? null
           : ProjectionConfig.fromJson(
-              json['projectionConfig'] as Map<String, dynamic>),
-      constellationSystemType:
-          ConstellationSystemType.fromJson(json['constellationSystemType']),
-      panelSystemType:
-          PanelSystemType.fromJson(json['panelSystemType']),
+              json['projectionConfig'] as Map<String, dynamic>,
+            ),
+      constellationSystemType: ConstellationSystemType.fromJson(
+        json['constellationSystemType'],
+      ),
+      panelSystemType: PanelSystemType.fromJson(json['panelSystemType']),
       epochCorrection: json['epochCorrection'] as String,
       totalDegree: (json['totalDegree'] as num).toDouble(),
       gongDegreeSeq: (json['gongDegreeSeq'] as List<dynamic>)
@@ -27,15 +27,21 @@ ZhouTianModel _$ZhouTianModelFromJson(Map<String, dynamic> json) =>
           .map((e) => ConstellationDegree.fromJson(e as Map<String, dynamic>))
           .toList(),
       alignmentPointAtConstellation: ConstellationDegree.fromJson(
-          json['alignmentPointAtConstellation'] as Map<String, dynamic>),
+        json['alignmentPointAtConstellation'] as Map<String, dynamic>,
+      ),
       alignmentPointAtGong: GongDegree.fromJson(
-          json['alignmentPointAtGong'] as Map<String, dynamic>),
-      zeroPointJieQi:
-          $enumDecode(_$TwentyFourJieQiEnumMap, json['zeroPointJieQi']),
+        json['alignmentPointAtGong'] as Map<String, dynamic>,
+      ),
+      zeroPointJieQi: $enumDecode(
+        _$TwentyFourJieQiEnumMap,
+        json['zeroPointJieQi'],
+      ),
       zeroPointAtConstellation: ConstellationDegree.fromJson(
-          json['zeroPointAtConstellation'] as Map<String, dynamic>),
-      zeroPointAtGong:
-          GongDegree.fromJson(json['zeroPointAtGong'] as Map<String, dynamic>),
+        json['zeroPointAtConstellation'] as Map<String, dynamic>,
+      ),
+      zeroPointAtGong: GongDegree.fromJson(
+        json['zeroPointAtGong'] as Map<String, dynamic>,
+      ),
       celestialLongitude: (json['celestialLongitude'] as num).toDouble(),
       zeroPointOffsetToNow: (json['zeroPointOffsetToNow'] as num).toDouble(),
       rightAscension: (json['rightAscension'] as num).toDouble(),
@@ -69,31 +75,14 @@ Map<String, dynamic> _$ZhouTianModelToJson(ZhouTianModel instance) =>
       'celestialLongitude': instance.celestialLongitude,
       'zeroPointOffsetToNow': instance.zeroPointOffsetToNow,
       'rightAscension': instance.rightAscension,
-      'gongOrder':
-          instance.gongOrder.map((e) => _$EnumTwelveGongEnumMap[e]!).toList(),
+      'gongOrder': instance.gongOrder
+          .map((e) => _$EnumTwelveGongEnumMap[e]!)
+          .toList(),
       'starInnOrder': instance.starInnOrder
           .map((e) => _$Enum28ConstellationsEnumMap[e]!)
           .toList(),
       'specificationList': instance.specificationList,
     };
-
-const _$CelestialCoordinateSystemEnumMap = {
-  CelestialCoordinateSystem.Ecliptic: '黄道制',
-  CelestialCoordinateSystem.Equatorial: '赤道制',
-  CelestialCoordinateSystem.SkyEquatorial: '天赤道制',
-  CelestialCoordinateSystem.PseudoEcliptic: '似黄道恒星制',
-};
-
-const _$ConstellationSystemTypeEnumMap = {
-  ConstellationSystemType.Classical: '古宿制',
-  ConstellationSystemType.AdjustedClassical: '矫正古宿制',
-  ConstellationSystemType.Modern: '今宿制',
-};
-
-const _$PanelSystemTypeEnumMap = {
-  PanelSystemType.Tropical: '回归制',
-  PanelSystemType.Sidereal: '恒星制',
-};
 
 const _$TwentyFourJieQiEnumMap = {
   TwentyFourJieQi.DONG_ZHI: '冬至',
@@ -166,4 +155,22 @@ const _$Enum28ConstellationsEnumMap = {
   Enum28Constellations.Shi_Huo_Zhu: '室',
   Enum28Constellations.Bi_Shui_Yu: '壁',
   Enum28Constellations.Kui_Mu_Lang: '奎',
+};
+
+const _$CelestialCoordinateSystemEnumMap = {
+  CelestialCoordinateSystem.Ecliptic: '黄道制',
+  CelestialCoordinateSystem.Equatorial: '赤道制',
+  CelestialCoordinateSystem.SkyEquatorial: '天赤道制',
+  CelestialCoordinateSystem.PseudoEcliptic: '似黄道恒星制',
+};
+
+const _$ConstellationSystemTypeEnumMap = {
+  ConstellationSystemType.Classical: '古宿制',
+  ConstellationSystemType.AdjustedClassical: '矫正古宿制',
+  ConstellationSystemType.Modern: '今宿制',
+};
+
+const _$PanelSystemTypeEnumMap = {
+  PanelSystemType.Tropical: '回归制',
+  PanelSystemType.Sidereal: '恒星制',
 };

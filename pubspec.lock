@@ -114,7 +114,7 @@ packages:
     source: hosted
     version: "8.12.3"
   calendar:
-    dependency: transitive
+    dependency: "direct main"
     description:
       path: "../calendar"
       relative: true
@@ -806,10 +806,24 @@ packages:
       relative: true
     source: path
     version: "0.0.0"
+  repository_interface_daliuren:
+    dependency: transitive
+    description:
+      path: "../repository-interface-daliuren"
+      relative: true
+    source: path
+    version: "0.0.0"
   repository_interface_four_zhu_card:
     dependency: transitive
     description:
       path: "../repository-interface-four-zhu-card"
+      relative: true
+    source: path
+    version: "0.0.0"
+  repository_interface_liuyao:
+    dependency: transitive
+    description:
+      path: "../repository-interface-liuyao"
       relative: true
     source: path
     version: "0.0.0"
@@ -834,6 +848,13 @@ packages:
       relative: true
     source: path
     version: "0.0.0"
+  repository_interface_record:
+    dependency: transitive
+    description:
+      path: "../repository-interface-record"
+      relative: true
+    source: path
+    version: "0.0.0"
   repository_interface_taiyishenshu:
     dependency: transitive
     description:
@@ -845,6 +866,13 @@ packages:
     dependency: transitive
     description:
       path: "../repository-interface-tiebanshenshu"
+      relative: true
+    source: path
+    version: "0.0.0"
+  repository_interface_ziweidoushu:
+    dependency: transitive
+    description:
+      path: "../repository-interface-ziweidoushu"
       relative: true
     source: path
     version: "0.0.0"

@@ -7,36 +7,36 @@ part of 'observer_position.dart';
 // **************************************************************************
 
 BaseObserverPosition _$BaseObserverPositionFromJson(
-        Map<String, dynamic> json) =>
-    BaseObserverPosition(
-      altitude: (json['altitude'] as num?)?.toDouble() ?? 0,
-      latitude: (json['latitude'] as num).toDouble(),
-      longitude: (json['longitude'] as num).toDouble(),
-      timezone: json['timezone'] as String,
-    );
+  Map<String, dynamic> json,
+) => BaseObserverPosition(
+  altitude: (json['altitude'] as num?)?.toDouble() ?? 0,
+  latitude: (json['latitude'] as num).toDouble(),
+  longitude: (json['longitude'] as num).toDouble(),
+  timezone: json['timezone'] as String,
+);
 
 Map<String, dynamic> _$BaseObserverPositionToJson(
-        BaseObserverPosition instance) =>
-    <String, dynamic>{
-      'latitude': instance.latitude,
-      'longitude': instance.longitude,
-      'altitude': instance.altitude,
-      'timezone': instance.timezone,
-    };
+  BaseObserverPosition instance,
+) => <String, dynamic>{
+  'latitude': instance.latitude,
+  'longitude': instance.longitude,
+  'altitude': instance.altitude,
+  'timezone': instance.timezone,
+};
 
 ObserverPosition _$ObserverPositionFromJson(Map<String, dynamic> json) =>
     ObserverPosition(
-      dateTime: DateTime.parse(json['dateTime'] as String),
-      latitude: (json['latitude'] as num).toDouble(),
-      longitude: (json['longitude'] as num).toDouble(),
-      altitude: (json['altitude'] as num).toDouble(),
-      timezone: json['timezone'] as String,
-      isDayBirth: json['isDayBirth'] as bool,
-      yearGanZhi: $enumDecode(_$JiaZiEnumMap, json['yearGanZhi']),
-      monthGanZhi: $enumDecode(_$JiaZiEnumMap, json['monthGanZhi']),
-      dayGanZhi: $enumDecode(_$JiaZiEnumMap, json['dayGanZhi']),
-      timeGanZhi: $enumDecode(_$JiaZiEnumMap, json['timeGanZhi']),
-    )
+        dateTime: DateTime.parse(json['dateTime'] as String),
+        latitude: (json['latitude'] as num).toDouble(),
+        longitude: (json['longitude'] as num).toDouble(),
+        altitude: (json['altitude'] as num).toDouble(),
+        timezone: json['timezone'] as String,
+        isDayBirth: json['isDayBirth'] as bool,
+        yearGanZhi: $enumDecode(_$JiaZiEnumMap, json['yearGanZhi']),
+        monthGanZhi: $enumDecode(_$JiaZiEnumMap, json['monthGanZhi']),
+        dayGanZhi: $enumDecode(_$JiaZiEnumMap, json['dayGanZhi']),
+        timeGanZhi: $enumDecode(_$JiaZiEnumMap, json['timeGanZhi']),
+      )
       ..utcDateTime = DateTime.parse(json['utcDateTime'] as String)
       ..fourZhuEightChar = json['fourZhuEightChar'] as String;
 

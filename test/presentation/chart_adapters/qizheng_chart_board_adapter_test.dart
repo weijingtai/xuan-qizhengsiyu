@@ -19,18 +19,18 @@ import 'package:qizhengsiyu/presentation/chart_adapters/qizheng_chart_board_snap
 QiZhengChartBoardSnapshot buildParityFixture() {
   // 12 gong in ecliptic order (戌 starts at 0°).
   const gongOrder = <EnumTwelveGong>[
-    EnumTwelveGong.Xu,   // 戌  0°
-    EnumTwelveGong.You,   // 酉 30°
-    EnumTwelveGong.Shen,  // 申 60°
-    EnumTwelveGong.Wei,   // 未 90°
-    EnumTwelveGong.Wu,    // 午 120°
-    EnumTwelveGong.Si,    // 巳 150°
-    EnumTwelveGong.Chen,  // 辰 180°
-    EnumTwelveGong.Mao,   // 卯 210°
-    EnumTwelveGong.Yin,   // 寅 240°
-    EnumTwelveGong.Chou,  // 丑 270°
-    EnumTwelveGong.Zi,    // 子 300°
-    EnumTwelveGong.Hai,   // 亥 330°
+    EnumTwelveGong.Xu, // 戌  0°
+    EnumTwelveGong.You, // 酉 30°
+    EnumTwelveGong.Shen, // 申 60°
+    EnumTwelveGong.Wei, // 未 90°
+    EnumTwelveGong.Wu, // 午 120°
+    EnumTwelveGong.Si, // 巳 150°
+    EnumTwelveGong.Chen, // 辰 180°
+    EnumTwelveGong.Mao, // 卯 210°
+    EnumTwelveGong.Yin, // 寅 240°
+    EnumTwelveGong.Chou, // 丑 270°
+    EnumTwelveGong.Zi, // 子 300°
+    EnumTwelveGong.Hai, // 亥 330°
   ];
 
   // 11 stars with original and resolved (post-collision) angles.
@@ -117,10 +117,7 @@ QiZhengChartBoardSnapshot buildParityFixture() {
 
   // 28 constellation arcs (equal-width for simplicity; real data varies).
   final constellations = Enum28Constellations.values
-      .map((c) => ConstellationSnapshot(
-            constellation: c,
-            degree: 360.0 / 28,
-          ))
+      .map((c) => ConstellationSnapshot(constellation: c, degree: 360.0 / 28))
       .toList();
 
   return QiZhengChartBoardSnapshot(
@@ -169,29 +166,133 @@ void main() {
 
   // ----- Layer count and type tests ----------------------------------------
 
-  test('board has exactly 4 layers', () {
-    expect(board.layers.length, 4);
+  test('board exposes the complete Legacy twelve-layer inventory', () {
+    expect(board.layers.map((layer) => layer.id), [
+      'earth-branch-ring',
+      'zodiac-ring',
+      'star-sequence-ring',
+      'destiny-ring',
+      'degree-ticks',
+      'constellation-ring',
+      'inner-star-track-ring',
+      'inner-star-body-ring',
+      'outer-star-track-ring',
+      'outer-star-body-ring',
+      'inner-shensha-ring',
+      'outer-shensha-ring',
+    ]);
   });
 
-  test('layer[0] is a SectorLayer (palace ring)', () {
+  test('layer[0] is the earth-branch SectorLayer', () {
     expect(board.layers[0], isA<SectorLayer>());
-    expect(board.layers[0].id, 'palace-ring');
+    expect(board.layers[0].id, 'earth-branch-ring');
   });
 
-  test('layer[1] is a TickLayer (360 ticks)', () {
-    expect(board.layers[1], isA<TickLayer>());
-    expect(board.layers[1].id, 'degree-ticks');
+  test('layer[4] is a TickLayer (360 ticks)', () {
+    expect(board.layers[4], isA<TickLayer>());
+    expect(board.layers[4].id, 'degree-ticks');
   });
 
-  test('layer[2] is an ArcLayer (28 constellations)', () {
-    expect(board.layers[2], isA<ArcLayer>());
-    expect(board.layers[2].id, 'constellation-ring');
+  test('layer[5] is an ArcLayer (28 constellations)', () {
+    expect(board.layers[5], isA<ArcLayer>());
+    expect(board.layers[5].id, 'constellation-ring');
   });
 
-  test('layer[3] is a PointLayer (star points)', () {
-    expect(board.layers[3], isA<PointLayer>());
-    expect(board.layers[3].id, 'star-points');
+  test('layer[7] is the inner-star body PointLayer', () {
+    expect(board.layers[7], isA<PointLayer>());
+    expect(board.layers[7].id, 'inner-star-body-ring');
   });
+
+  test('star track rings are whole rings, not twelve sectors', () {
+    final innerTrack = board.layers[6];
+    final outerTrack = board.layers[8];
+
+    expect(innerTrack.id, 'inner-star-track-ring');
+    expect(outerTrack.id, 'outer-star-track-ring');
+    expect(innerTrack, isA<ArcLayer>());
+    expect(outerTrack, isA<ArcLayer>());
+    expect((innerTrack as ArcLayer).arcs, hasLength(1));
+    expect((outerTrack as ArcLayer).arcs, hasLength(1));
+    expect(innerTrack.arcs.single.sweepAngle, 360);
+    expect(outerTrack.arcs.single.sweepAngle, 360);
+  });
+
+  test('center and every Legacy ring retain exact production radii', () {
+    expect(board.center?.radius, 70);
+    expect(board.layers[0].behavior.innerRadius, 70);
+    expect(board.layers[0].behavior.outerRadius, 120);
+    expect(board.layers[3].behavior.innerRadius, 144);
+    expect(board.layers[3].behavior.outerRadius, 214);
+    expect(board.layers[11].behavior.innerRadius, 436);
+    expect(board.layers[11].behavior.outerRadius, 526);
+  });
+
+  test(
+    'adapter preserves discontinuous Legacy ring radii without stacking',
+    () {
+      final discontinuousFixture = QiZhengChartBoardSnapshot(
+        totalDegree: fixture.totalDegree,
+        panelSystemType: fixture.panelSystemType,
+        constellationSystemType: fixture.constellationSystemType,
+        gongOrder: fixture.gongOrder,
+        stars: fixture.stars,
+        constellations: fixture.constellations,
+        ringLayout: const QiZhengRingLayoutSnapshot(
+          centerRadius: 30,
+          diZhiInnerRadius: 40,
+          diZhiOuterRadius: 55,
+          zodiacInnerRadius: 80,
+          zodiacOuterRadius: 94,
+          starSequenceInnerRadius: 120,
+          starSequenceOuterRadius: 120,
+          destinyInnerRadius: 150,
+          destinyOuterRadius: 188,
+          innerStarInnerRadius: 220,
+          innerStarOuterRadius: 248,
+          constellationInnerRadius: 300,
+          constellationOuterRadius: 318,
+          outerStarInnerRadius: 360,
+          outerStarOuterRadius: 388,
+          innerShenShaInnerRadius: 430,
+          innerShenShaOuterRadius: 470,
+          outerShenShaInnerRadius: 520,
+          outerShenShaOuterRadius: 560,
+        ),
+      );
+
+      final discontinuousBoard = const QiZhengChartBoardAdapter().buildBoard(
+        discontinuousFixture,
+        const ChartBoardAdapterContext(
+          moduleId: ModuleId.qizhengsiyu,
+          instanceId: 'discontinuous-radii',
+        ),
+      );
+
+      expect(discontinuousBoard.center?.radius, 30);
+      expect(discontinuousBoard.layers[0].behavior.innerRadius, 40);
+      expect(discontinuousBoard.layers[0].behavior.outerRadius, 55);
+      expect(discontinuousBoard.layers[1].behavior.innerRadius, 80);
+      expect(discontinuousBoard.layers[1].behavior.outerRadius, 94);
+      expect(discontinuousBoard.layers[2].visible, isFalse);
+      expect(discontinuousBoard.layers[3].behavior.innerRadius, 150);
+      expect(discontinuousBoard.layers[3].behavior.outerRadius, 188);
+      expect(discontinuousBoard.layers[5].behavior.innerRadius, 300);
+      expect(discontinuousBoard.layers[5].behavior.outerRadius, 318);
+      expect(discontinuousBoard.layers[11].behavior.innerRadius, 520);
+      expect(discontinuousBoard.layers[11].behavior.outerRadius, 560);
+    },
+  );
+
+  test(
+    'zero-width star-sequence ring keeps identity and order but is skipped',
+    () {
+      final layer = board.layers[2];
+      expect(layer.id, 'star-sequence-ring');
+      expect(layer.visible, isFalse);
+      expect(layer.metadata['optional'], isTrue);
+      expect(layer.metadata['skippedReason'], 'zeroWidth');
+    },
+  );
 
   // ----- Palace sector tests -----------------------------------------------
 
@@ -207,10 +308,10 @@ void main() {
     }
   });
 
-  test('palace sectors have stable ids like gong:戌', () {
+  test('palace sectors have stable ids scoped by their ring', () {
     final palaceLayer = board.layers[0] as SectorLayer;
-    expect(palaceLayer.sectors.first.id, 'gong:戌');
-    expect(palaceLayer.sectors.last.id, 'gong:亥');
+    expect(palaceLayer.sectors.first.id, 'earth-branch-ring:戌');
+    expect(palaceLayer.sectors.last.id, 'earth-branch-ring:亥');
   });
 
   test('palace sectors are ordered correctly (Xu first, Hai last)', () {
@@ -222,7 +323,7 @@ void main() {
   // ----- Tick layer tests --------------------------------------------------
 
   test('tick layer has major interval 30, minor 1', () {
-    final tickLayer = board.layers[1] as TickLayer;
+    final tickLayer = board.layers[4] as TickLayer;
     expect(tickLayer.majorTickInterval, 30);
     expect(tickLayer.minorTickInterval, 1);
     expect(tickLayer.tickLabelInterval, 10);
@@ -231,31 +332,33 @@ void main() {
   // ----- Constellation arc tests -------------------------------------------
 
   test('constellation layer has 28 arcs', () {
-    final arcLayer = board.layers[2] as ArcLayer;
+    final arcLayer = board.layers[5] as ArcLayer;
     expect(arcLayer.arcs.length, 28);
   });
 
   test('constellation arcs have stable ids like inn:角', () {
-    final arcLayer = board.layers[2] as ArcLayer;
+    final arcLayer = board.layers[5] as ArcLayer;
     expect(arcLayer.arcs.first.id, startsWith('inn:'));
   });
 
   test('constellation arcs tile to 360°', () {
-    final arcLayer = board.layers[2] as ArcLayer;
-    final totalSweep =
-        arcLayer.arcs.fold<double>(0, (sum, a) => sum + a.sweepAngle);
+    final arcLayer = board.layers[5] as ArcLayer;
+    final totalSweep = arcLayer.arcs.fold<double>(
+      0,
+      (sum, a) => sum + a.sweepAngle,
+    );
     expect(totalSweep, closeTo(360.0, 0.01));
   });
 
   // ----- Star point layer tests --------------------------------------------
 
   test('star point layer has 11 items', () {
-    final pointLayer = board.layers[3] as PointLayer;
+    final pointLayer = board.layers[7] as PointLayer;
     expect(pointLayer.items.length, 11);
   });
 
   test('each star item is an AngularPoint', () {
-    final pointLayer = board.layers[3] as PointLayer;
+    final pointLayer = board.layers[7] as PointLayer;
     for (final item in pointLayer.items) {
       expect(item, isA<AngularPoint>());
     }
@@ -264,37 +367,38 @@ void main() {
   // ----- Parity fixture: angles survive adapter unchanged ------------------
 
   test('PARITY: originalAngle survives adapter unchanged', () {
-    final pointLayer = board.layers[3] as PointLayer;
-    final angularPoints =
-        pointLayer.items.whereType<AngularPoint>().toList();
+    final pointLayer = board.layers[7] as PointLayer;
+    final angularPoints = pointLayer.items.whereType<AngularPoint>().toList();
 
     for (int i = 0; i < fixture.stars.length; i++) {
       final expected = fixture.stars[i].originalAngle;
       final actual = angularPoints[i].originalAngle;
-      expect(actual, expected,
-          reason:
-              'Star ${fixture.stars[i].star.name} originalAngle mismatch');
+      expect(
+        actual,
+        expected,
+        reason: 'Star ${fixture.stars[i].star.name} originalAngle mismatch',
+      );
     }
   });
 
   test('PARITY: resolvedAngle (displayAngle) survives adapter unchanged', () {
-    final pointLayer = board.layers[3] as PointLayer;
-    final angularPoints =
-        pointLayer.items.whereType<AngularPoint>().toList();
+    final pointLayer = board.layers[7] as PointLayer;
+    final angularPoints = pointLayer.items.whereType<AngularPoint>().toList();
 
     for (int i = 0; i < fixture.stars.length; i++) {
       final expected = fixture.stars[i].resolvedAngle;
       final actual = angularPoints[i].displayAngle;
-      expect(actual, expected,
-          reason:
-              'Star ${fixture.stars[i].star.name} displayAngle mismatch');
+      expect(
+        actual,
+        expected,
+        reason: 'Star ${fixture.stars[i].star.name} displayAngle mismatch',
+      );
     }
   });
 
   test('PARITY: Sun has leader=true (original != resolved)', () {
-    final pointLayer = board.layers[3] as PointLayer;
-    final angularPoints =
-        pointLayer.items.whereType<AngularPoint>().toList();
+    final pointLayer = board.layers[7] as PointLayer;
+    final angularPoints = pointLayer.items.whereType<AngularPoint>().toList();
 
     // Sun: original=15.5, resolved=15.5 → leader=false (no collision)
     final sun = angularPoints[0];
@@ -303,9 +407,8 @@ void main() {
   });
 
   test('PARITY: Moon has leader=true (original != resolved)', () {
-    final pointLayer = board.layers[3] as PointLayer;
-    final angularPoints =
-        pointLayer.items.whereType<AngularPoint>().toList();
+    final pointLayer = board.layers[7] as PointLayer;
+    final angularPoints = pointLayer.items.whereType<AngularPoint>().toList();
 
     // Moon: original=32.0, resolved=34.0 → leader=true (collision)
     final moon = angularPoints[1];
@@ -314,9 +417,8 @@ void main() {
   });
 
   test('PARITY: Venus has leader=true (original != resolved)', () {
-    final pointLayer = board.layers[3] as PointLayer;
-    final angularPoints =
-        pointLayer.items.whereType<AngularPoint>().toList();
+    final pointLayer = board.layers[7] as PointLayer;
+    final angularPoints = pointLayer.items.whereType<AngularPoint>().toList();
 
     // Venus: original=12.0, resolved=9.0 → leader=true (collision)
     final venus = angularPoints[2];
@@ -356,9 +458,8 @@ void main() {
   });
 
   test('star items carry starId in metadata', () {
-    final pointLayer = board.layers[3] as PointLayer;
-    final angularPoints =
-        pointLayer.items.whereType<AngularPoint>().toList();
+    final pointLayer = board.layers[7] as PointLayer;
+    final angularPoints = pointLayer.items.whereType<AngularPoint>().toList();
 
     final starIds = angularPoints.map((p) => p.metadata['starId']).toList();
     expect(starIds, contains('Sun'));

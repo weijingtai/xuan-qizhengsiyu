@@ -7,22 +7,20 @@ part of 'hua_yao.dart';
 // **************************************************************************
 
 HuaYao _$HuaYaoFromJson(Map<String, dynamic> json) => HuaYao(
-      json['name'] as String,
-      $enumDecode(_$JiXiongEnumEnumMap, json['jiXiong']),
-      (json['descriptionList'] as List<dynamic>?)
-          ?.map((e) => e as String)
-          .toList(),
-      (json['locationDescriptionList'] as List<dynamic>?)
-          ?.map((e) => e as String)
-          .toList(),
-      $enumDecode(_$ShenShaTypeEnumMap, json['type']),
-    );
+  json['name'] as String,
+  $enumDecode(_$JiXiongEnumEnumMap, json['jiXiong']),
+  (json['descriptionList'] as List<dynamic>?)?.map((e) => e as String).toList(),
+  (json['locationDescriptionList'] as List<dynamic>?)
+      ?.map((e) => e as String)
+      .toList(),
+  $enumDecode(_$ShenShaTypeEnumMap, json['type']),
+);
 
 Map<String, dynamic> _$HuaYaoToJson(HuaYao instance) => <String, dynamic>{
-      'name': instance.name,
-      'jiXiong': _$JiXiongEnumEnumMap[instance.jiXiong]!,
-      'type': _$ShenShaTypeEnumMap[instance.type]!,
-    };
+  'name': instance.name,
+  'jiXiong': _$JiXiongEnumEnumMap[instance.jiXiong]!,
+  'type': _$ShenShaTypeEnumMap[instance.type]!,
+};
 
 const _$JiXiongEnumEnumMap = {
   JiXiongEnum.DA_JI: '大吉',
@@ -46,11 +44,12 @@ const _$ShenShaTypeEnumMap = {
   ShenShaType.GuoLao: '果老',
 };
 
-HuaYaoItem _$HuaYaoItemFromJson(Map<String, dynamic> json) => HuaYaoItem(
-      name: json['name'] as String,
-      jiXiong: $enumDecode(_$JiXiongEnumEnumMap, json['jiXiong']),
-      type: $enumDecode(_$ShenShaTypeEnumMap, json['type']),
-    )
+HuaYaoItem _$HuaYaoItemFromJson(Map<String, dynamic> json) =>
+    HuaYaoItem(
+        name: json['name'] as String,
+        jiXiong: $enumDecode(_$JiXiongEnumEnumMap, json['jiXiong']),
+        type: $enumDecode(_$ShenShaTypeEnumMap, json['type']),
+      )
       ..descriptionList = (json['descriptionList'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList()
@@ -67,16 +66,14 @@ Map<String, dynamic> _$HuaYaoItemToJson(HuaYaoItem instance) =>
     };
 
 OthersHuaYao _$OthersHuaYaoFromJson(Map<String, dynamic> json) => OthersHuaYao(
-      json['name'] as String,
-      $enumDecode(_$JiXiongEnumEnumMap, json['jiXiong']),
-      (json['descriptionList'] as List<dynamic>?)
-          ?.map((e) => e as String)
-          .toList(),
-      (json['locationDescriptionList'] as List<dynamic>?)
-          ?.map((e) => e as String)
-          .toList(),
-      $enumDecode(_$ShenShaTypeEnumMap, json['type']),
-    );
+  json['name'] as String,
+  $enumDecode(_$JiXiongEnumEnumMap, json['jiXiong']),
+  (json['descriptionList'] as List<dynamic>?)?.map((e) => e as String).toList(),
+  (json['locationDescriptionList'] as List<dynamic>?)
+      ?.map((e) => e as String)
+      .toList(),
+  $enumDecode(_$ShenShaTypeEnumMap, json['type']),
+);
 
 Map<String, dynamic> _$OthersHuaYaoToJson(OthersHuaYao instance) =>
     <String, dynamic>{
@@ -97,8 +94,10 @@ TianGanHuaYao _$TianGanHuaYaoFromJson(Map<String, dynamic> json) =>
           .toList(),
       $enumDecode(_$ShenShaTypeEnumMap, json['type']),
       (json['locationMapper'] as Map<String, dynamic>).map(
-        (k, e) => MapEntry($enumDecode(_$TianGanEnumMap, k),
-            $enumDecode(_$EnumStarsEnumMap, e)),
+        (k, e) => MapEntry(
+          $enumDecode(_$TianGanEnumMap, k),
+          $enumDecode(_$EnumStarsEnumMap, e),
+        ),
       ),
     );
 
@@ -108,7 +107,8 @@ Map<String, dynamic> _$TianGanHuaYaoToJson(TianGanHuaYao instance) =>
       'jiXiong': _$JiXiongEnumEnumMap[instance.jiXiong]!,
       'type': _$ShenShaTypeEnumMap[instance.type]!,
       'locationMapper': instance.locationMapper.map(
-          (k, e) => MapEntry(_$TianGanEnumMap[k]!, _$EnumStarsEnumMap[e]!)),
+        (k, e) => MapEntry(_$TianGanEnumMap[k]!, _$EnumStarsEnumMap[e]!),
+      ),
     };
 
 const _$EnumStarsEnumMap = {
@@ -140,28 +140,29 @@ const _$TianGanEnumMap = {
 };
 
 DiZhiHuaYao _$DiZhiHuaYaoFromJson(Map<String, dynamic> json) => DiZhiHuaYao(
-      json['name'] as String,
-      $enumDecode(_$JiXiongEnumEnumMap, json['jiXiong']),
-      (json['descriptionList'] as List<dynamic>?)
-          ?.map((e) => e as String)
-          .toList(),
-      (json['locationDescriptionList'] as List<dynamic>?)
-          ?.map((e) => e as String)
-          .toList(),
-      $enumDecode(_$ShenShaTypeEnumMap, json['type']),
-      (json['locationMapper'] as Map<String, dynamic>).map(
-        (k, e) => MapEntry(
-            $enumDecode(_$DiZhiEnumMap, k), $enumDecode(_$EnumStarsEnumMap, e)),
-      ),
-    );
+  json['name'] as String,
+  $enumDecode(_$JiXiongEnumEnumMap, json['jiXiong']),
+  (json['descriptionList'] as List<dynamic>?)?.map((e) => e as String).toList(),
+  (json['locationDescriptionList'] as List<dynamic>?)
+      ?.map((e) => e as String)
+      .toList(),
+  $enumDecode(_$ShenShaTypeEnumMap, json['type']),
+  (json['locationMapper'] as Map<String, dynamic>).map(
+    (k, e) => MapEntry(
+      $enumDecode(_$DiZhiEnumMap, k),
+      $enumDecode(_$EnumStarsEnumMap, e),
+    ),
+  ),
+);
 
 Map<String, dynamic> _$DiZhiHuaYaoToJson(DiZhiHuaYao instance) =>
     <String, dynamic>{
       'name': instance.name,
       'jiXiong': _$JiXiongEnumEnumMap[instance.jiXiong]!,
       'type': _$ShenShaTypeEnumMap[instance.type]!,
-      'locationMapper': instance.locationMapper
-          .map((k, e) => MapEntry(_$DiZhiEnumMap[k]!, _$EnumStarsEnumMap[e]!)),
+      'locationMapper': instance.locationMapper.map(
+        (k, e) => MapEntry(_$DiZhiEnumMap[k]!, _$EnumStarsEnumMap[e]!),
+      ),
     };
 
 const _$DiZhiEnumMap = {

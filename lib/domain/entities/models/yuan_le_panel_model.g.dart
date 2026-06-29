@@ -7,13 +7,13 @@ part of 'yuan_le_panel_model.dart';
 // **************************************************************************
 
 YuanLePanel _$YuanLePanelFromJson(Map<String, dynamic> json) => YuanLePanel(
-      natalStars: (json['natalStars'] as List<dynamic>)
-          .map((e) => YuanLeStarInfo.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      transitStars: (json['transitStars'] as List<dynamic>?)
-          ?.map((e) => YuanLeStarInfo.fromJson(e as Map<String, dynamic>))
-          .toList(),
-    );
+  natalStars: (json['natalStars'] as List<dynamic>)
+      .map((e) => YuanLeStarInfo.fromJson(e as Map<String, dynamic>))
+      .toList(),
+  transitStars: (json['transitStars'] as List<dynamic>?)
+      ?.map((e) => YuanLeStarInfo.fromJson(e as Map<String, dynamic>))
+      .toList(),
+);
 
 Map<String, dynamic> _$YuanLePanelToJson(YuanLePanel instance) =>
     <String, dynamic>{
@@ -30,9 +30,13 @@ YuanLeStarInfo _$YuanLeStarInfoFromJson(Map<String, dynamic> json) =>
       gongDegree: (json['gongDegree'] as num).toDouble(),
       gongName: json['gongName'] as String,
       gongPositionStatus: $enumDecodeNullable(
-          _$EnumStarGongPositionStatusTypeEnumMap, json['gongPositionStatus']),
+        _$EnumStarGongPositionStatusTypeEnumMap,
+        json['gongPositionStatus'],
+      ),
       innPositionStatus: $enumDecodeNullable(
-          _$EnumStarGongPositionStatusTypeEnumMap, json['innPositionStatus']),
+        _$EnumStarGongPositionStatusTypeEnumMap,
+        json['innPositionStatus'],
+      ),
       walkingStatus: json['walkingStatus'] as String?,
       isBodyLifeMaster: json['isBodyLifeMaster'] as bool? ?? false,
       label: json['label'] as String? ?? '',

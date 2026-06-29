@@ -54,7 +54,8 @@ dependencies:
   xuan_logger:
     path: ../xuan-logger
   metaphysics_core:
-    path: ../xuan-metaphysics-core
+    git:
+      url: http://192.168.0.165:3000/xuan/metaphysics-core.git
   persistence_core:
     git:
       url: https://github.com/weijingtai/xuan-storage.git
@@ -75,6 +76,8 @@ dependencies:
     path: ../metaphysics-chart-ui
   theme:
     path: ../theme
+  calendar:
+    path: ../calendar
 
 dev_dependencies:
   flutter_test:

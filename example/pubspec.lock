@@ -925,7 +925,7 @@ packages:
     source: hosted
     version: "2.3.0"
   persistence_assets:
-    dependency: "direct overridden"
+    dependency: "direct main"
     description:
       path: "../../xuan-storage/assets"
       relative: true
@@ -946,12 +946,19 @@ packages:
     source: path
     version: "0.1.0"
   persistence_drift:
-    dependency: "direct overridden"
+    dependency: "direct main"
     description:
       path: "../../xuan-storage/drift"
       relative: true
     source: path
     version: "0.0.1"
+  persistence_preferences:
+    dependency: "direct main"
+    description:
+      path: "../../xuan-storage/preferences"
+      relative: true
+    source: path
+    version: "0.0.0"
   petitparser:
     dependency: transitive
     description:
@@ -1069,10 +1076,24 @@ packages:
       relative: true
     source: path
     version: "0.0.0"
+  repository_interface_daliuren:
+    dependency: transitive
+    description:
+      path: "../../repository-interface-daliuren"
+      relative: true
+    source: path
+    version: "0.0.0"
   repository_interface_four_zhu_card:
     dependency: transitive
     description:
       path: "../../repository-interface-four-zhu-card"
+      relative: true
+    source: path
+    version: "0.0.0"
+  repository_interface_liuyao:
+    dependency: transitive
+    description:
+      path: "../../repository-interface-liuyao"
       relative: true
     source: path
     version: "0.0.0"
@@ -1091,9 +1112,16 @@ packages:
     source: path
     version: "0.0.0"
   repository_interface_qizhengsiyu:
-    dependency: transitive
+    dependency: "direct main"
     description:
       path: "../../repository-interface-qizhengsiyu"
+      relative: true
+    source: path
+    version: "0.0.0"
+  repository_interface_record:
+    dependency: transitive
+    description:
+      path: "../../repository-interface-record"
       relative: true
     source: path
     version: "0.0.0"
@@ -1108,6 +1136,13 @@ packages:
     dependency: transitive
     description:
       path: "../../repository-interface-tiebanshenshu"
+      relative: true
+    source: path
+    version: "0.0.0"
+  repository_interface_ziweidoushu:
+    dependency: transitive
+    description:
+      path: "../../repository-interface-ziweidoushu"
       relative: true
     source: path
     version: "0.0.0"
@@ -1128,7 +1163,7 @@ packages:
     source: hosted
     version: "0.0.2"
   shared_preferences:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: shared_preferences
       sha256: c3025c5534b01739267eb7d76959bbc25a6d10f6988e1c2a3036940133dd10bf

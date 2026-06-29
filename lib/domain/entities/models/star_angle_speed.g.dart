@@ -13,7 +13,4 @@ StarAngleSpeed _$StarAngleSpeedFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$StarAngleSpeedToJson(StarAngleSpeed instance) =>
-    <String, dynamic>{
-      'angle': instance.angle,
-      'speed': instance.speed,
-    };
+    <String, dynamic>{'angle': instance.angle, 'speed': instance.speed};
