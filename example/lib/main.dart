@@ -8,6 +8,20 @@ import 'package:timezone/data/latest.dart' as tz;
 import 'package:qizhengsiyu/di.dart' as qizhengsiyu_di;
 import 'package:qizhengsiyu/navigator.dart' as qizhengsiyu_nav;
 import 'package:http/http.dart' as http;
+import 'package:persistence_drift/persistence_drift.dart';
+import 'package:persistence_preferences/persistence_preferences.dart';
+import 'package:persistence_assets/persistence_assets.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:drift/native.dart';
+import 'package:persistence_drift/qizhengsiyu/qizheng_module_registry.dart';
+import 'package:qizhengsiyu/qizhengsiyu_storage_dependencies.dart';
+import 'package:qizhengsiyu/data/datasources/local/app_database.dart';
+import 'package:qizhengsiyu/data/datasources/local/ge_ju_builtin_database.dart';
+import 'package:qizhengsiyu/data/datasources/local/ge_ju_sqlite_data_source.dart';
+import 'package:qizhengsiyu/data/datasources/local/daos/ge_ju_dao.dart';
+import 'package:qizhengsiyu/data/repositories/qizhengsiyu_pan_repository.dart';
+import 'package:qizhengsiyu/data/repositories/ge_ju_repository_impl.dart';
+import 'package:qizhengsiyu/data/datasources/local/services/ge_ju_school_service.dart';
 
 class _RootBundleAssetLoader implements AssetLoader {
   @override
@@ -56,11 +70,52 @@ Future<void> initServices() async {
 
 void main() async {
   await initServices();
+
+  final appDatabase = AppDatabase();
+  final geJuBuiltInDataSource =
+      GeJuSQLiteDataSource(GeJuBuiltInDatabase(createGeJuBuiltInConnection()));
+  final geJuDao = GeJuDao(appDatabase);
+
+  final newDb = PersistenceDriftDatabase(NativeDatabase.memory());
+  final prefs = await SharedPreferences.getInstance();
+  final sessionRepo = PreferencesAccountSessionRepository(prefs);
+  final accountDb = AccountDatabase(NativeDatabase.memory());
+  final identityLinkRepo = DriftAccountIdentityLinkRepository(accountDb);
+  
+  final bootstrapStore = DriftScopeBootstrapStore(newDb);
+  final ledger = DriftScopeLedger(db: newDb, bootstrapStore: bootstrapStore);
+  final resolver = ScopeResolver(
+    sessionRepository: sessionRepo,
+    identityLinkRepository: identityLinkRepo,
+    ledger: ledger,
+  );
+  final resolvedScope = await resolver.resolve();
+  final scopeUid = resolvedScope.scopeUid;
+
+  final ds = DriftRecordDataSource(newDb, scopeUid: scopeUid);
+  final store = LocalRecordRepository(ds, RecordAdapterRegistry([QiZhengModuleRegistry.codec()]));
+  final recordBackedRepository = QiZhengModuleRegistry.repository(store: store);
+
+  final deps = QiZhengSiYuStorageDependencies(
+    panRepository: QiZhengSiYuPanRepository(appDatabase: appDatabase),
+    recordRepository: recordBackedRepository,
+    geJuRepository:
+        GeJuRepositoryImpl(builtInDataSource: geJuBuiltInDataSource, dao: geJuDao),
+    geJuBuiltInDataSource: geJuBuiltInDataSource,
+    geJuSchoolService: GeJuSchoolService(dao: geJuDao),
+    shenSha: AssetsQiZhengShenShaRepository(),
+    huaYao: AssetsQiZhengHuaYaoRepository(),
+    starPositionStatus: const AssetsQiZhengStarPositionStatusRepository(),
+    historicalEphemeris: const AssetsQiZhengHistoricalEphemerisRepository(),
+    ephemerisResource: const AssetsQiZhengEphemerisResourceRepository(),
+    zhouTianModelRepository: const AssetsQiZhengZhouTianModelRepository(),
+  );
+
   runApp(
     MultiProvider(
       providers: [
         // 七政四余模块的依赖注入
-        ...qizhengsiyu_di.createProviders(),
+        ...qizhengsiyu_di.createProviders(deps),
       ],
       child: const MyApp(),
     ),

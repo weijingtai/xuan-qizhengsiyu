@@ -66,6 +66,15 @@ dependencies:
   drift_flutter: ^0.2.8
   decimal: ^3.2.4
   protobuf: ^6.0.0
+  persistence_preferences:
+    path: ../../xuan-storage/preferences
+  persistence_drift:
+    path: ../../xuan-storage/drift
+  persistence_assets:
+    path: ../../xuan-storage/assets
+  repository_interface_qizhengsiyu:
+    path: ../../repository-interface-qizhengsiyu
+  shared_preferences: ^2.2.0
 
 dev_dependencies:
   flutter_test:

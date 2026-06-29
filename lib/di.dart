@@ -1,5 +1,6 @@
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
+import 'package:repository_interface_qizhengsiyu/repository_interface_qizhengsiyu.dart';
 import 'package:qizhengsiyu/qizhengsiyu_storage_dependencies.dart';
 import 'package:qizhengsiyu/domain/repositories/shen_sha_repository_adapter.dart';
 import 'package:qizhengsiyu/domain/repositories/hua_yao_repository_adapter.dart';
@@ -72,6 +73,9 @@ List<SingleChildWidget> createProviders(QiZhengSiYuStorageDependencies deps) {
 
   return [
     // ============ Repositories (via adapters from injected ports) ============
+    Provider<QiZhengRecordRepository>(
+      create: (_) => deps.recordRepository,
+    ),
     Provider<ShenShaRepository>(
       create: (_) => shenShaRepo,
     ),

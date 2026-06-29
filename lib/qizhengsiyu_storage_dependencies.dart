@@ -1,4 +1,6 @@
-import 'package:repository_interface_qizhengsiyu/repository_interface_qizhengsiyu.dart';
+import 'package:repository_interface_qizhengsiyu/repository_interface_qizhengsiyu.dart'
+    hide GeJuBuiltInDataSource;
+import 'package:qizhengsiyu/data/datasources/local/ge_ju_local_data_source.dart';
 
 /// Dependency bundle for qizhengsiyu storage ports.
 ///
@@ -7,6 +9,7 @@ import 'package:repository_interface_qizhengsiyu/repository_interface_qizhengsiy
 class QiZhengSiYuStorageDependencies {
   const QiZhengSiYuStorageDependencies({
     required this.panRepository,
+    required this.recordRepository,
     required this.geJuRepository,
     required this.geJuBuiltInDataSource,
     required this.geJuSchoolService,
@@ -19,6 +22,7 @@ class QiZhengSiYuStorageDependencies {
   });
 
   final IQiZhengSiYuPanRepository panRepository;
+  final QiZhengRecordRepository recordRepository;
   final IGeJuRepository geJuRepository;
   final GeJuBuiltInDataSource geJuBuiltInDataSource;
   final GeJuSchoolServicePort geJuSchoolService;

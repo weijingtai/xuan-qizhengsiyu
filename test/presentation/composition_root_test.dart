@@ -218,6 +218,7 @@ void main() {
 QiZhengSiYuStorageDependencies _buildFakeDeps() {
   return QiZhengSiYuStorageDependencies(
     panRepository: FakeQiZhengSiYuPanRepository(),
+    recordRepository: FakeQiZhengRecordRepository(),
     geJuRepository: FakeGeJuRepository(),
     geJuBuiltInDataSource: FakeGeJuBuiltInDataSource(),
     geJuSchoolService: FakeGeJuSchoolServicePort(),

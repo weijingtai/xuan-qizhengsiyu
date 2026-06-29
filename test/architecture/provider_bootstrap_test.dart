@@ -3,7 +3,12 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
 import 'package:qizhengsiyu/di.dart';
 import 'package:qizhengsiyu/qizhengsiyu_storage_dependencies.dart';
-import 'package:repository_interface_qizhengsiyu/repository_interface_qizhengsiyu.dart';
+import 'package:repository_interface_qizhengsiyu/repository_interface_qizhengsiyu.dart'
+    hide GeJuBuiltInDataSource;
+import 'package:qizhengsiyu/data/datasources/local/ge_ju_local_data_source.dart';
+import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_rule.dart';
+import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_annotation.dart';
+import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_condition_set.dart';
 import 'package:qizhengsiyu/presentation/viewmodels/qi_zheng_si_yu_viewmodel.dart';
 import 'package:qizhengsiyu/presentation/viewmodels/ge_ju_list_viewmodel.dart';
 
@@ -19,6 +24,7 @@ void main() {
     late FakeQiZhengHistoricalEphemerisRepository fakeHistoricalEphemeris;
     late FakeQiZhengEphemerisResourceRepository fakeEphemerisResource;
     late FakeQiZhengZhouTianModelRepository fakeZhouTianModelRepository;
+    late FakeQiZhengRecordRepository fakeRecordRepository;
     late QiZhengSiYuStorageDependencies fakeDeps;
 
     setUp(() {
@@ -32,9 +38,11 @@ void main() {
       fakeHistoricalEphemeris = FakeQiZhengHistoricalEphemerisRepository();
       fakeEphemerisResource = FakeQiZhengEphemerisResourceRepository();
       fakeZhouTianModelRepository = FakeQiZhengZhouTianModelRepository();
+      fakeRecordRepository = FakeQiZhengRecordRepository();
 
       fakeDeps = QiZhengSiYuStorageDependencies(
         panRepository: fakePanRepository,
+        recordRepository: fakeRecordRepository,
         geJuRepository: fakeGeJuRepository,
         geJuBuiltInDataSource: fakeGeJuBuiltInDataSource,
         geJuSchoolService: fakeGeJuSchoolServicePort,
@@ -231,13 +239,13 @@ class FakeGeJuBuiltInDataSource implements GeJuBuiltInDataSource {
   Future<List<Map<String, dynamic>>> loadJsonFromAsset(String assetPath) async => const [];
 
   @override
-  Future<List<GeJuRuleContract>> loadBuiltInRules() async => const [];
+  Future<List<GeJuRule>> loadBuiltInRules() async => const [];
 
   @override
-  Future<List<GeJuAnnotationContract>> loadBuiltInAnnotations() async => const [];
+  Future<List<GeJuAnnotation>> loadBuiltInAnnotations() async => const [];
 
   @override
-  Future<List<GeJuConditionSetContract>> loadBuiltInConditionSets() async => const [];
+  Future<List<GeJuConditionSet>> loadBuiltInConditionSets() async => const [];
 }
 
 class FakeGeJuSchoolServicePort implements GeJuSchoolServicePort {
@@ -315,4 +323,21 @@ class FakeQiZhengEphemerisResourceRepository implements QiZhengEphemerisResource
 class FakeQiZhengZhouTianModelRepository implements QiZhengZhouTianModelRepository {
   @override
   Future<List<QiZhengZhouTianModelContract>> loadBuiltInZhouTianModels() async => const [];
+}
+
+class FakeQiZhengRecordRepository implements QiZhengRecordRepository {
+  @override
+  Future<String> saveRecord(QiZhengSiYuPanContract record) async => record.uuid;
+
+  @override
+  Future<List<QiZhengSiYuPanContract>> getAllRecords() async => const [];
+
+  @override
+  Future<QiZhengSiYuPanContract?> getRecordByUuid(String uuid) async => null;
+
+  @override
+  Future<bool> softDeleteRecord(String uuid) async => true;
+
+  @override
+  Stream<List<QiZhengSiYuPanContract>> watchAllRecords() => Stream.value(const []);
 }
