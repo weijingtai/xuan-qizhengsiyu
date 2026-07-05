@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:qizhengsiyu/enums/enum_panel_system_type.dart';
 import 'package:qizhengsiyu/theme/app_theme.dart';
-import 'package:qizhengsiyu/enums/enum_school.dart';
 import 'package:qizhengsiyu/enums/enum_rahu_ketu_convention.dart';
+import 'package:qizhengsiyu/enums/enum_zi_qi_algorithm.dart';
 
 import '../../../domain/entities/models/panel_config.dart';
 
@@ -37,6 +37,12 @@ class _CustomConfigSectionState extends State<CustomConfigSection> {
   // 罗计交点约定
   late EnumRahuKetuConvention _rahuKetuConvention;
 
+  // 紫气算法与配置
+  late EnumZiQiAlgorithm _ziQiAlgorithm;
+  late EnumZiQiPeriod _ziQiPeriod;
+  late EnumZiQiEpochSet _ziQiEpochSet;
+  late EnumZiQiChiDaoStandard _ziQiChiDaoStandard;
+
   // 是否显示神煞
   // late bool _showGods;
 
@@ -57,6 +63,14 @@ class _CustomConfigSectionState extends State<CustomConfigSection> {
         widget.initialConfig?.panelSystemType ?? PanelSystemType.Tropical;
     _rahuKetuConvention = widget.initialConfig?.rahuKetuConvention ??
         EnumRahuKetuConvention.luoJiangJiSheng;
+    _ziQiAlgorithm = widget.initialConfig?.ziQiAlgorithm ??
+        EnumZiQiAlgorithm.guoLaoQinTang;
+    _ziQiPeriod = widget.initialConfig?.ziQiPeriod ??
+        EnumZiQiPeriod.years28;
+    _ziQiEpochSet = widget.initialConfig?.ziQiEpochSet ??
+        EnumZiQiEpochSet.shouShiNvXiu;
+    _ziQiChiDaoStandard = widget.initialConfig?.ziQiChiDaoStandard ??
+        EnumZiQiChiDaoStandard.moira;
     _classicBook = ["七政四余星道要诀"]; // 暂时硬编码，因为PanelConfig暂时不支持
     // _showGods = widget.initialConfig?.sh ?? true;
     // _showPalaces = widget.initialConfig?.showPalaces ?? true;
@@ -80,6 +94,10 @@ class _CustomConfigSectionState extends State<CustomConfigSection> {
       lifeCountingToGong: base.lifeCountingToGong,
       bodyCountingToGong: base.bodyCountingToGong,
       rahuKetuConvention: _rahuKetuConvention,
+      ziQiAlgorithm: _ziQiAlgorithm,
+      ziQiPeriod: _ziQiPeriod,
+      ziQiEpochSet: _ziQiEpochSet,
+      ziQiChiDaoStandard: _ziQiChiDaoStandard,
     );
     widget.onConfigChanged(config);
   }
@@ -279,6 +297,181 @@ class _CustomConfigSectionState extends State<CustomConfigSection> {
                     ],
                   ),
                 ),
+            ],
+          ),
+        ),
+        const SizedBox(height: AppTheme.spacing16),
+
+        // 紫气算法与配置选择
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(AppTheme.borderRadius),
+            border: Border.all(color: const Color(0xFFEEEEEE)),
+          ),
+          padding: const EdgeInsets.all(AppTheme.spacing16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                '紫气算法与历元参数',
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.w500,
+                    ),
+              ),
+              const SizedBox(height: AppTheme.spacing12),
+
+              // 紫气算法
+              Text(
+                '紫气算法流派',
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: AppTheme.secondaryText,
+                    ),
+              ),
+              const SizedBox(height: AppTheme.spacing8),
+              DropdownButtonFormField<EnumZiQiAlgorithm>(
+                value: _ziQiAlgorithm,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  contentPadding: const EdgeInsets.symmetric(
+                    horizontal: AppTheme.spacing16,
+                    vertical: AppTheme.spacing12,
+                  ),
+                ),
+                items: EnumZiQiAlgorithm.values
+                    .map((algo) => DropdownMenuItem(
+                          value: algo,
+                          child: Text(algo.name),
+                        ))
+                    .toList(),
+                onChanged: (value) {
+                  setState(() {
+                    _ziQiAlgorithm = value!;
+                  });
+                  _updateConfig();
+                },
+              ),
+              const SizedBox(height: AppTheme.spacing16),
+
+              // 紫气周期
+              Text(
+                '紫气行度周期',
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: AppTheme.secondaryText,
+                    ),
+              ),
+              const SizedBox(height: AppTheme.spacing8),
+              Row(
+                children: [
+                  Expanded(
+                    child: _buildRadioTile(
+                      title: '28年十闰',
+                      subtitle: '周期 10227.1792 日',
+                      value: EnumZiQiPeriod.years28,
+                      groupValue: _ziQiPeriod,
+                      onChanged: (value) {
+                        setState(() {
+                          _ziQiPeriod = value!;
+                        });
+                        _updateConfig();
+                      },
+                    ),
+                  ),
+                  Expanded(
+                    child: _buildRadioTile(
+                      title: '29年一闰',
+                      subtitle: '周期 10592.0 日',
+                      value: EnumZiQiPeriod.years29,
+                      groupValue: _ziQiPeriod,
+                      onChanged: (value) {
+                        setState(() {
+                          _ziQiPeriod = value!;
+                        });
+                        _updateConfig();
+                      },
+                    ),
+                  ),
+                ],
+              ),
+
+              // 果老历元常数集
+              if (_ziQiAlgorithm == EnumZiQiAlgorithm.guoLaoQinTang) ...[
+                const SizedBox(height: AppTheme.spacing16),
+                Text(
+                  '果老历元常数集',
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: AppTheme.secondaryText,
+                      ),
+                ),
+                const SizedBox(height: AppTheme.spacing8),
+                DropdownButtonFormField<EnumZiQiEpochSet>(
+                  value: _ziQiEpochSet,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: AppTheme.spacing16,
+                      vertical: AppTheme.spacing12,
+                    ),
+                  ),
+                  items: EnumZiQiEpochSet.values
+                      .map((set) => DropdownMenuItem(
+                            value: set,
+                            child: Text(set.name),
+                          ))
+                      .toList(),
+                  onChanged: (value) {
+                    setState(() {
+                      _ziQiEpochSet = value!;
+                    });
+                    _updateConfig();
+                  },
+                ),
+              ],
+
+              // 天赤道·女宿紫气标准
+              if (_coordinateSystem == CelestialCoordinateSystem.Equatorial &&
+                  _ziQiEpochSet == EnumZiQiEpochSet.shouShiNvXiu &&
+                  _ziQiAlgorithm == EnumZiQiAlgorithm.guoLaoQinTang) ...[
+                const SizedBox(height: AppTheme.spacing16),
+                Text(
+                  '天赤道·女宿紫气标准',
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: AppTheme.secondaryText,
+                      ),
+                ),
+                const SizedBox(height: AppTheme.spacing8),
+                DropdownButtonFormField<EnumZiQiChiDaoStandard>(
+                  value: _ziQiChiDaoStandard,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: AppTheme.spacing16,
+                      vertical: AppTheme.spacing12,
+                    ),
+                    helperText: _ziQiChiDaoStandard == EnumZiQiChiDaoStandard.moira
+                        ? 'Moira 实测：与主流软件排盘对齐，锚定2026翼宿点。'
+                        : '授时正典：严格符合《授时历》古籍典籍记载。',
+                  ),
+                  items: EnumZiQiChiDaoStandard.values
+                      .map((std) => DropdownMenuItem(
+                            value: std,
+                            child: Text(std.name),
+                          ))
+                      .toList(),
+                  onChanged: (value) {
+                    setState(() {
+                      _ziQiChiDaoStandard = value!;
+                    });
+                    _updateConfig();
+                  },
+                ),
+              ],
             ],
           ),
         ),

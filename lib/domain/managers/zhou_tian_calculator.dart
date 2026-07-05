@@ -24,6 +24,17 @@ class ZhouTianCalculator {
   final int totalDegreesInt;
   final ICelestialProjector projector;
 
+  static double getStartEquatorialLon(
+      ZhouTianModel model, Enum28Constellations constellation) {
+    final calc = ZhouTianCalculator(zhouTianModel: model);
+    final angles = calc.calculateConstellationAngles();
+    final obj = angles[constellation];
+    if (obj == null) {
+      throw ArgumentError("星宿 ${constellation.name} 未在周天中对齐定位");
+    }
+    return obj.absStartContinuous;
+  }
+
   ZhouTianCalculator({required this.zhouTianModel})
       : totalDegreesInt =
             (zhouTianModel.totalDegree * ZhouTianCalculator.DEGREE_MULTIPLIER)

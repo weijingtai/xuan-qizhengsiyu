@@ -6,53 +6,69 @@ part of 'panel_config.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-BasePanelConfig _$BasePanelConfigFromJson(Map<String, dynamic> json) =>
-    BasePanelConfig(
-      celestialCoordinateSystem: $enumDecode(
-        _$CelestialCoordinateSystemEnumMap,
-        json['celestialCoordinateSystem'],
-      ),
-      houseDivisionSystem: $enumDecode(
-        _$HouseDivisionSystemEnumMap,
-        json['houseDivisionSystem'],
-      ),
-      panelSystemType: $enumDecode(
-        _$PanelSystemTypeEnumMap,
-        json['panelSystemType'],
-      ),
-      constellationSystemType: $enumDecode(
-        _$ConstellationSystemTypeEnumMap,
-        json['constellationSystemType'],
-      ),
-      settleLifeType: $enumDecode(
-        _$EnumSettleLifeTypeEnumMap,
-        json['settleLifeType'],
-      ),
-      settleBodyType: $enumDecode(
-        _$EnumSettleBodyTypeEnumMap,
-        json['settleBodyType'],
-      ),
-      islifeGongBySunRealTimeLocation:
-          json['islifeGongBySunRealTimeLocation'] as bool,
-      lifeCountingToGong:
-          $enumDecodeNullable(
-            _$EnumTwelveGongEnumMap,
-            json['lifeCountingToGong'],
-          ) ??
-          EnumTwelveGong.Mao,
-      bodyCountingToGong:
-          $enumDecodeNullable(
-            _$EnumTwelveGongEnumMap,
-            json['bodyCountingToGong'],
-          ) ??
-          EnumTwelveGong.You,
-      rahuKetuConvention:
-          $enumDecodeNullable(
-            _$EnumRahuKetuConventionEnumMap,
-            json['rahuKetuConvention'],
-          ) ??
-          EnumRahuKetuConvention.luoJiangJiSheng,
-    );
+BasePanelConfig _$BasePanelConfigFromJson(
+  Map<String, dynamic> json,
+) => BasePanelConfig(
+  celestialCoordinateSystem: $enumDecode(
+    _$CelestialCoordinateSystemEnumMap,
+    json['celestialCoordinateSystem'],
+  ),
+  houseDivisionSystem: $enumDecode(
+    _$HouseDivisionSystemEnumMap,
+    json['houseDivisionSystem'],
+  ),
+  panelSystemType: $enumDecode(
+    _$PanelSystemTypeEnumMap,
+    json['panelSystemType'],
+  ),
+  constellationSystemType: $enumDecode(
+    _$ConstellationSystemTypeEnumMap,
+    json['constellationSystemType'],
+  ),
+  settleLifeType: $enumDecode(
+    _$EnumSettleLifeTypeEnumMap,
+    json['settleLifeType'],
+  ),
+  settleBodyType: $enumDecode(
+    _$EnumSettleBodyTypeEnumMap,
+    json['settleBodyType'],
+  ),
+  islifeGongBySunRealTimeLocation:
+      json['islifeGongBySunRealTimeLocation'] as bool,
+  lifeCountingToGong:
+      $enumDecodeNullable(
+        _$EnumTwelveGongEnumMap,
+        json['lifeCountingToGong'],
+      ) ??
+      EnumTwelveGong.Mao,
+  bodyCountingToGong:
+      $enumDecodeNullable(
+        _$EnumTwelveGongEnumMap,
+        json['bodyCountingToGong'],
+      ) ??
+      EnumTwelveGong.You,
+  rahuKetuConvention:
+      $enumDecodeNullable(
+        _$EnumRahuKetuConventionEnumMap,
+        json['rahuKetuConvention'],
+      ) ??
+      EnumRahuKetuConvention.luoJiangJiSheng,
+  ziQiAlgorithm:
+      $enumDecodeNullable(_$EnumZiQiAlgorithmEnumMap, json['ziQiAlgorithm']) ??
+      EnumZiQiAlgorithm.guoLaoQinTang,
+  ziQiPeriod:
+      $enumDecodeNullable(_$EnumZiQiPeriodEnumMap, json['ziQiPeriod']) ??
+      EnumZiQiPeriod.years28,
+  ziQiEpochSet:
+      $enumDecodeNullable(_$EnumZiQiEpochSetEnumMap, json['ziQiEpochSet']) ??
+      EnumZiQiEpochSet.shouShiNvXiu,
+  ziQiChiDaoStandard:
+      $enumDecodeNullable(
+        _$EnumZiQiChiDaoStandardEnumMap,
+        json['ziQiChiDaoStandard'],
+      ) ??
+      EnumZiQiChiDaoStandard.moira,
+);
 
 Map<String, dynamic> _$BasePanelConfigToJson(
   BasePanelConfig instance,
@@ -71,6 +87,11 @@ Map<String, dynamic> _$BasePanelConfigToJson(
   'islifeGongBySunRealTimeLocation': instance.islifeGongBySunRealTimeLocation,
   'rahuKetuConvention':
       _$EnumRahuKetuConventionEnumMap[instance.rahuKetuConvention]!,
+  'ziQiAlgorithm': _$EnumZiQiAlgorithmEnumMap[instance.ziQiAlgorithm]!,
+  'ziQiPeriod': _$EnumZiQiPeriodEnumMap[instance.ziQiPeriod]!,
+  'ziQiEpochSet': _$EnumZiQiEpochSetEnumMap[instance.ziQiEpochSet]!,
+  'ziQiChiDaoStandard':
+      _$EnumZiQiChiDaoStandardEnumMap[instance.ziQiChiDaoStandard]!,
 };
 
 const _$CelestialCoordinateSystemEnumMap = {
@@ -130,6 +151,27 @@ const _$EnumTwelveGongEnumMap = {
 const _$EnumRahuKetuConventionEnumMap = {
   EnumRahuKetuConvention.luoJiangJiSheng: '罗降计升',
   EnumRahuKetuConvention.luoShengJiJiang: '罗升计降',
+};
+
+const _$EnumZiQiAlgorithmEnumMap = {
+  EnumZiQiAlgorithm.guoLaoQinTang: '果老琴堂',
+  EnumZiQiAlgorithm.yelvTianguan: '耶律天官',
+  EnumZiQiAlgorithm.shixian: '清时宪',
+};
+
+const _$EnumZiQiPeriodEnumMap = {
+  EnumZiQiPeriod.years28: 'years28',
+  EnumZiQiPeriod.years29: 'years29',
+};
+
+const _$EnumZiQiEpochSetEnumMap = {
+  EnumZiQiEpochSet.shouShiNvXiu: '授时女宿',
+  EnumZiQiEpochSet.fuTianJiXiu: '符天箕宿',
+};
+
+const _$EnumZiQiChiDaoStandardEnumMap = {
+  EnumZiQiChiDaoStandard.shouShiOrthodox: '授时正典',
+  EnumZiQiChiDaoStandard.moira: 'Moira实测',
 };
 
 FatePanelConfig _$FatePanelConfigFromJson(Map<String, dynamic> json) =>
@@ -198,6 +240,21 @@ PanelConfig _$PanelConfigFromJson(Map<String, dynamic> json) => PanelConfig(
         json['rahuKetuConvention'],
       ) ??
       EnumRahuKetuConvention.luoJiangJiSheng,
+  ziQiAlgorithm:
+      $enumDecodeNullable(_$EnumZiQiAlgorithmEnumMap, json['ziQiAlgorithm']) ??
+      EnumZiQiAlgorithm.guoLaoQinTang,
+  ziQiPeriod:
+      $enumDecodeNullable(_$EnumZiQiPeriodEnumMap, json['ziQiPeriod']) ??
+      EnumZiQiPeriod.years28,
+  ziQiEpochSet:
+      $enumDecodeNullable(_$EnumZiQiEpochSetEnumMap, json['ziQiEpochSet']) ??
+      EnumZiQiEpochSet.shouShiNvXiu,
+  ziQiChiDaoStandard:
+      $enumDecodeNullable(
+        _$EnumZiQiChiDaoStandardEnumMap,
+        json['ziQiChiDaoStandard'],
+      ) ??
+      EnumZiQiChiDaoStandard.moira,
 );
 
 Map<String, dynamic> _$PanelConfigToJson(
@@ -217,4 +274,9 @@ Map<String, dynamic> _$PanelConfigToJson(
   'islifeGongBySunRealTimeLocation': instance.islifeGongBySunRealTimeLocation,
   'rahuKetuConvention':
       _$EnumRahuKetuConventionEnumMap[instance.rahuKetuConvention]!,
+  'ziQiAlgorithm': _$EnumZiQiAlgorithmEnumMap[instance.ziQiAlgorithm]!,
+  'ziQiPeriod': _$EnumZiQiPeriodEnumMap[instance.ziQiPeriod]!,
+  'ziQiEpochSet': _$EnumZiQiEpochSetEnumMap[instance.ziQiEpochSet]!,
+  'ziQiChiDaoStandard':
+      _$EnumZiQiChiDaoStandardEnumMap[instance.ziQiChiDaoStandard]!,
 };

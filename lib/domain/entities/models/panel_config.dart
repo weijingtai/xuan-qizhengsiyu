@@ -2,6 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:qizhengsiyu/enums/enum_settle_life_body.dart';
 import 'package:qizhengsiyu/enums/enum_twelve_gong.dart';
 import 'package:qizhengsiyu/enums/enum_rahu_ketu_convention.dart';
+import 'package:qizhengsiyu/enums/enum_zi_qi_algorithm.dart';
 
 import '../../../enums/enum_panel_system_type.dart';
 import 'fate_dong_wei_da_xian.dart';
@@ -40,6 +41,22 @@ class BasePanelConfig {
   @JsonKey(defaultValue: EnumRahuKetuConvention.luoJiangJiSheng)
   EnumRahuKetuConvention rahuKetuConvention;
 
+  /// 紫气算法流派
+  @JsonKey(defaultValue: EnumZiQiAlgorithm.guoLaoQinTang)
+  EnumZiQiAlgorithm ziQiAlgorithm;
+
+  /// 紫气周期
+  @JsonKey(defaultValue: EnumZiQiPeriod.years28)
+  EnumZiQiPeriod ziQiPeriod;
+
+  /// 果老紫气历元常数集
+  @JsonKey(defaultValue: EnumZiQiEpochSet.shouShiNvXiu)
+  EnumZiQiEpochSet ziQiEpochSet;
+
+  /// 天赤道·女宿紫气的标准
+  @JsonKey(defaultValue: EnumZiQiChiDaoStandard.moira)
+  EnumZiQiChiDaoStandard ziQiChiDaoStandard;
+
   BasePanelConfig({
     /// 星道制式
     required this.celestialCoordinateSystem,
@@ -62,6 +79,10 @@ class BasePanelConfig {
     this.lifeCountingToGong = EnumTwelveGong.Mao,
     this.bodyCountingToGong = EnumTwelveGong.You,
     this.rahuKetuConvention = EnumRahuKetuConvention.luoJiangJiSheng,
+    this.ziQiAlgorithm = EnumZiQiAlgorithm.guoLaoQinTang,
+    this.ziQiPeriod = EnumZiQiPeriod.years28,
+    this.ziQiEpochSet = EnumZiQiEpochSet.shouShiNvXiu,
+    this.ziQiChiDaoStandard = EnumZiQiChiDaoStandard.moira,
   });
 
   // copy with
@@ -85,6 +106,10 @@ class BasePanelConfig {
     EnumSettleBodyType? settleBodyType,
     bool? lifeGongBySunRealTimeLocation,
     EnumRahuKetuConvention? rahuKetuConvention,
+    EnumZiQiAlgorithm? ziQiAlgorithm,
+    EnumZiQiPeriod? ziQiPeriod,
+    EnumZiQiEpochSet? ziQiEpochSet,
+    EnumZiQiChiDaoStandard? ziQiChiDaoStandard,
   }) {
     return BasePanelConfig(
       celestialCoordinateSystem:
@@ -93,11 +118,15 @@ class BasePanelConfig {
       panelSystemType: panelSystemType ?? this.panelSystemType,
       constellationSystemType:
           constellationSystemType ?? this.constellationSystemType,
-      settleLifeType: celestialSettleLifeType ?? this.settleLifeType,
+      settleLifeType: celestialSettleLifeType ?? settleLifeType,
       settleBodyType: settleBodyType ?? this.settleBodyType,
       islifeGongBySunRealTimeLocation:
-          lifeGongBySunRealTimeLocation ?? this.islifeGongBySunRealTimeLocation,
+          lifeGongBySunRealTimeLocation ?? islifeGongBySunRealTimeLocation,
       rahuKetuConvention: rahuKetuConvention ?? this.rahuKetuConvention,
+      ziQiAlgorithm: ziQiAlgorithm ?? this.ziQiAlgorithm,
+      ziQiPeriod: ziQiPeriod ?? this.ziQiPeriod,
+      ziQiEpochSet: ziQiEpochSet ?? this.ziQiEpochSet,
+      ziQiChiDaoStandard: ziQiChiDaoStandard ?? this.ziQiChiDaoStandard,
     );
   }
 
@@ -117,7 +146,11 @@ class BasePanelConfig {
         settleLifeType: EnumSettleLifeType.Mao, // 定命宫方法
         settleBodyType: EnumSettleBodyType.moon, // 定身宫方法
         islifeGongBySunRealTimeLocation: true, // 是否根据太阳实时位置定命宫
-        rahuKetuConvention: EnumRahuKetuConvention.luoJiangJiSheng);
+        rahuKetuConvention: EnumRahuKetuConvention.luoJiangJiSheng,
+        ziQiAlgorithm: EnumZiQiAlgorithm.guoLaoQinTang,
+        ziQiPeriod: EnumZiQiPeriod.years28,
+        ziQiEpochSet: EnumZiQiEpochSet.shouShiNvXiu,
+        ziQiChiDaoStandard: EnumZiQiChiDaoStandard.moira);
   }
 }
 
@@ -149,6 +182,10 @@ class PanelConfig extends BasePanelConfig {
     super.lifeCountingToGong,
     super.bodyCountingToGong,
     super.rahuKetuConvention,
+    super.ziQiAlgorithm,
+    super.ziQiPeriod,
+    super.ziQiEpochSet,
+    super.ziQiChiDaoStandard,
   });
 
   factory PanelConfig.fromJson(Map<String, dynamic> json) =>
@@ -166,6 +203,10 @@ class PanelConfig extends BasePanelConfig {
       settleBodyType: EnumSettleBodyType.moon,
       islifeGongBySunRealTimeLocation: true,
       rahuKetuConvention: EnumRahuKetuConvention.luoJiangJiSheng,
+      ziQiAlgorithm: EnumZiQiAlgorithm.guoLaoQinTang,
+      ziQiPeriod: EnumZiQiPeriod.years28,
+      ziQiEpochSet: EnumZiQiEpochSet.shouShiNvXiu,
+      ziQiChiDaoStandard: EnumZiQiChiDaoStandard.moira,
     );
   }
 }
