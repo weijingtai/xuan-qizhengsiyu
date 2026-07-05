@@ -13,6 +13,9 @@ import 'package:timezone/timezone.dart' as tz;
 import '../entities/models/panel_stars_info.dart';
 import '../entities/models/star_angle_raw_info.dart';
 import 'i_calculation_engine.dart';
+import 'siyu/si_yu_calculator.dart';
+import 'siyu/sweph_si_yu_ephemeris_source.dart';
+import 'siyu/ziqi/zi_qi_algorithm.dart';
 
 /// 基于SWEPH（瑞士星历表）的现代计算引擎。
 ///
@@ -62,7 +65,7 @@ class SwephEngine implements ICalculationEngine {
   List<StarPositionRawData> _transformToStarPositionRawData(
       StarsAngle starsAngle, BasePanelConfig config) {
     final List<StarPositionRawData> list = [];
-    final starMap = starsAngle.toMap();
+    final starMap = starsAngle.toMap(convention: config.rahuKetuConvention);
 
     starMap.forEach((star, angleSpeed) {
       final rawInfo = StarAngleRawInfo(
@@ -85,27 +88,6 @@ class SwephEngine implements ICalculationEngine {
     double roundHelper(double number) {
       num factor = pow(10, 2);
       return ((number * factor).round() / factor);
-    }
-
-    double ziQi() {
-      tz.TZDateTime baseShangHaiTime =
-          tz.TZDateTime(tz.getLocation('Asia/Shanghai'), 2013, 4, 9, 2, 58);
-      const angleForEachMinutes = 0.0352 / (24 * 60);
-
-      if (datetime.isAtSameMomentAs(baseShangHaiTime)) {
-        return 0;
-      }
-
-      var diffInMinutes = datetime.isBefore(baseShangHaiTime)
-          ? baseShangHaiTime.difference(datetime)
-          : datetime.difference(baseShangHaiTime);
-
-      double result = diffInMinutes.inMinutes * angleForEachMinutes;
-      if (result >= 360) {
-        result -= 360;
-      }
-
-      return result;
     }
 
     Sweph.swe_set_topo(observerPosition.longitude, observerPosition.latitude,
@@ -135,16 +117,11 @@ class SwephEngine implements ICalculationEngine {
     var saturn = Sweph.swe_calc(julianDay, HeavenlyBody.SE_SATURN,
         SwephFlag.SEFLG_SWIEPH | SwephFlag.SEFLG_SPEED);
 
-    var northNode = Sweph.swe_calc(
-        julianDay, HeavenlyBody.SE_MEAN_NODE, SwephFlag.SEFLG_SWIEPH);
-    double northNodeAngle = northNode.longitude;
-    double southNodeAngle = (northNodeAngle + 180) % 360;
-    var lilith = Sweph.swe_calc(
-        julianDay, HeavenlyBody.SE_MEAN_APOG, SwephFlag.SEFLG_SWIEPH);
+    final siyu = const SiYuCalculator(
+      source: SwephSiYuEphemerisSource(),
+      ziQiAlgorithm: _TransitionZiQiAlgorithm(),
+    ).compute(julianDay: julianDay, birthDate: datetime);
 
-    // This is a placeholder for the actual StarsAngle class which I cannot see.
-    // I am assuming it exists and has these properties.
-    // In a real scenario, I would read the definition of StarsAngle first.
     return StarsAngle(
         moon: roundHelper(lunar.longitude),
         sun: roundHelper(sun.longitude),
@@ -158,9 +135,34 @@ class SwephEngine implements ICalculationEngine {
         marsSpeed: roundHelper(mars.speedInLongitude),
         saturn: roundHelper(saturn.longitude),
         saturnSpeed: roundHelper(saturn.speedInLongitude),
-        northNode: roundHelper(northNodeAngle),
-        southNode: roundHelper(southNodeAngle),
-        lilith: roundHelper(lilith.longitude),
-        qi: roundHelper(ziQi()));
+        northNode: roundHelper(siyu.northNode),
+        southNode: roundHelper(siyu.southNode),
+        lilith: roundHelper(siyu.lilith),
+        qi: roundHelper(siyu.qi));
+  }
+}
+
+class _TransitionZiQiAlgorithm implements ZiQiAlgorithm {
+  const _TransitionZiQiAlgorithm();
+  @override
+  String get id => 'transition';
+  @override
+  double computeLongitude({required double julianDay, required DateTime datetime}) {
+    final tz.TZDateTime baseShangHaiTime =
+        tz.TZDateTime(tz.getLocation('Asia/Shanghai'), 2013, 4, 9, 2, 58);
+    const angleForEachMinutes = 0.0352 / (24 * 60);
+
+    if (datetime.isAtSameMomentAs(baseShangHaiTime)) {
+      return 0;
+    }
+    final diffInMinutes = datetime.isBefore(baseShangHaiTime)
+        ? baseShangHaiTime.difference(datetime)
+        : datetime.difference(baseShangHaiTime);
+
+    double result = diffInMinutes.inMinutes * angleForEachMinutes;
+    if (result >= 360) {
+      result -= 360;
+    }
+    return result;
   }
 }
