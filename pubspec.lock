@@ -707,7 +707,7 @@ packages:
     source: path
     version: "0.0.1"
   persistence_domain:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       path: "../xuan-domain"
       relative: true
@@ -814,7 +814,7 @@ packages:
     source: path
     version: "0.0.0"
   repository_interface_four_zhu_card:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       path: "../repository-interface-four-zhu-card"
       relative: true
@@ -1199,6 +1199,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.0"
+  xuan_common_ui:
+    dependency: transitive
+    description:
+      path: "../xuan-common-ui"
+      relative: true
+    source: path
+    version: "1.0.0"
   xuan_config:
     dependency: "direct dev"
     description:
@@ -1228,7 +1235,7 @@ packages:
     source: path
     version: "1.0.0"
   xuan_time_location:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       path: "../xuan-time-location"
       relative: true

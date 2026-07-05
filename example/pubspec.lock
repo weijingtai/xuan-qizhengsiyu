@@ -146,7 +146,7 @@ packages:
     source: hosted
     version: "8.12.3"
   calendar:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       path: "../../calendar"
       relative: true
@@ -939,7 +939,7 @@ packages:
     source: path
     version: "0.0.1"
   persistence_domain:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       path: "../../xuan-domain"
       relative: true
@@ -1084,7 +1084,7 @@ packages:
     source: path
     version: "0.0.0"
   repository_interface_four_zhu_card:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       path: "../../repository-interface-four-zhu-card"
       relative: true
@@ -1367,7 +1367,7 @@ packages:
     source: hosted
     version: "0.7.7"
   theme:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       path: "../../theme"
       relative: true
@@ -1525,6 +1525,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.6.1"
+  xuan_common_ui:
+    dependency: transitive
+    description:
+      path: "../../xuan-common-ui"
+      relative: true
+    source: path
+    version: "1.0.0"
   xuan_config:
     dependency: transitive
     description:
@@ -1554,7 +1561,7 @@ packages:
     source: path
     version: "1.0.0"
   xuan_time_location:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       path: "../../xuan-time-location"
       relative: true

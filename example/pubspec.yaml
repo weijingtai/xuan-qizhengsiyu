@@ -115,3 +115,13 @@ dependency_overrides:
     path: ../../xuan-metaphysics-core
   xuan_gua_core:
     path: ../../xuan-gua-core
+  theme:
+    path: ../../theme
+  repository_interface_four_zhu_card:
+    path: ../../repository-interface-four-zhu-card
+  persistence_domain:
+    path: ../../xuan-domain
+  xuan_time_location:
+    path: ../../xuan-time-location
+  calendar:
+    path: ../../calendar
