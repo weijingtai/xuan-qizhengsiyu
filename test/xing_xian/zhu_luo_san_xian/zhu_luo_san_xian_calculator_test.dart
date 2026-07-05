@@ -161,38 +161,34 @@ void main() {
 
   group("Doc B §7.2 四方案分歧用例", () {
     // 构造一个 pEnd ≠ pNext 且"已过 pNext"的盘
-    // 土星起巳(N=5,T=26)，太阳起卯(N=2,T=28)
+    // 土星起巳(N=5,T=26)，水星起子(N=1,T=24)
     // 初限土星走26年，从巳顺行：pEnd = (5 + 26-5) % 12 = 26 % 12 = 2 (寅)
-    // 中限太阳起卯，pNext = 卯(3)
-    // pEnd=2(寅) 已过 pNext=3(卯)？不对，寅→卯是顺行1步
-    // 让我重新构造：土星起巳，中限太阳起子
-    // pEnd = (5 + 21) % 12 = 26 % 12 = 2 (寅)
-    // pNext = 子(0)
+    // 中限水星起子，pNext = 子(0)
     // pEnd=2(寅) 已过 pNext=0(子)：寅→子顺行需 10 步
-    
+
     test("方案1: 候星逐宫延交法 - 已过pNext则继续顺行", () {
       final input = ZhuLuoInput(
         lifePalace: EnumTwelveGong.Zi,
         birthSect: BirthSect.day,
         rulerPalaces: {
           ZhuLuoRuler.saturn: EnumTwelveGong.Si,
-          ZhuLuoRuler.sun: EnumTwelveGong.Zi,
+          ZhuLuoRuler.mercury: EnumTwelveGong.Zi,
           ZhuLuoRuler.jupiter: EnumTwelveGong.Mao,
         },
         maxAge: 60,
         config: classicForwardUntilTargetConfig,
       );
       final results = calculateZhuLuoSanXian(input);
-      
+
       // 初限26年：1-5守巳，6-26顺行
       // age 26: palace = movePalace(Si, 26-5) = movePalace(Si, 21) = Yin(寅)
       expect(results.firstWhere((r) => r.age == 26).palace, EnumTwelveGong.Yin);
-      
+
       // 方案1：pEnd=寅 已过 pNext=子，继续顺行
-      // age 27: 子(0), age 28: 丑(1), ... age 36: 酉(9)
-      // 找到子(0)时交限，即 age 27
-      expect(results.firstWhere((r) => r.age == 27).palace, EnumTwelveGong.Zi);
-      expect(results.firstWhere((r) => r.age == 27).isTransitionYear, true);
+      // age 27: 卯(3), age 28: 辰(4), ... age 36: 子(0)
+      // 找到子(0)时交限，即 age 36
+      expect(results.firstWhere((r) => r.age == 36).palace, EnumTwelveGong.Zi);
+      expect(results.firstWhere((r) => r.age == 36).isTransitionYear, true);
     });
 
     test("方案2: 年限强制切换法 - 到期直接强制换限", () {
@@ -201,58 +197,42 @@ void main() {
         birthSect: BirthSect.day,
         rulerPalaces: {
           ZhuLuoRuler.saturn: EnumTwelveGong.Si,
-          ZhuLuoRuler.sun: EnumTwelveGong.Zi,
+          ZhuLuoRuler.mercury: EnumTwelveGong.Zi,
           ZhuLuoRuler.jupiter: EnumTwelveGong.Mao,
         },
         maxAge: 60,
         config: forceCutConfig,
       );
       final results = calculateZhuLuoSanXian(input);
-      
+
       // 方案2：age 26 处强制截断
       expect(results.firstWhere((r) => r.age == 26).phase, "forcedCut");
       expect(results.firstWhere((r) => r.age == 26).isTransitionYear, true);
     });
 
     test("方案3: 折返补救交限法 - 已过pNext则逆行折返", () {
-      // 用户描述的场景：
-      // 土星起巳(N=5,T=26)，月亮本命宫午(6)
-      // 初限26年：1-5守巳，6-26顺行
-      // age 25: movePalace(Si, 20) = 亥(11)
-      // age 26: movePalace(Si, 21) = 子(0)
-      // pNext = 午(6)，pEnd = 子(0)
-      // forwardDistance(子, 午) = (6-0+12)%12 = 6
-      // 6 <= 6，未到pNext，需要顺行延交（同方案1）
-      
       // 构造一个"已过pNext"的场景：
-      // 土星起巳(N=5,T=26)，月亮本命宫寅(2)
-      // age 26: movePalace(Si, 21) = 子(0)
-      // pNext = 寅(2)，pEnd = 子(0)
-      // forwardDistance(子, 寅) = (2-0+12)%12 = 2
-      // 2 <= 6，未到pNext，需要顺行延交（同方案1）
-      
-      // 构造一个"已过pNext"的场景：
-      // 土星起巳(N=5,T=26)，月亮本命宫亥(11)
-      // age 26: movePalace(Si, 21) = 子(0)
-      // pNext = 亥(11)，pEnd = 子(0)
-      // forwardDistance(子, 亥) = (11-0+12)%12 = 11
-      // 11 > 6，已过pNext，需要逆行折返
-      // retraceDist = (12-11)%12 = 1
-      // 从子(0)折返1步到亥(11)
+      // 土星起巳(N=5,T=26)，水星本命宫亥(11)
+      // age 26: movePalace(Si, 21) = 寅(2)
+      // pNext = 亥(11)，pEnd = 寅(2)
+      // forwardDistance(寅, 亥) = (11-2+12)%12 = 9
+      // 9 > 6，已过pNext，需要逆行折返
+      // retraceDist = (12-9)%12 = 3
+      // 从寅(2)折返3步到亥(11)
       final input = ZhuLuoInput(
         lifePalace: EnumTwelveGong.Zi,
         birthSect: BirthSect.day,
         rulerPalaces: {
           ZhuLuoRuler.saturn: EnumTwelveGong.Si,
-          ZhuLuoRuler.sun: EnumTwelveGong.Hai,  // pNext = 亥(11)
+          ZhuLuoRuler.mercury: EnumTwelveGong.Hai,
           ZhuLuoRuler.jupiter: EnumTwelveGong.Mao,
         },
         maxAge: 60,
         config: retraceConfig,
       );
       final results = calculateZhuLuoSanXian(input);
-      
-      // 方案3：age 26 在子(0)宫，已过 pNext=亥(11)，逆行折返1步到亥
+
+      // 方案3：age 26 在寅(2)宫，已过 pNext=亥(11)，逆行折返3步到亥
       expect(results.firstWhere((r) => r.age == 26).palace, EnumTwelveGong.Hai);
       expect(results.firstWhere((r) => r.age == 26).phase, "zheFan");
       expect(results.firstWhere((r) => r.age == 26).isTransitionYear, true);
@@ -267,20 +247,20 @@ void main() {
       // R = T - (T-N) = 26 - 21 = 5
       // 补桥条件：d * m == R → 1 * 3 == 5 → false
       // 所以走兜底强制切换
-      
+
       final input = ZhuLuoInput(
         lifePalace: EnumTwelveGong.Zi,
         birthSect: BirthSect.day,
         rulerPalaces: {
           ZhuLuoRuler.saturn: EnumTwelveGong.Si,
           ZhuLuoRuler.jupiter: EnumTwelveGong.Mao,
-          ZhuLuoRuler.sun: EnumTwelveGong.Mao,
+          ZhuLuoRuler.mercury: EnumTwelveGong.Mao,
         },
         maxAge: 60,
         config: bridgeWithFallbackConfig,
       );
       final results = calculateZhuLuoSanXian(input);
-      
+
       // 不满足补桥条件，走兜底强制切换
       expect(results.firstWhere((r) => r.age == 26).phase, "forcedCut");
       expect(results.firstWhere((r) => r.age == 26).isTransitionYear, true);
@@ -294,7 +274,7 @@ void main() {
         birthSect: BirthSect.day,
         rulerPalaces: {
           ZhuLuoRuler.saturn: EnumTwelveGong.Si,
-          ZhuLuoRuler.sun: EnumTwelveGong.Zi,
+          ZhuLuoRuler.mercury: EnumTwelveGong.Zi,
           ZhuLuoRuler.jupiter: EnumTwelveGong.Mao,
         },
         maxAge: 60,

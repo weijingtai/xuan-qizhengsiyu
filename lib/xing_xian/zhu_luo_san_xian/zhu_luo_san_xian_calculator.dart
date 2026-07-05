@@ -465,12 +465,26 @@ List<ZhuLuoYearResult> _mergeRecords(List<List<ZhuLuoYearResult>> stageRecordsLi
     if (recs.length == 1) {
       allRecords.add(recs.first);
     } else {
-      // 多个记录（交限年），取最新限的记录
+      // 多个记录（交限年），按 stage.index 排序
       recs.sort((a, b) => a.stage.index.compareTo(b.stage.index));
-      final base = recs.last;
       
+      // 查找交限标记记录
+      ZhuLuoYearResult? transitionRec;
+      for (final r in recs) {
+        if (r.isTransitionYear || r.phase == "forcedCut" || r.phase == "yanJiao" || 
+            r.phase == "zheFan" || r.phase == "buQiao") {
+          transitionRec = r;
+          break;
+        }
+      }
+      
+      // 基础记录取 stage.index 最大的（下一限的记录），携带下限起始的语义
+      final base = recs.last;
       final usedBridge = recs.any((r) => r.usedBridge);
-      final isTransitionYear = true;
+      final isTransitionYear = transitionRec != null || recs.any((r) => r.isTransitionYear);
+
+      // 交限年的 phase 取交限标记记录的 phase，而非下一限的常规 phase
+      final phase = transitionRec != null ? transitionRec.phase : base.phase;
 
       allRecords.add(ZhuLuoYearResult(
         age: base.age,
@@ -478,7 +492,7 @@ List<ZhuLuoYearResult> _mergeRecords(List<List<ZhuLuoYearResult>> stageRecordsLi
         ruler: base.ruler,
         palace: base.palace,
         algorithmId: base.algorithmId,
-        phase: base.phase,
+        phase: phase,
         isTransitionYear: isTransitionYear,
         usedBridge: usedBridge,
       ));
