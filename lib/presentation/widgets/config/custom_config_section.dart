@@ -3,6 +3,11 @@ import 'package:qizhengsiyu/enums/enum_panel_system_type.dart';
 import 'package:qizhengsiyu/theme/app_theme.dart';
 import 'package:qizhengsiyu/enums/enum_rahu_ketu_convention.dart';
 import 'package:qizhengsiyu/enums/enum_zi_qi_algorithm.dart';
+import 'package:qizhengsiyu/domain/engines/siyu/group/si_yu_group_algorithm.dart';
+import 'package:qizhengsiyu/domain/engines/siyu/spec/si_yu_group_spec.dart';
+import 'package:qizhengsiyu/domain/engines/siyu/profile/built_in_profiles.dart';
+import 'package:qizhengsiyu/presentation/widgets/config/si_yu_profile_selector.dart';
+import 'package:qizhengsiyu/presentation/widgets/config/si_yu_group_editor.dart';
 
 import '../../../domain/entities/models/panel_config.dart';
 
@@ -43,6 +48,10 @@ class _CustomConfigSectionState extends State<CustomConfigSection> {
   late EnumZiQiEpochSet _ziQiEpochSet;
   late EnumZiQiChiDaoStandard _ziQiChiDaoStandard;
 
+  late String _siYuProfileId;
+  late Map<String, SiYuGroupSpec> _siYuOverrides;
+  CelestialCoordinateSystem? _siYuCoordinateOverride;
+
   // 是否显示神煞
   // late bool _showGods;
 
@@ -71,6 +80,11 @@ class _CustomConfigSectionState extends State<CustomConfigSection> {
         EnumZiQiEpochSet.shouShiNvXiu;
     _ziQiChiDaoStandard = widget.initialConfig?.ziQiChiDaoStandard ??
         EnumZiQiChiDaoStandard.moira;
+    _siYuProfileId = widget.initialConfig?.siYuProfileId ?? 'guolao_ecliptic';
+    _siYuOverrides = widget.initialConfig?.siYuOverrides != null
+        ? Map.from(widget.initialConfig!.siYuOverrides)
+        : {};
+    _siYuCoordinateOverride = widget.initialConfig?.siYuCoordinateOverride;
     _classicBook = ["七政四余星道要诀"]; // 暂时硬编码，因为PanelConfig暂时不支持
     // _showGods = widget.initialConfig?.sh ?? true;
     // _showPalaces = widget.initialConfig?.showPalaces ?? true;
@@ -98,6 +112,9 @@ class _CustomConfigSectionState extends State<CustomConfigSection> {
       ziQiPeriod: _ziQiPeriod,
       ziQiEpochSet: _ziQiEpochSet,
       ziQiChiDaoStandard: _ziQiChiDaoStandard,
+      siYuProfileId: _siYuProfileId,
+      siYuOverrides: _siYuOverrides,
+      siYuCoordinateOverride: _siYuCoordinateOverride,
     );
     widget.onConfigChanged(config);
   }
@@ -595,6 +612,42 @@ class _CustomConfigSectionState extends State<CustomConfigSection> {
                 contentPadding: EdgeInsets.zero,
                 activeThumbColor: AppTheme.primaryColor,
               ),
+
+              // 四余高级配置
+              const Divider(),
+              const SizedBox(height: AppTheme.spacing12),
+              Text(
+                '四余自定义推算',
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+              ),
+              const SizedBox(height: AppTheme.spacing8),
+              SiYuProfileSelector(
+                selectedId: _siYuProfileId,
+                onChanged: (id) {
+                  setState(() {
+                    _siYuProfileId = id;
+                  });
+                  _updateConfig();
+                },
+              ),
+              const SizedBox(height: AppTheme.spacing12),
+              ...SiYuGroup.values.map((g) {
+                final resolved = BuiltInSiYuProfiles.byId(_siYuProfileId);
+                final spec = _siYuOverrides[g.name] ?? resolved.groups[g]!;
+                return SiYuGroupEditor(
+                  group: g,
+                  spec: spec,
+                  coordinate: _coordinateSystem,
+                  onChanged: (newSpec) {
+                    setState(() {
+                      _siYuOverrides[g.name] = newSpec;
+                    });
+                    _updateConfig();
+                  },
+                );
+              }),
 
               if (_useTraditionalCalculation)
                 Container(

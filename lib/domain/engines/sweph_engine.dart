@@ -24,6 +24,10 @@ import 'siyu/ziqi/tianguan_zi_qi_algorithm.dart';
 import 'siyu/ziqi/ziqi_epoch_calibrator.dart';
 import 'siyu/ziqi/solar_term_julian_day.dart';
 import 'siyu/ziqi/zi_qi_algorithm_registry.dart';
+import 'package:qizhengsiyu/domain/engines/siyu/group/si_yu_group_algorithm.dart';
+import 'package:qizhengsiyu/domain/engines/siyu/spec/si_yu_group_spec.dart';
+import 'package:qizhengsiyu/domain/engines/siyu/spec/si_yu_algorithm_factory.dart';
+import 'package:qizhengsiyu/domain/engines/siyu/profile/si_yu_config_resolver.dart';
 import 'package:qizhengsiyu/domain/managers/zhou_tian_calculator.dart';
 
 /// 基于SWEPH（瑞士星历表）的现代计算引擎。
@@ -56,9 +60,12 @@ class SwephEngine implements ICalculationEngine {
         throw UnimplementedError(
             'Unsupported panel system type: ${panelConfig.celestialCoordinateSystem.name} ${panelConfig.panelSystemType.name}');
       }
+    } else if (panelConfig.celestialCoordinateSystem ==
+        CelestialCoordinateSystem.SkyEquatorial) {
+      assertName = 'yuan_shoushi_chidao_hengxin.json';
     } else {
-        throw UnimplementedError(
-            'Unsupported panel system type: ${panelConfig.celestialCoordinateSystem.name} ${panelConfig.panelSystemType.name}');
+      throw UnimplementedError(
+          'Unsupported panel system type: ${panelConfig.celestialCoordinateSystem.name} ${panelConfig.panelSystemType.name}');
     }
     final jsonString = await _ephemerisRes.loadEphemerisResource(assertName);
     return ZhouTianModel.fromJson(jsonDecode(jsonString));
@@ -129,43 +136,94 @@ class SwephEngine implements ICalculationEngine {
 
     final double guoLaoEpochJd;
     final double guoLaoEpochLon;
-    switch (config.ziQiEpochSet) {
-      case EnumZiQiEpochSet.shouShiNvXiu:
-        guoLaoEpochJd = Sweph.swe_julday(
-            1280, 12, 14, 1 + 29 / 60 + 36 / 3600, CalendarType.SE_JUL_CAL);
-        guoLaoEpochLon = 295.0;
-        break;
-      case EnumZiQiEpochSet.fuTianJiXiu:
-        guoLaoEpochJd = winterSolsticeJulianDay(1281, julianCalendar: true);
-        final jiXiuStart = _jiXiuStartLongitude(zhouTianModel);
-        guoLaoEpochLon = ZiqiEpochCalibrator.fromConstellationPipeline(
-            jiXiuStartLongitude: jiXiuStart, totalDegree: zhouTianModel.totalDegree);
-        break;
+    final double guoLaoPeriod;
+
+    final String profileId = config.siYuProfileId;
+    final Map<SiYuGroup, SiYuGroupSpec> resolvedGroups;
+    final CelestialCoordinateSystem coordinate = config.siYuCoordinateOverride ?? config.celestialCoordinateSystem;
+    final double totalDegree = coordinate == CelestialCoordinateSystem.Ecliptic ? 360.0 : 365.25;
+
+    if (profileId == 'guolao_ecliptic' && config.siYuOverrides.isEmpty) {
+      // Legacy compatibility mode / dynamic default
+      final double ziqiEpochJd;
+      final double ziqiEpochLon;
+      final double ziqiDailyMotion;
+      final String ziqiKind;
+
+      if (config.ziQiAlgorithm == EnumZiQiAlgorithm.yelvTianguan) {
+        ziqiKind = 'yelv_tianguan_ziqi';
+        ziqiEpochJd = 0;
+        ziqiEpochLon = 0;
+        ziqiDailyMotion = 0;
+      } else if (config.ziQiAlgorithm == EnumZiQiAlgorithm.shixian) {
+        ziqiKind = 'shixian_ziqi';
+        ziqiEpochJd = 0;
+        ziqiEpochLon = 0;
+        ziqiDailyMotion = 0;
+      } else {
+        ziqiKind = 'linear_ziqi';
+        if (coordinate == CelestialCoordinateSystem.SkyEquatorial &&
+            config.ziQiChiDaoStandard == EnumZiQiChiDaoStandard.moira) {
+          ziqiEpochJd = 2461226.135;
+          ziqiEpochLon = 333.843;
+          ziqiDailyMotion = totalDegree / 10237.7;
+        } else {
+          ziqiDailyMotion = totalDegree / config.ziQiPeriod.days;
+          switch (config.ziQiEpochSet) {
+            case EnumZiQiEpochSet.shouShiNvXiu:
+              ziqiEpochJd = Sweph.swe_julday(
+                  1280, 12, 14, 1 + 29 / 60 + 36 / 3600, CalendarType.SE_JUL_CAL);
+              ziqiEpochLon = (totalDegree == 365.25) ? 1.884975 : 295.0;
+              break;
+            case EnumZiQiEpochSet.fuTianJiXiu:
+              ziqiEpochJd = winterSolsticeJulianDay(1281, julianCalendar: true);
+              final jiXiuStart = _jiXiuStartLongitude(zhouTianModel);
+              ziqiEpochLon = ZiqiEpochCalibrator.fromConstellationPipeline(
+                  jiXiuStartLongitude: jiXiuStart, totalDegree: totalDegree);
+              break;
+          }
+        }
+      }
+
+      resolvedGroups = {
+        SiYuGroup.luoJi: SiYuGroupSpec(
+          kind: 'ephemeris_node',
+          rahuKetuConventionIndex: config.rahuKetuConvention.index,
+        ),
+        SiYuGroup.yueBo: const SiYuGroupSpec(kind: 'ephemeris_apogee'),
+        SiYuGroup.ziQi: SiYuGroupSpec(
+          kind: ziqiKind,
+          params: {
+            'totalDegree': totalDegree,
+            'dailyMotion': ziqiDailyMotion,
+            'epochJulianDay': ziqiEpochJd,
+            'epochPosition': ziqiEpochLon,
+          },
+        ),
+      };
+    } else {
+      final resolved = SiYuConfigResolver().resolve(
+        profileId: profileId,
+        overrides: config.siYuOverrides.map(
+            (k, v) => MapEntry(SiYuGroup.values.byName(k), v)),
+        coordinateOverride: config.siYuCoordinateOverride,
+      );
+      resolvedGroups = resolved.groups;
     }
 
-    final registry = ZiQiAlgorithmRegistry({
-      EnumZiQiAlgorithm.guoLaoQinTang: GuoLaoZiQiAlgorithm(
-        totalDegree: zhouTianModel.totalDegree,
-        periodDays: config.ziQiPeriod.days,
-        epochJulianDay: guoLaoEpochJd,
-        epochLongitude: guoLaoEpochLon,
-      ),
-      EnumZiQiAlgorithm.shixian: ShixianZiQiAlgorithm(
-        dailyMotionDegrees: 126.720777 / 3600,
-        epochJulianDay: winterSolsticeJulianDay(1744, julianCalendar: false),
-        epochLongitude: 197.833333,
-      ),
-      EnumZiQiAlgorithm.yelvTianguan: const TianguanZiQiAlgorithm(
-        epochYear: 1281,
-        epochLongitude: 6.0,
-        yearlyIncrementDegrees: 13 + 5 / 60,
-      ),
-    });
-
-    final siyu = SiYuCalculator(
-      source: const SwephSiYuEphemerisSource(),
-      ziQiAlgorithm: registry.resolve(config.ziQiAlgorithm),
-    ).compute(julianDay: julianDay, birthDate: datetime);
+    final factory = SiYuAlgorithmFactory.withDefaults();
+    final ctx = CoordinateContext(
+        totalDegree: totalDegree, ephemerisSource: const SwephSiYuEphemerisSource());
+    
+    final siYuPos = <EnumStars, double>{};
+    for (final g in SiYuGroup.values) {
+      final spec = resolvedGroups[g];
+      if (spec != null) {
+        siYuPos.addAll(factory
+            .build(spec, ctx)
+            .computePositions(julianDay: julianDay, datetime: datetime));
+      }
+    }
 
     return StarsAngle(
         moon: roundHelper(lunar.longitude),
@@ -180,15 +238,15 @@ class SwephEngine implements ICalculationEngine {
         marsSpeed: roundHelper(mars.speedInLongitude),
         saturn: roundHelper(saturn.longitude),
         saturnSpeed: roundHelper(saturn.speedInLongitude),
-        northNode: roundHelper(siyu.northNode),
-        southNode: roundHelper(siyu.southNode),
-        lilith: roundHelper(siyu.lilith),
-        qi: roundHelper(siyu.qi));
+        northNode: roundHelper(siYuPos[EnumStars.Luo] ?? siYuPos[EnumStars.Ji]! - 180.0), // fallback if not computed, though always computed
+        southNode: roundHelper(siYuPos[EnumStars.Ji] ?? siYuPos[EnumStars.Luo]! - 180.0),
+        lilith: roundHelper(siYuPos[EnumStars.Bei] ?? 0.0),
+        qi: roundHelper(siYuPos[EnumStars.Qi] ?? 0.0));
   }
 
   double _jiXiuStartLongitude(ZhouTianModel zhouTianModel) {
     return ZhouTianCalculator.getStartEquatorialLon(
-        zhouTianModel, Enum28Constellations.Ji);
+        zhouTianModel, Enum28Constellations.Ji_Shui_Bao);
   }
 }
 

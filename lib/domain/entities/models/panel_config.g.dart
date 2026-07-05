@@ -68,6 +68,17 @@ BasePanelConfig _$BasePanelConfigFromJson(
         json['ziQiChiDaoStandard'],
       ) ??
       EnumZiQiChiDaoStandard.moira,
+  siYuProfileId: json['siYuProfileId'] as String? ?? 'guolao_ecliptic',
+  siYuOverrides:
+      (json['siYuOverrides'] as Map<String, dynamic>?)?.map(
+        (k, e) =>
+            MapEntry(k, SiYuGroupSpec.fromJson(e as Map<String, dynamic>)),
+      ) ??
+      {},
+  siYuCoordinateOverride: $enumDecodeNullable(
+    _$CelestialCoordinateSystemEnumMap,
+    json['siYuCoordinateOverride'],
+  ),
 );
 
 Map<String, dynamic> _$BasePanelConfigToJson(
@@ -92,6 +103,10 @@ Map<String, dynamic> _$BasePanelConfigToJson(
   'ziQiEpochSet': _$EnumZiQiEpochSetEnumMap[instance.ziQiEpochSet]!,
   'ziQiChiDaoStandard':
       _$EnumZiQiChiDaoStandardEnumMap[instance.ziQiChiDaoStandard]!,
+  'siYuProfileId': instance.siYuProfileId,
+  'siYuOverrides': instance.siYuOverrides,
+  'siYuCoordinateOverride':
+      _$CelestialCoordinateSystemEnumMap[instance.siYuCoordinateOverride],
 };
 
 const _$CelestialCoordinateSystemEnumMap = {
@@ -255,6 +270,17 @@ PanelConfig _$PanelConfigFromJson(Map<String, dynamic> json) => PanelConfig(
         json['ziQiChiDaoStandard'],
       ) ??
       EnumZiQiChiDaoStandard.moira,
+  siYuProfileId: json['siYuProfileId'] as String? ?? 'guolao_ecliptic',
+  siYuOverrides:
+      (json['siYuOverrides'] as Map<String, dynamic>?)?.map(
+        (k, e) =>
+            MapEntry(k, SiYuGroupSpec.fromJson(e as Map<String, dynamic>)),
+      ) ??
+      {},
+  siYuCoordinateOverride: $enumDecodeNullable(
+    _$CelestialCoordinateSystemEnumMap,
+    json['siYuCoordinateOverride'],
+  ),
 );
 
 Map<String, dynamic> _$PanelConfigToJson(
@@ -279,4 +305,8 @@ Map<String, dynamic> _$PanelConfigToJson(
   'ziQiEpochSet': _$EnumZiQiEpochSetEnumMap[instance.ziQiEpochSet]!,
   'ziQiChiDaoStandard':
       _$EnumZiQiChiDaoStandardEnumMap[instance.ziQiChiDaoStandard]!,
+  'siYuProfileId': instance.siYuProfileId,
+  'siYuOverrides': instance.siYuOverrides,
+  'siYuCoordinateOverride':
+      _$CelestialCoordinateSystemEnumMap[instance.siYuCoordinateOverride],
 };

@@ -3,6 +3,7 @@ import 'package:qizhengsiyu/enums/enum_settle_life_body.dart';
 import 'package:qizhengsiyu/enums/enum_twelve_gong.dart';
 import 'package:qizhengsiyu/enums/enum_rahu_ketu_convention.dart';
 import 'package:qizhengsiyu/enums/enum_zi_qi_algorithm.dart';
+import 'package:qizhengsiyu/domain/engines/siyu/spec/si_yu_group_spec.dart';
 
 import '../../../enums/enum_panel_system_type.dart';
 import 'fate_dong_wei_da_xian.dart';
@@ -57,6 +58,14 @@ class BasePanelConfig {
   @JsonKey(defaultValue: EnumZiQiChiDaoStandard.moira)
   EnumZiQiChiDaoStandard ziQiChiDaoStandard;
 
+  @JsonKey(defaultValue: 'guolao_ecliptic')
+  String siYuProfileId;
+
+  @JsonKey(defaultValue: {})
+  Map<String, SiYuGroupSpec> siYuOverrides; // 键=SiYuGroup.name
+
+  CelestialCoordinateSystem? siYuCoordinateOverride;
+
   BasePanelConfig({
     /// 星道制式
     required this.celestialCoordinateSystem,
@@ -83,6 +92,9 @@ class BasePanelConfig {
     this.ziQiPeriod = EnumZiQiPeriod.years28,
     this.ziQiEpochSet = EnumZiQiEpochSet.shouShiNvXiu,
     this.ziQiChiDaoStandard = EnumZiQiChiDaoStandard.moira,
+    this.siYuProfileId = 'guolao_ecliptic',
+    this.siYuOverrides = const {},
+    this.siYuCoordinateOverride,
   });
 
   // copy with
@@ -110,6 +122,9 @@ class BasePanelConfig {
     EnumZiQiPeriod? ziQiPeriod,
     EnumZiQiEpochSet? ziQiEpochSet,
     EnumZiQiChiDaoStandard? ziQiChiDaoStandard,
+    String? siYuProfileId,
+    Map<String, SiYuGroupSpec>? siYuOverrides,
+    CelestialCoordinateSystem? siYuCoordinateOverride,
   }) {
     return BasePanelConfig(
       celestialCoordinateSystem:
@@ -127,6 +142,9 @@ class BasePanelConfig {
       ziQiPeriod: ziQiPeriod ?? this.ziQiPeriod,
       ziQiEpochSet: ziQiEpochSet ?? this.ziQiEpochSet,
       ziQiChiDaoStandard: ziQiChiDaoStandard ?? this.ziQiChiDaoStandard,
+      siYuProfileId: siYuProfileId ?? this.siYuProfileId,
+      siYuOverrides: siYuOverrides ?? this.siYuOverrides,
+      siYuCoordinateOverride: siYuCoordinateOverride ?? this.siYuCoordinateOverride,
     );
   }
 
@@ -150,7 +168,10 @@ class BasePanelConfig {
         ziQiAlgorithm: EnumZiQiAlgorithm.guoLaoQinTang,
         ziQiPeriod: EnumZiQiPeriod.years28,
         ziQiEpochSet: EnumZiQiEpochSet.shouShiNvXiu,
-        ziQiChiDaoStandard: EnumZiQiChiDaoStandard.moira);
+        ziQiChiDaoStandard: EnumZiQiChiDaoStandard.moira,
+        siYuProfileId: 'guolao_ecliptic',
+        siYuOverrides: const {},
+        siYuCoordinateOverride: null);
   }
 }
 
@@ -186,6 +207,9 @@ class PanelConfig extends BasePanelConfig {
     super.ziQiPeriod,
     super.ziQiEpochSet,
     super.ziQiChiDaoStandard,
+    super.siYuProfileId,
+    super.siYuOverrides,
+    super.siYuCoordinateOverride,
   });
 
   factory PanelConfig.fromJson(Map<String, dynamic> json) =>
@@ -207,6 +231,9 @@ class PanelConfig extends BasePanelConfig {
       ziQiPeriod: EnumZiQiPeriod.years28,
       ziQiEpochSet: EnumZiQiEpochSet.shouShiNvXiu,
       ziQiChiDaoStandard: EnumZiQiChiDaoStandard.moira,
+      siYuProfileId: 'guolao_ecliptic',
+      siYuOverrides: const {},
+      siYuCoordinateOverride: null,
     );
   }
 }
