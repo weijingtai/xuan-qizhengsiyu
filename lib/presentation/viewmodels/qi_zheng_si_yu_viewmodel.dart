@@ -29,7 +29,7 @@ import 'package:metaphysics_core/models/divination_info_model.dart';
 import 'package:metaphysics_core/datamodel/datetime_divination_datamodel.dart';
 import 'package:metaphysics_core/datamodel/location.dart';
 import 'package:timezone/timezone.dart' as tz;
-import 'yun_liu_view_model.dart';
+import 'package:calendar/calendar.dart';
 import 'package:qizhengsiyu/domain/entities/models/panel_config.dart' as ui_panel_config;
 import 'package:qizhengsiyu/domain/entities/models/stars_angle.dart';
 
@@ -128,9 +128,7 @@ class QiZhengSiYuViewModel extends ChangeNotifier {
       ValueNotifier(null);
 
   /// 大运流年 ViewModel - 用于 YunLiuListTileCardWidget
-  // ignore: deprecated_member_use_from_same_package
   YunLiuViewModel? _yunLiuViewModel;
-  // ignore: deprecated_member_use_from_same_package
   YunLiuViewModel? get yunLiuViewModel => _yunLiuViewModel;
 
   /// 出生地地址信息（用于显示地名）
@@ -394,7 +392,6 @@ class QiZhengSiYuViewModel extends ChangeNotifier {
     );
 
     _yunLiuViewModel?.dispose();
-    // ignore: deprecated_member_use_from_same_package
     _yunLiuViewModel = YunLiuViewModel(
       service: YunLiuService(),
       birthDateTime: observer.dateTime,

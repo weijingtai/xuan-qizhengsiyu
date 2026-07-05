@@ -7,10 +7,10 @@ part of 'ge_ju_source.dart';
 // **************************************************************************
 
 GeJuSource _$GeJuSourceFromJson(Map<String, dynamic> json) => GeJuSource(
-      bookName: json['bookName'] as String,
-      school: json['school'] as String,
-      section: json['section'] as String?,
-    );
+  bookName: json['bookName'] as String,
+  school: json['school'] as String,
+  section: json['section'] as String?,
+);
 
 Map<String, dynamic> _$GeJuSourceToJson(GeJuSource instance) =>
     <String, dynamic>{

@@ -54,3 +54,6 @@ scripts/*
 .chrome-profile/
 example/.chrome-profile/
 .worktrees/
+.gstack/
+.claude/
+.commandcode/

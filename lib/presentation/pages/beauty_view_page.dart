@@ -30,6 +30,7 @@ import '../../painter/painters.dart';
 import '../../painter/star_body_ring_painter.dart';
 import '../../painter/star_xiu_ring_painter.dart';
 import '../../qi_zheng_si_yu_ui_constant_resources.dart';
+import '../../painter/chart_style/chart_style.dart';
 import '../models/lunar_date_info_v2_data.dart';
 import '../widgets/rings/gong_12_dizhi.dart';
 
@@ -57,6 +58,8 @@ import 'package:qizhengsiyu/enums/enum_panel_system_type.dart';
 import 'package:qizhengsiyu/enums/enum_settle_life_body.dart';
 import 'package:qizhengsiyu/domain/entities/models/panel_ui_size.dart'; // UI模型,保留在原位置
 
+import 'package:qizhengsiyu/presentation/adapters/legacy/qizheng_board_switch.dart';
+
 // ── 新增：四柱Card / 节气Card / 大运流年TreeList ──
 import 'package:metaphysics_core/models/eight_chars.dart';
 import 'package:xuan_four_zhu_card/widgets/four_zhu_card_host.dart';
@@ -66,7 +69,14 @@ import 'package:xuan_four_zhu_card/features/liu_yun/widgets/yun_liu_list_tile_ca
 // 尺寸模型已迁移至 models/panel_ui_size.dart
 
 class BeautyViewPage extends StatefulWidget {
-  const BeautyViewPage({super.key});
+  final BoardRenderer boardRenderer;
+  final bool initializeOnMount;
+
+  const BeautyViewPage({
+    super.key,
+    this.boardRenderer = BoardRenderer.qiZhengLegacy,
+    this.initializeOnMount = true,
+  });
 
   @override
   State<BeautyViewPage> createState() => _BeautyViewPageState();
@@ -86,6 +96,12 @@ class _BeautyViewPageState extends State<BeautyViewPage>
       dateTimeFormat: DateTimeFormat.onlyTimeAndSinceStart,
     ),
   );
+
+  // Chart theme tokens — resolved once, used by all Painters
+  static const _chartStyleResolver = FallbackChartStyleResolver();
+  late final QiZhengChartStyle _chartStyle;
+  late final QiZhengStarPalette _palette;
+
   static const List<String> destinyList = <String>[
     "命宫",
     "财帛",
@@ -166,11 +182,14 @@ class _BeautyViewPageState extends State<BeautyViewPage>
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    devInit().then((value) {
-      logger.d("devInit finished");
-    });
+    _chartStyle = _chartStyleResolver.resolve(Brightness.light);
+    _palette = _chartStyleResolver.resolvePalette(Brightness.light);
+    if (widget.initializeOnMount) {
+      devInit().then((value) {
+        logger.d("devInit finished");
+      });
+    }
     // 0°02′02‘’ 一天
     _jupiterController =
         AnimationController(
@@ -421,6 +440,14 @@ class _BeautyViewPageState extends State<BeautyViewPage>
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     double minSize = height > width ? width : height;
+    final mediaPadding = MediaQuery.paddingOf(context);
+    final double panelViewportExtent = min(
+      width,
+      max(
+        0.0,
+        height - kToolbarHeight - mediaPadding.top - mediaPadding.bottom,
+      ),
+    );
     // double panelMaxSize = minSize * .8;
     double panelMaxSize = 1700;
     logger.d("盘最大Size为$panelMaxSize");
@@ -434,7 +461,7 @@ class _BeautyViewPageState extends State<BeautyViewPage>
 
     // double fateLifeStarCenterCircleSize= starInnRangeMiddleSize+starBodyRadius*2+12;
 
-    if (isFirst) {
+    if (widget.initializeOnMount && isFirst) {
       Future.delayed(const Duration(seconds: 3), () {
         isFirst = false;
         // calculatePanel();
@@ -472,34 +499,26 @@ class _BeautyViewPageState extends State<BeautyViewPage>
             //     },
             //   ),
             // ),
-            AspectRatio(
-              aspectRatio: 1,
-              child: LayoutBuilder(
-                builder: (ctx, constraints) {
-                  final panelSize = constraints.biggest.shortestSide;
-                  logger.d("面板计算尺寸为$panelSize");
-                  // 计算缩放比例，确保整个面板在画布内完整可见
-                  final baseCanvasSize =
-                      panelSizeDataModel.outerShenShaSizeOuter;
-                  final scale = panelSize / baseCanvasSize;
-                  return ValueListenableBuilder<double>(
-                    valueListenable: _panelController.rotationDeg,
-                    builder: (ctx, rotation, _) {
-                      return PanelWidget(
-                        canvasSize: panelSize,
-                        rotationDeg: rotation,
-                        child: Transform.scale(
-                          scale: scale < 1 ? scale : 1,
-                          child: SizedBox(
-                            width: baseCanvasSize,
-                            height: baseCanvasSize,
-                            child: panel(starBodyRadius),
-                          ),
-                        ),
-                      );
-                    },
-                  );
-                },
+            Center(
+              child: SizedBox.square(
+                dimension: panelViewportExtent,
+                child: LayoutBuilder(
+                  builder: (ctx, constraints) {
+                    final panelSize = constraints.biggest.shortestSide;
+                    logger.d("面板计算尺寸为$panelSize");
+                    // 计算缩放比例，确保整个面板在画布内完整可见
+                    return ValueListenableBuilder<double>(
+                      valueListenable: _panelController.rotationDeg,
+                      builder: (ctx, rotation, _) {
+                        return PanelWidget(
+                          canvasSize: panelSize,
+                          rotationDeg: rotation,
+                          child: _buildBoardSwitch(starBodyRadius),
+                        );
+                      },
+                    );
+                  },
+                ),
               ),
             ),
 
@@ -570,8 +589,9 @@ class _BeautyViewPageState extends State<BeautyViewPage>
                   TextSpan(
                     text: bodyLifeModel.lifeGong.sevenZheng.singleName,
                     style: infoTextStyle.copyWith(
-                      color: QiZhengSiYuUIConstantResources
-                          .zhengColorMap[bodyLifeModel.lifeGong.sevenZheng],
+                      color: _palette.zhengColor(
+                        bodyLifeModel.lifeGong.sevenZheng,
+                      ),
                     ),
                   ),
                 ],
@@ -585,11 +605,9 @@ class _BeautyViewPageState extends State<BeautyViewPage>
                   TextSpan(
                     text: bodyLifeModel.lifeConstellation.sevenZheng.singleName,
                     style: infoTextStyle.copyWith(
-                      color:
-                          QiZhengSiYuUIConstantResources
-                              .zhengColorMap[bodyLifeModel
-                              .lifeConstellation
-                              .sevenZheng],
+                      color: _palette.zhengColor(
+                        bodyLifeModel.lifeConstellation.sevenZheng,
+                      ),
                     ),
                   ),
                 ],
@@ -610,8 +628,9 @@ class _BeautyViewPageState extends State<BeautyViewPage>
                   TextSpan(
                     text: bodyLifeModel.bodyGong.sevenZheng.singleName,
                     style: infoTextStyle.copyWith(
-                      color: QiZhengSiYuUIConstantResources
-                          .zhengColorMap[bodyLifeModel.bodyGong.sevenZheng],
+                      color: _palette.zhengColor(
+                        bodyLifeModel.bodyGong.sevenZheng,
+                      ),
                     ),
                   ),
                 ],
@@ -625,11 +644,9 @@ class _BeautyViewPageState extends State<BeautyViewPage>
                   TextSpan(
                     text: bodyLifeModel.bodyConstellation.sevenZheng.singleName,
                     style: infoTextStyle.copyWith(
-                      color:
-                          QiZhengSiYuUIConstantResources
-                              .zhengColorMap[bodyLifeModel
-                              .bodyConstellation
-                              .sevenZheng],
+                      color: _palette.zhengColor(
+                        bodyLifeModel.bodyConstellation.sevenZheng,
+                      ),
                     ),
                   ),
                 ],
@@ -719,6 +736,61 @@ class _BeautyViewPageState extends State<BeautyViewPage>
           ],
         ),
       ],
+    );
+  }
+
+  Widget _buildBoardSwitch(double starBodyRadius) {
+    final vm = context.read<QiZhengSiYuViewModel>();
+    final boardData = Listenable.merge([
+      vm.uiZhouTianModelNotifier,
+      vm.uiBasePanelNotifier,
+      vm.uiDaXianPanelNotifier,
+      vm.uiFateLifeStarsNotifier,
+      vm.uiBasicLifeStarsNotifier,
+    ]);
+
+    return ListenableBuilder(
+      listenable: boardData,
+      builder: (context, _) {
+        final basePanel = vm.uiBasePanelNotifier.value;
+        final destinyContent = basePanel?.twelveGongMapper.values
+            .map((gong) => gong.name)
+            .toList(growable: false);
+
+        return QiZhengBoardSwitch(
+          renderer: widget.boardRenderer,
+          productionBuilder: () => panel(starBodyRadius),
+          panelSizeDataModel: panelSizeDataModel,
+          innerStars: vm.uiFateLifeStarsNotifier.value ?? const [],
+          outerStars: vm.uiBasicLifeStarsNotifier.value ?? const [],
+          centerWidget: basePanel == null
+              ? Container(
+                  width: centerSize,
+                  height: centerSize,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(centerSize),
+                    border: Border.all(color: Colors.black54),
+                  ),
+                  child: const Text('加载中...'),
+                )
+              : center(basePanel),
+          zhouTianModel: vm.uiZhouTianModelNotifier.value,
+          destinyContentList: destinyContent,
+          destinyTextStyle: destinyTextStyle,
+          showTaiJiButtonNotifier: showTaiJiDianButtonNotifier,
+          selectedTaiJiContentListenable:
+              _selectedTaiJiDestiny12GongListNotifier,
+          onSelectTaiJiByGongName: selectTaiJiDestinyByGongName,
+          onSelectTaiJi: selectTaiJiDestiny,
+          onUnselectTaiJi: unselectTaiJiDestiny,
+          chartStyle: _chartStyle,
+          starPalette: _palette,
+          innerShenShaMapper: basePanel?.shenShaItemMapper,
+          outerShenShaMapper: vm.uiDaXianPanelNotifier.value?.shenShaItemMapper,
+          allStarsShowNotifier: showStarHuaJiInfoNotifier,
+        );
+      },
     );
   }
 
@@ -829,7 +901,7 @@ class _BeautyViewPageState extends State<BeautyViewPage>
         //             EnumTwelveGong.Shen,
         //             EnumTwelveGong.You,
         //           ],
-        //           starColorMapper: QiZhengSiYuUIConstantResources.zhengColorMap,
+        //           starColorMapper: _palette.zhengColorMap,
         //           isAntiClockwise: false,
         //           innerPadding: 3,
         //           isReverseText: false,
@@ -911,6 +983,7 @@ class _BeautyViewPageState extends State<BeautyViewPage>
                 ringWidth: 40,
                 tickLength: 7,
                 indicatorAngle: 45.1,
+                style: _chartStyle,
               ),
             ),
           ),
@@ -1510,7 +1583,8 @@ class _BeautyViewPageState extends State<BeautyViewPage>
         size: Size(fateLifeStarOuterSize, fateLifeStarOuterSize), // 设置画布大小
         painter: InnerLifeStarRangePainter(
           stars: uiFateStarList,
-          starsColorMap: QiZhengSiYuUIConstantResources.starsColorMap,
+          starsColorMap: _palette.starsColorMap,
+          style: _chartStyle,
           outerSize: fateLifeStarOuterSize,
           innerSize: fateLifeStarInnerSize,
           trackSize: fateLifeStarTrackSize,
@@ -1559,7 +1633,8 @@ class _BeautyViewPageState extends State<BeautyViewPage>
         ), // 设置画布大小
         painter: OuterLifeStarRangePainter(
           stars: uiBasicLifeStarList,
-          starsColorMap: QiZhengSiYuUIConstantResources.starsColorMap,
+          starsColorMap: _palette.starsColorMap,
+          style: _chartStyle,
           outerSize: basicLifeStarRingOuterSize,
           innerSize: basicLifeStarRingInnerSize,
           trackSize: basicLifeStarBodyTrackSize,
@@ -1660,7 +1735,7 @@ class _BeautyViewPageState extends State<BeautyViewPage>
     double size, {
     int offsetWidthTimes = 0,
   }) {
-    Color backgroundColor = QiZhengSiYuUIConstantResources.starsColorMap[star]!;
+    Color backgroundColor = _palette.starColor(star);
     double oWidth = offsetWidth;
     if (offsetWidthTimes != 0) {
       if (offsetWidthTimes < 0) {
@@ -1693,11 +1768,12 @@ class _BeautyViewPageState extends State<BeautyViewPage>
               radians: ((360 - (120 - degree)) * pi) / 180,
               offsetTimes: offsetWidthTimes,
               backgroundColor: backgroundColor,
+              style: _chartStyle,
               textStyle: GoogleFonts.notoSans(
                 fontSize: 20.0,
                 height: 1,
                 // color: Color.fromRGBO(55, 53, 52, 1),
-                color: QiZhengSiYuUIConstantResources.starsColorMap[star]!,
+                color: _palette.starColor(star),
                 fontWeight: FontWeight.normal,
                 shadows: [
                   BoxShadow(
@@ -1716,8 +1792,7 @@ class _BeautyViewPageState extends State<BeautyViewPage>
   }
 
   Widget lifePanelUIStarDefault(UIStarModel uiStar) {
-    Color backgroundColor =
-        QiZhengSiYuUIConstantResources.starsColorMap[uiStar.star]!;
+    Color backgroundColor = _palette.starColor(uiStar.star);
     return Transform.rotate(
       angle: (120 - uiStar.angle) * pi / 180,
       child: Container(
@@ -1737,12 +1812,12 @@ class _BeautyViewPageState extends State<BeautyViewPage>
               // angle:((360-degree) * pi) / 180,
               radians: ((360 - (120 - uiStar.angle)) * pi) / 180,
               backgroundColor: backgroundColor,
+              style: _chartStyle,
               textStyle: GoogleFonts.notoSans(
                 fontSize: 20.0,
                 height: 1,
                 // color: Color.fromRGBO(55, 53, 52, 1),
-                color:
-                    QiZhengSiYuUIConstantResources.starsColorMap[uiStar.star]!,
+                color: _palette.starColor(uiStar.star),
                 fontWeight: FontWeight.normal,
                 shadows: [
                   BoxShadow(
@@ -1766,7 +1841,7 @@ class _BeautyViewPageState extends State<BeautyViewPage>
     double offsetWidth, {
     int offsetWidthTimes = 0,
   }) {
-    Color backgroundColor = QiZhengSiYuUIConstantResources.starsColorMap[star]!;
+    Color backgroundColor = _palette.starColor(star);
     return Transform.rotate(
       angle: (120 - degree) * pi / 180,
       child: Container(
@@ -1793,11 +1868,12 @@ class _BeautyViewPageState extends State<BeautyViewPage>
                   radians: ((360 - (120 - degree)) * pi) / 180,
                   offsetTimes: offsetWidthTimes,
                   backgroundColor: backgroundColor,
+                  style: _chartStyle,
                   textStyle: GoogleFonts.notoSans(
                     fontSize: 20.0,
                     height: 1,
                     // color: Color.fromRGBO(55, 53, 52, 1),
-                    color: QiZhengSiYuUIConstantResources.starsColorMap[star]!,
+                    color: _palette.starColor(star),
                     fontWeight: FontWeight.normal,
                     shadows: [
                       BoxShadow(
@@ -1825,8 +1901,7 @@ class _BeautyViewPageState extends State<BeautyViewPage>
     double offsetWidth, {
     int offsetWidthTimes = 0,
   }) {
-    Color backgroundColor =
-        QiZhengSiYuUIConstantResources.starsColorMap[star.star]!;
+    Color backgroundColor = _palette.starsColorMap[star.star]!;
     double oWidth = offsetWidth;
     if (offsetWidthTimes != 0) {
       if (offsetWidthTimes < 0) {
@@ -1878,12 +1953,12 @@ class _BeautyViewPageState extends State<BeautyViewPage>
                     starAngle: star.angle,
                     offsetTimes: offsetWidthTimes,
                     backgroundColor: backgroundColor,
+                    style: _chartStyle,
                     textStyle: GoogleFonts.notoSans(
                       fontSize: 20.0,
                       height: 1,
                       // color: Color.fromRGBO(55, 53, 52, 1),
-                      color: QiZhengSiYuUIConstantResources
-                          .starsColorMap[star.star]!,
+                      color: _palette.starColor(star.star),
                       fontWeight: FontWeight.normal,
                       shadows: [
                         BoxShadow(
@@ -1931,7 +2006,7 @@ class _BeautyViewPageState extends State<BeautyViewPage>
       fontSize: 20.0,
       height: 1,
       // color: Color.fromRGBO(55, 53, 52, 1),
-      color: QiZhengSiYuUIConstantResources.zhengColorMap[walkingInfo.star]!,
+      color: _palette.zhengColor(walkingInfo.star),
       fontWeight: FontWeight.normal,
       shadows: [
         BoxShadow(
@@ -1968,6 +2043,7 @@ class _BeautyViewPageState extends State<BeautyViewPage>
                   offsetTimes: offsetWidthTimes,
                   backgroundColor: backgroundColor,
                   toOuter: true,
+                  style: _chartStyle,
                 ),
               );
             },
@@ -2044,7 +2120,8 @@ class _BeautyViewPageState extends State<BeautyViewPage>
             innerSize: starXiu28RingSizeInner,
             mapper: QiZhengSiYuConstantResources
                 .ZodiacTropicalModernStarsInnSystemMapper,
-            sevenZhengColorMapper: QiZhengSiYuUIConstantResources.zhengColorMap,
+            sevenZhengColorMapper: _palette.zhengColorMap,
+            style: _chartStyle,
           ),
         ),
       ),
@@ -2068,6 +2145,7 @@ class _BeautyViewPageState extends State<BeautyViewPage>
                   ringWidth: ringWidth,
                   tickLength: 7,
                   indicatorAngle: 45.1,
+                  style: _chartStyle,
                 ),
               ),
             ),
@@ -2090,8 +2168,8 @@ class _BeautyViewPageState extends State<BeautyViewPage>
                   innerSize: starXiu28RingSizeInner,
                   mapper: QiZhengSiYuConstantResources
                       .ZodiacTropicalModernStarsInnSystemMapper,
-                  sevenZhengColorMapper:
-                      QiZhengSiYuUIConstantResources.zhengColorMap,
+                  sevenZhengColorMapper: _palette.zhengColorMap,
+                  style: _chartStyle,
                 ),
               ),
             ),
@@ -2295,6 +2373,7 @@ class _BeautyViewPageState extends State<BeautyViewPage>
           painter: RingSheetPainter(
             innerRadius: innerRadius,
             outerRadius: outerRadius,
+            style: _chartStyle,
           ),
           // painter:TextCircleRingPainter(
           //   innerRadius: innerRadius,

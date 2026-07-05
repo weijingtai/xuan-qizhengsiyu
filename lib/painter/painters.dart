@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:qizhengsiyu/painter/chart_style/qi_zheng_chart_style.dart';
 import 'package:qizhengsiyu/presentation/models/ui_star_model.dart';
 
 class MyCirclePainter extends CustomPainter {
@@ -11,6 +12,7 @@ class MyCirclePainter extends CustomPainter {
   final TextStyle textStyle;
   int offsetTimes;
   bool toOuter;
+  final QiZhengChartStyle? style;
   MyCirclePainter(
       {required this.radians,
       required this.starAngle,
@@ -18,7 +20,9 @@ class MyCirclePainter extends CustomPainter {
       required this.textStyle,
       required this.offsetTimes,
       required this.backgroundColor,
-      this.toOuter = false});
+      this.toOuter = false,
+      this.style});
+  QiZhengChartStyle get _effectiveStyle => style ?? QiZhengChartStyle.fallback();
   @override
   void paint(Canvas canvas, Size size) {
     // final center = Offset(size.width / 2, size.height / 2);
@@ -62,14 +66,14 @@ class MyCirclePainter extends CustomPainter {
           center,
           Offset(size.width * .5, -size.height * .2),
           Paint()
-            ..color = Colors.black38.withOpacity(.1)
+            ..color = _effectiveStyle.colors.shadow.withValues(alpha: 0.1)
             ..strokeWidth = 3);
     } else {
       canvas.drawLine(
           center,
           Offset(size.width * .5, size.height),
           Paint()
-            ..color = Colors.black38.withOpacity(.1)
+            ..color = _effectiveStyle.colors.shadow.withValues(alpha: 0.1)
             ..strokeWidth = 3);
       canvas.drawLine(
           center,
@@ -93,9 +97,9 @@ class MyCirclePainter extends CustomPainter {
     // canvas.rotate((360-108) * pi / 180);
 
     canvas.drawCircle(Offset.zero, radius * .3,
-        Paint()..color = textStyle.color!.withOpacity(.3));
+        Paint()..color = textStyle.color!.withValues(alpha: 0.3));
     canvas.drawCircle(const Offset(1, 1), radius * .3,
-        Paint()..color = textStyle.color!.withOpacity(.1));
+        Paint()..color = textStyle.color!.withValues(alpha: 0.1));
 
     // canvas draw image from assets
     // ui.Image.asset("assets/planets/mars-bubbles-50.png")
@@ -126,7 +130,7 @@ class MyCirclePainter extends CustomPainter {
     var typeTextPainter = TextPainter(
       text: TextSpan(
         text: "荫",
-        style: textStyle.copyWith(color: Colors.black45, fontSize: 12),
+        style: textStyle.copyWith(color: _effectiveStyle.colors.annotationYin, fontSize: 12),
       ),
       textAlign: TextAlign.left,
       textDirection: TextDirection.ltr,
@@ -157,7 +161,7 @@ class MyCirclePainter extends CustomPainter {
       var typeTextPainter = TextPainter(
         text: TextSpan(
           text: "速",
-          style: textStyle.copyWith(color: Colors.red, fontSize: 12),
+          style: textStyle.copyWith(color: _effectiveStyle.colors.annotationSu, fontSize: 12),
         ),
         textAlign: TextAlign.left,
         textDirection: TextDirection.ltr,
@@ -192,7 +196,8 @@ class MyCirclePainter extends CustomPainter {
         offsetTimes != oldDelegate.offsetTimes ||
         toOuter != oldDelegate.toOuter ||
         textStyle != oldDelegate.textStyle ||
-        backgroundColor != oldDelegate.backgroundColor;
+        backgroundColor != oldDelegate.backgroundColor ||
+        style != oldDelegate.style;
   }
 }
 
@@ -200,12 +205,15 @@ class IndicatorScalePainter extends CustomPainter {
   final double ringWidth;
   final double tickLength;
   final double indicatorAngle;
+  final QiZhengChartStyle? style;
 
   IndicatorScalePainter({
     required this.indicatorAngle,
     required this.ringWidth,
     required this.tickLength,
+    this.style,
   });
+  QiZhengChartStyle get _effectiveStyle => style ?? QiZhengChartStyle.fallback();
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -225,7 +233,7 @@ class IndicatorScalePainter extends CustomPainter {
     // canvas.drawCircle(Offset(centerX, centerY), innerRadius, ringPaint);
 
     final Paint scalePaint = Paint()
-      ..color = Colors.red
+      ..color = _effectiveStyle.colors.northLine
       ..strokeWidth = 2
       ..style = PaintingStyle.stroke;
 
@@ -267,7 +275,8 @@ class IndicatorScalePainter extends CustomPainter {
   bool shouldRepaint(covariant IndicatorScalePainter oldDelegate) {
     return indicatorAngle != oldDelegate.indicatorAngle ||
         ringWidth != oldDelegate.ringWidth ||
-        tickLength != oldDelegate.tickLength;
+        tickLength != oldDelegate.tickLength ||
+        style != oldDelegate.style;
   }
 }
 
@@ -282,13 +291,16 @@ class StarBodyPainter extends CustomPainter {
   final Color backgroundColor;
   final TextStyle textStyle;
   bool toOuter;
+  final QiZhengChartStyle? style;
   StarBodyPainter(
       {required this.star,
       // required this.starInfo,
       required this.radians,
       required this.textStyle,
       required this.backgroundColor,
-      this.toOuter = false});
+      this.toOuter = false,
+      this.style});
+  QiZhengChartStyle get _effectiveStyle => style ?? QiZhengChartStyle.fallback();
   @override
   void paint(Canvas canvas, Size size) {
     // final center = Offset(size.width / 2, size.height / 2);
@@ -327,20 +339,20 @@ class StarBodyPainter extends CustomPainter {
           Offset(size.width * .5, -size.height * .2),
           Paint()
             // ..color = textStyle.color!
-            ..color = Colors.red
+            ..color = _effectiveStyle.colors.northLine
             ..strokeWidth = .5);
       canvas.drawLine(
           center,
           Offset(size.width * .5, -size.height * .2),
           Paint()
-            ..color = Colors.black38.withOpacity(.1)
+            ..color = _effectiveStyle.colors.shadow.withValues(alpha: 0.1)
             ..strokeWidth = 3);
     } else {
       canvas.drawLine(
           center,
           Offset(size.width * .5, size.height),
           Paint()
-            ..color = Colors.black38.withOpacity(.1)
+            ..color = _effectiveStyle.colors.shadow.withValues(alpha: 0.1)
             ..strokeWidth = 3);
       canvas.drawLine(
           center,
@@ -348,7 +360,7 @@ class StarBodyPainter extends CustomPainter {
           Paint()
             // ..color = textStyle.color!
             // ..strokeWidth = .5
-            ..color = Colors.red
+            ..color = _effectiveStyle.colors.northLine
             ..strokeWidth = .5);
     }
 
@@ -366,9 +378,9 @@ class StarBodyPainter extends CustomPainter {
     // canvas.rotate((360-108) * pi / 180);
 
     canvas.drawCircle(Offset.zero, radius * .3,
-        Paint()..color = textStyle.color!.withOpacity(.3));
+        Paint()..color = textStyle.color!.withValues(alpha: 0.3));
     canvas.drawCircle(const Offset(1, 1), radius * .3,
-        Paint()..color = textStyle.color!.withOpacity(.1));
+        Paint()..color = textStyle.color!.withValues(alpha: 0.1));
 
     // canvas draw image from assets
     // ui.Image.asset("assets/planets/mars-bubbles-50.png")
@@ -399,7 +411,7 @@ class StarBodyPainter extends CustomPainter {
     var typeTextPainter = TextPainter(
       text: TextSpan(
         text: "荫",
-        style: textStyle.copyWith(color: Colors.black45, fontSize: 12),
+        style: textStyle.copyWith(color: _effectiveStyle.colors.annotationYin, fontSize: 12),
       ),
       textAlign: TextAlign.left,
       textDirection: TextDirection.ltr,
@@ -430,7 +442,7 @@ class StarBodyPainter extends CustomPainter {
       var typeTextPainter = TextPainter(
         text: TextSpan(
           text: "速",
-          style: textStyle.copyWith(color: Colors.red, fontSize: 12),
+          style: textStyle.copyWith(color: _effectiveStyle.colors.annotationSu, fontSize: 12),
         ),
         textAlign: TextAlign.left,
         textDirection: TextDirection.ltr,
@@ -464,6 +476,7 @@ class StarBodyPainter extends CustomPainter {
         radians != oldDelegate.radians ||
         toOuter != oldDelegate.toOuter ||
         textStyle != oldDelegate.textStyle ||
-        backgroundColor != oldDelegate.backgroundColor;
+        backgroundColor != oldDelegate.backgroundColor ||
+        style != oldDelegate.style;
   }
 }

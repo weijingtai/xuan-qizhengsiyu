@@ -10,9 +10,25 @@ import 'package:qizhengsiyu/domain/entities/models/zhou_tian_model.dart';
 import 'package:sweph/sweph.dart';
 import 'package:timezone/timezone.dart' as tz;
 
+import 'package:metaphysics_core/enums.dart';
 import '../entities/models/panel_stars_info.dart';
 import '../entities/models/star_angle_raw_info.dart';
 import 'i_calculation_engine.dart';
+import 'siyu/si_yu_calculator.dart';
+import 'siyu/sweph_si_yu_ephemeris_source.dart';
+import 'siyu/ziqi/zi_qi_algorithm.dart';
+import 'package:qizhengsiyu/enums/enum_zi_qi_algorithm.dart';
+import 'siyu/ziqi/guolao_zi_qi_algorithm.dart';
+import 'siyu/ziqi/shixian_zi_qi_algorithm.dart';
+import 'siyu/ziqi/tianguan_zi_qi_algorithm.dart';
+import 'siyu/ziqi/ziqi_epoch_calibrator.dart';
+import 'siyu/ziqi/solar_term_julian_day.dart';
+import 'siyu/ziqi/zi_qi_algorithm_registry.dart';
+import 'package:qizhengsiyu/domain/engines/siyu/group/si_yu_group_algorithm.dart';
+import 'package:qizhengsiyu/domain/engines/siyu/spec/si_yu_group_spec.dart';
+import 'package:qizhengsiyu/domain/engines/siyu/spec/si_yu_algorithm_factory.dart';
+import 'package:qizhengsiyu/domain/engines/siyu/profile/si_yu_config_resolver.dart';
+import 'package:qizhengsiyu/domain/managers/zhou_tian_calculator.dart';
 
 /// 基于SWEPH（瑞士星历表）的现代计算引擎。
 ///
@@ -44,9 +60,12 @@ class SwephEngine implements ICalculationEngine {
         throw UnimplementedError(
             'Unsupported panel system type: ${panelConfig.celestialCoordinateSystem.name} ${panelConfig.panelSystemType.name}');
       }
+    } else if (panelConfig.celestialCoordinateSystem ==
+        CelestialCoordinateSystem.SkyEquatorial) {
+      assertName = 'yuan_shoushi_chidao_hengxin.json';
     } else {
-        throw UnimplementedError(
-            'Unsupported panel system type: ${panelConfig.celestialCoordinateSystem.name} ${panelConfig.panelSystemType.name}');
+      throw UnimplementedError(
+          'Unsupported panel system type: ${panelConfig.celestialCoordinateSystem.name} ${panelConfig.panelSystemType.name}');
     }
     final jsonString = await _ephemerisRes.loadEphemerisResource(assertName);
     return ZhouTianModel.fromJson(jsonDecode(jsonString));
@@ -55,14 +74,15 @@ class SwephEngine implements ICalculationEngine {
   @override
   Future<List<StarPositionRawData>> calculateStarPositions(
       DateTime birthDate, ObserverPosition position, BasePanelConfig config) async {
-    final starsAngle = _calculateAllStarsAngleOnZodiac(position, birthDate);
+    final zhouTianModel = await getSystemDefinition(config);
+    final starsAngle = _calculateAllStarsAngleOnZodiac(position, birthDate, zhouTianModel, config);
     return _transformToStarPositionRawData(starsAngle, config);
   }
 
   List<StarPositionRawData> _transformToStarPositionRawData(
       StarsAngle starsAngle, BasePanelConfig config) {
     final List<StarPositionRawData> list = [];
-    final starMap = starsAngle.toMap();
+    final starMap = starsAngle.toMap(convention: config.rahuKetuConvention);
 
     starMap.forEach((star, angleSpeed) {
       final rawInfo = StarAngleRawInfo(
@@ -81,31 +101,10 @@ class SwephEngine implements ICalculationEngine {
   }
 
   StarsAngle _calculateAllStarsAngleOnZodiac(
-      BaseObserverPosition observerPosition, DateTime datetime) {
+      BaseObserverPosition observerPosition, DateTime datetime, ZhouTianModel zhouTianModel, BasePanelConfig config) {
     double roundHelper(double number) {
       num factor = pow(10, 2);
       return ((number * factor).round() / factor);
-    }
-
-    double ziQi() {
-      tz.TZDateTime baseShangHaiTime =
-          tz.TZDateTime(tz.getLocation('Asia/Shanghai'), 2013, 4, 9, 2, 58);
-      const angleForEachMinutes = 0.0352 / (24 * 60);
-
-      if (datetime.isAtSameMomentAs(baseShangHaiTime)) {
-        return 0;
-      }
-
-      var diffInMinutes = datetime.isBefore(baseShangHaiTime)
-          ? baseShangHaiTime.difference(datetime)
-          : datetime.difference(baseShangHaiTime);
-
-      double result = diffInMinutes.inMinutes * angleForEachMinutes;
-      if (result >= 360) {
-        result -= 360;
-      }
-
-      return result;
     }
 
     Sweph.swe_set_topo(observerPosition.longitude, observerPosition.latitude,
@@ -135,16 +134,97 @@ class SwephEngine implements ICalculationEngine {
     var saturn = Sweph.swe_calc(julianDay, HeavenlyBody.SE_SATURN,
         SwephFlag.SEFLG_SWIEPH | SwephFlag.SEFLG_SPEED);
 
-    var northNode = Sweph.swe_calc(
-        julianDay, HeavenlyBody.SE_MEAN_NODE, SwephFlag.SEFLG_SWIEPH);
-    double northNodeAngle = northNode.longitude;
-    double southNodeAngle = (northNodeAngle + 180) % 360;
-    var lilith = Sweph.swe_calc(
-        julianDay, HeavenlyBody.SE_MEAN_APOG, SwephFlag.SEFLG_SWIEPH);
+    final double guoLaoEpochJd;
+    final double guoLaoEpochLon;
+    final double guoLaoPeriod;
 
-    // This is a placeholder for the actual StarsAngle class which I cannot see.
-    // I am assuming it exists and has these properties.
-    // In a real scenario, I would read the definition of StarsAngle first.
+    final String profileId = config.siYuProfileId;
+    final Map<SiYuGroup, SiYuGroupSpec> resolvedGroups;
+    final CelestialCoordinateSystem coordinate = config.siYuCoordinateOverride ?? config.celestialCoordinateSystem;
+    final double totalDegree = coordinate == CelestialCoordinateSystem.Ecliptic ? 360.0 : 365.25;
+
+    if (profileId == 'guolao_ecliptic' && config.siYuOverrides.isEmpty) {
+      // Legacy compatibility mode / dynamic default
+      final double ziqiEpochJd;
+      final double ziqiEpochLon;
+      final double ziqiDailyMotion;
+      final String ziqiKind;
+
+      if (config.ziQiAlgorithm == EnumZiQiAlgorithm.yelvTianguan) {
+        ziqiKind = 'yelv_tianguan_ziqi';
+        ziqiEpochJd = 0;
+        ziqiEpochLon = 0;
+        ziqiDailyMotion = 0;
+      } else if (config.ziQiAlgorithm == EnumZiQiAlgorithm.shixian) {
+        ziqiKind = 'shixian_ziqi';
+        ziqiEpochJd = 0;
+        ziqiEpochLon = 0;
+        ziqiDailyMotion = 0;
+      } else {
+        ziqiKind = 'linear_ziqi';
+        if (coordinate == CelestialCoordinateSystem.SkyEquatorial &&
+            config.ziQiChiDaoStandard == EnumZiQiChiDaoStandard.moira) {
+          ziqiEpochJd = 2461226.135;
+          ziqiEpochLon = 333.843;
+          ziqiDailyMotion = totalDegree / 10237.7;
+        } else {
+          ziqiDailyMotion = totalDegree / config.ziQiPeriod.days;
+          switch (config.ziQiEpochSet) {
+            case EnumZiQiEpochSet.shouShiNvXiu:
+              ziqiEpochJd = Sweph.swe_julday(
+                  1280, 12, 14, 1 + 29 / 60 + 36 / 3600, CalendarType.SE_JUL_CAL);
+              ziqiEpochLon = (totalDegree == 365.25) ? 1.884975 : 295.0;
+              break;
+            case EnumZiQiEpochSet.fuTianJiXiu:
+              ziqiEpochJd = winterSolsticeJulianDay(1281, julianCalendar: true);
+              final jiXiuStart = _jiXiuStartLongitude(zhouTianModel);
+              ziqiEpochLon = ZiqiEpochCalibrator.fromConstellationPipeline(
+                  jiXiuStartLongitude: jiXiuStart, totalDegree: totalDegree);
+              break;
+          }
+        }
+      }
+
+      resolvedGroups = {
+        SiYuGroup.luoJi: SiYuGroupSpec(
+          kind: 'ephemeris_node',
+          rahuKetuConventionIndex: config.rahuKetuConvention.index,
+        ),
+        SiYuGroup.yueBo: const SiYuGroupSpec(kind: 'ephemeris_apogee'),
+        SiYuGroup.ziQi: SiYuGroupSpec(
+          kind: ziqiKind,
+          params: {
+            'totalDegree': totalDegree,
+            'dailyMotion': ziqiDailyMotion,
+            'epochJulianDay': ziqiEpochJd,
+            'epochPosition': ziqiEpochLon,
+          },
+        ),
+      };
+    } else {
+      final resolved = SiYuConfigResolver().resolve(
+        profileId: profileId,
+        overrides: config.siYuOverrides.map(
+            (k, v) => MapEntry(SiYuGroup.values.byName(k), v)),
+        coordinateOverride: config.siYuCoordinateOverride,
+      );
+      resolvedGroups = resolved.groups;
+    }
+
+    final factory = SiYuAlgorithmFactory.withDefaults();
+    final ctx = CoordinateContext(
+        totalDegree: totalDegree, ephemerisSource: const SwephSiYuEphemerisSource());
+    
+    final siYuPos = <EnumStars, double>{};
+    for (final g in SiYuGroup.values) {
+      final spec = resolvedGroups[g];
+      if (spec != null) {
+        siYuPos.addAll(factory
+            .build(spec, ctx)
+            .computePositions(julianDay: julianDay, datetime: datetime));
+      }
+    }
+
     return StarsAngle(
         moon: roundHelper(lunar.longitude),
         sun: roundHelper(sun.longitude),
@@ -158,9 +238,39 @@ class SwephEngine implements ICalculationEngine {
         marsSpeed: roundHelper(mars.speedInLongitude),
         saturn: roundHelper(saturn.longitude),
         saturnSpeed: roundHelper(saturn.speedInLongitude),
-        northNode: roundHelper(northNodeAngle),
-        southNode: roundHelper(southNodeAngle),
-        lilith: roundHelper(lilith.longitude),
-        qi: roundHelper(ziQi()));
+        northNode: roundHelper(siYuPos[EnumStars.Luo] ?? siYuPos[EnumStars.Ji]! - 180.0), // fallback if not computed, though always computed
+        southNode: roundHelper(siYuPos[EnumStars.Ji] ?? siYuPos[EnumStars.Luo]! - 180.0),
+        lilith: roundHelper(siYuPos[EnumStars.Bei] ?? 0.0),
+        qi: roundHelper(siYuPos[EnumStars.Qi] ?? 0.0));
+  }
+
+  double _jiXiuStartLongitude(ZhouTianModel zhouTianModel) {
+    return ZhouTianCalculator.getStartEquatorialLon(
+        zhouTianModel, Enum28Constellations.Ji_Shui_Bao);
+  }
+}
+
+class _TransitionZiQiAlgorithm implements ZiQiAlgorithm {
+  const _TransitionZiQiAlgorithm();
+  @override
+  String get id => 'transition';
+  @override
+  double computeLongitude({required double julianDay, required DateTime datetime}) {
+    final tz.TZDateTime baseShangHaiTime =
+        tz.TZDateTime(tz.getLocation('Asia/Shanghai'), 2013, 4, 9, 2, 58);
+    const angleForEachMinutes = 0.0352 / (24 * 60);
+
+    if (datetime.isAtSameMomentAs(baseShangHaiTime)) {
+      return 0;
+    }
+    final diffInMinutes = datetime.isBefore(baseShangHaiTime)
+        ? baseShangHaiTime.difference(datetime)
+        : datetime.difference(baseShangHaiTime);
+
+    double result = diffInMinutes.inMinutes * angleForEachMinutes;
+    if (result >= 360) {
+      result -= 360;
+    }
+    return result;
   }
 }

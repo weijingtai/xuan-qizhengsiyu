@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:qizhengsiyu/painter/chart_style/qi_zheng_chart_style.dart';
 
 class SectorPainter extends CustomPainter {
   final double startAngle; // 扇环绘制的起始角度（相对于其自身坐标系）
@@ -10,6 +11,9 @@ class SectorPainter extends CustomPainter {
   final double innerRadius;
   final Color borderColor; // 新增边框颜色参数
   final double borderWidth; // 新增边框宽度参数
+  final QiZhengChartStyle? style;
+
+  QiZhengChartStyle get _effectiveStyle => style ?? QiZhengChartStyle.fallback();
 
   Text? singleText;
 
@@ -21,8 +25,12 @@ class SectorPainter extends CustomPainter {
     required this.innerRadius,
     this.borderColor = Colors.black12, // 默认边框颜色
     this.borderWidth = 1.0, // 默认边框宽度
+    this.style,
     this.singleText,
   });
+
+  Color get _effectiveBorderColor =>
+      _effectiveStyle.colors.sectorBorder;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -43,7 +51,7 @@ class SectorPainter extends CustomPainter {
     // 绘制扇形边框
     if (borderWidth > 0) {
       final Paint borderPaint = Paint()
-        ..color = borderColor
+        ..color = _effectiveBorderColor
         ..style = PaintingStyle.stroke
         ..strokeWidth = borderWidth;
 
@@ -77,7 +85,8 @@ class SectorPainter extends CustomPainter {
         oldDelegate.color != color ||
         oldDelegate.outerRadius != outerRadius ||
         oldDelegate.innerRadius != innerRadius ||
-        oldDelegate.borderColor != borderColor || // 检查边框颜色是否变化
-        oldDelegate.borderWidth != borderWidth; // 检查边框宽度是否变化
+        oldDelegate.borderColor != borderColor ||
+        oldDelegate.borderWidth != borderWidth ||
+        oldDelegate.style != style;
   }
 }

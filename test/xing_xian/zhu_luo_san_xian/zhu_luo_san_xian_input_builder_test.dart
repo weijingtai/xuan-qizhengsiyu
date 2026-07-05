@@ -146,7 +146,7 @@ void main() {
         birthSect: BirthSect.day,
         starPalaces: _frederickStarPalaces,
         maxAge: 80,
-        config: directAnnualWithBridgeConfig,
+        config: bridgeWithFallbackConfig,
       );
       expect(input.rulerPalaces[ZhuLuoRuler.mars], EnumTwelveGong.Zi);
       expect(input.rulerPalaces[ZhuLuoRuler.venus], EnumTwelveGong.Yin);
@@ -154,7 +154,7 @@ void main() {
       expect(input.lifePalace, EnumTwelveGong.You);
       expect(input.birthSect, BirthSect.day);
       expect(input.maxAge, 80);
-      expect(input.config, directAnnualWithBridgeConfig);
+      expect(input.config, bridgeWithFallbackConfig);
     });
 
     test('propagates StateError for incomplete star palaces', () {
@@ -164,7 +164,7 @@ void main() {
           birthSect: BirthSect.day,
           starPalaces: {EnumStars.Sun: EnumTwelveGong.Wu},
           maxAge: 80,
-          config: directAnnualWithBridgeConfig,
+          config: bridgeWithFallbackConfig,
         ),
         throwsA(isA<StateError>()),
       );
@@ -181,7 +181,7 @@ void main() {
         panel: panel,
         birthSect: BirthSect.day,
         maxAge: 80,
-        config: directAnnualWithBridgeConfig,
+        config: bridgeWithFallbackConfig,
       );
       expect(input.rulerPalaces[ZhuLuoRuler.mars], EnumTwelveGong.Zi);
       expect(input.rulerPalaces[ZhuLuoRuler.venus], EnumTwelveGong.Yin);
@@ -199,7 +199,7 @@ void main() {
           panel: panel,
           birthSect: BirthSect.day,
           maxAge: 80,
-          config: directAnnualWithBridgeConfig,
+          config: bridgeWithFallbackConfig,
         ),
         throwsA(isA<StateError>()),
       );

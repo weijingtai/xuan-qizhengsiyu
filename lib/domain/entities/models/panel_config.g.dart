@@ -6,47 +6,80 @@ part of 'panel_config.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-BasePanelConfig _$BasePanelConfigFromJson(Map<String, dynamic> json) =>
-    BasePanelConfig(
-      celestialCoordinateSystem: $enumDecode(
-        _$CelestialCoordinateSystemEnumMap,
-        json['celestialCoordinateSystem'],
-      ),
-      houseDivisionSystem: $enumDecode(
-        _$HouseDivisionSystemEnumMap,
-        json['houseDivisionSystem'],
-      ),
-      panelSystemType: $enumDecode(
-        _$PanelSystemTypeEnumMap,
-        json['panelSystemType'],
-      ),
-      constellationSystemType: $enumDecode(
-        _$ConstellationSystemTypeEnumMap,
-        json['constellationSystemType'],
-      ),
-      settleLifeType: $enumDecode(
-        _$EnumSettleLifeTypeEnumMap,
-        json['settleLifeType'],
-      ),
-      settleBodyType: $enumDecode(
-        _$EnumSettleBodyTypeEnumMap,
-        json['settleBodyType'],
-      ),
-      islifeGongBySunRealTimeLocation:
-          json['islifeGongBySunRealTimeLocation'] as bool,
-      lifeCountingToGong:
-          $enumDecodeNullable(
-            _$EnumTwelveGongEnumMap,
-            json['lifeCountingToGong'],
-          ) ??
-          EnumTwelveGong.Mao,
-      bodyCountingToGong:
-          $enumDecodeNullable(
-            _$EnumTwelveGongEnumMap,
-            json['bodyCountingToGong'],
-          ) ??
-          EnumTwelveGong.You,
-    );
+BasePanelConfig _$BasePanelConfigFromJson(
+  Map<String, dynamic> json,
+) => BasePanelConfig(
+  celestialCoordinateSystem: $enumDecode(
+    _$CelestialCoordinateSystemEnumMap,
+    json['celestialCoordinateSystem'],
+  ),
+  houseDivisionSystem: $enumDecode(
+    _$HouseDivisionSystemEnumMap,
+    json['houseDivisionSystem'],
+  ),
+  panelSystemType: $enumDecode(
+    _$PanelSystemTypeEnumMap,
+    json['panelSystemType'],
+  ),
+  constellationSystemType: $enumDecode(
+    _$ConstellationSystemTypeEnumMap,
+    json['constellationSystemType'],
+  ),
+  settleLifeType: $enumDecode(
+    _$EnumSettleLifeTypeEnumMap,
+    json['settleLifeType'],
+  ),
+  settleBodyType: $enumDecode(
+    _$EnumSettleBodyTypeEnumMap,
+    json['settleBodyType'],
+  ),
+  islifeGongBySunRealTimeLocation:
+      json['islifeGongBySunRealTimeLocation'] as bool,
+  lifeCountingToGong:
+      $enumDecodeNullable(
+        _$EnumTwelveGongEnumMap,
+        json['lifeCountingToGong'],
+      ) ??
+      EnumTwelveGong.Mao,
+  bodyCountingToGong:
+      $enumDecodeNullable(
+        _$EnumTwelveGongEnumMap,
+        json['bodyCountingToGong'],
+      ) ??
+      EnumTwelveGong.You,
+  rahuKetuConvention:
+      $enumDecodeNullable(
+        _$EnumRahuKetuConventionEnumMap,
+        json['rahuKetuConvention'],
+      ) ??
+      EnumRahuKetuConvention.luoJiangJiSheng,
+  ziQiAlgorithm:
+      $enumDecodeNullable(_$EnumZiQiAlgorithmEnumMap, json['ziQiAlgorithm']) ??
+      EnumZiQiAlgorithm.guoLaoQinTang,
+  ziQiPeriod:
+      $enumDecodeNullable(_$EnumZiQiPeriodEnumMap, json['ziQiPeriod']) ??
+      EnumZiQiPeriod.years28,
+  ziQiEpochSet:
+      $enumDecodeNullable(_$EnumZiQiEpochSetEnumMap, json['ziQiEpochSet']) ??
+      EnumZiQiEpochSet.shouShiNvXiu,
+  ziQiChiDaoStandard:
+      $enumDecodeNullable(
+        _$EnumZiQiChiDaoStandardEnumMap,
+        json['ziQiChiDaoStandard'],
+      ) ??
+      EnumZiQiChiDaoStandard.moira,
+  siYuProfileId: json['siYuProfileId'] as String? ?? 'guolao_ecliptic',
+  siYuOverrides:
+      (json['siYuOverrides'] as Map<String, dynamic>?)?.map(
+        (k, e) =>
+            MapEntry(k, SiYuGroupSpec.fromJson(e as Map<String, dynamic>)),
+      ) ??
+      {},
+  siYuCoordinateOverride: $enumDecodeNullable(
+    _$CelestialCoordinateSystemEnumMap,
+    json['siYuCoordinateOverride'],
+  ),
+);
 
 Map<String, dynamic> _$BasePanelConfigToJson(
   BasePanelConfig instance,
@@ -63,6 +96,17 @@ Map<String, dynamic> _$BasePanelConfigToJson(
   'settleBodyType': _$EnumSettleBodyTypeEnumMap[instance.settleBodyType]!,
   'bodyCountingToGong': _$EnumTwelveGongEnumMap[instance.bodyCountingToGong]!,
   'islifeGongBySunRealTimeLocation': instance.islifeGongBySunRealTimeLocation,
+  'rahuKetuConvention':
+      _$EnumRahuKetuConventionEnumMap[instance.rahuKetuConvention]!,
+  'ziQiAlgorithm': _$EnumZiQiAlgorithmEnumMap[instance.ziQiAlgorithm]!,
+  'ziQiPeriod': _$EnumZiQiPeriodEnumMap[instance.ziQiPeriod]!,
+  'ziQiEpochSet': _$EnumZiQiEpochSetEnumMap[instance.ziQiEpochSet]!,
+  'ziQiChiDaoStandard':
+      _$EnumZiQiChiDaoStandardEnumMap[instance.ziQiChiDaoStandard]!,
+  'siYuProfileId': instance.siYuProfileId,
+  'siYuOverrides': instance.siYuOverrides,
+  'siYuCoordinateOverride':
+      _$CelestialCoordinateSystemEnumMap[instance.siYuCoordinateOverride],
 };
 
 const _$CelestialCoordinateSystemEnumMap = {
@@ -117,6 +161,32 @@ const _$EnumTwelveGongEnumMap = {
   EnumTwelveGong.You: '酉',
   EnumTwelveGong.Xu: '戌',
   EnumTwelveGong.Hai: '亥',
+};
+
+const _$EnumRahuKetuConventionEnumMap = {
+  EnumRahuKetuConvention.luoJiangJiSheng: '罗降计升',
+  EnumRahuKetuConvention.luoShengJiJiang: '罗升计降',
+};
+
+const _$EnumZiQiAlgorithmEnumMap = {
+  EnumZiQiAlgorithm.guoLaoQinTang: '果老琴堂',
+  EnumZiQiAlgorithm.yelvTianguan: '耶律天官',
+  EnumZiQiAlgorithm.shixian: '清时宪',
+};
+
+const _$EnumZiQiPeriodEnumMap = {
+  EnumZiQiPeriod.years28: 'years28',
+  EnumZiQiPeriod.years29: 'years29',
+};
+
+const _$EnumZiQiEpochSetEnumMap = {
+  EnumZiQiEpochSet.shouShiNvXiu: '授时女宿',
+  EnumZiQiEpochSet.fuTianJiXiu: '符天箕宿',
+};
+
+const _$EnumZiQiChiDaoStandardEnumMap = {
+  EnumZiQiChiDaoStandard.shouShiOrthodox: '授时正典',
+  EnumZiQiChiDaoStandard.moira: 'Moira实测',
 };
 
 FatePanelConfig _$FatePanelConfigFromJson(Map<String, dynamic> json) =>
@@ -179,6 +249,38 @@ PanelConfig _$PanelConfigFromJson(Map<String, dynamic> json) => PanelConfig(
         json['bodyCountingToGong'],
       ) ??
       EnumTwelveGong.You,
+  rahuKetuConvention:
+      $enumDecodeNullable(
+        _$EnumRahuKetuConventionEnumMap,
+        json['rahuKetuConvention'],
+      ) ??
+      EnumRahuKetuConvention.luoJiangJiSheng,
+  ziQiAlgorithm:
+      $enumDecodeNullable(_$EnumZiQiAlgorithmEnumMap, json['ziQiAlgorithm']) ??
+      EnumZiQiAlgorithm.guoLaoQinTang,
+  ziQiPeriod:
+      $enumDecodeNullable(_$EnumZiQiPeriodEnumMap, json['ziQiPeriod']) ??
+      EnumZiQiPeriod.years28,
+  ziQiEpochSet:
+      $enumDecodeNullable(_$EnumZiQiEpochSetEnumMap, json['ziQiEpochSet']) ??
+      EnumZiQiEpochSet.shouShiNvXiu,
+  ziQiChiDaoStandard:
+      $enumDecodeNullable(
+        _$EnumZiQiChiDaoStandardEnumMap,
+        json['ziQiChiDaoStandard'],
+      ) ??
+      EnumZiQiChiDaoStandard.moira,
+  siYuProfileId: json['siYuProfileId'] as String? ?? 'guolao_ecliptic',
+  siYuOverrides:
+      (json['siYuOverrides'] as Map<String, dynamic>?)?.map(
+        (k, e) =>
+            MapEntry(k, SiYuGroupSpec.fromJson(e as Map<String, dynamic>)),
+      ) ??
+      {},
+  siYuCoordinateOverride: $enumDecodeNullable(
+    _$CelestialCoordinateSystemEnumMap,
+    json['siYuCoordinateOverride'],
+  ),
 );
 
 Map<String, dynamic> _$PanelConfigToJson(
@@ -196,4 +298,15 @@ Map<String, dynamic> _$PanelConfigToJson(
   'settleBodyType': _$EnumSettleBodyTypeEnumMap[instance.settleBodyType]!,
   'bodyCountingToGong': _$EnumTwelveGongEnumMap[instance.bodyCountingToGong]!,
   'islifeGongBySunRealTimeLocation': instance.islifeGongBySunRealTimeLocation,
+  'rahuKetuConvention':
+      _$EnumRahuKetuConventionEnumMap[instance.rahuKetuConvention]!,
+  'ziQiAlgorithm': _$EnumZiQiAlgorithmEnumMap[instance.ziQiAlgorithm]!,
+  'ziQiPeriod': _$EnumZiQiPeriodEnumMap[instance.ziQiPeriod]!,
+  'ziQiEpochSet': _$EnumZiQiEpochSetEnumMap[instance.ziQiEpochSet]!,
+  'ziQiChiDaoStandard':
+      _$EnumZiQiChiDaoStandardEnumMap[instance.ziQiChiDaoStandard]!,
+  'siYuProfileId': instance.siYuProfileId,
+  'siYuOverrides': instance.siYuOverrides,
+  'siYuCoordinateOverride':
+      _$CelestialCoordinateSystemEnumMap[instance.siYuCoordinateOverride],
 };

@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:qizhengsiyu/enums/enum_panel_system_type.dart';
 import 'package:qizhengsiyu/theme/app_theme.dart';
-import 'package:qizhengsiyu/enums/enum_school.dart';
+import 'package:qizhengsiyu/enums/enum_rahu_ketu_convention.dart';
+import 'package:qizhengsiyu/enums/enum_zi_qi_algorithm.dart';
+import 'package:qizhengsiyu/domain/engines/siyu/group/si_yu_group_algorithm.dart';
+import 'package:qizhengsiyu/domain/engines/siyu/spec/si_yu_group_spec.dart';
+import 'package:qizhengsiyu/domain/engines/siyu/profile/built_in_profiles.dart';
+import 'package:qizhengsiyu/presentation/widgets/config/si_yu_profile_selector.dart';
+import 'package:qizhengsiyu/presentation/widgets/config/si_yu_group_editor.dart';
 
 import '../../../domain/entities/models/panel_config.dart';
 
@@ -33,6 +39,19 @@ class _CustomConfigSectionState extends State<CustomConfigSection> {
   // 流派典籍
   late List<String> _classicBook;
 
+  // 罗计交点约定
+  late EnumRahuKetuConvention _rahuKetuConvention;
+
+  // 紫气算法与配置
+  late EnumZiQiAlgorithm _ziQiAlgorithm;
+  late EnumZiQiPeriod _ziQiPeriod;
+  late EnumZiQiEpochSet _ziQiEpochSet;
+  late EnumZiQiChiDaoStandard _ziQiChiDaoStandard;
+
+  late String _siYuProfileId;
+  late Map<String, SiYuGroupSpec> _siYuOverrides;
+  CelestialCoordinateSystem? _siYuCoordinateOverride;
+
   // 是否显示神煞
   // late bool _showGods;
 
@@ -51,6 +70,21 @@ class _CustomConfigSectionState extends State<CustomConfigSection> {
         CelestialCoordinateSystem.Ecliptic;
     _panelSystem =
         widget.initialConfig?.panelSystemType ?? PanelSystemType.Tropical;
+    _rahuKetuConvention = widget.initialConfig?.rahuKetuConvention ??
+        EnumRahuKetuConvention.luoJiangJiSheng;
+    _ziQiAlgorithm = widget.initialConfig?.ziQiAlgorithm ??
+        EnumZiQiAlgorithm.guoLaoQinTang;
+    _ziQiPeriod = widget.initialConfig?.ziQiPeriod ??
+        EnumZiQiPeriod.years28;
+    _ziQiEpochSet = widget.initialConfig?.ziQiEpochSet ??
+        EnumZiQiEpochSet.shouShiNvXiu;
+    _ziQiChiDaoStandard = widget.initialConfig?.ziQiChiDaoStandard ??
+        EnumZiQiChiDaoStandard.moira;
+    _siYuProfileId = widget.initialConfig?.siYuProfileId ?? 'guolao_ecliptic';
+    _siYuOverrides = widget.initialConfig?.siYuOverrides != null
+        ? Map.from(widget.initialConfig!.siYuOverrides)
+        : {};
+    _siYuCoordinateOverride = widget.initialConfig?.siYuCoordinateOverride;
     _classicBook = ["七政四余星道要诀"]; // 暂时硬编码，因为PanelConfig暂时不支持
     // _showGods = widget.initialConfig?.sh ?? true;
     // _showPalaces = widget.initialConfig?.showPalaces ?? true;
@@ -73,6 +107,14 @@ class _CustomConfigSectionState extends State<CustomConfigSection> {
       islifeGongBySunRealTimeLocation: base.islifeGongBySunRealTimeLocation,
       lifeCountingToGong: base.lifeCountingToGong,
       bodyCountingToGong: base.bodyCountingToGong,
+      rahuKetuConvention: _rahuKetuConvention,
+      ziQiAlgorithm: _ziQiAlgorithm,
+      ziQiPeriod: _ziQiPeriod,
+      ziQiEpochSet: _ziQiEpochSet,
+      ziQiChiDaoStandard: _ziQiChiDaoStandard,
+      siYuProfileId: _siYuProfileId,
+      siYuOverrides: _siYuOverrides,
+      siYuCoordinateOverride: _siYuCoordinateOverride,
     );
     widget.onConfigChanged(config);
   }
@@ -187,6 +229,266 @@ class _CustomConfigSectionState extends State<CustomConfigSection> {
                   ),
                 ],
               ),
+            ],
+          ),
+        ),
+        const SizedBox(height: AppTheme.spacing16),
+
+        // 罗计定义选择
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(AppTheme.borderRadius),
+            border: Border.all(color: const Color(0xFFEEEEEE)),
+          ),
+          padding: const EdgeInsets.all(AppTheme.spacing16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                '罗计升降交点定义',
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.w500,
+                    ),
+              ),
+              const SizedBox(height: AppTheme.spacing12),
+              Row(
+                children: [
+                  Expanded(
+                    child: _buildRadioTile(
+                      title: '罗降计升（古法）',
+                      subtitle: '罗睺为降交点，计都为升交点。果老/一行等古法所用',
+                      value: EnumRahuKetuConvention.luoJiangJiSheng,
+                      groupValue: _rahuKetuConvention,
+                      onChanged: (value) {
+                        setState(() {
+                          _rahuKetuConvention = value!;
+                        });
+                        _updateConfig();
+                      },
+                    ),
+                  ),
+                  Expanded(
+                    child: _buildRadioTile(
+                      title: '罗升计降（新法）',
+                      subtitle: '罗睺为升交点，计都为降交点。清后期/印占使用',
+                      value: EnumRahuKetuConvention.luoShengJiJiang,
+                      groupValue: _rahuKetuConvention,
+                      onChanged: (value) {
+                        setState(() {
+                          _rahuKetuConvention = value!;
+                        });
+                        _updateConfig();
+                      },
+                    ),
+                  ),
+                ],
+              ),
+              if (_rahuKetuConvention == EnumRahuKetuConvention.luoShengJiJiang)
+                Container(
+                  margin: const EdgeInsets.only(top: AppTheme.spacing12),
+                  padding: const EdgeInsets.all(AppTheme.spacing8),
+                  decoration: BoxDecoration(
+                    color: Colors.amber.shade50,
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: Colors.amber.shade200),
+                  ),
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.warning_amber_rounded,
+                        size: 16,
+                        color: Colors.amber.shade800,
+                      ),
+                      const SizedBox(width: AppTheme.spacing8),
+                      Expanded(
+                        child: Text(
+                          '与古法正统罗计相反、吉凶互换，仅供比对参考！',
+                          style:
+                              Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                    color: Colors.amber.shade900,
+                                    fontSize: 12,
+                                  ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+            ],
+          ),
+        ),
+        const SizedBox(height: AppTheme.spacing16),
+
+        // 紫气算法与配置选择
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(AppTheme.borderRadius),
+            border: Border.all(color: const Color(0xFFEEEEEE)),
+          ),
+          padding: const EdgeInsets.all(AppTheme.spacing16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                '紫气算法与历元参数',
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.w500,
+                    ),
+              ),
+              const SizedBox(height: AppTheme.spacing12),
+
+              // 紫气算法
+              Text(
+                '紫气算法流派',
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: AppTheme.secondaryText,
+                    ),
+              ),
+              const SizedBox(height: AppTheme.spacing8),
+              DropdownButtonFormField<EnumZiQiAlgorithm>(
+                value: _ziQiAlgorithm,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  contentPadding: const EdgeInsets.symmetric(
+                    horizontal: AppTheme.spacing16,
+                    vertical: AppTheme.spacing12,
+                  ),
+                ),
+                items: EnumZiQiAlgorithm.values
+                    .map((algo) => DropdownMenuItem(
+                          value: algo,
+                          child: Text(algo.name),
+                        ))
+                    .toList(),
+                onChanged: (value) {
+                  setState(() {
+                    _ziQiAlgorithm = value!;
+                  });
+                  _updateConfig();
+                },
+              ),
+              const SizedBox(height: AppTheme.spacing16),
+
+              // 紫气周期
+              Text(
+                '紫气行度周期',
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: AppTheme.secondaryText,
+                    ),
+              ),
+              const SizedBox(height: AppTheme.spacing8),
+              Row(
+                children: [
+                  Expanded(
+                    child: _buildRadioTile(
+                      title: '28年十闰',
+                      subtitle: '周期 10227.1792 日',
+                      value: EnumZiQiPeriod.years28,
+                      groupValue: _ziQiPeriod,
+                      onChanged: (value) {
+                        setState(() {
+                          _ziQiPeriod = value!;
+                        });
+                        _updateConfig();
+                      },
+                    ),
+                  ),
+                  Expanded(
+                    child: _buildRadioTile(
+                      title: '29年一闰',
+                      subtitle: '周期 10592.0 日',
+                      value: EnumZiQiPeriod.years29,
+                      groupValue: _ziQiPeriod,
+                      onChanged: (value) {
+                        setState(() {
+                          _ziQiPeriod = value!;
+                        });
+                        _updateConfig();
+                      },
+                    ),
+                  ),
+                ],
+              ),
+
+              // 果老历元常数集
+              if (_ziQiAlgorithm == EnumZiQiAlgorithm.guoLaoQinTang) ...[
+                const SizedBox(height: AppTheme.spacing16),
+                Text(
+                  '果老历元常数集',
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: AppTheme.secondaryText,
+                      ),
+                ),
+                const SizedBox(height: AppTheme.spacing8),
+                DropdownButtonFormField<EnumZiQiEpochSet>(
+                  value: _ziQiEpochSet,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: AppTheme.spacing16,
+                      vertical: AppTheme.spacing12,
+                    ),
+                  ),
+                  items: EnumZiQiEpochSet.values
+                      .map((set) => DropdownMenuItem(
+                            value: set,
+                            child: Text(set.name),
+                          ))
+                      .toList(),
+                  onChanged: (value) {
+                    setState(() {
+                      _ziQiEpochSet = value!;
+                    });
+                    _updateConfig();
+                  },
+                ),
+              ],
+
+              // 天赤道·女宿紫气标准
+              if (_coordinateSystem == CelestialCoordinateSystem.Equatorial &&
+                  _ziQiEpochSet == EnumZiQiEpochSet.shouShiNvXiu &&
+                  _ziQiAlgorithm == EnumZiQiAlgorithm.guoLaoQinTang) ...[
+                const SizedBox(height: AppTheme.spacing16),
+                Text(
+                  '天赤道·女宿紫气标准',
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: AppTheme.secondaryText,
+                      ),
+                ),
+                const SizedBox(height: AppTheme.spacing8),
+                DropdownButtonFormField<EnumZiQiChiDaoStandard>(
+                  value: _ziQiChiDaoStandard,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: AppTheme.spacing16,
+                      vertical: AppTheme.spacing12,
+                    ),
+                    helperText: _ziQiChiDaoStandard == EnumZiQiChiDaoStandard.moira
+                        ? 'Moira 实测：与主流软件排盘对齐，锚定2026翼宿点。'
+                        : '授时正典：严格符合《授时历》古籍典籍记载。',
+                  ),
+                  items: EnumZiQiChiDaoStandard.values
+                      .map((std) => DropdownMenuItem(
+                            value: std,
+                            child: Text(std.name),
+                          ))
+                      .toList(),
+                  onChanged: (value) {
+                    setState(() {
+                      _ziQiChiDaoStandard = value!;
+                    });
+                    _updateConfig();
+                  },
+                ),
+              ],
             ],
           ),
         ),
@@ -310,6 +612,42 @@ class _CustomConfigSectionState extends State<CustomConfigSection> {
                 contentPadding: EdgeInsets.zero,
                 activeThumbColor: AppTheme.primaryColor,
               ),
+
+              // 四余高级配置
+              const Divider(),
+              const SizedBox(height: AppTheme.spacing12),
+              Text(
+                '四余自定义推算',
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+              ),
+              const SizedBox(height: AppTheme.spacing8),
+              SiYuProfileSelector(
+                selectedId: _siYuProfileId,
+                onChanged: (id) {
+                  setState(() {
+                    _siYuProfileId = id;
+                  });
+                  _updateConfig();
+                },
+              ),
+              const SizedBox(height: AppTheme.spacing12),
+              ...SiYuGroup.values.map((g) {
+                final resolved = BuiltInSiYuProfiles.byId(_siYuProfileId);
+                final spec = _siYuOverrides[g.name] ?? resolved.groups[g]!;
+                return SiYuGroupEditor(
+                  group: g,
+                  spec: spec,
+                  coordinate: _coordinateSystem,
+                  onChanged: (newSpec) {
+                    setState(() {
+                      _siYuOverrides[g.name] = newSpec;
+                    });
+                    _updateConfig();
+                  },
+                );
+              }),
 
               if (_useTraditionalCalculation)
                 Container(

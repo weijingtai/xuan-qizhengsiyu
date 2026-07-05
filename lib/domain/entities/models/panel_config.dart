@@ -1,6 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:qizhengsiyu/enums/enum_settle_life_body.dart';
 import 'package:qizhengsiyu/enums/enum_twelve_gong.dart';
+import 'package:qizhengsiyu/enums/enum_rahu_ketu_convention.dart';
+import 'package:qizhengsiyu/enums/enum_zi_qi_algorithm.dart';
+import 'package:qizhengsiyu/domain/engines/siyu/spec/si_yu_group_spec.dart';
 
 import '../../../enums/enum_panel_system_type.dart';
 import 'fate_dong_wei_da_xian.dart';
@@ -31,21 +34,37 @@ class BasePanelConfig {
   EnumSettleBodyType settleBodyType;
   EnumTwelveGong bodyCountingToGong;
 
-  /// 立命宫是否以真太阳时计算, 默认以实时太阳时计算，否则根据月令不同，确定太阳所在宫位 如：“子月在寅，丑月在丑，寅月在亥。。。。”
+  /// 立命宫是否以真太阳时计算, 默认以实时太阳时计算，否则根据月令不同，确定太阳所在宫位 如：“子月在寅，丑月在丑，寅月在亥。。。”
   bool islifeGongBySunRealTimeLocation;
 
-  /// UI 是否启动上升点 --- 移动至UI部分
-  // bool withAscendant;
+  /// 罗睺/计都 升降交点归属（流派分歧，用户可选，默认旧法）。
+  /// 旧 JSON 缺此键时回落旧法（见 @JsonKey defaultValue）。
+  @JsonKey(defaultValue: EnumRahuKetuConvention.luoJiangJiSheng)
+  EnumRahuKetuConvention rahuKetuConvention;
 
-  // / UI 化曜系统 --- 移动至UI部分
-  // EnumHuaYaoType displayHuaYaoType;
+  /// 紫气算法流派
+  @JsonKey(defaultValue: EnumZiQiAlgorithm.guoLaoQinTang)
+  EnumZiQiAlgorithm ziQiAlgorithm;
 
-  /// 命盘排列顺序 --- 移动至UI部分
-  // List<UIEnumPanelRing> uiPanelRingOrder;
-  /// 批命提示流派 --- 移动至星盘高级部分
-  // EnumSchoolType schoolType;
-  /// 流派典籍 ---- 移动至星盘高级部分
-  // List<String> classicBooks;
+  /// 紫气周期
+  @JsonKey(defaultValue: EnumZiQiPeriod.years28)
+  EnumZiQiPeriod ziQiPeriod;
+
+  /// 果老紫气历元常数集
+  @JsonKey(defaultValue: EnumZiQiEpochSet.shouShiNvXiu)
+  EnumZiQiEpochSet ziQiEpochSet;
+
+  /// 天赤道·女宿紫气的标准
+  @JsonKey(defaultValue: EnumZiQiChiDaoStandard.moira)
+  EnumZiQiChiDaoStandard ziQiChiDaoStandard;
+
+  @JsonKey(defaultValue: 'guolao_ecliptic')
+  String siYuProfileId;
+
+  @JsonKey(defaultValue: {})
+  Map<String, SiYuGroupSpec> siYuOverrides; // 键=SiYuGroup.name
+
+  CelestialCoordinateSystem? siYuCoordinateOverride;
 
   BasePanelConfig({
     /// 星道制式
@@ -68,7 +87,16 @@ class BasePanelConfig {
     required this.islifeGongBySunRealTimeLocation,
     this.lifeCountingToGong = EnumTwelveGong.Mao,
     this.bodyCountingToGong = EnumTwelveGong.You,
+    this.rahuKetuConvention = EnumRahuKetuConvention.luoJiangJiSheng,
+    this.ziQiAlgorithm = EnumZiQiAlgorithm.guoLaoQinTang,
+    this.ziQiPeriod = EnumZiQiPeriod.years28,
+    this.ziQiEpochSet = EnumZiQiEpochSet.shouShiNvXiu,
+    this.ziQiChiDaoStandard = EnumZiQiChiDaoStandard.moira,
+    this.siYuProfileId = 'guolao_ecliptic',
+    this.siYuOverrides = const {},
+    this.siYuCoordinateOverride,
   });
+
   // copy with
   BasePanelConfig copyWith({
     /// 星道制式
@@ -89,6 +117,14 @@ class BasePanelConfig {
     /// 身宫方式
     EnumSettleBodyType? settleBodyType,
     bool? lifeGongBySunRealTimeLocation,
+    EnumRahuKetuConvention? rahuKetuConvention,
+    EnumZiQiAlgorithm? ziQiAlgorithm,
+    EnumZiQiPeriod? ziQiPeriod,
+    EnumZiQiEpochSet? ziQiEpochSet,
+    EnumZiQiChiDaoStandard? ziQiChiDaoStandard,
+    String? siYuProfileId,
+    Map<String, SiYuGroupSpec>? siYuOverrides,
+    CelestialCoordinateSystem? siYuCoordinateOverride,
   }) {
     return BasePanelConfig(
       celestialCoordinateSystem:
@@ -97,10 +133,18 @@ class BasePanelConfig {
       panelSystemType: panelSystemType ?? this.panelSystemType,
       constellationSystemType:
           constellationSystemType ?? this.constellationSystemType,
-      settleLifeType: celestialSettleLifeType ?? this.settleLifeType,
+      settleLifeType: celestialSettleLifeType ?? settleLifeType,
       settleBodyType: settleBodyType ?? this.settleBodyType,
       islifeGongBySunRealTimeLocation:
-          lifeGongBySunRealTimeLocation ?? this.islifeGongBySunRealTimeLocation,
+          lifeGongBySunRealTimeLocation ?? islifeGongBySunRealTimeLocation,
+      rahuKetuConvention: rahuKetuConvention ?? this.rahuKetuConvention,
+      ziQiAlgorithm: ziQiAlgorithm ?? this.ziQiAlgorithm,
+      ziQiPeriod: ziQiPeriod ?? this.ziQiPeriod,
+      ziQiEpochSet: ziQiEpochSet ?? this.ziQiEpochSet,
+      ziQiChiDaoStandard: ziQiChiDaoStandard ?? this.ziQiChiDaoStandard,
+      siYuProfileId: siYuProfileId ?? this.siYuProfileId,
+      siYuOverrides: siYuOverrides ?? this.siYuOverrides,
+      siYuCoordinateOverride: siYuCoordinateOverride ?? this.siYuCoordinateOverride,
     );
   }
 
@@ -116,10 +160,18 @@ class BasePanelConfig {
         houseDivisionSystem: HouseDivisionSystem.equal, // 等宫制
         panelSystemType: PanelSystemType.Tropical, // 回归制
         constellationSystemType:
-            ConstellationSystemType.Classical, // 经典黄道十二宫/二十八宿 (需确认具体含义)
-        settleLifeType: EnumSettleLifeType.Mao, // 定命宫方法 (需确认具体含义)
-        settleBodyType: EnumSettleBodyType.moon, // 定身宫方法 (需确认具体含义)
-        islifeGongBySunRealTimeLocation: true); // 是否根据太阳实时位置定命宫 (需确认具体含义)
+            ConstellationSystemType.Classical, // 经典黄道十二宫/二十八宿
+        settleLifeType: EnumSettleLifeType.Mao, // 定命宫方法
+        settleBodyType: EnumSettleBodyType.moon, // 定身宫方法
+        islifeGongBySunRealTimeLocation: true, // 是否根据太阳实时位置定命宫
+        rahuKetuConvention: EnumRahuKetuConvention.luoJiangJiSheng,
+        ziQiAlgorithm: EnumZiQiAlgorithm.guoLaoQinTang,
+        ziQiPeriod: EnumZiQiPeriod.years28,
+        ziQiEpochSet: EnumZiQiEpochSet.shouShiNvXiu,
+        ziQiChiDaoStandard: EnumZiQiChiDaoStandard.moira,
+        siYuProfileId: 'guolao_ecliptic',
+        siYuOverrides: const {},
+        siYuCoordinateOverride: null);
   }
 }
 
@@ -150,6 +202,14 @@ class PanelConfig extends BasePanelConfig {
     required super.islifeGongBySunRealTimeLocation,
     super.lifeCountingToGong,
     super.bodyCountingToGong,
+    super.rahuKetuConvention,
+    super.ziQiAlgorithm,
+    super.ziQiPeriod,
+    super.ziQiEpochSet,
+    super.ziQiChiDaoStandard,
+    super.siYuProfileId,
+    super.siYuOverrides,
+    super.siYuCoordinateOverride,
   });
 
   factory PanelConfig.fromJson(Map<String, dynamic> json) =>
@@ -166,6 +226,14 @@ class PanelConfig extends BasePanelConfig {
       settleLifeType: EnumSettleLifeType.Mao,
       settleBodyType: EnumSettleBodyType.moon,
       islifeGongBySunRealTimeLocation: true,
+      rahuKetuConvention: EnumRahuKetuConvention.luoJiangJiSheng,
+      ziQiAlgorithm: EnumZiQiAlgorithm.guoLaoQinTang,
+      ziQiPeriod: EnumZiQiPeriod.years28,
+      ziQiEpochSet: EnumZiQiEpochSet.shouShiNvXiu,
+      ziQiChiDaoStandard: EnumZiQiChiDaoStandard.moira,
+      siYuProfileId: 'guolao_ecliptic',
+      siYuOverrides: const {},
+      siYuCoordinateOverride: null,
     );
   }
 }

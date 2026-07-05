@@ -15,11 +15,11 @@ StarPositionRawData _$StarPositionRawDataFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$StarPositionRawDataToJson(
-        StarPositionRawData instance) =>
-    <String, dynamic>{
-      'starType': _$EnumStarsEnumMap[instance.starType]!,
-      'angleRawInfoSet': instance.angleRawInfoSet.toList(),
-    };
+  StarPositionRawData instance,
+) => <String, dynamic>{
+  'starType': _$EnumStarsEnumMap[instance.starType]!,
+  'angleRawInfoSet': instance.angleRawInfoSet.toList(),
+};
 
 const _$EnumStarsEnumMap = {
   EnumStars.Sun: '日',

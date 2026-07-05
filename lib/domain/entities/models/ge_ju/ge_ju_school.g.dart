@@ -7,14 +7,13 @@ part of 'ge_ju_school.dart';
 // **************************************************************************
 
 GeJuSchool _$GeJuSchoolFromJson(Map<String, dynamic> json) => GeJuSchool(
-      id: json['id'] as String,
-      name: json['name'] as String,
-      brief: json['brief'] as String?,
-      features: (json['features'] as List<dynamic>?)
-              ?.map((e) => e as String)
-              .toList() ??
-          [],
-    );
+  id: json['id'] as String,
+  name: json['name'] as String,
+  brief: json['brief'] as String?,
+  features:
+      (json['features'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+      [],
+);
 
 Map<String, dynamic> _$GeJuSchoolToJson(GeJuSchool instance) =>
     <String, dynamic>{

@@ -10,8 +10,9 @@ GeJuAnnotation _$GeJuAnnotationFromJson(Map<String, dynamic> json) =>
     GeJuAnnotation(
       id: json['id'] as String,
       ruleId: json['ruleId'] as String,
-      schools:
-          (json['schools'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      schools: (json['schools'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
       source: json['source'] == null
           ? null
           : GeJuSource.fromJson(json['source'] as Map<String, dynamic>),
@@ -24,11 +25,13 @@ GeJuAnnotation _$GeJuAnnotationFromJson(Map<String, dynamic> json) =>
       parentAnnotationId: json['parentAnnotationId'] as String?,
       parentMajorVersion: (json['parentMajorVersion'] as num?)?.toInt(),
       relationToParent: json['relationToParent'] as String?,
-      references: (json['references'] as List<dynamic>?)
+      references:
+          (json['references'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
           [],
-      relatedConditionSetIds: (json['relatedConditionSetIds'] as List<dynamic>?)
+      relatedConditionSetIds:
+          (json['relatedConditionSetIds'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
           [],

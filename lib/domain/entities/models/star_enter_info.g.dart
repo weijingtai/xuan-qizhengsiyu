@@ -7,13 +7,16 @@ part of 'star_enter_info.dart';
 // **************************************************************************
 
 EnteredInfo _$EnteredInfoFromJson(Map<String, dynamic> json) => EnteredInfo(
-      originalStar:
-          StarDegree.fromJson(json['originalStar'] as Map<String, dynamic>),
-      enterGongInfo:
-          GongDegree.fromJson(json['enterGongInfo'] as Map<String, dynamic>),
-      enterInnInfo: ConstellationDegree.fromJson(
-          json['enterInnInfo'] as Map<String, dynamic>),
-    );
+  originalStar: StarDegree.fromJson(
+    json['originalStar'] as Map<String, dynamic>,
+  ),
+  enterGongInfo: GongDegree.fromJson(
+    json['enterGongInfo'] as Map<String, dynamic>,
+  ),
+  enterInnInfo: ConstellationDegree.fromJson(
+    json['enterInnInfo'] as Map<String, dynamic>,
+  ),
+);
 
 Map<String, dynamic> _$EnteredInfoToJson(EnteredInfo instance) =>
     <String, dynamic>{

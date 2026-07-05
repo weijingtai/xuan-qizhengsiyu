@@ -3,7 +3,12 @@
 // These fakes allow tests to construct fakeDeps without touching
 // real databases, assets, or file I/O. Reused across Q0–Q6 tests.
 
-import 'package:repository_interface_qizhengsiyu/repository_interface_qizhengsiyu.dart';
+import 'package:repository_interface_qizhengsiyu/repository_interface_qizhengsiyu.dart'
+    hide GeJuBuiltInDataSource;
+import 'package:qizhengsiyu/data/datasources/local/ge_ju_local_data_source.dart';
+import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_rule.dart';
+import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_annotation.dart';
+import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_condition_set.dart';
 
 // ===== IQiZhengSiYuPanRepository =====
 
@@ -271,14 +276,14 @@ class FakeGeJuBuiltInDataSource implements GeJuBuiltInDataSource {
       const [];
 
   @override
-  Future<List<GeJuRuleContract>> loadBuiltInRules() async => const [];
+  Future<List<GeJuRule>> loadBuiltInRules() async => const [];
 
   @override
-  Future<List<GeJuAnnotationContract>> loadBuiltInAnnotations() async =>
+  Future<List<GeJuAnnotation>> loadBuiltInAnnotations() async =>
       const [];
 
   @override
-  Future<List<GeJuConditionSetContract>> loadBuiltInConditionSets() async =>
+  Future<List<GeJuConditionSet>> loadBuiltInConditionSets() async =>
       const [];
 }
 
@@ -403,4 +408,43 @@ class FakeQiZhengZhouTianModelRepository
   Future<List<QiZhengZhouTianModelContract>>
       loadBuiltInZhouTianModels() async =>
           const [];
+}
+
+// ===== QiZhengRecordRepository =====
+
+class FakeQiZhengRecordRepository implements QiZhengRecordRepository {
+  final List<QiZhengSiYuPanContract> _records = [];
+
+  @override
+  Future<String> saveRecord(QiZhengSiYuPanContract record) async {
+    _records.removeWhere((r) => r.uuid == record.uuid);
+    _records.add(record);
+    return record.uuid;
+  }
+
+  @override
+  Future<List<QiZhengSiYuPanContract>> getAllRecords() async {
+    return List.from(_records);
+  }
+
+  @override
+  Future<QiZhengSiYuPanContract?> getRecordByUuid(String uuid) async {
+    try {
+      return _records.firstWhere((r) => r.uuid == uuid);
+    } catch (_) {
+      return null;
+    }
+  }
+
+  @override
+  Future<bool> softDeleteRecord(String uuid) async {
+    final lengthBefore = _records.length;
+    _records.removeWhere((r) => r.uuid == uuid);
+    return _records.length < lengthBefore;
+  }
+
+  @override
+  Stream<List<QiZhengSiYuPanContract>> watchAllRecords() {
+    return Stream.value(List.from(_records));
+  }
 }

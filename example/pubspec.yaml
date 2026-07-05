@@ -66,6 +66,15 @@ dependencies:
   drift_flutter: ^0.2.8
   decimal: ^3.2.4
   protobuf: ^6.0.0
+  persistence_preferences:
+    path: ../../xuan-storage/preferences
+  persistence_drift:
+    path: ../../xuan-storage/drift
+  persistence_assets:
+    path: ../../xuan-storage/assets
+  repository_interface_qizhengsiyu:
+    path: ../../repository-interface-qizhengsiyu
+  shared_preferences: ^2.2.0
 
 dev_dependencies:
   flutter_test:
@@ -106,3 +115,13 @@ dependency_overrides:
     path: ../../xuan-metaphysics-core
   xuan_gua_core:
     path: ../../xuan-gua-core
+  theme:
+    path: ../../theme
+  repository_interface_four_zhu_card:
+    path: ../../repository-interface-four-zhu-card
+  persistence_domain:
+    path: ../../xuan-domain
+  xuan_time_location:
+    path: ../../xuan-time-location
+  calendar:
+    path: ../../calendar

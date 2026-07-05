@@ -129,11 +129,12 @@ class StarEnterInfoCalculator {
           // // print(
           //     '警告：${dynamicStart.name}宿偏移量${dynamicStart.degree}超过该宿总度数${constellation.degree}');
         } else {
-          // NOTE: 每宫30°时会添加一个为0°的宫位 在末尾（戌宫）所以删除
-          // tmpAppendToTail.add(GongDegree(
-          //   gong: gong.gong,
-          //   degree: dynamicStart.degree,
-          // ));
+          if (dynamicStart.degree > 0) {
+            tmpAppendToTail.add(GongDegree(
+              gong: gong.gong,
+              degree: dynamicStart.degree,
+            ));
+          }
           newSequence.add(GongDegree(
             gong: gong.gong,
             degree: gong.degree - dynamicStart.degree,

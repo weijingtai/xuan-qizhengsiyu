@@ -113,7 +113,7 @@ void main() {
         newZiGong15Sequence,
       );
       expect(res2.gong, EnumTwelveGong.fromStrZhi("子"));
-      expect(res2.degree, 15, reason: "子宫15度");
+      expect(res2.degree, 30, reason: "子宫30度");
     });
     test('测试宫位查找 res3', () {
       final res3 = StarEnterInfoCalculator.doFindGong(
@@ -121,7 +121,7 @@ void main() {
         newZiGong15Sequence,
       );
       expect(res3.gong, EnumTwelveGong.fromStrZhi("子"));
-      expect(res3.degree, 0);
+      expect(res3.degree, 15);
     });
     test('测试宫位查找 res3_1', () {
       final res3_1 = StarEnterInfoCalculator.doFindGong(

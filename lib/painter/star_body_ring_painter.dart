@@ -4,6 +4,7 @@ import 'package:metaphysics_core/enums.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter/foundation.dart';
+import 'package:qizhengsiyu/painter/chart_style/qi_zheng_chart_style.dart';
 import 'package:qizhengsiyu/presentation/models/ui_star_model.dart';
 
 class OuterLifeStarRangePainter extends CustomPainter {
@@ -19,6 +20,7 @@ class OuterLifeStarRangePainter extends CustomPainter {
   Map<EnumStars, Color> starsColorMap;
   bool showStarTrackLine;
   bool showText;
+  final QiZhengChartStyle? style;
 
   // ElevenStarsInfo starInfo;
   OuterLifeStarRangePainter({
@@ -30,7 +32,9 @@ class OuterLifeStarRangePainter extends CustomPainter {
     required this.outerSize,
     this.showText = false,
     this.showStarTrackLine = false,
+    this.style,
   });
+  QiZhengChartStyle get _effectiveStyle => style ?? QiZhengChartStyle.fallback();
 // 定义一个函数来计算圆上某一角度对应的点的坐标
   Offset calculatePointOnCircle(double radius, double angle) {
     // 将角度转换为弧度，因为三角函数接受的参数是弧度制
@@ -65,7 +69,7 @@ class OuterLifeStarRangePainter extends CustomPainter {
     // canvas.drawLine(Offset(center.dx, center.dy), Offset(center.dx*2, center.dy), zeroLinePaint);
     if (showStarTrackLine) {
       final paintStarsTrack = Paint()
-        ..color = Colors.grey
+        ..color = _effectiveStyle.colors.border
         ..style = PaintingStyle.stroke
         ..strokeWidth = .5;
       canvas.drawCircle(center, trackRadius, paintStarsTrack);
@@ -95,7 +99,7 @@ class OuterLifeStarRangePainter extends CustomPainter {
       canvas.drawCircle(inRingXY, 2, guidDot);
 
       final starHolderDot = Paint()
-        ..color = color.withOpacity(.4)
+        ..color = color.withValues(alpha: 0.4)
         ..style = PaintingStyle.fill
         ..strokeWidth = 2.0;
       canvas.drawCircle(outRingXY, 6, starHolderDot);
@@ -140,7 +144,7 @@ class OuterLifeStarRangePainter extends CustomPainter {
     var typeTextPainter = TextPainter(
       text: TextSpan(
         text: "荫",
-        style: textStyle.copyWith(color: Colors.black45, fontSize: 12),
+        style: textStyle.copyWith(color: _effectiveStyle.colors.annotationYin, fontSize: 12),
       ),
       textAlign: TextAlign.left,
       textDirection: TextDirection.ltr,
@@ -161,7 +165,7 @@ class OuterLifeStarRangePainter extends CustomPainter {
       var typeTextPainter = TextPainter(
         text: TextSpan(
           text: "速",
-          style: textStyle.copyWith(color: Colors.red, fontSize: 12),
+          style: textStyle.copyWith(color: _effectiveStyle.colors.annotationSu, fontSize: 12),
         ),
         textAlign: TextAlign.left,
         textDirection: TextDirection.ltr,
@@ -186,6 +190,7 @@ class OuterLifeStarRangePainter extends CustomPainter {
         showStarTrackLine != oldDelegate.showStarTrackLine ||
         showText != oldDelegate.showText ||
         textStyle != oldDelegate.textStyle ||
+        style != oldDelegate.style ||
         !listEquals(stars, oldDelegate.stars) ||
         !mapEquals(starsColorMap, oldDelegate.starsColorMap);
   }
@@ -213,6 +218,7 @@ class InnerLifeStarRangePainter extends CustomPainter {
   // String get starName=>star.star.singleName;
 
   double innerPadding;
+  final QiZhengChartStyle? style;
 
   InnerLifeStarRangePainter(
       {required this.stars,
@@ -223,7 +229,9 @@ class InnerLifeStarRangePainter extends CustomPainter {
       required this.outerSize,
       this.showStarTrackLine = false,
       this.showText = false,
-      this.innerPadding = 16.0});
+      this.innerPadding = 16.0,
+      this.style});
+  QiZhengChartStyle get _effectiveStyle => style ?? QiZhengChartStyle.fallback();
 // 定义一个函数来计算圆上某一角度对应的点的坐标
   Offset calculatePointOnCircle(double radius, double angle) {
     // 将角度转换为弧度，因为三角函数接受的参数是弧度制
@@ -270,7 +278,7 @@ class InnerLifeStarRangePainter extends CustomPainter {
     // final radius = trackSize;
     if (showStarTrackLine) {
       final paintStarsTrack = Paint()
-        ..color = Colors.grey
+        ..color = _effectiveStyle.colors.border
         ..style = PaintingStyle.stroke
         ..strokeWidth = .5;
       canvas.drawCircle(center, trackRadius, paintStarsTrack);
@@ -309,7 +317,7 @@ class InnerLifeStarRangePainter extends CustomPainter {
       canvas.drawCircle(inRingXY, 2, guidDot);
 
       final starHolderDot = Paint()
-        ..color = color.withOpacity(.4)
+        ..color = color.withValues(alpha: 0.4)
         ..style = PaintingStyle.fill
         ..strokeWidth = 2.0;
       canvas.drawCircle(outRingXY, 6, starHolderDot);
@@ -350,7 +358,7 @@ class InnerLifeStarRangePainter extends CustomPainter {
     var typeTextPainter = TextPainter(
       text: TextSpan(
         text: "荫",
-        style: textStyle.copyWith(color: Colors.black45, fontSize: 12),
+        style: textStyle.copyWith(color: _effectiveStyle.colors.annotationYin, fontSize: 12),
       ),
       textAlign: TextAlign.left,
       textDirection: TextDirection.ltr,
@@ -371,7 +379,7 @@ class InnerLifeStarRangePainter extends CustomPainter {
       var typeTextPainter = TextPainter(
         text: TextSpan(
           text: "速",
-          style: textStyle.copyWith(color: Colors.red, fontSize: 12),
+          style: textStyle.copyWith(color: _effectiveStyle.colors.annotationSu, fontSize: 12),
         ),
         textAlign: TextAlign.left,
         textDirection: TextDirection.ltr,
@@ -397,6 +405,7 @@ class InnerLifeStarRangePainter extends CustomPainter {
         showStarTrackLine != oldDelegate.showStarTrackLine ||
         showText != oldDelegate.showText ||
         textStyle != oldDelegate.textStyle ||
+        style != oldDelegate.style ||
         !listEquals(stars, oldDelegate.stars) ||
         !mapEquals(starsColorMap, oldDelegate.starsColorMap);
   }
@@ -405,11 +414,14 @@ class InnerLifeStarRangePainter extends CustomPainter {
 class RingSheetPainter extends CustomPainter {
   double innerRadius;
   double outerRadius;
+  final QiZhengChartStyle? style;
 
   RingSheetPainter({
     required this.innerRadius,
     required this.outerRadius,
+    this.style,
   });
+  QiZhengChartStyle get _effectiveStyle => style ?? QiZhengChartStyle.fallback();
 
 // 定义一个函数来计算圆上某一角度对应的点的坐标
   Offset calculatePointOnCircle(double radius, double angle) {
@@ -431,9 +443,9 @@ class RingSheetPainter extends CustomPainter {
       // paint guid line side dot at ring inner border
       // UIStarModel star = stars[i];
       // Color color = starsColorMap[star.star]!;
-      Color color = Colors.black87;
+      Color color = _effectiveStyle.colors.divider;
       if (i == 0) {
-        color = Colors.red;
+        color = _effectiveStyle.colors.northLine;
       }
 
       Offset inRingXY = calculatePointOnCircle(innerRadius, angle - 15);
@@ -448,9 +460,10 @@ class RingSheetPainter extends CustomPainter {
     canvas.restore();
   }
 
-  @override
+@override
   bool shouldRepaint(covariant RingSheetPainter oldDelegate) {
     return innerRadius != oldDelegate.innerRadius ||
-        outerRadius != oldDelegate.outerRadius;
+        outerRadius != oldDelegate.outerRadius ||
+        style != oldDelegate.style;
   }
 }

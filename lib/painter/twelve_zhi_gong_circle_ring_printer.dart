@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:metaphysics_core/enums.dart';
 import 'package:qizhengsiyu/enums/enum_twelve_gong.dart';
 import 'package:flutter/foundation.dart';
+import 'package:qizhengsiyu/painter/chart_style/qi_zheng_chart_style.dart';
 
 class TwelveZhiGongCircleRingPrinter extends CustomPainter {
   final double innerRadius;
@@ -19,6 +20,9 @@ class TwelveZhiGongCircleRingPrinter extends CustomPainter {
   double outerPadding = 12;
   bool withBackgroundColor = true;
   Map<EnumStars, Color> starColorMapper;
+  final QiZhengChartStyle? style;
+
+  QiZhengChartStyle get _effectiveStyle => style ?? QiZhengChartStyle.fallback();
 
   // Map<String,Color> fiveElementsColorMap = {
   //   "金":Color(0xffFFD700),
@@ -42,6 +46,7 @@ class TwelveZhiGongCircleRingPrinter extends CustomPainter {
     this.withBackgroundColor = true,
     this.innerPadding = 12,
     this.outerPadding = 12,
+    this.style,
     this.textStyle =
         const TextStyle(color: Colors.black, fontSize: 18, height: 1.2),
   }) {
@@ -56,17 +61,17 @@ class TwelveZhiGongCircleRingPrinter extends CustomPainter {
     // canvas.translate(center.dx, center.dy);
     // 给canvas绘制灰色透明度为0.1的背景
     final Paint backgroundPaint = Paint()
-      ..color = Colors.grey.withOpacity(.1)
+      ..color = Colors.grey.withValues(alpha: 0.1)
       ..style = PaintingStyle.fill;
     canvas.drawCircle(center, size.width / 2, backgroundPaint);
 
     final Paint background2Paint = Paint()
-      ..color = Colors.blue.withOpacity(.1)
+      ..color = Colors.blue.withValues(alpha: 0.1)
       ..style = PaintingStyle.fill;
     canvas.drawCircle(center, innerRadius, background2Paint);
 
     final Paint background3Paint = Paint()
-      ..color = Colors.blue.withOpacity(.1)
+      ..color = Colors.blue.withValues(alpha: 0.1)
       ..style = PaintingStyle.fill;
     canvas.drawCircle(center, outerRadius, background3Paint);
     // 绘制圆心点
@@ -114,7 +119,7 @@ class TwelveZhiGongCircleRingPrinter extends CustomPainter {
     // canvas.rotate(pi + pi/4);
 
     final Paint borderPaint = Paint()
-      ..color = Colors.grey
+      ..color = _effectiveStyle.colors.border
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1;
 
@@ -298,6 +303,7 @@ class TwelveZhiGongCircleRingPrinter extends CustomPainter {
         innerPadding != old.innerPadding ||
         outerPadding != old.outerPadding ||
         textStyle != old.textStyle ||
+        style != old.style ||
         !listEquals(twelveGongList, old.twelveGongList) ||
         !mapEquals(starColorMapper, old.starColorMapper);
   }

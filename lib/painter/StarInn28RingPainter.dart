@@ -34,17 +34,17 @@ class Starinn28ringPainter extends CustomPainter {
     // canvas.translate(center.dx, center.dy);
     // 给canvas绘制灰色透明度为0.1的背景
     final Paint backgroundPaint = Paint()
-      ..color = Colors.grey.withOpacity(.1)
+      ..color = Colors.grey.withValues(alpha: 0.1)
       ..style = PaintingStyle.fill;
     canvas.drawCircle(center, size.width / 2, backgroundPaint);
 
     final Paint background2Paint = Paint()
-      ..color = Colors.blue.withOpacity(.1)
+      ..color = Colors.blue.withValues(alpha: 0.1)
       ..style = PaintingStyle.fill;
     canvas.drawCircle(center, innerRadius, background2Paint);
 
     final Paint background3Paint = Paint()
-      ..color = Colors.blue.withOpacity(.1)
+      ..color = Colors.blue.withValues(alpha: 0.1)
       ..style = PaintingStyle.fill;
     canvas.drawCircle(center, outerRadius, background3Paint);
     // 绘制圆心点
@@ -168,6 +168,14 @@ class Starinn28ringPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(CustomPainter old) {
-    return false;
+    return old is! Starinn28ringPainter ||
+        innerRadius != old.innerRadius ||
+        outerRadius != old.outerRadius ||
+        isReverseText != old.isReverseText ||
+        isReverseOrderSequence != old.isReverseOrderSequence ||
+        innerPadding != old.innerPadding ||
+        outerPadding != old.outerPadding ||
+        textStyle != old.textStyle ||
+        twentyEightStarsList != old.twentyEightStarsList;
   }
 }

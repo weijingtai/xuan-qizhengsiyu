@@ -7,24 +7,24 @@ part of 'stars_angle.dart';
 // **************************************************************************
 
 BaseFiveStarWalkingInfo _$BaseFiveStarWalkingInfoFromJson(
-        Map<String, dynamic> json) =>
-    BaseFiveStarWalkingInfo(
-      star: $enumDecode(_$EnumStarsEnumMap, json['star']),
-      speed: (json['speed'] as num).toDouble(),
-      walkingType:
-          $enumDecode(_$FiveStarWalkingTypeEnumMap, json['walkingType']),
-      threshold: StarWalkingTypeThreshold.fromJson(
-          json['threshold'] as Map<String, dynamic>),
-    );
+  Map<String, dynamic> json,
+) => BaseFiveStarWalkingInfo(
+  star: $enumDecode(_$EnumStarsEnumMap, json['star']),
+  speed: (json['speed'] as num).toDouble(),
+  walkingType: $enumDecode(_$FiveStarWalkingTypeEnumMap, json['walkingType']),
+  threshold: StarWalkingTypeThreshold.fromJson(
+    json['threshold'] as Map<String, dynamic>,
+  ),
+);
 
 Map<String, dynamic> _$BaseFiveStarWalkingInfoToJson(
-        BaseFiveStarWalkingInfo instance) =>
-    <String, dynamic>{
-      'star': _$EnumStarsEnumMap[instance.star]!,
-      'speed': instance.speed,
-      'walkingType': _$FiveStarWalkingTypeEnumMap[instance.walkingType]!,
-      'threshold': instance.threshold,
-    };
+  BaseFiveStarWalkingInfo instance,
+) => <String, dynamic>{
+  'star': _$EnumStarsEnumMap[instance.star]!,
+  'speed': instance.speed,
+  'walkingType': _$FiveStarWalkingTypeEnumMap[instance.walkingType]!,
+  'threshold': instance.threshold,
+};
 
 const _$EnumStarsEnumMap = {
   EnumStars.Sun: '日',

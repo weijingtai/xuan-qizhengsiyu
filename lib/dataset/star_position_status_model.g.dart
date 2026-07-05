@@ -7,41 +7,39 @@ part of 'star_position_status_model.dart';
 // **************************************************************************
 
 StarPositionStatusDatasetModel<T>
-    _$StarPositionStatusDatasetModelFromJson<T extends Enum>(
+_$StarPositionStatusDatasetModelFromJson<T extends Enum>(
   Map<String, dynamic> json,
   T Function(Object? json) fromJsonT,
-) =>
-        StarPositionStatusDatasetModel<T>(
-          id: (json['id'] as num).toInt(),
-          className: json['className'] as String,
-          star: $enumDecode(_$EnumStarsEnumMap, json['star']),
-          starPositionStatusType: $enumDecode(
-              _$EnumStarGongPositionStatusTypeEnumMap,
-              json['starPositionStatusType']),
-          positionList:
-              (json['positionList'] as List<dynamic>).map(fromJsonT).toList(),
-          descriptionList: (json['descriptionList'] as List<dynamic>?)
-              ?.map((e) => e as String)
-              .toList(),
-          geJuList: (json['geJuList'] as List<dynamic>?)
-              ?.map((e) => e as String)
-              .toList(),
-        );
+) => StarPositionStatusDatasetModel<T>(
+  id: (json['id'] as num).toInt(),
+  className: json['className'] as String,
+  star: $enumDecode(_$EnumStarsEnumMap, json['star']),
+  starPositionStatusType: $enumDecode(
+    _$EnumStarGongPositionStatusTypeEnumMap,
+    json['starPositionStatusType'],
+  ),
+  positionList: (json['positionList'] as List<dynamic>).map(fromJsonT).toList(),
+  descriptionList: (json['descriptionList'] as List<dynamic>?)
+      ?.map((e) => e as String)
+      .toList(),
+  geJuList: (json['geJuList'] as List<dynamic>?)
+      ?.map((e) => e as String)
+      .toList(),
+);
 
 Map<String, dynamic> _$StarPositionStatusDatasetModelToJson<T extends Enum>(
   StarPositionStatusDatasetModel<T> instance,
   Object? Function(T value) toJsonT,
-) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'className': instance.className,
-      'star': _$EnumStarsEnumMap[instance.star]!,
-      'starPositionStatusType': _$EnumStarGongPositionStatusTypeEnumMap[
-          instance.starPositionStatusType]!,
-      'positionList': instance.positionList.map(toJsonT).toList(),
-      'descriptionList': instance.descriptionList,
-      'geJuList': instance.geJuList,
-    };
+) => <String, dynamic>{
+  'id': instance.id,
+  'className': instance.className,
+  'star': _$EnumStarsEnumMap[instance.star]!,
+  'starPositionStatusType':
+      _$EnumStarGongPositionStatusTypeEnumMap[instance.starPositionStatusType]!,
+  'positionList': instance.positionList.map(toJsonT).toList(),
+  'descriptionList': instance.descriptionList,
+  'geJuList': instance.geJuList,
+};
 
 const _$EnumStarsEnumMap = {
   EnumStars.Sun: '日',

@@ -8,14 +8,16 @@ part of 'ge_ju_user_preference.dart';
 
 GeJuUserPreference _$GeJuUserPreferenceFromJson(Map<String, dynamic> json) =>
     GeJuUserPreference(
-      hiddenConditionSetIds: (json['hiddenConditionSetIds'] as List<dynamic>?)
+      hiddenConditionSetIds:
+          (json['hiddenConditionSetIds'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
           [],
       conditionSetSchools: (json['conditionSetSchools'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),
-      hiddenAnnotationIds: (json['hiddenAnnotationIds'] as List<dynamic>?)
+      hiddenAnnotationIds:
+          (json['hiddenAnnotationIds'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
           [],

@@ -7,23 +7,29 @@ part of 'gong_star_info.dart';
 // **************************************************************************
 
 GongStarInfo _$GongStarInfoFromJson(Map<String, dynamic> json) => GongStarInfo(
-      positionType:
-          $enumDecode(_$StarGongPositionTypeEnumMap, json['positionType']),
-      mapper: (json['mapper'] as Map<String, dynamic>).map(
-        (k, e) => MapEntry(
-            $enumDecode(_$EnumTwelveGongEnumMap, k),
-            (e as List<dynamic>)
-                .map((e) => $enumDecode(_$EnumStarsEnumMap, e))
-                .toList()),
-      ),
-    );
+  positionType: $enumDecode(
+    _$StarGongPositionTypeEnumMap,
+    json['positionType'],
+  ),
+  mapper: (json['mapper'] as Map<String, dynamic>).map(
+    (k, e) => MapEntry(
+      $enumDecode(_$EnumTwelveGongEnumMap, k),
+      (e as List<dynamic>)
+          .map((e) => $enumDecode(_$EnumStarsEnumMap, e))
+          .toList(),
+    ),
+  ),
+);
 
 Map<String, dynamic> _$GongStarInfoToJson(GongStarInfo instance) =>
     <String, dynamic>{
       'positionType': _$StarGongPositionTypeEnumMap[instance.positionType]!,
-      'mapper': instance.mapper.map((k, e) => MapEntry(
+      'mapper': instance.mapper.map(
+        (k, e) => MapEntry(
           _$EnumTwelveGongEnumMap[k]!,
-          e.map((e) => _$EnumStarsEnumMap[e]!).toList())),
+          e.map((e) => _$EnumStarsEnumMap[e]!).toList(),
+        ),
+      ),
     };
 
 const _$StarGongPositionTypeEnumMap = {
@@ -64,31 +70,36 @@ const _$EnumTwelveGongEnumMap = {
 };
 
 ConstellationStarInfo _$ConstellationStarInfoFromJson(
-        Map<String, dynamic> json) =>
-    ConstellationStarInfo(
-      constellationStar:
-          $enumDecode(_$EnumStarsEnumMap, json['constellationStar']),
-      mapper: (json['mapper'] as Map<String, dynamic>).map(
-        (k, e) => MapEntry(
-            $enumDecode(_$Enum28ConstellationsEnumMap, k),
-            (e as List<dynamic>)
-                .map((e) => $enumDecode(_$EnumStarsEnumMap, e))
-                .toList()),
-      ),
-      positionType: $enumDecode(
-          _$StarConstellationPositionTypeEnumMap, json['positionType']),
-    );
+  Map<String, dynamic> json,
+) => ConstellationStarInfo(
+  constellationStar: $enumDecode(_$EnumStarsEnumMap, json['constellationStar']),
+  mapper: (json['mapper'] as Map<String, dynamic>).map(
+    (k, e) => MapEntry(
+      $enumDecode(_$Enum28ConstellationsEnumMap, k),
+      (e as List<dynamic>)
+          .map((e) => $enumDecode(_$EnumStarsEnumMap, e))
+          .toList(),
+    ),
+  ),
+  positionType: $enumDecode(
+    _$StarConstellationPositionTypeEnumMap,
+    json['positionType'],
+  ),
+);
 
 Map<String, dynamic> _$ConstellationStarInfoToJson(
-        ConstellationStarInfo instance) =>
-    <String, dynamic>{
-      'constellationStar': _$EnumStarsEnumMap[instance.constellationStar]!,
-      'positionType':
-          _$StarConstellationPositionTypeEnumMap[instance.positionType]!,
-      'mapper': instance.mapper.map((k, e) => MapEntry(
-          _$Enum28ConstellationsEnumMap[k]!,
-          e.map((e) => _$EnumStarsEnumMap[e]!).toList())),
-    };
+  ConstellationStarInfo instance,
+) => <String, dynamic>{
+  'constellationStar': _$EnumStarsEnumMap[instance.constellationStar]!,
+  'positionType':
+      _$StarConstellationPositionTypeEnumMap[instance.positionType]!,
+  'mapper': instance.mapper.map(
+    (k, e) => MapEntry(
+      _$Enum28ConstellationsEnumMap[k]!,
+      e.map((e) => _$EnumStarsEnumMap[e]!).toList(),
+    ),
+  ),
+};
 
 const _$Enum28ConstellationsEnumMap = {
   Enum28Constellations.Lou_Jin_Gou: '娄',
@@ -136,6 +147,7 @@ SameLuoStarInfo _$SameLuoStarInfoFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$SameLuoStarInfoToJson(SameLuoStarInfo instance) =>
     <String, dynamic>{
       'star': _$EnumStarsEnumMap[instance.star]!,
-      'sameLuoStars':
-          instance.sameLuoStars.map((e) => _$EnumStarsEnumMap[e]!).toList(),
+      'sameLuoStars': instance.sameLuoStars
+          .map((e) => _$EnumStarsEnumMap[e]!)
+          .toList(),
     };

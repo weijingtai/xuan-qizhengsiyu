@@ -419,5 +419,6 @@ class DaXianRingPainter extends CustomPainter {
         oldDelegate.innerRadius != innerRadius ||
         oldDelegate.gongBorder != gongBorder ||
         oldDelegate.slotBorder != slotBorder;
+
   }
 }

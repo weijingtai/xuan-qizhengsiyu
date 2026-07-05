@@ -8,17 +8,19 @@ part of 'naming_degree_pair.dart';
 
 ConstellationDegree _$ConstellationDegreeFromJson(Map<String, dynamic> json) =>
     ConstellationDegree(
-      constellation:
-          $enumDecode(_$Enum28ConstellationsEnumMap, json['constellation']),
+      constellation: $enumDecode(
+        _$Enum28ConstellationsEnumMap,
+        json['constellation'],
+      ),
       degree: (json['degree'] as num).toDouble(),
     );
 
 Map<String, dynamic> _$ConstellationDegreeToJson(
-        ConstellationDegree instance) =>
-    <String, dynamic>{
-      'constellation': _$Enum28ConstellationsEnumMap[instance.constellation]!,
-      'degree': instance.degree,
-    };
+  ConstellationDegree instance,
+) => <String, dynamic>{
+  'constellation': _$Enum28ConstellationsEnumMap[instance.constellation]!,
+  'degree': instance.degree,
+};
 
 const _$Enum28ConstellationsEnumMap = {
   Enum28Constellations.Lou_Jin_Gou: '娄',
@@ -52,9 +54,9 @@ const _$Enum28ConstellationsEnumMap = {
 };
 
 GongDegree _$GongDegreeFromJson(Map<String, dynamic> json) => GongDegree(
-      gong: $enumDecode(_$EnumTwelveGongEnumMap, json['gong']),
-      degree: (json['degree'] as num).toDouble(),
-    );
+  gong: $enumDecode(_$EnumTwelveGongEnumMap, json['gong']),
+  degree: (json['degree'] as num).toDouble(),
+);
 
 Map<String, dynamic> _$GongDegreeToJson(GongDegree instance) =>
     <String, dynamic>{
@@ -78,9 +80,9 @@ const _$EnumTwelveGongEnumMap = {
 };
 
 StarDegree _$StarDegreeFromJson(Map<String, dynamic> json) => StarDegree(
-      star: $enumDecode(_$EnumStarsEnumMap, json['star']),
-      degree: (json['degree'] as num).toDouble(),
-    );
+  star: $enumDecode(_$EnumStarsEnumMap, json['star']),
+  degree: (json['degree'] as num).toDouble(),
+);
 
 Map<String, dynamic> _$StarDegreeToJson(StarDegree instance) =>
     <String, dynamic>{
@@ -103,30 +105,32 @@ const _$EnumStarsEnumMap = {
 };
 
 ConstellationPosition _$ConstellationPositionFromJson(
-        Map<String, dynamic> json) =>
-    ConstellationPosition(
-      constellation:
-          $enumDecode(_$Enum28ConstellationsEnumMap, json['constellation']),
-      degree: (json['degree'] as num).toDouble(),
-      startAtDegree: (json['startAtDegree'] as num).toDouble(),
-      endAtDegree: (json['endAtDegree'] as num).toDouble(),
-    );
+  Map<String, dynamic> json,
+) => ConstellationPosition(
+  constellation: $enumDecode(
+    _$Enum28ConstellationsEnumMap,
+    json['constellation'],
+  ),
+  degree: (json['degree'] as num).toDouble(),
+  startAtDegree: (json['startAtDegree'] as num).toDouble(),
+  endAtDegree: (json['endAtDegree'] as num).toDouble(),
+);
 
 Map<String, dynamic> _$ConstellationPositionToJson(
-        ConstellationPosition instance) =>
-    <String, dynamic>{
-      'constellation': _$Enum28ConstellationsEnumMap[instance.constellation]!,
-      'degree': instance.degree,
-      'startAtDegree': instance.startAtDegree,
-      'endAtDegree': instance.endAtDegree,
-    };
+  ConstellationPosition instance,
+) => <String, dynamic>{
+  'constellation': _$Enum28ConstellationsEnumMap[instance.constellation]!,
+  'degree': instance.degree,
+  'startAtDegree': instance.startAtDegree,
+  'endAtDegree': instance.endAtDegree,
+};
 
 GongPosition _$GongPositionFromJson(Map<String, dynamic> json) => GongPosition(
-      gong: $enumDecode(_$EnumTwelveGongEnumMap, json['gong']),
-      degree: (json['degree'] as num).toDouble(),
-      startAtDegree: (json['startAtDegree'] as num).toDouble(),
-      endAtDegree: (json['endAtDegree'] as num).toDouble(),
-    );
+  gong: $enumDecode(_$EnumTwelveGongEnumMap, json['gong']),
+  degree: (json['degree'] as num).toDouble(),
+  startAtDegree: (json['startAtDegree'] as num).toDouble(),
+  endAtDegree: (json['endAtDegree'] as num).toDouble(),
+);
 
 Map<String, dynamic> _$GongPositionToJson(GongPosition instance) =>
     <String, dynamic>{

@@ -10,10 +10,13 @@ ElevenStarsInfo _$ElevenStarsInfoFromJson(Map<String, dynamic> json) =>
     ElevenStarsInfo(
       star: $enumDecode(_$EnumStarsEnumMap, json['star']),
       angle: (json['angle'] as num).toDouble(),
-      enterInfo:
-          EnteredInfo.fromJson(json['enterInfo'] as Map<String, dynamic>),
+      enterInfo: EnteredInfo.fromJson(
+        json['enterInfo'] as Map<String, dynamic>,
+      ),
       fiveStarWalkingType: $enumDecode(
-          _$FiveStarWalkingTypeEnumMap, json['fiveStarWalkingType']),
+        _$FiveStarWalkingTypeEnumMap,
+        json['fiveStarWalkingType'],
+      ),
       walkingSpeed: (json['walkingSpeed'] as num).toDouble(),
       priority: $enumDecode(_$EnumStarsPriorityEnumMap, json['priority']),
     );
@@ -62,10 +65,13 @@ FiveStarsInfo _$FiveStarsInfoFromJson(Map<String, dynamic> json) =>
     FiveStarsInfo(
       star: $enumDecode(_$EnumStarsEnumMap, json['star']),
       angle: (json['angle'] as num).toDouble(),
-      enterInfo:
-          EnteredInfo.fromJson(json['enterInfo'] as Map<String, dynamic>),
+      enterInfo: EnteredInfo.fromJson(
+        json['enterInfo'] as Map<String, dynamic>,
+      ),
       fiveStarWalkingType: $enumDecode(
-          _$FiveStarWalkingTypeEnumMap, json['fiveStarWalkingType']),
+        _$FiveStarWalkingTypeEnumMap,
+        json['fiveStarWalkingType'],
+      ),
       walkingSpeed: (json['walkingSpeed'] as num).toDouble(),
     );
 
@@ -80,28 +86,26 @@ Map<String, dynamic> _$FiveStarsInfoToJson(FiveStarsInfo instance) =>
     };
 
 SunInfo _$SunInfoFromJson(Map<String, dynamic> json) => SunInfo(
-      angle: (json['angle'] as num).toDouble(),
-      enterInfo:
-          EnteredInfo.fromJson(json['enterInfo'] as Map<String, dynamic>),
-    );
+  angle: (json['angle'] as num).toDouble(),
+  enterInfo: EnteredInfo.fromJson(json['enterInfo'] as Map<String, dynamic>),
+);
 
 Map<String, dynamic> _$SunInfoToJson(SunInfo instance) => <String, dynamic>{
-      'angle': instance.angle,
-      'enterInfo': instance.enterInfo,
-    };
+  'angle': instance.angle,
+  'enterInfo': instance.enterInfo,
+};
 
 MoonInfo _$MoonInfoFromJson(Map<String, dynamic> json) => MoonInfo(
-      angle: (json['angle'] as num).toDouble(),
-      enterInfo:
-          EnteredInfo.fromJson(json['enterInfo'] as Map<String, dynamic>),
-      moonPhase: $enumDecode(_$EnumMoonPhasesEnumMap, json['moonPhase']),
-    );
+  angle: (json['angle'] as num).toDouble(),
+  enterInfo: EnteredInfo.fromJson(json['enterInfo'] as Map<String, dynamic>),
+  moonPhase: $enumDecode(_$EnumMoonPhasesEnumMap, json['moonPhase']),
+);
 
 Map<String, dynamic> _$MoonInfoToJson(MoonInfo instance) => <String, dynamic>{
-      'angle': instance.angle,
-      'enterInfo': instance.enterInfo,
-      'moonPhase': _$EnumMoonPhasesEnumMap[instance.moonPhase]!,
-    };
+  'angle': instance.angle,
+  'enterInfo': instance.enterInfo,
+  'moonPhase': _$EnumMoonPhasesEnumMap[instance.moonPhase]!,
+};
 
 const _$EnumMoonPhasesEnumMap = {
   EnumMoonPhases.New: 'New',
@@ -118,8 +122,9 @@ FourSlaveStarInfo _$FourSlaveStarInfoFromJson(Map<String, dynamic> json) =>
     FourSlaveStarInfo(
       star: $enumDecode(_$EnumStarsEnumMap, json['star']),
       angle: (json['angle'] as num).toDouble(),
-      enterInfo:
-          EnteredInfo.fromJson(json['enterInfo'] as Map<String, dynamic>),
+      enterInfo: EnteredInfo.fromJson(
+        json['enterInfo'] as Map<String, dynamic>,
+      ),
       walkingSpeed: (json['walkingSpeed'] as num).toDouble(),
     );
 
@@ -135,8 +140,9 @@ LouJiStarsInfo _$LouJiStarsInfoFromJson(Map<String, dynamic> json) =>
     LouJiStarsInfo(
       star: $enumDecode(_$EnumStarsEnumMap, json['star']),
       angle: (json['angle'] as num).toDouble(),
-      enterInfo:
-          EnteredInfo.fromJson(json['enterInfo'] as Map<String, dynamic>),
+      enterInfo: EnteredInfo.fromJson(
+        json['enterInfo'] as Map<String, dynamic>,
+      ),
     );
 
 Map<String, dynamic> _$LouJiStarsInfoToJson(LouJiStarsInfo instance) =>
