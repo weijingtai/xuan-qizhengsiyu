@@ -3,12 +3,13 @@
 # Lines below are suggestions — uncomment to activate.
 # Use ! prefix to force-include something excluded by defaults.
 #
-# Built-in defaults are always excluded unless negated:
+# Built-in defaults (always excluded unless negated):
 #   node_modules/, .git/, dist/, build/, obj/, *.lock, *.min.js, etc.
-
+#
 # --- From .gitignore (uncomment to exclude) ---
 
-.dart_tool/
+# .DS_Store
+# .dart_tool/
 # .packages
 # .pub/
 # .vagrant/
@@ -33,20 +34,22 @@
 # *sync/
 # Icon?
 # .tags*
-.android/
-.ios/
-.flutter-plugins
-.flutter-plugins-dependencies
+# .android/
+# .ios/
+# .flutter-plugins
+# .flutter-plugins-dependencies
 # app.*.symbols
 # app.*.map.json
 # scripts/*
 # .chrome-profile/
 # example/.chrome-profile/
+# .worktrees/
+# .gstack/
+# .claude/
+# .commandcode/
 
 # --- Detected directories (uncomment to exclude) ---
 
-example/
-companion_system/
 # test/
 # docs/
 # scripts/
