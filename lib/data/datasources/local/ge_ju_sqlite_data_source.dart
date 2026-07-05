@@ -19,7 +19,7 @@ class GeJuSQLiteDataSource implements GeJuBuiltInDataSource {
 
   GeJuSQLiteDataSource(this._db);
 
-  // jixiong 字符串 → JiXiongEnum（xuan-common）
+  // jixiong 字符串 → JiXiongEnum
   static JiXiongEnum? _toJiXiong(String value) =>
       JiXiongEnum.fromName(value) == JiXiongEnum.WEI_ZHI
           ? null
