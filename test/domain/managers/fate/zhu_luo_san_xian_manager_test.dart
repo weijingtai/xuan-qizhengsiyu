@@ -104,13 +104,16 @@ void main() {
         config: bridgeWithFallbackConfig,
       );
       expect(results, isNotEmpty);
-      expect(results.firstWhere((r) => r.age == 61).palace, EnumTwelveGong.Wu);
-      expect(results.firstWhere((r) => r.age == 75).palace, EnumTwelveGong.Shen);
+      expect(results.firstWhere((r) => r.age == 61).palace, EnumTwelveGong.Hai);
+      expect(
+        results.firstWhere((r) => r.age == 75).palace,
+        EnumTwelveGong.Chou,
+      );
     });
   });
 
   group('calculateFromStarPalaces', () {
-    test('Frederick age 61 → Wu', () {
+    test('Frederick age 61 → Hai', () {
       final results = manager.calculateFromStarPalaces(
         lifePalace: EnumTwelveGong.You,
         birthSect: BirthSect.day,
@@ -118,10 +121,10 @@ void main() {
         maxAge: 80,
         config: bridgeWithFallbackConfig,
       );
-      expect(results.firstWhere((r) => r.age == 61).palace, EnumTwelveGong.Wu);
+      expect(results.firstWhere((r) => r.age == 61).palace, EnumTwelveGong.Hai);
     });
 
-    test('Frederick age 75 → Shen', () {
+    test('Frederick age 75 → Chou', () {
       final results = manager.calculateFromStarPalaces(
         lifePalace: EnumTwelveGong.You,
         birthSect: BirthSect.day,
@@ -129,7 +132,10 @@ void main() {
         maxAge: 80,
         config: bridgeWithFallbackConfig,
       );
-      expect(results.firstWhere((r) => r.age == 75).palace, EnumTwelveGong.Shen);
+      expect(
+        results.firstWhere((r) => r.age == 75).palace,
+        EnumTwelveGong.Chou,
+      );
     });
 
     test('throws StateError for incomplete star palaces', () {
@@ -147,7 +153,7 @@ void main() {
   });
 
   group('calculateFromPanel', () {
-    test('FrederickPanel age 75 → Shen', () {
+    test('FrederickPanel age 75 → Chou', () {
       final panel = _buildFrederickPanel();
       final results = manager.calculateFromPanel(
         panel: panel,
@@ -155,10 +161,13 @@ void main() {
         maxAge: 80,
         config: bridgeWithFallbackConfig,
       );
-      expect(results.firstWhere((r) => r.age == 75).palace, EnumTwelveGong.Shen);
+      expect(
+        results.firstWhere((r) => r.age == 75).palace,
+        EnumTwelveGong.Chou,
+      );
     });
 
-    test('FrederickPanel age 61 → Wu', () {
+    test('FrederickPanel age 61 → Hai', () {
       final panel = _buildFrederickPanel();
       final results = manager.calculateFromPanel(
         panel: panel,
@@ -166,7 +175,7 @@ void main() {
         maxAge: 80,
         config: bridgeWithFallbackConfig,
       );
-      expect(results.firstWhere((r) => r.age == 61).palace, EnumTwelveGong.Wu);
+      expect(results.firstWhere((r) => r.age == 61).palace, EnumTwelveGong.Hai);
     });
   });
 }
