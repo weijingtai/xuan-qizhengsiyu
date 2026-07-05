@@ -46,6 +46,12 @@ BasePanelConfig _$BasePanelConfigFromJson(Map<String, dynamic> json) =>
             json['bodyCountingToGong'],
           ) ??
           EnumTwelveGong.You,
+      rahuKetuConvention:
+          $enumDecodeNullable(
+            _$EnumRahuKetuConventionEnumMap,
+            json['rahuKetuConvention'],
+          ) ??
+          EnumRahuKetuConvention.luoJiangJiSheng,
     );
 
 Map<String, dynamic> _$BasePanelConfigToJson(
@@ -63,6 +69,8 @@ Map<String, dynamic> _$BasePanelConfigToJson(
   'settleBodyType': _$EnumSettleBodyTypeEnumMap[instance.settleBodyType]!,
   'bodyCountingToGong': _$EnumTwelveGongEnumMap[instance.bodyCountingToGong]!,
   'islifeGongBySunRealTimeLocation': instance.islifeGongBySunRealTimeLocation,
+  'rahuKetuConvention':
+      _$EnumRahuKetuConventionEnumMap[instance.rahuKetuConvention]!,
 };
 
 const _$CelestialCoordinateSystemEnumMap = {
@@ -117,6 +125,11 @@ const _$EnumTwelveGongEnumMap = {
   EnumTwelveGong.You: '酉',
   EnumTwelveGong.Xu: '戌',
   EnumTwelveGong.Hai: '亥',
+};
+
+const _$EnumRahuKetuConventionEnumMap = {
+  EnumRahuKetuConvention.luoJiangJiSheng: '罗降计升',
+  EnumRahuKetuConvention.luoShengJiJiang: '罗升计降',
 };
 
 FatePanelConfig _$FatePanelConfigFromJson(Map<String, dynamic> json) =>
@@ -179,6 +192,12 @@ PanelConfig _$PanelConfigFromJson(Map<String, dynamic> json) => PanelConfig(
         json['bodyCountingToGong'],
       ) ??
       EnumTwelveGong.You,
+  rahuKetuConvention:
+      $enumDecodeNullable(
+        _$EnumRahuKetuConventionEnumMap,
+        json['rahuKetuConvention'],
+      ) ??
+      EnumRahuKetuConvention.luoJiangJiSheng,
 );
 
 Map<String, dynamic> _$PanelConfigToJson(
@@ -196,4 +215,6 @@ Map<String, dynamic> _$PanelConfigToJson(
   'settleBodyType': _$EnumSettleBodyTypeEnumMap[instance.settleBodyType]!,
   'bodyCountingToGong': _$EnumTwelveGongEnumMap[instance.bodyCountingToGong]!,
   'islifeGongBySunRealTimeLocation': instance.islifeGongBySunRealTimeLocation,
+  'rahuKetuConvention':
+      _$EnumRahuKetuConventionEnumMap[instance.rahuKetuConvention]!,
 };

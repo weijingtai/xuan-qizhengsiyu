@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:qizhengsiyu/enums/enum_settle_life_body.dart';
 import 'package:qizhengsiyu/enums/enum_twelve_gong.dart';
+import 'package:qizhengsiyu/enums/enum_rahu_ketu_convention.dart';
 
 import '../../../enums/enum_panel_system_type.dart';
 import 'fate_dong_wei_da_xian.dart';
@@ -31,21 +32,13 @@ class BasePanelConfig {
   EnumSettleBodyType settleBodyType;
   EnumTwelveGong bodyCountingToGong;
 
-  /// 立命宫是否以真太阳时计算, 默认以实时太阳时计算，否则根据月令不同，确定太阳所在宫位 如：“子月在寅，丑月在丑，寅月在亥。。。。”
+  /// 立命宫是否以真太阳时计算, 默认以实时太阳时计算，否则根据月令不同，确定太阳所在宫位 如：“子月在寅，丑月在丑，寅月在亥。。。”
   bool islifeGongBySunRealTimeLocation;
 
-  /// UI 是否启动上升点 --- 移动至UI部分
-  // bool withAscendant;
-
-  // / UI 化曜系统 --- 移动至UI部分
-  // EnumHuaYaoType displayHuaYaoType;
-
-  /// 命盘排列顺序 --- 移动至UI部分
-  // List<UIEnumPanelRing> uiPanelRingOrder;
-  /// 批命提示流派 --- 移动至星盘高级部分
-  // EnumSchoolType schoolType;
-  /// 流派典籍 ---- 移动至星盘高级部分
-  // List<String> classicBooks;
+  /// 罗睺/计都 升降交点归属（流派分歧，用户可选，默认旧法）。
+  /// 旧 JSON 缺此键时回落旧法（见 @JsonKey defaultValue）。
+  @JsonKey(defaultValue: EnumRahuKetuConvention.luoJiangJiSheng)
+  EnumRahuKetuConvention rahuKetuConvention;
 
   BasePanelConfig({
     /// 星道制式
@@ -68,7 +61,9 @@ class BasePanelConfig {
     required this.islifeGongBySunRealTimeLocation,
     this.lifeCountingToGong = EnumTwelveGong.Mao,
     this.bodyCountingToGong = EnumTwelveGong.You,
+    this.rahuKetuConvention = EnumRahuKetuConvention.luoJiangJiSheng,
   });
+
   // copy with
   BasePanelConfig copyWith({
     /// 星道制式
@@ -89,6 +84,7 @@ class BasePanelConfig {
     /// 身宫方式
     EnumSettleBodyType? settleBodyType,
     bool? lifeGongBySunRealTimeLocation,
+    EnumRahuKetuConvention? rahuKetuConvention,
   }) {
     return BasePanelConfig(
       celestialCoordinateSystem:
@@ -101,6 +97,7 @@ class BasePanelConfig {
       settleBodyType: settleBodyType ?? this.settleBodyType,
       islifeGongBySunRealTimeLocation:
           lifeGongBySunRealTimeLocation ?? this.islifeGongBySunRealTimeLocation,
+      rahuKetuConvention: rahuKetuConvention ?? this.rahuKetuConvention,
     );
   }
 
@@ -116,10 +113,11 @@ class BasePanelConfig {
         houseDivisionSystem: HouseDivisionSystem.equal, // 等宫制
         panelSystemType: PanelSystemType.Tropical, // 回归制
         constellationSystemType:
-            ConstellationSystemType.Classical, // 经典黄道十二宫/二十八宿 (需确认具体含义)
-        settleLifeType: EnumSettleLifeType.Mao, // 定命宫方法 (需确认具体含义)
-        settleBodyType: EnumSettleBodyType.moon, // 定身宫方法 (需确认具体含义)
-        islifeGongBySunRealTimeLocation: true); // 是否根据太阳实时位置定命宫 (需确认具体含义)
+            ConstellationSystemType.Classical, // 经典黄道十二宫/二十八宿
+        settleLifeType: EnumSettleLifeType.Mao, // 定命宫方法
+        settleBodyType: EnumSettleBodyType.moon, // 定身宫方法
+        islifeGongBySunRealTimeLocation: true, // 是否根据太阳实时位置定命宫
+        rahuKetuConvention: EnumRahuKetuConvention.luoJiangJiSheng);
   }
 }
 
@@ -150,6 +148,7 @@ class PanelConfig extends BasePanelConfig {
     required super.islifeGongBySunRealTimeLocation,
     super.lifeCountingToGong,
     super.bodyCountingToGong,
+    super.rahuKetuConvention,
   });
 
   factory PanelConfig.fromJson(Map<String, dynamic> json) =>
@@ -166,6 +165,7 @@ class PanelConfig extends BasePanelConfig {
       settleLifeType: EnumSettleLifeType.Mao,
       settleBodyType: EnumSettleBodyType.moon,
       islifeGongBySunRealTimeLocation: true,
+      rahuKetuConvention: EnumRahuKetuConvention.luoJiangJiSheng,
     );
   }
 }

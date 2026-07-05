@@ -5,6 +5,8 @@ import 'package:tuple/tuple.dart';
 
 import 'eleven_stars_info.dart';
 import 'star_angle_speed.dart';
+import 'package:qizhengsiyu/enums/enum_rahu_ketu_convention.dart';
+import 'package:qizhengsiyu/domain/engines/siyu/rahu_ketu_definition.dart';
 
 class PanelStarsInfo {
   final ElevenStarsInfo sun;
@@ -89,7 +91,17 @@ class StarsAngle {
   final double lilith;
   final double qi;
 
-  static StarsAngle fromMapper(Map<EnumStars, StarAngleSpeed> mapper) {
+  static StarsAngle fromMapper(
+    Map<EnumStars, StarAngleSpeed> mapper, {
+    EnumRahuKetuConvention convention =
+        EnumRahuKetuConvention.luoJiangJiSheng,
+  }) {
+    final luoAngle = mapper[EnumStars.Luo]!.angle;
+    final jiAngle = mapper[EnumStars.Ji]!.angle;
+    final isOld = convention == EnumRahuKetuConvention.luoJiangJiSheng;
+    // 旧法：升=计、降=罗；新法反之。
+    final northNode = isOld ? jiAngle : luoAngle;
+    final southNode = isOld ? luoAngle : jiAngle;
     return StarsAngle(
       sun: mapper[EnumStars.Sun]!.angle,
       moon: mapper[EnumStars.Moon]!.angle,
@@ -103,8 +115,8 @@ class StarsAngle {
       saturnSpeed: mapper[EnumStars.Saturn]!.speed,
       water: mapper[EnumStars.Mercury]!.angle,
       waterSpeed: mapper[EnumStars.Mercury]!.speed,
-      southNode: mapper[EnumStars.Luo]!.angle,
-      northNode: mapper[EnumStars.Ji]!.angle,
+      southNode: southNode,
+      northNode: northNode,
       lilith: mapper[EnumStars.Bei]!.angle,
       qi: mapper[EnumStars.Qi]!.angle,
     );
@@ -129,21 +141,34 @@ class StarsAngle {
     required this.qi,
   });
 
-  Map<EnumStars, StarAngleSpeed> toMap() => {
-        EnumStars.Sun: StarAngleSpeed(angle: sun, speed: 0),
-        EnumStars.Moon: StarAngleSpeed(angle: moon, speed: 0),
-        EnumStars.Venus: StarAngleSpeed(angle: venus, speed: venusSpeed),
-        EnumStars.Jupiter: StarAngleSpeed(angle: jupiter, speed: jupiterSpeed),
-        EnumStars.Mars: StarAngleSpeed(angle: mars, speed: marsSpeed),
-        EnumStars.Saturn: StarAngleSpeed(angle: saturn, speed: saturnSpeed),
-        EnumStars.Mercury: StarAngleSpeed(angle: water, speed: waterSpeed),
-        EnumStars.Luo: StarAngleSpeed(angle: southNode, speed: 0),
-        EnumStars.Ji: StarAngleSpeed(angle: northNode, speed: 0),
-        EnumStars.Bei: StarAngleSpeed(angle: lilith, speed: 0),
-        EnumStars.Qi: StarAngleSpeed(angle: qi, speed: 0),
-      };
+  Map<EnumStars, StarAngleSpeed> toMap({
+    EnumRahuKetuConvention convention =
+        EnumRahuKetuConvention.luoJiangJiSheng,
+  }) {
+    final rk = RahuKetuDefinition.assign(
+        northNode: northNode, convention: convention);
+    return {
+      EnumStars.Sun: StarAngleSpeed(angle: sun, speed: 0),
+      EnumStars.Moon: StarAngleSpeed(angle: moon, speed: 0),
+      EnumStars.Venus: StarAngleSpeed(angle: venus, speed: venusSpeed),
+      EnumStars.Jupiter: StarAngleSpeed(angle: jupiter, speed: jupiterSpeed),
+      EnumStars.Mars: StarAngleSpeed(angle: mars, speed: marsSpeed),
+      EnumStars.Saturn: StarAngleSpeed(angle: saturn, speed: saturnSpeed),
+      EnumStars.Mercury: StarAngleSpeed(angle: water, speed: waterSpeed),
+      EnumStars.Luo: StarAngleSpeed(angle: rk.luo, speed: 0),
+      EnumStars.Ji: StarAngleSpeed(angle: rk.ji, speed: 0),
+      EnumStars.Bei: StarAngleSpeed(angle: lilith, speed: 0),
+      EnumStars.Qi: StarAngleSpeed(angle: qi, speed: 0),
+    };
+  }
 
-  double getByStar(EnumStars star) {
+  double getByStar(
+    EnumStars star, {
+    EnumRahuKetuConvention convention =
+        EnumRahuKetuConvention.luoJiangJiSheng,
+  }) {
+    final rk = RahuKetuDefinition.assign(
+        northNode: northNode, convention: convention);
     double starAngle = 0;
     switch (star) {
       case EnumStars.Moon:
@@ -174,10 +199,10 @@ class StarsAngle {
         starAngle = lilith;
         break;
       case EnumStars.Ji:
-        starAngle = northNode;
+        starAngle = rk.ji;
         break;
       case EnumStars.Luo:
-        starAngle = southNode;
+        starAngle = rk.luo;
         break;
     }
     return starAngle;
