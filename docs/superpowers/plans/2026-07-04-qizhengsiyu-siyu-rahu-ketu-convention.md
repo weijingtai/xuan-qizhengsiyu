@@ -1,6 +1,6 @@
 # 四余独立模块抽取 + 罗计升降交点用户可选 + 紫气算法可扩展 Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [x]`) syntax for tracking.
 >
 > **本计划分三部分**：**Part A（Task 1–8）** 四余模块抽取 + 罗计用户可选；**Part B（Task 9–16）** 紫气算法可扩展 + 天赤道郑氏星案模型（含 Moira 四点验证、郭守敬宿距）；**Part C（Task 17–24）** 四余可配置计算框架——三算法组（罗计/月孛/紫气）、星历/古法平行变体、分段多模型、流派档案+单项覆盖、spec+工厂+两层 UI（自定义=选择+调参，无 DSL）。依赖：C 依赖 A/B，B 依赖 A。设计 spec：`docs/superpowers/specs/2026-07-04-siyu-configurable-framework-design.md`。
 
@@ -85,7 +85,7 @@
 **Interfaces:**
 - Produces: `enum EnumRahuKetuConvention { luoJiangJiSheng, luoShengJiJiang }`，各带 `String name`、`String description`；`@JsonValue("罗降计升")` / `@JsonValue("罗升计降")`。
 
-- [ ] **Step 1: 写失败测试**
+- [x] **Step 1: 写失败测试**
 
 ```dart
 // test/enums/enum_rahu_ketu_convention_test.dart
@@ -107,12 +107,12 @@ void main() {
 }
 ```
 
-- [ ] **Step 2: 运行确认失败**
+- [x] **Step 2: 运行确认失败**
 
 Run: `flutter test test/enums/enum_rahu_ketu_convention_test.dart`
 Expected: FAIL —— 找不到 `enum_rahu_ketu_convention.dart`。
 
-- [ ] **Step 3: 实现枚举**
+- [x] **Step 3: 实现枚举**
 
 ```dart
 // lib/enums/enum_rahu_ketu_convention.dart
@@ -142,12 +142,12 @@ enum EnumRahuKetuConvention {
 }
 ```
 
-- [ ] **Step 4: 运行确认通过**
+- [x] **Step 4: 运行确认通过**
 
 Run: `flutter test test/enums/enum_rahu_ketu_convention_test.dart`
 Expected: PASS
 
-- [ ] **Step 5: 提交**
+- [x] **Step 5: 提交**
 
 ```bash
 git add lib/enums/enum_rahu_ketu_convention.dart test/enums/enum_rahu_ketu_convention_test.dart
@@ -168,7 +168,7 @@ git commit -m "feat(siyu): 新增罗计升降交点归属枚举 EnumRahuKetuConv
   - `class RahuKetuLongitudes { final double luo; final double ji; const RahuKetuLongitudes({required this.luo, required this.ji}); }`
   - `RahuKetuLongitudes RahuKetuDefinition.assign({required double northNode, required EnumRahuKetuConvention convention})` —— 给定升交点黄经，按流派返回罗/计黄经；恒满足 `|luo-ji| ≡ 180°`。
 
-- [ ] **Step 1: 写失败测试（源规格书 §8-B 全部不变量）**
+- [x] **Step 1: 写失败测试（源规格书 §8-B 全部不变量）**
 
 ```dart
 // test/domain/engines/siyu/rahu_ketu_definition_test.dart
@@ -221,12 +221,12 @@ void main() {
 }
 ```
 
-- [ ] **Step 2: 运行确认失败**
+- [x] **Step 2: 运行确认失败**
 
 Run: `flutter test test/domain/engines/siyu/rahu_ketu_definition_test.dart`
 Expected: FAIL —— 找不到 `rahu_ketu_definition.dart`。
 
-- [ ] **Step 3: 实现纯函数**
+- [x] **Step 3: 实现纯函数**
 
 ```dart
 // lib/domain/engines/siyu/rahu_ketu_definition.dart
@@ -269,12 +269,12 @@ class RahuKetuDefinition {
 }
 ```
 
-- [ ] **Step 4: 运行确认通过**
+- [x] **Step 4: 运行确认通过**
 
 Run: `flutter test test/domain/engines/siyu/rahu_ketu_definition_test.dart`
 Expected: PASS（5 个 test 全绿）
 
-- [ ] **Step 5: 提交**
+- [x] **Step 5: 提交**
 
 ```bash
 git add lib/domain/engines/siyu/rahu_ketu_definition.dart test/domain/engines/siyu/rahu_ketu_definition_test.dart
@@ -300,7 +300,7 @@ git commit -m "feat(siyu): 隔离罗计定义层 RahuKetuDefinition + 结构不�
 > **前向说明**：本 Task 里紫气用内联 `_computeZiQi`（搬运旧 magic 公式）仅为过渡，保证 Part A 可独立跑通。**Part B Task 14 会把构造函数改为 `SiYuCalculator({required source, required ZiQiAlgorithm ziQiAlgorithm})` 并删除 `_computeZiQi`**。若按顺序连做 Part A+B，可直接采用 Task 14 的注入式签名，跳过此过渡实现。
   - `class SwephSiYuEphemerisSource implements ISiYuEphemerisSource` —— 生产实现，包裹 `Sweph.swe_calc`。
 
-- [ ] **Step 1: 写失败测试（用 Fake 源，脱离 sweph；结构不变量 + 紫气搬运保真）**
+- [x] **Step 1: 写失败测试（用 Fake 源，脱离 sweph；结构不变量 + 紫气搬运保真）**
 
 ```dart
 // test/domain/engines/siyu/si_yu_calculator_test.dart
@@ -357,12 +357,12 @@ void main() {
 }
 ```
 
-- [ ] **Step 2: 运行确认失败**
+- [x] **Step 2: 运行确认失败**
 
 Run: `flutter test test/domain/engines/siyu/si_yu_calculator_test.dart`
 Expected: FAIL —— 找不到 `si_yu_calculator.dart`。
 
-- [ ] **Step 3: 实现 `SiYuCalculator`（紫气公式逐字搬自 `sweph_engine.dart`）**
+- [x] **Step 3: 实现 `SiYuCalculator`（紫气公式逐字搬自 `sweph_engine.dart`）**
 
 ```dart
 // lib/domain/engines/siyu/si_yu_calculator.dart
@@ -441,7 +441,7 @@ class SiYuCalculator {
 }
 ```
 
-- [ ] **Step 4: 实现生产星历源**
+- [x] **Step 4: 实现生产星历源**
 
 ```dart
 // lib/domain/engines/siyu/sweph_si_yu_ephemeris_source.dart
@@ -469,12 +469,12 @@ class SwephSiYuEphemerisSource implements ISiYuEphemerisSource {
 }
 ```
 
-- [ ] **Step 5: 运行确认通过**
+- [x] **Step 5: 运行确认通过**
 
 Run: `flutter test test/domain/engines/siyu/si_yu_calculator_test.dart`
 Expected: PASS（4 个 test 全绿）
 
-- [ ] **Step 6: 提交**
+- [x] **Step 6: 提交**
 
 ```bash
 git add lib/domain/engines/siyu/si_yu_calculator.dart lib/domain/engines/siyu/sweph_si_yu_ephemeris_source.dart test/domain/engines/siyu/si_yu_calculator_test.dart
@@ -495,7 +495,7 @@ git commit -m "feat(siyu): 抽出四余天文计算模块 SiYuCalculator + 注�
 - Consumes: `EnumRahuKetuConvention`（Task 1）。
 - Produces: `BasePanelConfig.rahuKetuConvention`（可写字段，默认 `luoJiangJiSheng`）；`PanelConfig` 通过 `super.rahuKetuConvention` 支持。
 
-- [ ] **Step 1: 写失败测试（含旧 JSON 缺字段的向后兼容）**
+- [x] **Step 1: 写失败测试（含旧 JSON 缺字段的向后兼容）**
 
 ```dart
 // test/domain/entities/models/panel_config_convention_test.dart
@@ -527,12 +527,12 @@ void main() {
 }
 ```
 
-- [ ] **Step 2: 运行确认失败**
+- [x] **Step 2: 运行确认失败**
 
 Run: `flutter test test/domain/entities/models/panel_config_convention_test.dart`
 Expected: FAIL —— `rahuKetuConvention` getter 不存在（编译错误）。
 
-- [ ] **Step 3: 改 `panel_config.dart`**
+- [x] **Step 3: 改 `panel_config.dart`**
 
 在 `import` 区加：
 ```dart
@@ -561,17 +561,17 @@ import '../../../enums/enum_rahu_ketu_convention.dart';
 
 > 说明：`defaultBasicPanelConfig()`/`defaultPanelConfig()`/`getPreviousPanelConfig()` 使用命名构造且不传该参，会自动取默认旧法，无需改动。
 
-- [ ] **Step 4: 重生成 .g.dart**
+- [x] **Step 4: 重生成 .g.dart**
 
 Run: `dart run build_runner build --delete-conflicting-outputs`
 Expected: 成功；`panel_config.g.dart` 含 `rahuKetuConvention` 的读写（带 defaultValue 回落）。
 
-- [ ] **Step 5: 运行确认通过 + 静态检查**
+- [x] **Step 5: 运行确认通过 + 静态检查**
 
 Run: `flutter test test/domain/entities/models/panel_config_convention_test.dart && flutter analyze`
 Expected: 测试 PASS；analyze 无新增错误。
 
-- [ ] **Step 6: 提交**
+- [x] **Step 6: 提交**
 
 ```bash
 git add lib/domain/entities/models/panel_config.dart lib/domain/entities/models/panel_config.g.dart test/domain/entities/models/panel_config_convention_test.dart
@@ -594,7 +594,7 @@ git commit -m "feat(config): BasePanelConfig 新增 rahuKetuConvention（默认�
   - `double StarsAngle.getByStar(EnumStars star, {EnumRahuKetuConvention convention = EnumRahuKetuConvention.luoJiangJiSheng})`
   - **字段 `southNode/northNode/lilith/qi` 与 `toJson()` 保持不变**（序列化零改动）。
 
-- [ ] **Step 1: 写失败测试**
+- [x] **Step 1: 写失败测试**
 
 ```dart
 // test/domain/entities/models/stars_angle_convention_test.dart
@@ -644,12 +644,12 @@ void main() {
 }
 ```
 
-- [ ] **Step 2: 运行确认失败**
+- [x] **Step 2: 运行确认失败**
 
 Run: `flutter test test/domain/entities/models/stars_angle_convention_test.dart`
 Expected: FAIL —— `toMap` 不接受 `convention` 命名参数（编译错误）。
 
-- [ ] **Step 3: 改 `panel_stars_info.dart`**
+- [x] **Step 3: 改 `panel_stars_info.dart`**
 
 顶部 `import` 区加：
 ```dart
@@ -764,17 +764,17 @@ import 'package:qizhengsiyu/domain/engines/siyu/rahu_ketu_definition.dart';
   }
 ```
 
-- [ ] **Step 4: 运行确认通过**
+- [x] **Step 4: 运行确认通过**
 
 Run: `flutter test test/domain/entities/models/stars_angle_convention_test.dart`
 Expected: PASS
 
-- [ ] **Step 5: 回归护栏——跑受影响的既有测试**
+- [x] **Step 5: 回归护栏——跑受影响的既有测试**
 
 Run: `flutter test test/test_planets_walking_type.dart`
 Expected: 与本次改动前结果一致（不因默认旧法而变化）。若该测试改前已失败（见备注），确认失败项与改动无关。
 
-- [ ] **Step 6: 提交**
+- [x] **Step 6: 提交**
 
 ```bash
 git add lib/domain/entities/models/panel_stars_info.dart test/domain/entities/models/stars_angle_convention_test.dart
@@ -793,7 +793,7 @@ git commit -m "feat(siyu): StarsAngle 罗计映射改为 convention 驱动（默
 - Consumes: `SiYuCalculator` + `SwephSiYuEphemerisSource`（Task 3）；`StarsAngle.toMap(convention:)`（Task 5）；`BasePanelConfig.rahuKetuConvention`（Task 4）。
 - Produces: 引擎 `calculateStarPositions` 的输出 `List<StarPositionRawData>` 中，罗/计位置随 `config.rahuKetuConvention` 变化；默认旧法时与改动前逐值一致。
 
-- [ ] **Step 1: 写失败测试（用可注入的四余源做端到端翻转断言，绕开 sweph 资源）**
+- [x] **Step 1: 写失败测试（用可注入的四余源做端到端翻转断言，绕开 sweph 资源）**
 
 > 注：`_calculateAllStarsAngleOnZodiac` 直接静态调用 `Sweph`，难以在纯单测启动。本测试改为验证「转换边界」把 convention 正确透传：构造一个 `StarsAngle` 并经 `toMap(convention: config.rahuKetuConvention)` 得到的罗/计与 §8-B 一致。若团队已有 sweph 测试夹具，可另加真实引擎用例。
 
@@ -829,12 +829,12 @@ void main() {
 }
 ```
 
-- [ ] **Step 2: 运行确认失败/通过基线**
+- [x] **Step 2: 运行确认失败/通过基线**
 
 Run: `flutter test test/domain/engines/sweph_engine_convention_test.dart`
 Expected: 若 Task 4/5 已完成，此测试应已 PASS（它锁定 config→toMap 的契约）。作为回归护栏保留。
 
-- [ ] **Step 3: 改 `sweph_engine.dart` —— 用 SiYuCalculator 替换内联四余**
+- [x] **Step 3: 改 `sweph_engine.dart` —— 用 SiYuCalculator 替换内联四余**
 
 顶部 `import` 区加：
 ```dart
@@ -858,7 +858,7 @@ import 'siyu/sweph_si_yu_ephemeris_source.dart';
 
 （七政各行保持不变。）
 
-- [ ] **Step 4: 改 `_transformToStarPositionRawData` 透传 convention**
+- [x] **Step 4: 改 `_transformToStarPositionRawData` 透传 convention**
 
 把（现 65 行）：
 ```dart
@@ -869,12 +869,12 @@ import 'siyu/sweph_si_yu_ephemeris_source.dart';
     final starMap = starsAngle.toMap(convention: config.rahuKetuConvention);
 ```
 
-- [ ] **Step 5: 静态检查 + 全量测试**
+- [x] **Step 5: 静态检查 + 全量测试**
 
 Run: `flutter analyze && flutter test test/domain/engines/sweph_engine_convention_test.dart`
 Expected: analyze 无新增错误；测试 PASS。
 
-- [ ] **Step 6: 提交**
+- [x] **Step 6: 提交**
 
 ```bash
 git add lib/domain/engines/sweph_engine.dart test/domain/engines/sweph_engine_convention_test.dart
@@ -895,7 +895,7 @@ git commit -m "refactor(siyu): SwephEngine 接入 SiYuCalculator 并透传罗计
 
 > ⚠️ **空接陷阱**：`_updateConfig` 现只重建部分字段。必须把 `rahuKetuConvention` 加进新建的 `PanelConfig(...)`，否则用户选择被丢弃。
 
-- [ ] **Step 1: 写失败测试（回调携带用户所选流派）**
+- [x] **Step 1: 写失败测试（回调携带用户所选流派）**
 
 ```dart
 // test/presentation/widgets/custom_config_section_convention_test.dart
@@ -931,12 +931,12 @@ void main() {
 }
 ```
 
-- [ ] **Step 2: 运行确认失败**
+- [x] **Step 2: 运行确认失败**
 
 Run: `flutter test test/presentation/widgets/custom_config_section_convention_test.dart`
 Expected: FAIL —— 找不到「罗升计降（新法·时宪）」文本。
 
-- [ ] **Step 3: 改 `custom_config_section.dart`**
+- [x] **Step 3: 改 `custom_config_section.dart`**
 
 顶部 `import` 区加：
 ```dart
@@ -1041,17 +1041,17 @@ import 'package:qizhengsiyu/enums/enum_rahu_ketu_convention.dart';
         ),
 ```
 
-- [ ] **Step 4: 运行确认通过**
+- [x] **Step 4: 运行确认通过**
 
 Run: `flutter test test/presentation/widgets/custom_config_section_convention_test.dart`
 Expected: PASS
 
-- [ ] **Step 5: 静态检查**
+- [x] **Step 5: 静态检查**
 
 Run: `flutter analyze`
 Expected: 无新增错误。
 
-- [ ] **Step 6: 提交**
+- [x] **Step 6: 提交**
 
 ```bash
 git add lib/presentation/widgets/config/custom_config_section.dart test/presentation/widgets/custom_config_section_convention_test.dart
@@ -1067,17 +1067,17 @@ git commit -m "feat(ui): 配置页新增罗计定义单选与新法警示，并�
 
 **Interfaces:** 无新增代码接口。
 
-- [ ] **Step 1: 全量测试**
+- [x] **Step 1: 全量测试**
 
 Run: `flutter test`
 Expected: 新增用例全绿；既有失败项仅限改动前已存在的 star position 相关（见「参考」备注），无新增回归。
 
-- [ ] **Step 2: 全量静态检查**
+- [x] **Step 2: 全量静态检查**
 
 Run: `flutter analyze`
 Expected: 无新增错误。
 
-- [ ] **Step 3: 写模块文档**
+- [x] **Step 3: 写模块文档**
 
 新建 `doc/feature/siyu/README.md`，内容涵盖：
 - 四余模块结构（`lib/domain/engines/siyu/`：`RahuKetuDefinition` / `SiYuCalculator` / `ISiYuEphemerisSource`）。
@@ -1085,7 +1085,7 @@ Expected: 无新增错误。
 - 配置项 `BasePanelConfig.rahuKetuConvention` 的用法与向后兼容策略。
 - 已知遗留议题（**非本次范围**）：紫气历元 2013 基准未校准；四余顺逆方向未显式化；`sweph_engine.dart` 时间基准（`datetime` 直取为 UTC）与紫气上海时区基准是否统一存疑。
 
-- [ ] **Step 4: 提交**
+- [x] **Step 4: 提交**
 
 ```bash
 git add doc/feature/siyu/README.md
