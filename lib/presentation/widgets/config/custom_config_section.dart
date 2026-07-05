@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:qizhengsiyu/enums/enum_panel_system_type.dart';
 import 'package:qizhengsiyu/theme/app_theme.dart';
 import 'package:qizhengsiyu/enums/enum_school.dart';
+import 'package:qizhengsiyu/enums/enum_rahu_ketu_convention.dart';
 
 import '../../../domain/entities/models/panel_config.dart';
 
@@ -33,6 +34,9 @@ class _CustomConfigSectionState extends State<CustomConfigSection> {
   // 流派典籍
   late List<String> _classicBook;
 
+  // 罗计交点约定
+  late EnumRahuKetuConvention _rahuKetuConvention;
+
   // 是否显示神煞
   // late bool _showGods;
 
@@ -51,6 +55,8 @@ class _CustomConfigSectionState extends State<CustomConfigSection> {
         CelestialCoordinateSystem.Ecliptic;
     _panelSystem =
         widget.initialConfig?.panelSystemType ?? PanelSystemType.Tropical;
+    _rahuKetuConvention = widget.initialConfig?.rahuKetuConvention ??
+        EnumRahuKetuConvention.luoJiangJiSheng;
     _classicBook = ["七政四余星道要诀"]; // 暂时硬编码，因为PanelConfig暂时不支持
     // _showGods = widget.initialConfig?.sh ?? true;
     // _showPalaces = widget.initialConfig?.showPalaces ?? true;
@@ -73,6 +79,7 @@ class _CustomConfigSectionState extends State<CustomConfigSection> {
       islifeGongBySunRealTimeLocation: base.islifeGongBySunRealTimeLocation,
       lifeCountingToGong: base.lifeCountingToGong,
       bodyCountingToGong: base.bodyCountingToGong,
+      rahuKetuConvention: _rahuKetuConvention,
     );
     widget.onConfigChanged(config);
   }
@@ -187,6 +194,91 @@ class _CustomConfigSectionState extends State<CustomConfigSection> {
                   ),
                 ],
               ),
+            ],
+          ),
+        ),
+        const SizedBox(height: AppTheme.spacing16),
+
+        // 罗计定义选择
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(AppTheme.borderRadius),
+            border: Border.all(color: const Color(0xFFEEEEEE)),
+          ),
+          padding: const EdgeInsets.all(AppTheme.spacing16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                '罗计升降交点定义',
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.w500,
+                    ),
+              ),
+              const SizedBox(height: AppTheme.spacing12),
+              Row(
+                children: [
+                  Expanded(
+                    child: _buildRadioTile(
+                      title: '罗降计升（古法）',
+                      subtitle: '罗睺为降交点，计都为升交点。果老/一行等古法所用',
+                      value: EnumRahuKetuConvention.luoJiangJiSheng,
+                      groupValue: _rahuKetuConvention,
+                      onChanged: (value) {
+                        setState(() {
+                          _rahuKetuConvention = value!;
+                        });
+                        _updateConfig();
+                      },
+                    ),
+                  ),
+                  Expanded(
+                    child: _buildRadioTile(
+                      title: '罗升计降（新法）',
+                      subtitle: '罗睺为升交点，计都为降交点。清后期/印占使用',
+                      value: EnumRahuKetuConvention.luoShengJiJiang,
+                      groupValue: _rahuKetuConvention,
+                      onChanged: (value) {
+                        setState(() {
+                          _rahuKetuConvention = value!;
+                        });
+                        _updateConfig();
+                      },
+                    ),
+                  ),
+                ],
+              ),
+              if (_rahuKetuConvention == EnumRahuKetuConvention.luoShengJiJiang)
+                Container(
+                  margin: const EdgeInsets.only(top: AppTheme.spacing12),
+                  padding: const EdgeInsets.all(AppTheme.spacing8),
+                  decoration: BoxDecoration(
+                    color: Colors.amber.shade50,
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: Colors.amber.shade200),
+                  ),
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.warning_amber_rounded,
+                        size: 16,
+                        color: Colors.amber.shade800,
+                      ),
+                      const SizedBox(width: AppTheme.spacing8),
+                      Expanded(
+                        child: Text(
+                          '与古法正统罗计相反、吉凶互换，仅供比对参考！',
+                          style:
+                              Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                    color: Colors.amber.shade900,
+                                    fontSize: 12,
+                                  ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
             ],
           ),
         ),
