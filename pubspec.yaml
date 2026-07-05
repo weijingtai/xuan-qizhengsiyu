@@ -72,6 +72,8 @@ dependencies:
     path: ../xuan-storage/drift
   persistence_assets:
     path: ../xuan-storage/assets
+  persistence_preferences:
+    path: ../xuan-storage/preferences
   metaphysics_chart_ui:
     path: ../metaphysics-chart-ui
   theme:

@@ -720,6 +720,13 @@ packages:
       relative: true
     source: path
     version: "0.0.1"
+  persistence_preferences:
+    dependency: "direct main"
+    description:
+      path: "../xuan-storage/preferences"
+      relative: true
+    source: path
+    version: "0.0.0"
   platform:
     dependency: transitive
     description:
