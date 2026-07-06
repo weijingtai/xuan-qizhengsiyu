@@ -17,6 +17,7 @@ profile
 DerivedData/
 
 .generated/
+example/assets/tmp/
 
 *.pbxuser
 *.mode1v3

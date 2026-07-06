@@ -13,7 +13,7 @@ part 'zhou_tian_model.g.dart';
 
 @JsonSerializable()
 class ZhouTianModel {
-  // 黄道制，赤道制，天赤道制，拟黄道术
+  // 黄道制，赤道制，天赤道制，似黄道恒星制
   @JsonKey(fromJson: CelestialCoordinateSystem.fromJson)
   CelestialCoordinateSystem systemType;
 
