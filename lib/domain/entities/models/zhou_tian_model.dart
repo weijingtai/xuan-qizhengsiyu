@@ -6,6 +6,7 @@ import 'package:tuple/tuple.dart';
 
 export '../../../enums/enum_panel_system_type.dart';
 import '../../../enums/enum_panel_system_type.dart';
+import '../../../enums/enum_zhou_tian_model.dart';
 import 'naming_degree_pair.dart';
 import 'projection_config.dart';
 
@@ -98,4 +99,67 @@ class ZhouTianModel {
       _$ZhouTianModelFromJson(json);
   @override
   Map<String, dynamic> toJson() => _$ZhouTianModelToJson(this);
+
+  ZhouTianModel copyWith({
+    CelestialCoordinateSystem? systemType,
+    ProjectionConfig? projectionConfig,
+    ConstellationSystemType? constellationSystemType,
+    PanelSystemType? panelSystemType,
+    String? epochCorrection,
+    double? totalDegree,
+    List<GongDegree>? gongDegreeSeq,
+    List<ConstellationDegree>? starInnDegreeSeq,
+    ConstellationDegree? alignmentPointAtConstellation,
+    GongDegree? alignmentPointAtGong,
+    TwentyFourJieQi? zeroPointJieQi,
+    ConstellationDegree? zeroPointAtConstellation,
+    GongDegree? zeroPointAtGong,
+    double? celestialLongitude,
+    double? zeroPointOffsetToNow,
+    double? rightAscension,
+    List<EnumTwelveGong>? gongOrder,
+    List<Enum28Constellations>? starInnOrder,
+    List<String>? specificationList,
+  }) {
+    return ZhouTianModel(
+      systemType: systemType ?? this.systemType,
+      projectionConfig: projectionConfig ?? this.projectionConfig,
+      constellationSystemType:
+          constellationSystemType ?? this.constellationSystemType,
+      panelSystemType: panelSystemType ?? this.panelSystemType,
+      epochCorrection: epochCorrection ?? this.epochCorrection,
+      totalDegree: totalDegree ?? this.totalDegree,
+      gongDegreeSeq: gongDegreeSeq ?? this.gongDegreeSeq,
+      starInnDegreeSeq: starInnDegreeSeq ?? this.starInnDegreeSeq,
+      alignmentPointAtConstellation:
+          alignmentPointAtConstellation ?? this.alignmentPointAtConstellation,
+      alignmentPointAtGong: alignmentPointAtGong ?? this.alignmentPointAtGong,
+      zeroPointJieQi: zeroPointJieQi ?? this.zeroPointJieQi,
+      zeroPointAtConstellation:
+          zeroPointAtConstellation ?? this.zeroPointAtConstellation,
+      zeroPointAtGong: zeroPointAtGong ?? this.zeroPointAtGong,
+      celestialLongitude: celestialLongitude ?? this.celestialLongitude,
+      zeroPointOffsetToNow: zeroPointOffsetToNow ?? this.zeroPointOffsetToNow,
+      rightAscension: rightAscension ?? this.rightAscension,
+      specificationList: specificationList ?? this.specificationList,
+      gongOrder: gongOrder ?? this.gongOrder,
+      starInnOrder: starInnOrder ?? this.starInnOrder,
+    );
+  }
+
+  /// 按面板配置产出覆写副本；config 两字段均 null 时返回 this（零成本、零行为变化）。
+  /// 关键约束：ZhouTianModelManager._mapper 是共享缓存实例，覆写必须走此克隆，严禁原地 mutate。
+  ZhouTianModel applyOverrides(
+      EnumZhouTianModel? configZhouTianOverride,
+      ProjectionConfig? configProjectionOverride) {
+    if (configZhouTianOverride == null && configProjectionOverride == null) {
+      return this;
+    }
+    return copyWith(
+      totalDegree:
+          configZhouTianOverride?.totalDegree ?? totalDegree,
+      projectionConfig:
+          configProjectionOverride ?? projectionConfig,
+    );
+  }
 }

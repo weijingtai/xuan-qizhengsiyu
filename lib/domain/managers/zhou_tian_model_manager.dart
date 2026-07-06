@@ -83,7 +83,7 @@ class ZhouTianModelManager {
     _mapper[key] = model;
   }
 
-  /// 根据PanelConfig获取对应的ZhouTianModel
+  /// 根据PanelConfig获取对应的ZhouTianModel（从缓存克隆，绝不原地下标 mutate）。
   ZhouTianModel getZhouTianModelBy(BasePanelConfig config) {
     if (!_isLoaded) {
       throw StateError(
@@ -97,7 +97,9 @@ class ZhouTianModelManager {
       throw UnimplementedError(
           'No ZhouTianModel found for the given PanelConfig.');
     }
-    return _mapper[key]!;
+    return _mapper[key]!.applyOverrides(
+        config.zhouTianModelOverride,
+        config.projectionOverride);
   }
 
   /// 创建映射器的键

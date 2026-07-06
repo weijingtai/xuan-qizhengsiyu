@@ -79,6 +79,15 @@ BasePanelConfig _$BasePanelConfigFromJson(
     _$CelestialCoordinateSystemEnumMap,
     json['siYuCoordinateOverride'],
   ),
+  zhouTianModelOverride: $enumDecodeNullable(
+    _$EnumZhouTianModelEnumMap,
+    json['zhouTianModelOverride'],
+  ),
+  projectionOverride: json['projectionOverride'] == null
+      ? null
+      : ProjectionConfig.fromJson(
+          json['projectionOverride'] as Map<String, dynamic>,
+        ),
 );
 
 Map<String, dynamic> _$BasePanelConfigToJson(
@@ -107,6 +116,9 @@ Map<String, dynamic> _$BasePanelConfigToJson(
   'siYuOverrides': instance.siYuOverrides,
   'siYuCoordinateOverride':
       _$CelestialCoordinateSystemEnumMap[instance.siYuCoordinateOverride],
+  'zhouTianModelOverride':
+      _$EnumZhouTianModelEnumMap[instance.zhouTianModelOverride],
+  'projectionOverride': instance.projectionOverride,
 };
 
 const _$CelestialCoordinateSystemEnumMap = {
@@ -187,6 +199,11 @@ const _$EnumZiQiEpochSetEnumMap = {
 const _$EnumZiQiChiDaoStandardEnumMap = {
   EnumZiQiChiDaoStandard.shouShiOrthodox: '授时正典',
   EnumZiQiChiDaoStandard.moira: 'Moira实测',
+};
+
+const _$EnumZhouTianModelEnumMap = {
+  EnumZhouTianModel.degree360: 'degree360',
+  EnumZhouTianModel.degree36525: 'degree36525',
 };
 
 FatePanelConfig _$FatePanelConfigFromJson(Map<String, dynamic> json) =>
@@ -281,6 +298,15 @@ PanelConfig _$PanelConfigFromJson(Map<String, dynamic> json) => PanelConfig(
     _$CelestialCoordinateSystemEnumMap,
     json['siYuCoordinateOverride'],
   ),
+  zhouTianModelOverride: $enumDecodeNullable(
+    _$EnumZhouTianModelEnumMap,
+    json['zhouTianModelOverride'],
+  ),
+  projectionOverride: json['projectionOverride'] == null
+      ? null
+      : ProjectionConfig.fromJson(
+          json['projectionOverride'] as Map<String, dynamic>,
+        ),
 );
 
 Map<String, dynamic> _$PanelConfigToJson(
@@ -309,4 +335,7 @@ Map<String, dynamic> _$PanelConfigToJson(
   'siYuOverrides': instance.siYuOverrides,
   'siYuCoordinateOverride':
       _$CelestialCoordinateSystemEnumMap[instance.siYuCoordinateOverride],
+  'zhouTianModelOverride':
+      _$EnumZhouTianModelEnumMap[instance.zhouTianModelOverride],
+  'projectionOverride': instance.projectionOverride,
 };

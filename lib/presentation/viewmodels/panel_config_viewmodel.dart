@@ -185,6 +185,8 @@ class PanelConfigViewModel extends ChangeNotifier {
       settleLifeType: EnumSettleLifeType.Mao,
       settleBodyType: EnumSettleBodyType.moon,
       islifeGongBySunRealTimeLocation: true,
+      zhouTianModelOverride: null,
+      projectionOverride: null,
     );
   }
 

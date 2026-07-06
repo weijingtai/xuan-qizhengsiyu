@@ -6,37 +6,48 @@ import '../engines/projection/huang_chi_dao_diff.dart';
 import '../entities/models/projection_config.dart';
 
 class CelestialProjectorFactory {
+  /// 春分锚点默认值：0.0（春分点不动契约）。
+  /// 文档 002 §10 指出元时春分点约在壁宿 6–8°（待定 O1），
+  /// 0.0 表示不施加全局平移，仅依赖 diff 算法的进退规则。
+  static const double _defaultAnchor = 0.0;
+
   static ICelestialProjector create(
       ProjectionConfig? config, double targetTotal) {
-    final srcTotal = config?.sourceTotal ?? 360.0;
-    if (config == null || config.strategy == MappingStrategy.linear) {
-      return LinearCelestialProjector(
-        sourceTotal: srcTotal,
-        targetTotal: targetTotal,
-        offset: config?.offset ?? 0.0,
-      );
-    } else if (config.strategy == MappingStrategy.tuiBianHuangDao) {
-      final diffType = config.huangChiDaoDiffType ?? HuangChiDaoDiffType.jiyuan;
-      final HuangChiDaoDiff diff = switch (diffType) {
-        HuangChiDaoDiffType.daren => const DarenJinTuiDiff(),
-        HuangChiDaoDiffType.jiyuan => const JiyuanFormulaDiff(),
-        HuangChiDaoDiffType.shoushi => ShoushiSphericalDiff(
-            epsilonDeg: config.epsilonDeg ?? 23.90,
-            zhouTian: targetTotal,
-          ),
-      };
-      return TuiBianHuangDaoProjector(
-        diff: diff,
-        zhouTian: targetTotal,
-        springEquinoxAnchor: config.springEquinoxAnchor ?? 6.0,
-      );
-    } else {
-      return PiecewiseCelestialProjector(
-        sourcePoints: config.sourcePoints!,
-        targetPoints: config.targetPoints!,
-        sourceTotal: srcTotal,
-        targetTotal: targetTotal,
-      );
+    final strategy = config?.strategy ?? MappingStrategy.linear;
+    switch (strategy) {
+      case MappingStrategy.linear:
+        return LinearCelestialProjector(
+          sourceTotal: 360.0,
+          targetTotal: targetTotal,
+          offset: config?.offset ?? 0.0,
+        );
+      case MappingStrategy.piecewise:
+        return PiecewiseCelestialProjector(
+          sourcePoints: config!.sourcePoints!,
+          targetPoints: config.targetPoints!,
+          sourceTotal: 360.0,
+          targetTotal: targetTotal,
+        );
+      case MappingStrategy.tuiBianHuangDao:
+        return TuiBianHuangDaoProjector(
+          diff: _buildDiff(config!, targetTotal),
+          zhouTian: targetTotal,
+          springEquinoxAnchor: config.springEquinoxAnchor ?? _defaultAnchor,
+        );
+    }
+  }
+
+  static HuangChiDaoDiff _buildDiff(ProjectionConfig c, double zhouTian) {
+    switch (c.huangChiDaoDiffType ?? HuangChiDaoDiffType.shoushi) {
+      case HuangChiDaoDiffType.daren:
+        return const DarenJinTuiDiff();
+      case HuangChiDaoDiffType.jiyuan:
+        return const JiyuanFormulaDiff();
+      case HuangChiDaoDiffType.shoushi:
+        return ShoushiSphericalDiff(
+          epsilonDeg: c.epsilonDeg ?? 23.90,
+          zhouTian: zhouTian,
+        );
     }
   }
 }

@@ -68,7 +68,9 @@ class SwephEngine implements ICalculationEngine {
           'Unsupported panel system type: ${panelConfig.celestialCoordinateSystem.name} ${panelConfig.panelSystemType.name}');
     }
     final jsonString = await _ephemerisRes.loadEphemerisResource(assertName);
-    return ZhouTianModel.fromJson(jsonDecode(jsonString));
+    return ZhouTianModel.fromJson(jsonDecode(jsonString)).applyOverrides(
+        panelConfig.zhouTianModelOverride,
+        panelConfig.projectionOverride);
   }
 
   @override

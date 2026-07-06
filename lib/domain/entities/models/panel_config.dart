@@ -6,7 +6,9 @@ import 'package:qizhengsiyu/enums/enum_zi_qi_algorithm.dart';
 import 'package:qizhengsiyu/domain/engines/siyu/spec/si_yu_group_spec.dart';
 
 import '../../../enums/enum_panel_system_type.dart';
+import '../../../enums/enum_zhou_tian_model.dart';
 import 'fate_dong_wei_da_xian.dart';
+import 'projection_config.dart';
 
 part 'panel_config.g.dart';
 
@@ -66,6 +68,12 @@ class BasePanelConfig {
 
   CelestialCoordinateSystem? siYuCoordinateOverride;
 
+  /// 周天制覆写：null = 用资产自带 totalDegree；degree36525 → 覆写为 365.2575。
+  EnumZhouTianModel? zhouTianModelOverride;
+
+  /// 黄赤道换算覆写：null = 用资产自带 projectionConfig（现状多为空/线性）。
+  ProjectionConfig? projectionOverride;
+
   BasePanelConfig({
     /// 星道制式
     required this.celestialCoordinateSystem,
@@ -95,6 +103,8 @@ class BasePanelConfig {
     this.siYuProfileId = 'guolao_ecliptic',
     this.siYuOverrides = const {},
     this.siYuCoordinateOverride,
+    this.zhouTianModelOverride,
+    this.projectionOverride,
   });
 
   // copy with
@@ -125,6 +135,8 @@ class BasePanelConfig {
     String? siYuProfileId,
     Map<String, SiYuGroupSpec>? siYuOverrides,
     CelestialCoordinateSystem? siYuCoordinateOverride,
+    EnumZhouTianModel? zhouTianModelOverride,
+    ProjectionConfig? projectionOverride,
   }) {
     return BasePanelConfig(
       celestialCoordinateSystem:
@@ -145,6 +157,8 @@ class BasePanelConfig {
       siYuProfileId: siYuProfileId ?? this.siYuProfileId,
       siYuOverrides: siYuOverrides ?? this.siYuOverrides,
       siYuCoordinateOverride: siYuCoordinateOverride ?? this.siYuCoordinateOverride,
+      zhouTianModelOverride: zhouTianModelOverride ?? this.zhouTianModelOverride,
+      projectionOverride: projectionOverride ?? this.projectionOverride,
     );
   }
 
@@ -171,7 +185,9 @@ class BasePanelConfig {
         ziQiChiDaoStandard: EnumZiQiChiDaoStandard.moira,
         siYuProfileId: 'guolao_ecliptic',
         siYuOverrides: const {},
-        siYuCoordinateOverride: null);
+        siYuCoordinateOverride: null,
+        zhouTianModelOverride: null,
+        projectionOverride: null);
   }
 }
 
@@ -210,6 +226,8 @@ class PanelConfig extends BasePanelConfig {
     super.siYuProfileId,
     super.siYuOverrides,
     super.siYuCoordinateOverride,
+    super.zhouTianModelOverride,
+    super.projectionOverride,
   });
 
   factory PanelConfig.fromJson(Map<String, dynamic> json) =>
@@ -234,6 +252,8 @@ class PanelConfig extends BasePanelConfig {
       siYuProfileId: 'guolao_ecliptic',
       siYuOverrides: const {},
       siYuCoordinateOverride: null,
+      zhouTianModelOverride: null,
+      projectionOverride: null,
     );
   }
 }

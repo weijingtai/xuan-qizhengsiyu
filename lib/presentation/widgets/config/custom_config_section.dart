@@ -9,6 +9,9 @@ import 'package:qizhengsiyu/domain/engines/siyu/profile/built_in_profiles.dart';
 import 'package:qizhengsiyu/presentation/widgets/config/si_yu_profile_selector.dart';
 import 'package:qizhengsiyu/presentation/widgets/config/si_yu_group_editor.dart';
 
+import 'package:qizhengsiyu/enums/enum_zhou_tian_model.dart';
+import 'package:qizhengsiyu/domain/entities/models/projection_config.dart';
+
 import '../../../domain/entities/models/panel_config.dart';
 
 /// 自定义配置部分
@@ -52,6 +55,12 @@ class _CustomConfigSectionState extends State<CustomConfigSection> {
   late Map<String, SiYuGroupSpec> _siYuOverrides;
   CelestialCoordinateSystem? _siYuCoordinateOverride;
 
+  late EnumZhouTianModel? _zhouTianModel;
+  late MappingStrategy _mappingStrategy;
+  late HuangChiDaoDiffType? _huangChiDaoDiffType;
+  late double _epsilonDeg;
+  late double _springEquinoxAnchor;
+
   // 是否显示神煞
   // late bool _showGods;
 
@@ -85,6 +94,12 @@ class _CustomConfigSectionState extends State<CustomConfigSection> {
         ? Map.from(widget.initialConfig!.siYuOverrides)
         : {};
     _siYuCoordinateOverride = widget.initialConfig?.siYuCoordinateOverride;
+    _zhouTianModel = widget.initialConfig?.zhouTianModelOverride;
+    final projOverride = widget.initialConfig?.projectionOverride;
+    _mappingStrategy = projOverride?.strategy ?? MappingStrategy.linear;
+    _huangChiDaoDiffType = projOverride?.huangChiDaoDiffType;
+    _epsilonDeg = projOverride?.epsilonDeg ?? 23.90;
+    _springEquinoxAnchor = projOverride?.springEquinoxAnchor ?? 0.0;
     _classicBook = ["七政四余星道要诀"]; // 暂时硬编码，因为PanelConfig暂时不支持
     // _showGods = widget.initialConfig?.sh ?? true;
     // _showPalaces = widget.initialConfig?.showPalaces ?? true;
@@ -115,6 +130,15 @@ class _CustomConfigSectionState extends State<CustomConfigSection> {
       siYuProfileId: _siYuProfileId,
       siYuOverrides: _siYuOverrides,
       siYuCoordinateOverride: _siYuCoordinateOverride,
+      zhouTianModelOverride: _zhouTianModel,
+      projectionOverride: _mappingStrategy == MappingStrategy.linear
+          ? null
+          : ProjectionConfig(
+              strategy: MappingStrategy.tuiBianHuangDao,
+              huangChiDaoDiffType: _huangChiDaoDiffType,
+              epsilonDeg: _epsilonDeg,
+              springEquinoxAnchor: _springEquinoxAnchor,
+            ),
     );
     widget.onConfigChanged(config);
   }
@@ -486,6 +510,208 @@ class _CustomConfigSectionState extends State<CustomConfigSection> {
                       _ziQiChiDaoStandard = value!;
                     });
                     _updateConfig();
+                  },
+                ),
+              ],
+            ],
+          ),
+        ),
+        const SizedBox(height: AppTheme.spacing16),
+
+        // 周天制与黄赤道换算
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(AppTheme.borderRadius),
+            border: Border.all(color: const Color(0xFFEEEEEE)),
+          ),
+          padding: const EdgeInsets.all(AppTheme.spacing16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                '周天制与黄赤道换算',
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.w500,
+                    ),
+              ),
+              const SizedBox(height: AppTheme.spacing12),
+              Text(
+                '周天制',
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: AppTheme.secondaryText,
+                    ),
+              ),
+              const SizedBox(height: AppTheme.spacing8),
+              Row(
+                children: [
+                  Expanded(
+                    child: _buildRadioTile<EnumZhouTianModel?>(
+                      title: '360 度制',
+                      subtitle: '现代 360°，默认',
+                      value: null,
+                      groupValue: _zhouTianModel,
+                      onChanged: (value) {
+                        setState(() {
+                          _zhouTianModel = value;
+                        });
+                        _updateConfig();
+                      },
+                    ),
+                  ),
+                  Expanded(
+                    child: _buildRadioTile<EnumZhouTianModel?>(
+                      title: '古度 365.25',
+                      subtitle: '古周天 365.2575',
+                      value: EnumZhouTianModel.degree36525,
+                      groupValue: _zhouTianModel,
+                      onChanged: (value) {
+                        setState(() {
+                          _zhouTianModel = value;
+                        });
+                        _updateConfig();
+                      },
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: AppTheme.spacing16),
+              Text(
+                '黄赤道换算',
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: AppTheme.secondaryText,
+                    ),
+              ),
+              const SizedBox(height: AppTheme.spacing8),
+              DropdownButtonFormField<MappingStrategy>(
+                value: _mappingStrategy,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  contentPadding: const EdgeInsets.symmetric(
+                    horizontal: AppTheme.spacing16,
+                    vertical: AppTheme.spacing12,
+                  ),
+                ),
+                items: const [
+                  DropdownMenuItem(
+                    value: MappingStrategy.linear,
+                    child: Text('线性（默认）'),
+                  ),
+                  DropdownMenuItem(
+                    value: MappingStrategy.tuiBianHuangDao,
+                    child: Text('推变黄道'),
+                  ),
+                ],
+                onChanged: (value) {
+                  setState(() {
+                    _mappingStrategy = value!;
+                  });
+                  _updateConfig();
+                },
+              ),
+              if (_mappingStrategy == MappingStrategy.tuiBianHuangDao) ...[
+                const SizedBox(height: AppTheme.spacing16),
+                Text(
+                  '推变黄道算法',
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: AppTheme.secondaryText,
+                      ),
+                ),
+                const SizedBox(height: AppTheme.spacing8),
+                DropdownButtonFormField<HuangChiDaoDiffType>(
+                  value: _huangChiDaoDiffType ?? HuangChiDaoDiffType.shoushi,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: AppTheme.spacing16,
+                      vertical: AppTheme.spacing12,
+                    ),
+                  ),
+                  items: const [
+                    DropdownMenuItem(
+                      value: HuangChiDaoDiffType.daren,
+                      child: Text('大衍进退表'),
+                    ),
+                    DropdownMenuItem(
+                      value: HuangChiDaoDiffType.jiyuan,
+                      child: Text('纪元(姚舜辅)'),
+                    ),
+                    DropdownMenuItem(
+                      value: HuangChiDaoDiffType.shoushi,
+                      child: Text('授时球面'),
+                    ),
+                  ],
+                  onChanged: (value) {
+                    setState(() {
+                      _huangChiDaoDiffType = value;
+                    });
+                    _updateConfig();
+                  },
+                ),
+                const SizedBox(height: AppTheme.spacing16),
+                Text(
+                  '黄赤交角 ε',
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: AppTheme.secondaryText,
+                      ),
+                ),
+                const SizedBox(height: AppTheme.spacing8),
+                TextFormField(
+                  initialValue: _epsilonDeg.toString(),
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: AppTheme.spacing16,
+                      vertical: AppTheme.spacing12,
+                    ),
+                    helperText: '授时历大距',
+                  ),
+                  onChanged: (value) {
+                    final parsed = double.tryParse(value);
+                    if (parsed != null) {
+                      setState(() {
+                        _epsilonDeg = parsed;
+                      });
+                      _updateConfig();
+                    }
+                  },
+                ),
+                const SizedBox(height: AppTheme.spacing16),
+                Text(
+                  '春分锚点',
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: AppTheme.secondaryText,
+                      ),
+                ),
+                const SizedBox(height: AppTheme.spacing8),
+                TextFormField(
+                  initialValue: _springEquinoxAnchor.toString(),
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: AppTheme.spacing16,
+                      vertical: AppTheme.spacing12,
+                    ),
+                    helperText: '赤道度·古周天',
+                  ),
+                  onChanged: (value) {
+                    final parsed = double.tryParse(value);
+                    if (parsed != null) {
+                      setState(() {
+                        _springEquinoxAnchor = parsed;
+                      });
+                      _updateConfig();
+                    }
                   },
                 ),
               ],
