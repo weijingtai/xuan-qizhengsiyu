@@ -18,6 +18,8 @@ import 'package:qizhengsiyu/presentation/models/ui_star_model.dart';
 import 'package:qizhengsiyu/presentation/pages/beauty_view_page.dart';
 import 'package:qizhengsiyu/presentation/viewmodels/qi_zheng_si_yu_viewmodel.dart';
 import 'package:qizhengsiyu/qizhengsiyu_storage_dependencies.dart';
+import 'package:qizhengsiyu/data/datasources/local/app_database.dart';
+import 'package:drift/native.dart';
 
 import '../../fakes/fake_storage_dependencies.dart';
 
@@ -34,6 +36,7 @@ QiZhengSiYuStorageDependencies _fakeDependencies() {
     historicalEphemeris: FakeQiZhengHistoricalEphemerisRepository(),
     ephemerisResource: FakeQiZhengEphemerisResourceRepository(),
     zhouTianModelRepository: FakeQiZhengZhouTianModelRepository(),
+    userSchoolProfileDao: AppDatabase.forTesting(NativeDatabase.memory()).userSchoolProfileDao,
   );
 }
 
