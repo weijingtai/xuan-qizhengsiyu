@@ -2,6 +2,8 @@
 
 import 'dart:math' as math;
 
+import '../../../utils/math/arc_circle.dart';
+
 /// 黄赤道度差策略 —— 「推变黄道」三算法的可插拔核心。
 ///
 /// 三种历法算法（大衍进退表 / 姚舜辅公式 / 授时球面三角）都走同一个「进退」外壳：
@@ -176,5 +178,45 @@ class ShoushiTableDiff extends HuangChiDaoDiff {
     if (fi >= _len() - 1) return _d[_len() - 1];
     final frac = x - fi;
     return _d[fi] + (_dd(fi + 1) - _d[fi]) * frac;
+  }
+}
+
+/// 第四种算法 —— 元授时历弧矢割圆术（HushiGeyuan 的黄赤道换算）。
+///
+/// HushiGeyuan.rightAscension(lam)=alpha 为黄道→赤道；diff(c) 需赤道→黄赤差，
+/// 故在 [0, quadrant] 内二分反演求 lam 使 alpha(lam)=c，返回 d=lam-c。
+/// 见 docs/project/architecture/002 弧矢割圆术章节。
+class HushiGeyuanDiff extends HuangChiDaoDiff {
+  final HushiGeyuan _geyuan;
+  final double _zhouTian;
+
+  HushiGeyuanDiff({double zhouTian = 365.2575, double epsilonDeg = 23.9030})
+      : _zhouTian = zhouTian,
+        _geyuan = HushiGeyuan(
+          zhouTian: zhouTian,
+          daJu: epsilonDeg,
+          piRatio: math.pi,
+        );
+
+  @override
+  double get quadrant => _zhouTian / 4.0;
+
+  @override
+  double diff(double c) {
+    final x = c.abs().clamp(0.0, quadrant);
+    if (x <= 0) return 0.0;
+    double lo = 0.0, hi = quadrant;
+    for (var i = 0; i < 60; i++) {
+      final mid = (lo + hi) / 2.0;
+      final alpha = _geyuan.rightAscension(mid);
+      if (alpha < x) {
+        lo = mid;
+      } else {
+        hi = mid;
+      }
+    }
+    final lam = (lo + hi) / 2.0;
+    final d = lam - x;
+    return d < 0 ? 0.0 : d;
   }
 }

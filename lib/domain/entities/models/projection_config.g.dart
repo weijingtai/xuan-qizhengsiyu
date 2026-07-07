@@ -48,4 +48,5 @@ const _$HuangChiDaoDiffTypeEnumMap = {
   HuangChiDaoDiffType.daren: 'daren',
   HuangChiDaoDiffType.jiyuan: 'jiyuan',
   HuangChiDaoDiffType.shoushi: 'shoushi',
+  HuangChiDaoDiffType.hushi: 'hushi',
 };

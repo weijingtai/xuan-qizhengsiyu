@@ -48,6 +48,9 @@ class CelestialProjectorFactory {
           epsilonDeg: c.epsilonDeg ?? 23.90,
           zhouTian: zhouTian,
         );
+      case HuangChiDaoDiffType.hushi:
+        return HushiGeyuanDiff(
+            epsilonDeg: c.epsilonDeg ?? 23.9030, zhouTian: zhouTian);
     }
   }
 }

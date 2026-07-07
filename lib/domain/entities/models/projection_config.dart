@@ -19,6 +19,8 @@ enum HuangChiDaoDiffType {
   jiyuan,
   @JsonValue('shoushi')
   shoushi,
+  @JsonValue('hushi')
+  hushi,
 }
 
 @JsonSerializable()
