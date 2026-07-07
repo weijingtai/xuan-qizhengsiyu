@@ -33,7 +33,14 @@ void main() {
     expect(callbackConfig, isNull);
 
     // Tap on the new convention
-    await tester.tap(find.text('罗升计降（新法）'));
+    final newConventionRadio = find.byWidgetPredicate(
+      (w) => w is RadioListTile<EnumRahuKetuConvention> &&
+          w.subtitle is Text &&
+          (w.subtitle as Text).data!.contains('清后期'),
+    );
+    await tester.ensureVisible(newConventionRadio);
+    await tester.pumpAndSettle();
+    await tester.tap(newConventionRadio);
     await tester.pumpAndSettle();
 
     // Verify callback was triggered and updated config to new convention
