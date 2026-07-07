@@ -1,5 +1,6 @@
 import '../../enums/enum_panel_system_type.dart';
 import '../../enums/enum_zhou_tian_model.dart';
+import '../../enums/enum_zero_point_ref.dart';
 import '../entities/models/panel_config.dart';
 import '../entities/models/projection_config.dart';
 
@@ -35,6 +36,17 @@ class PanelSystemResolver {
     // ③ 古黄道 + 线性 提示退化
     if (coord == CelestialCoordinateSystem.PseudoEcliptic && !isTuiBian) {
       warnings.add('古黄道未选推黄道算法，将退化为直接 365.25÷360 缩放');
+    }
+    // ④ 回归/恒星 与 起点(春分/冬至) 的语义匹配（非阻断提示）
+    final ref = config.zeroPointRef;
+    if (ref != null) {
+      final isTropical = config.panelSystemType == PanelSystemType.Tropical;
+      if (isTropical && ref == EnumZeroPointRef.dongzhi) {
+        warnings.add('回归制通常配春分起点，当前选了冬至起点，请确认');
+      }
+      if (!isTropical && ref == EnumZeroPointRef.chunfen) {
+        warnings.add('恒星制通常配冬至/固定恒星起点，当前选了春分起点，请确认');
+      }
     }
     // ⑤ 逐宿覆写 提示核对
     final overrides = config.starInnDegreeOverrides;
