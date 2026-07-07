@@ -1,6 +1,5 @@
 import 'package:uuid/uuid.dart';
 import 'package:qizhengsiyu/enums/enum_school.dart';
-import 'package:qizhengsiyu/data/datasources/local/app_database.dart';
 import 'package:qizhengsiyu/data/datasources/local/daos/user_school_profile_dao.dart';
 import 'package:qizhengsiyu/domain/entities/models/panel_config.dart';
 import 'package:qizhengsiyu/domain/services/user_school_profile_service_port.dart';
@@ -25,7 +24,16 @@ class UserSchoolProfileService implements UserSchoolProfileServicePort {
   }
 
   @override
-  Future<List<UserSchoolProfileTableData>> listAll() => _dao.listAll();
+  Future<List<SavedSchoolProfile>> listAll() async {
+    final list = await _dao.listAll();
+    return list.map((e) => SavedSchoolProfile(
+      id: e.uuid,
+      name: e.name,
+      school: e.school,
+      classicBook: e.classicBook,
+      config: e.panelConfig,
+    )).toList();
+  }
   
   @override
   Future<void> delete(String uuid) => _dao.softDelete(uuid);
