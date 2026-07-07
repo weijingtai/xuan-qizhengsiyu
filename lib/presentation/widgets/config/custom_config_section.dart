@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:qizhengsiyu/enums/enum_panel_system_type.dart';
 import 'package:qizhengsiyu/theme/app_theme.dart';
 import 'package:qizhengsiyu/enums/enum_rahu_ketu_convention.dart';
+import 'package:qizhengsiyu/enums/enum_settle_life_body.dart';
 import 'package:qizhengsiyu/enums/enum_zi_qi_algorithm.dart';
 import 'package:qizhengsiyu/domain/engines/siyu/group/si_yu_group_algorithm.dart';
 import 'package:qizhengsiyu/domain/engines/siyu/spec/si_yu_group_spec.dart';
@@ -10,7 +11,10 @@ import 'package:qizhengsiyu/presentation/widgets/config/si_yu_profile_selector.d
 import 'package:qizhengsiyu/presentation/widgets/config/si_yu_group_editor.dart';
 
 import 'package:qizhengsiyu/enums/enum_zhou_tian_model.dart';
+import 'package:qizhengsiyu/enums/enum_zero_point_ref.dart';
+import 'package:qizhengsiyu/enums/enum_constellation_offset_tier.dart';
 import 'package:qizhengsiyu/domain/entities/models/projection_config.dart';
+import 'package:qizhengsiyu/domain/managers/panel_system_resolver.dart';
 
 import '../../../domain/entities/models/panel_config.dart';
 
@@ -61,6 +65,11 @@ class _CustomConfigSectionState extends State<CustomConfigSection> {
   late double _epsilonDeg;
   late double _springEquinoxAnchor;
 
+  late EnumZeroPointRef? _zeroPointRef;
+  late ConstellationOffsetTier? _offsetTier;
+  late double _constellationOffsetDeg;
+  late ConstellationSystemType _constellationSystemType;
+
   // 是否显示神煞
   // late bool _showGods;
 
@@ -100,6 +109,13 @@ class _CustomConfigSectionState extends State<CustomConfigSection> {
     _huangChiDaoDiffType = projOverride?.huangChiDaoDiffType;
     _epsilonDeg = projOverride?.epsilonDeg ?? 23.90;
     _springEquinoxAnchor = projOverride?.springEquinoxAnchor ?? 0.0;
+    _zeroPointRef = widget.initialConfig?.zeroPointRef;
+    _offsetTier = widget.initialConfig?.offsetTier;
+    _constellationOffsetDeg =
+        widget.initialConfig?.constellationOffsetDeg ?? 0.0;
+    _constellationSystemType =
+        widget.initialConfig?.constellationSystemType ??
+            ConstellationSystemType.Classical;
     _classicBook = ["七政四余星道要诀"]; // 暂时硬编码，因为PanelConfig暂时不支持
     // _showGods = widget.initialConfig?.sh ?? true;
     // _showPalaces = widget.initialConfig?.showPalaces ?? true;
@@ -116,7 +132,7 @@ class _CustomConfigSectionState extends State<CustomConfigSection> {
       panelSystemType: _panelSystem,
       // Fields we don't control, take from base
       houseDivisionSystem: base.houseDivisionSystem,
-      constellationSystemType: base.constellationSystemType,
+      constellationSystemType: _constellationSystemType,
       settleLifeType: base.settleLifeType,
       settleBodyType: base.settleBodyType,
       islifeGongBySunRealTimeLocation: base.islifeGongBySunRealTimeLocation,
@@ -139,15 +155,64 @@ class _CustomConfigSectionState extends State<CustomConfigSection> {
               epsilonDeg: _epsilonDeg,
               springEquinoxAnchor: _springEquinoxAnchor,
             ),
+      zeroPointRef: _zeroPointRef,
+      offsetTier: _offsetTier,
+      constellationOffsetDeg: _constellationOffsetDeg,
+      starInnDegreeOverrides: widget.initialConfig?.starInnDegreeOverrides,
     );
     widget.onConfigChanged(config);
   }
 
   @override
   Widget build(BuildContext context) {
+    final check = PanelSystemResolver().validate(_currentConfig());
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        if (!check.isCoherent)
+          Container(
+            margin: const EdgeInsets.only(bottom: AppTheme.spacing16),
+            padding: const EdgeInsets.all(AppTheme.spacing12),
+            decoration: BoxDecoration(
+              color: Colors.amber.shade50,
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(color: Colors.amber.shade300),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ...check.warnings.map((w) => Padding(
+                      padding: const EdgeInsets.only(bottom: 4),
+                      child: Text(w,
+                          style: TextStyle(
+                              color: Colors.amber.shade900, fontSize: 13)),
+                    )),
+                if (check.suggestedFix != null)
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: TextButton.icon(
+                      onPressed: () {
+                        final fix = check.suggestedFix!;
+                        setState(() {
+                          _zhouTianModel = fix.zhouTianModelOverride;
+                          _offsetTier = fix.offsetTier;
+                          _constellationOffsetDeg =
+                              fix.constellationOffsetDeg ?? 0.0;
+                          if (fix.projectionOverride == null) {
+                            _mappingStrategy = MappingStrategy.linear;
+                          }
+                        });
+                        _updateConfig();
+                      },
+                      icon: Icon(Icons.auto_fix_high,
+                          size: 16, color: Colors.amber.shade800),
+                      label: Text('一键归正',
+                          style: TextStyle(color: Colors.amber.shade800)),
+                    ),
+                  ),
+              ],
+            ),
+          ),
         // 星道制式选择
         Container(
           decoration: BoxDecoration(
@@ -166,37 +231,9 @@ class _CustomConfigSectionState extends State<CustomConfigSection> {
                     ),
               ),
               const SizedBox(height: AppTheme.spacing12),
-              Row(
-                children: [
-                  Expanded(
-                    child: _buildRadioTile(
-                      title: '黄道制',
-                      subtitle: '以黄道十二宫为基础',
-                      value: CelestialCoordinateSystem.Ecliptic,
-                      groupValue: _coordinateSystem,
-                      onChanged: (value) {
-                        setState(() {
-                          _coordinateSystem = value!;
-                        });
-                        _updateConfig();
-                      },
-                    ),
-                  ),
-                  Expanded(
-                    child: _buildRadioTile(
-                      title: '赤道制',
-                      subtitle: '以赤道十二宫为基础',
-                      value: CelestialCoordinateSystem.Equatorial,
-                      groupValue: _coordinateSystem,
-                      onChanged: (value) {
-                        setState(() {
-                          _coordinateSystem = value!;
-                        });
-                        _updateConfig();
-                      },
-                    ),
-                  ),
-                ],
+              Column(
+                children: _buildCoordinateSystemOptions(
+                    context, CelestialCoordinateSystem.values),
               ),
             ],
           ),
@@ -644,6 +681,10 @@ class _CustomConfigSectionState extends State<CustomConfigSection> {
                       value: HuangChiDaoDiffType.shoushi,
                       child: Text('授时球面'),
                     ),
+                    DropdownMenuItem(
+                      value: HuangChiDaoDiffType.hushi,
+                      child: Text('弧矢割圆术'),
+                    ),
                   ],
                   onChanged: (value) {
                     setState(() {
@@ -715,6 +756,160 @@ class _CustomConfigSectionState extends State<CustomConfigSection> {
                   },
                 ),
               ],
+            ],
+          ),
+        ),
+        const SizedBox(height: AppTheme.spacing16),
+
+        // 起点与偏移
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(AppTheme.borderRadius),
+            border: Border.all(color: const Color(0xFFEEEEEE)),
+          ),
+          padding: const EdgeInsets.all(AppTheme.spacing16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                '起点与偏移',
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.w500,
+                    ),
+              ),
+              const SizedBox(height: AppTheme.spacing12),
+              Text(
+                '起点',
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: AppTheme.secondaryText,
+                    ),
+              ),
+              const SizedBox(height: AppTheme.spacing8),
+              DropdownButtonFormField<EnumZeroPointRef?>(
+                value: _zeroPointRef,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  contentPadding: const EdgeInsets.symmetric(
+                    horizontal: AppTheme.spacing16,
+                    vertical: AppTheme.spacing12,
+                  ),
+                ),
+                items: [
+                  const DropdownMenuItem(
+                    value: null,
+                    child: Text('跟随资产（默认）'),
+                  ),
+                  ...EnumZeroPointRef.values
+                      .map((e) => DropdownMenuItem(
+                            value: e,
+                            child: Text(e.label),
+                          )),
+                ],
+                onChanged: (value) {
+                  setState(() {
+                    _zeroPointRef = value;
+                  });
+                  _updateConfig();
+                },
+              ),
+              const SizedBox(height: AppTheme.spacing16),
+              Text(
+                '偏移量',
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: AppTheme.secondaryText,
+                    ),
+              ),
+              const SizedBox(height: AppTheme.spacing8),
+              Row(
+                children: ConstellationOffsetTier.values.map((tier) {
+                  return Expanded(
+                    child: _buildRadioTile<ConstellationOffsetTier?>(
+                      title: tier.label,
+                      subtitle: '默认 ${tier.defaultOffsetDeg}°',
+                      value: tier,
+                      groupValue: _offsetTier,
+                      onChanged: (value) {
+                        setState(() {
+                          _offsetTier = value;
+                          if (value != null) {
+                            _constellationOffsetDeg =
+                                value.defaultOffsetDeg;
+                          }
+                        });
+                        _updateConfig();
+                      },
+                    ),
+                  );
+                }).toList(),
+              ),
+              const SizedBox(height: AppTheme.spacing12),
+              TextFormField(
+                initialValue: _constellationOffsetDeg.toString(),
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  contentPadding: const EdgeInsets.symmetric(
+                    horizontal: AppTheme.spacing16,
+                    vertical: AppTheme.spacing12,
+                  ),
+                  helperText: '偏移数值（度），可覆盖档位默认',
+                ),
+                onChanged: (value) {
+                  final parsed = double.tryParse(value);
+                  if (parsed != null) {
+                    setState(() {
+                      _constellationOffsetDeg = parsed;
+                    });
+                    _updateConfig();
+                  }
+                },
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: AppTheme.spacing16),
+
+        // 星宿制式（ConstellationSystemType）
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(AppTheme.borderRadius),
+            border: Border.all(color: const Color(0xFFEEEEEE)),
+          ),
+          padding: const EdgeInsets.all(AppTheme.spacing16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                '星宿类型',
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.w500,
+                    ),
+              ),
+              const SizedBox(height: AppTheme.spacing12),
+              Row(
+                children: ConstellationSystemType.values.map((type) {
+                  return Expanded(
+                    child: _buildRadioTile<ConstellationSystemType>(
+                      title: type.name,
+                      subtitle: type.description,
+                      value: type,
+                      groupValue: _constellationSystemType,
+                      onChanged: (value) {
+                        setState(() {
+                          _constellationSystemType = value!;
+                        });
+                        _updateConfig();
+                      },
+                    ),
+                  );
+                }).toList(),
+              ),
             ],
           ),
         ),
@@ -920,6 +1115,83 @@ class _CustomConfigSectionState extends State<CustomConfigSection> {
         ),
       ],
     );
+  }
+
+  BasePanelConfig _currentConfig() {
+    return BasePanelConfig(
+      celestialCoordinateSystem: _coordinateSystem,
+      houseDivisionSystem:
+          widget.initialConfig?.houseDivisionSystem ?? HouseDivisionSystem.equal,
+      panelSystemType: _panelSystem,
+      constellationSystemType: _constellationSystemType,
+      settleLifeType: widget.initialConfig?.settleLifeType ??
+          EnumSettleLifeType.Mao,
+      settleBodyType: widget.initialConfig?.settleBodyType ??
+          EnumSettleBodyType.moon,
+      islifeGongBySunRealTimeLocation:
+          widget.initialConfig?.islifeGongBySunRealTimeLocation ?? true,
+      zhouTianModelOverride: _zhouTianModel,
+      projectionOverride: _mappingStrategy == MappingStrategy.linear
+          ? null
+          : ProjectionConfig(
+              strategy: MappingStrategy.tuiBianHuangDao,
+              huangChiDaoDiffType: _huangChiDaoDiffType,
+              epsilonDeg: _epsilonDeg,
+              springEquinoxAnchor: _springEquinoxAnchor,
+            ),
+      zeroPointRef: _zeroPointRef,
+      offsetTier: _offsetTier,
+      constellationOffsetDeg: _constellationOffsetDeg,
+      starInnDegreeOverrides: widget.initialConfig?.starInnDegreeOverrides,
+    );
+  }
+
+  List<Widget> _buildCoordinateSystemOptions(
+      BuildContext context, List<CelestialCoordinateSystem> systems) {
+    final subtitles = {
+      CelestialCoordinateSystem.Ecliptic: '以黄道面为基准划分十二宫，接近西方占星',
+      CelestialCoordinateSystem.Equatorial: '以赤道面为基准划分十二宫，周天 360°',
+      CelestialCoordinateSystem.SkyEquatorial:
+          '以天赤道面为基准，周天 365.25°合一年之数',
+      CelestialCoordinateSystem.PseudoEcliptic:
+          '采用不等宫系统，赤道坐标投影推算黄道位置',
+    };
+    return systems.map((system) {
+      return Padding(
+        padding: const EdgeInsets.only(bottom: 8),
+        child: _buildRadioTile(
+          title: system.name,
+          subtitle: subtitles[system] ?? system.description,
+          value: system,
+          groupValue: _coordinateSystem,
+          onChanged: (value) {
+            setState(() {
+              _coordinateSystem = value!;
+            });
+            _autoFillRecommendedDefaults(value!);
+            _updateConfig();
+          },
+        ),
+      );
+    }).toList();
+  }
+
+  void _autoFillRecommendedDefaults(CelestialCoordinateSystem coord) {
+    switch (coord) {
+      case CelestialCoordinateSystem.Ecliptic:
+      case CelestialCoordinateSystem.Equatorial:
+        _zhouTianModel = null;
+        _mappingStrategy = MappingStrategy.linear;
+        break;
+      case CelestialCoordinateSystem.SkyEquatorial:
+        _zhouTianModel = EnumZhouTianModel.degree36525;
+        _mappingStrategy = MappingStrategy.linear;
+        break;
+      case CelestialCoordinateSystem.PseudoEcliptic:
+        _zhouTianModel = EnumZhouTianModel.degree36525;
+        _mappingStrategy = MappingStrategy.tuiBianHuangDao;
+        break;
+    }
   }
 
   /// 构建单选按钮项
