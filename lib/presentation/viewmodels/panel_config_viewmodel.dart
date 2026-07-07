@@ -7,6 +7,9 @@ import 'package:qizhengsiyu/enums/enum_panel_system_type.dart';
 import 'package:qizhengsiyu/enums/enum_school.dart';
 import 'package:qizhengsiyu/enums/enum_settle_life_body.dart';
 import 'package:qizhengsiyu/domain/entities/models/panel_config.dart';
+import 'package:qizhengsiyu/domain/engines/school/school_profile.dart';
+import 'package:qizhengsiyu/domain/engines/school/built_in_school_profiles.dart';
+import 'package:qizhengsiyu/domain/engines/school/school_config_resolver.dart';
 
 /// 命盘配置视图模型
 ///
@@ -28,6 +31,15 @@ class PanelConfigViewModel extends ChangeNotifier {
   // 自定义配置
   late PanelConfig _customConfig;
   BuildContext context;
+
+  final SchoolConfigResolver _schoolResolver = SchoolConfigResolver();
+  String? _selectedProfileId;
+  bool _isCustomized = false;
+
+  String? get selectedProfileId => _selectedProfileId;
+  bool get isCustomized => _isCustomized;
+  List<SchoolProfile> availableBooksFor(EnumSchoolType school) =>
+      BuiltInSchoolProfiles.bySchool(school);
 
   /// 构造函数
   ///
@@ -115,37 +127,84 @@ class PanelConfigViewModel extends ChangeNotifier {
   /// 更新自定义配置
   void updateCustomConfig(PanelConfig customConfig) {
     _customConfig = customConfig;
+    _isCustomized = true;
+    notifyListeners();
   }
 
   /// 更新流派类型
   void updateSchoolType(EnumSchoolType schoolType) {
-    // 根据流派类型更新默认配置
-    // _customConfig = _customConfig.copyWith(schoolType: schoolType);
+    if (schoolType == EnumSchoolType.Customerized) {
+      // 自定义流派：保持当前配置，仅标记
+      _isCustomized = true;
+      notifyListeners();
+      return;
+    }
+    final profile = BuiltInSchoolProfiles.defaultForSchool(schoolType);
+    final baseResult = _schoolResolver.applyProfile(_customConfig, profile);
+    _customConfig = PanelConfig(
+      celestialCoordinateSystem: baseResult.celestialCoordinateSystem,
+      houseDivisionSystem: baseResult.houseDivisionSystem,
+      panelSystemType: baseResult.panelSystemType,
+      constellationSystemType: baseResult.constellationSystemType,
+      settleLifeType: baseResult.settleLifeType,
+      settleBodyType: baseResult.settleBodyType,
+      islifeGongBySunRealTimeLocation:
+          baseResult.islifeGongBySunRealTimeLocation,
+      lifeCountingToGong: baseResult.lifeCountingToGong,
+      bodyCountingToGong: baseResult.bodyCountingToGong,
+      rahuKetuConvention: baseResult.rahuKetuConvention,
+      ziQiAlgorithm: baseResult.ziQiAlgorithm,
+      ziQiPeriod: baseResult.ziQiPeriod,
+      ziQiEpochSet: baseResult.ziQiEpochSet,
+      ziQiChiDaoStandard: baseResult.ziQiChiDaoStandard,
+      siYuProfileId: baseResult.siYuProfileId,
+      siYuOverrides: baseResult.siYuOverrides,
+      siYuCoordinateOverride: baseResult.siYuCoordinateOverride,
+      zhouTianModelOverride: baseResult.zhouTianModelOverride,
+      projectionOverride: baseResult.projectionOverride,
+      zeroPointRef: baseResult.zeroPointRef,
+      offsetTier: baseResult.offsetTier,
+      constellationOffsetDeg: baseResult.constellationOffsetDeg,
+      starInnDegreeOverrides: baseResult.starInnDegreeOverrides,
+    );
+    _selectedProfileId = profile.id;
+    _isCustomized = false;
+    notifyListeners();
+  }
 
-    // 根据不同流派设置默认值
-    // switch (schoolType) {
-    //   case EnumSchoolType.QinTang:
-    //     _customConfig = _customConfig.copyWith(
-    //       coordinateSystem: CelestialCoordinateSystem.Equatorial,
-    //       classicBooks: ['星学大成'],
-    //     );
-    //     break;
-    //   case EnumSchoolType.GuoLao:
-    //     _customConfig = _customConfig.copyWith(
-    //       coordinateSystem: CoordinateSystemType.Ecliptic,
-    //       classicBooks: ['果老星宗'],
-    //     );
-    //     break;
-    //   case EnumSchoolType.TianGuan:
-    //     _customConfig = _customConfig.copyWith(
-    //       coordinateSystem: CoordinateSystemType.Ecliptic,
-    //       classicBooks: ['天官星经'],
-    //     );
-    //     break;
-    //   case EnumSchoolType.Customerized:
-    //     // 自定义流派保持当前设置
-    //     break;
-    // }
+  /// 选具体典籍档案（同派多典籍）
+  void selectClassicBook(String profileId) {
+    final profile = BuiltInSchoolProfiles.byId(profileId);
+    final baseResult = _schoolResolver.applyProfile(_customConfig, profile);
+    _customConfig = PanelConfig(
+      celestialCoordinateSystem: baseResult.celestialCoordinateSystem,
+      houseDivisionSystem: baseResult.houseDivisionSystem,
+      panelSystemType: baseResult.panelSystemType,
+      constellationSystemType: baseResult.constellationSystemType,
+      settleLifeType: baseResult.settleLifeType,
+      settleBodyType: baseResult.settleBodyType,
+      islifeGongBySunRealTimeLocation:
+          baseResult.islifeGongBySunRealTimeLocation,
+      lifeCountingToGong: baseResult.lifeCountingToGong,
+      bodyCountingToGong: baseResult.bodyCountingToGong,
+      rahuKetuConvention: baseResult.rahuKetuConvention,
+      ziQiAlgorithm: baseResult.ziQiAlgorithm,
+      ziQiPeriod: baseResult.ziQiPeriod,
+      ziQiEpochSet: baseResult.ziQiEpochSet,
+      ziQiChiDaoStandard: baseResult.ziQiChiDaoStandard,
+      siYuProfileId: baseResult.siYuProfileId,
+      siYuOverrides: baseResult.siYuOverrides,
+      siYuCoordinateOverride: baseResult.siYuCoordinateOverride,
+      zhouTianModelOverride: baseResult.zhouTianModelOverride,
+      projectionOverride: baseResult.projectionOverride,
+      zeroPointRef: baseResult.zeroPointRef,
+      offsetTier: baseResult.offsetTier,
+      constellationOffsetDeg: baseResult.constellationOffsetDeg,
+      starInnDegreeOverrides: baseResult.starInnDegreeOverrides,
+    );
+    _selectedProfileId = profile.id;
+    _isCustomized = false;
+    notifyListeners();
   }
 
   /// 构建完整的配置对象
