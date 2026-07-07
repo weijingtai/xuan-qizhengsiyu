@@ -4083,6 +4083,545 @@ class GeJuSchoolsTableCompanion extends UpdateCompanion<GeJuSchoolsTableData> {
   }
 }
 
+class $UserSchoolProfileTableTable extends UserSchoolProfileTable
+    with TableInfo<$UserSchoolProfileTableTable, UserSchoolProfileTableData> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $UserSchoolProfileTableTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _uuidMeta = const VerificationMeta('uuid');
+  @override
+  late final GeneratedColumn<String> uuid = GeneratedColumn<String>(
+    'uuid',
+    aliasedName,
+    false,
+    additionalChecks: GeneratedColumn.checkTextLength(minTextLength: 1),
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _nameMeta = const VerificationMeta('name');
+  @override
+  late final GeneratedColumn<String> name = GeneratedColumn<String>(
+    'name',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _schoolMeta = const VerificationMeta('school');
+  @override
+  late final GeneratedColumn<String> school = GeneratedColumn<String>(
+    'school',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _classicBookMeta = const VerificationMeta(
+    'classicBook',
+  );
+  @override
+  late final GeneratedColumn<String> classicBook = GeneratedColumn<String>(
+    'classic_book',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  @override
+  late final GeneratedColumnWithTypeConverter<BasePanelConfig, String>
+  panelConfig =
+      GeneratedColumn<String>(
+        'panel_config_json',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: true,
+      ).withConverter<BasePanelConfig>(
+        $UserSchoolProfileTableTable.$converterpanelConfig,
+      );
+  static const VerificationMeta _createdAtMeta = const VerificationMeta(
+    'createdAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+    'created_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _lastUpdatedAtMeta = const VerificationMeta(
+    'lastUpdatedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> lastUpdatedAt =
+      GeneratedColumn<DateTime>(
+        'last_updated_at',
+        aliasedName,
+        false,
+        type: DriftSqlType.dateTime,
+        requiredDuringInsert: true,
+      );
+  static const VerificationMeta _deletedAtMeta = const VerificationMeta(
+    'deletedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> deletedAt = GeneratedColumn<DateTime>(
+    'deleted_at',
+    aliasedName,
+    true,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    uuid,
+    name,
+    school,
+    classicBook,
+    panelConfig,
+    createdAt,
+    lastUpdatedAt,
+    deletedAt,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 't_user_school_profiles';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<UserSchoolProfileTableData> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('uuid')) {
+      context.handle(
+        _uuidMeta,
+        uuid.isAcceptableOrUnknown(data['uuid']!, _uuidMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_uuidMeta);
+    }
+    if (data.containsKey('name')) {
+      context.handle(
+        _nameMeta,
+        name.isAcceptableOrUnknown(data['name']!, _nameMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_nameMeta);
+    }
+    if (data.containsKey('school')) {
+      context.handle(
+        _schoolMeta,
+        school.isAcceptableOrUnknown(data['school']!, _schoolMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_schoolMeta);
+    }
+    if (data.containsKey('classic_book')) {
+      context.handle(
+        _classicBookMeta,
+        classicBook.isAcceptableOrUnknown(
+          data['classic_book']!,
+          _classicBookMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_classicBookMeta);
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(
+        _createdAtMeta,
+        createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_createdAtMeta);
+    }
+    if (data.containsKey('last_updated_at')) {
+      context.handle(
+        _lastUpdatedAtMeta,
+        lastUpdatedAt.isAcceptableOrUnknown(
+          data['last_updated_at']!,
+          _lastUpdatedAtMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_lastUpdatedAtMeta);
+    }
+    if (data.containsKey('deleted_at')) {
+      context.handle(
+        _deletedAtMeta,
+        deletedAt.isAcceptableOrUnknown(data['deleted_at']!, _deletedAtMeta),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {uuid};
+  @override
+  UserSchoolProfileTableData map(
+    Map<String, dynamic> data, {
+    String? tablePrefix,
+  }) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return UserSchoolProfileTableData(
+      uuid: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}uuid'],
+      )!,
+      name: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}name'],
+      )!,
+      school: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}school'],
+      )!,
+      classicBook: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}classic_book'],
+      )!,
+      panelConfig: $UserSchoolProfileTableTable.$converterpanelConfig.fromSql(
+        attachedDatabase.typeMapping.read(
+          DriftSqlType.string,
+          data['${effectivePrefix}panel_config_json'],
+        )!,
+      ),
+      createdAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}created_at'],
+      )!,
+      lastUpdatedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}last_updated_at'],
+      )!,
+      deletedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}deleted_at'],
+      ),
+    );
+  }
+
+  @override
+  $UserSchoolProfileTableTable createAlias(String alias) {
+    return $UserSchoolProfileTableTable(attachedDatabase, alias);
+  }
+
+  static TypeConverter<BasePanelConfig, String> $converterpanelConfig =
+      const PanelConfigConverter();
+}
+
+class UserSchoolProfileTableData extends DataClass
+    implements Insertable<UserSchoolProfileTableData> {
+  final String uuid;
+  final String name;
+  final String school;
+  final String classicBook;
+  final BasePanelConfig panelConfig;
+  final DateTime createdAt;
+  final DateTime lastUpdatedAt;
+  final DateTime? deletedAt;
+  const UserSchoolProfileTableData({
+    required this.uuid,
+    required this.name,
+    required this.school,
+    required this.classicBook,
+    required this.panelConfig,
+    required this.createdAt,
+    required this.lastUpdatedAt,
+    this.deletedAt,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['uuid'] = Variable<String>(uuid);
+    map['name'] = Variable<String>(name);
+    map['school'] = Variable<String>(school);
+    map['classic_book'] = Variable<String>(classicBook);
+    {
+      map['panel_config_json'] = Variable<String>(
+        $UserSchoolProfileTableTable.$converterpanelConfig.toSql(panelConfig),
+      );
+    }
+    map['created_at'] = Variable<DateTime>(createdAt);
+    map['last_updated_at'] = Variable<DateTime>(lastUpdatedAt);
+    if (!nullToAbsent || deletedAt != null) {
+      map['deleted_at'] = Variable<DateTime>(deletedAt);
+    }
+    return map;
+  }
+
+  UserSchoolProfileTableCompanion toCompanion(bool nullToAbsent) {
+    return UserSchoolProfileTableCompanion(
+      uuid: Value(uuid),
+      name: Value(name),
+      school: Value(school),
+      classicBook: Value(classicBook),
+      panelConfig: Value(panelConfig),
+      createdAt: Value(createdAt),
+      lastUpdatedAt: Value(lastUpdatedAt),
+      deletedAt: deletedAt == null && nullToAbsent
+          ? const Value.absent()
+          : Value(deletedAt),
+    );
+  }
+
+  factory UserSchoolProfileTableData.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return UserSchoolProfileTableData(
+      uuid: serializer.fromJson<String>(json['uuid']),
+      name: serializer.fromJson<String>(json['name']),
+      school: serializer.fromJson<String>(json['school']),
+      classicBook: serializer.fromJson<String>(json['classicBook']),
+      panelConfig: serializer.fromJson<BasePanelConfig>(json['panelConfig']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+      lastUpdatedAt: serializer.fromJson<DateTime>(json['lastUpdatedAt']),
+      deletedAt: serializer.fromJson<DateTime?>(json['deletedAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'uuid': serializer.toJson<String>(uuid),
+      'name': serializer.toJson<String>(name),
+      'school': serializer.toJson<String>(school),
+      'classicBook': serializer.toJson<String>(classicBook),
+      'panelConfig': serializer.toJson<BasePanelConfig>(panelConfig),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+      'lastUpdatedAt': serializer.toJson<DateTime>(lastUpdatedAt),
+      'deletedAt': serializer.toJson<DateTime?>(deletedAt),
+    };
+  }
+
+  UserSchoolProfileTableData copyWith({
+    String? uuid,
+    String? name,
+    String? school,
+    String? classicBook,
+    BasePanelConfig? panelConfig,
+    DateTime? createdAt,
+    DateTime? lastUpdatedAt,
+    Value<DateTime?> deletedAt = const Value.absent(),
+  }) => UserSchoolProfileTableData(
+    uuid: uuid ?? this.uuid,
+    name: name ?? this.name,
+    school: school ?? this.school,
+    classicBook: classicBook ?? this.classicBook,
+    panelConfig: panelConfig ?? this.panelConfig,
+    createdAt: createdAt ?? this.createdAt,
+    lastUpdatedAt: lastUpdatedAt ?? this.lastUpdatedAt,
+    deletedAt: deletedAt.present ? deletedAt.value : this.deletedAt,
+  );
+  UserSchoolProfileTableData copyWithCompanion(
+    UserSchoolProfileTableCompanion data,
+  ) {
+    return UserSchoolProfileTableData(
+      uuid: data.uuid.present ? data.uuid.value : this.uuid,
+      name: data.name.present ? data.name.value : this.name,
+      school: data.school.present ? data.school.value : this.school,
+      classicBook: data.classicBook.present
+          ? data.classicBook.value
+          : this.classicBook,
+      panelConfig: data.panelConfig.present
+          ? data.panelConfig.value
+          : this.panelConfig,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+      lastUpdatedAt: data.lastUpdatedAt.present
+          ? data.lastUpdatedAt.value
+          : this.lastUpdatedAt,
+      deletedAt: data.deletedAt.present ? data.deletedAt.value : this.deletedAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('UserSchoolProfileTableData(')
+          ..write('uuid: $uuid, ')
+          ..write('name: $name, ')
+          ..write('school: $school, ')
+          ..write('classicBook: $classicBook, ')
+          ..write('panelConfig: $panelConfig, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('lastUpdatedAt: $lastUpdatedAt, ')
+          ..write('deletedAt: $deletedAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    uuid,
+    name,
+    school,
+    classicBook,
+    panelConfig,
+    createdAt,
+    lastUpdatedAt,
+    deletedAt,
+  );
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is UserSchoolProfileTableData &&
+          other.uuid == this.uuid &&
+          other.name == this.name &&
+          other.school == this.school &&
+          other.classicBook == this.classicBook &&
+          other.panelConfig == this.panelConfig &&
+          other.createdAt == this.createdAt &&
+          other.lastUpdatedAt == this.lastUpdatedAt &&
+          other.deletedAt == this.deletedAt);
+}
+
+class UserSchoolProfileTableCompanion
+    extends UpdateCompanion<UserSchoolProfileTableData> {
+  final Value<String> uuid;
+  final Value<String> name;
+  final Value<String> school;
+  final Value<String> classicBook;
+  final Value<BasePanelConfig> panelConfig;
+  final Value<DateTime> createdAt;
+  final Value<DateTime> lastUpdatedAt;
+  final Value<DateTime?> deletedAt;
+  final Value<int> rowid;
+  const UserSchoolProfileTableCompanion({
+    this.uuid = const Value.absent(),
+    this.name = const Value.absent(),
+    this.school = const Value.absent(),
+    this.classicBook = const Value.absent(),
+    this.panelConfig = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.lastUpdatedAt = const Value.absent(),
+    this.deletedAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  UserSchoolProfileTableCompanion.insert({
+    required String uuid,
+    required String name,
+    required String school,
+    required String classicBook,
+    required BasePanelConfig panelConfig,
+    required DateTime createdAt,
+    required DateTime lastUpdatedAt,
+    this.deletedAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  }) : uuid = Value(uuid),
+       name = Value(name),
+       school = Value(school),
+       classicBook = Value(classicBook),
+       panelConfig = Value(panelConfig),
+       createdAt = Value(createdAt),
+       lastUpdatedAt = Value(lastUpdatedAt);
+  static Insertable<UserSchoolProfileTableData> custom({
+    Expression<String>? uuid,
+    Expression<String>? name,
+    Expression<String>? school,
+    Expression<String>? classicBook,
+    Expression<String>? panelConfig,
+    Expression<DateTime>? createdAt,
+    Expression<DateTime>? lastUpdatedAt,
+    Expression<DateTime>? deletedAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (uuid != null) 'uuid': uuid,
+      if (name != null) 'name': name,
+      if (school != null) 'school': school,
+      if (classicBook != null) 'classic_book': classicBook,
+      if (panelConfig != null) 'panel_config_json': panelConfig,
+      if (createdAt != null) 'created_at': createdAt,
+      if (lastUpdatedAt != null) 'last_updated_at': lastUpdatedAt,
+      if (deletedAt != null) 'deleted_at': deletedAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  UserSchoolProfileTableCompanion copyWith({
+    Value<String>? uuid,
+    Value<String>? name,
+    Value<String>? school,
+    Value<String>? classicBook,
+    Value<BasePanelConfig>? panelConfig,
+    Value<DateTime>? createdAt,
+    Value<DateTime>? lastUpdatedAt,
+    Value<DateTime?>? deletedAt,
+    Value<int>? rowid,
+  }) {
+    return UserSchoolProfileTableCompanion(
+      uuid: uuid ?? this.uuid,
+      name: name ?? this.name,
+      school: school ?? this.school,
+      classicBook: classicBook ?? this.classicBook,
+      panelConfig: panelConfig ?? this.panelConfig,
+      createdAt: createdAt ?? this.createdAt,
+      lastUpdatedAt: lastUpdatedAt ?? this.lastUpdatedAt,
+      deletedAt: deletedAt ?? this.deletedAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (uuid.present) {
+      map['uuid'] = Variable<String>(uuid.value);
+    }
+    if (name.present) {
+      map['name'] = Variable<String>(name.value);
+    }
+    if (school.present) {
+      map['school'] = Variable<String>(school.value);
+    }
+    if (classicBook.present) {
+      map['classic_book'] = Variable<String>(classicBook.value);
+    }
+    if (panelConfig.present) {
+      map['panel_config_json'] = Variable<String>(
+        $UserSchoolProfileTableTable.$converterpanelConfig.toSql(
+          panelConfig.value,
+        ),
+      );
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    if (lastUpdatedAt.present) {
+      map['last_updated_at'] = Variable<DateTime>(lastUpdatedAt.value);
+    }
+    if (deletedAt.present) {
+      map['deleted_at'] = Variable<DateTime>(deletedAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('UserSchoolProfileTableCompanion(')
+          ..write('uuid: $uuid, ')
+          ..write('name: $name, ')
+          ..write('school: $school, ')
+          ..write('classicBook: $classicBook, ')
+          ..write('panelConfig: $panelConfig, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('lastUpdatedAt: $lastUpdatedAt, ')
+          ..write('deletedAt: $deletedAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -4100,10 +4639,15 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $GeJuSchoolsTableTable geJuSchoolsTable = $GeJuSchoolsTableTable(
     this,
   );
+  late final $UserSchoolProfileTableTable userSchoolProfileTable =
+      $UserSchoolProfileTableTable(this);
   late final QiZhengSiYuPanDao qiZhengSiYuPanDao = QiZhengSiYuPanDao(
     this as AppDatabase,
   );
   late final GeJuDao geJuDao = GeJuDao(this as AppDatabase);
+  late final UserSchoolProfileDao userSchoolProfileDao = UserSchoolProfileDao(
+    this as AppDatabase,
+  );
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -4116,6 +4660,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     geJuUserPreferencesTable,
     geJuDeletionRecordsTable,
     geJuSchoolsTable,
+    userSchoolProfileTable,
   ];
 }
 
@@ -6256,6 +6801,290 @@ typedef $$GeJuSchoolsTableTableProcessedTableManager =
       GeJuSchoolsTableData,
       PrefetchHooks Function()
     >;
+typedef $$UserSchoolProfileTableTableCreateCompanionBuilder =
+    UserSchoolProfileTableCompanion Function({
+      required String uuid,
+      required String name,
+      required String school,
+      required String classicBook,
+      required BasePanelConfig panelConfig,
+      required DateTime createdAt,
+      required DateTime lastUpdatedAt,
+      Value<DateTime?> deletedAt,
+      Value<int> rowid,
+    });
+typedef $$UserSchoolProfileTableTableUpdateCompanionBuilder =
+    UserSchoolProfileTableCompanion Function({
+      Value<String> uuid,
+      Value<String> name,
+      Value<String> school,
+      Value<String> classicBook,
+      Value<BasePanelConfig> panelConfig,
+      Value<DateTime> createdAt,
+      Value<DateTime> lastUpdatedAt,
+      Value<DateTime?> deletedAt,
+      Value<int> rowid,
+    });
+
+class $$UserSchoolProfileTableTableFilterComposer
+    extends Composer<_$AppDatabase, $UserSchoolProfileTableTable> {
+  $$UserSchoolProfileTableTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get uuid => $composableBuilder(
+    column: $table.uuid,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get name => $composableBuilder(
+    column: $table.name,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get school => $composableBuilder(
+    column: $table.school,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get classicBook => $composableBuilder(
+    column: $table.classicBook,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnWithTypeConverterFilters<BasePanelConfig, BasePanelConfig, String>
+  get panelConfig => $composableBuilder(
+    column: $table.panelConfig,
+    builder: (column) => ColumnWithTypeConverterFilters(column),
+  );
+
+  ColumnFilters<DateTime> get createdAt => $composableBuilder(
+    column: $table.createdAt,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get lastUpdatedAt => $composableBuilder(
+    column: $table.lastUpdatedAt,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get deletedAt => $composableBuilder(
+    column: $table.deletedAt,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$UserSchoolProfileTableTableOrderingComposer
+    extends Composer<_$AppDatabase, $UserSchoolProfileTableTable> {
+  $$UserSchoolProfileTableTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get uuid => $composableBuilder(
+    column: $table.uuid,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get name => $composableBuilder(
+    column: $table.name,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get school => $composableBuilder(
+    column: $table.school,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get classicBook => $composableBuilder(
+    column: $table.classicBook,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get panelConfig => $composableBuilder(
+    column: $table.panelConfig,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get createdAt => $composableBuilder(
+    column: $table.createdAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get lastUpdatedAt => $composableBuilder(
+    column: $table.lastUpdatedAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get deletedAt => $composableBuilder(
+    column: $table.deletedAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$UserSchoolProfileTableTableAnnotationComposer
+    extends Composer<_$AppDatabase, $UserSchoolProfileTableTable> {
+  $$UserSchoolProfileTableTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get uuid =>
+      $composableBuilder(column: $table.uuid, builder: (column) => column);
+
+  GeneratedColumn<String> get name =>
+      $composableBuilder(column: $table.name, builder: (column) => column);
+
+  GeneratedColumn<String> get school =>
+      $composableBuilder(column: $table.school, builder: (column) => column);
+
+  GeneratedColumn<String> get classicBook => $composableBuilder(
+    column: $table.classicBook,
+    builder: (column) => column,
+  );
+
+  GeneratedColumnWithTypeConverter<BasePanelConfig, String> get panelConfig =>
+      $composableBuilder(
+        column: $table.panelConfig,
+        builder: (column) => column,
+      );
+
+  GeneratedColumn<DateTime> get createdAt =>
+      $composableBuilder(column: $table.createdAt, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get lastUpdatedAt => $composableBuilder(
+    column: $table.lastUpdatedAt,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<DateTime> get deletedAt =>
+      $composableBuilder(column: $table.deletedAt, builder: (column) => column);
+}
+
+class $$UserSchoolProfileTableTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $UserSchoolProfileTableTable,
+          UserSchoolProfileTableData,
+          $$UserSchoolProfileTableTableFilterComposer,
+          $$UserSchoolProfileTableTableOrderingComposer,
+          $$UserSchoolProfileTableTableAnnotationComposer,
+          $$UserSchoolProfileTableTableCreateCompanionBuilder,
+          $$UserSchoolProfileTableTableUpdateCompanionBuilder,
+          (
+            UserSchoolProfileTableData,
+            BaseReferences<
+              _$AppDatabase,
+              $UserSchoolProfileTableTable,
+              UserSchoolProfileTableData
+            >,
+          ),
+          UserSchoolProfileTableData,
+          PrefetchHooks Function()
+        > {
+  $$UserSchoolProfileTableTableTableManager(
+    _$AppDatabase db,
+    $UserSchoolProfileTableTable table,
+  ) : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$UserSchoolProfileTableTableFilterComposer(
+                $db: db,
+                $table: table,
+              ),
+          createOrderingComposer: () =>
+              $$UserSchoolProfileTableTableOrderingComposer(
+                $db: db,
+                $table: table,
+              ),
+          createComputedFieldComposer: () =>
+              $$UserSchoolProfileTableTableAnnotationComposer(
+                $db: db,
+                $table: table,
+              ),
+          updateCompanionCallback:
+              ({
+                Value<String> uuid = const Value.absent(),
+                Value<String> name = const Value.absent(),
+                Value<String> school = const Value.absent(),
+                Value<String> classicBook = const Value.absent(),
+                Value<BasePanelConfig> panelConfig = const Value.absent(),
+                Value<DateTime> createdAt = const Value.absent(),
+                Value<DateTime> lastUpdatedAt = const Value.absent(),
+                Value<DateTime?> deletedAt = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => UserSchoolProfileTableCompanion(
+                uuid: uuid,
+                name: name,
+                school: school,
+                classicBook: classicBook,
+                panelConfig: panelConfig,
+                createdAt: createdAt,
+                lastUpdatedAt: lastUpdatedAt,
+                deletedAt: deletedAt,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String uuid,
+                required String name,
+                required String school,
+                required String classicBook,
+                required BasePanelConfig panelConfig,
+                required DateTime createdAt,
+                required DateTime lastUpdatedAt,
+                Value<DateTime?> deletedAt = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => UserSchoolProfileTableCompanion.insert(
+                uuid: uuid,
+                name: name,
+                school: school,
+                classicBook: classicBook,
+                panelConfig: panelConfig,
+                createdAt: createdAt,
+                lastUpdatedAt: lastUpdatedAt,
+                deletedAt: deletedAt,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$UserSchoolProfileTableTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $UserSchoolProfileTableTable,
+      UserSchoolProfileTableData,
+      $$UserSchoolProfileTableTableFilterComposer,
+      $$UserSchoolProfileTableTableOrderingComposer,
+      $$UserSchoolProfileTableTableAnnotationComposer,
+      $$UserSchoolProfileTableTableCreateCompanionBuilder,
+      $$UserSchoolProfileTableTableUpdateCompanionBuilder,
+      (
+        UserSchoolProfileTableData,
+        BaseReferences<
+          _$AppDatabase,
+          $UserSchoolProfileTableTable,
+          UserSchoolProfileTableData
+        >,
+      ),
+      UserSchoolProfileTableData,
+      PrefetchHooks Function()
+    >;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -6283,4 +7112,9 @@ class $AppDatabaseManager {
       );
   $$GeJuSchoolsTableTableTableManager get geJuSchoolsTable =>
       $$GeJuSchoolsTableTableTableManager(_db, _db.geJuSchoolsTable);
+  $$UserSchoolProfileTableTableTableManager get userSchoolProfileTable =>
+      $$UserSchoolProfileTableTableTableManager(
+        _db,
+        _db.userSchoolProfileTable,
+      );
 }

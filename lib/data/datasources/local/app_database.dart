@@ -8,8 +8,10 @@ import '../../../domain/entities/models/pan_entity.dart';
 import '../../../domain/entities/models/panel_config.dart';
 import 'daos/qizhengsiyu_pan_dao.dart';
 import 'daos/ge_ju_dao.dart';
+import 'daos/user_school_profile_dao.dart';
 import 'tables/qizhengsiyu_pan_table.dart';
 import 'tables/ge_ju_tables.dart';
+import 'tables/user_school_profile_table.dart';
 import '../../models/converters/divination_datetime_converter.dart';
 import '../../models/converters/panel_config_converter.dart';
 import '../../models/converters/panel_model_converter.dart';
@@ -25,8 +27,9 @@ part 'app_database.g.dart';
     GeJuUserPreferencesTable,
     GeJuDeletionRecordsTable,
     GeJuSchoolsTable,
+    UserSchoolProfileTable,
   ],
-  daos: [QiZhengSiYuPanDao, GeJuDao],
+  daos: [QiZhengSiYuPanDao, GeJuDao, UserSchoolProfileDao],
 )
 class AppDatabase extends _$AppDatabase {
   AppDatabase._([QueryExecutor? e])
@@ -61,7 +64,7 @@ class AppDatabase extends _$AppDatabase {
   factory AppDatabase.forTesting(QueryExecutor e) => AppDatabase._(e);
 
   @override
-  int get schemaVersion => 3;
+  int get schemaVersion => 4;
 
   @override
   MigrationStrategy get migration {
@@ -81,6 +84,10 @@ class AppDatabase extends _$AppDatabase {
         if (from < 3) {
           // v3: Add GeJu Schools table
           await m.createTable(geJuSchoolsTable);
+        }
+        if (from < 4) {
+          // v4: 用户自定义流派档案表
+          await m.createTable(userSchoolProfileTable);
         }
       },
     );
