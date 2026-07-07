@@ -61,16 +61,26 @@ class SwephEngine implements ICalculationEngine {
             'Unsupported panel system type: ${panelConfig.celestialCoordinateSystem.name} ${panelConfig.panelSystemType.name}');
       }
     } else if (panelConfig.celestialCoordinateSystem ==
-        CelestialCoordinateSystem.SkyEquatorial) {
+            CelestialCoordinateSystem.SkyEquatorial ||
+        panelConfig.celestialCoordinateSystem ==
+            CelestialCoordinateSystem.Equatorial ||
+        panelConfig.celestialCoordinateSystem ==
+            CelestialCoordinateSystem.PseudoEcliptic) {
+      // Equatorial/PseudoEcliptic 复用赤道基准资产；PseudoEcliptic 的投影由 config.projectionOverride 决定
       assertName = 'yuan_shoushi_chidao_hengxin.json';
     } else {
       throw UnimplementedError(
-          'Unsupported panel system type: ${panelConfig.celestialCoordinateSystem.name} ${panelConfig.panelSystemType.name}');
+          'Unsupported coordinate system: ${panelConfig.celestialCoordinateSystem.name}');
     }
     final jsonString = await _ephemerisRes.loadEphemerisResource(assertName);
     return ZhouTianModel.fromJson(jsonDecode(jsonString)).applyOverrides(
-        panelConfig.zhouTianModelOverride,
-        panelConfig.projectionOverride);
+        zhouTianModelOverride: panelConfig.zhouTianModelOverride,
+        projectionOverride: panelConfig.projectionOverride,
+        zeroPointRef: panelConfig.zeroPointRef,
+        offsetTier: panelConfig.offsetTier,
+        constellationOffsetDeg: panelConfig.constellationOffsetDeg,
+        starInnDegreeOverrides: panelConfig.starInnDegreeOverrides,
+    );
   }
 
   @override
