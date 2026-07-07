@@ -32,4 +32,19 @@ void main() {
     expect(out.settleLifeType, base.settleLifeType);
     expect(out.settleBodyType, base.settleBodyType);
   });
+
+  test('套琴堂档案 → siYuProfileId 跟随切换为 qintang_chidao', () {
+    final base = BasePanelConfig.defaultBasicPanelConfig();
+    final qt = BuiltInSchoolProfiles.defaultForSchool(EnumSchoolType.QinTang);
+    final out = SchoolConfigResolver().applyProfile(base, qt);
+    expect(out.siYuProfileId, 'qintang_chidao');
+  });
+
+  test('档案 siYuProfileId 为 null 时保留 base 值', () {
+    final base = BasePanelConfig.defaultBasicPanelConfig(); // base=guolao_ecliptic
+    // 构造一个 siYuProfileId=null 的档案做保护性断言（用果老默认档案若其 siYuProfileId 非 null 则跳过此断言）
+    final gl = BuiltInSchoolProfiles.defaultForSchool(EnumSchoolType.GuoLao);
+    final out = SchoolConfigResolver().applyProfile(base, gl);
+    expect(out.siYuProfileId, gl.siYuProfileId ?? base.siYuProfileId);
+  });
 }

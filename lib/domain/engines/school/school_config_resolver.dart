@@ -21,7 +21,7 @@ class SchoolConfigResolver {
       ziQiPeriod: base.ziQiPeriod,
       ziQiEpochSet: base.ziQiEpochSet,
       ziQiChiDaoStandard: base.ziQiChiDaoStandard,
-      siYuProfileId: base.siYuProfileId,
+      siYuProfileId: p.siYuProfileId ?? base.siYuProfileId,
       siYuOverrides: base.siYuOverrides,
       siYuCoordinateOverride: base.siYuCoordinateOverride,
       zhouTianModelOverride: p.zhouTianModelOverride,
