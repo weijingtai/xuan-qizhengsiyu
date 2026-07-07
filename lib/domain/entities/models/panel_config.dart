@@ -7,6 +7,9 @@ import 'package:qizhengsiyu/domain/engines/siyu/spec/si_yu_group_spec.dart';
 
 import '../../../enums/enum_panel_system_type.dart';
 import '../../../enums/enum_zhou_tian_model.dart';
+import '../../../enums/enum_zero_point_ref.dart';
+import '../../../enums/enum_constellation_offset_tier.dart';
+import 'package:metaphysics_core/enums.dart';
 import 'fate_dong_wei_da_xian.dart';
 import 'projection_config.dart';
 
@@ -74,6 +77,22 @@ class BasePanelConfig {
   /// 黄赤道换算覆写：null = 用资产自带 projectionConfig（现状多为空/线性）。
   ProjectionConfig? projectionOverride;
 
+  /// 起点参考（春分/冬至）；null=用资产 zeroPointJieQi。
+  EnumZeroPointRef? zeroPointRef;
+
+  /// 星宿偏移档位；null=不按档位偏移。
+  ConstellationOffsetTier? offsetTier;
+
+  /// 偏移数值（度），覆盖档位默认；null=用档位默认或不偏移。
+  double? constellationOffsetDeg;
+
+  /// 逐宿弧度覆写；null/空=不覆写。
+  @JsonKey(
+    fromJson: _starInnOverridesFromJson,
+    toJson: _starInnOverridesToJson,
+  )
+  Map<Enum28Constellations, double>? starInnDegreeOverrides;
+
   BasePanelConfig({
     /// 星道制式
     required this.celestialCoordinateSystem,
@@ -105,6 +124,10 @@ class BasePanelConfig {
     this.siYuCoordinateOverride,
     this.zhouTianModelOverride,
     this.projectionOverride,
+    this.zeroPointRef,
+    this.offsetTier,
+    this.constellationOffsetDeg,
+    this.starInnDegreeOverrides,
   });
 
   // copy with
@@ -137,6 +160,10 @@ class BasePanelConfig {
     CelestialCoordinateSystem? siYuCoordinateOverride,
     EnumZhouTianModel? zhouTianModelOverride,
     ProjectionConfig? projectionOverride,
+    EnumZeroPointRef? zeroPointRef,
+    ConstellationOffsetTier? offsetTier,
+    double? constellationOffsetDeg,
+    Map<Enum28Constellations, double>? starInnDegreeOverrides,
   }) {
     return BasePanelConfig(
       celestialCoordinateSystem:
@@ -159,6 +186,10 @@ class BasePanelConfig {
       siYuCoordinateOverride: siYuCoordinateOverride ?? this.siYuCoordinateOverride,
       zhouTianModelOverride: zhouTianModelOverride ?? this.zhouTianModelOverride,
       projectionOverride: projectionOverride ?? this.projectionOverride,
+      zeroPointRef: zeroPointRef ?? this.zeroPointRef,
+      offsetTier: offsetTier ?? this.offsetTier,
+      constellationOffsetDeg: constellationOffsetDeg ?? this.constellationOffsetDeg,
+      starInnDegreeOverrides: starInnDegreeOverrides ?? this.starInnDegreeOverrides,
     );
   }
 
@@ -187,7 +218,11 @@ class BasePanelConfig {
         siYuOverrides: const {},
         siYuCoordinateOverride: null,
         zhouTianModelOverride: null,
-        projectionOverride: null);
+        projectionOverride: null,
+        zeroPointRef: null,
+        offsetTier: null,
+        constellationOffsetDeg: null,
+        starInnDegreeOverrides: null);
   }
 }
 
@@ -228,6 +263,10 @@ class PanelConfig extends BasePanelConfig {
     super.siYuCoordinateOverride,
     super.zhouTianModelOverride,
     super.projectionOverride,
+    super.zeroPointRef,
+    super.offsetTier,
+    super.constellationOffsetDeg,
+    super.starInnDegreeOverrides,
   });
 
   factory PanelConfig.fromJson(Map<String, dynamic> json) =>
@@ -254,6 +293,87 @@ class PanelConfig extends BasePanelConfig {
       siYuCoordinateOverride: null,
       zhouTianModelOverride: null,
       projectionOverride: null,
+      zeroPointRef: null,
+      offsetTier: null,
+      constellationOffsetDeg: null,
+      starInnDegreeOverrides: null,
     );
   }
+}
+
+/// Enum28Constellations 的 @JsonValue 映射（中文名 → 枚举值）。
+const _starInnEnumFromChinese = {
+  '角': Enum28Constellations.Jiao_Mu_Jiao,
+  '亢': Enum28Constellations.Kang_Jin_Long,
+  '氐': Enum28Constellations.Di_Tu_Lu,
+  '房': Enum28Constellations.Fang_Ri_Tu,
+  '心': Enum28Constellations.Xin_Yue_Hu,
+  '尾': Enum28Constellations.Wei_Huo_Hu,
+  '箕': Enum28Constellations.Ji_Shui_Bao,
+  '斗': Enum28Constellations.Dou_Mu_Xie,
+  '牛': Enum28Constellations.Niu_Jin_Niu,
+  '女': Enum28Constellations.Nv_Tu_Fu,
+  '虚': Enum28Constellations.Xu_Ri_Shu,
+  '危': Enum28Constellations.Wei_Yue_Yan,
+  '室': Enum28Constellations.Shi_Huo_Zhu,
+  '壁': Enum28Constellations.Bi_Shui_Yu,
+  '奎': Enum28Constellations.Kui_Mu_Lang,
+  '娄': Enum28Constellations.Lou_Jin_Gou,
+  '胃': Enum28Constellations.Wei_Tu_Zhi,
+  '昴': Enum28Constellations.Mao_Ri_Ji,
+  '毕': Enum28Constellations.Bi_Yue_Wu,
+  '觜': Enum28Constellations.Zi_Huo_Hou,
+  '参': Enum28Constellations.Shen_Shui_Yuan,
+  '井': Enum28Constellations.Jing_Mu_Han,
+  '鬼': Enum28Constellations.Gui_Jin_Yang,
+  '柳': Enum28Constellations.Liu_Tu_Zhang,
+  '星': Enum28Constellations.Xing_Ri_Ma,
+  '张': Enum28Constellations.Zhang_Yue_Lu,
+  '翼': Enum28Constellations.Yi_Huo_She,
+  '轸': Enum28Constellations.Zhen_Shui_Yin,
+};
+
+/// Enum28Constellations 的 @JsonValue 反向映射（枚举值 → 中文名）。
+const _starInnEnumToChinese = {
+  Enum28Constellations.Jiao_Mu_Jiao: '角',
+  Enum28Constellations.Kang_Jin_Long: '亢',
+  Enum28Constellations.Di_Tu_Lu: '氐',
+  Enum28Constellations.Fang_Ri_Tu: '房',
+  Enum28Constellations.Xin_Yue_Hu: '心',
+  Enum28Constellations.Wei_Huo_Hu: '尾',
+  Enum28Constellations.Ji_Shui_Bao: '箕',
+  Enum28Constellations.Dou_Mu_Xie: '斗',
+  Enum28Constellations.Niu_Jin_Niu: '牛',
+  Enum28Constellations.Nv_Tu_Fu: '女',
+  Enum28Constellations.Xu_Ri_Shu: '虚',
+  Enum28Constellations.Wei_Yue_Yan: '危',
+  Enum28Constellations.Shi_Huo_Zhu: '室',
+  Enum28Constellations.Bi_Shui_Yu: '壁',
+  Enum28Constellations.Kui_Mu_Lang: '奎',
+  Enum28Constellations.Lou_Jin_Gou: '娄',
+  Enum28Constellations.Wei_Tu_Zhi: '胃',
+  Enum28Constellations.Mao_Ri_Ji: '昴',
+  Enum28Constellations.Bi_Yue_Wu: '毕',
+  Enum28Constellations.Zi_Huo_Hou: '觜',
+  Enum28Constellations.Shen_Shui_Yuan: '参',
+  Enum28Constellations.Jing_Mu_Han: '井',
+  Enum28Constellations.Gui_Jin_Yang: '鬼',
+  Enum28Constellations.Liu_Tu_Zhang: '柳',
+  Enum28Constellations.Xing_Ri_Ma: '星',
+  Enum28Constellations.Zhang_Yue_Lu: '张',
+  Enum28Constellations.Yi_Huo_She: '翼',
+  Enum28Constellations.Zhen_Shui_Yin: '轸',
+};
+
+Map<String, dynamic>? _starInnOverridesToJson(
+    Map<Enum28Constellations, double>? map) {
+  if (map == null) return null;
+  return map.map((k, v) => MapEntry(_starInnEnumToChinese[k]!, v));
+}
+
+Map<Enum28Constellations, double>? _starInnOverridesFromJson(
+    Map<String, dynamic>? json) {
+  if (json == null) return null;
+  return json.map((k, v) =>
+      MapEntry(_starInnEnumFromChinese[k]!, (v as num).toDouble()));
 }

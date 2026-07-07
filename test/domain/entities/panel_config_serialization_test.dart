@@ -4,6 +4,8 @@ import 'package:qizhengsiyu/domain/entities/models/panel_config.dart';
 import 'package:qizhengsiyu/domain/entities/models/projection_config.dart';
 import 'package:qizhengsiyu/enums/enum_zhou_tian_model.dart';
 import 'package:qizhengsiyu/enums/enum_panel_system_type.dart';
+import 'package:qizhengsiyu/enums/enum_zero_point_ref.dart';
+import 'package:qizhengsiyu/enums/enum_constellation_offset_tier.dart';
 import 'package:metaphysics_core/enums.dart';
 
 void main() {
@@ -92,6 +94,31 @@ void main() {
       final panelConfig = PanelConfig.defaultPanelConfig();
       expect(panelConfig.zhouTianModelOverride, isNull);
       expect(panelConfig.projectionOverride, isNull);
+    });
+
+    test('A层新字段 zeroPointRef/offsetTier/偏移/逐宿覆写 往返保真', () {
+      final cfg = BasePanelConfig.defaultBasicPanelConfig().copyWith(
+        zeroPointRef: EnumZeroPointRef.dongzhi,
+        offsetTier: ConstellationOffsetTier.adjusted,
+        constellationOffsetDeg: 14.0,
+        starInnDegreeOverrides: {Enum28Constellations.Jiao_Mu_Jiao: 12.3},
+      );
+      final round = BasePanelConfig.fromJson(cfg.toJson());
+      expect(round.zeroPointRef, EnumZeroPointRef.dongzhi);
+      expect(round.offsetTier, ConstellationOffsetTier.adjusted);
+      expect(round.constellationOffsetDeg, 14.0);
+      expect(round.starInnDegreeOverrides?[Enum28Constellations.Jiao_Mu_Jiao], 12.3);
+    });
+
+    test('旧 JSON 缺 A层新字段 → null，不抛异常', () {
+      final legacy = BasePanelConfig.defaultBasicPanelConfig().toJson()
+        ..remove('zeroPointRef')
+        ..remove('offsetTier')
+        ..remove('constellationOffsetDeg')
+        ..remove('starInnDegreeOverrides');
+      final cfg = BasePanelConfig.fromJson(legacy);
+      expect(cfg.zeroPointRef, isNull);
+      expect(cfg.starInnDegreeOverrides, isNull);
     });
   });
 }

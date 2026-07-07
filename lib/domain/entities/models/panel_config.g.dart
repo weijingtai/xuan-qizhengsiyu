@@ -88,6 +88,18 @@ BasePanelConfig _$BasePanelConfigFromJson(
       : ProjectionConfig.fromJson(
           json['projectionOverride'] as Map<String, dynamic>,
         ),
+  zeroPointRef: $enumDecodeNullable(
+    _$EnumZeroPointRefEnumMap,
+    json['zeroPointRef'],
+  ),
+  offsetTier: $enumDecodeNullable(
+    _$ConstellationOffsetTierEnumMap,
+    json['offsetTier'],
+  ),
+  constellationOffsetDeg: (json['constellationOffsetDeg'] as num?)?.toDouble(),
+  starInnDegreeOverrides: _starInnOverridesFromJson(
+    json['starInnDegreeOverrides'] as Map<String, dynamic>?,
+  ),
 );
 
 Map<String, dynamic> _$BasePanelConfigToJson(
@@ -119,6 +131,12 @@ Map<String, dynamic> _$BasePanelConfigToJson(
   'zhouTianModelOverride':
       _$EnumZhouTianModelEnumMap[instance.zhouTianModelOverride],
   'projectionOverride': instance.projectionOverride,
+  'zeroPointRef': _$EnumZeroPointRefEnumMap[instance.zeroPointRef],
+  'offsetTier': _$ConstellationOffsetTierEnumMap[instance.offsetTier],
+  'constellationOffsetDeg': instance.constellationOffsetDeg,
+  'starInnDegreeOverrides': _starInnOverridesToJson(
+    instance.starInnDegreeOverrides,
+  ),
 };
 
 const _$CelestialCoordinateSystemEnumMap = {
@@ -204,6 +222,17 @@ const _$EnumZiQiChiDaoStandardEnumMap = {
 const _$EnumZhouTianModelEnumMap = {
   EnumZhouTianModel.degree360: 'degree360',
   EnumZhouTianModel.degree36525: 'degree36525',
+};
+
+const _$EnumZeroPointRefEnumMap = {
+  EnumZeroPointRef.chunfen: 'chunfen',
+  EnumZeroPointRef.dongzhi: 'dongzhi',
+};
+
+const _$ConstellationOffsetTierEnumMap = {
+  ConstellationOffsetTier.guXiu: 'guXiu',
+  ConstellationOffsetTier.adjusted: 'adjusted',
+  ConstellationOffsetTier.modern: 'modern',
 };
 
 FatePanelConfig _$FatePanelConfigFromJson(Map<String, dynamic> json) =>
@@ -307,6 +336,18 @@ PanelConfig _$PanelConfigFromJson(Map<String, dynamic> json) => PanelConfig(
       : ProjectionConfig.fromJson(
           json['projectionOverride'] as Map<String, dynamic>,
         ),
+  zeroPointRef: $enumDecodeNullable(
+    _$EnumZeroPointRefEnumMap,
+    json['zeroPointRef'],
+  ),
+  offsetTier: $enumDecodeNullable(
+    _$ConstellationOffsetTierEnumMap,
+    json['offsetTier'],
+  ),
+  constellationOffsetDeg: (json['constellationOffsetDeg'] as num?)?.toDouble(),
+  starInnDegreeOverrides: _starInnOverridesFromJson(
+    json['starInnDegreeOverrides'] as Map<String, dynamic>?,
+  ),
 );
 
 Map<String, dynamic> _$PanelConfigToJson(
@@ -338,4 +379,10 @@ Map<String, dynamic> _$PanelConfigToJson(
   'zhouTianModelOverride':
       _$EnumZhouTianModelEnumMap[instance.zhouTianModelOverride],
   'projectionOverride': instance.projectionOverride,
+  'zeroPointRef': _$EnumZeroPointRefEnumMap[instance.zeroPointRef],
+  'offsetTier': _$ConstellationOffsetTierEnumMap[instance.offsetTier],
+  'constellationOffsetDeg': instance.constellationOffsetDeg,
+  'starInnDegreeOverrides': _starInnOverridesToJson(
+    instance.starInnDegreeOverrides,
+  ),
 };
