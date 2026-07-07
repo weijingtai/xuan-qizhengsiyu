@@ -73,6 +73,59 @@ class _FakeRepo implements QiZhengZhouTianModelRepository {
 }
 
 void main() {
+  /// 逐星宿对比 degree，验证"逐位一致"。
+  void _assertStarInnDegreeSeqEqual(
+      List<ConstellationDegree> actual, List<ConstellationDegree> expected) {
+    expect(actual.length, expected.length,
+        reason: '星宿数量不应变化');
+    for (var i = 0; i < actual.length; i++) {
+      expect(actual[i].constellation, expected[i].constellation,
+          reason: '星宿 $i 名不一致');
+      expect(actual[i].degree, closeTo(expected[i].degree, 1e-9),
+          reason: '星宿 ${actual[i].constellation} 度数不一致');
+    }
+  }
+
+  /// 逐宫对比 degree。
+  void _assertGongDegreeSeqEqual(
+      List<GongDegree> actual, List<GongDegree> expected) {
+    expect(actual.length, expected.length,
+        reason: '宫位数量不应变化');
+    for (var i = 0; i < actual.length; i++) {
+      expect(actual[i].gong, expected[i].gong,
+          reason: '宫 $i 名不一致');
+      expect(actual[i].degree, closeTo(expected[i].degree, 1e-9),
+          reason: '宫 ${actual[i].gong} 度数不一致');
+    }
+  }
+
+  /// 全模型关键字段逐位一致性校验。
+  void _assertModelsEquivalent(
+      ZhouTianModel actual, ZhouTianModel expected) {
+    expect(actual.totalDegree, expected.totalDegree);
+    expect(actual.systemType, expected.systemType);
+    expect(actual.panelSystemType, expected.panelSystemType);
+    expect(actual.constellationSystemType, expected.constellationSystemType);
+    expect(actual.zeroPointJieQi, expected.zeroPointJieQi);
+    expect(actual.zeroPointAtConstellation.constellation,
+        expected.zeroPointAtConstellation.constellation);
+    expect(actual.zeroPointAtConstellation.degree,
+        closeTo(expected.zeroPointAtConstellation.degree, 1e-9));
+    expect(actual.zeroPointAtGong.gong, expected.zeroPointAtGong.gong);
+    expect(actual.zeroPointAtGong.degree,
+        closeTo(expected.zeroPointAtGong.degree, 1e-9));
+    expect(actual.alignmentPointAtConstellation.constellation,
+        expected.alignmentPointAtConstellation.constellation);
+    expect(actual.alignmentPointAtConstellation.degree,
+        closeTo(expected.alignmentPointAtConstellation.degree, 1e-9));
+    expect(actual.starInnOrder, expected.starInnOrder);
+    expect(actual.gongOrder, expected.gongOrder);
+    _assertStarInnDegreeSeqEqual(
+        actual.starInnDegreeSeq, expected.starInnDegreeSeq);
+    _assertGongDegreeSeqEqual(
+        actual.gongDegreeSeq, expected.gongDegreeSeq);
+  }
+
   /// 基线：默认 config 通过完整管线得到的模型。
   ZhouTianModel _baseline() {
     final model = _buildBaselineModel();
@@ -101,10 +154,7 @@ void main() {
     });
     final result = manager.getZhouTianModelBy(oldCfg);
 
-    expect(result.totalDegree, baselineModel.totalDegree);
-    expect(result.starInnDegreeSeq.length, baselineModel.starInnDegreeSeq.length);
-    expect(result.zeroPointAtConstellation.degree,
-        baselineModel.zeroPointAtConstellation.degree);
+    _assertModelsEquivalent(result, baselineModel);
   });
 
   test('(b) 新建默认 config → 基线一致', () {
@@ -117,12 +167,11 @@ void main() {
     });
     final result = manager.getZhouTianModelBy(cfg);
 
-    expect(result.totalDegree, baselineModel.totalDegree);
-    expect(result.starInnDegreeSeq.length, baselineModel.starInnDegreeSeq.length);
+    _assertModelsEquivalent(result, baselineModel);
   });
 
   test('(c) 显式 degree360+linear → 与 null 默认一致', () {
-    final cfgNull = BasePanelConfig.defaultBasicPanelConfig(); // zhouTianModelOverride=null
+    final cfgNull = BasePanelConfig.defaultBasicPanelConfig();
     final cfg360 = BasePanelConfig.defaultBasicPanelConfig().copyWith(
       zhouTianModelOverride: null,
       projectionOverride: null,
@@ -137,8 +186,7 @@ void main() {
     final r1 = manager.getZhouTianModelBy(cfgNull);
     final r2 = manager.getZhouTianModelBy(cfg360);
 
-    expect(r2.totalDegree, r1.totalDegree);
-    expect(r2.starInnDegreeSeq.length, r1.starInnDegreeSeq.length);
+    _assertModelsEquivalent(r2, r1);
   });
 
   test('(d) 默认 config 不含 A 层字段副作用', () {
@@ -155,10 +203,6 @@ void main() {
     });
     final result = manager.getZhouTianModelBy(cfg);
 
-    // 全 null 默认不应改变模型的关键值
-    expect(result.totalDegree, model.totalDegree);
-    expect(result.starInnDegreeSeq.length, model.starInnDegreeSeq.length);
-    expect(result.zeroPointAtConstellation.degree,
-        model.zeroPointAtConstellation.degree);
+    _assertModelsEquivalent(result, model);
   });
 }
