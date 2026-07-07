@@ -6,6 +6,9 @@ import 'package:qizhengsiyu/theme/app_theme.dart';
 import 'package:slide_switcher/slide_switcher.dart';
 
 import '../../domain/entities/models/panel_config.dart';
+import '../../domain/engines/school/school_profile.dart';
+import '../../domain/services/user_school_profile_service.dart';
+import '../../data/datasources/local/app_database.dart';
 import '../../enums/enum_school.dart';
 import '../viewmodels/panel_config_viewmodel.dart';
 import '../widgets/common/water_ink_card.dart';
@@ -13,6 +16,7 @@ import '../widgets/config/basic_info_section.dart';
 import '../widgets/config/custom_config_section.dart';
 import '../widgets/config/location_section.dart';
 import '../widgets/config/school_selector.dart';
+import '../widgets/config/school_profile_bar.dart';
 import '../widgets/config/star_chart_preview.dart';
 
 /// 七政四余命盘配置页面
@@ -446,6 +450,9 @@ class _QiZhengSiYuConfigPageState extends State<QiZhengSiYuConfigPage>
 
   /// 构建流派选择器
   Widget _buildSchoolSelector() {
+    final books = _selectedSchool != EnumSchoolType.Customerized
+        ? _viewModel.availableBooksFor(_selectedSchool)
+        : <SchoolProfile>[];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -465,6 +472,17 @@ class _QiZhengSiYuConfigPageState extends State<QiZhengSiYuConfigPage>
             });
             _viewModel.updateSchoolType(school);
           },
+        ),
+        SchoolProfileBar(
+          selectedSchool: _selectedSchool,
+          books: books,
+          isCustomized: _viewModel.isCustomized,
+          selectedProfileId: _viewModel.selectedProfileId,
+          onBookSelected: (profileId) {
+            setState(() {});
+            _viewModel.selectClassicBook(profileId);
+          },
+          onSaveProfile: _onSaveUserProfile,
         ),
       ],
     );
@@ -556,6 +574,49 @@ class _QiZhengSiYuConfigPageState extends State<QiZhengSiYuConfigPage>
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
             child: const Text('了解了'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// 存为自定义流派
+  void _onSaveUserProfile() {
+    final controller = TextEditingController();
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text('存为自定义流派'),
+        content: TextField(
+          controller: controller,
+          decoration: const InputDecoration(hintText: '流派名称'),
+          autofocus: true,
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: const Text('取消'),
+          ),
+          TextButton(
+            onPressed: () async {
+              final name = controller.text.trim();
+              if (name.isEmpty) return;
+              final svc = UserSchoolProfileService(
+                  AppDatabase().userSchoolProfileDao);
+              await svc.saveCurrentAsProfile(
+                name: name,
+                school: _selectedSchool,
+                classicBook: _viewModel.selectedProfileId ?? '',
+                config: _viewModel.customConfig,
+              );
+              Navigator.pop(ctx);
+              if (mounted) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('自定义流派已保存')),
+                );
+              }
+            },
+            child: const Text('保存'),
           ),
         ],
       ),
