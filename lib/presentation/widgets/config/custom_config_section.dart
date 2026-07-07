@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:metaphysics_core/enums.dart';
 import 'package:qizhengsiyu/enums/enum_panel_system_type.dart';
 import 'package:qizhengsiyu/theme/app_theme.dart';
 import 'package:qizhengsiyu/enums/enum_rahu_ketu_convention.dart';
@@ -69,6 +70,7 @@ class _CustomConfigSectionState extends State<CustomConfigSection> {
   late ConstellationOffsetTier? _offsetTier;
   late double _constellationOffsetDeg;
   late ConstellationSystemType _constellationSystemType;
+  late Map<Enum28Constellations, double>? _starInnDegreeOverrides;
 
   // 是否显示神煞
   // late bool _showGods;
@@ -117,6 +119,9 @@ class _CustomConfigSectionState extends State<CustomConfigSection> {
         widget.initialConfig?.constellationSystemType ??
             ConstellationSystemType.Classical;
     _classicBook = ["七政四余星道要诀"]; // 暂时硬编码，因为PanelConfig暂时不支持
+    _starInnDegreeOverrides = widget.initialConfig?.starInnDegreeOverrides != null
+        ? Map.from(widget.initialConfig!.starInnDegreeOverrides!)
+        : null;
     // _showGods = widget.initialConfig?.sh ?? true;
     // _showPalaces = widget.initialConfig?.showPalaces ?? true;
     // _useTraditionalCalculation =
@@ -158,7 +163,7 @@ class _CustomConfigSectionState extends State<CustomConfigSection> {
       zeroPointRef: _zeroPointRef,
       offsetTier: _offsetTier,
       constellationOffsetDeg: _constellationOffsetDeg,
-      starInnDegreeOverrides: widget.initialConfig?.starInnDegreeOverrides,
+      starInnDegreeOverrides: _starInnDegreeOverrides,
     );
     widget.onConfigChanged(config);
   }
@@ -910,6 +915,56 @@ class _CustomConfigSectionState extends State<CustomConfigSection> {
                   );
                 }).toList(),
               ),
+              ExpansionTile(
+                title: const Text('逐宿覆写'),
+                children: [
+                  ListView(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    children: Enum28Constellations.values.map((c) {
+                        final key = 'starinn_${c.name}';
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 4),
+                          child: Row(
+                            children: [
+                              SizedBox(
+                                width: 80,
+                                child: Text(c.starName, style: const TextStyle(fontSize: 14)),
+                              ),
+                              Expanded(
+                                child: TextFormField(
+                                  key: ValueKey(key),
+                                  initialValue: _starInnDegreeOverrides?[c]?.toString() ?? '',
+                                  keyboardType: TextInputType.number,
+                                  decoration: const InputDecoration(
+                                    hintText: '度数',
+                                    contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                    border: OutlineInputBorder(),
+                                  ),
+                                  onChanged: (text) {
+                                    final v = double.tryParse(text);
+                                    setState(() {
+                                      if (v == null) {
+                                        _starInnDegreeOverrides?.remove(c);
+                                        if (_starInnDegreeOverrides?.isEmpty ?? true) {
+                                          _starInnDegreeOverrides = null;
+                                        }
+                                      } else {
+                                        _starInnDegreeOverrides ??= {};
+                                        _starInnDegreeOverrides![c] = v;
+                                      }
+                                    });
+                                    _updateConfig();
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      }).toList(),
+                  ),
+                ],
+              ),
             ],
           ),
         ),
@@ -1142,7 +1197,7 @@ class _CustomConfigSectionState extends State<CustomConfigSection> {
       zeroPointRef: _zeroPointRef,
       offsetTier: _offsetTier,
       constellationOffsetDeg: _constellationOffsetDeg,
-      starInnDegreeOverrides: widget.initialConfig?.starInnDegreeOverrides,
+      starInnDegreeOverrides: _starInnDegreeOverrides,
     );
   }
 
