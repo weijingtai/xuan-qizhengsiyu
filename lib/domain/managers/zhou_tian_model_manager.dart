@@ -98,8 +98,13 @@ class ZhouTianModelManager {
           'No ZhouTianModel found for the given PanelConfig.');
     }
     return _mapper[key]!.applyOverrides(
-        config.zhouTianModelOverride,
-        config.projectionOverride);
+        zhouTianModelOverride: config.zhouTianModelOverride,
+        projectionOverride: config.projectionOverride,
+        zeroPointRef: config.zeroPointRef,
+        offsetTier: config.offsetTier,
+        constellationOffsetDeg: config.constellationOffsetDeg,
+        starInnDegreeOverrides: config.starInnDegreeOverrides,
+    );
   }
 
   /// 创建映射器的键

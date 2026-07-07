@@ -1,4 +1,5 @@
 import 'package:metaphysics_core/enums.dart';
+import 'package:metaphysics_core/enums.dart';
 import 'package:xuan_four_zhu_card/widgets/twenty_four_jie_qi_tag.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:qizhengsiyu/enums/enum_twelve_gong.dart';
@@ -7,6 +8,8 @@ import 'package:tuple/tuple.dart';
 export '../../../enums/enum_panel_system_type.dart';
 import '../../../enums/enum_panel_system_type.dart';
 import '../../../enums/enum_zhou_tian_model.dart';
+import '../../../enums/enum_zero_point_ref.dart';
+import '../../../enums/enum_constellation_offset_tier.dart';
 import 'naming_degree_pair.dart';
 import 'projection_config.dart';
 
@@ -149,17 +152,42 @@ class ZhouTianModel {
 
   /// 按面板配置产出覆写副本；config 两字段均 null 时返回 this（零成本、零行为变化）。
   /// 关键约束：ZhouTianModelManager._mapper 是共享缓存实例，覆写必须走此克隆，严禁原地 mutate。
-  ZhouTianModel applyOverrides(
-      EnumZhouTianModel? configZhouTianOverride,
-      ProjectionConfig? configProjectionOverride) {
-    if (configZhouTianOverride == null && configProjectionOverride == null) {
-      return this;
+  ZhouTianModel applyOverrides({
+    EnumZhouTianModel? zhouTianModelOverride,
+    ProjectionConfig? projectionOverride,
+    EnumZeroPointRef? zeroPointRef,
+    ConstellationOffsetTier? offsetTier,
+    double? constellationOffsetDeg,
+    Map<Enum28Constellations, double>? starInnDegreeOverrides,
+  }) {
+    final hasAny = zhouTianModelOverride != null ||
+        projectionOverride != null ||
+        zeroPointRef != null ||
+        offsetTier != null ||
+        constellationOffsetDeg != null ||
+        (starInnDegreeOverrides != null && starInnDegreeOverrides.isNotEmpty);
+    if (!hasAny) return this;
+
+    final offset = constellationOffsetDeg ?? offsetTier?.defaultOffsetDeg ?? 0.0;
+
+    List<ConstellationDegree>? newStarInn;
+    if (starInnDegreeOverrides != null && starInnDegreeOverrides.isNotEmpty) {
+      newStarInn = starInnDegreeSeq.map((cd) {
+        final ov = starInnDegreeOverrides[cd.constellation];
+        return ov == null ? cd : cd.copyWith(degree: ov);
+      }).toList();
     }
+
+    final newZero = offset == 0.0
+        ? zeroPointAtConstellation
+        : zeroPointAtConstellation.copyWith(
+            degree: zeroPointAtConstellation.degree + offset);
+
     return copyWith(
-      totalDegree:
-          configZhouTianOverride?.totalDegree ?? totalDegree,
-      projectionConfig:
-          configProjectionOverride ?? projectionConfig,
+      totalDegree: zhouTianModelOverride?.totalDegree ?? totalDegree,
+      projectionConfig: projectionOverride ?? projectionConfig,
+      starInnDegreeSeq: newStarInn ?? starInnDegreeSeq,
+      zeroPointAtConstellation: newZero,
     );
   }
 }

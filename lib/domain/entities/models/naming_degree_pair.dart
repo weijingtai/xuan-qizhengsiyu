@@ -12,6 +12,9 @@ class ConstellationDegree {
 
   ConstellationDegree({required this.constellation, required this.degree});
 
+  ConstellationDegree copyWith({double? degree}) =>
+      ConstellationDegree(constellation: constellation, degree: degree ?? this.degree);
+
   factory ConstellationDegree.fromJson(Map<String, dynamic> json) =>
       _$ConstellationDegreeFromJson(json);
   @override
