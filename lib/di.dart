@@ -6,6 +6,8 @@ import 'package:qizhengsiyu/domain/repositories/shen_sha_repository_adapter.dart
 import 'package:qizhengsiyu/domain/repositories/hua_yao_repository_adapter.dart';
 import 'package:qizhengsiyu/domain/repositories/ge_ju_repository_adapter.dart';
 import 'package:qizhengsiyu/domain/services/ge_ju_school_service_adapter.dart';
+import 'package:qizhengsiyu/domain/services/user_school_profile_service_port.dart';
+import 'package:qizhengsiyu/data/services/user_school_profile_service.dart';
 import 'package:qizhengsiyu/domain/repositories/ge_ju_product_repository.dart';
 import 'package:qizhengsiyu/domain/managers/zhou_tian_model_manager.dart';
 import 'package:qizhengsiyu/domain/managers/shen_sha_manager.dart';
@@ -134,6 +136,11 @@ List<SingleChildWidget> createProviders(QiZhengSiYuStorageDependencies deps) {
     // GeJu School Service (adapter wrapping contract port)
     Provider<GeJuSchoolServiceAdapter>(
       create: (_) => geJuSchool,
+    ),
+
+    // UserSchoolProfileService
+    Provider<UserSchoolProfileServicePort>(
+      create: (_) => UserSchoolProfileService(deps.userSchoolProfileDao),
     ),
 
     // ============ Domain Services (non-static) ============

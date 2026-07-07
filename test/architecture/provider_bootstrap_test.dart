@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
+import 'package:drift/native.dart';
 import 'package:qizhengsiyu/di.dart';
 import 'package:qizhengsiyu/qizhengsiyu_storage_dependencies.dart';
+import 'package:qizhengsiyu/data/datasources/local/app_database.dart';
 import 'package:repository_interface_qizhengsiyu/repository_interface_qizhengsiyu.dart'
     hide GeJuBuiltInDataSource;
 import 'package:qizhengsiyu/data/datasources/local/ge_ju_local_data_source.dart';
@@ -46,6 +48,7 @@ void main() {
         geJuRepository: fakeGeJuRepository,
         geJuBuiltInDataSource: fakeGeJuBuiltInDataSource,
         geJuSchoolService: fakeGeJuSchoolServicePort,
+        userSchoolProfileDao: AppDatabase.forTesting(NativeDatabase.memory()).userSchoolProfileDao,
         shenSha: fakeShenShaRepository,
         huaYao: fakeHuaYaoRepository,
         starPositionStatus: fakeStarPositionStatus,

@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:qizhengsiyu/enums/enum_school.dart';
 import 'package:qizhengsiyu/data/datasources/local/app_database.dart';
 import 'package:qizhengsiyu/domain/entities/models/panel_config.dart';
-import 'package:qizhengsiyu/domain/services/user_school_profile_service.dart';
+import 'package:qizhengsiyu/data/services/user_school_profile_service.dart';
 
 void main() {
   test('保存当前配置为命名档案 → 可列出', () async {

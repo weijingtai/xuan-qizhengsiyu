@@ -8,8 +8,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
+import 'package:drift/native.dart';
 import 'package:qizhengsiyu/di.dart';
 import 'package:qizhengsiyu/qizhengsiyu_storage_dependencies.dart';
+import 'package:qizhengsiyu/data/datasources/local/app_database.dart';
 import 'package:qizhengsiyu/presentation/viewmodels/qi_zheng_si_yu_viewmodel.dart';
 import 'package:qizhengsiyu/presentation/viewmodels/ge_ju_list_viewmodel.dart';
 import 'package:qizhengsiyu/presentation/viewmodels/ge_ju_editor_viewmodel.dart';
@@ -222,6 +224,7 @@ QiZhengSiYuStorageDependencies _buildFakeDeps() {
     geJuRepository: FakeGeJuRepository(),
     geJuBuiltInDataSource: FakeGeJuBuiltInDataSource(),
     geJuSchoolService: FakeGeJuSchoolServicePort(),
+    userSchoolProfileDao: AppDatabase.forTesting(NativeDatabase.memory()).userSchoolProfileDao,
     shenSha: FakeQiZhengShenShaRepository(),
     huaYao: FakeQiZhengHuaYaoRepository(),
     starPositionStatus: FakeQiZhengStarPositionStatusRepository(),

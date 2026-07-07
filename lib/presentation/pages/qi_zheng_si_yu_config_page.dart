@@ -7,8 +7,7 @@ import 'package:slide_switcher/slide_switcher.dart';
 
 import '../../domain/entities/models/panel_config.dart';
 import '../../domain/engines/school/school_profile.dart';
-import '../../domain/services/user_school_profile_service.dart';
-import '../../data/datasources/local/app_database.dart';
+import '../../domain/services/user_school_profile_service_port.dart';
 import '../../enums/enum_school.dart';
 import '../viewmodels/panel_config_viewmodel.dart';
 import '../widgets/common/water_ink_card.dart';
@@ -601,8 +600,7 @@ class _QiZhengSiYuConfigPageState extends State<QiZhengSiYuConfigPage>
             onPressed: () async {
               final name = controller.text.trim();
               if (name.isEmpty) return;
-              final svc = UserSchoolProfileService(
-                  AppDatabase().userSchoolProfileDao);
+              final svc = Provider.of<UserSchoolProfileServicePort>(ctx, listen: false);
               await svc.saveCurrentAsProfile(
                 name: name,
                 school: _selectedSchool,

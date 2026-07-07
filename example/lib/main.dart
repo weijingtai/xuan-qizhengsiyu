@@ -103,6 +103,7 @@ void main() async {
         GeJuRepositoryImpl(builtInDataSource: geJuBuiltInDataSource, dao: geJuDao),
     geJuBuiltInDataSource: geJuBuiltInDataSource,
     geJuSchoolService: GeJuSchoolService(dao: geJuDao),
+    userSchoolProfileDao: appDatabase.userSchoolProfileDao,
     shenSha: AssetsQiZhengShenShaRepository(),
     huaYao: AssetsQiZhengHuaYaoRepository(),
     starPositionStatus: const AssetsQiZhengStarPositionStatusRepository(),

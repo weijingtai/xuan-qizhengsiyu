@@ -1,6 +1,7 @@
 import 'package:repository_interface_qizhengsiyu/repository_interface_qizhengsiyu.dart'
     hide GeJuBuiltInDataSource;
 import 'package:qizhengsiyu/data/datasources/local/ge_ju_local_data_source.dart';
+import 'package:qizhengsiyu/data/datasources/local/daos/user_school_profile_dao.dart';
 
 /// Dependency bundle for qizhengsiyu storage ports.
 ///
@@ -13,6 +14,7 @@ class QiZhengSiYuStorageDependencies {
     required this.geJuRepository,
     required this.geJuBuiltInDataSource,
     required this.geJuSchoolService,
+    required this.userSchoolProfileDao,
     required this.shenSha,
     required this.huaYao,
     required this.starPositionStatus,
@@ -26,6 +28,7 @@ class QiZhengSiYuStorageDependencies {
   final IGeJuRepository geJuRepository;
   final GeJuBuiltInDataSource geJuBuiltInDataSource;
   final GeJuSchoolServicePort geJuSchoolService;
+  final UserSchoolProfileDao userSchoolProfileDao;
   final QiZhengShenShaRepository shenSha;
   final QiZhengHuaYaoRepository huaYao;
   final QiZhengStarPositionStatusRepository starPositionStatus;
