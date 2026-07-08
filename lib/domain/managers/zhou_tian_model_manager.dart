@@ -1,5 +1,3 @@
-import 'dart:convert';
-import 'package:flutter/foundation.dart';
 import 'package:xuan_logger/xuan_logger.dart';
 
 import 'package:repository_interface_qizhengsiyu/repository_interface_qizhengsiyu.dart';
@@ -11,17 +9,33 @@ import 'zhou_tian_calculator.dart';
 
 // 条件导入: Web 使用 stub，非 Web 使用真实实现
 import 'zhou_tian_file_storage_stub.dart'
-    if (dart.library.io) 'zhou_tian_file_storage_io.dart' as file_storage;
+    if (dart.library.io) 'zhou_tian_file_storage_io.dart'
+    as file_storage;
 
 class ZhouTianModelManager {
   final QiZhengZhouTianModelRepository _repository;
 
   ZhouTianModelManager({required QiZhengZhouTianModelRepository repository})
-      : _repository = repository;
+    : _repository = repository;
 
   // 使用Map存储加载的ZhouTianModel
   final Map<String, ZhouTianModel> _mapper = {};
   bool _isLoaded = false;
+
+  Future<Map<String, ZhouTianModel>> loadFromFiles(
+    List<String> filePaths,
+  ) async {
+    if (_mapper.isNotEmpty) {
+      clear();
+    }
+    final jsonMaps = await file_storage.loadModelsFromFiles(filePaths);
+    for (final jsonMap in jsonMaps) {
+      final model = ZhouTianModel.fromJson(jsonMap);
+      _addModelToMapper(model);
+    }
+    _isLoaded = true;
+    return _mapper;
+  }
 
   /// 异步加载周天模型数据（通过注入的 repository）
   Future<void> load() async {
@@ -33,7 +47,7 @@ class ZhouTianModelManager {
         final model = ZhouTianModel.fromJson(contract.raw);
         _addModelToMapper(model);
       }
-      
+
       await loadUserSchemes();
 
       _isLoaded = true;
@@ -56,8 +70,11 @@ class ZhouTianModelManager {
   }
 
   void _addModelToMapper(ZhouTianModel model) {
-    final key = _createMapperKey(model.systemType, model.panelSystemType,
-        model.constellationSystemType);
+    final key = _createMapperKey(
+      model.systemType,
+      model.panelSystemType,
+      model.constellationSystemType,
+    );
     _mapper[key] = model;
   }
 
@@ -65,31 +82,37 @@ class ZhouTianModelManager {
   ZhouTianModel getZhouTianModelBy(BasePanelConfig config) {
     if (!_isLoaded) {
       throw StateError(
-          'ZhouTianModelManager has not been loaded yet. Call load() first.');
+        'ZhouTianModelManager has not been loaded yet. Call load() first.',
+      );
     }
 
-    final key = _createMapperKey(config.celestialCoordinateSystem,
-        config.panelSystemType, config.constellationSystemType);
+    final key = _createMapperKey(
+      config.celestialCoordinateSystem,
+      config.panelSystemType,
+      config.constellationSystemType,
+    );
 
     if (!_mapper.containsKey(key)) {
       throw UnimplementedError(
-          'No ZhouTianModel found for the given PanelConfig.');
+        'No ZhouTianModel found for the given PanelConfig.',
+      );
     }
     return _mapper[key]!.applyOverrides(
-        zhouTianModelOverride: config.zhouTianModelOverride,
-        projectionOverride: config.projectionOverride,
-        zeroPointRef: config.zeroPointRef,
-        offsetTier: config.offsetTier,
-        constellationOffsetDeg: config.constellationOffsetDeg,
-        starInnDegreeOverrides: config.starInnDegreeOverrides,
+      zhouTianModelOverride: config.zhouTianModelOverride,
+      projectionOverride: config.projectionOverride,
+      zeroPointRef: config.zeroPointRef,
+      offsetTier: config.offsetTier,
+      constellationOffsetDeg: config.constellationOffsetDeg,
+      starInnDegreeOverrides: config.starInnDegreeOverrides,
     );
   }
 
   /// 创建映射器的键
   String _createMapperKey(
-      CelestialCoordinateSystem systemType,
-      PanelSystemType panelSystemType,
-      ConstellationSystemType constellationSystemType) {
+    CelestialCoordinateSystem systemType,
+    PanelSystemType panelSystemType,
+    ConstellationSystemType constellationSystemType,
+  ) {
     return '${systemType.name}_${panelSystemType.name}_${constellationSystemType.name}';
   }
 
@@ -97,7 +120,8 @@ class ZhouTianModelManager {
   Map<String, ZhouTianModel> get allModels {
     if (!_isLoaded) {
       throw StateError(
-          'ZhouTianModelManager has not been loaded yet. Call load() first.');
+        'ZhouTianModelManager has not been loaded yet. Call load() first.',
+      );
     }
     return Map.unmodifiable(_mapper);
   }
@@ -157,7 +181,8 @@ class ZhouTianModelManager {
   }
 
   List<ConstellationMappingResult> calculateZhouTianMapper(
-      ZhouTianModel zhouTian) {
+    ZhouTianModel zhouTian,
+  ) {
     if (zhouTian.starInnOrder.first !=
         zhouTian.zeroPointAtConstellation.constellation) {
       throw Exception("起始星宿必须与0°星宿一致");
@@ -166,8 +191,9 @@ class ZhouTianModelManager {
       throw Exception("起始宫位必须与0°宫位一致");
     }
 
-    return ZhouTianCalculator(zhouTianModel: zhouTian)
-        .mapConstellationsToPalaces();
+    return ZhouTianCalculator(
+      zhouTianModel: zhouTian,
+    ).mapConstellationsToPalaces();
   }
 
   /// 清空数据
@@ -186,7 +212,10 @@ class ZhouTianModelManager {
   /// 用于测试：直接添加单个模型
   void addModelForTesting(ZhouTianModel model) {
     final key = _createMapperKey(
-        model.systemType, model.panelSystemType, model.constellationSystemType);
+      model.systemType,
+      model.panelSystemType,
+      model.constellationSystemType,
+    );
     _mapper[key] = model;
     _isLoaded = true;
   }

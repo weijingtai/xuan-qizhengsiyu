@@ -18,3 +18,16 @@ Future<List<Map<String, dynamic>>> loadUserSchemesFromFiles() async {
   }
   return results;
 }
+
+Future<List<Map<String, dynamic>>> loadModelsFromFiles(
+  List<String> filePaths,
+) async {
+  final results = <Map<String, dynamic>>[];
+  for (final filePath in filePaths) {
+    final file = File(filePath);
+    final jsonString = await file.readAsString();
+    final jsonMap = json.decode(jsonString);
+    results.add(jsonMap as Map<String, dynamic>);
+  }
+  return results;
+}
