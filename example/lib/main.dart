@@ -8,11 +8,12 @@ import 'package:timezone/data/latest.dart' as tz;
 import 'package:qizhengsiyu/di.dart' as qizhengsiyu_di;
 import 'package:qizhengsiyu/navigator.dart' as qizhengsiyu_nav;
 import 'package:http/http.dart' as http;
+import 'package:drift/drift.dart';
+import 'package:drift_flutter/drift_flutter.dart';
 import 'package:persistence_drift/persistence_drift.dart';
 import 'package:persistence_preferences/persistence_preferences.dart';
 import 'package:persistence_assets/persistence_assets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:drift/native.dart';
 import 'package:persistence_drift/qizhengsiyu/qizheng_module_registry.dart';
 import 'package:qizhengsiyu/qizhengsiyu_storage_dependencies.dart';
 import 'package:qizhengsiyu/data/datasources/local/app_database.dart';
@@ -76,10 +77,32 @@ void main() async {
       GeJuSQLiteDataSource(GeJuBuiltInDatabase(createGeJuBuiltInConnection()));
   final geJuDao = GeJuDao(appDatabase);
 
-  final newDb = PersistenceDriftDatabase(NativeDatabase.memory());
+  final newDb = PersistenceDriftDatabase(
+    driftDatabase(
+      name: 'persistence',
+      native: const DriftNativeOptions(
+        databaseDirectory: getApplicationSupportDirectory,
+      ),
+      web: DriftWebOptions(
+        sqlite3Wasm: Uri.parse('sqlite3.wasm'),
+        driftWorker: Uri.parse('drift_worker.js'),
+      ),
+    ),
+  );
   final prefs = await SharedPreferences.getInstance();
   final sessionRepo = PreferencesAccountSessionRepository(prefs);
-  final accountDb = AccountDatabase(NativeDatabase.memory());
+  final accountDb = AccountDatabase(
+    driftDatabase(
+      name: 'account',
+      native: const DriftNativeOptions(
+        databaseDirectory: getApplicationSupportDirectory,
+      ),
+      web: DriftWebOptions(
+        sqlite3Wasm: Uri.parse('sqlite3.wasm'),
+        driftWorker: Uri.parse('drift_worker.js'),
+      ),
+    ),
+  );
   final identityLinkRepo = DriftAccountIdentityLinkRepository(accountDb);
   
   final bootstrapStore = DriftScopeBootstrapStore(newDb);

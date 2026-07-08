@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:xuan_logger/xuan_logger.dart';
 
 import 'package:repository_interface_qizhengsiyu/repository_interface_qizhengsiyu.dart';
@@ -8,6 +8,10 @@ import '../../xing_xian/gong_constellation_mapping.dart';
 import '../entities/models/panel_config.dart';
 import '../entities/models/zhou_tian_model.dart';
 import 'zhou_tian_calculator.dart';
+
+// 条件导入: Web 使用 stub，非 Web 使用真实实现
+import 'zhou_tian_file_storage_stub.dart'
+    if (dart.library.io) 'zhou_tian_file_storage_io.dart' as file_storage;
 
 class ZhouTianModelManager {
   final QiZhengZhouTianModelRepository _repository;
@@ -18,24 +22,6 @@ class ZhouTianModelManager {
   // 使用Map存储加载的ZhouTianModel
   final Map<String, ZhouTianModel> _mapper = {};
   bool _isLoaded = false;
-
-  Future<Map<String, ZhouTianModel>> loadFromFiles(
-      List<String> filePaths) async {
-    if (_mapper.isNotEmpty) {
-      clear();
-    }
-    for (String filePath in filePaths) {
-      File file = File(filePath);
-      String jsonString = await file.readAsString();
-      Map<String, dynamic> jsonMap = json.decode(jsonString);
-      ZhouTianModel model = ZhouTianModel.fromJson(jsonMap);
-      String key = _createMapperKey(model.systemType, model.panelSystemType,
-          model.constellationSystemType);
-      _mapper[key] = model;
-    }
-    _isLoaded = true;
-    return _mapper; // Return the mapper as the resul
-  }
 
   /// 异步加载周天模型数据（通过注入的 repository）
   Future<void> load() async {
@@ -58,19 +44,11 @@ class ZhouTianModelManager {
 
   Future<void> loadUserSchemes() async {
     try {
-      // 假设用户预设存放在应用文档目录的 user_schemes/ 文件夹下
-      // 在 CLI 环境中，我们可以检查本地目录
-      final userSchemesDir = Directory('user_schemes');
-      if (await userSchemesDir.exists()) {
-        final List<FileSystemEntity> entities = await userSchemesDir.list().toList();
-        for (var entity in entities) {
-          if (entity is File && entity.path.endsWith('.json')) {
-            final String content = await entity.readAsString();
-            final model = ZhouTianModel.fromJson(json.decode(content));
-            _addModelToMapper(model);
-            logger.i("Loaded user scheme: ${entity.path}");
-          }
-        }
+      final schemes = await file_storage.loadUserSchemesFromFiles();
+      for (final jsonMap in schemes) {
+        final model = ZhouTianModel.fromJson(jsonMap);
+        _addModelToMapper(model);
+        logger.i("Loaded user scheme");
       }
     } catch (e) {
       logger.w("Failed to load user schemes: $e");

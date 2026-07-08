@@ -14,10 +14,12 @@ import 'package:qizhengsiyu/presentation/widgets/rings/gong_ming_li_ring.dart';
 import 'package:qizhengsiyu/qi_zheng_si_yu_ui_constant_resources.dart';
 import 'package:tuple/tuple.dart';
 
+import 'package:drift/drift.dart';
+import 'package:drift_flutter/drift_flutter.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:persistence_drift/persistence_drift.dart';
 import 'package:persistence_preferences/persistence_preferences.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:drift/native.dart';
 import 'package:persistence_drift/qizhengsiyu/qizheng_module_registry.dart';
 import 'package:persistence_assets/persistence_assets.dart';
 import 'package:repository_interface_qizhengsiyu/repository_interface_qizhengsiyu.dart';
@@ -47,10 +49,32 @@ void main() async {
       GeJuSQLiteDataSource(GeJuBuiltInDatabase(createGeJuBuiltInConnection()));
   final geJuDao = GeJuDao(appDatabase);
   
-  final newDb = PersistenceDriftDatabase(NativeDatabase.memory());
+  final newDb = PersistenceDriftDatabase(
+    driftDatabase(
+      name: 'persistence',
+      native: const DriftNativeOptions(
+        databaseDirectory: getApplicationSupportDirectory,
+      ),
+      web: DriftWebOptions(
+        sqlite3Wasm: Uri.parse('sqlite3.wasm'),
+        driftWorker: Uri.parse('drift_worker.js'),
+      ),
+    ),
+  );
   final prefs = await SharedPreferences.getInstance();
   final sessionRepo = PreferencesAccountSessionRepository(prefs);
-  final accountDb = AccountDatabase(NativeDatabase.memory());
+  final accountDb = AccountDatabase(
+    driftDatabase(
+      name: 'account',
+      native: const DriftNativeOptions(
+        databaseDirectory: getApplicationSupportDirectory,
+      ),
+      web: DriftWebOptions(
+        sqlite3Wasm: Uri.parse('sqlite3.wasm'),
+        driftWorker: Uri.parse('drift_worker.js'),
+      ),
+    ),
+  );
   final identityLinkRepo = DriftAccountIdentityLinkRepository(accountDb);
   
   final bootstrapStore = DriftScopeBootstrapStore(newDb);
