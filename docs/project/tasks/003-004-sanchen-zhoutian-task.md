@@ -17,6 +17,19 @@
 
 ---
 
+## 当前状态(本分支 agent/opencode/004-drag-calibration-tool)
+
+> 【覆盖重写区】接手本分支先读这里
+
+- 刚完成: 2-D d1 — GeJu 自建数据调研 SOP 写毕(`docs/project/tasks/2D-geju-research-sop.md`),精确指向 Drift(`app_database.dart`/`daos/ge_ju_dao.dart`/`tables/ge_ju_tables.dart`)+ JSON(`ge_ju_file_storage_io.dart`/`ge_ju_legacy_migrator*`)两条链路,并纳入 `user_school_profile` 作第二参照样本
+- 已落地(前序): 2-A ①层几何库 + 2-B ②层语义适配/applyOverrides 覆写(commit 6a94707)已进历史
+- 半成品在制(非本轮产物, 未提交): 2-C ③-甲 `lib/presentation/widgets/calibration/star_xiu_drag_calibration.dart`(163行) + 同名 test(232行) — 留给 2-C 执行者自行落盘验证,本轮未 add
+- 下一步: 把 SOP 交 OpenCode 执行取数 → 产出 `2D-geju-research-findings.md`
+- 微观意图: 取数报告回交后, Claude Code 据现状做 Drift/JSON 选型 + 定候选对齐点表接口(2-D d3);顺手核对 `user_school_profile` 能否直接当轻量自建表模板
+- 验证: 本轮纯文档无需跑测试;2-C calibration 待其执行者 `flutter test test/presentation/widgets/calibration/`
+
+---
+
 ## 总体目标(一句话)
 
 把《三辰通载》黄道恒星制盘制数据接入 xuan-qizhengsiyu 项目(含 schema 迁移、资产落地、对齐点候选登记、不等宫死字段打通),并开发一个拖拽校准对齐点的可视化工具(004),用于在史料候选分歧未消时做间接验证。全程在 worktree 中开发,主分支零改动。
@@ -115,6 +128,7 @@
 | ✅ 不等宫 UI(003 §13) 排除在本版外,单独立项(见方向三) | 避免范围蔓延 | 004 §2 |
 | ❌ 不顺手处理 `constellationOffsetDeg` 没施加到 `alignmentPointAtConstellation` 的事 | 改 `applyOverrides()` 时留意别引入冲突,但本次不修;两个 override 同时非空的优先级留给实施计划明确(建议 `alignmentPointOverride` 优先) | 004 §9 |
 | ❌ 不直接挖 chart-ui 包的接口手势支持现状 | 不在可见 checkout 范围内;①②层的可迁移性设计基于"尽量减少假设"的保守策略 | 004 §9 |
+| 📋 2-D 调研 SOP 把 `user_school_profile` 定为第二参照样本 | 它是"一条命名的轻量用户自建记录",形态比 GeJu 规则更贴近候选对齐点(候选名+ConstellationDegree+时间+备注),可作 Drift/JSON 选型的第二对照锚 | 2026-07-09 SOP 撰写 |
 
 ### 待补测试规格(004 §8 已细化)
 - ①层单元测试:跨 0°/360° 边界
