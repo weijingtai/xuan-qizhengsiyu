@@ -100,6 +100,11 @@ BasePanelConfig _$BasePanelConfigFromJson(
   starInnDegreeOverrides: _starInnOverridesFromJson(
     json['starInnDegreeOverrides'] as Map<String, dynamic>?,
   ),
+  alignmentPointOverride: json['alignmentPointOverride'] == null
+      ? null
+      : ConstellationDegree.fromJson(
+          json['alignmentPointOverride'] as Map<String, dynamic>,
+        ),
 );
 
 Map<String, dynamic> _$BasePanelConfigToJson(
@@ -137,6 +142,7 @@ Map<String, dynamic> _$BasePanelConfigToJson(
   'starInnDegreeOverrides': _starInnOverridesToJson(
     instance.starInnDegreeOverrides,
   ),
+  'alignmentPointOverride': instance.alignmentPointOverride,
 };
 
 const _$CelestialCoordinateSystemEnumMap = {
@@ -348,6 +354,11 @@ PanelConfig _$PanelConfigFromJson(Map<String, dynamic> json) => PanelConfig(
   starInnDegreeOverrides: _starInnOverridesFromJson(
     json['starInnDegreeOverrides'] as Map<String, dynamic>?,
   ),
+  alignmentPointOverride: json['alignmentPointOverride'] == null
+      ? null
+      : ConstellationDegree.fromJson(
+          json['alignmentPointOverride'] as Map<String, dynamic>,
+        ),
 );
 
 Map<String, dynamic> _$PanelConfigToJson(
@@ -385,4 +396,5 @@ Map<String, dynamic> _$PanelConfigToJson(
   'starInnDegreeOverrides': _starInnOverridesToJson(
     instance.starInnDegreeOverrides,
   ),
+  'alignmentPointOverride': instance.alignmentPointOverride,
 };

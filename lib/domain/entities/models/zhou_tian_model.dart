@@ -159,13 +159,15 @@ class ZhouTianModel {
     ConstellationOffsetTier? offsetTier,
     double? constellationOffsetDeg,
     Map<Enum28Constellations, double>? starInnDegreeOverrides,
+    ConstellationDegree? alignmentPointOverride,
   }) {
     final hasAny = zhouTianModelOverride != null ||
         projectionOverride != null ||
         zeroPointRef != null ||
         offsetTier != null ||
         constellationOffsetDeg != null ||
-        (starInnDegreeOverrides != null && starInnDegreeOverrides.isNotEmpty);
+        (starInnDegreeOverrides != null && starInnDegreeOverrides.isNotEmpty) ||
+        alignmentPointOverride != null;
     if (!hasAny) return this;
 
     final offset = constellationOffsetDeg ?? offsetTier?.defaultOffsetDeg ?? 0.0;
@@ -178,15 +180,27 @@ class ZhouTianModel {
       }).toList();
     }
 
-    final newZero = offset == 0.0
-        ? zeroPointAtConstellation
-        : zeroPointAtConstellation.copyWith(
-            degree: zeroPointAtConstellation.degree + offset);
+    // 拖拽校准对齐点：非空时同时替换 alignmentPointAtConstellation 与
+    // zeroPointAtConstellation 为同一绝对值（两字段本该保持同步，见 004 设计 §4）。
+    // 优先级：alignmentPointOverride 优先于 constellationOffsetDeg 派生的岁差偏移
+    // ——override 直接给绝对值，不再叠加 offset（见 004 设计 §9）。
+    final ConstellationDegree newAlignment =
+        alignmentPointOverride ?? alignmentPointAtConstellation;
+    final ConstellationDegree newZero;
+    if (alignmentPointOverride != null) {
+      newZero = alignmentPointOverride;
+    } else {
+      newZero = offset == 0.0
+          ? zeroPointAtConstellation
+          : zeroPointAtConstellation.copyWith(
+              degree: zeroPointAtConstellation.degree + offset);
+    }
 
     return copyWith(
       totalDegree: zhouTianModelOverride?.totalDegree ?? totalDegree,
       projectionConfig: projectionOverride ?? projectionConfig,
       starInnDegreeSeq: newStarInn ?? starInnDegreeSeq,
+      alignmentPointAtConstellation: newAlignment,
       zeroPointAtConstellation: newZero,
     );
   }
