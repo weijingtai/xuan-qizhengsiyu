@@ -126,4 +126,61 @@ void main() {
       expect(again.alignmentPointAtConstellation.degree, 0.0);
     });
   });
+
+  group('集成: 切换 alignmentPointOverride 前后 mapConstellationsToPalaces 输出确实变', () {
+    late ZhouTianModelManager manager;
+
+    setUp(() {
+      manager = ZhouTianModelManager(repository: _FakeRepo([_model()]));
+      manager.addModelForTesting(_model());
+    });
+
+    test('override 为 null → mapConstellationsToPalaces 以资产锚点为基准', () {
+      final m = manager.getZhouTianModelBy(_config());
+      final mappings = ZhouTianCalculator(zhouTianModel: m)
+          .mapConstellationsToPalaces();
+      expect(mappings, isNotEmpty);
+    });
+
+    test('override 非空 → 映射结果与 null 时不同', () {
+      final baseMappings = ZhouTianCalculator(
+              zhouTianModel: manager.getZhouTianModelBy(_config()))
+          .mapConstellationsToPalaces();
+
+      final overriddenMappings = ZhouTianCalculator(
+              zhouTianModel: manager.getZhouTianModelBy(_config(
+        alignmentPointOverride: ConstellationDegree(
+            constellation: Enum28Constellations.Kang_Jin_Long, degree: 3.0),
+      ))).mapConstellationsToPalaces();
+
+      final baseStart = baseMappings
+          .firstWhere((r) =>
+              r.constellationName == Enum28Constellations.Jiao_Mu_Jiao)
+          .absStartDeg;
+      final overriddenStart = overriddenMappings
+          .firstWhere((r) =>
+              r.constellationName == Enum28Constellations.Jiao_Mu_Jiao)
+          .absStartDeg;
+
+      expect(baseStart, isNot(closeTo(overriddenStart, 1e-6)),
+          reason: '切换 alignmentPointOverride 后星宿映射起点必须改变');
+    });
+
+    test('override 前后 mapConstellationsToPalaces 不抛异常', () {
+      final baseMappings = ZhouTianCalculator(
+              zhouTianModel: manager.getZhouTianModelBy(_config()))
+          .mapConstellationsToPalaces();
+
+      final overriddenMappings = ZhouTianCalculator(
+              zhouTianModel: manager.getZhouTianModelBy(_config(
+        alignmentPointOverride: ConstellationDegree(
+            constellation: Enum28Constellations.Kang_Jin_Long, degree: 3.0),
+      ))).mapConstellationsToPalaces();
+
+      expect(baseMappings, isNotEmpty);
+      expect(overriddenMappings, isNotEmpty);
+      expect(baseMappings.length, equals(_model().starInnOrder.length));
+      expect(overriddenMappings.length, equals(_model().starInnOrder.length));
+    });
+  });
 }

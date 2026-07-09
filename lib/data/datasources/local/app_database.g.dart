@@ -4622,6 +4622,508 @@ class UserSchoolProfileTableCompanion
   }
 }
 
+class $AlignmentPointCandidateTableTable extends AlignmentPointCandidateTable
+    with
+        TableInfo<
+          $AlignmentPointCandidateTableTable,
+          AlignmentPointCandidateTableData
+        > {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $AlignmentPointCandidateTableTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _uuidMeta = const VerificationMeta('uuid');
+  @override
+  late final GeneratedColumn<String> uuid = GeneratedColumn<String>(
+    'uuid',
+    aliasedName,
+    false,
+    additionalChecks: GeneratedColumn.checkTextLength(minTextLength: 1),
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _nameMeta = const VerificationMeta('name');
+  @override
+  late final GeneratedColumn<String> name = GeneratedColumn<String>(
+    'name',
+    aliasedName,
+    false,
+    additionalChecks: GeneratedColumn.checkTextLength(minTextLength: 1),
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  @override
+  late final GeneratedColumnWithTypeConverter<ConstellationDegree, String>
+  alignmentPoint =
+      GeneratedColumn<String>(
+        'alignment_point_json',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: true,
+      ).withConverter<ConstellationDegree>(
+        $AlignmentPointCandidateTableTable.$converteralignmentPoint,
+      );
+  static const VerificationMeta _sourceNoteMeta = const VerificationMeta(
+    'sourceNote',
+  );
+  @override
+  late final GeneratedColumn<String> sourceNote = GeneratedColumn<String>(
+    'source_note',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _createdAtMeta = const VerificationMeta(
+    'createdAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+    'created_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _lastUpdatedAtMeta = const VerificationMeta(
+    'lastUpdatedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> lastUpdatedAt =
+      GeneratedColumn<DateTime>(
+        'last_updated_at',
+        aliasedName,
+        false,
+        type: DriftSqlType.dateTime,
+        requiredDuringInsert: true,
+      );
+  static const VerificationMeta _deletedAtMeta = const VerificationMeta(
+    'deletedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> deletedAt = GeneratedColumn<DateTime>(
+    'deleted_at',
+    aliasedName,
+    true,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: false,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    uuid,
+    name,
+    alignmentPoint,
+    sourceNote,
+    createdAt,
+    lastUpdatedAt,
+    deletedAt,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 't_alignment_point_candidates';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<AlignmentPointCandidateTableData> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('uuid')) {
+      context.handle(
+        _uuidMeta,
+        uuid.isAcceptableOrUnknown(data['uuid']!, _uuidMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_uuidMeta);
+    }
+    if (data.containsKey('name')) {
+      context.handle(
+        _nameMeta,
+        name.isAcceptableOrUnknown(data['name']!, _nameMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_nameMeta);
+    }
+    if (data.containsKey('source_note')) {
+      context.handle(
+        _sourceNoteMeta,
+        sourceNote.isAcceptableOrUnknown(data['source_note']!, _sourceNoteMeta),
+      );
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(
+        _createdAtMeta,
+        createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_createdAtMeta);
+    }
+    if (data.containsKey('last_updated_at')) {
+      context.handle(
+        _lastUpdatedAtMeta,
+        lastUpdatedAt.isAcceptableOrUnknown(
+          data['last_updated_at']!,
+          _lastUpdatedAtMeta,
+        ),
+      );
+    } else if (isInserting) {
+      context.missing(_lastUpdatedAtMeta);
+    }
+    if (data.containsKey('deleted_at')) {
+      context.handle(
+        _deletedAtMeta,
+        deletedAt.isAcceptableOrUnknown(data['deleted_at']!, _deletedAtMeta),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {uuid};
+  @override
+  AlignmentPointCandidateTableData map(
+    Map<String, dynamic> data, {
+    String? tablePrefix,
+  }) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return AlignmentPointCandidateTableData(
+      uuid: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}uuid'],
+      )!,
+      name: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}name'],
+      )!,
+      alignmentPoint: $AlignmentPointCandidateTableTable
+          .$converteralignmentPoint
+          .fromSql(
+            attachedDatabase.typeMapping.read(
+              DriftSqlType.string,
+              data['${effectivePrefix}alignment_point_json'],
+            )!,
+          ),
+      sourceNote: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}source_note'],
+      ),
+      createdAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}created_at'],
+      )!,
+      lastUpdatedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}last_updated_at'],
+      )!,
+      deletedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}deleted_at'],
+      ),
+    );
+  }
+
+  @override
+  $AlignmentPointCandidateTableTable createAlias(String alias) {
+    return $AlignmentPointCandidateTableTable(attachedDatabase, alias);
+  }
+
+  static TypeConverter<ConstellationDegree, String> $converteralignmentPoint =
+      const ConstellationDegreeConverter();
+}
+
+class AlignmentPointCandidateTableData extends DataClass
+    implements Insertable<AlignmentPointCandidateTableData> {
+  final String uuid;
+  final String name;
+  final ConstellationDegree alignmentPoint;
+  final String? sourceNote;
+  final DateTime createdAt;
+  final DateTime lastUpdatedAt;
+  final DateTime? deletedAt;
+  const AlignmentPointCandidateTableData({
+    required this.uuid,
+    required this.name,
+    required this.alignmentPoint,
+    this.sourceNote,
+    required this.createdAt,
+    required this.lastUpdatedAt,
+    this.deletedAt,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['uuid'] = Variable<String>(uuid);
+    map['name'] = Variable<String>(name);
+    {
+      map['alignment_point_json'] = Variable<String>(
+        $AlignmentPointCandidateTableTable.$converteralignmentPoint.toSql(
+          alignmentPoint,
+        ),
+      );
+    }
+    if (!nullToAbsent || sourceNote != null) {
+      map['source_note'] = Variable<String>(sourceNote);
+    }
+    map['created_at'] = Variable<DateTime>(createdAt);
+    map['last_updated_at'] = Variable<DateTime>(lastUpdatedAt);
+    if (!nullToAbsent || deletedAt != null) {
+      map['deleted_at'] = Variable<DateTime>(deletedAt);
+    }
+    return map;
+  }
+
+  AlignmentPointCandidateTableCompanion toCompanion(bool nullToAbsent) {
+    return AlignmentPointCandidateTableCompanion(
+      uuid: Value(uuid),
+      name: Value(name),
+      alignmentPoint: Value(alignmentPoint),
+      sourceNote: sourceNote == null && nullToAbsent
+          ? const Value.absent()
+          : Value(sourceNote),
+      createdAt: Value(createdAt),
+      lastUpdatedAt: Value(lastUpdatedAt),
+      deletedAt: deletedAt == null && nullToAbsent
+          ? const Value.absent()
+          : Value(deletedAt),
+    );
+  }
+
+  factory AlignmentPointCandidateTableData.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return AlignmentPointCandidateTableData(
+      uuid: serializer.fromJson<String>(json['uuid']),
+      name: serializer.fromJson<String>(json['name']),
+      alignmentPoint: serializer.fromJson<ConstellationDegree>(
+        json['alignmentPoint'],
+      ),
+      sourceNote: serializer.fromJson<String?>(json['sourceNote']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+      lastUpdatedAt: serializer.fromJson<DateTime>(json['lastUpdatedAt']),
+      deletedAt: serializer.fromJson<DateTime?>(json['deletedAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'uuid': serializer.toJson<String>(uuid),
+      'name': serializer.toJson<String>(name),
+      'alignmentPoint': serializer.toJson<ConstellationDegree>(alignmentPoint),
+      'sourceNote': serializer.toJson<String?>(sourceNote),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+      'lastUpdatedAt': serializer.toJson<DateTime>(lastUpdatedAt),
+      'deletedAt': serializer.toJson<DateTime?>(deletedAt),
+    };
+  }
+
+  AlignmentPointCandidateTableData copyWith({
+    String? uuid,
+    String? name,
+    ConstellationDegree? alignmentPoint,
+    Value<String?> sourceNote = const Value.absent(),
+    DateTime? createdAt,
+    DateTime? lastUpdatedAt,
+    Value<DateTime?> deletedAt = const Value.absent(),
+  }) => AlignmentPointCandidateTableData(
+    uuid: uuid ?? this.uuid,
+    name: name ?? this.name,
+    alignmentPoint: alignmentPoint ?? this.alignmentPoint,
+    sourceNote: sourceNote.present ? sourceNote.value : this.sourceNote,
+    createdAt: createdAt ?? this.createdAt,
+    lastUpdatedAt: lastUpdatedAt ?? this.lastUpdatedAt,
+    deletedAt: deletedAt.present ? deletedAt.value : this.deletedAt,
+  );
+  AlignmentPointCandidateTableData copyWithCompanion(
+    AlignmentPointCandidateTableCompanion data,
+  ) {
+    return AlignmentPointCandidateTableData(
+      uuid: data.uuid.present ? data.uuid.value : this.uuid,
+      name: data.name.present ? data.name.value : this.name,
+      alignmentPoint: data.alignmentPoint.present
+          ? data.alignmentPoint.value
+          : this.alignmentPoint,
+      sourceNote: data.sourceNote.present
+          ? data.sourceNote.value
+          : this.sourceNote,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+      lastUpdatedAt: data.lastUpdatedAt.present
+          ? data.lastUpdatedAt.value
+          : this.lastUpdatedAt,
+      deletedAt: data.deletedAt.present ? data.deletedAt.value : this.deletedAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('AlignmentPointCandidateTableData(')
+          ..write('uuid: $uuid, ')
+          ..write('name: $name, ')
+          ..write('alignmentPoint: $alignmentPoint, ')
+          ..write('sourceNote: $sourceNote, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('lastUpdatedAt: $lastUpdatedAt, ')
+          ..write('deletedAt: $deletedAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    uuid,
+    name,
+    alignmentPoint,
+    sourceNote,
+    createdAt,
+    lastUpdatedAt,
+    deletedAt,
+  );
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is AlignmentPointCandidateTableData &&
+          other.uuid == this.uuid &&
+          other.name == this.name &&
+          other.alignmentPoint == this.alignmentPoint &&
+          other.sourceNote == this.sourceNote &&
+          other.createdAt == this.createdAt &&
+          other.lastUpdatedAt == this.lastUpdatedAt &&
+          other.deletedAt == this.deletedAt);
+}
+
+class AlignmentPointCandidateTableCompanion
+    extends UpdateCompanion<AlignmentPointCandidateTableData> {
+  final Value<String> uuid;
+  final Value<String> name;
+  final Value<ConstellationDegree> alignmentPoint;
+  final Value<String?> sourceNote;
+  final Value<DateTime> createdAt;
+  final Value<DateTime> lastUpdatedAt;
+  final Value<DateTime?> deletedAt;
+  final Value<int> rowid;
+  const AlignmentPointCandidateTableCompanion({
+    this.uuid = const Value.absent(),
+    this.name = const Value.absent(),
+    this.alignmentPoint = const Value.absent(),
+    this.sourceNote = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.lastUpdatedAt = const Value.absent(),
+    this.deletedAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  AlignmentPointCandidateTableCompanion.insert({
+    required String uuid,
+    required String name,
+    required ConstellationDegree alignmentPoint,
+    this.sourceNote = const Value.absent(),
+    required DateTime createdAt,
+    required DateTime lastUpdatedAt,
+    this.deletedAt = const Value.absent(),
+    this.rowid = const Value.absent(),
+  }) : uuid = Value(uuid),
+       name = Value(name),
+       alignmentPoint = Value(alignmentPoint),
+       createdAt = Value(createdAt),
+       lastUpdatedAt = Value(lastUpdatedAt);
+  static Insertable<AlignmentPointCandidateTableData> custom({
+    Expression<String>? uuid,
+    Expression<String>? name,
+    Expression<String>? alignmentPoint,
+    Expression<String>? sourceNote,
+    Expression<DateTime>? createdAt,
+    Expression<DateTime>? lastUpdatedAt,
+    Expression<DateTime>? deletedAt,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (uuid != null) 'uuid': uuid,
+      if (name != null) 'name': name,
+      if (alignmentPoint != null) 'alignment_point_json': alignmentPoint,
+      if (sourceNote != null) 'source_note': sourceNote,
+      if (createdAt != null) 'created_at': createdAt,
+      if (lastUpdatedAt != null) 'last_updated_at': lastUpdatedAt,
+      if (deletedAt != null) 'deleted_at': deletedAt,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  AlignmentPointCandidateTableCompanion copyWith({
+    Value<String>? uuid,
+    Value<String>? name,
+    Value<ConstellationDegree>? alignmentPoint,
+    Value<String?>? sourceNote,
+    Value<DateTime>? createdAt,
+    Value<DateTime>? lastUpdatedAt,
+    Value<DateTime?>? deletedAt,
+    Value<int>? rowid,
+  }) {
+    return AlignmentPointCandidateTableCompanion(
+      uuid: uuid ?? this.uuid,
+      name: name ?? this.name,
+      alignmentPoint: alignmentPoint ?? this.alignmentPoint,
+      sourceNote: sourceNote ?? this.sourceNote,
+      createdAt: createdAt ?? this.createdAt,
+      lastUpdatedAt: lastUpdatedAt ?? this.lastUpdatedAt,
+      deletedAt: deletedAt ?? this.deletedAt,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (uuid.present) {
+      map['uuid'] = Variable<String>(uuid.value);
+    }
+    if (name.present) {
+      map['name'] = Variable<String>(name.value);
+    }
+    if (alignmentPoint.present) {
+      map['alignment_point_json'] = Variable<String>(
+        $AlignmentPointCandidateTableTable.$converteralignmentPoint.toSql(
+          alignmentPoint.value,
+        ),
+      );
+    }
+    if (sourceNote.present) {
+      map['source_note'] = Variable<String>(sourceNote.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    if (lastUpdatedAt.present) {
+      map['last_updated_at'] = Variable<DateTime>(lastUpdatedAt.value);
+    }
+    if (deletedAt.present) {
+      map['deleted_at'] = Variable<DateTime>(deletedAt.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('AlignmentPointCandidateTableCompanion(')
+          ..write('uuid: $uuid, ')
+          ..write('name: $name, ')
+          ..write('alignmentPoint: $alignmentPoint, ')
+          ..write('sourceNote: $sourceNote, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('lastUpdatedAt: $lastUpdatedAt, ')
+          ..write('deletedAt: $deletedAt, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -4641,6 +5143,8 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   );
   late final $UserSchoolProfileTableTable userSchoolProfileTable =
       $UserSchoolProfileTableTable(this);
+  late final $AlignmentPointCandidateTableTable alignmentPointCandidateTable =
+      $AlignmentPointCandidateTableTable(this);
   late final QiZhengSiYuPanDao qiZhengSiYuPanDao = QiZhengSiYuPanDao(
     this as AppDatabase,
   );
@@ -4648,6 +5152,8 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final UserSchoolProfileDao userSchoolProfileDao = UserSchoolProfileDao(
     this as AppDatabase,
   );
+  late final AlignmentPointCandidateDao alignmentPointCandidateDao =
+      AlignmentPointCandidateDao(this as AppDatabase);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -4661,6 +5167,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     geJuDeletionRecordsTable,
     geJuSchoolsTable,
     userSchoolProfileTable,
+    alignmentPointCandidateTable,
   ];
 }
 
@@ -7085,6 +7592,276 @@ typedef $$UserSchoolProfileTableTableProcessedTableManager =
       UserSchoolProfileTableData,
       PrefetchHooks Function()
     >;
+typedef $$AlignmentPointCandidateTableTableCreateCompanionBuilder =
+    AlignmentPointCandidateTableCompanion Function({
+      required String uuid,
+      required String name,
+      required ConstellationDegree alignmentPoint,
+      Value<String?> sourceNote,
+      required DateTime createdAt,
+      required DateTime lastUpdatedAt,
+      Value<DateTime?> deletedAt,
+      Value<int> rowid,
+    });
+typedef $$AlignmentPointCandidateTableTableUpdateCompanionBuilder =
+    AlignmentPointCandidateTableCompanion Function({
+      Value<String> uuid,
+      Value<String> name,
+      Value<ConstellationDegree> alignmentPoint,
+      Value<String?> sourceNote,
+      Value<DateTime> createdAt,
+      Value<DateTime> lastUpdatedAt,
+      Value<DateTime?> deletedAt,
+      Value<int> rowid,
+    });
+
+class $$AlignmentPointCandidateTableTableFilterComposer
+    extends Composer<_$AppDatabase, $AlignmentPointCandidateTableTable> {
+  $$AlignmentPointCandidateTableTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get uuid => $composableBuilder(
+    column: $table.uuid,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get name => $composableBuilder(
+    column: $table.name,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnWithTypeConverterFilters<
+    ConstellationDegree,
+    ConstellationDegree,
+    String
+  >
+  get alignmentPoint => $composableBuilder(
+    column: $table.alignmentPoint,
+    builder: (column) => ColumnWithTypeConverterFilters(column),
+  );
+
+  ColumnFilters<String> get sourceNote => $composableBuilder(
+    column: $table.sourceNote,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get createdAt => $composableBuilder(
+    column: $table.createdAt,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get lastUpdatedAt => $composableBuilder(
+    column: $table.lastUpdatedAt,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get deletedAt => $composableBuilder(
+    column: $table.deletedAt,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$AlignmentPointCandidateTableTableOrderingComposer
+    extends Composer<_$AppDatabase, $AlignmentPointCandidateTableTable> {
+  $$AlignmentPointCandidateTableTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get uuid => $composableBuilder(
+    column: $table.uuid,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get name => $composableBuilder(
+    column: $table.name,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get alignmentPoint => $composableBuilder(
+    column: $table.alignmentPoint,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get sourceNote => $composableBuilder(
+    column: $table.sourceNote,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get createdAt => $composableBuilder(
+    column: $table.createdAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get lastUpdatedAt => $composableBuilder(
+    column: $table.lastUpdatedAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get deletedAt => $composableBuilder(
+    column: $table.deletedAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$AlignmentPointCandidateTableTableAnnotationComposer
+    extends Composer<_$AppDatabase, $AlignmentPointCandidateTableTable> {
+  $$AlignmentPointCandidateTableTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get uuid =>
+      $composableBuilder(column: $table.uuid, builder: (column) => column);
+
+  GeneratedColumn<String> get name =>
+      $composableBuilder(column: $table.name, builder: (column) => column);
+
+  GeneratedColumnWithTypeConverter<ConstellationDegree, String>
+  get alignmentPoint => $composableBuilder(
+    column: $table.alignmentPoint,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get sourceNote => $composableBuilder(
+    column: $table.sourceNote,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<DateTime> get createdAt =>
+      $composableBuilder(column: $table.createdAt, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get lastUpdatedAt => $composableBuilder(
+    column: $table.lastUpdatedAt,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<DateTime> get deletedAt =>
+      $composableBuilder(column: $table.deletedAt, builder: (column) => column);
+}
+
+class $$AlignmentPointCandidateTableTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $AlignmentPointCandidateTableTable,
+          AlignmentPointCandidateTableData,
+          $$AlignmentPointCandidateTableTableFilterComposer,
+          $$AlignmentPointCandidateTableTableOrderingComposer,
+          $$AlignmentPointCandidateTableTableAnnotationComposer,
+          $$AlignmentPointCandidateTableTableCreateCompanionBuilder,
+          $$AlignmentPointCandidateTableTableUpdateCompanionBuilder,
+          (
+            AlignmentPointCandidateTableData,
+            BaseReferences<
+              _$AppDatabase,
+              $AlignmentPointCandidateTableTable,
+              AlignmentPointCandidateTableData
+            >,
+          ),
+          AlignmentPointCandidateTableData,
+          PrefetchHooks Function()
+        > {
+  $$AlignmentPointCandidateTableTableTableManager(
+    _$AppDatabase db,
+    $AlignmentPointCandidateTableTable table,
+  ) : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$AlignmentPointCandidateTableTableFilterComposer(
+                $db: db,
+                $table: table,
+              ),
+          createOrderingComposer: () =>
+              $$AlignmentPointCandidateTableTableOrderingComposer(
+                $db: db,
+                $table: table,
+              ),
+          createComputedFieldComposer: () =>
+              $$AlignmentPointCandidateTableTableAnnotationComposer(
+                $db: db,
+                $table: table,
+              ),
+          updateCompanionCallback:
+              ({
+                Value<String> uuid = const Value.absent(),
+                Value<String> name = const Value.absent(),
+                Value<ConstellationDegree> alignmentPoint =
+                    const Value.absent(),
+                Value<String?> sourceNote = const Value.absent(),
+                Value<DateTime> createdAt = const Value.absent(),
+                Value<DateTime> lastUpdatedAt = const Value.absent(),
+                Value<DateTime?> deletedAt = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => AlignmentPointCandidateTableCompanion(
+                uuid: uuid,
+                name: name,
+                alignmentPoint: alignmentPoint,
+                sourceNote: sourceNote,
+                createdAt: createdAt,
+                lastUpdatedAt: lastUpdatedAt,
+                deletedAt: deletedAt,
+                rowid: rowid,
+              ),
+          createCompanionCallback:
+              ({
+                required String uuid,
+                required String name,
+                required ConstellationDegree alignmentPoint,
+                Value<String?> sourceNote = const Value.absent(),
+                required DateTime createdAt,
+                required DateTime lastUpdatedAt,
+                Value<DateTime?> deletedAt = const Value.absent(),
+                Value<int> rowid = const Value.absent(),
+              }) => AlignmentPointCandidateTableCompanion.insert(
+                uuid: uuid,
+                name: name,
+                alignmentPoint: alignmentPoint,
+                sourceNote: sourceNote,
+                createdAt: createdAt,
+                lastUpdatedAt: lastUpdatedAt,
+                deletedAt: deletedAt,
+                rowid: rowid,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$AlignmentPointCandidateTableTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $AlignmentPointCandidateTableTable,
+      AlignmentPointCandidateTableData,
+      $$AlignmentPointCandidateTableTableFilterComposer,
+      $$AlignmentPointCandidateTableTableOrderingComposer,
+      $$AlignmentPointCandidateTableTableAnnotationComposer,
+      $$AlignmentPointCandidateTableTableCreateCompanionBuilder,
+      $$AlignmentPointCandidateTableTableUpdateCompanionBuilder,
+      (
+        AlignmentPointCandidateTableData,
+        BaseReferences<
+          _$AppDatabase,
+          $AlignmentPointCandidateTableTable,
+          AlignmentPointCandidateTableData
+        >,
+      ),
+      AlignmentPointCandidateTableData,
+      PrefetchHooks Function()
+    >;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -7116,5 +7893,11 @@ class $AppDatabaseManager {
       $$UserSchoolProfileTableTableTableManager(
         _db,
         _db.userSchoolProfileTable,
+      );
+  $$AlignmentPointCandidateTableTableTableManager
+  get alignmentPointCandidateTable =>
+      $$AlignmentPointCandidateTableTableTableManager(
+        _db,
+        _db.alignmentPointCandidateTable,
       );
 }
