@@ -12,8 +12,10 @@ class PanelSystemCheck {
 }
 
 class PanelSystemResolver {
-  PanelSystemCheck validate(BasePanelConfig config,
-      {Set<String> availableAssetKeys = const {}}) {
+  PanelSystemCheck validate(
+    BasePanelConfig config, {
+    Set<String> availableAssetKeys = const {},
+  }) {
     final warnings = <String>[];
     BasePanelConfig? fix;
     final coord = config.celestialCoordinateSystem;
@@ -62,6 +64,38 @@ class PanelSystemResolver {
         warnings.add('当前坐标×星盘×星宿组合暂无对应资产（$key）');
       }
     }
+    // ⑦ 宫位划分方案总和与周天不一致时提示；仅提示，不自动修正史料口径。
+    final houseTotal = _houseDivisionTotal(
+      config.houseDivisionSystem,
+      is365 ? EnumZhouTianModel.degree36525.totalDegree : 360.0,
+    );
+    final targetTotal = is365
+        ? EnumZhouTianModel.degree36525.totalDegree
+        : 360.0;
+    final diff = (houseTotal - targetTotal).abs();
+    if (diff > 0.05) {
+      warnings.add(
+        '当前宫位划分方案（${config.houseDivisionSystem.name}）总和 ${houseTotal.toStringAsFixed(4)}° '
+        '与周天 ${targetTotal.toStringAsFixed(4)}° 相差 ${diff.toStringAsFixed(4)}°，'
+        '盘面首尾宫位可能出现缝隙，请确认史料口径。',
+      );
+    }
     return PanelSystemCheck(warnings.isEmpty, warnings, fix);
+  }
+
+  double _houseDivisionTotal(HouseDivisionSystem system, double targetTotal) {
+    switch (system) {
+      case HouseDivisionSystem.equal:
+      case HouseDivisionSystem.equatorialEqual:
+      case HouseDivisionSystem.unequal:
+        return targetTotal;
+      case HouseDivisionSystem.equatorialFourZheng:
+        return 31.312 * 4 + 30.0 * 8;
+      case HouseDivisionSystem.equatorialSunMoon:
+      case HouseDivisionSystem.equatorialZiWu:
+        return 32.625 * 2 + 30.0 * 10;
+      case HouseDivisionSystem.equatorialZiWuSanChenTongZai:
+        return 30.4380 * 2 + 30.4979 * 10;
+    }
   }
 }

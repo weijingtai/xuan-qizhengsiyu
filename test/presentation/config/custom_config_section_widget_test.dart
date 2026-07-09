@@ -32,8 +32,7 @@ void main() {
     expect(find.text('似黄道恒星制'), findsOneWidget);
   });
 
-  testWidgets('出现周天制与黄赤道换算/起点/偏移量/星宿类型卡标题',
-      (WidgetTester tester) async {
+  testWidgets('出现周天制与黄赤道换算/起点/偏移量/星宿类型卡标题', (WidgetTester tester) async {
     await tester.pumpWidget(_buildTestWidget());
     await tester.pumpAndSettle();
 
@@ -42,15 +41,34 @@ void main() {
     expect(find.text('星宿类型'), findsOneWidget);
   });
 
+  testWidgets('出现宫位划分控件并包含三辰通载子午不等宫', (WidgetTester tester) async {
+    await tester.pumpWidget(_buildTestWidget());
+    await tester.pumpAndSettle();
+
+    expect(find.text('宫位划分'), findsOneWidget);
+
+    final dropdown = find.byWidgetPredicate(
+      (w) => w is DropdownButtonFormField<HouseDivisionSystem>,
+    );
+    await tester.ensureVisible(dropdown);
+    await tester.pumpAndSettle();
+    await tester.tap(dropdown);
+    await tester.pumpAndSettle();
+
+    expect(find.text('三辰通载子午'), findsWidgets);
+  });
+
   testWidgets('选推变黄道后下拉含弧矢割圆术选项', (WidgetTester tester) async {
     // 先 pump 默认 widget，再 tap 古黄道以触发联动推荐默认
-    await tester.pumpWidget(MaterialApp(
-      home: Scaffold(body: SingleChildScrollView(
-        child: CustomConfigSection(
-          onConfigChanged: (_) {},
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: SingleChildScrollView(
+            child: CustomConfigSection(onConfigChanged: (_) {}),
+          ),
         ),
-      )),
-    ));
+      ),
+    );
     await tester.pumpAndSettle();
 
     // 点选 似黄道恒星制 → 联动 _autoFillRecommendedDefaults 填 tuiBianHuangDao
@@ -62,15 +80,15 @@ void main() {
 
     // 打开推变黄道算法下拉
     final diffDropdown = find.byWidgetPredicate(
-        (w) => w is DropdownButtonFormField<HuangChiDaoDiffType>);
+      (w) => w is DropdownButtonFormField<HuangChiDaoDiffType>,
+    );
     await tester.ensureVisible(diffDropdown);
     await tester.pumpAndSettle();
     await tester.tap(diffDropdown);
     await tester.pumpAndSettle();
 
     // 下拉菜单中应有弧矢割圆术
-    expect(find.text('弧矢割圆术'), findsOneWidget,
-        reason: '推变黄道算法子选项中应包含弧矢割圆术');
+    expect(find.text('弧矢割圆术'), findsOneWidget, reason: '推变黄道算法子选项中应包含弧矢割圆术');
   });
 
   testWidgets('矛盾组合（黄道 + 365.25）出警告条', (WidgetTester tester) async {
@@ -84,14 +102,18 @@ void main() {
       islifeGongBySunRealTimeLocation: true,
       zhouTianModelOverride: EnumZhouTianModel.degree36525,
     );
-    await tester.pumpWidget(MaterialApp(
-      home: Scaffold(body: SingleChildScrollView(
-        child: CustomConfigSection(
-          initialConfig: cfg,
-          onConfigChanged: (_) {},
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: SingleChildScrollView(
+            child: CustomConfigSection(
+              initialConfig: cfg,
+              onConfigChanged: (_) {},
+            ),
+          ),
         ),
-      )),
-    ));
+      ),
+    );
     await tester.pumpAndSettle();
 
     // 警告条应包含冲突文案

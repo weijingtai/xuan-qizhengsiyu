@@ -104,6 +104,7 @@ class ZhouTianModelManager {
       offsetTier: config.offsetTier,
       constellationOffsetDeg: config.constellationOffsetDeg,
       starInnDegreeOverrides: config.starInnDegreeOverrides,
+      houseDivisionSystemOverride: config.houseDivisionSystem,
     );
   }
 

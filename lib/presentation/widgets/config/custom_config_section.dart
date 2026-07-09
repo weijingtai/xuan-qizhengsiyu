@@ -70,6 +70,7 @@ class _CustomConfigSectionState extends State<CustomConfigSection> {
   late ConstellationOffsetTier? _offsetTier;
   late double _constellationOffsetDeg;
   late ConstellationSystemType _constellationSystemType;
+  late HouseDivisionSystem _houseDivisionSystem;
   late Map<Enum28Constellations, double>? _starInnDegreeOverrides;
 
   // 是否显示神煞
@@ -118,6 +119,8 @@ class _CustomConfigSectionState extends State<CustomConfigSection> {
     _constellationSystemType =
         widget.initialConfig?.constellationSystemType ??
             ConstellationSystemType.Classical;
+    _houseDivisionSystem =
+        widget.initialConfig?.houseDivisionSystem ?? HouseDivisionSystem.equal;
     _classicBook = ["七政四余星道要诀"]; // 暂时硬编码，因为PanelConfig暂时不支持
     _starInnDegreeOverrides = widget.initialConfig?.starInnDegreeOverrides != null
         ? Map.from(widget.initialConfig!.starInnDegreeOverrides!)
@@ -136,7 +139,7 @@ class _CustomConfigSectionState extends State<CustomConfigSection> {
       celestialCoordinateSystem: _coordinateSystem,
       panelSystemType: _panelSystem,
       // Fields we don't control, take from base
-      houseDivisionSystem: base.houseDivisionSystem,
+      houseDivisionSystem: _houseDivisionSystem,
       constellationSystemType: _constellationSystemType,
       settleLifeType: base.settleLifeType,
       settleBodyType: base.settleBodyType,
@@ -761,6 +764,39 @@ class _CustomConfigSectionState extends State<CustomConfigSection> {
                   },
                 ),
               ],
+              const SizedBox(height: AppTheme.spacing16),
+              Text(
+                '宫位划分',
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: AppTheme.secondaryText,
+                    ),
+              ),
+              const SizedBox(height: AppTheme.spacing8),
+              DropdownButtonFormField<HouseDivisionSystem>(
+                value: _houseDivisionSystem,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  contentPadding: const EdgeInsets.symmetric(
+                    horizontal: AppTheme.spacing16,
+                    vertical: AppTheme.spacing12,
+                  ),
+                  helperText: _houseDivisionSystem.description,
+                ),
+                items: HouseDivisionSystem.values
+                    .map((system) => DropdownMenuItem(
+                          value: system,
+                          child: Text(system.name),
+                        ))
+                    .toList(),
+                onChanged: (value) {
+                  setState(() {
+                    _houseDivisionSystem = value!;
+                  });
+                  _updateConfig();
+                },
+              ),
             ],
           ),
         ),
@@ -1175,8 +1211,7 @@ class _CustomConfigSectionState extends State<CustomConfigSection> {
   BasePanelConfig _currentConfig() {
     return BasePanelConfig(
       celestialCoordinateSystem: _coordinateSystem,
-      houseDivisionSystem:
-          widget.initialConfig?.houseDivisionSystem ?? HouseDivisionSystem.equal,
+      houseDivisionSystem: _houseDivisionSystem,
       panelSystemType: _panelSystem,
       constellationSystemType: _constellationSystemType,
       settleLifeType: widget.initialConfig?.settleLifeType ??
