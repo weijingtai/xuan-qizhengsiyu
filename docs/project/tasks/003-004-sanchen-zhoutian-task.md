@@ -21,12 +21,12 @@
 
 > 【覆盖重写区】接手本分支先读这里
 
-- 刚完成: 2-D d1 — GeJu 自建数据调研 SOP 写毕(`docs/project/tasks/2D-geju-research-sop.md`),精确指向 Drift(`app_database.dart`/`daos/ge_ju_dao.dart`/`tables/ge_ju_tables.dart`)+ JSON(`ge_ju_file_storage_io.dart`/`ge_ju_legacy_migrator*`)两条链路,并纳入 `user_school_profile` 作第二参照样本
-- 已落地(前序): 2-A ①层几何库 + 2-B ②层语义适配/applyOverrides 覆写(commit 6a94707)已进历史
-- 半成品在制(非本轮产物, 未提交): 2-C ③-甲 `lib/presentation/widgets/calibration/star_xiu_drag_calibration.dart`(163行) + 同名 test(232行) — 留给 2-C 执行者自行落盘验证,本轮未 add
-- 下一步: 把 SOP 交 OpenCode 执行取数 → 产出 `2D-geju-research-findings.md`
-- 微观意图: 取数报告回交后, Claude Code 据现状做 Drift/JSON 选型 + 定候选对齐点表接口(2-D d3);顺手核对 `user_school_profile` 能否直接当轻量自建表模板
-- 验证: 本轮纯文档无需跑测试;2-C calibration 待其执行者 `flutter test test/presentation/widgets/calibration/`
+- 刚完成: 2-D d3 — 收到 OpenCode 取数报告(`2D-geju-research-findings.md`)后做选型决策: **Drift + user_school_profile 模板**,已定表/Converter/DAO 接口 + 8 步实现工单(`2D-geju-selection-and-interface.md`),并经 spec-task-executor + code-review-expert 两角色交叉审查修订(采纳 4 真问题,驳回 3 假阳性)
+- 已落地(前序): 2-A ①层几何库 + 2-B ②层语义适配/applyOverrides(6a94707);2-C ③-甲 StarXiuDragCalibration 拖拽组件(3a191ec);2-D d1 SOP + findings 取数
+- 下一步: 把 `2D-geju-selection-and-interface.md` §3 工单交 OpenCode 做最小实现(建表+Converter+DAO+注册+迁移 4→5+build_runner+DAO 往返测试)
+- 微观意图: OpenCode 建表回来后进 2-E(集成+Widget 测试),把 onPanEnd 的两个保存动作接到新 DAO;顺手核对 alignmentPointOverride 与 constellationOffsetDeg 同时非空时的优先级(设计 004 §9 建议 override 优先)
+- 验证: 本轮纯文档决策无需跑测试;工单交付后 OpenCode 跑 `flutter analyze` + DAO 往返测试
+- 审查教训: spec-task-executor 本轮 0 工具调用致 3 处断言全错,其结论已回源码逐条证伪,详见决策文档 §5
 
 ---
 
@@ -129,6 +129,9 @@
 | ❌ 不顺手处理 `constellationOffsetDeg` 没施加到 `alignmentPointAtConstellation` 的事 | 改 `applyOverrides()` 时留意别引入冲突,但本次不修;两个 override 同时非空的优先级留给实施计划明确(建议 `alignmentPointOverride` 优先) | 004 §9 |
 | ❌ 不直接挖 chart-ui 包的接口手势支持现状 | 不在可见 checkout 范围内;①②层的可迁移性设计基于"尽量减少假设"的保守策略 | 004 §9 |
 | 📋 2-D 调研 SOP 把 `user_school_profile` 定为第二参照样本 | 它是"一条命名的轻量用户自建记录",形态比 GeJu 规则更贴近候选对齐点(候选名+ConstellationDegree+时间+备注),可作 Drift/JSON 选型的第二对照锚 | 2026-07-09 SOP 撰写 |
+| ✅ 2-D 候选对齐点存储选 Drift,以 user_school_profile 为模板 | GeJu 的 JSON 通道已废弃(单向迁 Drift 后归档),新数据一律走 Drift;user_school_profile 是同构轻量记录范式;Web 兼容白拿。表 `t_alignment_point_candidates`,字段 uuid/name/alignment_point_json/source_note/created_at/last_updated_at/deleted_at,schemaVersion 4→5。详见 `2D-geju-selection-and-interface.md` | 2026-07-09 2D-findings Q1/Q5/Q6 |
+| ✅ 时间字段用 last_updated_at(随 user_school_profile) 而非 updated_at(GeJu) | 让 DAO listAll 排序可原样照抄 user_school_profile_dao,减少照抄出错 | 2026-07-09 两角色审查 R1 |
+| 📋 两角色交叉审查裁定:code-review 全属实,spec-task-executor 0 工具调用 3 处断言全错已驳回 | 跨角色审查结论必须回源码核实,工具调用数是可信度强信号 | 2026-07-09 审查修订记录 |
 
 ### 待补测试规格(004 §8 已细化)
 - ①层单元测试:跨 0°/360° 边界
