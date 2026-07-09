@@ -1,46 +1,122 @@
 {
-      "systemType": "黄道制",
-      "starInnType": "古宿",
-      "starInnSystem": "推黄术",
-      "epochCorrection": "宋·开禧历",
-      "totalDegree": 360.0,
-      "twelvGongDegreeMap": {
-        "子": 30.0,
-        "丑": 30.0,
-        "寅": 30.0,
-        "卯": 30.0,
-        "辰": 30.0,
-        "巳": 30.0,
-        "午": 30.0,
-        "未": 30.0,
-        "申": 30.0,
-        "酉": 30.0,
-        "戌": 30.0,
-        "亥": 30.0
-    },
-    "starInnDegreeMap": {
-      "角":11,"亢":11,"氐":18,"房":5,"心":8,"尾":15,"箕":9,
-      "斗":24,"牛":8,"女":11,"虚":10,"危":20,"室":16,"壁":13,
-      "奎":11,"娄":13,"胃":12,"昴":9,"毕":15,"觜":1,"参":11,
-      "井":31,"鬼":5,"柳":17,"星":8,"张":18,"翼":17,"轸":13
-    },
-    "alignmentPointAtStarInn": {
-      "starInn": "危宿",
-      "degree": 0.0
-    },
-    "alignmentPointAtGong": {
-      "gong": "子",
-      "degree": 0.0
-    },
-      "zeroPointJieQi": "立春",
-      "zeroPointAtStarInn": {"starInn": "危宿", "degree": 0.0},
-      "zeroPointAtGong": {"gong": "子宫", "degree": 0.0},
-      "celestialLongitude": 0.0,
-      "rightAscension": 240.5,
-      "zeroPointOffsetToNow": 28.0,
-      "注释": [
-        "历法参数依据《汉书·律历志》核心数据：日法81、闰法19、统法1539[2,6](@ref)",
-        "周天度数采用'周天五十六万二千一百二十'换算为365.25°[6,8](@ref)",
-        "宿度划分遵循'四象-七政'体系：东方苍龙属木、北方玄武属水等[1,7](@ref)"
-      ]
-    }
+  "systemType": "黄道制",
+  "constellationSystemType": "古宿制",
+  "panelSystemType": "恒星制",
+  "epochCorrection": "宋·三辰通载（钱如璧传）",
+  "totalDegree": 365.255,
+  "gongOrder": [
+    "戌",
+    "酉",
+    "申",
+    "未",
+    "午",
+    "巳",
+    "辰",
+    "卯",
+    "寅",
+    "丑",
+    "子",
+    "亥"
+  ],
+  "starInnOrder": [
+    "角",
+    "亢",
+    "氐",
+    "房",
+    "心",
+    "尾",
+    "箕",
+    "斗",
+    "牛",
+    "女",
+    "虚",
+    "危",
+    "室",
+    "壁",
+    "奎",
+    "娄",
+    "胃",
+    "昴",
+    "毕",
+    "觜",
+    "参",
+    "井",
+    "鬼",
+    "柳",
+    "星",
+    "张",
+    "翼",
+    "轸"
+  ],
+  "gongDegreeSeq": [
+    { "gong": "子", "degree": 30.438 },
+    { "gong": "丑", "degree": 30.4379 },
+    { "gong": "寅", "degree": 30.4379 },
+    { "gong": "卯", "degree": 30.4379 },
+    { "gong": "辰", "degree": 30.4379 },
+    { "gong": "巳", "degree": 30.4379 },
+    { "gong": "午", "degree": 30.438 },
+    { "gong": "未", "degree": 30.4379 },
+    { "gong": "申", "degree": 30.4379 },
+    { "gong": "酉", "degree": 30.4379 },
+    { "gong": "戌", "degree": 30.4379 },
+    { "gong": "亥", "degree": 30.4379 }
+  ],
+  "starInnDegreeSeq": [
+    { "constellation": "角", "degree": 13.0 },
+    { "constellation": "亢", "degree": 9.0 },
+    { "constellation": "氐", "degree": 16.0 },
+    { "constellation": "房", "degree": 5.0 },
+    { "constellation": "心", "degree": 5.0 },
+    { "constellation": "尾", "degree": 17.0 },
+    { "constellation": "箕", "degree": 10.0 },
+    { "constellation": "斗", "degree": 24.0 },
+    { "constellation": "牛", "degree": 7.0 },
+    { "constellation": "女", "degree": 11.5 },
+    { "constellation": "虚", "degree": 10.255 },
+    { "constellation": "危", "degree": 18.0 },
+    { "constellation": "室", "degree": 17.0 },
+    { "constellation": "壁", "degree": 10.0 },
+    { "constellation": "奎", "degree": 17.5 },
+    { "constellation": "娄", "degree": 13.0 },
+    { "constellation": "胃", "degree": 14.5 },
+    { "constellation": "昴", "degree": 11.0 },
+    { "constellation": "毕", "degree": 16.0 },
+    { "constellation": "觜", "degree": 1.0 },
+    { "constellation": "参", "degree": 9.0 },
+    { "constellation": "井", "degree": 30.0 },
+    { "constellation": "鬼", "degree": 3.0 },
+    { "constellation": "柳", "degree": 14.0 },
+    { "constellation": "星", "degree": 7.0 },
+    { "constellation": "张", "degree": 19.0 },
+    { "constellation": "翼", "degree": 19.0 },
+    { "constellation": "轸", "degree": 18.5 }
+  ],
+  "alignmentPointAtConstellation": {
+    "constellation": "虚",
+    "degree": 1.6275
+  },
+  "alignmentPointAtGong": {
+    "gong": "子",
+    "degree": 0.0
+  },
+  "zeroPointJieQi": "春分",
+  "zeroPointAtConstellation": {
+    "constellation": "虚",
+    "degree": 1.6275
+  },
+  "zeroPointAtGong": {
+    "gong": "子",
+    "degree": 0.0
+  },
+  "celestialLongitude": 0.0,
+  "rightAscension": 0.0,
+  "zeroPointOffsetToNow": 0.0,
+  "specificationList": [
+    "出处：《三辰通载》三十卷，宋·钱如璧传，影宋抄本 PDF（用户提供）。黄道恒星制、古宿。",
+    "锚点（1-D 定案）：子宫0° = 虚宿 1.6275°；戌宫0° = 奎宿 7.2484°。周天 365.255°，等宫制（子午宫 30.438°、其余宫 30.4379°，合计 365.255°）。",
+    "二十八宿黄道宿度由原表十二宫分段表反推，求和 = 365.255°，且与'周天黄道二十八宿求度数'歌诀逐字吻合（室17、奎17.5、娄13、胃14.5、井30、张翼各19、危18、虚10.255…）。系原表 decimalized，非现代均分反推。",
+    "岁差参数 zeroPointOffsetToNow 暂置 0.0（未由本次史料坐实，接入排盘前需另行计算）。",
+    "考订与互证详见 docs/project/tasks/1D-sanchen-primary-source.md、1D-claude-analysis.md。"
+  ]
+}
