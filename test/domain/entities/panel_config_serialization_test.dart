@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:qizhengsiyu/domain/entities/models/panel_config.dart';
+import 'package:qizhengsiyu/domain/entities/models/naming_degree_pair.dart';
 import 'package:qizhengsiyu/domain/entities/models/projection_config.dart';
 import 'package:qizhengsiyu/enums/enum_zhou_tian_model.dart';
 import 'package:qizhengsiyu/enums/enum_panel_system_type.dart';
@@ -108,6 +109,25 @@ void main() {
       expect(round.offsetTier, ConstellationOffsetTier.adjusted);
       expect(round.constellationOffsetDeg, 14.0);
       expect(round.starInnDegreeOverrides?[Enum28Constellations.Jiao_Mu_Jiao], 12.3);
+    });
+
+    test('alignmentPointOverride 往返保真', () {
+      final original = BasePanelConfig.defaultBasicPanelConfig().copyWith(
+        alignmentPointOverride: ConstellationDegree(
+            constellation: Enum28Constellations.Xu_Ri_Shu, degree: 6.0),
+      );
+      final json = _roundtrip(original);
+      final restored = BasePanelConfig.fromJson(json);
+      expect(restored.alignmentPointOverride?.constellation,
+          Enum28Constellations.Xu_Ri_Shu);
+      expect(restored.alignmentPointOverride?.degree, 6.0);
+    });
+
+    test('默认配置 alignmentPointOverride 为 null', () {
+      expect(BasePanelConfig.defaultBasicPanelConfig().alignmentPointOverride,
+          isNull);
+      expect(
+          PanelConfig.defaultPanelConfig().alignmentPointOverride, isNull);
     });
 
     test('旧 JSON 缺 A层新字段 → null，不抛异常', () {

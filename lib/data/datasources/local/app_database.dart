@@ -9,12 +9,16 @@ import '../../../domain/entities/models/panel_config.dart';
 import 'daos/qizhengsiyu_pan_dao.dart';
 import 'daos/ge_ju_dao.dart';
 import 'daos/user_school_profile_dao.dart';
+import 'daos/alignment_point_candidate_dao.dart';
 import 'tables/qizhengsiyu_pan_table.dart';
 import 'tables/ge_ju_tables.dart';
 import 'tables/user_school_profile_table.dart';
+import 'tables/alignment_point_candidate_table.dart';
+import '../../../domain/entities/models/naming_degree_pair.dart';
 import '../../models/converters/divination_datetime_converter.dart';
 import '../../models/converters/panel_config_converter.dart';
 import '../../models/converters/panel_model_converter.dart';
+import '../../models/converters/constellation_degree_converter.dart';
 
 part 'app_database.g.dart';
 
@@ -28,8 +32,9 @@ part 'app_database.g.dart';
     GeJuDeletionRecordsTable,
     GeJuSchoolsTable,
     UserSchoolProfileTable,
+    AlignmentPointCandidateTable,
   ],
-  daos: [QiZhengSiYuPanDao, GeJuDao, UserSchoolProfileDao],
+  daos: [QiZhengSiYuPanDao, GeJuDao, UserSchoolProfileDao, AlignmentPointCandidateDao],
 )
 class AppDatabase extends _$AppDatabase {
   AppDatabase._([QueryExecutor? e])
@@ -64,7 +69,7 @@ class AppDatabase extends _$AppDatabase {
   factory AppDatabase.forTesting(QueryExecutor e) => AppDatabase._(e);
 
   @override
-  int get schemaVersion => 4;
+  int get schemaVersion => 5;
 
   @override
   MigrationStrategy get migration {
@@ -88,6 +93,10 @@ class AppDatabase extends _$AppDatabase {
         if (from < 4) {
           // v4: 用户自定义流派档案表
           await m.createTable(userSchoolProfileTable);
+        }
+        if (from < 5) {
+          // v5: 用户自建候选对齐点表
+          await m.createTable(alignmentPointCandidateTable);
         }
       },
     );

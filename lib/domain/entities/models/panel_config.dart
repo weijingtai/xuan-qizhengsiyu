@@ -11,6 +11,7 @@ import '../../../enums/enum_zero_point_ref.dart';
 import '../../../enums/enum_constellation_offset_tier.dart';
 import 'package:metaphysics_core/enums.dart';
 import 'fate_dong_wei_da_xian.dart';
+import 'naming_degree_pair.dart';
 import 'projection_config.dart';
 
 part 'panel_config.g.dart';
@@ -93,6 +94,11 @@ class BasePanelConfig {
   )
   Map<Enum28Constellations, double>? starInnDegreeOverrides;
 
+  /// 拖拽校准得到的对齐点覆写（宿+度数绝对值）；null=完全沿用资产自带的
+  /// alignmentPointAtConstellation。非空时经 ZhouTianModel.applyOverrides()
+  /// 同时替换 alignmentPointAtConstellation 与 zeroPointAtConstellation。
+  ConstellationDegree? alignmentPointOverride;
+
   BasePanelConfig({
     /// 星道制式
     required this.celestialCoordinateSystem,
@@ -128,6 +134,7 @@ class BasePanelConfig {
     this.offsetTier,
     this.constellationOffsetDeg,
     this.starInnDegreeOverrides,
+    this.alignmentPointOverride,
   });
 
   // copy with
@@ -164,6 +171,7 @@ class BasePanelConfig {
     ConstellationOffsetTier? offsetTier,
     double? constellationOffsetDeg,
     Map<Enum28Constellations, double>? starInnDegreeOverrides,
+    ConstellationDegree? alignmentPointOverride,
   }) {
     return BasePanelConfig(
       celestialCoordinateSystem:
@@ -190,6 +198,7 @@ class BasePanelConfig {
       offsetTier: offsetTier ?? this.offsetTier,
       constellationOffsetDeg: constellationOffsetDeg ?? this.constellationOffsetDeg,
       starInnDegreeOverrides: starInnDegreeOverrides ?? this.starInnDegreeOverrides,
+      alignmentPointOverride: alignmentPointOverride ?? this.alignmentPointOverride,
     );
   }
 
@@ -222,7 +231,8 @@ class BasePanelConfig {
         zeroPointRef: null,
         offsetTier: null,
         constellationOffsetDeg: null,
-        starInnDegreeOverrides: null);
+        starInnDegreeOverrides: null,
+        alignmentPointOverride: null);
   }
 }
 
@@ -267,6 +277,7 @@ class PanelConfig extends BasePanelConfig {
     super.offsetTier,
     super.constellationOffsetDeg,
     super.starInnDegreeOverrides,
+    super.alignmentPointOverride,
   });
 
   factory PanelConfig.fromJson(Map<String, dynamic> json) =>
@@ -297,6 +308,7 @@ class PanelConfig extends BasePanelConfig {
       offsetTier: null,
       constellationOffsetDeg: null,
       starInnDegreeOverrides: null,
+      alignmentPointOverride: null,
     );
   }
 }
