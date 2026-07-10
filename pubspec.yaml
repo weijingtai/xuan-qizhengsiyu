@@ -41,6 +41,7 @@ dependencies:
   equatable: ^2.0.8
   json_serializable: ^6.12.0
   json_annotation: ^4.11.0
+  freezed_annotation: ^2.4.4
   flutter_city_picker: ^2.2.0
   board_datetime_picker: 2.8.5
   flutter_sliding_toast: ^1.5.3
