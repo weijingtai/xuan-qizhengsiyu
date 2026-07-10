@@ -159,6 +159,7 @@ const _$HouseDivisionSystemEnumMap = {
   HouseDivisionSystem.equatorialFourZheng: '四正',
   HouseDivisionSystem.equatorialSunMoon: '日月',
   HouseDivisionSystem.equatorialZiWu: 'equatorialZiWu',
+  HouseDivisionSystem.equatorialZiWuSanChenTongZai: '三辰通载子午',
 };
 
 const _$PanelSystemTypeEnumMap = {

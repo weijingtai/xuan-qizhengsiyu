@@ -25,14 +25,18 @@ void main() {
     final cfg = BasePanelConfig.defaultBasicPanelConfig().copyWith(
       celestialCoordinateSystem: CelestialCoordinateSystem.Ecliptic,
       projectionOverride: ProjectionConfig(
-          strategy: MappingStrategy.tuiBianHuangDao,
-          huangChiDaoDiffType: HuangChiDaoDiffType.shoushi),
+        strategy: MappingStrategy.tuiBianHuangDao,
+        huangChiDaoDiffType: HuangChiDaoDiffType.shoushi,
+      ),
     );
     expect(r.validate(cfg).isCoherent, isFalse);
   });
 
   test('默认 config = 一致、无警告', () {
-    expect(r.validate(BasePanelConfig.defaultBasicPanelConfig()).isCoherent, isTrue);
+    expect(
+      r.validate(BasePanelConfig.defaultBasicPanelConfig()).isCoherent,
+      isTrue,
+    );
   });
 
   test('规则④：回归制 + 冬至起点 → 语义提示', () {
@@ -51,5 +55,20 @@ void main() {
     );
     final c = r.validate(cfg);
     expect(c.warnings.any((w) => w.contains('回归制通常配春分')), isFalse);
+  });
+
+  test('规则⑦：三辰通载子午不等宫总和偏离周天 → warning-only', () {
+    final cfg = BasePanelConfig.defaultBasicPanelConfig().copyWith(
+      celestialCoordinateSystem: CelestialCoordinateSystem.SkyEquatorial,
+      zhouTianModelOverride: EnumZhouTianModel.degree36525,
+      houseDivisionSystem: HouseDivisionSystem.equatorialZiWuSanChenTongZai,
+    );
+
+    final c = r.validate(cfg);
+
+    expect(c.warnings.any((w) => w.contains('365.855')), isTrue);
+    expect(c.warnings.any((w) => w.contains('365.2575')), isTrue);
+    expect(c.warnings.any((w) => w.contains('0.5975')), isTrue);
+    expect(c.suggestedFix, isNull, reason: '史料偏差只提示，不自动改用户选择');
   });
 }

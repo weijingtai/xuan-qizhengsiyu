@@ -105,7 +105,10 @@ enum HouseDivisionSystem {
   equatorialSunMoon(
       "日月", "午未宫为32.625°，其余十宫各为30° `32.625*2+30*10=365.25`周天之数, 使用时四舍五入"),
   equatorialZiWu(
-      "子午", "子午宫为32.625°，其余十宫各为30° `32.625*2+30*10=365.25`周天之数, 使用时四舍五入");
+      "子午", "子午宫为32.625°，其余十宫各为30° `32.625*2+30*10=365.25`周天之数, 使用时四舍五入"),
+  @JsonValue("三辰通载子午")
+  equatorialZiWuSanChenTongZai(
+      "三辰通载子午", "子午两宫30.4380°，其余十宫30.4979°；总和365.855°，原样保留史料偏差");
 
   final String name;
   final String description;

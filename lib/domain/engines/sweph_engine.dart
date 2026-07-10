@@ -80,6 +80,7 @@ class SwephEngine implements ICalculationEngine {
         offsetTier: panelConfig.offsetTier,
         constellationOffsetDeg: panelConfig.constellationOffsetDeg,
         starInnDegreeOverrides: panelConfig.starInnDegreeOverrides,
+        houseDivisionSystemOverride: panelConfig.houseDivisionSystem,
     );
   }
 

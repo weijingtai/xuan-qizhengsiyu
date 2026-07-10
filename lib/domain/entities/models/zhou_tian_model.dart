@@ -165,17 +165,22 @@ class ZhouTianModel {
     double? constellationOffsetDeg,
     Map<Enum28Constellations, double>? starInnDegreeOverrides,
     ConstellationDegree? alignmentPointOverride,
+    HouseDivisionSystem? houseDivisionSystemOverride,
   }) {
-    final hasAny = zhouTianModelOverride != null ||
-        projectionOverride != null ||
-        zeroPointRef != null ||
-        offsetTier != null ||
-        constellationOffsetDeg != null ||
-        (starInnDegreeOverrides != null && starInnDegreeOverrides.isNotEmpty) ||
-        alignmentPointOverride != null;
+    final hasAny =
+        zhouTianModelOverride != null ||
+            projectionOverride != null ||
+            zeroPointRef != null ||
+            offsetTier != null ||
+            constellationOffsetDeg != null ||
+            (starInnDegreeOverrides != null && starInnDegreeOverrides.isNotEmpty) ||
+            alignmentPointOverride != null ||
+            houseDivisionSystemOverride != null;
     if (!hasAny) return this;
 
-    final offset = constellationOffsetDeg ?? offsetTier?.defaultOffsetDeg ?? 0.0;
+    final offset =
+        constellationOffsetDeg ?? offsetTier?.defaultOffsetDeg ?? 0.0;
+    final newTotalDegree = zhouTianModelOverride?.totalDegree ?? totalDegree;
 
     List<ConstellationDegree>? newStarInn;
     if (starInnDegreeOverrides != null && starInnDegreeOverrides.isNotEmpty) {
@@ -204,9 +209,51 @@ class ZhouTianModel {
     return copyWith(
       totalDegree: zhouTianModelOverride?.totalDegree ?? totalDegree,
       projectionConfig: projectionOverride ?? projectionConfig,
+      gongDegreeSeq: houseDivisionSystemOverride == null
+          ? gongDegreeSeq
+          : _buildGongDegreeSeq(houseDivisionSystemOverride, newTotalDegree),
       starInnDegreeSeq: newStarInn ?? starInnDegreeSeq,
       alignmentPointAtConstellation: newAlignment,
       zeroPointAtConstellation: newZero,
     );
+  }
+
+  List<GongDegree> _buildGongDegreeSeq(
+    HouseDivisionSystem system,
+    double targetTotalDegree,
+  ) {
+    double widthFor(EnumTwelveGong gong) {
+      switch (system) {
+        case HouseDivisionSystem.equal:
+        case HouseDivisionSystem.equatorialEqual:
+        case HouseDivisionSystem.unequal:
+          return targetTotalDegree / 12;
+        case HouseDivisionSystem.equatorialFourZheng:
+          return {
+                EnumTwelveGong.Zi,
+                EnumTwelveGong.Wu,
+                EnumTwelveGong.Mao,
+                EnumTwelveGong.You,
+              }.contains(gong)
+              ? 31.312
+              : 30.0;
+        case HouseDivisionSystem.equatorialSunMoon:
+          return {EnumTwelveGong.Wu, EnumTwelveGong.Wei}.contains(gong)
+              ? 32.625
+              : 30.0;
+        case HouseDivisionSystem.equatorialZiWu:
+          return {EnumTwelveGong.Zi, EnumTwelveGong.Wu}.contains(gong)
+              ? 32.625
+              : 30.0;
+        case HouseDivisionSystem.equatorialZiWuSanChenTongZai:
+          return {EnumTwelveGong.Zi, EnumTwelveGong.Wu}.contains(gong)
+              ? 30.4380
+              : 30.4979;
+      }
+    }
+
+    return gongOrder
+        .map((gong) => GongDegree(gong: gong, degree: widthFor(gong)))
+        .toList();
   }
 }
