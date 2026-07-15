@@ -55,8 +55,7 @@ dependencies:
   xuan_logger:
     path: ../xuan-logger
   metaphysics_core:
-    git:
-      url: http://192.168.0.165:3000/xuan/metaphysics-core.git
+    path: ../xuan-metaphysics-core
   persistence_core:
     git:
       url: https://github.com/weijingtai/xuan-storage.git
