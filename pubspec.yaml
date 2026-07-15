@@ -22,7 +22,8 @@ environment:
 
 dependencies:
   xuan_four_zhu_card:
-    path: ../xuan-four-zhu-card
+    git:
+      url: http://192.168.0.165:3000/xuan/xuan-four-zhu-card.git
   flutter:
     sdk: flutter
   logger: ^2.6.2
@@ -53,9 +54,11 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
   xuan_logger:
-    path: ../xuan-logger
+    git:
+      url: http://192.168.0.165:3000/xuan/xuan-logger.git
   metaphysics_core:
-    path: ../xuan-metaphysics-core
+    git:
+      url: http://192.168.0.165:3000/xuan/metaphysics-core.git
   persistence_core:
     git:
       url: https://github.com/weijingtai/xuan-storage.git
@@ -63,7 +66,8 @@ dependencies:
   decimal: ^3.2.4
   yaml: ^3.1.3
   repository_interface_qizhengsiyu:
-    path: ../repository-interface-qizhengsiyu
+    git:
+      url: http://192.168.0.165:3000/xuan/repository-interface-qizhengsiyu.git
   drift: ^2.30.1
   drift_flutter: ^0.2.8
   sqlite3_flutter_libs: ^0.5.41
@@ -76,11 +80,14 @@ dependencies:
   persistence_preferences:
     path: ../xuan-storage/preferences
   metaphysics_chart_ui:
-    path: ../metaphysics-chart-ui
+    git:
+      url: http://192.168.0.165:3000/xuan/metaphysics-chart-ui.git
   theme:
-    path: ../theme
+    git:
+      url: http://192.168.0.165:3000/xuan/theme.git
   calendar:
-    path: ../calendar
+    git:
+      url: http://192.168.0.165:3000/xuan/calendar.git
 
 dev_dependencies:
   flutter_test:
@@ -91,7 +98,8 @@ dev_dependencies:
   freezed_annotation: ^2.4.4
   json_serializable: ^6.12.0
   xuan_config:
-    path: ../xuan_config
+    git:
+      url: http://192.168.0.165:3000/xuan/xuan_config.git
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -152,16 +160,23 @@ dependency_overrides:
   persistence_assets:
     path: ../xuan-storage/assets
   metaphysics_core:
-    path: ../xuan-metaphysics-core
+    git:
+      url: http://192.168.0.165:3000/xuan/metaphysics-core.git
   xuan_gua_core:
-    path: ../xuan-gua-core
+    git:
+      url: http://192.168.0.165:3000/xuan/xuan-gua-core.git
   theme:
-    path: ../theme
+    git:
+      url: http://192.168.0.165:3000/xuan/theme.git
   repository_interface_four_zhu_card:
-    path: ../repository-interface-four-zhu-card
+    git:
+      url: http://192.168.0.165:3000/xuan/repository-interface-four-zhu-card.git
   persistence_domain:
-    path: ../xuan-domain
+    git:
+      url: http://192.168.0.165:3000/xuan/xuan-domain.git
   xuan_time_location:
-    path: ../xuan-time-location
+    git:
+      url: http://192.168.0.165:3000/xuan/xuan-time-location.git
   calendar:
-    path: ../calendar
+    git:
+      url: http://192.168.0.165:3000/xuan/calendar.git
