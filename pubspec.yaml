@@ -74,11 +74,17 @@ dependencies:
   path_provider: ^2.1.5
   path: ^1.8.3
   persistence_drift:
-    path: ../xuan-storage/drift
+    git:
+      url: http://192.168.0.165:3000/xuan/xuan-storage.git
+      path: drift
   persistence_assets:
-    path: ../xuan-storage/assets
+    git:
+      url: http://192.168.0.165:3000/xuan/xuan-storage.git
+      path: assets
   persistence_preferences:
-    path: ../xuan-storage/preferences
+    git:
+      url: http://192.168.0.165:3000/xuan/xuan-storage.git
+      path: preferences
   metaphysics_chart_ui:
     git:
       url: http://192.168.0.165:3000/xuan/metaphysics-chart-ui.git
@@ -154,11 +160,17 @@ flutter:
 
 dependency_overrides:
   persistence_core:
-    path: ../xuan-storage/core
+    git:
+      url: http://192.168.0.165:3000/xuan/xuan-storage.git
+      path: core
   persistence_drift:
-    path: ../xuan-storage/drift
+    git:
+      url: http://192.168.0.165:3000/xuan/xuan-storage.git
+      path: drift
   persistence_assets:
-    path: ../xuan-storage/assets
+    git:
+      url: http://192.168.0.165:3000/xuan/xuan-storage.git
+      path: assets
   metaphysics_core:
     git:
       url: http://192.168.0.165:3000/xuan/metaphysics-core.git
