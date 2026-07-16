@@ -143,14 +143,47 @@ BasePanelModel _emptyPanel() {
   );
 }
 
+class FakeRecordRepo implements QiZhengRecordRepository {
+  final Map<String, QiZhengSiYuPanContract> _records = {};
+
+  @override
+  Future<String> saveRecord(QiZhengSiYuPanContract record) async {
+    _records[record.uuid] = record;
+    return record.uuid;
+  }
+
+  @override
+  Future<List<QiZhengSiYuPanContract>> getAllRecords() async => _records.values.toList();
+
+  @override
+  Future<QiZhengSiYuPanContract?> getRecordByUuid(String uuid) async => _records[uuid];
+
+  @override
+  Future<bool> softDeleteRecord(String uuid) async {
+    if (_records.containsKey(uuid)) {
+      _records.remove(uuid);
+      return true;
+    }
+    return false;
+  }
+
+  @override
+  Stream<List<QiZhengSiYuPanContract>> watchAllRecords() => Stream.value(_records.values.toList());
+}
+
 void main() {
   group('SaveCalculatedPanelUseCase', () {
     late FakePanRepo repo;
+    late FakeRecordRepo recordRepo;
     late SaveCalculatedPanelUseCase useCase;
 
     setUp(() {
       repo = FakePanRepo();
-      useCase = SaveCalculatedPanelUseCase(qiZhengSiYuPanRepository: repo);
+      recordRepo = FakeRecordRepo();
+      useCase = SaveCalculatedPanelUseCase(
+        qiZhengSiYuPanRepository: repo,
+        recordRepository: recordRepo,
+      );
     });
 
     test('constructs without Flutter bindings', () {
@@ -261,6 +294,20 @@ void main() {
 
       final afterDelete = await useCase.getByUuid(entity.uuid);
       expect(afterDelete, isNull);
+    });
+
+    test('execute dual-writes to pan repo and record repo', () async {
+      final panelModel = _emptyPanel();
+
+      final entity = await useCase.execute(
+        basicPanelModel: panelModel,
+        panelConfig: _testConfig(),
+        divinationDatetimeModel: _testDatetime(),
+        requestInfo: _testRequestInfo(),
+      );
+
+      expect(repo._store[entity.uuid], isNotNull);
+      expect(recordRepo.getRecordByUuid(entity.uuid), completion(isNotNull));
     });
   });
 }

@@ -10,9 +10,11 @@ import '../entities/models/panel_config.dart';
 class SaveCalculatedPanelUseCase {
   final Uuid _uuid = const Uuid();
   IQiZhengSiYuPanRepository qiZhengSiYuPanRepository;
+  QiZhengRecordRepository recordRepository;
 
   SaveCalculatedPanelUseCase({
     required this.qiZhengSiYuPanRepository,
+    required this.recordRepository,
   });
 
   /// 保存计算得到的基础面板模型到本地数据库
@@ -36,6 +38,7 @@ class SaveCalculatedPanelUseCase {
         divinationDatetimeModel: divinationDatetimeModel,
       );
       await qiZhengSiYuPanRepository.save(entity.toContract());
+      await recordRepository.saveRecord(entity.toContract());
       return entity;
     } catch (e) {
       throw SavePanelException('保存面板数据失败: $e');

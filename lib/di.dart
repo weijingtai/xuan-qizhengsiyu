@@ -178,6 +178,7 @@ List<SingleChildWidget> createProviders(QiZhengSiYuStorageDependencies deps) {
     Provider<SaveCalculatedPanelUseCase>(
       create: (context) => SaveCalculatedPanelUseCase(
         qiZhengSiYuPanRepository: deps.panRepository,
+        recordRepository: deps.recordRepository,
       ),
     ),
 
