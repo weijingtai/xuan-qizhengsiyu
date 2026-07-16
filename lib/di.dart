@@ -41,6 +41,8 @@ import 'package:qizhengsiyu/presentation/viewmodels/ge_ju_editor_viewmodel.dart'
 import 'package:qizhengsiyu/presentation/viewmodels/ge_ju_detail_viewmodel.dart';
 import 'package:qizhengsiyu/presentation/viewmodels/ge_ju_school_list_viewmodel.dart';
 import 'package:qizhengsiyu/presentation/viewmodels/ge_ju_school_editor_viewmodel.dart';
+import 'package:qizhengsiyu/presentation/pages/beauty_page_viewmodel.dart';
+import 'package:qizhengsiyu/domain/usecases/calculate_fate_dong_wei_usecase.dart';
 
 class AppCalculationEngineProvider implements ICalculationEngineProvider {
   final QiZhengSiYuStorageDependencies _deps;
@@ -214,6 +216,20 @@ List<SingleChildWidget> createProviders(QiZhengSiYuStorageDependencies deps) {
     ChangeNotifierProvider<GeJuSchoolEditorViewModel>(
       create: (context) => GeJuSchoolEditorViewModel(
         schoolService: context.read<GeJuSchoolServiceAdapter>(),
+      ),
+    ),
+
+    // ============ BeautyPageViewModel ============
+    Provider<CalculateFateDongWeiUseCase>(
+      create: (_) => CalculateFateDongWeiUseCase(),
+    ),
+    ChangeNotifierProvider<BeautyPageViewModel>(
+      create: (context) => BeautyPageViewModel(
+        calculateFateDongWeiUseCase: context.read<CalculateFateDongWeiUseCase>(),
+        saveCalculatedPanelUseCase: context.read<SaveCalculatedPanelUseCase>(),
+        shenShaManager: context.read<ShenShaManager>(),
+        huaYaoManager: context.read<HuaYaoManager>(),
+        zhouTianModelManager: context.read<ZhouTianModelManager>(),
       ),
     ),
   ];
