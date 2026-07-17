@@ -13,6 +13,7 @@ import 'package:qizhengsiyu/presentation/pages/qizhengsiyu_home_page.dart';
 
 import 'di.dart';
 import 'package:qizhengsiyu/qizhengsiyu_storage_dependencies.dart';
+import 'package:qizhengsiyu/l10n/generated/app_localizations.dart';
 
 class NavigatorGenerator {
   static final RouteObserver<PageRoute> routeObserver =
@@ -35,7 +36,7 @@ class NavigatorGenerator {
       if (arguments is String) {
         return GeJuDetailPage(ruleId: arguments);
       }
-      return const Scaffold(body: Center(child: Text('参数错误')));
+      return Scaffold(body: Center(child: Text(AppLocalizations.of(context)!.navigatorParamError)));
     },
 
     "/qizhengsiyu/ge_ju/create": (context, {arguments}) {
@@ -90,9 +91,9 @@ class NavigatorGenerator {
   }
 
   static Route _errorPage(msg) {
-    return MaterialPageRoute(builder: (_) {
+    return MaterialPageRoute(builder: (context) {
       return Scaffold(
-          appBar: AppBar(title: const Text('奇门遁甲_未知页面')),
+          appBar: AppBar(title: Text(AppLocalizations.of(context)!.navigatorUnknownPage)),
           body: Center(child: Text(msg)));
     });
   }

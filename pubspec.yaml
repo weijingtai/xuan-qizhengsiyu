@@ -39,6 +39,7 @@ dependencies:
   timezone: ^0.9.4
   el_tooltip: ^2.2.1
   provider: ^6.1.5+1
+
   equatable: ^2.0.8
   json_serializable: ^6.12.0
   json_annotation: ^4.11.0
@@ -111,6 +112,7 @@ dev_dependencies:
 # following page: https://dart.dev/tools/pub/pubspec
 
 flutter:
+  generate: true
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
