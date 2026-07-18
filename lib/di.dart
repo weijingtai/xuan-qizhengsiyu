@@ -37,6 +37,7 @@ import 'package:qizhengsiyu/domain/usecases/apply_school_profile_usecase.dart';
 import 'package:qizhengsiyu/domain/usecases/get_si_yu_profiles_usecase.dart';
 import 'package:qizhengsiyu/domain/usecases/validate_panel_config_usecase.dart';
 import 'package:qizhengsiyu/domain/usecases/compute_rise_set_usecase.dart';
+import 'package:qizhengsiyu/domain/usecases/yun_liu_usecase.dart';
 
 // GeJu 相关导入
 import 'package:qizhengsiyu/domain/services/ge_ju_crud_service.dart';
@@ -191,6 +192,7 @@ List<SingleChildWidget> createProviders(QiZhengSiYuStorageDependencies deps) {
     Provider<GetSiYuProfilesUseCase>(create: (_) => GetSiYuProfilesUseCase()),
     Provider<ValidatePanelConfigUseCase>(create: (_) => ValidatePanelConfigUseCase()),
     Provider<ComputeRiseSetUseCase>(create: (_) => ComputeRiseSetUseCase()),
+    Provider<YunLiuUseCase>(create: (_) => YunLiuUseCase()),
 
     // ============ ViewModels ============
     ChangeNotifierProvider<QiZhengSiYuViewModel>(
@@ -200,6 +202,7 @@ List<SingleChildWidget> createProviders(QiZhengSiYuStorageDependencies deps) {
         evaluateGeJuUseCase: context.read<EvaluateQiZhengGeJuUseCase>(),
         buildTimelineUseCase: context.read<BuildQiZhengTimelineUseCase>(),
         computeRiseSetUseCase: context.read<ComputeRiseSetUseCase>(),
+        yunLiuUseCase: context.read<YunLiuUseCase>(),
       ),
     ),
     ChangeNotifierProvider<PanelConfigViewModel>(

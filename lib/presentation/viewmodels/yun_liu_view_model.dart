@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:metaphysics_core/domain/calculators/liu_yun/models/yun_liu_display_models.dart';
-import 'package:metaphysics_core/domain/calculators/liu_yun/services/yun_liu_service.dart';
 import 'package:metaphysics_core/models/chinese_date_info.dart';
 import 'package:metaphysics_core/enums/enum_gender.dart';
 import 'package:metaphysics_core/enums/enum_tian_gan.dart';
+import 'package:qizhengsiyu/domain/usecases/yun_liu_usecase.dart';
 
 @Deprecated("Migrated to calendar package. Use package:calendar/calendar.dart instead.")
 class YunLiuViewModel extends ChangeNotifier {
-  final YunLiuService _service;
+  final YunLiuUseCase _useCase;
 
   // --- Input Config ---
   final DateTime birthDateTime;
@@ -50,18 +50,18 @@ class YunLiuViewModel extends ChangeNotifier {
   bool get isAllCollapsed => _isExplicitlyCollapsed;
 
   YunLiuViewModel({
-    required YunLiuService service,
+    required YunLiuUseCase useCase,
     required this.birthDateTime,
     required this.gender,
     required this.birthDateInfo,
     DateTime? referenceDate,
-  })  : _service = service,
+  })  : _useCase = useCase,
         referenceDate = referenceDate ?? DateTime.now() {
     _init();
   }
 
   void _init() {
-    _daYunList = _service.calculateDaYunList(
+    _daYunList = _useCase.calculateDaYunList(
       birthDateTime: birthDateTime,
       gender: gender,
       birthDateInfo: birthDateInfo,
@@ -170,7 +170,7 @@ class YunLiuViewModel extends ChangeNotifier {
     if (_liuRiCache.containsKey(key)) {
       return _liuRiCache[key]!;
     }
-    final data = _service.fetchLiuRiData(year, month, dayMaster);
+    final data = _useCase.fetchLiuRiData(year, month, dayMaster);
     _liuRiCache[key] = data;
     return data;
   }
@@ -180,7 +180,7 @@ class YunLiuViewModel extends ChangeNotifier {
     if (_liuShiCache.containsKey(key)) {
       return _liuShiCache[key]!;
     }
-    final data = _service.fetchLiuShiData(year, month, day, dayMaster);
+    final data = _useCase.fetchLiuShiData(year, month, day, dayMaster);
     _liuShiCache[key] = data;
     return data;
   }

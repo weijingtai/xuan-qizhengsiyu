@@ -19,16 +19,15 @@ import 'package:qizhengsiyu/presentation/models/lunar_date_info_v2_data.dart';
 import 'package:qizhengsiyu/domain/entities/models/eleven_stars_info.dart';
 import 'package:qizhengsiyu/enums/enum_qi_zheng.dart';
 import 'package:metaphysics_core/enums/datetime_strategy_enums.dart';
-import 'package:metaphysics_core/models/calculation_strategy_config_logic_model.dart';
-import 'package:metaphysics_core/helpers/solar_lunar_datetime_helper.dart';
-import 'package:metaphysics_core/domain/calculators/liu_yun/services/yun_liu_service.dart';
+import 'package:qizhengsiyu/domain/usecases/yun_liu_usecase.dart';
 import 'package:metaphysics_core/adapters/lunar_adapter.dart';
 import 'package:metaphysics_core/models/divination_datetime.dart';
 import 'package:metaphysics_core/models/divination_info_model.dart';
 import 'package:metaphysics_core/datamodel/datetime_divination_datamodel.dart';
 import 'package:metaphysics_core/datamodel/location.dart';
 import 'package:timezone/timezone.dart' as tz;
-import 'package:calendar/calendar.dart';
+import 'package:calendar/calendar.dart' hide YunLiuViewModel;
+import 'package:qizhengsiyu/presentation/viewmodels/yun_liu_view_model.dart';
 import 'package:qizhengsiyu/domain/entities/models/panel_config.dart' as ui_panel_config;
 import 'package:qizhengsiyu/domain/entities/models/stars_angle.dart';
 
@@ -44,6 +43,7 @@ class QiZhengSiYuViewModel extends ChangeNotifier {
   final EvaluateQiZhengGeJuUseCase _evaluateGeJuUseCase;
   final BuildQiZhengTimelineUseCase _buildTimelineUseCase;
   final ComputeRiseSetUseCase _computeRiseSetUseCase;
+  final YunLiuUseCase _yunLiuUseCase;
 
   QiZhengSiYuViewModel({
     required InitializeQiZhengOfficialDataUseCase initializeOfficialDataUseCase,
@@ -51,11 +51,13 @@ class QiZhengSiYuViewModel extends ChangeNotifier {
     required EvaluateQiZhengGeJuUseCase evaluateGeJuUseCase,
     required BuildQiZhengTimelineUseCase buildTimelineUseCase,
     required ComputeRiseSetUseCase computeRiseSetUseCase,
+    required YunLiuUseCase yunLiuUseCase,
   })  : _initUseCase = initializeOfficialDataUseCase,
         _calculateUseCase = calculateBasePanelUseCase,
         _evaluateGeJuUseCase = evaluateGeJuUseCase,
         _buildTimelineUseCase = buildTimelineUseCase,
-        _computeRiseSetUseCase = computeRiseSetUseCase;
+        _computeRiseSetUseCase = computeRiseSetUseCase,
+        _yunLiuUseCase = yunLiuUseCase;
 
   // ==================== 核心状态 (MVVM) ====================
   BasePanelModel? _basicLifePanel;
@@ -386,16 +388,11 @@ class QiZhengSiYuViewModel extends ChangeNotifier {
     if (_lifeObserver == null) return;
 
     final observer = _lifeObserver!;
-    final birthDateInfo = SolarLunarDateTimeHelper.cacluateChineseDateInfoV2(
-      observer.dateTime,
-      CalculationStrategyConfigLogicModel.defaultConfig.copyWith(
-        ziStrategy: ZiShiStrategy.noDistinguishAt23,
-      ),
-    );
+    final birthDateInfo = _yunLiuUseCase.computeBirthDateInfo(observer.dateTime);
 
     _yunLiuViewModel?.dispose();
     _yunLiuViewModel = YunLiuViewModel(
-      service: YunLiuService(),
+      useCase: _yunLiuUseCase,
       birthDateTime: observer.dateTime,
       gender: Gender.male,
       birthDateInfo: birthDateInfo,
