@@ -69,4 +69,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String confirmDeleteConditionSet(String label) {
     return 'Are you sure you want to delete \"$label\"?';
   }
+
+  @override
+  String get noSchools => 'No schools';
+
+  @override
+  String confirmDeleteSchool(String name) {
+    return 'Are you sure you want to delete school \"$name\"?';
+  }
 }

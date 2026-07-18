@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_school.dart';
 import 'package:qizhengsiyu/presentation/viewmodels/ge_ju_school_list_viewmodel.dart';
+import 'package:qizhengsiyu/l10n/generated/app_localizations.dart';
 
 /// 流派列表页面
 class GeJuSchoolListPage extends StatefulWidget {
@@ -57,7 +58,7 @@ class _GeJuSchoolListPageState extends State<GeJuSchoolListPage> {
           }
 
           if (viewModel.schools.isEmpty) {
-            return const Center(child: Text('暂无流派'));
+            return Center(child: Text(AppLocalizations.of(context)!.noSchools));
           }
 
           return ListView.separated(
@@ -121,8 +122,8 @@ class _GeJuSchoolListPageState extends State<GeJuSchoolListPage> {
                 }
               },
               itemBuilder: (context) => [
-                const PopupMenuItem(value: 'edit', child: Text('编辑')),
-                const PopupMenuItem(value: 'delete', child: Text('删除')),
+                PopupMenuItem(value: 'edit', child: Text(AppLocalizations.of(context)!.edit)),
+                PopupMenuItem(value: 'delete', child: Text(AppLocalizations.of(context)!.delete)),
               ],
             ),
       onTap: () => _navigateToEditor(context, schoolId: school.id),
@@ -146,18 +147,18 @@ class _GeJuSchoolListPageState extends State<GeJuSchoolListPage> {
   ) async {
     final confirmed = await showDialog<bool>(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('确认删除'),
-        content: Text('确定要删除流派 "${school.name}" 吗？'),
+      builder: (ctx) => AlertDialog(
+        title: Text(AppLocalizations.of(context)!.confirmDelete),
+        content: Text(AppLocalizations.of(context)!.confirmDeleteSchool(school.name)),
         actions: [
           TextButton(
-            onPressed: () => Navigator.pop(context, false),
-            child: const Text('取消'),
+            onPressed: () => Navigator.pop(ctx, false),
+            child: Text(AppLocalizations.of(context)!.cancel),
           ),
           TextButton(
-            onPressed: () => Navigator.pop(context, true),
+            onPressed: () => Navigator.pop(ctx, true),
             style: TextButton.styleFrom(foregroundColor: Colors.red),
-            child: const Text('删除'),
+            child: Text(AppLocalizations.of(context)!.delete),
           ),
         ],
       ),
@@ -167,7 +168,7 @@ class _GeJuSchoolListPageState extends State<GeJuSchoolListPage> {
       final success = await viewModel.deleteSchool(school.id);
       if (!success && context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(viewModel.errorMessage ?? '删除失败')),
+          SnackBar(content: Text(viewModel.errorMessage ?? AppLocalizations.of(context)!.deleteFailed)),
         );
       }
     }

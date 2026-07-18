@@ -18,5 +18,7 @@
   "deleteAnnotation": "Delete Note",
   "confirmDeleteAnnotation": "Are you sure you want to delete this note?",
   "deleteConditionSet": "Delete Condition Set",
-  "confirmDeleteConditionSet": "Are you sure you want to delete \"{label}\"?"
+  "confirmDeleteConditionSet": "Are you sure you want to delete \"{label}\"?",
+  "noSchools": "No schools",
+  "confirmDeleteSchool": "Are you sure you want to delete school \"{name}\"?"
 }

@@ -211,6 +211,18 @@ abstract class AppLocalizations {
   /// In zh, this message translates to:
   /// **'确定要删除方案 \"{label}\" 吗？'**
   String confirmDeleteConditionSet(String label);
+
+  /// No description provided for @noSchools.
+  ///
+  /// In zh, this message translates to:
+  /// **'暂无流派'**
+  String get noSchools;
+
+  /// No description provided for @confirmDeleteSchool.
+  ///
+  /// In zh, this message translates to:
+  /// **'确定要删除流派 \"{name}\" 吗？'**
+  String confirmDeleteSchool(String name);
 }
 
 class _AppLocalizationsDelegate

@@ -68,4 +68,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String confirmDeleteConditionSet(String label) {
     return '确定要删除方案 \"$label\" 吗？';
   }
+
+  @override
+  String get noSchools => '暂无流派';
+
+  @override
+  String confirmDeleteSchool(String name) {
+    return '确定要删除流派 \"$name\" 吗？';
+  }
 }

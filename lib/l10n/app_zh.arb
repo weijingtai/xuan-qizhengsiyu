@@ -28,5 +28,12 @@
     "placeholders": {
       "label": { "type": "String" }
     }
+  },
+  "noSchools": "暂无流派",
+  "confirmDeleteSchool": "确定要删除流派 \"{name}\" 吗？",
+  "@confirmDeleteSchool": {
+    "placeholders": {
+      "name": { "type": "String" }
+    }
   }
 }
