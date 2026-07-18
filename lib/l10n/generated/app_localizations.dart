@@ -223,6 +223,48 @@ abstract class AppLocalizations {
   /// In zh, this message translates to:
   /// **'确定要删除流派 \"{name}\" 吗？'**
   String confirmDeleteSchool(String name);
+
+  /// No description provided for @back.
+  ///
+  /// In zh, this message translates to:
+  /// **'返回'**
+  String get back;
+
+  /// No description provided for @save.
+  ///
+  /// In zh, this message translates to:
+  /// **'保存'**
+  String get save;
+
+  /// No description provided for @timezoneAutoSet.
+  ///
+  /// In zh, this message translates to:
+  /// **'• 时区会根据地点自动设置'**
+  String get timezoneAutoSet;
+
+  /// No description provided for @customSchoolSaved.
+  ///
+  /// In zh, this message translates to:
+  /// **'自定义流派已保存'**
+  String get customSchoolSaved;
+
+  /// No description provided for @configSaved.
+  ///
+  /// In zh, this message translates to:
+  /// **'配置已保存'**
+  String get configSaved;
+
+  /// No description provided for @saveFailed.
+  ///
+  /// In zh, this message translates to:
+  /// **'保存失败: {error}'**
+  String saveFailed(String error);
+
+  /// No description provided for @generateChartFailed.
+  ///
+  /// In zh, this message translates to:
+  /// **'生成命盘失败: {error}'**
+  String generateChartFailed(String error);
 }
 
 class _AppLocalizationsDelegate

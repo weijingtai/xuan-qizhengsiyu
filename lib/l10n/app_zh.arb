@@ -35,5 +35,22 @@
     "placeholders": {
       "name": { "type": "String" }
     }
+  },
+  "back": "返回",
+  "save": "保存",
+  "timezoneAutoSet": "• 时区会根据地点自动设置",
+  "customSchoolSaved": "自定义流派已保存",
+  "configSaved": "配置已保存",
+  "saveFailed": "保存失败: {error}",
+  "@saveFailed": {
+    "placeholders": {
+      "error": { "type": "String" }
+    }
+  },
+  "generateChartFailed": "生成命盘失败: {error}",
+  "@generateChartFailed": {
+    "placeholders": {
+      "error": { "type": "String" }
+    }
   }
 }

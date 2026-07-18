@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qizhengsiyu/enums/enum_panel_system_type.dart';
 import 'package:qizhengsiyu/theme/app_theme.dart';
+import 'package:qizhengsiyu/l10n/generated/app_localizations.dart';
 import 'package:slide_switcher/slide_switcher.dart';
 
 import '../../domain/entities/models/panel_config.dart';
@@ -510,7 +511,7 @@ class _QiZhengSiYuConfigPageState extends State<QiZhengSiYuConfigPage>
           // 返回按钮
           TextButton.icon(
             icon: const Icon(Icons.arrow_back),
-            label: const Text('返回'),
+            label: Text(AppLocalizations.of(context)!.back),
             onPressed: () => Navigator.of(context).pop(),
           ),
 
@@ -556,7 +557,7 @@ class _QiZhengSiYuConfigPageState extends State<QiZhengSiYuConfigPage>
               ),
               const SizedBox(height: AppTheme.spacing8),
               const Text('• 选择出生地或占卜地点'),
-              const Text('• 时区会根据地点自动设置'),
+              Text(AppLocalizations.of(context)!.timezoneAutoSet),
               const SizedBox(height: AppTheme.spacing16),
               Text(
                 '自定义配置',
@@ -594,7 +595,7 @@ class _QiZhengSiYuConfigPageState extends State<QiZhengSiYuConfigPage>
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx),
-            child: const Text('取消'),
+            child: Text(AppLocalizations.of(context)!.cancel),
           ),
           TextButton(
             onPressed: () async {
@@ -610,11 +611,11 @@ class _QiZhengSiYuConfigPageState extends State<QiZhengSiYuConfigPage>
               Navigator.pop(ctx);
               if (mounted) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('自定义流派已保存')),
+                  SnackBar(content: Text(AppLocalizations.of(context)!.customSchoolSaved)),
                 );
               }
             },
-            child: const Text('保存'),
+            child: Text(AppLocalizations.of(context)!.save),
           ),
         ],
       ),
@@ -643,8 +644,8 @@ class _QiZhengSiYuConfigPageState extends State<QiZhengSiYuConfigPage>
 
       // 显示成功提示
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('配置已保存'),
+        SnackBar(
+          content: Text(AppLocalizations.of(context)!.configSaved),
           backgroundColor: Colors.green,
         ),
       );
@@ -652,7 +653,7 @@ class _QiZhengSiYuConfigPageState extends State<QiZhengSiYuConfigPage>
       // 显示错误提示
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('保存失败: $e'),
+          content: Text(AppLocalizations.of(context)!.saveFailed(e.toString())),
           backgroundColor: Colors.red,
         ),
       );
@@ -709,7 +710,7 @@ class _QiZhengSiYuConfigPageState extends State<QiZhengSiYuConfigPage>
       // 显示错误提示
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('生成命盘失败: $e'),
+          content: Text(AppLocalizations.of(context)!.generateChartFailed(e.toString())),
           backgroundColor: Colors.red,
         ),
       );

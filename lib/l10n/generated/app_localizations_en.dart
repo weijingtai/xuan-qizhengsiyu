@@ -77,4 +77,30 @@ class AppLocalizationsEn extends AppLocalizations {
   String confirmDeleteSchool(String name) {
     return 'Are you sure you want to delete school \"$name\"?';
   }
+
+  @override
+  String get back => 'Back';
+
+  @override
+  String get save => 'Save';
+
+  @override
+  String get timezoneAutoSet =>
+      '• Timezone is automatically set based on location';
+
+  @override
+  String get customSchoolSaved => 'Custom school saved';
+
+  @override
+  String get configSaved => 'Configuration saved';
+
+  @override
+  String saveFailed(String error) {
+    return 'Save failed: $error';
+  }
+
+  @override
+  String generateChartFailed(String error) {
+    return 'Chart generation failed: $error';
+  }
 }

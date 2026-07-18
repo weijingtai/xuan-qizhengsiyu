@@ -76,4 +76,29 @@ class AppLocalizationsZh extends AppLocalizations {
   String confirmDeleteSchool(String name) {
     return '确定要删除流派 \"$name\" 吗？';
   }
+
+  @override
+  String get back => '返回';
+
+  @override
+  String get save => '保存';
+
+  @override
+  String get timezoneAutoSet => '• 时区会根据地点自动设置';
+
+  @override
+  String get customSchoolSaved => '自定义流派已保存';
+
+  @override
+  String get configSaved => '配置已保存';
+
+  @override
+  String saveFailed(String error) {
+    return '保存失败: $error';
+  }
+
+  @override
+  String generateChartFailed(String error) {
+    return '生成命盘失败: $error';
+  }
 }
