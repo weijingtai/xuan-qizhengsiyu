@@ -31,6 +31,10 @@ import 'package:qizhengsiyu/domain/usecases/calculate_qizheng_base_panel_usecase
 import 'package:qizhengsiyu/domain/usecases/evaluate_qizheng_ge_ju_usecase.dart';
 import 'package:qizhengsiyu/domain/usecases/build_qizheng_timeline_usecase.dart';
 import 'package:qizhengsiyu/domain/usecases/save_calculated_panel_usecase.dart';
+import 'package:qizhengsiyu/domain/usecases/get_school_profiles_usecase.dart';
+import 'package:qizhengsiyu/domain/usecases/apply_school_profile_usecase.dart';
+import 'package:qizhengsiyu/domain/usecases/get_si_yu_profiles_usecase.dart';
+import 'package:qizhengsiyu/domain/usecases/validate_panel_config_usecase.dart';
 
 // GeJu 相关导入
 import 'package:qizhengsiyu/domain/services/ge_ju_crud_service.dart';
@@ -180,6 +184,10 @@ List<SingleChildWidget> createProviders(QiZhengSiYuStorageDependencies deps) {
         recordRepository: deps.recordRepository,
       ),
     ),
+    Provider<GetSchoolProfilesUseCase>(create: (_) => GetSchoolProfilesUseCase()),
+    Provider<ApplySchoolProfileUseCase>(create: (_) => ApplySchoolProfileUseCase()),
+    Provider<GetSiYuProfilesUseCase>(create: (_) => GetSiYuProfilesUseCase()),
+    Provider<ValidatePanelConfigUseCase>(create: (_) => ValidatePanelConfigUseCase()),
 
     // ============ ViewModels ============
     ChangeNotifierProvider<QiZhengSiYuViewModel>(
