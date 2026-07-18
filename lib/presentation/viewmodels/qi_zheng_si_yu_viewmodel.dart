@@ -20,7 +20,7 @@ import 'package:qizhengsiyu/domain/entities/models/eleven_stars_info.dart';
 import 'package:qizhengsiyu/enums/enum_qi_zheng.dart';
 import 'package:metaphysics_core/enums/datetime_strategy_enums.dart';
 import 'package:qizhengsiyu/domain/usecases/yun_liu_usecase.dart';
-import 'package:metaphysics_core/adapters/lunar_adapter.dart';
+import 'package:qizhengsiyu/domain/usecases/compute_gan_zhi_usecase.dart';
 import 'package:metaphysics_core/models/divination_datetime.dart';
 import 'package:metaphysics_core/models/divination_info_model.dart';
 import 'package:metaphysics_core/datamodel/datetime_divination_datamodel.dart';
@@ -44,6 +44,7 @@ class QiZhengSiYuViewModel extends ChangeNotifier {
   final BuildQiZhengTimelineUseCase _buildTimelineUseCase;
   final ComputeRiseSetUseCase _computeRiseSetUseCase;
   final YunLiuUseCase _yunLiuUseCase;
+  final ComputeGanZhiUseCase _computeGanZhiUseCase;
 
   QiZhengSiYuViewModel({
     required InitializeQiZhengOfficialDataUseCase initializeOfficialDataUseCase,
@@ -52,12 +53,14 @@ class QiZhengSiYuViewModel extends ChangeNotifier {
     required BuildQiZhengTimelineUseCase buildTimelineUseCase,
     required ComputeRiseSetUseCase computeRiseSetUseCase,
     required YunLiuUseCase yunLiuUseCase,
+    required ComputeGanZhiUseCase computeGanZhiUseCase,
   })  : _initUseCase = initializeOfficialDataUseCase,
         _calculateUseCase = calculateBasePanelUseCase,
         _evaluateGeJuUseCase = evaluateGeJuUseCase,
         _buildTimelineUseCase = buildTimelineUseCase,
         _computeRiseSetUseCase = computeRiseSetUseCase,
-        _yunLiuUseCase = yunLiuUseCase;
+        _yunLiuUseCase = yunLiuUseCase,
+        _computeGanZhiUseCase = computeGanZhiUseCase;
 
   // ==================== 核心状态 (MVVM) ====================
   BasePanelModel? _basicLifePanel;
@@ -716,26 +719,18 @@ class QiZhengSiYuViewModel extends ChangeNotifier {
   }
 
   /// 计算年份干支
-  JiaZi _calculateYearGanZhi(tz.TZDateTime datetime) {
-    final lunar = LunarAdapter.fromDate(datetime);
-    return JiaZi.getFromGanZhiValue(lunar.getYearInGanZhi())!;
-  }
+  JiaZi _calculateYearGanZhi(tz.TZDateTime datetime) =>
+      _computeGanZhiUseCase.calculateYearGanZhi(datetime);
 
   /// 计算月份干支
-  JiaZi _calculateMonthGanZhi(tz.TZDateTime datetime) {
-    final lunar = LunarAdapter.fromDate(datetime);
-    return JiaZi.getFromGanZhiValue(lunar.getMonthInGanZhi())!;
-  }
+  JiaZi _calculateMonthGanZhi(tz.TZDateTime datetime) =>
+      _computeGanZhiUseCase.calculateMonthGanZhi(datetime);
 
   /// 计算日干支
-  JiaZi _calculateDayGanZhi(tz.TZDateTime datetime) {
-    final lunar = LunarAdapter.fromDate(datetime);
-    return JiaZi.getFromGanZhiValue(lunar.getDayInGanZhi())!;
-  }
+  JiaZi _calculateDayGanZhi(tz.TZDateTime datetime) =>
+      _computeGanZhiUseCase.calculateDayGanZhi(datetime);
 
   /// 计算时辰干支
-  JiaZi _calculateTimeGanZhi(tz.TZDateTime datetime) {
-    final lunar = LunarAdapter.fromDate(datetime);
-    return JiaZi.getFromGanZhiValue(lunar.getTimeInGanZhi())!;
-  }
+  JiaZi _calculateTimeGanZhi(tz.TZDateTime datetime) =>
+      _computeGanZhiUseCase.calculateTimeGanZhi(datetime);
 }
