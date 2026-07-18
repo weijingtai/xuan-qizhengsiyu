@@ -7,9 +7,9 @@ import 'package:qizhengsiyu/enums/enum_panel_system_type.dart';
 import 'package:qizhengsiyu/enums/enum_school.dart';
 import 'package:qizhengsiyu/enums/enum_settle_life_body.dart';
 import 'package:qizhengsiyu/domain/entities/models/panel_config.dart';
-import 'package:qizhengsiyu/domain/engines/school/school_profile.dart';
-import 'package:qizhengsiyu/domain/engines/school/built_in_school_profiles.dart';
-import 'package:qizhengsiyu/domain/engines/school/school_config_resolver.dart';
+import 'package:qizhengsiyu/domain/entities/models/school_profile.dart';
+import 'package:qizhengsiyu/domain/usecases/get_school_profiles_usecase.dart';
+import 'package:qizhengsiyu/domain/usecases/apply_school_profile_usecase.dart';
 
 /// 命盘配置视图模型
 ///
@@ -30,63 +30,28 @@ class PanelConfigViewModel extends ChangeNotifier {
 
   // 自定义配置
   late PanelConfig _customConfig;
-  BuildContext context;
 
-  final SchoolConfigResolver _schoolResolver = SchoolConfigResolver();
+  final GetSchoolProfilesUseCase _schoolProfiles;
+  final ApplySchoolProfileUseCase _applyProfile;
   String? _selectedProfileId;
   bool _isCustomized = false;
 
   String? get selectedProfileId => _selectedProfileId;
   bool get isCustomized => _isCustomized;
   List<SchoolProfile> availableBooksFor(EnumSchoolType school) =>
-      BuiltInSchoolProfiles.bySchool(school);
+      _schoolProfiles.bySchool(school);
 
   /// 构造函数
   ///
   /// [initialConfig] 初始配置，用于恢复上次的设置
-  PanelConfigViewModel(this.context) {
+  PanelConfigViewModel({
+    required GetSchoolProfilesUseCase schoolProfiles,
+    required ApplySchoolProfileUseCase applyProfile,
+  })  : _schoolProfiles = schoolProfiles,
+        _applyProfile = applyProfile {
     _customConfig = PanelConfigViewModel.getPreviousPanelConfig();
     // 如果没有位置信息，设置一个默认地址，避免校验阻塞
     _location ??= Address.defualtAddress;
-    // if (initialConfig != null) {
-    //   _configType = initialConfig.configType;
-    //   _customConfig = initialConfig.customConfig;
-    //   _location = initialConfig.location;
-
-    //   if (initialConfig.queryType == EnumQueryType.destiny) {
-    //     _basicPersonInfo = initialConfig.basicPersonInfo;
-    //   } else {
-    //     _divinationInfo = initialConfig.divinationInfo;
-    //   }
-    // } else {
-    //   // 设置默认值
-    //   _basicPersonInfo = BasicPersonInfo(
-    //       name: null,
-    //       gender: Gender.unknown,
-    //       birthTime,
-    //       birthLocation,
-    //       trueSolarTime,
-    //       bazi: BaZi.defualtBaZi,
-    //       hasDaylightSaving,
-    //       isTrueSolarTime);
-
-    //   _divinationInfo = BasicDivination(
-    //     question: "",
-    //     divinationAt: DateTime.now(),
-    //     details: null,
-    //     divinationPerson: null,
-    //   );
-
-    //   _location = Location(
-    //     country: '中国',
-    //     province: '北京',
-    //     city: '北京',
-    //     timezone: 'Asia/Shanghai',
-    //     // hasDaylightSaving: false,
-    //     // isTrueSolarTime: false,
-    //     coordinates: Coordinates(latitude: 39.9042, longitude: 116.4074),
-    //   );
-    // }
   }
 
   /// 获取配置类型
@@ -139,8 +104,8 @@ class PanelConfigViewModel extends ChangeNotifier {
       notifyListeners();
       return;
     }
-    final profile = BuiltInSchoolProfiles.defaultForSchool(schoolType);
-    final baseResult = _schoolResolver.applyProfile(_customConfig, profile);
+    final profile = _schoolProfiles.defaultForSchool(schoolType);
+    final baseResult = _applyProfile.execute(_customConfig, profile);
     _customConfig = PanelConfig(
       celestialCoordinateSystem: baseResult.celestialCoordinateSystem,
       houseDivisionSystem: baseResult.houseDivisionSystem,
@@ -174,8 +139,8 @@ class PanelConfigViewModel extends ChangeNotifier {
 
   /// 选具体典籍档案（同派多典籍）
   void selectClassicBook(String profileId) {
-    final profile = BuiltInSchoolProfiles.byId(profileId);
-    final baseResult = _schoolResolver.applyProfile(_customConfig, profile);
+    final profile = _schoolProfiles.byId(profileId);
+    final baseResult = _applyProfile.execute(_customConfig, profile);
     _customConfig = PanelConfig(
       celestialCoordinateSystem: baseResult.celestialCoordinateSystem,
       houseDivisionSystem: baseResult.houseDivisionSystem,

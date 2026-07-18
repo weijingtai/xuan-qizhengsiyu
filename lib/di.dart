@@ -17,6 +17,7 @@ import 'package:qizhengsiyu/domain/repositories/hua_yao_repository.dart';
 import 'package:qizhengsiyu/domain/services/shen_sha_service.dart';
 import 'package:qizhengsiyu/domain/services/hua_yao_service.dart';
 import 'package:qizhengsiyu/presentation/viewmodels/qi_zheng_si_yu_viewmodel.dart';
+import 'package:qizhengsiyu/presentation/viewmodels/panel_config_viewmodel.dart';
 import 'package:qizhengsiyu/domain/entities/models/panel_config.dart';
 import 'package:qizhengsiyu/domain/engines/calculation_engine_factory.dart';
 import 'package:qizhengsiyu/domain/engines/i_calculation_engine.dart';
@@ -196,6 +197,12 @@ List<SingleChildWidget> createProviders(QiZhengSiYuStorageDependencies deps) {
         calculateBasePanelUseCase: context.read<CalculateQiZhengBasePanelUseCase>(),
         evaluateGeJuUseCase: context.read<EvaluateQiZhengGeJuUseCase>(),
         buildTimelineUseCase: context.read<BuildQiZhengTimelineUseCase>(),
+      ),
+    ),
+    ChangeNotifierProvider<PanelConfigViewModel>(
+      create: (context) => PanelConfigViewModel(
+        schoolProfiles: context.read<GetSchoolProfilesUseCase>(),
+        applyProfile: context.read<ApplySchoolProfileUseCase>(),
       ),
     ),
 

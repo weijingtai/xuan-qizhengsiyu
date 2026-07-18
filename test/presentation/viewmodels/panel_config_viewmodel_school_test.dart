@@ -1,19 +1,19 @@
-import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:metaphysics_core/enums.dart';
 import 'package:qizhengsiyu/enums/enum_panel_system_type.dart';
 import 'package:qizhengsiyu/enums/enum_school.dart';
 import 'package:qizhengsiyu/enums/enum_zhou_tian_model.dart';
 import 'package:qizhengsiyu/domain/entities/models/panel_config.dart';
+import 'package:qizhengsiyu/domain/usecases/get_school_profiles_usecase.dart';
+import 'package:qizhengsiyu/domain/usecases/apply_school_profile_usecase.dart';
 import 'package:qizhengsiyu/presentation/viewmodels/panel_config_viewmodel.dart';
 
 void main() {
-  testWidgets('选琴堂 → config 套天赤道/365.25，且通知监听', (tester) async {
-    late PanelConfigViewModel vm;
-    await tester.pumpWidget(Builder(builder: (ctx) {
-      vm = PanelConfigViewModel(ctx);
-      return const SizedBox();
-    }));
+  test('选琴堂 → config 套天赤道/365.25，且通知监听', () {
+    final vm = PanelConfigViewModel(
+      schoolProfiles: GetSchoolProfilesUseCase(),
+      applyProfile: ApplySchoolProfileUseCase(),
+    );
     var notified = 0;
     vm.addListener(() => notified++);
 
@@ -27,12 +27,11 @@ void main() {
     expect(vm.isCustomized, isFalse); // 刚套档案未自定义
   });
 
-  testWidgets('套档案后手改 config → isCustomized=true', (tester) async {
-    late PanelConfigViewModel vm;
-    await tester.pumpWidget(Builder(builder: (ctx) {
-      vm = PanelConfigViewModel(ctx);
-      return const SizedBox();
-    }));
+  test('套档案后手改 config → isCustomized=true', () {
+    final vm = PanelConfigViewModel(
+      schoolProfiles: GetSchoolProfilesUseCase(),
+      applyProfile: ApplySchoolProfileUseCase(),
+    );
     vm.updateSchoolType(EnumSchoolType.GuoLao);
     vm.updateCustomConfig(PanelConfig(
       celestialCoordinateSystem: CelestialCoordinateSystem.SkyEquatorial,
@@ -46,12 +45,11 @@ void main() {
     expect(vm.isCustomized, isTrue);
   });
 
-  testWidgets('Customerized 流派 → 保持当前配置不变', (tester) async {
-    late PanelConfigViewModel vm;
-    await tester.pumpWidget(Builder(builder: (ctx) {
-      vm = PanelConfigViewModel(ctx);
-      return const SizedBox();
-    }));
+  test('Customerized 流派 → 保持当前配置不变', () {
+    final vm = PanelConfigViewModel(
+      schoolProfiles: GetSchoolProfilesUseCase(),
+      applyProfile: ApplySchoolProfileUseCase(),
+    );
     final before = vm.customConfig.celestialCoordinateSystem;
     vm.updateSchoolType(EnumSchoolType.Customerized);
     expect(vm.customConfig.celestialCoordinateSystem, before);
