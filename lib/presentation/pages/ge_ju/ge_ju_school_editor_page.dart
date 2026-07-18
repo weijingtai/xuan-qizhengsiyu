@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qizhengsiyu/presentation/viewmodels/ge_ju_school_editor_viewmodel.dart';
+import 'package:qizhengsiyu/l10n/generated/app_localizations.dart';
 
 /// 流派编辑器页面
 class GeJuSchoolEditorPage extends StatefulWidget {
@@ -61,7 +62,7 @@ class _GeJuSchoolEditorPageState extends State<GeJuSchoolEditorPage> {
                 if (!viewModel.isReadOnly)
                   TextButton(
                     onPressed: viewModel.canSave ? () => _save(viewModel) : null,
-                    child: const Text('保存'),
+                    child: Text(AppLocalizations.of(context)!.save),
                   ),
               ],
             ),
@@ -199,7 +200,7 @@ class _GeJuSchoolEditorPageState extends State<GeJuSchoolEditorPage> {
     final success = await viewModel.save();
     if (success && mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('保存成功')),
+        SnackBar(content: Text(AppLocalizations.of(context)!.saveSuccess)),
       );
       Navigator.pop(context, true);
     }
@@ -210,13 +211,13 @@ class _GeJuSchoolEditorPageState extends State<GeJuSchoolEditorPage> {
 
     final result = await showDialog<bool>(
       context: context,
-      builder: (context) => AlertDialog(
+      builder: (ctx) => AlertDialog(
         title: const Text('放弃修改？'),
-        content: const Text('您有未保存的修改，确定要放弃吗？'),
+        content: Text(AppLocalizations.of(context)!.confirmDiscardChanges),
         actions: [
           TextButton(
-            onPressed: () => Navigator.pop(context, false),
-            child: const Text('继续编辑'),
+            onPressed: () => Navigator.pop(ctx, false),
+            child: Text(AppLocalizations.of(context)!.continueEditing),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
