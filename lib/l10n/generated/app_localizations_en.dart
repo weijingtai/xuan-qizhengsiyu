@@ -13,4 +13,60 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get navigatorUnknownPage => 'Unknown Page';
+
+  @override
+  String get geJuDetail => 'Pattern Detail';
+
+  @override
+  String get edit => 'Edit';
+
+  @override
+  String get copy => 'Copy';
+
+  @override
+  String get saveAs => 'Save As';
+
+  @override
+  String get copyJson => 'Copy JSON';
+
+  @override
+  String get delete => 'Delete';
+
+  @override
+  String get retry => 'Retry';
+
+  @override
+  String get ruleNotFound => 'Pattern not found';
+
+  @override
+  String get copiedToClipboard => 'JSON copied to clipboard';
+
+  @override
+  String get confirmDelete => 'Confirm Delete';
+
+  @override
+  String confirmDeleteRule(String name) {
+    return 'Are you sure you want to delete pattern \"$name\"? This action cannot be undone.';
+  }
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get deleteFailed => 'Delete failed';
+
+  @override
+  String get deleteAnnotation => 'Delete Note';
+
+  @override
+  String get confirmDeleteAnnotation =>
+      'Are you sure you want to delete this note?';
+
+  @override
+  String get deleteConditionSet => 'Delete Condition Set';
+
+  @override
+  String confirmDeleteConditionSet(String label) {
+    return 'Are you sure you want to delete \"$label\"?';
+  }
 }

@@ -10,6 +10,7 @@ import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_rule.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju_model.dart';
 import 'package:qizhengsiyu/presentation/viewmodels/ge_ju_detail_viewmodel.dart';
 import 'package:qizhengsiyu/presentation/widgets/ge_ju/condition_tree_view.dart';
+import 'package:qizhengsiyu/l10n/generated/app_localizations.dart';
 
 /// 格局详情页面
 class GeJuDetailPage extends StatefulWidget {
@@ -39,12 +40,12 @@ class _GeJuDetailPageState extends State<GeJuDetailPage> {
       builder: (context, viewModel, _) {
         return Scaffold(
           appBar: AppBar(
-            title: Text(viewModel.rule?.name ?? '格局详情'),
+            title: Text(viewModel.rule?.name ?? AppLocalizations.of(context)!.geJuDetail),
             actions: [
               if (viewModel.canEdit)
                 IconButton(
                   icon: const Icon(Icons.edit),
-                  tooltip: '编辑',
+                  tooltip: AppLocalizations.of(context)!.edit,
                   onPressed: () {
                     Navigator.pushNamed(
                       context,
@@ -56,44 +57,44 @@ class _GeJuDetailPageState extends State<GeJuDetailPage> {
               PopupMenuButton<String>(
                 onSelected: (value) => _handleMenuAction(context, viewModel, value),
                 itemBuilder: (context) => [
-                  const PopupMenuItem(
+                  PopupMenuItem(
                     value: 'duplicate',
                     child: Row(
                       children: [
-                        Icon(Icons.copy, size: 18),
-                        SizedBox(width: 8),
-                        Text('复制'),
+                        const Icon(Icons.copy, size: 18),
+                        const SizedBox(width: 8),
+                        Text(AppLocalizations.of(context)!.copy),
                       ],
                     ),
                   ),
-                  const PopupMenuItem(
+                  PopupMenuItem(
                     value: 'saveAs',
                     child: Row(
                       children: [
-                        Icon(Icons.save_as, size: 18),
-                        SizedBox(width: 8),
-                        Text('另存为'),
+                        const Icon(Icons.save_as, size: 18),
+                        const SizedBox(width: 8),
+                        Text(AppLocalizations.of(context)!.saveAs),
                       ],
                     ),
                   ),
-                  const PopupMenuItem(
+                  PopupMenuItem(
                     value: 'copyJson',
                     child: Row(
                       children: [
-                        Icon(Icons.data_object, size: 18),
-                        SizedBox(width: 8),
-                        Text('复制JSON'),
+                        const Icon(Icons.data_object, size: 18),
+                        const SizedBox(width: 8),
+                        Text(AppLocalizations.of(context)!.copyJson),
                       ],
                     ),
                   ),
                   if (viewModel.canEdit)
-                    const PopupMenuItem(
+                    PopupMenuItem(
                       value: 'delete',
                       child: Row(
                         children: [
-                          Icon(Icons.delete, size: 18, color: Colors.red),
-                          SizedBox(width: 8),
-                          Text('删除', style: TextStyle(color: Colors.red)),
+                          const Icon(Icons.delete, size: 18, color: Colors.red),
+                          const SizedBox(width: 8),
+                          Text(AppLocalizations.of(context)!.delete, style: const TextStyle(color: Colors.red)),
                         ],
                       ),
                     ),
@@ -121,7 +122,7 @@ class _GeJuDetailPageState extends State<GeJuDetailPage> {
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () => viewModel.load(widget.ruleId),
-              child: const Text('重试'),
+              child: Text(AppLocalizations.of(context)!.retry),
             ),
           ],
         ),
@@ -129,7 +130,7 @@ class _GeJuDetailPageState extends State<GeJuDetailPage> {
     }
 
     if (viewModel.rule == null) {
-      return const Center(child: Text('格局不存在'));
+      return Center(child: Text(AppLocalizations.of(context)!.ruleNotFound));
     }
 
     return ListView(
@@ -420,7 +421,7 @@ class _GeJuDetailPageState extends State<GeJuDetailPage> {
               .convert(viewModel.rule!.toJson());
           Clipboard.setData(ClipboardData(text: jsonStr));
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('JSON 已复制到剪贴板')),
+            SnackBar(content: Text(AppLocalizations.of(context)!.copiedToClipboard)),
           );
         }
         break;
@@ -433,18 +434,18 @@ class _GeJuDetailPageState extends State<GeJuDetailPage> {
   Future<void> _confirmDeleteRule(BuildContext context, GeJuDetailViewModel viewModel) async {
     final confirmed = await showDialog<bool>(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('确认删除'),
-        content: Text('确定要删除格局 "${viewModel.rule?.name}" 吗？此操作不可撤销。'),
+      builder: (ctx) => AlertDialog(
+        title: Text(AppLocalizations.of(context)!.confirmDelete),
+        content: Text(AppLocalizations.of(context)!.confirmDeleteRule(viewModel.rule?.name ?? '')),
         actions: [
           TextButton(
-            onPressed: () => Navigator.pop(context, false),
-            child: const Text('取消'),
+            onPressed: () => Navigator.pop(ctx, false),
+            child: Text(AppLocalizations.of(context)!.cancel),
           ),
           TextButton(
-            onPressed: () => Navigator.pop(context, true),
+            onPressed: () => Navigator.pop(ctx, true),
             style: TextButton.styleFrom(foregroundColor: Colors.red),
-            child: const Text('删除'),
+            child: Text(AppLocalizations.of(context)!.delete),
           ),
         ],
       ),
@@ -456,7 +457,7 @@ class _GeJuDetailPageState extends State<GeJuDetailPage> {
         Navigator.pop(context);
       } else if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(viewModel.errorMessage ?? '删除失败')),
+          SnackBar(content: Text(viewModel.errorMessage ?? AppLocalizations.of(context)!.deleteFailed)),
         );
       }
     }
@@ -465,15 +466,15 @@ class _GeJuDetailPageState extends State<GeJuDetailPage> {
   Future<void> _confirmDeleteAnnotation(BuildContext context, GeJuDetailViewModel viewModel, GeJuAnnotation ann) async {
     final confirmed = await showDialog<bool>(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('删除注解'),
-        content: const Text('确定要删除该注解吗？'),
+      builder: (ctx) => AlertDialog(
+        title: Text(AppLocalizations.of(context)!.deleteAnnotation),
+        content: Text(AppLocalizations.of(context)!.confirmDeleteAnnotation),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context, false), child: const Text('取消')),
+          TextButton(onPressed: () => Navigator.pop(ctx, false), child: Text(AppLocalizations.of(context)!.cancel)),
           TextButton(
-            onPressed: () => Navigator.pop(context, true),
+            onPressed: () => Navigator.pop(ctx, true),
             style: TextButton.styleFrom(foregroundColor: Colors.red),
-            child: const Text('删除'),
+            child: Text(AppLocalizations.of(context)!.delete),
           ),
         ],
       ),
@@ -486,15 +487,15 @@ class _GeJuDetailPageState extends State<GeJuDetailPage> {
   Future<void> _confirmDeleteConditionSet(BuildContext context, GeJuDetailViewModel viewModel, GeJuConditionSet cs) async {
     final confirmed = await showDialog<bool>(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('删除判断方案'),
-        content: Text('确定要删除方案 "${cs.label}" 吗？'),
+      builder: (ctx) => AlertDialog(
+        title: Text(AppLocalizations.of(context)!.deleteConditionSet),
+        content: Text(AppLocalizations.of(context)!.confirmDeleteConditionSet(cs.label)),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context, false), child: const Text('取消')),
+          TextButton(onPressed: () => Navigator.pop(ctx, false), child: Text(AppLocalizations.of(context)!.cancel)),
           TextButton(
-            onPressed: () => Navigator.pop(context, true),
+            onPressed: () => Navigator.pop(ctx, true),
             style: TextButton.styleFrom(foregroundColor: Colors.red),
-            child: const Text('删除'),
+            child: Text(AppLocalizations.of(context)!.delete),
           ),
         ],
       ),

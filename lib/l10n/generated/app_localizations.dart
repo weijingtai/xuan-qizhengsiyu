@@ -109,6 +109,108 @@ abstract class AppLocalizations {
   /// In zh, this message translates to:
   /// **'奇门遁甲_未知页面'**
   String get navigatorUnknownPage;
+
+  /// No description provided for @geJuDetail.
+  ///
+  /// In zh, this message translates to:
+  /// **'格局详情'**
+  String get geJuDetail;
+
+  /// No description provided for @edit.
+  ///
+  /// In zh, this message translates to:
+  /// **'编辑'**
+  String get edit;
+
+  /// No description provided for @copy.
+  ///
+  /// In zh, this message translates to:
+  /// **'复制'**
+  String get copy;
+
+  /// No description provided for @saveAs.
+  ///
+  /// In zh, this message translates to:
+  /// **'另存为'**
+  String get saveAs;
+
+  /// No description provided for @copyJson.
+  ///
+  /// In zh, this message translates to:
+  /// **'复制JSON'**
+  String get copyJson;
+
+  /// No description provided for @delete.
+  ///
+  /// In zh, this message translates to:
+  /// **'删除'**
+  String get delete;
+
+  /// No description provided for @retry.
+  ///
+  /// In zh, this message translates to:
+  /// **'重试'**
+  String get retry;
+
+  /// No description provided for @ruleNotFound.
+  ///
+  /// In zh, this message translates to:
+  /// **'格局不存在'**
+  String get ruleNotFound;
+
+  /// No description provided for @copiedToClipboard.
+  ///
+  /// In zh, this message translates to:
+  /// **'JSON 已复制到剪贴板'**
+  String get copiedToClipboard;
+
+  /// No description provided for @confirmDelete.
+  ///
+  /// In zh, this message translates to:
+  /// **'确认删除'**
+  String get confirmDelete;
+
+  /// No description provided for @confirmDeleteRule.
+  ///
+  /// In zh, this message translates to:
+  /// **'确定要删除格局 \"{name}\" 吗？此操作不可撤销。'**
+  String confirmDeleteRule(String name);
+
+  /// No description provided for @cancel.
+  ///
+  /// In zh, this message translates to:
+  /// **'取消'**
+  String get cancel;
+
+  /// No description provided for @deleteFailed.
+  ///
+  /// In zh, this message translates to:
+  /// **'删除失败'**
+  String get deleteFailed;
+
+  /// No description provided for @deleteAnnotation.
+  ///
+  /// In zh, this message translates to:
+  /// **'删除注解'**
+  String get deleteAnnotation;
+
+  /// No description provided for @confirmDeleteAnnotation.
+  ///
+  /// In zh, this message translates to:
+  /// **'确定要删除该注解吗？'**
+  String get confirmDeleteAnnotation;
+
+  /// No description provided for @deleteConditionSet.
+  ///
+  /// In zh, this message translates to:
+  /// **'删除判断方案'**
+  String get deleteConditionSet;
+
+  /// No description provided for @confirmDeleteConditionSet.
+  ///
+  /// In zh, this message translates to:
+  /// **'确定要删除方案 \"{label}\" 吗？'**
+  String confirmDeleteConditionSet(String label);
 }
 
 class _AppLocalizationsDelegate

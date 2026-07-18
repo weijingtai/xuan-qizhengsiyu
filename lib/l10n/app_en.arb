@@ -1,5 +1,22 @@
 {
   "@@locale": "en",
   "navigatorParamError": "Parameter Error",
-  "navigatorUnknownPage": "Unknown Page"
+  "navigatorUnknownPage": "Unknown Page",
+  "geJuDetail": "Pattern Detail",
+  "edit": "Edit",
+  "copy": "Copy",
+  "saveAs": "Save As",
+  "copyJson": "Copy JSON",
+  "delete": "Delete",
+  "retry": "Retry",
+  "ruleNotFound": "Pattern not found",
+  "copiedToClipboard": "JSON copied to clipboard",
+  "confirmDelete": "Confirm Delete",
+  "confirmDeleteRule": "Are you sure you want to delete pattern \"{name}\"? This action cannot be undone.",
+  "cancel": "Cancel",
+  "deleteFailed": "Delete failed",
+  "deleteAnnotation": "Delete Note",
+  "confirmDeleteAnnotation": "Are you sure you want to delete this note?",
+  "deleteConditionSet": "Delete Condition Set",
+  "confirmDeleteConditionSet": "Are you sure you want to delete \"{label}\"?"
 }

@@ -1,5 +1,32 @@
 {
   "@@locale": "zh",
   "navigatorParamError": "参数错误",
-  "navigatorUnknownPage": "奇门遁甲_未知页面"
+  "navigatorUnknownPage": "奇门遁甲_未知页面",
+  "geJuDetail": "格局详情",
+  "edit": "编辑",
+  "copy": "复制",
+  "saveAs": "另存为",
+  "copyJson": "复制JSON",
+  "delete": "删除",
+  "retry": "重试",
+  "ruleNotFound": "格局不存在",
+  "copiedToClipboard": "JSON 已复制到剪贴板",
+  "confirmDelete": "确认删除",
+  "confirmDeleteRule": "确定要删除格局 \"{name}\" 吗？此操作不可撤销。",
+  "@confirmDeleteRule": {
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
+  "cancel": "取消",
+  "deleteFailed": "删除失败",
+  "deleteAnnotation": "删除注解",
+  "confirmDeleteAnnotation": "确定要删除该注解吗？",
+  "deleteConditionSet": "删除判断方案",
+  "confirmDeleteConditionSet": "确定要删除方案 \"{label}\" 吗？",
+  "@confirmDeleteConditionSet": {
+    "placeholders": {
+      "label": { "type": "String" }
+    }
+  }
 }
