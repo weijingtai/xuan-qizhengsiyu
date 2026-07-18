@@ -1,14 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:provider/provider.dart';
+import 'package:qizhengsiyu/domain/usecases/validate_panel_config_usecase.dart';
+import 'package:qizhengsiyu/domain/usecases/get_si_yu_profiles_usecase.dart';
 import 'package:qizhengsiyu/presentation/widgets/config/custom_config_section.dart';
 
 void main() {
   testWidgets('逐宿覆写编辑器展开后有 TextFormField', (tester) async {
-    await tester.pumpWidget(MaterialApp(
-      home: Scaffold(
-        body: SingleChildScrollView(
-          child: CustomConfigSection(
-            onConfigChanged: (_) {},
+    await tester.pumpWidget(MultiProvider(
+      providers: [
+        Provider<ValidatePanelConfigUseCase>(create: (_) => ValidatePanelConfigUseCase()),
+        Provider<GetSiYuProfilesUseCase>(create: (_) => GetSiYuProfilesUseCase()),
+      ],
+      child: MaterialApp(
+        home: Scaffold(
+          body: SingleChildScrollView(
+            child: CustomConfigSection(
+              onConfigChanged: (_) {},
+            ),
           ),
         ),
       ),

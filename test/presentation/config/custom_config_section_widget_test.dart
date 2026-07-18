@@ -1,21 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:provider/provider.dart';
 import 'package:metaphysics_core/enums.dart';
 import 'package:qizhengsiyu/presentation/widgets/config/custom_config_section.dart';
 import 'package:qizhengsiyu/domain/entities/models/panel_config.dart';
 import 'package:qizhengsiyu/domain/entities/models/projection_config.dart';
+import 'package:qizhengsiyu/domain/usecases/validate_panel_config_usecase.dart';
+import 'package:qizhengsiyu/domain/usecases/get_si_yu_profiles_usecase.dart';
 import 'package:qizhengsiyu/enums/enum_settle_life_body.dart';
 import 'package:qizhengsiyu/enums/enum_panel_system_type.dart';
 import 'package:qizhengsiyu/enums/enum_zhou_tian_model.dart';
 
 void main() {
   Widget _buildTestWidget({PanelConfig? initialConfig}) {
-    return MaterialApp(
-      home: Scaffold(
-        body: SingleChildScrollView(
-          child: CustomConfigSection(
-            initialConfig: initialConfig,
-            onConfigChanged: (_) {},
+    return MultiProvider(
+      providers: [
+        Provider<ValidatePanelConfigUseCase>(create: (_) => ValidatePanelConfigUseCase()),
+        Provider<GetSiYuProfilesUseCase>(create: (_) => GetSiYuProfilesUseCase()),
+      ],
+      child: MaterialApp(
+        home: Scaffold(
+          body: SingleChildScrollView(
+            child: CustomConfigSection(
+              initialConfig: initialConfig,
+              onConfigChanged: (_) {},
+            ),
           ),
         ),
       ),
@@ -61,10 +70,16 @@ void main() {
   testWidgets('选推变黄道后下拉含弧矢割圆术选项', (WidgetTester tester) async {
     // 先 pump 默认 widget，再 tap 古黄道以触发联动推荐默认
     await tester.pumpWidget(
-      MaterialApp(
-        home: Scaffold(
-          body: SingleChildScrollView(
-            child: CustomConfigSection(onConfigChanged: (_) {}),
+      MultiProvider(
+        providers: [
+          Provider<ValidatePanelConfigUseCase>(create: (_) => ValidatePanelConfigUseCase()),
+          Provider<GetSiYuProfilesUseCase>(create: (_) => GetSiYuProfilesUseCase()),
+        ],
+        child: MaterialApp(
+          home: Scaffold(
+            body: SingleChildScrollView(
+              child: CustomConfigSection(onConfigChanged: (_) {}),
+            ),
           ),
         ),
       ),
@@ -103,12 +118,18 @@ void main() {
       zhouTianModelOverride: EnumZhouTianModel.degree36525,
     );
     await tester.pumpWidget(
-      MaterialApp(
-        home: Scaffold(
-          body: SingleChildScrollView(
-            child: CustomConfigSection(
-              initialConfig: cfg,
-              onConfigChanged: (_) {},
+      MultiProvider(
+        providers: [
+          Provider<ValidatePanelConfigUseCase>(create: (_) => ValidatePanelConfigUseCase()),
+          Provider<GetSiYuProfilesUseCase>(create: (_) => GetSiYuProfilesUseCase()),
+        ],
+        child: MaterialApp(
+          home: Scaffold(
+            body: SingleChildScrollView(
+              child: CustomConfigSection(
+                initialConfig: cfg,
+                onConfigChanged: (_) {},
+              ),
             ),
           ),
         ),

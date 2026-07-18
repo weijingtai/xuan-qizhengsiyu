@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:provider/provider.dart';
 import 'package:qizhengsiyu/domain/entities/models/panel_config.dart';
+import 'package:qizhengsiyu/domain/usecases/validate_panel_config_usecase.dart';
+import 'package:qizhengsiyu/domain/usecases/get_si_yu_profiles_usecase.dart';
 import 'package:qizhengsiyu/enums/enum_rahu_ketu_convention.dart';
 import 'package:qizhengsiyu/presentation/widgets/config/custom_config_section.dart';
 
@@ -10,14 +13,20 @@ void main() {
     PanelConfig? callbackConfig;
 
     await tester.pumpWidget(
-      MaterialApp(
-        home: Scaffold(
-          body: SingleChildScrollView(
-            child: CustomConfigSection(
-              initialConfig: PanelConfig.defaultPanelConfig(),
-              onConfigChanged: (cfg) {
-                callbackConfig = cfg;
-              },
+      MultiProvider(
+        providers: [
+          Provider<ValidatePanelConfigUseCase>(create: (_) => ValidatePanelConfigUseCase()),
+          Provider<GetSiYuProfilesUseCase>(create: (_) => GetSiYuProfilesUseCase()),
+        ],
+        child: MaterialApp(
+          home: Scaffold(
+            body: SingleChildScrollView(
+              child: CustomConfigSection(
+                initialConfig: PanelConfig.defaultPanelConfig(),
+                onConfigChanged: (cfg) {
+                  callbackConfig = cfg;
+                },
+              ),
             ),
           ),
         ),
