@@ -7,7 +7,7 @@ import 'package:qizhengsiyu/l10n/generated/app_localizations.dart';
 import 'package:slide_switcher/slide_switcher.dart';
 
 import '../../domain/entities/models/panel_config.dart';
-import '../../domain/engines/school/school_profile.dart';
+import '../../domain/entities/models/school_profile.dart';
 import '../../domain/services/user_school_profile_service_port.dart';
 import '../../enums/enum_school.dart';
 import '../viewmodels/panel_config_viewmodel.dart';

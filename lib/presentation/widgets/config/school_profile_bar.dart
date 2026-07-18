@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qizhengsiyu/enums/enum_school.dart';
-import 'package:qizhengsiyu/domain/engines/school/school_profile.dart';
+import 'package:qizhengsiyu/domain/entities/models/school_profile.dart';
 
 /// 典籍下拉 + 「已自定义」徽标 + 「存为自定义流派」按钮。
 /// 配置页流派选择器下方的一段附加 UI。

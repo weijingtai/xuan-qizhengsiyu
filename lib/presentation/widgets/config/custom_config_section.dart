@@ -5,9 +5,12 @@ import 'package:qizhengsiyu/theme/app_theme.dart';
 import 'package:qizhengsiyu/enums/enum_rahu_ketu_convention.dart';
 import 'package:qizhengsiyu/enums/enum_settle_life_body.dart';
 import 'package:qizhengsiyu/enums/enum_zi_qi_algorithm.dart';
-import 'package:qizhengsiyu/domain/engines/siyu/group/si_yu_group_algorithm.dart';
-import 'package:qizhengsiyu/domain/engines/siyu/spec/si_yu_group_spec.dart';
-import 'package:qizhengsiyu/domain/engines/siyu/profile/built_in_profiles.dart';
+import 'package:provider/provider.dart';
+import 'package:qizhengsiyu/domain/entities/models/si_yu_group.dart';
+import 'package:qizhengsiyu/domain/entities/models/si_yu_group_spec.dart';
+import 'package:qizhengsiyu/domain/entities/models/si_yu_profile.dart';
+import 'package:qizhengsiyu/domain/usecases/get_si_yu_profiles_usecase.dart';
+import 'package:qizhengsiyu/domain/usecases/validate_panel_config_usecase.dart';
 import 'package:qizhengsiyu/presentation/widgets/config/si_yu_profile_selector.dart';
 import 'package:qizhengsiyu/presentation/widgets/config/si_yu_group_editor.dart';
 
@@ -15,7 +18,6 @@ import 'package:qizhengsiyu/enums/enum_zhou_tian_model.dart';
 import 'package:qizhengsiyu/enums/enum_zero_point_ref.dart';
 import 'package:qizhengsiyu/enums/enum_constellation_offset_tier.dart';
 import 'package:qizhengsiyu/domain/entities/models/projection_config.dart';
-import 'package:qizhengsiyu/domain/managers/panel_system_resolver.dart';
 
 import '../../../domain/entities/models/panel_config.dart';
 
@@ -173,7 +175,7 @@ class _CustomConfigSectionState extends State<CustomConfigSection> {
 
   @override
   Widget build(BuildContext context) {
-    final check = PanelSystemResolver().validate(_currentConfig());
+    final check = context.read<ValidatePanelConfigUseCase>().execute(_currentConfig());
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -1137,6 +1139,7 @@ class _CustomConfigSectionState extends State<CustomConfigSection> {
               const SizedBox(height: AppTheme.spacing8),
               SiYuProfileSelector(
                 selectedId: _siYuProfileId,
+                profiles: context.read<GetSiYuProfilesUseCase>().all(),
                 onChanged: (id) {
                   setState(() {
                     _siYuProfileId = id;
@@ -1146,7 +1149,7 @@ class _CustomConfigSectionState extends State<CustomConfigSection> {
               ),
               const SizedBox(height: AppTheme.spacing12),
               ...SiYuGroup.values.map((g) {
-                final resolved = BuiltInSiYuProfiles.byId(_siYuProfileId);
+                final resolved = context.read<GetSiYuProfilesUseCase>().byId(_siYuProfileId);
                 final spec = _siYuOverrides[g.name] ?? resolved.groups[g]!;
                 return SiYuGroupEditor(
                   group: g,
