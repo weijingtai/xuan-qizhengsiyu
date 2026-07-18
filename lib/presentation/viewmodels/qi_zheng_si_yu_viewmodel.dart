@@ -12,6 +12,7 @@ import 'package:qizhengsiyu/domain/usecases/initialize_qizheng_official_data_use
 import 'package:qizhengsiyu/domain/usecases/calculate_qizheng_base_panel_usecase.dart';
 import 'package:qizhengsiyu/domain/usecases/evaluate_qizheng_ge_ju_usecase.dart';
 import 'package:qizhengsiyu/domain/usecases/build_qizheng_timeline_usecase.dart';
+import 'package:qizhengsiyu/domain/usecases/compute_rise_set_usecase.dart';
 import 'package:qizhengsiyu/presentation/models/ui_star_model.dart';
 import 'package:qizhengsiyu/presentation/pages/StarsResolver.dart';
 import 'package:qizhengsiyu/presentation/models/lunar_date_info_v2_data.dart';
@@ -21,8 +22,6 @@ import 'package:metaphysics_core/enums/datetime_strategy_enums.dart';
 import 'package:metaphysics_core/models/calculation_strategy_config_logic_model.dart';
 import 'package:metaphysics_core/helpers/solar_lunar_datetime_helper.dart';
 import 'package:metaphysics_core/domain/calculators/liu_yun/services/yun_liu_service.dart';
-import 'package:metaphysics_core/utils/celestial_rise_set_calculator.dart';
-import 'package:metaphysics_core/helpers/solar_time_calculator.dart';
 import 'package:metaphysics_core/adapters/lunar_adapter.dart';
 import 'package:metaphysics_core/models/divination_datetime.dart';
 import 'package:metaphysics_core/models/divination_info_model.dart';
@@ -44,16 +43,19 @@ class QiZhengSiYuViewModel extends ChangeNotifier {
   final CalculateQiZhengBasePanelUseCase _calculateUseCase;
   final EvaluateQiZhengGeJuUseCase _evaluateGeJuUseCase;
   final BuildQiZhengTimelineUseCase _buildTimelineUseCase;
+  final ComputeRiseSetUseCase _computeRiseSetUseCase;
 
   QiZhengSiYuViewModel({
     required InitializeQiZhengOfficialDataUseCase initializeOfficialDataUseCase,
     required CalculateQiZhengBasePanelUseCase calculateBasePanelUseCase,
     required EvaluateQiZhengGeJuUseCase evaluateGeJuUseCase,
     required BuildQiZhengTimelineUseCase buildTimelineUseCase,
+    required ComputeRiseSetUseCase computeRiseSetUseCase,
   })  : _initUseCase = initializeOfficialDataUseCase,
         _calculateUseCase = calculateBasePanelUseCase,
         _evaluateGeJuUseCase = evaluateGeJuUseCase,
-        _buildTimelineUseCase = buildTimelineUseCase;
+        _buildTimelineUseCase = buildTimelineUseCase,
+        _computeRiseSetUseCase = computeRiseSetUseCase;
 
   // ==================== 核心状态 (MVVM) ====================
   BasePanelModel? _basicLifePanel;
@@ -609,54 +611,7 @@ class QiZhengSiYuViewModel extends ChangeNotifier {
 
   /// 计算日月出没展示数据
   RiseSetDisplayData? _computeRiseSetData(ObserverPosition observer) {
-    try {
-      // 日月出没（UTC）
-      final dailyInfo = CelestialRiseSetCalculator.calculateDaily(
-        utcDateTime: observer.utcDateTime,
-        longitude: observer.longitude,
-        latitude: observer.latitude,
-        altitude: observer.altitude,
-      );
-
-      // UTC → 本地时区
-      final loc = tz.getLocation(observer.timezone);
-      DateTime? toLocal(DateTime? utc) =>
-          utc != null ? tz.TZDateTime.from(utc, loc) : null;
-
-      // 真太阳时
-      final trueSolarTime = SolarTimeCalculator(
-        dateTime: observer.utcDateTime,
-        longitude: observer.longitude,
-      ).getTrueSolarTime();
-
-      // 阴历信息（基于本地时间）
-      final lunar = LunarAdapter.fromDate(observer.dateTime);
-      final lunarDateString =
-          '${lunar.getYearInGanZhi()}年${lunar.getMonthInChinese()}${lunar.getDayInChinese()}日';
-      final lunarTimeString = '${lunar.getTimeZhi()}时';
-      final jieQiInfo = lunar.getJieQi();
-
-      return RiseSetDisplayData(
-        sunRise: toLocal(dailyInfo.sun.rise),
-        sunSet: toLocal(dailyInfo.sun.set_),
-        moonRise: toLocal(dailyInfo.moon.rise),
-        moonSet: toLocal(dailyInfo.moon.set_),
-        trueSolarTime: trueSolarTime,
-        longitude: observer.longitude,
-        latitude: observer.latitude,
-        timezone: observer.timezone,
-        lunarDateString: lunarDateString,
-        lunarTimeString: lunarTimeString,
-        isDayBirth: observer.isDayBirth,
-        fourPillarsDisplay: observer.fourZhuEightChar,
-        localDateTime: observer.dateTime,
-        locationName: _birthLocationName,
-        jieQiInfo: jieQiInfo,
-      );
-    } catch (e) {
-      debugPrint('Error computing rise/set data: $e');
-      return null;
-    }
+    return _computeRiseSetUseCase.execute(observer, locationName: _birthLocationName);
   }
 
   /// 更新自定义日期的日月出没数据（供 UI 日期选择器调用）

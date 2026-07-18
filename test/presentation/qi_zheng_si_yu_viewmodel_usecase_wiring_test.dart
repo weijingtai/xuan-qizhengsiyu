@@ -19,6 +19,7 @@ import 'package:qizhengsiyu/domain/usecases/initialize_qizheng_official_data_use
 import 'package:qizhengsiyu/domain/usecases/calculate_qizheng_base_panel_usecase.dart';
 import 'package:qizhengsiyu/domain/usecases/evaluate_qizheng_ge_ju_usecase.dart';
 import 'package:qizhengsiyu/domain/usecases/build_qizheng_timeline_usecase.dart';
+import 'package:qizhengsiyu/domain/usecases/compute_rise_set_usecase.dart';
 import 'package:qizhengsiyu/presentation/viewmodels/qi_zheng_si_yu_viewmodel.dart';
 import 'package:metaphysics_core/enums.dart';
 
@@ -41,6 +42,7 @@ void main() {
         calculateBasePanelUseCase: spyCalculateUseCase,
         evaluateGeJuUseCase: spyEvaluateGeJuUseCase,
         buildTimelineUseCase: spyBuildTimelineUseCase,
+        computeRiseSetUseCase: ComputeRiseSetUseCase(),
       );
     });
 
