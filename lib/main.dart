@@ -6,7 +6,6 @@ import 'package:metaphysics_core/models/year_month.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qizhengsiyu/enums/enum_twelve_gong.dart';
-import 'package:qizhengsiyu/presentation/pages/beauty_page_viewmodel.dart';
 import 'package:qizhengsiyu/presentation/widgets/rings/circle_text_painter.dart';
 import 'package:qizhengsiyu/presentation/widgets/rings/da_xian_ring.dart';
 import 'package:qizhengsiyu/presentation/widgets/rings/gong_12_dizhi.dart';
@@ -26,11 +25,6 @@ import 'package:repository_interface_qizhengsiyu/repository_interface_qizhengsiy
 import 'package:qizhengsiyu/qizhengsiyu_storage_dependencies.dart';
 import 'package:qizhengsiyu/domain/entities/models/body_life_model.dart';
 import 'package:qizhengsiyu/domain/entities/models/naming_degree_pair.dart';
-import 'package:qizhengsiyu/domain/usecases/calculate_fate_dong_wei_usecase.dart';
-import 'package:qizhengsiyu/domain/usecases/save_calculated_panel_usecase.dart';
-import 'package:qizhengsiyu/domain/managers/shen_sha_manager.dart';
-import 'package:qizhengsiyu/domain/managers/hua_yao_manager.dart';
-import 'package:qizhengsiyu/domain/managers/zhou_tian_model_manager.dart';
 import 'di.dart';
 import 'navigator.dart';
 import 'package:qizhengsiyu/data/datasources/local/app_database.dart';
@@ -110,14 +104,6 @@ void main() async {
     providers: [
       Provider<QiZhengSiYuStorageDependencies>.value(value: deps),
       ...createProviders(deps),
-      ChangeNotifierProvider<BeautyPageViewModel>(
-          create: (ctx) => BeautyPageViewModel(
-              calculateFateDongWeiUseCase: CalculateFateDongWeiUseCase(),
-              saveCalculatedPanelUseCase: ctx.read<SaveCalculatedPanelUseCase>(),
-              shenShaManager: ctx.read<ShenShaManager>(),
-              huaYaoManager: ctx.read<HuaYaoManager>(),
-              zhouTianModelManager: ctx.read<ZhouTianModelManager>(),
-          )),
     ],
     child: const MyApp(),
   ));
