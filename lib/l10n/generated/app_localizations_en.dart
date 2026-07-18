@@ -100,6 +100,26 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get propertySettings => 'Property Settings';
+
+  @override
+  String get fixErrorsBeforeSave =>
+      'Please fix validation errors before saving';
+
+  @override
+  String get saveSuccess => 'Saved successfully';
+
+  @override
+  String get confirmDiscardChanges =>
+      'You have unsaved changes. Are you sure you want to discard them?';
+
+  @override
+  String get continueEditing => 'Continue Editing';
+
+  @override
+  String get discard => 'Discard';
+
+  @override
   String get searchGeJuHint => 'Search pattern name, description...';
 
   @override

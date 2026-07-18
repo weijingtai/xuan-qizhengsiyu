@@ -98,6 +98,24 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
+  String get propertySettings => '属性设置';
+
+  @override
+  String get fixErrorsBeforeSave => '请修正验证错误后再保存';
+
+  @override
+  String get saveSuccess => '保存成功';
+
+  @override
+  String get confirmDiscardChanges => '您有未保存的修改，确定要放弃吗？';
+
+  @override
+  String get continueEditing => '继续编辑';
+
+  @override
+  String get discard => '放弃';
+
+  @override
   String get searchGeJuHint => '搜索格局名称、描述...';
 
   @override

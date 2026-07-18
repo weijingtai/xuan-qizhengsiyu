@@ -6,6 +6,7 @@ import 'package:qizhengsiyu/domain/entities/models/ge_ju_model.dart';
 import 'package:qizhengsiyu/presentation/viewmodels/ge_ju_editor_viewmodel.dart';
 import 'package:qizhengsiyu/presentation/widgets/ge_ju/condition_tree_editor.dart';
 import 'package:qizhengsiyu/presentation/widgets/ge_ju/ge_ju_school_selector.dart';
+import 'package:qizhengsiyu/l10n/generated/app_localizations.dart';
 
 /// 格局编辑器页面
 class GeJuEditorPage extends StatefulWidget {
@@ -102,7 +103,7 @@ class _GeJuEditorPageState extends State<GeJuEditorPage> {
                   TextButton(
                     onPressed:
                         viewModel.canSave ? () => _save(viewModel) : null,
-                    child: const Text('保存'),
+                    child: Text(AppLocalizations.of(context)!.save),
                   ),
                 ],
               ],
@@ -227,7 +228,7 @@ class _GeJuEditorPageState extends State<GeJuEditorPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('属性设置',
+            Text(AppLocalizations.of(context)!.propertySettings,
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
             const SizedBox(height: 12),
             Row(
@@ -517,7 +518,7 @@ class _GeJuEditorPageState extends State<GeJuEditorPage> {
     viewModel.validate();
     if (!viewModel.canSave) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('请修正验证错误后再保存')),
+        SnackBar(content: Text(AppLocalizations.of(context)!.fixErrorsBeforeSave)),
       );
       return;
     }
@@ -525,7 +526,7 @@ class _GeJuEditorPageState extends State<GeJuEditorPage> {
     final result = await viewModel.save();
     if (result.success && mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('保存成功')),
+        SnackBar(content: Text(AppLocalizations.of(context)!.saveSuccess)),
       );
       Navigator.pop(context, true);
     }
@@ -546,13 +547,13 @@ class _GeJuEditorPageState extends State<GeJuEditorPage> {
 
     final result = await showDialog<bool>(
       context: context,
-      builder: (context) => AlertDialog(
+      builder: (ctx) => AlertDialog(
         title: const Text('放弃修改？'),
-        content: const Text('您有未保存的修改，确定要放弃吗？'),
+        content: Text(AppLocalizations.of(context)!.confirmDiscardChanges),
         actions: [
           TextButton(
-            onPressed: () => Navigator.pop(context, false),
-            child: const Text('继续编辑'),
+            onPressed: () => Navigator.pop(ctx, false),
+            child: Text(AppLocalizations.of(context)!.continueEditing),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),

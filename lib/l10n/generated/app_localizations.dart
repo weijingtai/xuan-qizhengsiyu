@@ -260,6 +260,42 @@ abstract class AppLocalizations {
   /// **'保存失败: {error}'**
   String saveFailed(String error);
 
+  /// No description provided for @propertySettings.
+  ///
+  /// In zh, this message translates to:
+  /// **'属性设置'**
+  String get propertySettings;
+
+  /// No description provided for @fixErrorsBeforeSave.
+  ///
+  /// In zh, this message translates to:
+  /// **'请修正验证错误后再保存'**
+  String get fixErrorsBeforeSave;
+
+  /// No description provided for @saveSuccess.
+  ///
+  /// In zh, this message translates to:
+  /// **'保存成功'**
+  String get saveSuccess;
+
+  /// No description provided for @confirmDiscardChanges.
+  ///
+  /// In zh, this message translates to:
+  /// **'您有未保存的修改，确定要放弃吗？'**
+  String get confirmDiscardChanges;
+
+  /// No description provided for @continueEditing.
+  ///
+  /// In zh, this message translates to:
+  /// **'继续编辑'**
+  String get continueEditing;
+
+  /// No description provided for @discard.
+  ///
+  /// In zh, this message translates to:
+  /// **'放弃'**
+  String get discard;
+
   /// No description provided for @searchGeJuHint.
   ///
   /// In zh, this message translates to:

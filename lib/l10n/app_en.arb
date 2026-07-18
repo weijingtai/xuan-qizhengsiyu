@@ -27,6 +27,12 @@
   "customSchoolSaved": "Custom school saved",
   "configSaved": "Configuration saved",
   "saveFailed": "Save failed: {error}",
+  "propertySettings": "Property Settings",
+  "fixErrorsBeforeSave": "Please fix validation errors before saving",
+  "saveSuccess": "Saved successfully",
+  "confirmDiscardChanges": "You have unsaved changes. Are you sure you want to discard them?",
+  "continueEditing": "Continue Editing",
+  "discard": "Discard",
   "searchGeJuHint": "Search pattern name, description...",
   "generateChartFailed": "Chart generation failed: {error}"
 }

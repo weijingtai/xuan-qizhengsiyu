@@ -47,6 +47,12 @@
       "error": { "type": "String" }
     }
   },
+  "propertySettings": "属性设置",
+  "fixErrorsBeforeSave": "请修正验证错误后再保存",
+  "saveSuccess": "保存成功",
+  "confirmDiscardChanges": "您有未保存的修改，确定要放弃吗？",
+  "continueEditing": "继续编辑",
+  "discard": "放弃",
   "searchGeJuHint": "搜索格局名称、描述...",
   "generateChartFailed": "生成命盘失败: {error}",
   "@generateChartFailed": {
