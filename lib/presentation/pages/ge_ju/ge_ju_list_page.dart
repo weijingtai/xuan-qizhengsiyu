@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_rule.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju_model.dart';
+import 'package:qizhengsiyu/l10n/generated/app_localizations.dart';
 import 'package:qizhengsiyu/presentation/viewmodels/ge_ju_list_viewmodel.dart';
 import 'package:qizhengsiyu/presentation/widgets/ge_ju/ge_ju_list_tile.dart';
 
@@ -75,7 +76,7 @@ class _GeJuListPageState extends State<GeJuListPage> {
           child: TextField(
             controller: _searchController,
             decoration: InputDecoration(
-              hintText: '搜索格局名称、描述...',
+              hintText: AppLocalizations.of(context)!.searchGeJuHint,
               prefixIcon: const Icon(Icons.search),
               suffixIcon: viewModel.searchKeyword.isNotEmpty
                   ? IconButton(
@@ -332,18 +333,18 @@ class _GeJuListPageState extends State<GeJuListPage> {
   ) async {
     final confirmed = await showDialog<bool>(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('确认删除'),
-        content: Text('确定要删除格局 "${rule.name}" 吗？此操作不可撤销。'),
+      builder: (ctx) => AlertDialog(
+        title: Text(AppLocalizations.of(context)!.confirmDelete),
+        content: Text(AppLocalizations.of(context)!.confirmDeleteRule(rule.name)),
         actions: [
           TextButton(
-            onPressed: () => Navigator.pop(context, false),
-            child: const Text('取消'),
+            onPressed: () => Navigator.pop(ctx, false),
+            child: Text(AppLocalizations.of(context)!.cancel),
           ),
           TextButton(
-            onPressed: () => Navigator.pop(context, true),
+            onPressed: () => Navigator.pop(ctx, true),
             style: TextButton.styleFrom(foregroundColor: Colors.red),
-            child: const Text('删除'),
+            child: Text(AppLocalizations.of(context)!.delete),
           ),
         ],
       ),
@@ -353,7 +354,7 @@ class _GeJuListPageState extends State<GeJuListPage> {
       final success = await viewModel.deleteRule(rule.id);
       if (!success && context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(viewModel.errorMessage ?? '删除失败')),
+          SnackBar(content: Text(viewModel.errorMessage ?? AppLocalizations.of(context)!.deleteFailed)),
         );
       }
     }

@@ -47,6 +47,7 @@
       "error": { "type": "String" }
     }
   },
+  "searchGeJuHint": "搜索格局名称、描述...",
   "generateChartFailed": "生成命盘失败: {error}",
   "@generateChartFailed": {
     "placeholders": {

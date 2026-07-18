@@ -98,6 +98,9 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
+  String get searchGeJuHint => '搜索格局名称、描述...';
+
+  @override
   String generateChartFailed(String error) {
     return '生成命盘失败: $error';
   }

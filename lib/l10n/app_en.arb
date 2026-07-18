@@ -27,5 +27,6 @@
   "customSchoolSaved": "Custom school saved",
   "configSaved": "Configuration saved",
   "saveFailed": "Save failed: {error}",
+  "searchGeJuHint": "Search pattern name, description...",
   "generateChartFailed": "Chart generation failed: {error}"
 }

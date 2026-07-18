@@ -260,6 +260,12 @@ abstract class AppLocalizations {
   /// **'保存失败: {error}'**
   String saveFailed(String error);
 
+  /// No description provided for @searchGeJuHint.
+  ///
+  /// In zh, this message translates to:
+  /// **'搜索格局名称、描述...'**
+  String get searchGeJuHint;
+
   /// No description provided for @generateChartFailed.
   ///
   /// In zh, this message translates to:

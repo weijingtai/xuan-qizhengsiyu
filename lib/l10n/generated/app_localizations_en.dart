@@ -100,6 +100,9 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get searchGeJuHint => 'Search pattern name, description...';
+
+  @override
   String generateChartFailed(String error) {
     return 'Chart generation failed: $error';
   }
