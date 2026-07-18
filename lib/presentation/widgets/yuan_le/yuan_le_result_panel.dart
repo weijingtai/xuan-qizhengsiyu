@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:qizhengsiyu/domain/entities/models/base_panel_model.dart';
 import 'package:qizhengsiyu/domain/entities/models/passage_year_panel_model.dart';
 import 'package:qizhengsiyu/domain/entities/models/yuan_le_panel_model.dart';
-import 'package:qizhengsiyu/domain/services/yuan_le_panel_builder.dart';
+import 'package:qizhengsiyu/domain/usecases/build_yuan_le_panel_usecase.dart';
 import 'package:qizhengsiyu/presentation/viewmodels/qi_zheng_si_yu_viewmodel.dart';
 
 // ─── 调色板 ──────────────────────────────────────────────────────────────
@@ -36,7 +36,7 @@ class YuanLeResultPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final vm = context.read<QiZhengSiYuViewModel>();
-    final builder = context.read<YuanLePanelBuilder>();
+    final builder = context.read<BuildYuanLePanelUseCase>();
 
     return ValueListenableBuilder<BasePanelModel?>(
       valueListenable: vm.uiBasePanelNotifier,
@@ -51,7 +51,7 @@ class YuanLeResultPanel extends StatelessWidget {
           builder: (context, transitPanel, _) {
             // 构建垣乐面板是异步操作
             return FutureBuilder<YuanLePanel>(
-              future: builder.build(
+              future: builder.execute(
                 natalPanel,
                 transitPanel: transitPanel,
               ),

@@ -38,6 +38,7 @@ import 'package:qizhengsiyu/domain/usecases/get_si_yu_profiles_usecase.dart';
 import 'package:qizhengsiyu/domain/usecases/validate_panel_config_usecase.dart';
 import 'package:qizhengsiyu/domain/usecases/compute_rise_set_usecase.dart';
 import 'package:qizhengsiyu/domain/usecases/yun_liu_usecase.dart';
+import 'package:qizhengsiyu/domain/usecases/build_yuan_le_panel_usecase.dart';
 
 // GeJu 相关导入
 import 'package:qizhengsiyu/domain/services/ge_ju_crud_service.dart';
@@ -156,6 +157,10 @@ List<SingleChildWidget> createProviders(QiZhengSiYuStorageDependencies deps) {
       create: (context) => YuanLePanelBuilder(
         positionStatusRepo: deps.starPositionStatus,
       ),
+    ),
+    Provider<BuildYuanLePanelUseCase>(
+      create: (context) =>
+          BuildYuanLePanelUseCase(builder: context.read<YuanLePanelBuilder>()),
     ),
 
     // ============ UseCases ============

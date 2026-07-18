@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:qizhengsiyu/domain/entities/models/base_panel_model.dart';
 import 'package:qizhengsiyu/domain/entities/models/passage_year_panel_model.dart';
 import 'package:qizhengsiyu/domain/entities/models/yuan_le_panel_model.dart';
-import 'package:qizhengsiyu/domain/services/yuan_le_panel_builder.dart';
+import 'package:qizhengsiyu/domain/usecases/build_yuan_le_panel_usecase.dart';
 import 'package:qizhengsiyu/presentation/viewmodels/qi_zheng_si_yu_viewmodel.dart';
 import 'package:metaphysics_core/enums.dart';
 import 'package:qizhengsiyu/enums/enum_star_position_status.dart';
@@ -80,7 +80,7 @@ class _YuanLeResultPanelV2State extends State<YuanLeResultPanelV2> {
     }
     _lastNatalPanel = natalPanel;
     _lastTransitPanel = transitPanel;
-    _cachedFuture = context.read<YuanLePanelBuilder>().build(
+    _cachedFuture = context.read<BuildYuanLePanelUseCase>().execute(
       natalPanel,
       transitPanel: transitPanel,
     );
