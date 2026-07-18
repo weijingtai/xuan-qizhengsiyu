@@ -125,3 +125,7 @@ dependency_overrides:
     path: ../../xuan-time-location
   calendar:
     path: ../../calendar
+  repository_interface_qizhengsiyu:
+    path: ../../repository-interface-qizhengsiyu
+  persistence_preferences:
+    path: ../../xuan-storage/preferences

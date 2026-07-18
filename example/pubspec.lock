@@ -156,10 +156,10 @@ packages:
     dependency: transitive
     description:
       name: characters
-      sha256: f71061c654a3380576a52b451dd5532377954cf9dbd272a78fc8479606670803
+      sha256: faf38497bda5ead2a8c7615f4f7939df04333478bf32e4173fcb06d428b5716b
       url: "https://pub.dev"
     source: hosted
-    version: "1.4.0"
+    version: "1.4.1"
   charcode:
     dependency: transitive
     description:
@@ -299,9 +299,11 @@ packages:
   divination_case:
     dependency: transitive
     description:
-      path: "../../xuan-divination-case"
-      relative: true
-    source: path
+      path: "."
+      ref: HEAD
+      resolved-ref: a11a429b57447ef632e008d61f146e3362e49162
+      url: "http://192.168.0.165:3000/xuan/xuan-divination-case.git"
+    source: git
     version: "0.1.0"
   dotlottie_loader:
     dependency: "direct main"
@@ -436,6 +438,11 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.0.0"
+  flutter_localizations:
+    dependency: transitive
+    description: flutter
+    source: sdk
+    version: "0.0.0"
   flutter_map:
     dependency: "direct main"
     description:
@@ -770,32 +777,34 @@ packages:
     dependency: transitive
     description:
       name: matcher
-      sha256: dc58c723c3c24bf8d3e2d3ad3f2f9d7bd9cf43ec6feaa64181775e60190153f2
+      sha256: dc0b7dc7651697ea4ff3e69ef44b0407ea32c487a39fff6a4004fa585e901861
       url: "https://pub.dev"
     source: hosted
-    version: "0.12.17"
+    version: "0.12.19"
   material_color_utilities:
     dependency: transitive
     description:
       name: material_color_utilities
-      sha256: f7142bb1154231d7ea5f96bc7bde4bda2a0945d2806bb11670e30b850d56bdec
+      sha256: "9c337007e82b1889149c82ed242ed1cb24a66044e30979c44912381e9be4c48b"
       url: "https://pub.dev"
     source: hosted
-    version: "0.11.1"
+    version: "0.13.0"
   meta:
     dependency: "direct main"
     description:
       name: meta
-      sha256: "23f08335362185a5ea2ad3a4e597f1375e78bce8a040df5c600c8d3552ef2394"
+      sha256: "1741988757a65eb6b36abe716829688cf01910bbf91c34354ff7ec1c3de2b349"
       url: "https://pub.dev"
     source: hosted
-    version: "1.17.0"
+    version: "1.18.0"
   metaphysics_chart_ui:
     dependency: transitive
     description:
-      path: "../../metaphysics-chart-ui"
-      relative: true
-    source: path
+      path: "."
+      ref: HEAD
+      resolved-ref: "1cc8b46047a5f356c9be627f3ca175c307b7ae1c"
+      url: "http://192.168.0.165:3000/xuan/metaphysics-chart-ui.git"
+    source: git
     version: "0.0.1"
   metaphysics_core:
     dependency: "direct overridden"
@@ -1065,23 +1074,38 @@ packages:
   repository_interface_account:
     dependency: transitive
     description:
-      path: "../../repository-interface-account"
-      relative: true
-    source: path
+      path: "."
+      ref: HEAD
+      resolved-ref: "7f4b7dd06f1c8f67d983cf5b7510905aa87575e3"
+      url: "http://192.168.0.165:3000/xuan/repository-interface-account.git"
+    source: git
     version: "0.0.0"
   repository_interface_ai:
     dependency: transitive
     description:
-      path: "../../repository-interface-ai"
-      relative: true
-    source: path
+      path: "."
+      ref: HEAD
+      resolved-ref: "6d6630bd7243adc71e831f96deae43f0183b3a6e"
+      url: "http://192.168.0.165:3000/xuan/repository-interface-ai.git"
+    source: git
     version: "0.0.0"
+  repository_interface_bazi:
+    dependency: transitive
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: a299ef169351ad9e6318b43d47c545fb784a2350
+      url: "http://192.168.0.165:3000/xuan/repository-interface-bazi.git"
+    source: git
+    version: "0.1.0"
   repository_interface_daliuren:
     dependency: transitive
     description:
-      path: "../../repository-interface-daliuren"
-      relative: true
-    source: path
+      path: "."
+      ref: main
+      resolved-ref: e7fc164195f71f1c782b2bb370ef83dd17a5424e
+      url: "http://192.168.0.165:3000/xuan/repository-interface-daliuren.git"
+    source: git
     version: "0.0.0"
   repository_interface_four_zhu_card:
     dependency: "direct overridden"
@@ -1093,23 +1117,29 @@ packages:
   repository_interface_liuyao:
     dependency: transitive
     description:
-      path: "../../repository-interface-liuyao"
-      relative: true
-    source: path
+      path: "."
+      ref: HEAD
+      resolved-ref: "039fc9a55f630ef5927fa220ef6fe6b99dcddb84"
+      url: "http://192.168.0.165:3000/xuan/repository-interface-liuyao.git"
+    source: git
     version: "0.0.0"
   repository_interface_meihuayishu:
     dependency: transitive
     description:
-      path: "../../repository-interface-meihuayishu"
-      relative: true
-    source: path
+      path: "."
+      ref: HEAD
+      resolved-ref: "13212590c2ad2c3c276dc83dc41a5dd9d9dccf3a"
+      url: "http://192.168.0.165:3000/xuan/repository-interface-meihuayishu.git"
+    source: git
     version: "0.0.0"
   repository_interface_qimendunjia:
     dependency: transitive
     description:
-      path: "../../repository-interface-qimendunjia"
-      relative: true
-    source: path
+      path: "."
+      ref: HEAD
+      resolved-ref: a121ff82b6405c04511781aed1b330a498b91f54
+      url: "http://192.168.0.165:3000/xuan/repository-interface-qimendunjia.git"
+    source: git
     version: "0.0.0"
   repository_interface_qizhengsiyu:
     dependency: "direct main"
@@ -1121,30 +1151,38 @@ packages:
   repository_interface_record:
     dependency: transitive
     description:
-      path: "../../repository-interface-record"
-      relative: true
-    source: path
+      path: "."
+      ref: HEAD
+      resolved-ref: "2fd7c1c2c7e8aefaac6a8a9a79a4d7ab5a1cb7d2"
+      url: "http://192.168.0.165:3000/xuan/repository-interface-record.git"
+    source: git
     version: "0.0.0"
   repository_interface_taiyishenshu:
     dependency: transitive
     description:
-      path: "../../repository-interface-taiyishenshu"
-      relative: true
-    source: path
+      path: "."
+      ref: HEAD
+      resolved-ref: "16cce149a37164718950bdb0295450c9f4155d61"
+      url: "http://192.168.0.165:3000/xuan/repository-interface-taiyishenshu.git"
+    source: git
     version: "0.0.0"
   repository_interface_tiebanshenshu:
     dependency: transitive
     description:
-      path: "../../repository-interface-tiebanshenshu"
-      relative: true
-    source: path
+      path: "."
+      ref: HEAD
+      resolved-ref: "99ae19a96cb35f6d6160c31db3c7a619e3601f51"
+      url: "http://192.168.0.165:3000/xuan/repository-interface-tiebanshenshu.git"
+    source: git
     version: "0.0.0"
   repository_interface_ziweidoushu:
     dependency: transitive
     description:
-      path: "../../repository-interface-ziweidoushu"
-      relative: true
-    source: path
+      path: "."
+      ref: HEAD
+      resolved-ref: "4d5b45cf13a587ba866d1ca1843f202b8d7ff798"
+      url: "http://192.168.0.165:3000/xuan/repository-interface-ziweidoushu.git"
+    source: git
     version: "0.0.0"
   responsive_framework:
     dependency: "direct main"
@@ -1346,9 +1384,11 @@ packages:
   taiyishenshu:
     dependency: transitive
     description:
-      path: "../../xuan-taiyishenshu"
-      relative: true
-    source: path
+      path: "."
+      ref: HEAD
+      resolved-ref: bf30e09dc57e6e620ad1917ccefffb54c1ae3cd0
+      url: "http://192.168.0.165:3000/xuan/xuan-taiyishenshu.git"
+    source: git
     version: "1.1.0+2"
   term_glyph:
     dependency: transitive
@@ -1362,10 +1402,10 @@ packages:
     dependency: transitive
     description:
       name: test_api
-      sha256: ab2726c1a94d3176a45960b6234466ec367179b87dd74f1611adb1f3b5fb9d55
+      sha256: "949a932224383300f01be9221c39180316445ecb8e7547f70a41a35bf421fb9e"
       url: "https://pub.dev"
     source: hosted
-    version: "0.7.7"
+    version: "0.7.11"
   theme:
     dependency: "direct overridden"
     description:
@@ -1528,23 +1568,29 @@ packages:
   xuan_common_ui:
     dependency: transitive
     description:
-      path: "../../xuan-common-ui"
-      relative: true
-    source: path
+      path: "."
+      ref: HEAD
+      resolved-ref: "23bfe2a142f598d81c8717ba816f84597cb8cb6a"
+      url: "http://192.168.0.165:3000/xuan/xuan-common-ui.git"
+    source: git
     version: "1.0.0"
   xuan_config:
     dependency: transitive
     description:
-      path: "../../xuan_config"
-      relative: true
-    source: path
+      path: "."
+      ref: HEAD
+      resolved-ref: "9264c3cc81f5199163e03b379bf8091378f2a061"
+      url: "http://192.168.0.165:3000/xuan/xuan_config.git"
+    source: git
     version: "0.1.0"
   xuan_four_zhu_card:
     dependency: transitive
     description:
-      path: "../../xuan-four-zhu-card"
-      relative: true
-    source: path
+      path: "."
+      ref: HEAD
+      resolved-ref: c3a81e0af86b5d818106d87594152c88c39eb175
+      url: "http://192.168.0.165:3000/xuan/xuan-four-zhu-card.git"
+    source: git
     version: "0.1.0"
   xuan_gua_core:
     dependency: "direct overridden"
@@ -1556,9 +1602,11 @@ packages:
   xuan_logger:
     dependency: transitive
     description:
-      path: "../../xuan-logger"
-      relative: true
-    source: path
+      path: "."
+      ref: HEAD
+      resolved-ref: d8deb4d0d0692b577f6b2c758630d0fe9fdd8742
+      url: "http://192.168.0.165:3000/xuan/xuan-logger.git"
+    source: git
     version: "1.0.0"
   xuan_time_location:
     dependency: "direct overridden"
@@ -1576,5 +1624,5 @@ packages:
     source: hosted
     version: "3.1.3"
 sdks:
-  dart: ">=3.10.3 <4.0.0"
+  dart: ">=3.11.0 <4.0.0"
   flutter: ">=3.38.4"
