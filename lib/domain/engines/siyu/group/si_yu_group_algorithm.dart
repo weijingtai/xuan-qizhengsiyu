@@ -1,6 +1,7 @@
 import 'package:metaphysics_core/enums.dart';
+import 'package:qizhengsiyu/domain/entities/models/si_yu_group.dart';
 
-enum SiYuGroup { luoJi, yueBo, ziQi }
+export 'package:qizhengsiyu/domain/entities/models/si_yu_group.dart';
 
 /// 四余算法组统一策略：一次产出本组所有星的位置(度，坐标框架由算法自持)。
 abstract interface class SiYuGroupAlgorithm {

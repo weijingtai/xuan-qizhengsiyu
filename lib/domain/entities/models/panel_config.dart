@@ -3,7 +3,7 @@ import 'package:qizhengsiyu/enums/enum_settle_life_body.dart';
 import 'package:qizhengsiyu/enums/enum_twelve_gong.dart';
 import 'package:qizhengsiyu/enums/enum_rahu_ketu_convention.dart';
 import 'package:qizhengsiyu/enums/enum_zi_qi_algorithm.dart';
-import 'package:qizhengsiyu/domain/engines/siyu/spec/si_yu_group_spec.dart';
+import 'package:qizhengsiyu/domain/entities/models/si_yu_group_spec.dart';
 
 import '../../../enums/enum_panel_system_type.dart';
 import '../../../enums/enum_zhou_tian_model.dart';
