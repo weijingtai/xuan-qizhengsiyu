@@ -56,7 +56,7 @@ dependencies:
   # HTTP 请求（LLM API）
   http: ^1.2.0
 
-  # xuan-ai Chat Window（本地 path 依赖）
+  # xuan-ai Chat Window（私有 Gitea 依赖）
   ai_core:
     git:
       url: http://xuan:***@192.168.0.165:3000/xuan/xuan-ai.git
@@ -76,15 +76,14 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^5.0.0
   drift_dev: ^2.30.1
-  build_runner: ^2.4.6
+  build_runner: ^2.17.0
 
 dependency_overrides:
   # 版本冲突覆盖
   google_fonts: ^6.2.1
   ai_core:
-    path: ../../xuan-ai
-
-
+    git:
+      url: http://192.168.0.165:3000/xuan/xuan-ai.git
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
