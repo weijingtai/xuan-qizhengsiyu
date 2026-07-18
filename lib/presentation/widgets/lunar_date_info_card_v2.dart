@@ -5,7 +5,7 @@ import 'package:timezone/timezone.dart' as tz;
 import 'package:metaphysics_core/models/chinese_date_info.dart';
 import 'package:metaphysics_core/models/seventy_two_phenology.dart';
 
-import 'package:metaphysics_core/helpers/solar_lunar_datetime_helper.dart';
+import 'package:qizhengsiyu/domain/entities/models/lunar_display_helper.dart';
 
 import '../models/lunar_date_info_v2_data.dart';
 
@@ -239,7 +239,7 @@ class LunarDateInfoCardV2 extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Text(
-              '${eightChars.year.name}年 ${chineseDateInfo!.isLeapMonth ? "[闰]" : ""}${SolarLunarDateTimeHelper.intMonth2ChineseMap[lunarMonthName]}月${SolarLunarDateTimeHelper.intDay2ChineseMap[lunarDayName]}日 ${eightChars.time.diZhi.name}时',
+              '${eightChars.year.name}年 ${chineseDateInfo!.isLeapMonth ? "[闰]" : ""}${LunarDisplayHelper.intMonth2ChineseMap[lunarMonthName]}月${LunarDisplayHelper.intDay2ChineseMap[lunarDayName]}日 ${eightChars.time.diZhi.name}时',
               style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w500,
@@ -249,7 +249,7 @@ class LunarDateInfoCardV2 extends StatelessWidget {
             ),
             const SizedBox(width: 8),
             Text(
-              '${SolarLunarDateTimeHelper.intMonthTo4SeasonsMap[chineseDateInfo!.lunarMonth]}',
+              '${LunarDisplayHelper.intMonthTo4SeasonsMap[chineseDateInfo!.lunarMonth]}',
               style: TextStyle(
                 fontSize: 14,
                 color: mainlyTextThemeColor,
@@ -479,13 +479,6 @@ class LunarDateInfoCardV2 extends StatelessWidget {
 
     // If coordinates are null, we still show the mockup for dev purposes
     // but in final version we should use calculateDaily
-    /*
-    final dailyInfo = CelestialRiseSetCalculator.calculateDaily(
-      utcDateTime: dateTime!.toUtc(),
-      longitude: coordinates?.longitude ?? 121.4726,
-      latitude: coordinates?.latitude ?? 31.2317,
-    );
-    */
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),

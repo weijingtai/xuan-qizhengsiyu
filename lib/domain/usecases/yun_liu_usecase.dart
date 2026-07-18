@@ -14,6 +14,10 @@ final class YunLiuUseCase {
 
   YunLiuUseCase({YunLiuService? service}) : _service = service ?? YunLiuService();
 
+  /// 暴露底层 service 供 calendar 包的 YunLiuViewModel 构造使用。
+  /// presentation 层通过 UseCase 间接获取,不直接 import YunLiuService。
+  YunLiuService get service => _service;
+
   List<DaYunDisplayData> calculateDaYunList({
     required DateTime birthDateTime,
     required Gender gender,

@@ -19,7 +19,6 @@ import 'package:qizhengsiyu/presentation/models/lunar_date_info_v2_data.dart';
 import 'package:qizhengsiyu/domain/entities/models/eleven_stars_info.dart';
 import 'package:qizhengsiyu/enums/enum_qi_zheng.dart';
 import 'package:metaphysics_core/enums/datetime_strategy_enums.dart';
-import 'package:metaphysics_core/domain/calculators/liu_yun/services/yun_liu_service.dart';
 import 'package:qizhengsiyu/domain/usecases/yun_liu_usecase.dart';
 import 'package:qizhengsiyu/domain/usecases/compute_gan_zhi_usecase.dart';
 import 'package:metaphysics_core/models/divination_datetime.dart';
@@ -28,7 +27,6 @@ import 'package:metaphysics_core/datamodel/datetime_divination_datamodel.dart';
 import 'package:metaphysics_core/datamodel/location.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:calendar/calendar.dart';
-import 'package:qizhengsiyu/presentation/viewmodels/yun_liu_view_model.dart' as local_yunliu;
 import 'package:qizhengsiyu/domain/entities/models/panel_config.dart' as ui_panel_config;
 import 'package:qizhengsiyu/domain/entities/models/stars_angle.dart';
 
@@ -396,7 +394,7 @@ class QiZhengSiYuViewModel extends ChangeNotifier {
 
     _yunLiuViewModel?.dispose();
     _yunLiuViewModel = YunLiuViewModel(
-      service: YunLiuService(),
+      service: _yunLiuUseCase.service,
       birthDateTime: observer.dateTime,
       gender: Gender.male,
       birthDateInfo: birthDateInfo,

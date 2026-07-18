@@ -5,7 +5,7 @@ publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.11.0 <4.0.0'
+  sdk: '>=3.1.0 <4.0.0'
 
 dependencies:
   flutter:
@@ -67,27 +67,20 @@ dependencies:
   decimal: ^3.2.4
   protobuf: ^6.0.0
   persistence_preferences:
-    git:
-      url: http://192.168.0.165:3000/xuan/xuan-storage.git
-      path: preferences
+    path: ../../xuan-storage/preferences
   persistence_drift:
-    git:
-      url: http://192.168.0.165:3000/xuan/xuan-storage.git
-      path: drift
+    path: ../../xuan-storage/drift
   persistence_assets:
-    git:
-      url: http://192.168.0.165:3000/xuan/xuan-storage.git
-      path: assets
+    path: ../../xuan-storage/assets
   repository_interface_qizhengsiyu:
-    git:
-      url: http://192.168.0.165:3000/xuan/repository-interface-qizhengsiyu.git
+    path: ../../repository-interface-qizhengsiyu
   shared_preferences: ^2.2.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^6.0.0
-  build_runner: ^2.17.0
+  build_runner: ^2.10.5
   drift_dev: ^2.30.1
 
 flutter:
@@ -111,38 +104,24 @@ flutter:
 
 dependency_overrides:
   qizhengsiyu:
-    git:
-      url: http://192.168.0.165:3000/xuan/xuan-qizhengsiyu.git
+    path: ..
   persistence_core:
-    git:
-      url: http://192.168.0.165:3000/xuan/xuan-storage.git
-      path: core
+    path: ../../xuan-storage/core
   persistence_drift:
-    git:
-      url: http://192.168.0.165:3000/xuan/xuan-storage.git
-      path: drift
+    path: ../../xuan-storage/drift
   persistence_assets:
-    git:
-      url: http://192.168.0.165:3000/xuan/xuan-storage.git
-      path: assets
+    path: ../../xuan-storage/assets
   metaphysics_core:
-    git:
-      url: http://192.168.0.165:3000/xuan/metaphysics-core.git
+    path: ../../xuan-metaphysics-core
   xuan_gua_core:
-    git:
-      url: http://192.168.0.165:3000/xuan/xuan-gua-core.git
+    path: ../../xuan-gua-core
   theme:
-    git:
-      url: http://192.168.0.165:3000/xuan/theme.git
+    path: ../../theme
   repository_interface_four_zhu_card:
-    git:
-      url: http://192.168.0.165:3000/xuan/repository-interface-four-zhu-card.git
+    path: ../../repository-interface-four-zhu-card
   persistence_domain:
-    git:
-      url: http://192.168.0.165:3000/xuan/xuan-domain.git
+    path: ../../xuan-domain
   xuan_time_location:
-    git:
-      url: http://192.168.0.165:3000/xuan/time-location.git
+    path: ../../xuan-time-location
   calendar:
-    git:
-      url: http://192.168.0.165:3000/xuan/calendar.git
+    path: ../../calendar
