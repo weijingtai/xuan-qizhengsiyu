@@ -13,6 +13,7 @@ import 'package:flutter_city_picker/model/address.dart';
 import 'package:flutter_sliding_toast/flutter_sliding_toast.dart';
 import 'package:intl/intl.dart';
 import 'package:qizhengsiyu/theme/app_theme.dart';
+import 'package:qizhengsiyu/l10n/generated/app_localizations.dart';
 import 'package:slide_switcher/slide_switcher.dart';
 import 'package:timezone/timezone.dart' as tz;
 
@@ -210,7 +211,7 @@ class _BasicInfoSectionState extends State<BasicInfoSection>
                     TextFormField(
                       controller: _nameController,
                       decoration: InputDecoration(
-                        hintText: '请输入姓名',
+                        hintText: AppLocalizations.of(context)!.nameHint,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
@@ -606,7 +607,7 @@ class _BasicInfoSectionState extends State<BasicInfoSection>
               TextFormField(
                 controller: _querierController,
                 decoration: InputDecoration(
-                  hintText: '请输入福主姓名',
+                  hintText: AppLocalizations.of(context)!.fuzhuNameHint,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),

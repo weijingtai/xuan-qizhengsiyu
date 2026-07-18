@@ -120,6 +120,21 @@ class AppLocalizationsEn extends AppLocalizations {
   String get discard => 'Discard';
 
   @override
+  String get nameHint => 'Please enter name';
+
+  @override
+  String get fuzhuNameHint => 'Please enter client name';
+
+  @override
+  String get loading => 'Loading...';
+
+  @override
+  String get confirm => 'Confirm';
+
+  @override
+  String get geJuRulesDesc => 'View and edit pattern rules';
+
+  @override
   String get searchGeJuHint => 'Search pattern name, description...';
 
   @override

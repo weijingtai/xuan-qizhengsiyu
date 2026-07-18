@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:qizhengsiyu/l10n/generated/app_localizations.dart';
 
 /// 七政四余模块入口选择页
 class QiZhengSiYuHomePage extends StatelessWidget {
@@ -26,7 +27,7 @@ class QiZhengSiYuHomePage extends StatelessWidget {
             context,
             icon: Icons.auto_awesome,
             title: '格局管理',
-            subtitle: '查看、编辑格局规则',
+            subtitle: AppLocalizations.of(context)!.geJuRulesDesc,
             route: '/qizhengsiyu/ge_ju/list',
           ),
         ],

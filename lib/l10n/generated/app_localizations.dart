@@ -296,6 +296,36 @@ abstract class AppLocalizations {
   /// **'放弃'**
   String get discard;
 
+  /// No description provided for @nameHint.
+  ///
+  /// In zh, this message translates to:
+  /// **'请输入姓名'**
+  String get nameHint;
+
+  /// No description provided for @fuzhuNameHint.
+  ///
+  /// In zh, this message translates to:
+  /// **'请输入福主姓名'**
+  String get fuzhuNameHint;
+
+  /// No description provided for @loading.
+  ///
+  /// In zh, this message translates to:
+  /// **'加载中...'**
+  String get loading;
+
+  /// No description provided for @confirm.
+  ///
+  /// In zh, this message translates to:
+  /// **'确定'**
+  String get confirm;
+
+  /// No description provided for @geJuRulesDesc.
+  ///
+  /// In zh, this message translates to:
+  /// **'查看、编辑格局规则'**
+  String get geJuRulesDesc;
+
   /// No description provided for @searchGeJuHint.
   ///
   /// In zh, this message translates to:

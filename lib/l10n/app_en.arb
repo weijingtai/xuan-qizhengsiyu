@@ -33,6 +33,11 @@
   "confirmDiscardChanges": "You have unsaved changes. Are you sure you want to discard them?",
   "continueEditing": "Continue Editing",
   "discard": "Discard",
+  "nameHint": "Please enter name",
+  "fuzhuNameHint": "Please enter client name",
+  "loading": "Loading...",
+  "confirm": "Confirm",
+  "geJuRulesDesc": "View and edit pattern rules",
   "searchGeJuHint": "Search pattern name, description...",
   "generateChartFailed": "Chart generation failed: {error}"
 }

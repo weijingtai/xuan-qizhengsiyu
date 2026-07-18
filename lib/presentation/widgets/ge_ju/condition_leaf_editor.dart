@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:qizhengsiyu/presentation/models/condition_editor_node.dart';
 import 'package:qizhengsiyu/presentation/models/condition_type_registry.dart';
 import 'package:qizhengsiyu/presentation/widgets/ge_ju/condition_param_widgets.dart';
+import 'package:qizhengsiyu/l10n/generated/app_localizations.dart';
 
 /// 显示叶子条件编辑器对话框
 ///
@@ -86,7 +87,7 @@ class _ConditionLeafEditorPageState extends State<_ConditionLeafEditorPage> {
         actions: [
           TextButton(
             onPressed: _save,
-            child: const Text('确定'),
+            child: Text(AppLocalizations.of(context)!.confirm),
           ),
         ],
       ),

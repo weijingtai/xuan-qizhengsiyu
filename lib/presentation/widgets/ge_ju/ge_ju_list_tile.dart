@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_annotation.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_rule.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju_model.dart';
+import 'package:qizhengsiyu/l10n/generated/app_localizations.dart';
 
 /// 格局列表项组件
 class GeJuListTile extends StatelessWidget {
@@ -101,13 +102,13 @@ class GeJuListTile extends StatelessWidget {
           }
         },
         itemBuilder: (context) => [
-          const PopupMenuItem(
+          PopupMenuItem(
             value: 'duplicate',
             child: Row(
               children: [
-                Icon(Icons.copy, size: 18),
-                SizedBox(width: 8),
-                Text('复制'),
+                const Icon(Icons.copy, size: 18),
+                const SizedBox(width: 8),
+                Text(AppLocalizations.of(context)!.copy),
               ],
             ),
           ),
@@ -118,7 +119,7 @@ class GeJuListTile extends StatelessWidget {
                 children: [
                   Icon(Icons.delete, size: 18, color: Colors.red),
                   const SizedBox(width: 8),
-                  const Text('删除', style: TextStyle(color: Colors.red)),
+                  Text(AppLocalizations.of(context)!.delete, style: const TextStyle(color: Colors.red)),
                 ],
               ),
             ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_school.dart';
+import 'package:qizhengsiyu/l10n/generated/app_localizations.dart';
 
 /// 流派多选组件（FilterChip Wrap）
 class GeJuSchoolSelector extends StatelessWidget {
@@ -19,7 +20,7 @@ class GeJuSchoolSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (allSchools.isEmpty) {
-      return Text('暂无流派', style: TextStyle(color: Colors.grey.shade500));
+      return Text(AppLocalizations.of(context)!.noSchools, style: TextStyle(color: Colors.grey.shade500));
     }
 
     return Wrap(

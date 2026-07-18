@@ -116,6 +116,21 @@ class AppLocalizationsZh extends AppLocalizations {
   String get discard => '放弃';
 
   @override
+  String get nameHint => '请输入姓名';
+
+  @override
+  String get fuzhuNameHint => '请输入福主姓名';
+
+  @override
+  String get loading => '加载中...';
+
+  @override
+  String get confirm => '确定';
+
+  @override
+  String get geJuRulesDesc => '查看、编辑格局规则';
+
+  @override
   String get searchGeJuHint => '搜索格局名称、描述...';
 
   @override

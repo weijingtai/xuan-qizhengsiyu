@@ -12,6 +12,7 @@ import 'package:metaphysics_core/models/divination_info_model.dart';
 import 'package:xuan_four_zhu_card/pages/dev_enter_page_view_model.dart';
 import 'package:qizhengsiyu/domain/entities/models/base_panel_model.dart';
 import 'package:qizhengsiyu/domain/entities/models/passage_year_panel_model.dart';
+import 'package:qizhengsiyu/l10n/generated/app_localizations.dart';
 
 import 'package:qizhengsiyu/domain/entities/models/eleven_stars_info.dart';
 import 'package:qizhengsiyu/domain/entities/models/zhou_tian_model.dart';
@@ -772,7 +773,7 @@ class _BeautyViewPageState extends State<BeautyViewPage>
                     borderRadius: BorderRadius.circular(centerSize),
                     border: Border.all(color: Colors.black54),
                   ),
-                  child: const Text('加载中...'),
+                  child: Text(AppLocalizations.of(context)!.loading),
                 )
               : center(basePanel),
           zhouTianModel: vm.uiZhouTianModelNotifier.value,
@@ -1157,7 +1158,7 @@ class _BeautyViewPageState extends State<BeautyViewPage>
                     borderRadius: BorderRadius.circular(centerSize),
                     border: Border.all(color: Colors.black54, width: 1),
                   ),
-                  child: const Text("加载中..."),
+                  child: Text(AppLocalizations.of(context)!.loading),
                 );
               }
               return center(baseModel);

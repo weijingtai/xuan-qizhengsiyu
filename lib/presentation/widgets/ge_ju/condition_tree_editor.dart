@@ -3,6 +3,7 @@ import 'package:qizhengsiyu/presentation/models/condition_editor_node.dart';
 import 'package:qizhengsiyu/presentation/models/condition_type_registry.dart';
 import 'package:qizhengsiyu/presentation/widgets/ge_ju/condition_leaf_editor.dart';
 import 'package:qizhengsiyu/presentation/widgets/ge_ju/condition_type_picker.dart';
+import 'package:qizhengsiyu/l10n/generated/app_localizations.dart';
 
 /// 可交互的条件树编辑器
 class ConditionTreeEditor extends StatelessWidget {
@@ -401,7 +402,7 @@ class _NodePopupMenu extends StatelessWidget {
         const PopupMenuDivider(),
         PopupMenuItem(
           value: 'delete',
-          child: Text('删除', style: TextStyle(color: Colors.red.shade700)),
+          child: Text(AppLocalizations.of(context)!.delete, style: TextStyle(color: Colors.red.shade700)),
         ),
       ],
       onSelected: (action) {
