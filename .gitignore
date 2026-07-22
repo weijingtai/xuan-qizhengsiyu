@@ -57,3 +57,4 @@ example/.chrome-profile/
 .gstack/
 .claude/
 .commandcode/
+pubspec_overrides.yaml
