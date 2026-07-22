@@ -219,6 +219,10 @@ class QiZhengSiYuViewModel extends ChangeNotifier {
         coordinates =
             datetimeModel.observer.location!.address!.province.coordinates;
         break;
+      case EnumDatetimeType.politicalCenter:
+        coordinates =
+            datetimeModel.observer.location!.address!.province.coordinates;
+        break;
       case EnumDatetimeType.meanSolar:
         coordinates =
             datetimeModel.observer.location!.address!.city?.coordinates ??

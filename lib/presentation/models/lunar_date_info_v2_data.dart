@@ -27,6 +27,8 @@ class LunarDateInfoV2Data {
         return bundle.standeredChineseInfo;
       case EnumDatetimeType.removeDST:
         return bundle.removeDSTChineseInfo;
+      case EnumDatetimeType.politicalCenter:
+        return bundle.politicalCenterChineseInfo;
       case EnumDatetimeType.meanSolar:
         return bundle.meanSolarChineseInfo;
       case EnumDatetimeType.trueSolar:
@@ -40,6 +42,8 @@ class LunarDateInfoV2Data {
         return bundle.standeredDatetime;
       case EnumDatetimeType.removeDST:
         return bundle.removeDSTDatetime;
+      case EnumDatetimeType.politicalCenter:
+        return bundle.politicalCenterDatetime;
       case EnumDatetimeType.meanSolar:
         return bundle.meanSolarDatetime;
       case EnumDatetimeType.trueSolar:
