@@ -71,6 +71,10 @@ dependencies:
   repository_interface_qizhengsiyu:
     git:
       url: http://192.168.0.165:3000/xuan/repository-interface-qizhengsiyu.git
+  repository_interface_divination_pipeline:
+    git:
+      url: http://192.168.0.165:3000/xuan/repository-interface-divination-pipeline.git
+      ref: main
   drift: ^2.30.1
   drift_flutter: ^0.2.8
   sqlite3_flutter_libs: ^0.5.41
@@ -163,6 +167,10 @@ flutter:
     iosBundleIdentifier: com.example.qizhengsiyu
 
 dependency_overrides:
+  repository_interface_divination_pipeline:
+    git:
+      url: http://192.168.0.165:3000/xuan/repository-interface-divination-pipeline.git
+      ref: main
   persistence_core:
     git:
       url: http://192.168.0.165:3000/xuan/xuan-storage.git

@@ -33,14 +33,15 @@ class GenerateBasePanelService {
   final BasePanelConfig panelConfig;
   final ObserverPosition observerPosition;
 
-  final ShenShaManager shenShaManager;
-  final HuaYaoManager huaYaoManager;
+  final ShenShaManager? shenShaManager;
+  final HuaYaoManager? huaYaoManager;
 
-  GenerateBasePanelService(
-      {required this.panelConfig,
-      required this.observerPosition,
-      required this.shenShaManager,
-      required this.huaYaoManager});
+  GenerateBasePanelService({
+    required this.panelConfig,
+    required this.observerPosition,
+    this.shenShaManager,
+    this.huaYaoManager,
+  });
 
   // --- Zi Qi (Purple Gas) Calculation Constants & Methods ---
 
@@ -73,16 +74,15 @@ class GenerateBasePanelService {
     return result;
   }
 
-  Future<BasePanelModel> calculate({
+  BasePanelModel calculateSync({
     required ZhouTianModel zhouTianModel,
     required Map<EnumStars, StarAngleSpeed> starAngleMapper,
-  }) async {
-    // The engine has already provided the zhouTianModel and starAngleMapper.
-    // This service is now responsible for the post-processing.
-
+    required Map<EnumTwelveGong, List<ShenSha>> shenShaMapper,
+    required Map<HuaYao, EnumStars> huaYaoMapper,
+  }) {
     // 2. 计算星体进入宫位信息
     final Map<EnumStars, EnteredInfo> enteredGongMapper =
-        _getStarEnteredInfoMapper(starAngleMapper, zhouTianModel);
+        getStarEnteredInfoMapper(starAngleMapper, zhouTianModel);
 
     // 3. 计算五星运行状态
     final Map<EnumStars, StarAngleSpeed> fiveStarMapper =
@@ -98,9 +98,53 @@ class GenerateBasePanelService {
     // 5. 根据命宫位置，排序命理十二宫
     final Map<EnumTwelveGong, EnumDestinyTwelveGong> twelveGongMapper =
         orderDestinyTwelveGong(bodyLifeModel);
-    // 6. 计算神煞位置
+
+    final Map<EnumTwelveGong, List<ShenSha>> shenShaItemMapper =
+        shenShaMapper.map((key, value) {
+      return MapEntry(key, value.map((e) => e).toList());
+    });
+
+    return _buildBasePanel(
+      zhouTianModel: zhouTianModel,
+      starAngleMapper: starAngleMapper,
+      enteredGongMapper: enteredGongMapper,
+      fiveStarWalkingTypeMapper: fiveStarWalkingTypeMapper,
+      bodyLifeModel: bodyLifeModel,
+      twelveGongMapper: twelveGongMapper,
+      shenShaMapper: shenShaMapper,
+      shenShaItemMapper: shenShaItemMapper,
+      huaYaoMapper: huaYaoMapper,
+    );
+  }
+
+  Future<BasePanelModel> calculate({
+    required ZhouTianModel zhouTianModel,
+    required Map<EnumStars, StarAngleSpeed> starAngleMapper,
+  }) async {
+    // The engine has already provided the zhouTianModel and starAngleMapper.
+    // This service is now responsible for the post-processing.
+
+    // 2. 计算星体进入宫位信息
+    final Map<EnumStars, EnteredInfo> enteredGongMapper =
+        getStarEnteredInfoMapper(starAngleMapper, zhouTianModel);
+
+    // 3. 计算五星运行状态
+    final Map<EnumStars, StarAngleSpeed> fiveStarMapper =
+        Map.fromEntries(starAngleMapper.entries.where((t) => t.key.isFiveStar));
+    final Map<EnumStars, BaseFiveStarWalkingInfo> fiveStarWalkingTypeMapper =
+        calculateFiveStarskWalingStatus(fiveStarMapper);
+
+    // 4. 计算四主（命宫主、身宫主、命度主、身度主）
+    final BodyLifeModel bodyLifeModel = calculateLifeBodyAndMaster(
+        zhouTianModel,
+        enteredGongMapper[EnumStars.Sun]!,
+        enteredGongMapper[EnumStars.Moon]!);
+    // 5. 根据命宫位置，排序命理十二宫
+    final Map<EnumTwelveGong, EnumDestinyTwelveGong> twelveGongMapper =
+        orderDestinyTwelveGong(bodyLifeModel);
+    // 6. 计算神煞位置 (async 路径需要 manager 实例)
     final Map<EnumTwelveGong, List<ShenSha>> shenShaMapper =
-        await shenShaManager.calculate(
+        await shenShaManager!.calculate(
             observerPosition.yearGanZhi,
             observerPosition.monthGanZhi,
             observerPosition.timeGanZhi,
@@ -114,22 +158,37 @@ class GenerateBasePanelService {
       return MapEntry(key, value.map((e) => e).toList());
     });
 
-    // 将神煞从ShenSha 处理成 String
-    // Map<EnumTwelveGong, List<String>> shenShaStrMapper = {};
-    // for (var i = 0; i < shenShaMapper.entries.length; i++) {
-    //   final entry = shenShaMapper.entries.elementAt(i);
-    //   final gong = entry.key;
-    //   final shenShaList = entry.value;
-    //   final result = shenShaList.map((e) => e.name).toList();
-    //   shenShaStrMapper[gong] = result;
-    // }
-
-    // 7. 计算化曜位置
-    final Map<HuaYao, EnumStars> huaYaoMapper = await huaYaoManager.calculate(
+    // 6. 计算化曜位置
+    final Map<HuaYao, EnumStars> huaYaoMapper = await huaYaoManager!.calculate(
       mingGong: bodyLifeModel.lifeGong,
       yearJiaZi: observerPosition.yearGanZhi,
       monthJiaZi: observerPosition.monthGanZhi,
     );
+
+    return _buildBasePanel(
+      zhouTianModel: zhouTianModel,
+      starAngleMapper: starAngleMapper,
+      enteredGongMapper: enteredGongMapper,
+      fiveStarWalkingTypeMapper: fiveStarWalkingTypeMapper,
+      bodyLifeModel: bodyLifeModel,
+      twelveGongMapper: twelveGongMapper,
+      shenShaMapper: shenShaMapper,
+      shenShaItemMapper: shenShaItemMapper,
+      huaYaoMapper: huaYaoMapper,
+    );
+  }
+
+  BasePanelModel _buildBasePanel({
+    required ZhouTianModel zhouTianModel,
+    required Map<EnumStars, StarAngleSpeed> starAngleMapper,
+    required Map<EnumStars, EnteredInfo> enteredGongMapper,
+    required Map<EnumStars, BaseFiveStarWalkingInfo> fiveStarWalkingTypeMapper,
+    required BodyLifeModel bodyLifeModel,
+    required Map<EnumTwelveGong, EnumDestinyTwelveGong> twelveGongMapper,
+    required Map<EnumTwelveGong, List<ShenSha>> shenShaMapper,
+    required Map<EnumTwelveGong, List<ShenSha>> shenShaItemMapper,
+    required Map<HuaYao, EnumStars> huaYaoMapper,
+  }) {
     final Map<EnumStars, List<HuaYaoItem>> huaYaoItemMapper = {};
     for (var entry in huaYaoMapper.entries) {
       if (!huaYaoItemMapper.containsKey(entry.value)) {
@@ -177,7 +236,7 @@ class GenerateBasePanelService {
 
     // 2. 计算星体进入宫位信息
     final Map<EnumStars, EnteredInfo> enteredGongMapper =
-        _getStarEnteredInfoMapper(starAngleMapper, zhouTianModel);
+        getStarEnteredInfoMapper(starAngleMapper, zhouTianModel);
 
     // 3. 计算五星运行状态
     final Map<EnumStars, StarAngleSpeed> fiveStarMapper =
@@ -187,7 +246,7 @@ class GenerateBasePanelService {
 
     // 6. 计算神煞位置
     final Map<EnumTwelveGong, List<ShenSha>> shenShaMapper =
-        await shenShaManager.calculate(
+        await shenShaManager!.calculate(
             daXianObserver.yearGanZhi,
             daXianObserver.monthGanZhi,
             daXianObserver.timeGanZhi,
@@ -200,7 +259,7 @@ class GenerateBasePanelService {
       return MapEntry(key, value.map((e) => e).toList());
     });
     // 7. 计算化曜位置
-    final Map<HuaYao, EnumStars> huaYaoMapper = await huaYaoManager.calculate(
+    final Map<HuaYao, EnumStars> huaYaoMapper = await huaYaoManager!.calculate(
       mingGong: basePanel.bodyLifeModel.lifeGong,
       yearJiaZi: daXianObserver.yearGanZhi,
       monthJiaZi: daXianObserver.monthGanZhi,
@@ -400,7 +459,7 @@ class GenerateBasePanelService {
     return result;
   }
 
-  Map<EnumStars, EnteredInfo> _getStarEnteredInfoMapper(
+  Map<EnumStars, EnteredInfo> getStarEnteredInfoMapper(
       Map<EnumStars, StarAngleSpeed> starAngleMapper,
       ZhouTianModel zhouTianModel) {
     final starEnterInfoCalculator =

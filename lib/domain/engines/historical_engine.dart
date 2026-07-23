@@ -78,4 +78,10 @@ class HistoricalEngine implements ICalculationEngine {
     // Return only the Sun's position for now
     return [sunPosition];
   }
+
+  @override
+  List<StarPositionRawData> calculateStarPositionsSync(
+      DateTime birthDate, ObserverPosition position, BasePanelConfig config, ZhouTianModel zhouTianModel) {
+    throw UnimplementedError('HistoricalEngine sync path not yet implemented');
+  }
 }

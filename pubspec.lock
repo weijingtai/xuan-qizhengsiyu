@@ -861,7 +861,7 @@ packages:
     source: git
     version: "0.0.0"
   repository_interface_divination_pipeline:
-    dependency: "direct overridden"
+    dependency: "direct main"
     description:
       path: "../repository-interface-divination-pipeline"
       relative: true
