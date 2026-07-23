@@ -33,14 +33,15 @@ class GenerateBasePanelService {
   final BasePanelConfig panelConfig;
   final ObserverPosition observerPosition;
 
-  final ShenShaManager shenShaManager;
-  final HuaYaoManager huaYaoManager;
+  final ShenShaManager? shenShaManager;
+  final HuaYaoManager? huaYaoManager;
 
-  GenerateBasePanelService(
-      {required this.panelConfig,
-      required this.observerPosition,
-      required this.shenShaManager,
-      required this.huaYaoManager});
+  GenerateBasePanelService({
+    required this.panelConfig,
+    required this.observerPosition,
+    this.shenShaManager,
+    this.huaYaoManager,
+  });
 
   // --- Zi Qi (Purple Gas) Calculation Constants & Methods ---
 
@@ -141,9 +142,9 @@ class GenerateBasePanelService {
     // 5. 根据命宫位置，排序命理十二宫
     final Map<EnumTwelveGong, EnumDestinyTwelveGong> twelveGongMapper =
         orderDestinyTwelveGong(bodyLifeModel);
-    // 6. 计算神煞位置
+    // 6. 计算神煞位置 (async 路径需要 manager 实例)
     final Map<EnumTwelveGong, List<ShenSha>> shenShaMapper =
-        await shenShaManager.calculate(
+        await shenShaManager!.calculate(
             observerPosition.yearGanZhi,
             observerPosition.monthGanZhi,
             observerPosition.timeGanZhi,
@@ -158,8 +159,7 @@ class GenerateBasePanelService {
     });
 
     // 6. 计算化曜位置
-    // 7. 计算化曜位置
-    final Map<HuaYao, EnumStars> huaYaoMapper = await huaYaoManager.calculate(
+    final Map<HuaYao, EnumStars> huaYaoMapper = await huaYaoManager!.calculate(
       mingGong: bodyLifeModel.lifeGong,
       yearJiaZi: observerPosition.yearGanZhi,
       monthJiaZi: observerPosition.monthGanZhi,
@@ -246,7 +246,7 @@ class GenerateBasePanelService {
 
     // 6. 计算神煞位置
     final Map<EnumTwelveGong, List<ShenSha>> shenShaMapper =
-        await shenShaManager.calculate(
+        await shenShaManager!.calculate(
             daXianObserver.yearGanZhi,
             daXianObserver.monthGanZhi,
             daXianObserver.timeGanZhi,
@@ -259,7 +259,7 @@ class GenerateBasePanelService {
       return MapEntry(key, value.map((e) => e).toList());
     });
     // 7. 计算化曜位置
-    final Map<HuaYao, EnumStars> huaYaoMapper = await huaYaoManager.calculate(
+    final Map<HuaYao, EnumStars> huaYaoMapper = await huaYaoManager!.calculate(
       mingGong: basePanel.bodyLifeModel.lifeGong,
       yearJiaZi: daXianObserver.yearGanZhi,
       monthJiaZi: daXianObserver.monthGanZhi,

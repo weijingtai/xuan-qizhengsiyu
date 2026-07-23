@@ -1,7 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:metaphysics_core/enums.dart';
-import 'package:metaphysics_core/models/divination_datetime.dart' show EnumDatetimeType;
-import 'package:timezone/data/latest_all.dart' as tz_data;
+import 'package:metaphysics_core/models/divination_datetime.dart';
 import 'package:metaphysics_core/models/shen_sha.dart';
 import 'package:metaphysics_core/models/shen_sha_bundled.dart';
 import 'package:metaphysics_core/models/shen_sha_gan_zhi.dart';
@@ -16,15 +17,26 @@ import 'package:qizhengsiyu/domain/entities/models/observer_position.dart';
 import 'package:qizhengsiyu/domain/entities/models/panel_config.dart';
 import 'package:qizhengsiyu/domain/entities/models/star_angle_raw_info.dart';
 import 'package:qizhengsiyu/domain/entities/models/star_position_raw_data.dart';
-import 'package:qizhengsiyu/domain/entities/models/star_angle_speed.dart';
 import 'package:qizhengsiyu/domain/entities/models/zhou_tian_model.dart';
 import 'package:qizhengsiyu/domain/entities/models/naming_degree_pair.dart';
+import 'package:qizhengsiyu/domain/engines/i_calculation_engine.dart';
+import 'package:qizhengsiyu/domain/engines/calculation_engine_factory.dart';
+import 'package:qizhengsiyu/domain/managers/shen_sha_manager.dart';
+import 'package:qizhengsiyu/domain/managers/hua_yao_manager.dart';
+import 'package:qizhengsiyu/domain/repositories/shen_sha_repository.dart';
+import 'package:qizhengsiyu/domain/repositories/hua_yao_repository.dart';
+import 'package:qizhengsiyu/domain/services/shen_sha_service.dart';
+import 'package:qizhengsiyu/domain/services/hua_yao_service.dart';
+import 'package:qizhengsiyu/domain/usecases/calculate_qizheng_base_panel_usecase.dart';
 import 'package:qizhengsiyu/domain/pipeline/qizheng_chart_calculator.dart';
 import 'package:qizhengsiyu/domain/pipeline/qizheng_calculation_context.dart';
 import 'package:qizhengsiyu/domain/pipeline/qizheng_chart_params.dart';
+import 'package:qizhengsiyu/domain/entities/models/base_panel_model.dart';
+import 'package:qizhengsiyu/domain/entities/models/pan_entity.dart';
 import 'package:qizhengsiyu/enums/enum_twelve_gong.dart';
 import 'package:qizhengsiyu/enums/enum_hua_yao_shen_sha.dart';
 import 'package:qizhengsiyu/enums/enum_settle_life_body.dart';
+import 'package:timezone/data/latest_all.dart' as tz_data;
 
 final _uuid = '00000000-0000-0000-0000-000000000001';
 final _now = DateTime(2026, 7, 22);
@@ -97,15 +109,6 @@ List<StarPositionRawData> _positions() => [
     ),
 ];
 
-Map<EnumStars, StarAngleSpeed> _angleMapper() {
-  final m = <EnumStars, StarAngleSpeed>{};
-  for (final p in _positions()) {
-    final i = p.angleRawInfoSet.first;
-    m[p.starType] = StarAngleSpeed(angle: i.angle, speed: i.speed);
-  }
-  return m;
-}
-
 final _config = BasePanelConfig(
   celestialCoordinateSystem: CelestialCoordinateSystem.Ecliptic,
   houseDivisionSystem: HouseDivisionSystem.equal,
@@ -116,36 +119,75 @@ final _config = BasePanelConfig(
   islifeGongBySunRealTimeLocation: true,
 );
 
-QizhengChartParams _params() => QizhengChartParams(
-  uuid: _uuid,
-  createdAt: _now,
-  lastUpdatedAt: _now,
-  divinationRequestInfoUuid: _uuid,
-  panelConfig: _config,
-  observerPosition: _observer(),
-);
+class _FakeShenShaRepository implements ShenShaRepository {
+  @override Future<List<TianGanShenSha>> getTianGanShenSha() async => const [];
+  @override Future<List<YearDiZhiShenSha>> getYearDiZhiShenSha() async => const [];
+  @override Future<List<MonthDiZhiShenSha>> getMonthDiZhiShenSha() async => const [];
+  @override Future<List<GanZhiShenSha>> getGanZhiShenSha() async => const [];
+  @override Future<List<BundledShenSha>> getBundledShenSha() async => _bundled();
+  @override Future<List<OtherShenSha>> getOtherShenSha() async => _other();
+}
+
+class _FakeHuaYaoRepository implements HuaYaoRepository {
+  @override Future<List<TianGanHuaYao>> getTianGanHuaYao() async => const [];
+  @override Future<List<DiZhiHuaYao>> getDiZhiHuaYao() async => const [];
+  @override Future<List<OthersHuaYao>> getOthersHuaYao() async => _othersHuaYao();
+}
+
+class _FakeEngine implements ICalculationEngine {
+  final ZhouTianModel model;
+  final List<StarPositionRawData> positions;
+  _FakeEngine(this.model, this.positions);
+
+  @override
+  Future<ZhouTianModel> getSystemDefinition(BasePanelConfig config) async => model;
+
+  @override
+  Future<List<StarPositionRawData>> calculateStarPositions(
+    DateTime birthDate, ObserverPosition position, BasePanelConfig config,
+  ) async => positions;
+
+  @override
+  List<StarPositionRawData> calculateStarPositionsSync(
+    DateTime birthDate, ObserverPosition position, BasePanelConfig config, ZhouTianModel zhouTianModel,
+  ) => positions;
+}
+
+class _FakeEngineProvider implements ICalculationEngineProvider {
+  final ICalculationEngine engine;
+  _FakeEngineProvider(this.engine);
+
+  @override
+  ICalculationEngine getEngine(BasePanelConfig config) => engine;
+}
 
 void main() {
+  late _FakeEngine engine;
+  late ShenShaManager shenShaManager;
+  late HuaYaoManager huaYaoManager;
   late QizhengCalculationContext ctx;
   late QizhengChartCalculator calculator;
   late ResolvedMoment moment;
 
-  setUp(() {
+  setUp(() async {
     tz_data.initializeTimeZones();
-    ctx = QizhengCalculationContext(
-      zhouTianModel: _ecliptic(),
-      starAngleMapper: _angleMapper(),
-      otherShenSha: _other(),
-      ganZhiShenSha: const [],
-      tianGanShenSha: const [],
-      yearDiZhiShenSha: const [],
-      monthDiZhiShenSha: const [],
-      bundledShenSha: _bundled(),
-      tianGanHuaYao: const [],
-      diZhiHuaYao: const [],
-      othersHuaYao: _othersHuaYao(),
+
+    engine = _FakeEngine(_ecliptic(), _positions());
+    shenShaManager = ShenShaManager(
+      shenShaService: ShenShaService(repository: _FakeShenShaRepository()),
     );
-    calculator = QizhengChartCalculator(context: ctx);
+    huaYaoManager = HuaYaoManager(
+      huaYaoService: HuaYaoService(repository: _FakeHuaYaoRepository()),
+    );
+
+    ctx = await QizhengCalculationContext.load(
+      config: _config,
+      engine: engine,
+      shenShaService: ShenShaService(repository: _FakeShenShaRepository()),
+      huaYaoService: HuaYaoService(repository: _FakeHuaYaoRepository()),
+    );
+    calculator = QizhengChartCalculator(context: ctx, engine: engine);
+
     moment = ResolvedMoment(
       source: DivinationMoment(
         instantUtc: DateTime.utc(1990, 1, 1, 4),
@@ -166,16 +208,88 @@ void main() {
     );
   });
 
-  test('red: calculator constructs and returns contract', () {
-    expect(calculator.module, equals('qizhengsiyu'));
-    final contract = calculator.calculate(moment, _params());
-    expect(contract, isA<QiZhengSiYuPanContract>());
-    expect(contract.uuid, equals(_uuid));
-  });
+  test(
+    'red: panelModelJson matches legacy async calculation chain',
+    () async {
+      CalculationEngineFactory.setProvider(_FakeEngineProvider(engine));
+
+      final useCase = CalculateQiZhengBasePanelUseCase(
+        shenShaManager: shenShaManager,
+        huaYaoManager: huaYaoManager,
+      );
+
+      final legacyResult = await useCase.execute(
+        config: _config,
+        observer: _observer(),
+      );
+
+      final divinationDatetimeModel = DivinationDatetimeModel.standard(
+        uuid: _uuid,
+        queryUuid: _uuid,
+        timezoneStr: 'Asia/Shanghai',
+        datetime: DateTime(1990, 1, 1, 12),
+        bazi: EightChars(
+          year: JiaZi.JIA_ZI, month: JiaZi.JIA_ZI,
+          day: JiaZi.JIA_ZI, time: JiaZi.JIA_ZI,
+        ),
+        lunarMonth: 1,
+        isLeapMonth: false,
+        lunarDay: 1,
+        jieQiInfo: JieQiInfo(
+          jieQi: TwentyFourJieQi.CHUN_FEN,
+          startAt: DateTime(1990, 3, 20),
+          endAt: DateTime(1990, 4, 4),
+        ),
+        isSeersLocation: false,
+        location: null,
+      );
+
+      final params = QizhengChartParams(
+        uuid: _uuid,
+        createdAt: _now,
+        lastUpdatedAt: _now,
+        divinationRequestInfoUuid: _uuid,
+        divinationDatetimeJson: jsonEncode(divinationDatetimeModel.toJson()),
+        panelConfig: _config,
+        observerPosition: _observer(),
+      );
+
+      final contract = calculator.calculate(moment, params);
+
+      final legacyEntity = QiZhengSiYuPanEntity(
+        uuid: _uuid,
+        createdAt: _now,
+        lastUpdatedAt: _now,
+        deletedAt: null,
+        divinationRequestInfoUuid: _uuid,
+        divinationDatetimeModel: divinationDatetimeModel,
+        panelConfig: _config,
+        panelModel: legacyResult.basicLifePanel,
+      );
+      final legacyContract = legacyEntity.toContract();
+
+      expect(calculator.module, equals('qizhengsiyu'));
+      expect(contract.uuid, equals(_uuid));
+      expect(contract.panelModelJson, equals(legacyContract.panelModelJson));
+      expect(contract.panelConfigJson, equals(legacyContract.panelConfigJson));
+      expect(contract.divinationDatetimeJson, equals(legacyContract.divinationDatetimeJson));
+    },
+    timeout: const Timeout(Duration(seconds: 15)),
+  );
 
   test('is deterministic — same input twice produces equal contract', () {
-    final a = calculator.calculate(moment, _params());
-    final b = calculator.calculate(moment, _params());
+    final params = QizhengChartParams(
+      uuid: _uuid,
+      createdAt: _now,
+      lastUpdatedAt: _now,
+      divinationRequestInfoUuid: _uuid,
+      divinationDatetimeJson: '{}',
+      panelConfig: _config,
+      observerPosition: _observer(),
+    );
+
+    final a = calculator.calculate(moment, params);
+    final b = calculator.calculate(moment, params);
     expect(a, equals(b));
   });
 }

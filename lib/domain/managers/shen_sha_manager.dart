@@ -49,6 +49,37 @@ class ShenShaManager {
     );
   }
 
+  Future<Map<EnumTwelveGong, List<TianGanShenSha>>> generateTianGanShenShaMapper(
+      JiaZi yearJiaZi) async {
+    final tianGanShenSha = await shenShaService.getTianGanShenSha();
+    return _generateTianGanShenShaMapperSync(yearJiaZi, tianGanShenSha);
+  }
+
+  Future<Map<EnumTwelveGong, List<GanZhiShenSha>>> generateGanZhiShenShaMapper(
+      JiaZi yearJiaZi) async {
+    final mapper = <EnumTwelveGong, List<GanZhiShenSha>>{};
+    final ganZhiShenSha = await shenShaService.getGanZhiShenSha();
+    ganZhiShenSha.forEach((e) {
+      e.locationMapper.forEach((key, value) {
+        if (value.contains(yearJiaZi)) {
+          final gong = EnumTwelveGong.getEnumTwelveGongByZhi(key);
+          mapper[gong] = [...?mapper[gong], e];
+        }
+      });
+    });
+    return mapper;
+  }
+
+  Map<EnumTwelveGong, List<BundledShenSha>> generateBeforeHorse(
+    JiaZi yearGanZhi, List<BundledShenSha> beforeHorseList) {
+    return _generateBeforeHorseStatic(yearGanZhi, beforeHorseList);
+  }
+
+  Map<EnumTwelveGong, List<BundledShenSha>> generateBeforeTaiSui(
+    EnumTwelveGong taiSui, List<BundledShenSha> shenShaList) {
+    return _generateBeforeTaiSuiStatic(taiSui, shenShaList);
+  }
+
   static Map<EnumTwelveGong, List<ShenSha>> calculateShenShaSync({
     required JiaZi yearJiaZi,
     required JiaZi monthJiaZi,
@@ -228,9 +259,9 @@ class ShenShaManager {
     final yearTaiSuiGong =
         EnumTwelveGong.getEnumTwelveGongByZhi(yearGanZhi.zhi);
 
-    final beforeJia = generateBeforeTaiSui(yearTaiSuiGong, beforeJiaList);
+    final beforeJia = _generateBeforeTaiSuiStatic(yearTaiSuiGong, beforeJiaList);
     final afterJia = generateAfterTaiSui(yearTaiSuiGong, afterJiaList);
-    final beforeHorse = generateBeforeHorse(yearGanZhi, beforeHorseSuiList);
+    final beforeHorse = _generateBeforeHorseStatic(yearGanZhi, beforeHorseSuiList);
 
     final result = <EnumTwelveGong, List<BundledShenSha>>{};
     for (EnumTwelveGong gong in EnumTwelveGong.listAll) {
@@ -308,7 +339,7 @@ class ShenShaManager {
     return suiDianGong;
   }
 
-  static Map<EnumTwelveGong, List<BundledShenSha>> generateBeforeTaiSui(
+  static Map<EnumTwelveGong, List<BundledShenSha>> _generateBeforeTaiSuiStatic(
       EnumTwelveGong taiSui, List<BundledShenSha> shenShaList) {
     Map<EnumTwelveGong, List<BundledShenSha>> result = {};
     final taiSuiAt = taiSui.zhi.index;
@@ -358,7 +389,7 @@ class ShenShaManager {
     return result;
   }
 
-  static Map<EnumTwelveGong, List<BundledShenSha>> generateBeforeHorse(
+  static Map<EnumTwelveGong, List<BundledShenSha>> _generateBeforeHorseStatic(
       JiaZi yearGanZhi, List<BundledShenSha> beforeHorseList) {
     final yearHouseDiZhi = DiZhiSanHe.getHorseBySingleDiZhi(yearGanZhi.zhi);
     final yearHouseGong = EnumTwelveGong.getEnumTwelveGongByZhi(yearHouseDiZhi);

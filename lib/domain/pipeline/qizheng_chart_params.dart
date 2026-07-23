@@ -8,6 +8,7 @@ final class QizhengChartParams implements ModuleParams {
   final DateTime createdAt;
   final DateTime lastUpdatedAt;
   final String divinationRequestInfoUuid;
+  final String divinationDatetimeJson;
   final BasePanelConfig panelConfig;
   final ObserverPosition observerPosition;
 
@@ -16,6 +17,7 @@ final class QizhengChartParams implements ModuleParams {
     required this.createdAt,
     required this.lastUpdatedAt,
     required this.divinationRequestInfoUuid,
+    required this.divinationDatetimeJson,
     required this.panelConfig,
     required this.observerPosition,
   });
@@ -26,6 +28,7 @@ final class QizhengChartParams implements ModuleParams {
     'createdAt': createdAt.toIso8601String(),
     'lastUpdatedAt': lastUpdatedAt.toIso8601String(),
     'divinationRequestInfoUuid': divinationRequestInfoUuid,
+    'divinationDatetimeJson': divinationDatetimeJson,
     'panelConfig': panelConfig.toJson(),
     'observerPosition': observerPosition.toJson(),
   };
