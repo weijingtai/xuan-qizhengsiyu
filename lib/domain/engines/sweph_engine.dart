@@ -88,6 +88,12 @@ class SwephEngine implements ICalculationEngine {
   Future<List<StarPositionRawData>> calculateStarPositions(
       DateTime birthDate, ObserverPosition position, BasePanelConfig config) async {
     final zhouTianModel = await getSystemDefinition(config);
+    return calculateStarPositionsSync(birthDate, position, config, zhouTianModel);
+  }
+
+  @override
+  List<StarPositionRawData> calculateStarPositionsSync(
+      DateTime birthDate, ObserverPosition position, BasePanelConfig config, ZhouTianModel zhouTianModel) {
     final starsAngle = _calculateAllStarsAngleOnZodiac(position, birthDate, zhouTianModel, config);
     return _transformToStarPositionRawData(starsAngle, config);
   }

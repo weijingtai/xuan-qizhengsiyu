@@ -19,27 +19,47 @@ class HuaYaoManager {
     required JiaZi yearJiaZi,
     required JiaZi monthJiaZi,
   }) async {
+    final tianGanHuaYao = await huaYaoService.getTianGanHuaYao();
+    final diZhiHuaYao = await huaYaoService.getDiZhiHuaYao();
+    final othersHuaYao = await huaYaoService.getOthersHuaYao();
+    return calculateHuaYaoSync(
+      mingGong: mingGong,
+      yearJiaZi: yearJiaZi,
+      monthJiaZi: monthJiaZi,
+      tianGanHuaYao: tianGanHuaYao,
+      diZhiHuaYao: diZhiHuaYao,
+      othersHuaYao: othersHuaYao,
+    );
+  }
+
+  static Map<HuaYao, EnumStars> calculateHuaYaoSync({
+    required EnumTwelveGong mingGong,
+    required JiaZi yearJiaZi,
+    required JiaZi monthJiaZi,
+    required List<TianGanHuaYao> tianGanHuaYao,
+    required List<DiZhiHuaYao> diZhiHuaYao,
+    required List<OthersHuaYao> othersHuaYao,
+  }) {
     final res = <HuaYao, EnumStars>{};
-    res.addAll(await generateTianGanHuaYaoBy(yearJiaZi));
-    res.addAll(await generateDiZhiHuaYaoBy(yearJiaZi, monthJiaZi));
-    res.addAll(await generateOthersHuaYaoBy(
-        yearJiaZi: yearJiaZi, mingGong: mingGong));
+    res.addAll(_generateTianGanHuaYaoBySync(yearJiaZi, tianGanHuaYao));
+    res.addAll(_generateDiZhiHuaYaoBySync(yearJiaZi, monthJiaZi, diZhiHuaYao));
+    res.addAll(_generateOthersHuaYaoBySync(
+        yearJiaZi: yearJiaZi, mingGong: mingGong, othersHuaYao: othersHuaYao));
     return res;
   }
 
-  Future<Map<HuaYao, EnumStars>> generateTianGanHuaYaoBy(JiaZi yearJiaZi) async {
+  static Map<HuaYao, EnumStars> _generateTianGanHuaYaoBySync(
+      JiaZi yearJiaZi, List<TianGanHuaYao> tianGanHuaYao) {
     final res = <HuaYao, EnumStars>{};
-    final tianGanHuaYao = await huaYaoService.getTianGanHuaYao();
     tianGanHuaYao.forEach((hy) {
       res[hy] = hy.locationMapper[yearJiaZi.gan]!;
     });
     return res;
   }
 
-  Future<Map<HuaYao, EnumStars>> generateDiZhiHuaYaoBy(
-      JiaZi yearJiaZi, JiaZi monthJiaZi) async {
+  static Map<HuaYao, EnumStars> _generateDiZhiHuaYaoBySync(
+      JiaZi yearJiaZi, JiaZi monthJiaZi, List<DiZhiHuaYao> diZhiHuaYao) {
     final res = <HuaYao, EnumStars>{};
-    final diZhiHuaYao = await huaYaoService.getDiZhiHuaYao();
     diZhiHuaYao.forEach((hy) {
       if (hy.type == ShenShaType.DiZhi_year) {
         res[hy] = hy.locationMapper[yearJiaZi.zhi]!;
@@ -50,11 +70,11 @@ class HuaYaoManager {
     return res;
   }
 
-  Future<Map<HuaYao, EnumStars>> generateOthersHuaYaoBy({
+  static Map<HuaYao, EnumStars> _generateOthersHuaYaoBySync({
     required EnumTwelveGong mingGong,
     required JiaZi yearJiaZi,
-  }) async {
-    final othersHuaYao = await huaYaoService.getOthersHuaYao();
+    required List<OthersHuaYao> othersHuaYao,
+  }) {
     Map<HuaYao, EnumStars> res = {};
 
     // 获取科甲

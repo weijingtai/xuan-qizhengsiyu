@@ -26,67 +26,101 @@ class ShenShaManager {
       EnumTwelveGong sunGong,
       EnumTwelveGong moonGong,
       bool isDayBirth) async {
+    final otherShenSha = await shenShaService.getOtherShenSha();
+    final ganZhiShenSha = await shenShaService.getGanZhiShenSha();
+    final tianGanShenSha = await shenShaService.getTianGanShenSha();
+    final yearDiZhiShenSha = await shenShaService.getYearDiZhiShenSha();
+    final monthDiZhiShenSha = await shenShaService.getMonthDiZhiShenSha();
+    final bundledShenSha = await shenShaService.getBundledShenSha();
+    return calculateShenShaSync(
+      yearJiaZi: yearJiaZi,
+      monthJiaZi: monthJiaZi,
+      hourJiaZi: hourJiaZi,
+      mingGong: mingGong,
+      sunGong: sunGong,
+      moonGong: moonGong,
+      isDayBirth: isDayBirth,
+      otherShenSha: otherShenSha,
+      ganZhiShenSha: ganZhiShenSha,
+      tianGanShenSha: tianGanShenSha,
+      yearDiZhiShenSha: yearDiZhiShenSha,
+      monthDiZhiShenSha: monthDiZhiShenSha,
+      bundledShenSha: bundledShenSha,
+    );
+  }
+
+  static Map<EnumTwelveGong, List<ShenSha>> calculateShenShaSync({
+    required JiaZi yearJiaZi,
+    required JiaZi monthJiaZi,
+    required JiaZi hourJiaZi,
+    required EnumTwelveGong mingGong,
+    required EnumTwelveGong sunGong,
+    required EnumTwelveGong moonGong,
+    required bool isDayBirth,
+    required List<OtherShenSha> otherShenSha,
+    required List<GanZhiShenSha> ganZhiShenSha,
+    required List<TianGanShenSha> tianGanShenSha,
+    required List<DiZhiShenSha> yearDiZhiShenSha,
+    required List<DiZhiShenSha> monthDiZhiShenSha,
+    required List<BundledShenSha> bundledShenSha,
+  }) {
     final result = <EnumTwelveGong, List<ShenSha>>{};
     EnumTwelveGong.listAll.forEach((e) {
       result[e] = [];
     });
 
-    final otherShenSha = await shenShaService.getOtherShenSha();
-
     // 斗杓
     final douBiaoGong = generateDouBiao(monthJiaZi, hourJiaZi);
     result[douBiaoGong]!.add(otherShenSha.firstWhere((t) => t.name == "斗杓"));
 
-    // 其他神煞 卦气、禄卦(天禄卦气)、岁殿、月廉
-    final otherShenShaMapper = await generateOtherShenShaMapper(
-        yearJiaZi, monthJiaZi, mingGong, sunGong, moonGong, isDayBirth);
+    // 其他神煞 卦气、禄卦、岁殿、月廉
+    final otherShenShaMapper = _generateOtherShenShaMapperSync(
+        yearJiaZi, monthJiaZi, mingGong, sunGong, moonGong, isDayBirth, otherShenSha);
     otherShenShaMapper.forEach((key, value) {
       result[key]!.addAll(value);
     });
 
     // 天干神煞 空亡、孤虚、擎天、游奕
-    final kongWangGongMapper = await calculateGanZhiShenSha(yearJiaZi);
+    final kongWangGongMapper = _calculateGanZhiShenShaSync(yearJiaZi, ganZhiShenSha);
     kongWangGongMapper.forEach((key, value) {
       result[key]!.addAll(value);
     });
 
     // 驾前、驾后、驿马神煞
-    final bundledShenShaMapper = await generateBundledShenSha(yearJiaZi);
+    final bundledShenShaMapper = _generateBundledShenShaSync(yearJiaZi, bundledShenSha);
     bundledShenShaMapper.forEach((key, value) {
       result[key]!.addAll(value);
     });
 
     // 天干神煞
-    final tianGanShenShaMapper = await generateTianGanShenShaMapper(yearJiaZi);
+    final tianGanShenShaMapper = _generateTianGanShenShaMapperSync(yearJiaZi, tianGanShenSha);
     tianGanShenShaMapper.forEach((key, value) {
       result[key]!.addAll(value);
     });
 
     // 年 地支神煞
-    final yearDiZhiShenShaMapper =
-        await generateYearDiZhiShenShaMapper(yearJiaZi);
+    final yearDiZhiShenShaMapper = _generateYearDiZhiShenShaMapperSync(yearJiaZi, yearDiZhiShenSha);
     yearDiZhiShenShaMapper.forEach((key, value) {
       result[key]!.addAll(value);
     });
 
     // 月 地支神煞
-    final monthDiZhiShenShaMapper =
-        await generateMonthDiZhiShenShaMapper(monthJiaZi);
+    final monthDiZhiShenShaMapper = _generateMonthDiZhiShenShaSync(monthJiaZi, monthDiZhiShenSha);
     monthDiZhiShenShaMapper.forEach((key, value) {
       result[key]!.addAll(value);
     });
     return result;
   }
 
-  Future<Map<EnumTwelveGong, List<OtherShenSha>>> generateOtherShenShaMapper(
+  static Map<EnumTwelveGong, List<OtherShenSha>> _generateOtherShenShaMapperSync(
       JiaZi yearJiaZi,
       JiaZi monthJiaZi,
       EnumTwelveGong mingGong,
       EnumTwelveGong sunGong,
       EnumTwelveGong moonGong,
-      bool isDayBirth) async {
+      bool isDayBirth,
+      List<OtherShenSha> otherShenSha) {
     final result = <EnumTwelveGong, List<OtherShenSha>>{};
-    final otherShenSha = await shenShaService.getOtherShenSha();
 
     // 卦气
     final EnumTwelveGong guaQiGong =
@@ -116,11 +150,9 @@ class ShenShaManager {
     return result;
   }
 
-  Future<Map<EnumTwelveGong, List<ShenSha>>> calculateGanZhiShenSha(
-      JiaZi yearJiaZi) async {
+  static Map<EnumTwelveGong, List<ShenSha>> _calculateGanZhiShenShaSync(
+      JiaZi yearJiaZi, List<GanZhiShenSha> ganZhiShenSha) {
     final result = <EnumTwelveGong, List<ShenSha>>{};
-    final ganZhiShenSha = await shenShaService.getGanZhiShenSha();
-
     ganZhiShenSha.forEach((sh) {
       sh.locationMapper.entries.forEach((e) {
         if (e.value.contains(yearJiaZi)) {
@@ -132,91 +164,58 @@ class ShenShaManager {
     return result;
   }
 
-  Future<Map<EnumTwelveGong, List<TianGanShenSha>>> generateTianGanShenShaMapper(
-      JiaZi yearJiaZi) async {
-    // 生成天干神煞映射
+  static Map<EnumTwelveGong, List<TianGanShenSha>> _generateTianGanShenShaMapperSync(
+      JiaZi yearJiaZi, List<TianGanShenSha> tianGanShenSha) {
     final tianGanShenShaMapper = <EnumTwelveGong, List<TianGanShenSha>>{};
     EnumTwelveGong.listAll.forEach((e) {
       tianGanShenShaMapper[e] = [];
     });
-    final tianGanShenSha = await shenShaService.getTianGanShenSha();
 
     for (var i = 0; i < tianGanShenSha.length; i++) {
-      final tianGanShenShaItem = tianGanShenSha[i];
-      DiZhi atDiZhi = tianGanShenShaItem.locationMapper[yearJiaZi.gan]!;
+      final item = tianGanShenSha[i];
+      DiZhi atDiZhi = item.locationMapper[yearJiaZi.gan]!;
       tianGanShenShaMapper[EnumTwelveGong.getEnumTwelveGongByZhi(atDiZhi)]!
-          .add(tianGanShenShaItem);
+          .add(item);
     }
     return tianGanShenShaMapper;
   }
 
-  Future<Map<EnumTwelveGong, List<DiZhiShenSha>>>
-      generateYearDiZhiShenShaMapper(JiaZi yearJiaZi) async {
-    // 生成地支神煞映射
-    final yearDiZhiShenShaMapper = <EnumTwelveGong, List<DiZhiShenSha>>{};
+  static Map<EnumTwelveGong, List<DiZhiShenSha>> _generateYearDiZhiShenShaMapperSync(
+      JiaZi yearJiaZi, List<DiZhiShenSha> yearDiZhiShenSha) {
+    final mapper = <EnumTwelveGong, List<DiZhiShenSha>>{};
     EnumTwelveGong.listAll.forEach((e) {
-      yearDiZhiShenShaMapper[e] = [];
+      mapper[e] = [];
     });
-    final yearDiZhiShenSha = await shenShaService.getYearDiZhiShenSha();
 
     for (var i = 0; i < yearDiZhiShenSha.length; i++) {
-      final yearDiZhiShenShaItem = yearDiZhiShenSha[i];
-      DiZhi atDiZhi = yearDiZhiShenShaItem.locationMapper[yearJiaZi.zhi]!;
-      yearDiZhiShenShaMapper[EnumTwelveGong.getEnumTwelveGongByZhi(atDiZhi)]!
-          .add(yearDiZhiShenShaItem);
+      final item = yearDiZhiShenSha[i];
+      DiZhi atDiZhi = item.locationMapper[yearJiaZi.zhi]!;
+      mapper[EnumTwelveGong.getEnumTwelveGongByZhi(atDiZhi)]!.add(item);
     }
-
-    return yearDiZhiShenShaMapper;
+    return mapper;
   }
 
-  Future<Map<EnumTwelveGong, List<GanZhiShenSha>>> generateGanZhiShenShaMapper(
-      JiaZi yearJiaZi) async {
-    // 生成地支神煞映射
-    final ganzhiShenShaMapper = <EnumTwelveGong, List<GanZhiShenSha>>{};
-    final ganZhiShenSha = await shenShaService.getGanZhiShenSha();
-    ganZhiShenSha.forEach((e) {
-      e.locationMapper.forEach((key, value) {
-        if (value.contains(yearJiaZi)) {
-          final gong = EnumTwelveGong.getEnumTwelveGongByZhi(key);
-          if (ganzhiShenShaMapper[gong] == null) {
-            ganzhiShenShaMapper[gong] = [];
-          }
-          ganzhiShenShaMapper[gong]!.add(e);
-        }
-      });
-    });
-    return ganzhiShenShaMapper;
-  }
-
-  Future<Map<EnumTwelveGong, List<DiZhiShenSha>>>
-      generateMonthDiZhiShenShaMapper(JiaZi monthJiaZi) async {
-    // 生成地支神煞映射
-    final monthDiZhiShenShaMapper = <DiZhi, List<DiZhiShenSha>>{};
-    final monthDiZhiShenSha = await shenShaService.getMonthDiZhiShenSha();
-
+  static Map<EnumTwelveGong, List<DiZhiShenSha>> _generateMonthDiZhiShenShaSync(
+      JiaZi monthJiaZi, List<DiZhiShenSha> monthDiZhiShenSha) {
+    final diZhiMapper = <DiZhi, List<DiZhiShenSha>>{};
     DiZhi.listAll.forEach((e) {
-      monthDiZhiShenShaMapper[e] = [];
+      diZhiMapper[e] = [];
     });
 
     for (var i = 0; i < monthDiZhiShenSha.length; i++) {
-      final monthDiZhiShenShaItem = monthDiZhiShenSha[i];
-      DiZhi atDiZhi = monthDiZhiShenShaItem.locationMapper[monthJiaZi.zhi]!;
-      monthDiZhiShenShaMapper[atDiZhi]!.add(monthDiZhiShenShaItem);
+      final item = monthDiZhiShenSha[i];
+      DiZhi atDiZhi = item.locationMapper[monthJiaZi.zhi]!;
+      diZhiMapper[atDiZhi]!.add(item);
     }
 
-    // 生成十二宫的地支神煞映射
-    return Map.fromEntries(monthDiZhiShenShaMapper.entries.map((entry) {
+    return Map.fromEntries(diZhiMapper.entries.map((entry) {
       return MapEntry(EnumTwelveGong.getEnumTwelveGongByZhi(entry.key),
           entry.value.toList());
     }));
   }
 
-  Future<Map<EnumTwelveGong, List<BundledShenSha>>> generateBundledShenSha(
-      JiaZi yearGanZhi) async {
-    // 根据年支获得太岁所在位置
-    final yearZhi = yearGanZhi.zhi;
-    final bundledShenSha = await shenShaService.getBundledShenSha();
-
+  static Map<EnumTwelveGong, List<BundledShenSha>> _generateBundledShenShaSync(
+      JiaZi yearGanZhi, List<BundledShenSha> bundledShenSha) {
     final beforeJiaList = bundledShenSha
         .where((b) => b.type == BundledShenShaType.beforeJia)
         .toList();
@@ -228,7 +227,7 @@ class ShenShaManager {
         .toList();
     final yearTaiSuiGong =
         EnumTwelveGong.getEnumTwelveGongByZhi(yearGanZhi.zhi);
-    // 获取驾前
+
     final beforeJia = generateBeforeTaiSui(yearTaiSuiGong, beforeJiaList);
     final afterJia = generateAfterTaiSui(yearTaiSuiGong, afterJiaList);
     final beforeHorse = generateBeforeHorse(yearGanZhi, beforeHorseSuiList);
@@ -309,7 +308,7 @@ class ShenShaManager {
     return suiDianGong;
   }
 
-  Map<EnumTwelveGong, List<BundledShenSha>> generateBeforeTaiSui(
+  static Map<EnumTwelveGong, List<BundledShenSha>> generateBeforeTaiSui(
       EnumTwelveGong taiSui, List<BundledShenSha> shenShaList) {
     Map<EnumTwelveGong, List<BundledShenSha>> result = {};
     final taiSuiAt = taiSui.zhi.index;
@@ -325,7 +324,7 @@ class ShenShaManager {
     return result;
   }
 
-  Map<EnumTwelveGong, List<BundledShenSha>> generateAfterTaiSui(
+  static Map<EnumTwelveGong, List<BundledShenSha>> generateAfterTaiSui(
       EnumTwelveGong taiSui, List<BundledShenSha> shenShaList) {
     Map<EnumTwelveGong, List<BundledShenSha>> result = {};
     final taiSuiAt = taiSui.zhi.index;
@@ -359,7 +358,7 @@ class ShenShaManager {
     return result;
   }
 
-  Map<EnumTwelveGong, List<BundledShenSha>> generateBeforeHorse(
+  static Map<EnumTwelveGong, List<BundledShenSha>> generateBeforeHorse(
       JiaZi yearGanZhi, List<BundledShenSha> beforeHorseList) {
     final yearHouseDiZhi = DiZhiSanHe.getHorseBySingleDiZhi(yearGanZhi.zhi);
     final yearHouseGong = EnumTwelveGong.getEnumTwelveGongByZhi(yearHouseDiZhi);

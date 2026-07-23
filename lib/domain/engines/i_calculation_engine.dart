@@ -16,4 +16,13 @@ abstract class ICalculationEngine {
   /// @return 一个包含所有星体原生位置的列表
   Future<List<StarPositionRawData>> calculateStarPositions(
       DateTime birthDate, ObserverPosition position, BasePanelConfig config);
+
+  /// 同步计算星体位置（接收预载的 ZhouTianModel，跳过 getSystemDefinition 异步加载）。
+  /// Sweph FFI 为同步调用，此方法内禁止 await/IO。
+  List<StarPositionRawData> calculateStarPositionsSync(
+    DateTime birthDate,
+    ObserverPosition position,
+    BasePanelConfig config,
+    ZhouTianModel zhouTianModel,
+  );
 }

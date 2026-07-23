@@ -146,6 +146,11 @@ class FakeEngine implements ICalculationEngine {
   Future<List<StarPositionRawData>> calculateStarPositions(
     DateTime birthDate, ObserverPosition position, BasePanelConfig config,
   ) async => positions;
+
+  @override
+  List<StarPositionRawData> calculateStarPositionsSync(
+    DateTime birthDate, ObserverPosition position, BasePanelConfig config, ZhouTianModel zhouTianModel,
+  ) => positions;
 }
 
 class FakeEngineProvider implements ICalculationEngineProvider {

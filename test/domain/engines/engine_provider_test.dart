@@ -152,6 +152,12 @@ class _FakeCalculationEngine implements ICalculationEngine {
       DateTime birthDate, ObserverPosition position, BasePanelConfig config) async {
     throw UnimplementedError('Fake: not needed for provider contract test');
   }
+
+  @override
+  List<StarPositionRawData> calculateStarPositionsSync(
+      DateTime birthDate, ObserverPosition position, BasePanelConfig config, ZhouTianModel zhouTianModel) {
+    throw UnimplementedError('Fake: not needed for provider contract test');
+  }
 }
 
 /// Alternate fake engine for testing provider swap.
@@ -164,6 +170,12 @@ class _AlternateFakeCalculationEngine implements ICalculationEngine {
   @override
   Future<List<StarPositionRawData>> calculateStarPositions(
       DateTime birthDate, ObserverPosition position, BasePanelConfig config) async {
+    throw UnimplementedError('Fake: not needed for provider contract test');
+  }
+
+  @override
+  List<StarPositionRawData> calculateStarPositionsSync(
+      DateTime birthDate, ObserverPosition position, BasePanelConfig config, ZhouTianModel zhouTianModel) {
     throw UnimplementedError('Fake: not needed for provider contract test');
   }
 }
