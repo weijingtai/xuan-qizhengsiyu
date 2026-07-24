@@ -1,6 +1,8 @@
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
+import 'package:repository_interface_divination_pipeline/repository_interface_divination_pipeline.dart';
 import 'package:repository_interface_qizhengsiyu/repository_interface_qizhengsiyu.dart';
+import 'package:xuan_time_location/xuan_time_location.dart';
 import 'package:qizhengsiyu/qizhengsiyu_storage_dependencies.dart';
 import 'package:qizhengsiyu/domain/repositories/shen_sha_repository_adapter.dart';
 import 'package:qizhengsiyu/domain/repositories/hua_yao_repository_adapter.dart';
@@ -16,6 +18,7 @@ import 'package:qizhengsiyu/domain/repositories/shen_sha_repository.dart';
 import 'package:qizhengsiyu/domain/repositories/hua_yao_repository.dart';
 import 'package:qizhengsiyu/domain/services/shen_sha_service.dart';
 import 'package:qizhengsiyu/domain/services/hua_yao_service.dart';
+import 'package:qizhengsiyu/domain/pipeline/qizheng_pipeline_executor.dart';
 import 'package:qizhengsiyu/presentation/viewmodels/qi_zheng_si_yu_viewmodel.dart';
 import 'package:qizhengsiyu/presentation/viewmodels/panel_config_viewmodel.dart';
 import 'package:qizhengsiyu/domain/entities/models/panel_config.dart';
@@ -50,7 +53,6 @@ import 'package:qizhengsiyu/presentation/viewmodels/ge_ju_editor_viewmodel.dart'
 import 'package:qizhengsiyu/presentation/viewmodels/ge_ju_detail_viewmodel.dart';
 import 'package:qizhengsiyu/presentation/viewmodels/ge_ju_school_list_viewmodel.dart';
 import 'package:qizhengsiyu/presentation/viewmodels/ge_ju_school_editor_viewmodel.dart';
-import 'package:qizhengsiyu/domain/usecases/calculate_fate_dong_wei_usecase.dart';
 
 class AppCalculationEngineProvider implements ICalculationEngineProvider {
   final QiZhengSiYuStorageDependencies _deps;
@@ -164,6 +166,11 @@ List<SingleChildWidget> createProviders(QiZhengSiYuStorageDependencies deps) {
           BuildYuanLePanelUseCase(builder: context.read<YuanLePanelBuilder>()),
     ),
 
+    // ============ Pipeline ============
+    Provider<MomentResolver>(
+      create: (_) => DefaultMomentResolver(),
+    ),
+
     // ============ UseCases ============
     Provider<InitializeQiZhengOfficialDataUseCase>(
       create: (context) => InitializeQiZhengOfficialDataUseCase(
@@ -211,6 +218,10 @@ List<SingleChildWidget> createProviders(QiZhengSiYuStorageDependencies deps) {
         computeRiseSetUseCase: context.read<ComputeRiseSetUseCase>(),
         yunLiuUseCase: context.read<YunLiuUseCase>(),
         computeGanZhiUseCase: context.read<ComputeGanZhiUseCase>(),
+        momentResolver: context.read<MomentResolver>(),
+        shenShaService: context.read<ShenShaService>(),
+        huaYaoService: context.read<HuaYaoService>(),
+        pipelineExecutor: QizhengPipelineExecutor(),
       ),
     ),
     ChangeNotifierProvider<PanelConfigViewModel>(

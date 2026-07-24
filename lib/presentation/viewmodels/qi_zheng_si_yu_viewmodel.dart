@@ -1,34 +1,40 @@
-import 'package:metaphysics_core/enums.dart';
+import 'dart:convert';
+
+import 'package:calendar/calendar.dart';
 import 'package:flutter/foundation.dart';
+import 'package:metaphysics_core/datamodel/datetime_divination_datamodel.dart';
+import 'package:metaphysics_core/datamodel/location.dart';
+import 'package:metaphysics_core/enums.dart';
+import 'package:metaphysics_core/models/divination_datetime.dart';
+import 'package:metaphysics_core/models/divination_info_model.dart';
 import 'package:qizhengsiyu/domain/entities/models/base_panel_model.dart';
+import 'package:qizhengsiyu/domain/entities/models/eleven_stars_info.dart';
+import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_result.dart';
 import 'package:qizhengsiyu/domain/entities/models/observer_position.dart';
 import 'package:qizhengsiyu/domain/entities/models/panel_config.dart';
 import 'package:qizhengsiyu/domain/entities/models/passage_year_panel_model.dart';
-import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_result.dart';
 import 'package:qizhengsiyu/domain/entities/models/rise_set_display_data.dart';
-import 'package:qizhengsiyu/domain/entities/models/zhou_tian_model.dart';
 import 'package:qizhengsiyu/domain/entities/models/star_angle_speed.dart';
-import 'package:qizhengsiyu/domain/usecases/initialize_qizheng_official_data_usecase.dart';
-import 'package:qizhengsiyu/domain/usecases/calculate_qizheng_base_panel_usecase.dart';
-import 'package:qizhengsiyu/domain/usecases/evaluate_qizheng_ge_ju_usecase.dart';
+import 'package:qizhengsiyu/domain/entities/models/stars_angle.dart';
+import 'package:qizhengsiyu/domain/entities/models/zhou_tian_model.dart';
 import 'package:qizhengsiyu/domain/usecases/build_qizheng_timeline_usecase.dart';
+import 'package:qizhengsiyu/domain/usecases/calculate_qizheng_base_panel_usecase.dart';
+import 'package:qizhengsiyu/domain/usecases/compute_gan_zhi_usecase.dart';
 import 'package:qizhengsiyu/domain/usecases/compute_rise_set_usecase.dart';
+import 'package:qizhengsiyu/domain/usecases/evaluate_qizheng_ge_ju_usecase.dart';
+import 'package:qizhengsiyu/domain/usecases/initialize_qizheng_official_data_usecase.dart';
+import 'package:qizhengsiyu/domain/usecases/yun_liu_usecase.dart';
+import 'package:qizhengsiyu/enums/enum_qi_zheng.dart';
+import 'package:qizhengsiyu/presentation/models/lunar_date_info_v2_data.dart';
 import 'package:qizhengsiyu/presentation/models/ui_star_model.dart';
 import 'package:qizhengsiyu/presentation/pages/StarsResolver.dart';
-import 'package:qizhengsiyu/presentation/models/lunar_date_info_v2_data.dart';
-import 'package:qizhengsiyu/domain/entities/models/eleven_stars_info.dart';
-import 'package:qizhengsiyu/enums/enum_qi_zheng.dart';
-import 'package:metaphysics_core/enums/datetime_strategy_enums.dart';
-import 'package:qizhengsiyu/domain/usecases/yun_liu_usecase.dart';
-import 'package:qizhengsiyu/domain/usecases/compute_gan_zhi_usecase.dart';
-import 'package:metaphysics_core/models/divination_datetime.dart';
-import 'package:metaphysics_core/models/divination_info_model.dart';
-import 'package:metaphysics_core/datamodel/datetime_divination_datamodel.dart';
-import 'package:metaphysics_core/datamodel/location.dart';
 import 'package:timezone/timezone.dart' as tz;
-import 'package:calendar/calendar.dart';
+
+import 'package:qizhengsiyu/domain/pipeline/qizheng_pipeline_executor.dart';
+import 'package:qizhengsiyu/domain/services/shen_sha_service.dart';
+import 'package:qizhengsiyu/domain/services/hua_yao_service.dart';
+import 'package:repository_interface_divination_pipeline/repository_interface_divination_pipeline.dart';
 import 'package:qizhengsiyu/domain/entities/models/panel_config.dart' as ui_panel_config;
-import 'package:qizhengsiyu/domain/entities/models/stars_angle.dart';
 
 /// 七政四余 ViewModel - MVVM架构 + UI兼容层
 ///
@@ -44,6 +50,14 @@ class QiZhengSiYuViewModel extends ChangeNotifier {
   final ComputeRiseSetUseCase _computeRiseSetUseCase;
   final YunLiuUseCase _yunLiuUseCase;
   final ComputeGanZhiUseCase _computeGanZhiUseCase;
+  final MomentResolver? _momentResolver;
+  final ShenShaService? _shenShaService;
+  final HuaYaoService? _huaYaoService;
+  final QizhengPipelineExecutor? _pipelineExecutor;
+
+  ResolvedMoment? _resolvedMoment;
+  String _divinationRequestInfoUuid = '';
+  String _divinationDatetimeJson = '{}';
 
   QiZhengSiYuViewModel({
     required InitializeQiZhengOfficialDataUseCase initializeOfficialDataUseCase,
@@ -53,13 +67,21 @@ class QiZhengSiYuViewModel extends ChangeNotifier {
     required ComputeRiseSetUseCase computeRiseSetUseCase,
     required YunLiuUseCase yunLiuUseCase,
     required ComputeGanZhiUseCase computeGanZhiUseCase,
+    MomentResolver? momentResolver,
+    ShenShaService? shenShaService,
+    HuaYaoService? huaYaoService,
+    QizhengPipelineExecutor? pipelineExecutor,
   })  : _initUseCase = initializeOfficialDataUseCase,
         _calculateUseCase = calculateBasePanelUseCase,
         _evaluateGeJuUseCase = evaluateGeJuUseCase,
         _buildTimelineUseCase = buildTimelineUseCase,
         _computeRiseSetUseCase = computeRiseSetUseCase,
         _yunLiuUseCase = yunLiuUseCase,
-        _computeGanZhiUseCase = computeGanZhiUseCase;
+        _computeGanZhiUseCase = computeGanZhiUseCase,
+        _momentResolver = momentResolver,
+        _shenShaService = shenShaService,
+        _huaYaoService = huaYaoService,
+        _pipelineExecutor = pipelineExecutor;
 
   // ==================== 核心状态 (MVVM) ====================
   BasePanelModel? _basicLifePanel;
@@ -188,10 +210,26 @@ class QiZhengSiYuViewModel extends ChangeNotifier {
     _lifeObserver = _generateLifeObserverPosition(divinationInfoModel);
     baseObserverPositionNotifier.value = _lifeObserver;
 
-    // 提取地址名称用于日月出没面板显示
+    _divinationRequestInfoUuid = divinationInfoModel.divination.uuid;
+
     final datetimeData = divinationInfoModel.divinationDatetime;
     final datetimeModel = datetimeData.timingInfoListJson!
         .firstWhere((t) => t.uuid == datetimeData.timingInfoUuid);
+    _divinationDatetimeJson = jsonEncode(datetimeModel.toJson());
+
+    if (_momentResolver != null) {
+      _resolvedMoment = _momentResolver.resolve(DivinationMoment(
+        instantUtc: datetimeModel.datetime.toUtc(),
+        place: GeoPoint(
+          longitude: _lifeObserver!.longitude,
+          latitude: _lifeObserver!.latitude,
+          timeZoneId: datetimeModel.observer.timezoneStr,
+        ),
+        reckoning: datetimeModel.observer.type,
+      ));
+    }
+
+    // 提取地址名称用于日月出没面板显示
     final address = datetimeModel.observer.location?.address;
     if (address != null) {
       final parts = <String>[];
@@ -311,18 +349,39 @@ class QiZhengSiYuViewModel extends ChangeNotifier {
       BasePanelConfig config, ObserverPosition observer) async {
     await _initUseCase.execute();
 
-    final panelResult = await _calculateUseCase.execute(
-      config: config,
-      observer: observer,
-    );
-
-    _basicLifePanel = panelResult.basicLifePanel;
-    _zhouTianModel = panelResult.zhouTianModel;
-    _lastStarAngleMapper = panelResult.starAngleMapper;
+    if (_resolvedMoment != null &&
+        _shenShaService != null &&
+        _huaYaoService != null &&
+        _pipelineExecutor != null) {
+      final result = await _pipelineExecutor!.execute(
+        moment: _resolvedMoment!,
+        config: config,
+        observer: observer,
+        shenShaService: _shenShaService!,
+        huaYaoService: _huaYaoService!,
+        divinationRequestInfoUuid: _divinationRequestInfoUuid,
+        divinationDatetimeJson: _divinationDatetimeJson,
+        uuid: DateTime.now().millisecondsSinceEpoch.toString(),
+        createdAt: DateTime.now(),
+      );
+      _basicLifePanel = result.panelModel;
+      _zhouTianModel = result.zhouTianModel;
+      _lastStarAngleMapper = result.starAngleMapper;
+    } else {
+      final panelResult = await _calculateUseCase.execute(
+        config: config,
+        observer: observer,
+      );
+      _basicLifePanel = panelResult.basicLifePanel;
+      _zhouTianModel = panelResult.zhouTianModel;
+      _lastStarAngleMapper = panelResult.starAngleMapper;
+    }
 
     // 保存出生时间参数（格局评估使用）
     _birthYearJiaZi = observer.yearGanZhi;
     _birthMonthZhi = observer.monthGanZhi.zhi;
+
+    uiZhouTianModelNotifier.value = _zhouTianModel;
 
     // 构建 UI 星体
     if (_baseMiniSafetyAngle > 0) {
@@ -331,7 +390,6 @@ class QiZhengSiYuViewModel extends ChangeNotifier {
       _uiBasicLifeStars = _calculateUIStarsFromMapper(_lastStarAngleMapper!, 10.0);
     }
 
-    uiZhouTianModelNotifier.value = _zhouTianModel;
     uiBasePanelNotifier.value = _basicLifePanel;
     uiBasicLifeStarsNotifier.value = _uiBasicLifeStars;
 

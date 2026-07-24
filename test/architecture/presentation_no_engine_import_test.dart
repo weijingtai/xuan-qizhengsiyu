@@ -11,8 +11,8 @@ const _forbiddenImports = [
   '/domain/services/generate_base_panel_service',
   'celestial_rise_set_calculator',
   'solar_time_calculator',
-  'solar_lunar_datetime_helper', // 评审补充: 阴历/干支 helper
-  'lunar_adapter',               // 评审补充: LunarAdapter
+  'solar_lunar_datetime_helper',
+  'lunar_adapter',
   '/liu_yun/services/',
 ];
 
