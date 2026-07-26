@@ -8,6 +8,7 @@ import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 import 'package:qizhengsiyu/enums/enum_qi_zheng.dart';
 import 'package:metaphysics_core/enums.dart';
+import 'package:metaphysics_core/models/jie_qi_info.dart';
 import 'package:metaphysics_core/models/divination_info_model.dart';
 import 'package:xuan_four_zhu_card/pages/dev_enter_page_view_model.dart';
 import 'package:qizhengsiyu/domain/entities/models/base_panel_model.dart';
@@ -60,6 +61,9 @@ import 'package:qizhengsiyu/enums/enum_settle_life_body.dart';
 import 'package:qizhengsiyu/domain/entities/models/panel_ui_size.dart'; // UI模型,保留在原位置
 
 import 'package:qizhengsiyu/presentation/adapters/legacy/qizheng_board_switch.dart';
+import 'package:bazi_embed_ui_interface/bazi_embed_ui_interface.dart';
+import 'package:repository_interface_bazi/repository_interface_bazi.dart';
+import 'package:repository_interface_divination_pipeline/geo.dart';
 
 // ── 新增：四柱Card / 节气Card / 大运流年TreeList ──
 import 'package:metaphysics_core/models/eight_chars.dart';
@@ -531,6 +535,9 @@ class _BeautyViewPageState extends State<BeautyViewPage>
 
             // ── 大运流年·三层级联 ──
             _buildYunLiuCardSection(),
+
+            // ── BaziEmbed 大运流年 sheet ──
+            _buildBaziEmbedSection(),
 
             // ── 格局评估结果面板 ──
             const GeJuResultPanel(showDebugBar: true),
@@ -2531,6 +2538,74 @@ class _BeautyViewPageState extends State<BeautyViewPage>
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 8),
           child: YunLiuListTileCardWidget(viewModel: yunLiuVm),
+        );
+      },
+    );
+  }
+
+  /// BaziEmbed 展示区块 — 调用 bazi 侧大运流年 sheet
+  ///
+  /// BaziBirthContext 构造说明：
+  /// - birthDateTime / gender / eightChars / birthLocation 可从 ObserverPosition 构造
+  /// - chineseDateInfo 需要 Phenology、JieQiInfo、YuanYunOrder、NineYun 等复杂类型，
+  ///   当前 ViewModel 未暴露这些字段，属于 BLOCKER
+  /// - 其余可选字段（ziBoundaryStrategy 等）使用 BaziBirthContext 默认值
+  Widget _buildBaziEmbedSection() {
+    final port = context.read<BaziEmbedUiPort?>();
+    if (port == null) return const SizedBox.shrink();
+
+    final vm = context.read<QiZhengSiYuViewModel>();
+    return ValueListenableBuilder<ObserverPosition?>(
+      valueListenable: vm.baseObserverPositionNotifier,
+      builder: (context, observer, _) {
+        if (observer == null) return const SizedBox.shrink();
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          child: OutlinedButton.icon(
+            icon: const Icon(Icons.timeline, size: 18),
+            label: const Text('大运流年（BaziEmbed）'),
+            onPressed: () {
+              final birthContext = BaziBirthContext(
+                birthDateTime: observer.dateTime,
+                gender: Gender.male,
+                eightChars: EightChars(
+                  year: observer.yearGanZhi,
+                  month: observer.monthGanZhi,
+                  day: observer.dayGanZhi,
+                  time: observer.timeGanZhi,
+                ),
+                // TODO(chineseDateInfo): 需从 ViewModel 获取 Phenology/JieQiInfo/YuanYunOrder/NineYun
+                // 当前无法构造完整的 ChineseDateInfo，属于 BLOCKER
+                chineseDateInfo: ChineseDateInfo(
+                  eightChars: EightChars(
+                    year: observer.yearGanZhi,
+                    month: observer.monthGanZhi,
+                    day: observer.dayGanZhi,
+                    time: observer.timeGanZhi,
+                  ),
+                  phenology: Phenology.phenologyList.first,
+                  lunarMonth: 0,
+                  lunarDay: 0,
+                  isLeapMonth: false,
+                  jieQiInfo: JieQiInfo(
+                    jieQi: TwentyFourJieQi.LI_CHUN,
+                    startAt: observer.dateTime,
+                    endAt: observer.dateTime,
+                  ),
+                  threeYuan: YuanYunOrder.upper,
+                  nineYun: NineYun.first,
+                ),
+                birthLocation: BirthPlace(
+                  GeoPoint(
+                    latitude: observer.latitude,
+                    longitude: observer.longitude,
+                    timeZoneId: observer.timezone,
+                  ),
+                ),
+              );
+              port.showDayunLiunianSheet(context, birthContext);
+            },
+          ),
         );
       },
     );

@@ -262,6 +262,10 @@ class _RiseSetInfoPanelState extends State<RiseSetInfoPanel> {
     );
   }
 
+  /// 该处属第三类时间语义（天象查询日期），与起课时间/命盘生日均不同，
+  /// 现有 QueryTimeInputCard 双模式不覆盖；若未来出现第二个天象查询消费方，
+  /// 再抽 QueryTimeInputCard 第三模式，当前不做通用组件。
+  @Deprecated('原生 picker 待迁移至 TL 统一输入；当前该 panel 零挂载，保留待接。')
   Future<void> _pickDate(BuildContext context, QiZhengSiYuViewModel vm) async {
     final selected = await showDatePicker(
       context: context,

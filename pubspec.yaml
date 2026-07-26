@@ -104,6 +104,9 @@ dependencies:
   calendar:
     git:
       url: http://192.168.0.165:3000/xuan/calendar.git
+  bazi_embed_ui_interface:
+    git:
+      url: http://192.168.0.165:3000/xuan/bazi-embed-ui-interface.git
 
 dev_dependencies:
   flutter_test:
@@ -170,6 +173,8 @@ flutter:
     iosBundleIdentifier: com.example.qizhengsiyu
 
 dependency_overrides:
+  repository_interface_bazi:
+    path: ../repository-interface-bazi
   repository_interface_divination_pipeline:
     git:
       url: http://192.168.0.165:3000/xuan/repository-interface-divination-pipeline.git
