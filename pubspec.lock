@@ -49,6 +49,15 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.0"
+  bazi_embed_ui_interface:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: "0b637d361b01bad8d394cbc597721101b87bb5d2"
+      url: "http://192.168.0.165:3000/xuan/bazi-embed-ui-interface.git"
+    source: git
+    version: "0.1.0"
   board_datetime_picker:
     dependency: "direct main"
     description:
@@ -118,7 +127,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "87fc0d4e92a03eb3bca1d195937cf3b0bef45baa"
+      resolved-ref: "40526af448c30e21829a87517132004afa81f07c"
       url: "http://192.168.0.165:3000/xuan/calendar.git"
     source: git
     version: "0.1.0"
@@ -222,24 +231,26 @@ packages:
     dependency: transitive
     description:
       name: dio
-      sha256: ea2bad3c89a27635ce2d85cce4d6b199da49a5a48ec77b03e45b65a3b90922b0
+      sha256: "0df44ebba85e503958eb75d07eedd3c86275a58c1d3eda2f2ce8f0a2c3abbb3c"
       url: "https://pub.dev"
     source: hosted
-    version: "5.10.0"
+    version: "5.11.0"
   dio_web_adapter:
     dependency: transitive
     description:
       name: dio_web_adapter
-      sha256: dd58dc3861eb36edb13b217efc006a1c21e5bbc341de8c229b85634fa5e362e4
+      sha256: "0786d0b7295a373de356fc0af4f6f1d0ab2844ed31b19dfc5e7556b70e24212c"
       url: "https://pub.dev"
     source: hosted
-    version: "2.2.0"
+    version: "2.2.1"
   divination_case:
     dependency: "direct overridden"
     description:
-      path: "../xuan-divination-case"
-      relative: true
-    source: path
+      path: "."
+      ref: HEAD
+      resolved-ref: "3671b92eb3bb4b0c1ac1958e79f9bfa91db67491"
+      url: "http://192.168.0.165:3000/xuan/xuan-divination-case.git"
+    source: git
     version: "0.1.0"
   dotted_border:
     dependency: transitive
@@ -609,9 +620,11 @@ packages:
   metaphysics_core:
     dependency: "direct main"
     description:
-      path: "../xuan-metaphysics-core"
-      relative: true
-    source: path
+      path: "."
+      ref: HEAD
+      resolved-ref: c4dbaf951659c245c023a416b4c6d8e1ec5671cf
+      url: "http://192.168.0.165:3000/xuan/metaphysics-core.git"
+    source: git
     version: "0.1.1"
   mime:
     dependency: transitive
@@ -706,16 +719,18 @@ packages:
     description:
       path: assets
       ref: HEAD
-      resolved-ref: "38496aead6cbce354475ad16bb42b5d5ec87aced"
+      resolved-ref: cb7522832e54ec8a2039e0d4302b2197def767ef
       url: "http://192.168.0.165:3000/xuan/xuan-storage.git"
     source: git
     version: "0.0.1"
   persistence_core:
     dependency: "direct main"
     description:
-      path: "../xuan-storage/core"
-      relative: true
-    source: path
+      path: core
+      ref: HEAD
+      resolved-ref: cb7522832e54ec8a2039e0d4302b2197def767ef
+      url: "http://192.168.0.165:3000/xuan/xuan-storage.git"
+    source: git
     version: "0.0.1"
   persistence_domain:
     dependency: transitive
@@ -731,7 +746,7 @@ packages:
     description:
       path: drift
       ref: HEAD
-      resolved-ref: "38496aead6cbce354475ad16bb42b5d5ec87aced"
+      resolved-ref: cb7522832e54ec8a2039e0d4302b2197def767ef
       url: "http://192.168.0.165:3000/xuan/xuan-storage.git"
     source: git
     version: "0.0.1"
@@ -740,7 +755,7 @@ packages:
     description:
       path: preferences
       ref: HEAD
-      resolved-ref: "38496aead6cbce354475ad16bb42b5d5ec87aced"
+      resolved-ref: cb7522832e54ec8a2039e0d4302b2197def767ef
       url: "http://192.168.0.165:3000/xuan/xuan-storage.git"
     source: git
     version: "0.0.0"
@@ -843,10 +858,10 @@ packages:
     source: git
     version: "0.0.0"
   repository_interface_bazi:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       path: "."
-      ref: HEAD
+      ref: main
       resolved-ref: df3e48605cd220a5b6d7b43737d2976474146506
       url: "http://192.168.0.165:3000/xuan/repository-interface-bazi.git"
     source: git
@@ -863,9 +878,11 @@ packages:
   repository_interface_divination_pipeline:
     dependency: "direct main"
     description:
-      path: "../repository-interface-divination-pipeline"
-      relative: true
-    source: path
+      path: "."
+      ref: main
+      resolved-ref: "194fc2b4b5366cbfa3efb6734011a7d0a4b3b43c"
+      url: "http://192.168.0.165:3000/xuan/repository-interface-divination-pipeline.git"
+    source: git
     version: "0.1.0"
   repository_interface_four_zhu_card:
     dependency: transitive
@@ -915,9 +932,11 @@ packages:
   repository_interface_record:
     dependency: "direct overridden"
     description:
-      path: "../repository-interface-record"
-      relative: true
-    source: path
+      path: "."
+      ref: HEAD
+      resolved-ref: ba31dbf0ba54ad509af15c69eab6807d45b64bb8
+      url: "http://192.168.0.165:3000/xuan/repository-interface-record.git"
+    source: git
     version: "0.0.0"
   repository_interface_taiyishenshu:
     dependency: transitive
@@ -1043,10 +1062,10 @@ packages:
     dependency: transitive
     description:
       name: source_gen
-      sha256: ec37cc0e6694374cbef59ed79685572c870a54ede6fa30a3e420feb3adffea02
+      sha256: a603f1fb984a7391ae5978d1b92bfaaa08b350dca5c825256f925818f7943bf5
       url: "https://pub.dev"
     source: hosted
-    version: "4.2.3"
+    version: "4.2.4"
   source_helper:
     dependency: transitive
     description:
@@ -1294,9 +1313,11 @@ packages:
   xuan_four_zhu_card:
     dependency: "direct main"
     description:
-      path: "../xuan-four-zhu-card"
-      relative: true
-    source: path
+      path: "."
+      ref: HEAD
+      resolved-ref: decba851d2989701896419d5fbf489afd63eaff1
+      url: "http://192.168.0.165:3000/xuan/xuan-four-zhu-card.git"
+    source: git
     version: "0.1.0"
   xuan_gua_core:
     dependency: transitive
@@ -1317,11 +1338,11 @@ packages:
     source: git
     version: "1.0.0"
   xuan_time_location:
-    dependency: transitive
+    dependency: "direct main"
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "30d4553310df1e8302dee5e0e4cd6412a8814fd5"
+      resolved-ref: c5ee31277816899270bcb50abdec8d3267bf6bf6
       url: "http://192.168.0.165:3000/xuan/xuan-time-location.git"
     source: git
     version: "0.1.0"
