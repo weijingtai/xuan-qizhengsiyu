@@ -174,7 +174,9 @@ flutter:
 
 dependency_overrides:
   repository_interface_bazi:
-    path: ../repository-interface-bazi
+    git:
+      url: http://192.168.0.165:3000/xuan/repository-interface-bazi.git
+      ref: main
   repository_interface_divination_pipeline:
     git:
       url: http://192.168.0.165:3000/xuan/repository-interface-divination-pipeline.git
