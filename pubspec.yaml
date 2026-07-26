@@ -24,6 +24,9 @@ dependencies:
   xuan_four_zhu_card:
     git:
       url: http://192.168.0.165:3000/xuan/xuan-four-zhu-card.git
+  xuan_time_location:
+    git:
+      url: http://192.168.0.165:3000/xuan/xuan-time-location.git
   flutter:
     sdk: flutter
   flutter_localizations:
