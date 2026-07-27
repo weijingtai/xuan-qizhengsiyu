@@ -54,7 +54,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "0b637d361b01bad8d394cbc597721101b87bb5d2"
+      resolved-ref: c4a448b51a191bcdf9c5677cdbe9d92579c87990
       url: "http://192.168.0.165:3000/xuan/bazi-embed-ui-interface.git"
     source: git
     version: "0.1.0"
@@ -500,10 +500,10 @@ packages:
     dependency: transitive
     description:
       name: jni
-      sha256: c2230682d5bc2362c1c9e8d3c7f406d9cbba23ab3f2e203a025dd47e0fb2e68f
+      sha256: ca1efa31ef27a0b8ecbb4f8dcf3785e5ad1b8a54c64af9b72d287ae81f93a4f4
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.0"
+    version: "1.0.1"
   jni_flutter:
     dependency: transitive
     description:
@@ -512,6 +512,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.1"
+  jni_util:
+    dependency: transitive
+    description:
+      name: jni_util
+      sha256: "1ba86da04a5f2bf18fde2edb235587e70c5b0fc5bd4ba955f46b00942c3fc35f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   json_annotation:
     dependency: "direct main"
     description:
@@ -719,7 +727,7 @@ packages:
     description:
       path: assets
       ref: HEAD
-      resolved-ref: cb7522832e54ec8a2039e0d4302b2197def767ef
+      resolved-ref: d66ef3069090108e4be5775138d67aa1b0342dbc
       url: "http://192.168.0.165:3000/xuan/xuan-storage.git"
     source: git
     version: "0.0.1"
@@ -728,7 +736,7 @@ packages:
     description:
       path: core
       ref: HEAD
-      resolved-ref: cb7522832e54ec8a2039e0d4302b2197def767ef
+      resolved-ref: d66ef3069090108e4be5775138d67aa1b0342dbc
       url: "http://192.168.0.165:3000/xuan/xuan-storage.git"
     source: git
     version: "0.0.1"
@@ -746,7 +754,7 @@ packages:
     description:
       path: drift
       ref: HEAD
-      resolved-ref: cb7522832e54ec8a2039e0d4302b2197def767ef
+      resolved-ref: d66ef3069090108e4be5775138d67aa1b0342dbc
       url: "http://192.168.0.165:3000/xuan/xuan-storage.git"
     source: git
     version: "0.0.1"
@@ -755,7 +763,7 @@ packages:
     description:
       path: preferences
       ref: HEAD
-      resolved-ref: cb7522832e54ec8a2039e0d4302b2197def767ef
+      resolved-ref: d66ef3069090108e4be5775138d67aa1b0342dbc
       url: "http://192.168.0.165:3000/xuan/xuan-storage.git"
     source: git
     version: "0.0.0"
@@ -1224,10 +1232,10 @@ packages:
     dependency: "direct main"
     description:
       name: uuid
-      sha256: a11b666489b1954e01d992f3d601b1804a33937b5a8fe677bd26b8a9f96f96e8
+      sha256: "9b129329f58692f6e6578329498a8fe9fbe98f090beb764ffbb8ee2eadd01dcd"
       url: "https://pub.dev"
     source: hosted
-    version: "4.5.2"
+    version: "4.6.0"
   vector_math:
     dependency: transitive
     description:

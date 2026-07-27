@@ -52,7 +52,7 @@ dependencies:
   flutter_city_picker: ^2.2.0
   board_datetime_picker: 2.8.5
   flutter_sliding_toast: ^1.5.3
-  uuid: 4.5.2
+  uuid: ^4.6.0
 
   slide_switcher: ^1.1.2
 
@@ -173,10 +173,6 @@ flutter:
     iosBundleIdentifier: com.example.qizhengsiyu
 
 dependency_overrides:
-  repository_interface_bazi:
-    git:
-      url: http://192.168.0.165:3000/xuan/repository-interface-bazi.git
-      ref: main
   repository_interface_divination_pipeline:
     git:
       url: http://192.168.0.165:3000/xuan/repository-interface-divination-pipeline.git

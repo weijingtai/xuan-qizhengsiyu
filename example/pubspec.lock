@@ -86,7 +86,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "0b637d361b01bad8d394cbc597721101b87bb5d2"
+      resolved-ref: c4a448b51a191bcdf9c5677cdbe9d92579c87990
       url: "http://192.168.0.165:3000/xuan/bazi-embed-ui-interface.git"
     source: git
     version: "0.1.0"
@@ -287,18 +287,18 @@ packages:
     dependency: "direct main"
     description:
       name: dio
-      sha256: ea2bad3c89a27635ce2d85cce4d6b199da49a5a48ec77b03e45b65a3b90922b0
+      sha256: "0df44ebba85e503958eb75d07eedd3c86275a58c1d3eda2f2ce8f0a2c3abbb3c"
       url: "https://pub.dev"
     source: hosted
-    version: "5.10.0"
+    version: "5.11.0"
   dio_web_adapter:
     dependency: transitive
     description:
       name: dio_web_adapter
-      sha256: dd58dc3861eb36edb13b217efc006a1c21e5bbc341de8c229b85634fa5e362e4
+      sha256: "0786d0b7295a373de356fc0af4f6f1d0ab2844ed31b19dfc5e7556b70e24212c"
       url: "https://pub.dev"
     source: hosted
-    version: "2.2.0"
+    version: "2.2.1"
   divination_case:
     dependency: "direct overridden"
     description:
@@ -692,10 +692,10 @@ packages:
     dependency: transitive
     description:
       name: jni
-      sha256: c2230682d5bc2362c1c9e8d3c7f406d9cbba23ab3f2e203a025dd47e0fb2e68f
+      sha256: ca1efa31ef27a0b8ecbb4f8dcf3785e5ad1b8a54c64af9b72d287ae81f93a4f4
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.0"
+    version: "1.0.1"
   jni_flutter:
     dependency: transitive
     description:
@@ -704,6 +704,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.1"
+  jni_util:
+    dependency: transitive
+    description:
+      name: jni_util
+      sha256: "1ba86da04a5f2bf18fde2edb235587e70c5b0fc5bd4ba955f46b00942c3fc35f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   json_annotation:
     dependency: "direct main"
     description:
@@ -951,7 +959,7 @@ packages:
     description:
       path: assets
       ref: HEAD
-      resolved-ref: cb7522832e54ec8a2039e0d4302b2197def767ef
+      resolved-ref: d66ef3069090108e4be5775138d67aa1b0342dbc
       url: "http://192.168.0.165:3000/xuan/xuan-storage.git"
     source: git
     version: "0.0.1"
@@ -960,7 +968,7 @@ packages:
     description:
       path: core
       ref: HEAD
-      resolved-ref: cb7522832e54ec8a2039e0d4302b2197def767ef
+      resolved-ref: d66ef3069090108e4be5775138d67aa1b0342dbc
       url: "http://192.168.0.165:3000/xuan/xuan-storage.git"
     source: git
     version: "0.0.1"
@@ -978,7 +986,7 @@ packages:
     description:
       path: drift
       ref: HEAD
-      resolved-ref: cb7522832e54ec8a2039e0d4302b2197def767ef
+      resolved-ref: d66ef3069090108e4be5775138d67aa1b0342dbc
       url: "http://192.168.0.165:3000/xuan/xuan-storage.git"
     source: git
     version: "0.0.1"
@@ -987,7 +995,7 @@ packages:
     description:
       path: preferences
       ref: HEAD
-      resolved-ref: cb7522832e54ec8a2039e0d4302b2197def767ef
+      resolved-ref: d66ef3069090108e4be5775138d67aa1b0342dbc
       url: "http://192.168.0.165:3000/xuan/xuan-storage.git"
     source: git
     version: "0.0.0"
@@ -1027,10 +1035,10 @@ packages:
     dependency: transitive
     description:
       name: posix
-      sha256: "185ef7606574f789b40f289c233efa52e96dead518aed988e040a10737febb07"
+      sha256: bc1bad54ad2b735816e31f8d4600cfde6c7839975085ddfbca48b6c9f7c4044e
       url: "https://pub.dev"
     source: hosted
-    version: "6.5.0"
+    version: "6.5.2"
   proj4dart:
     dependency: transitive
     description:
@@ -1349,10 +1357,10 @@ packages:
     dependency: transitive
     description:
       name: source_gen
-      sha256: ec37cc0e6694374cbef59ed79685572c870a54ede6fa30a3e420feb3adffea02
+      sha256: a603f1fb984a7391ae5978d1b92bfaaa08b350dca5c825256f925818f7943bf5
       url: "https://pub.dev"
     source: hosted
-    version: "4.2.3"
+    version: "4.2.4"
   source_helper:
     dependency: transitive
     description:
@@ -1527,10 +1535,10 @@ packages:
     dependency: "direct main"
     description:
       name: uuid
-      sha256: a11b666489b1954e01d992f3d601b1804a33937b5a8fe677bd26b8a9f96f96e8
+      sha256: "9b129329f58692f6e6578329498a8fe9fbe98f090beb764ffbb8ee2eadd01dcd"
       url: "https://pub.dev"
     source: hosted
-    version: "4.5.2"
+    version: "4.6.0"
   vector_math:
     dependency: transitive
     description:
@@ -1642,7 +1650,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "5bc4bddaedbee4bdd5378ce486c00a2679ca4202"
+      resolved-ref: decba851d2989701896419d5fbf489afd63eaff1
       url: "http://192.168.0.165:3000/xuan/xuan-four-zhu-card.git"
     source: git
     version: "0.1.0"
