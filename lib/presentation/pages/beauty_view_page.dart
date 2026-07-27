@@ -2544,20 +2544,23 @@ class _BeautyViewPageState extends State<BeautyViewPage>
 
   /// BaziEmbed 展示区块 — 调用 bazi 侧大运流年 sheet
   ///
-  /// BaziBirthContext 构造说明：
-  /// - birthDateTime / gender / eightChars / birthLocation 可从 ObserverPosition 构造
-  /// - chineseDateInfo 需要 Phenology、JieQiInfo、YuanYunOrder、NineYun 等复杂类型，
-  ///   当前 ViewModel 未暴露这些字段，属于 BLOCKER
-  /// - 其余可选字段（ziBoundaryStrategy 等）使用 BaziBirthContext 默认值
+  /// gender 从 DivinationInfoModel.divination.gender 提取；若为空则隐藏按钮。
+  /// chineseDateInfo 从 yunLiuViewModel.birthDateInfo 获取（已由
+  /// YunLiuUseCase.computeBirthDateInfo 通过 SolarLunarDateTimeHelper.cacluateChineseDateInfoV2 计算）。
   Widget _buildBaziEmbedSection() {
     final port = context.read<BaziEmbedUiPort?>();
     if (port == null) return const SizedBox.shrink();
 
     final vm = context.read<QiZhengSiYuViewModel>();
-    return ValueListenableBuilder<ObserverPosition?>(
-      valueListenable: vm.baseObserverPositionNotifier,
-      builder: (context, observer, _) {
-        if (observer == null) return const SizedBox.shrink();
+    return AnimatedBuilder(
+      animation: vm,
+      builder: (context, _) {
+        final observer = vm.baseObserverPositionNotifier.value;
+        final yunLiuVm = vm.yunLiuViewModel;
+        final gender = vm.gender;
+        if (observer == null || yunLiuVm == null || gender == null) {
+          return const SizedBox.shrink();
+        }
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
           child: OutlinedButton.icon(
@@ -2566,34 +2569,14 @@ class _BeautyViewPageState extends State<BeautyViewPage>
             onPressed: () {
               final birthContext = BaziBirthContext(
                 birthDateTime: observer.dateTime,
-                gender: Gender.male,
+                gender: gender,
                 eightChars: EightChars(
                   year: observer.yearGanZhi,
                   month: observer.monthGanZhi,
                   day: observer.dayGanZhi,
                   time: observer.timeGanZhi,
                 ),
-                // TODO(chineseDateInfo): 需从 ViewModel 获取 Phenology/JieQiInfo/YuanYunOrder/NineYun
-                // 当前无法构造完整的 ChineseDateInfo，属于 BLOCKER
-                chineseDateInfo: ChineseDateInfo(
-                  eightChars: EightChars(
-                    year: observer.yearGanZhi,
-                    month: observer.monthGanZhi,
-                    day: observer.dayGanZhi,
-                    time: observer.timeGanZhi,
-                  ),
-                  phenology: Phenology.phenologyList.first,
-                  lunarMonth: 0,
-                  lunarDay: 0,
-                  isLeapMonth: false,
-                  jieQiInfo: JieQiInfo(
-                    jieQi: TwentyFourJieQi.LI_CHUN,
-                    startAt: observer.dateTime,
-                    endAt: observer.dateTime,
-                  ),
-                  threeYuan: YuanYunOrder.upper,
-                  nineYun: NineYun.first,
-                ),
+                chineseDateInfo: yunLiuVm.birthDateInfo,
                 birthLocation: BirthPlace(
                   GeoPoint(
                     latitude: observer.latitude,
