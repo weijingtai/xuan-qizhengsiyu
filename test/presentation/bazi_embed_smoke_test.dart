@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:metaphysics_core/enums.dart';
-import 'package:metaphysics_core/models/eight_chars.dart';
-import 'package:metaphysics_core/models/jie_qi_info.dart';
+import 'package:metaphysics_core/metaphysics_core.dart';
 import 'package:bazi_embed_ui_interface/bazi_embed_ui_interface.dart';
 import 'package:repository_interface_bazi/repository_interface_bazi.dart';
 import 'package:repository_interface_divination_pipeline/geo.dart';
