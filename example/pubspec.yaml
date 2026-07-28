@@ -42,8 +42,6 @@ dependencies:
   qizhengsiyu:
     git:
       url: http://192.168.0.165:3000/xuan/xuan-qizhengsiyu.git
-      ref: main
-
   cupertino_icons: ^1.0.8
   dotlottie_loader: ^0.0.5
   auto_size_text: ^3.0.0
@@ -82,6 +80,9 @@ dependencies:
     git:
       url: http://192.168.0.165:3000/xuan/repository-interface-qizhengsiyu.git
   shared_preferences: ^2.2.0
+  enumeration:
+    git:
+      url: http://192.168.0.165:3000/xuan/enumeration.git
 
 dev_dependencies:
   flutter_test:
@@ -111,7 +112,8 @@ flutter:
 
 dependency_overrides:
   qizhengsiyu:
-    path: ..
+    git:
+      url: http://192.168.0.165:3000/xuan/xuan-qizhengsiyu.git
   persistence_core:
     git:
       url: http://192.168.0.165:3000/xuan/xuan-storage.git
