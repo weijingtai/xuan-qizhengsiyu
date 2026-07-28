@@ -105,6 +105,9 @@ dependencies:
   bazi_embed_ui_interface:
     git:
       url: http://192.168.0.165:3000/xuan/bazi-embed-ui-interface.git
+  enumeration:
+    git:
+      url: http://192.168.0.165:3000/xuan/enumeration.git
 
 dev_dependencies:
   flutter_test:
