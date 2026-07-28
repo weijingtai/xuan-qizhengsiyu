@@ -7,7 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 import 'package:qizhengsiyu/enums/enum_qi_zheng.dart';
-import 'package:metaphysics_core/enums.dart';
+import 'package:metaphysics_core/metaphysics_core.dart';
 import 'package:metaphysics_core/models/divination_info_model.dart';
 import 'package:xuan_four_zhu_card/pages/dev_enter_page_view_model.dart';
 import 'package:qizhengsiyu/domain/entities/models/base_panel_model.dart';
@@ -60,6 +60,9 @@ import 'package:qizhengsiyu/enums/enum_settle_life_body.dart';
 import 'package:qizhengsiyu/domain/entities/models/panel_ui_size.dart'; // UI模型,保留在原位置
 
 import 'package:qizhengsiyu/presentation/adapters/legacy/qizheng_board_switch.dart';
+import 'package:bazi_embed_ui_interface/bazi_embed_ui_interface.dart';
+import 'package:repository_interface_bazi/repository_interface_bazi.dart';
+import 'package:repository_interface_divination_pipeline/geo.dart';
 
 // ── 新增：四柱Card / 节气Card / 大运流年TreeList ──
 import 'package:metaphysics_core/models/eight_chars.dart';
@@ -531,6 +534,9 @@ class _BeautyViewPageState extends State<BeautyViewPage>
 
             // ── 大运流年·三层级联 ──
             _buildYunLiuCardSection(),
+
+            // ── BaziEmbed 大运流年 sheet ──
+            _buildBaziEmbedSection(),
 
             // ── 格局评估结果面板 ──
             const GeJuResultPanel(showDebugBar: true),
@@ -2531,6 +2537,57 @@ class _BeautyViewPageState extends State<BeautyViewPage>
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 8),
           child: YunLiuListTileCardWidget(viewModel: yunLiuVm),
+        );
+      },
+    );
+  }
+
+  /// BaziEmbed 展示区块 — 调用 bazi 侧大运流年 sheet
+  ///
+  /// gender 从 DivinationInfoModel.divination.gender 提取；若为空则隐藏按钮。
+  /// chineseDateInfo 从 yunLiuViewModel.birthDateInfo 获取（已由
+  /// YunLiuUseCase.computeBirthDateInfo 通过 SolarLunarDateTimeHelper.cacluateChineseDateInfoV2 计算）。
+  Widget _buildBaziEmbedSection() {
+    final port = context.read<BaziEmbedUiPort?>();
+    if (port == null) return const SizedBox.shrink();
+
+    final vm = context.read<QiZhengSiYuViewModel>();
+    return AnimatedBuilder(
+      animation: vm,
+      builder: (context, _) {
+        final observer = vm.baseObserverPositionNotifier.value;
+        final yunLiuVm = vm.yunLiuViewModel;
+        final gender = vm.gender;
+        if (observer == null || yunLiuVm == null || gender == null) {
+          return const SizedBox.shrink();
+        }
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          child: OutlinedButton.icon(
+            icon: const Icon(Icons.timeline, size: 18),
+            label: const Text('大运流年（BaziEmbed）'),
+            onPressed: () {
+              final birthContext = BaziBirthContext(
+                birthDateTime: observer.dateTime,
+                gender: gender,
+                eightChars: EightChars(
+                  year: observer.yearGanZhi,
+                  month: observer.monthGanZhi,
+                  day: observer.dayGanZhi,
+                  time: observer.timeGanZhi,
+                ),
+                chineseDateInfo: yunLiuVm.birthDateInfo,
+                birthLocation: BirthPlace(
+                  GeoPoint(
+                    latitude: observer.latitude,
+                    longitude: observer.longitude,
+                    timeZoneId: observer.timezone,
+                  ),
+                ),
+              );
+              port.showDayunLiunianSheet(context, birthContext);
+            },
+          ),
         );
       },
     );

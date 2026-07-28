@@ -28,6 +28,7 @@ import 'package:qizhengsiyu/domain/engines/sweph_engine.dart';
 import 'package:qizhengsiyu/domain/engines/historical_engine.dart';
 import 'package:qizhengsiyu/data/datasources/local/definitions/system_definition_local_data_source.dart';
 import 'package:qizhengsiyu/enums/enum_panel_system_type.dart';
+import 'package:bazi_embed_ui_interface/bazi_embed_ui_interface.dart';
 
 // UseCase 导入
 import 'package:qizhengsiyu/domain/usecases/initialize_qizheng_official_data_usecase.dart';
@@ -85,7 +86,11 @@ List<SingleChildWidget> createProviders(QiZhengSiYuStorageDependencies deps) {
   final geJuRepo = GeJuRepositoryAdapter(deps.geJuRepository);
   final geJuSchool = GeJuSchoolServiceAdapter(deps.geJuSchoolService);
 
+  // BaziEmbed 展示端口：由宿主注入实现，qizheng 侧只消费不实现
   return [
+    // ============ BaziEmbed 端口 ============
+    Provider<BaziEmbedUiPort?>.value(value: null),
+
     // ============ Repositories (via adapters from injected ports) ============
     Provider<QiZhengRecordRepository>(
       create: (_) => deps.recordRepository,

@@ -163,6 +163,10 @@ class QiZhengSiYuViewModel extends ChangeNotifier {
   String? _birthLocationName;
   String? get birthLocationName => _birthLocationName;
 
+  /// 性别（从 DivinationInfoModel.divination.gender 提取，可空）
+  Gender? _gender;
+  Gender? get gender => _gender;
+
   // ==================== UI兼容层: 普通属性 ====================
   /// 大限星体列表
   List<UIStarModel> _uiFateLifeStars = [];
@@ -211,6 +215,7 @@ class QiZhengSiYuViewModel extends ChangeNotifier {
     baseObserverPositionNotifier.value = _lifeObserver;
 
     _divinationRequestInfoUuid = divinationInfoModel.divination.uuid;
+    _gender = divinationInfoModel.divination.gender;
 
     final datetimeData = divinationInfoModel.divinationDatetime;
     final datetimeModel = datetimeData.timingInfoListJson!

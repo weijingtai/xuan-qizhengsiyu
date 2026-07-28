@@ -1,10 +1,13 @@
 import 'package:metaphysics_core/enums.dart';
+import 'package:metaphysics_core/models/divination_datetime.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qizhengsiyu/enums/enum_panel_system_type.dart';
 import 'package:qizhengsiyu/theme/app_theme.dart';
 import 'package:qizhengsiyu/l10n/generated/app_localizations.dart';
+import 'package:qizhengsiyu/infrastructure/qizheng_timezone_provider_adapter.dart';
 import 'package:slide_switcher/slide_switcher.dart';
+import 'package:xuan_four_zhu_card/widgets/query_time_input_card.dart';
 
 import '../../domain/entities/models/panel_config.dart';
 import '../../domain/entities/models/school_profile.dart';
@@ -56,6 +59,13 @@ class _QiZhengSiYuConfigPageState extends State<QiZhengSiYuConfigPage>
   // 当前设备类型
   EnumDeviceType _deviceType = EnumDeviceType.mobile;
 
+  // 统一时间输入组件相关
+  late final ValueNotifier<
+    List<MapEntry<EnumDatetimeType, DivinationDatetimeModel>>?
+  > _selectableCardsNotifier;
+  late final QizhengTimezoneProviderAdapter _timezoneAdapter;
+  DateTime? _selectedDateTime;
+
   @override
   void initState() {
     super.initState();
@@ -69,6 +79,27 @@ class _QiZhengSiYuConfigPageState extends State<QiZhengSiYuConfigPage>
     // ValueNotifier(widget.initialConfig?.queryType ?? EnumQueryType.destiny);
     _configTypeNotifier = ValueNotifier(EnumQueryType.destiny);
 
+    // 初始化统一时间输入组件
+    _selectableCardsNotifier =
+        ValueNotifier<List<MapEntry<EnumDatetimeType, DivinationDatetimeModel>>?>(
+          null,
+        );
+
+    final initialDt = DateTime.now();
+    _timezoneAdapter = QizhengTimezoneProviderAdapter(
+      initialDatetime: initialDt,
+      onDatetimeChanged: (dt) {
+        if (dt != null && mounted) {
+          setState(() {
+            _selectedDateTime = dt;
+          });
+        }
+      },
+      onLocationSelected: (location) {
+        // 位置选择回调（预留）
+      },
+    );
+
     // 设置初始流派
     // if (widget.initialConfig != null) {
     // _selectedSchool = widget.initialConfig!.schoolType;
@@ -79,6 +110,7 @@ class _QiZhengSiYuConfigPageState extends State<QiZhengSiYuConfigPage>
   void dispose() {
     _tabController.dispose();
     _configTypeNotifier.dispose();
+    _selectableCardsNotifier.dispose();
     super.dispose();
   }
 
@@ -156,6 +188,19 @@ class _QiZhengSiYuConfigPageState extends State<QiZhengSiYuConfigPage>
           _buildSchoolSelector(),
           const SizedBox(height: AppTheme.spacing24),
 
+          // 统一时间输入组件
+          WaterInkCard(
+            title: '时间输入',
+            icon: Icons.access_time,
+            child: QueryTimeInputCard(
+              defaultDateTimeType: DateTimeType.solar,
+              selectableCardsNotifier: _selectableCardsNotifier,
+              timezoneProvider: _timezoneAdapter,
+              initialDateTime: _selectedDateTime ?? DateTime.now(),
+            ),
+          ),
+          const SizedBox(height: AppTheme.spacing16),
+
           // 基本信息
           WaterInkCard(
             title: '基本信息',
@@ -215,6 +260,19 @@ class _QiZhengSiYuConfigPageState extends State<QiZhengSiYuConfigPage>
           // 流派选择
           _buildSchoolSelector(),
           const SizedBox(height: AppTheme.spacing24),
+
+          // 统一时间输入组件
+          WaterInkCard(
+            title: '时间输入',
+            icon: Icons.access_time,
+            child: QueryTimeInputCard(
+              defaultDateTimeType: DateTimeType.solar,
+              selectableCardsNotifier: _selectableCardsNotifier,
+              timezoneProvider: _timezoneAdapter,
+              initialDateTime: _selectedDateTime ?? DateTime.now(),
+            ),
+          ),
+          const SizedBox(height: AppTheme.spacing16),
 
           // 两栏布局
           Row(
@@ -307,6 +365,19 @@ class _QiZhengSiYuConfigPageState extends State<QiZhengSiYuConfigPage>
           // 流派选择
           _buildSchoolSelector(),
           const SizedBox(height: AppTheme.spacing24),
+
+          // 统一时间输入组件
+          WaterInkCard(
+            title: '时间输入',
+            icon: Icons.access_time,
+            child: QueryTimeInputCard(
+              defaultDateTimeType: DateTimeType.solar,
+              selectableCardsNotifier: _selectableCardsNotifier,
+              timezoneProvider: _timezoneAdapter,
+              initialDateTime: _selectedDateTime ?? DateTime.now(),
+            ),
+          ),
+          const SizedBox(height: AppTheme.spacing16),
 
           // 三栏布局
           Row(
