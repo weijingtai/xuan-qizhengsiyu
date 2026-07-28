@@ -16,7 +16,7 @@ import 'package:tuple/tuple.dart';
 import 'package:drift/drift.dart';
 import 'package:drift_flutter/drift_flutter.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:persistence_drift/persistence_drift.dart';
+import 'package:persistence_drift/persistence_drift.dart' hide AppDatabase;
 import 'package:persistence_preferences/persistence_preferences.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:persistence_drift/qizhengsiyu/qizheng_module_registry.dart';
