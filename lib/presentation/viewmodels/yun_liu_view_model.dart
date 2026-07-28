@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:metaphysics_core/domain/calculators/liu_yun/models/yun_liu_display_models.dart';
 import 'package:metaphysics_core/models/chinese_date_info.dart';
-import 'package:metaphysics_core/enums/enum_gender.dart';
+import 'package:enumeration/enums.dart';
 import 'package:metaphysics_core/enums/enum_tian_gan.dart';
 import 'package:qizhengsiyu/domain/usecases/yun_liu_usecase.dart';
 
