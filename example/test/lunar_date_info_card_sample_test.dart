@@ -1,14 +1,16 @@
-import 'package:example/lunar_date_info_card_sample.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:qizhengsiyu/presentation/widgets/lunar_date_info_card_v2.dart';
 import 'package:timezone/data/latest.dart' as tz_data;
 
+import '../lib/lunar_date_info_card_sample.dart';
+
 void main() {
   setUpAll(tz_data.initializeTimeZones);
 
-  testWidgets('renders the deterministic lunar date information card',
-      (tester) async {
+  testWidgets('renders the deterministic lunar date information card', (
+    tester,
+  ) async {
     await tester.binding.setSurfaceSize(const Size(432, 240));
     tester.binding.platformDispatcher.textScaleFactorTestValue = 0.75;
     addTearDown(() {
@@ -34,7 +36,9 @@ void main() {
     expect(find.text('静态示例'), findsOneWidget);
 
     await tester.drag(
-        find.byType(SingleChildScrollView), const Offset(0, -200));
+      find.byType(SingleChildScrollView),
+      const Offset(0, -200),
+    );
     await tester.pumpAndSettle();
     expect(tester.takeException(), isNull);
   });

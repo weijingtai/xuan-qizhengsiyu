@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:metaphysics_core/enums/enum_di_zhi.dart';
-import 'package:metaphysics_core/enums/enum_five_xing.dart';
-import 'package:metaphysics_core/enums/enum_tian_gan.dart';
+import 'package:enumeration/enums.dart';
 
 import '../theme/gan_zhi_gua_colors.dart';
 

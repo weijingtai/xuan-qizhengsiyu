@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:metaphysics_core/enums/enum_di_zhi.dart';
-import 'package:metaphysics_core/enums/enum_tian_gan.dart';
+import 'package:enumeration/enums.dart';
 
 /// Local color maps for the lunar card widget.
 ///

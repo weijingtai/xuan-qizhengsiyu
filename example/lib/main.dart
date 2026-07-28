@@ -10,7 +10,7 @@ import 'package:qizhengsiyu/navigator.dart' as qizhengsiyu_nav;
 import 'package:http/http.dart' as http;
 import 'package:drift/drift.dart';
 import 'package:drift_flutter/drift_flutter.dart';
-import 'package:persistence_drift/persistence_drift.dart';
+import 'package:persistence_drift/persistence_drift.dart' hide AppDatabase;
 import 'package:persistence_preferences/persistence_preferences.dart';
 import 'package:persistence_assets/persistence_assets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -64,17 +64,16 @@ Future<void> initSweph([List<String> epheAssets = const []]) async {
 Future<void> initServices() async {
   tz.initializeTimeZones();
   WidgetsFlutterBinding.ensureInitialized();
-  await initSweph([
-    'packages/sweph/assets/ephe/sefstars.txt',
-  ]);
+  await initSweph(['packages/sweph/assets/ephe/sefstars.txt']);
 }
 
 void main() async {
   await initServices();
 
   final appDatabase = AppDatabase();
-  final geJuBuiltInDataSource =
-      GeJuSQLiteDataSource(GeJuBuiltInDatabase(createGeJuBuiltInConnection()));
+  final geJuBuiltInDataSource = GeJuSQLiteDataSource(
+    GeJuBuiltInDatabase(createGeJuBuiltInConnection()),
+  );
   final geJuDao = GeJuDao(appDatabase);
 
   final newDb = PersistenceDriftDatabase(
@@ -104,7 +103,7 @@ void main() async {
     ),
   );
   final identityLinkRepo = DriftAccountIdentityLinkRepository(accountDb);
-  
+
   final bootstrapStore = DriftScopeBootstrapStore(newDb);
   final ledger = DriftScopeLedger(db: newDb, bootstrapStore: bootstrapStore);
   final resolver = ScopeResolver(
@@ -116,14 +115,19 @@ void main() async {
   final scopeUid = resolvedScope.scopeUid;
 
   final ds = DriftRecordDataSource(newDb, scopeUid: scopeUid);
-  final store = LocalRecordRepository(ds, RecordAdapterRegistry([QiZhengModuleRegistry.codec()]));
+  final store = LocalRecordRepository(
+    ds,
+    RecordAdapterRegistry([QiZhengModuleRegistry.codec()]),
+  );
   final recordBackedRepository = QiZhengModuleRegistry.repository(store: store);
 
   final deps = QiZhengSiYuStorageDependencies(
     panRepository: QiZhengSiYuPanRepository(appDatabase: appDatabase),
     recordRepository: recordBackedRepository,
-    geJuRepository:
-        GeJuRepositoryImpl(builtInDataSource: geJuBuiltInDataSource, dao: geJuDao),
+    geJuRepository: GeJuRepositoryImpl(
+      builtInDataSource: geJuBuiltInDataSource,
+      dao: geJuDao,
+    ),
     geJuBuiltInDataSource: geJuBuiltInDataSource,
     geJuSchoolService: GeJuSchoolService(dao: geJuDao),
     userSchoolProfileDao: appDatabase.userSchoolProfileDao,

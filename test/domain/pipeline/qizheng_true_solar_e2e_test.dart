@@ -4,7 +4,7 @@ import 'package:metaphysics_core/datamodel/divination_request_info_datamodel.dar
 import 'package:metaphysics_core/datamodel/geo_location.dart';
 import 'package:metaphysics_core/datamodel/location.dart';
 import 'package:metaphysics_core/enums.dart';
-import 'package:metaphysics_core/enums/enum_datetime_type.dart';
+import 'package:enumeration/enums.dart';
 import 'package:metaphysics_core/models/chinese_date_info.dart';
 import 'package:metaphysics_core/models/divination_datetime.dart';
 import 'package:metaphysics_core/models/divination_info_model.dart';

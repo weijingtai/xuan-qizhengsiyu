@@ -5,7 +5,7 @@ import 'package:metaphysics_core/helpers/solar_lunar_datetime_helper.dart';
 import 'package:metaphysics_core/utils/celestial_rise_set_calculator.dart';
 import 'package:metaphysics_core/adapters/lunar_adapter.dart';
 import 'package:metaphysics_core/models/calculation_strategy_config_logic_model.dart';
-import 'package:metaphysics_core/enums/datetime_strategy_enums.dart';
+import 'package:enumeration/enums.dart';
 import 'package:qizhengsiyu/domain/entities/models/observer_position.dart';
 import 'package:qizhengsiyu/domain/entities/models/base_panel_model.dart';
 import 'package:qizhengsiyu/domain/entities/models/star_angle_speed.dart';

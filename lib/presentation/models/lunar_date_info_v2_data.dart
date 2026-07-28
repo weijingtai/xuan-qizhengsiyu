@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:metaphysics_core/models/chinese_date_info.dart';
 import 'package:metaphysics_core/models/datetime_details_bundle_logic_model.dart';
 import 'package:metaphysics_core/models/divination_datetime.dart';
+import 'package:enumeration/enums.dart';
 
 import '../theme/gan_zhi_gua_colors.dart';
 
