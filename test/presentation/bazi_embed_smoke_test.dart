@@ -43,7 +43,7 @@ void main() {
         GeoPoint(
           latitude: 39.9042,
           longitude: 116.4074,
-          timeZoneId: 'Asia/Shanghai',
+          timeZoneId: 'Asia/Beijing',
         ),
       ),
     );
@@ -89,7 +89,7 @@ void main() {
 
     test('birthLocation 与输入一致', () {
       expect(birthContext.birthLocation!.longitude, equals(116.4074));
-      expect(birthContext.birthLocation!.timeZoneId, equals('Asia/Shanghai'));
+      expect(birthContext.birthLocation!.timeZoneId, equals('Asia/Beijing'));
     });
   });
 }

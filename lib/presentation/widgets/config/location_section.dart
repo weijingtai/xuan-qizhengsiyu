@@ -38,7 +38,7 @@ class _LocationSectionState extends State<LocationSection> {
     // _country = widget.initialLocation?.country ?? '中国';
     // _city = widget.initialLocation?.city ?? '北京';
     // _province = widget.initialLocation?.province ?? '北京';
-    _timezone = widget.initialLocation?.timezone ?? 'Asia/Shanghai';
+    _timezone = widget.initialLocation?.timezone ?? 'Asia/Beijing';
     // _hasDaylightSaving = widget.initialLocation?.hasDaylightSaving ?? false;
     // _isTrueSolarTime = widget.initialLocation?.isTrueSolarTime ?? false;
     // _longitude = widget.initialLocation?.longitude;

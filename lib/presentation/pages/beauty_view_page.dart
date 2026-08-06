@@ -156,7 +156,7 @@ class _BeautyViewPageState extends State<BeautyViewPage>
       latitude: 39.9042, // 北京纬度
       longitude: 116.4074, // 北京经度
       altitude: 0,
-      timezone: 'Asia/Shanghai',
+      timezone: 'Asia/Beijing',
       isDayBirth: true,
       yearGanZhi: JiaZi.GENG_WU, // 庚午年 (1990)
       monthGanZhi: JiaZi.WU_ZI, // 戊子月

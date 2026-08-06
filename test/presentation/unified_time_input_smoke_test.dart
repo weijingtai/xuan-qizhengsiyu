@@ -45,8 +45,8 @@ void main() {
         initialDatetime: DateTime.now(),
       );
 
-      expect(adapter.timezone, equals('Asia/Shanghai'));
-      expect(adapter.localTimezone, equals('Asia/Shanghai'));
+      expect(adapter.timezone, equals('Asia/Beijing'));
+      expect(adapter.localTimezone, equals('Asia/Beijing'));
     });
 
     test('updateTimezone updates timezone notifier', () {
@@ -135,7 +135,7 @@ void main() {
 
       // 断言 adapter 状态与构造参数一致
       expect(adapter.selectedDatetime, equals(DateTime(2024, 1, 15, 10, 30)));
-      expect(adapter.timezone, equals('Asia/Shanghai'));
+      expect(adapter.timezone, equals('Asia/Beijing'));
 
       // 验证 adapter 满足 QTIC 所需的全部接口方法
       adapter.updateDatetime(DateTime(2024, 6, 20, 14, 45));
