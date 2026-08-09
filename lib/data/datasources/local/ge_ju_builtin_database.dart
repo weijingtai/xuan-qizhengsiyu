@@ -55,14 +55,21 @@ class GeJuBuiltInDatabase extends _$GeJuBuiltInDatabase {
   GeJuBuiltInDatabase(super.e);
 
   @override
-  int get schemaVersion => 1;
+  int get schemaVersion => 2;
 
-  // 每次从 assets 覆盖，schema 始终最新，无需真正迁移
+  // native 端每次从 assets 覆盖预置 sqlite（表已存在），此迁移通常不触发；
+  // Web 端（driftDatabase 新建空库）必须建表，否则查询报 no such table。
+  // schemaVersion 2：覆盖 Web 端已存在的旧 v1 空库（旧 onCreate 为空实现），
+  // 升级路径 onUpgrade 补齐表（IndexedDB 库已存在时 onCreate 不会重新触发）。
   @override
   MigrationStrategy get migration {
     return MigrationStrategy(
-      onCreate: (Migrator m) async {},
-      onUpgrade: (Migrator m, int from, int to) async {},
+      onCreate: (Migrator m) async {
+        await m.createAll();
+      },
+      onUpgrade: (Migrator m, int from, int to) async {
+        await m.createAll();
+      },
     );
   }
 }

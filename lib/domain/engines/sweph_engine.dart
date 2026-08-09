@@ -1,13 +1,19 @@
 import 'dart:math';
 import 'dart:convert';
+import 'dart:typed_data';
 
+import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:flutter/services.dart' show rootBundle;
+import 'package:http/http.dart' as http;
+import 'package:path_provider/path_provider.dart'
+    show getApplicationSupportDirectory;
 import 'package:repository_interface_qizhengsiyu/repository_interface_qizhengsiyu.dart';
 import 'package:qizhengsiyu/domain/entities/models/observer_position.dart';
 import 'package:qizhengsiyu/domain/entities/models/star_position_raw_data.dart';
 import 'package:qizhengsiyu/domain/entities/models/panel_config.dart';
 import 'package:qizhengsiyu/enums/enum_panel_system_type.dart';
 import 'package:qizhengsiyu/domain/entities/models/zhou_tian_model.dart';
-import 'package:sweph/sweph.dart';
+import 'package:sweph/sweph.dart' hide kIsWeb;
 import 'package:timezone/timezone.dart' as tz;
 
 import 'package:metaphysics_core/enums.dart';
@@ -36,11 +42,42 @@ import 'package:qizhengsiyu/domain/managers/zhou_tian_calculator.dart';
 class SwephEngine implements ICalculationEngine {
   final QiZhengEphemerisResourceRepository _ephemerisRes;
 
+  /// sweph 库初始化 future（幂等：只初始化一次）。
+  static Future<void>? _swephInitFuture;
+
   SwephEngine({required QiZhengEphemerisResourceRepository ephemerisRes})
       : _ephemerisRes = ephemerisRes;
 
+  /// 幂等初始化 sweph（Web 端 wasm / native ffi）。
+  ///
+  /// sweph 的 `_bindings` 是 static late，未调用 [Sweph.init] 前访问
+  /// 抛 `LateInitializationError`。照 example `initSweph` 样板：
+  /// Web 用 http 拉资产，native 用 rootBundle。
+  Future<void> _ensureSwephInitialized() {
+    return _swephInitFuture ??= _initSweph();
+  }
+
+  Future<void> _initSweph() async {
+    if (kIsWeb) {
+      await Sweph.init(
+        epheAssets: const ['packages/sweph/assets/ephe/sefstars.txt'],
+        epheFilesPath: 'ephe_files',
+        assetLoader: _WebAssetLoader(),
+      );
+    } else {
+      final epheFilesPath =
+          '${(await getApplicationSupportDirectory()).path}/ephe_files';
+      await Sweph.init(
+        epheAssets: const ['packages/sweph/assets/ephe/sefstars.txt'],
+        epheFilesPath: epheFilesPath,
+        assetLoader: _RootBundleAssetLoader(),
+      );
+    }
+  }
+
   @override
   Future<ZhouTianModel> getSystemDefinition(BasePanelConfig panelConfig) async {
+    await _ensureSwephInitialized();
     final String assertName;
     if (panelConfig.celestialCoordinateSystem ==
         CelestialCoordinateSystem.Ecliptic) {
@@ -291,5 +328,25 @@ class _TransitionZiQiAlgorithm implements ZiQiAlgorithm {
       result -= 360;
     }
     return result;
+  }
+}
+
+/// Web 端资产加载（照 example `_WebAssetLoader`）：sweph 资产走 HTTP 拉取。
+class _WebAssetLoader with AssetLoader {
+  @override
+  Future<Uint8List> load(String assetPath) async {
+    final response = await http.get(Uri.parse('assets/$assetPath'));
+    if (response.statusCode != 200) {
+      throw Exception('Failed to load asset: $assetPath');
+    }
+    return response.bodyBytes;
+  }
+}
+
+/// native 端资产加载（照 example `_RootBundleAssetLoader`）。
+class _RootBundleAssetLoader with AssetLoader {
+  @override
+  Future<Uint8List> load(String assetPath) async {
+    return (await rootBundle.load(assetPath)).buffer.asUint8List();
   }
 }

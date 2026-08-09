@@ -42,6 +42,7 @@ dependencies:
   google_fonts: ^6.2.1
   sweph: ^3.2.1+2.10.3
   timezone: ^0.9.4
+  http: ^1.6.0
   el_tooltip: ^2.2.1
   provider: ^6.1.5+1
 

@@ -13,6 +13,8 @@ final class QiZhengSiYuModuleManifest {
   static const String minShellVersion = '0.1.0-a3';
 
   static List<SingleChildWidget> createProviders(QiZhengSiYuStorageDependencies deps) {
+    // timezone 数据库在 di.dart createProviders 中初始化
+    // （shell 实际调用链：qz.createProviders → di.dart）。
     return di_module.createProviders(deps);
   }
 
