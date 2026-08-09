@@ -106,8 +106,6 @@ flutter:
     - assets/shen_sha/
     - assets/qizhengsiyu/
     - assets/qizhengsiyu/ge_ju/
-    - assets/qizhengsiyu/ge_ju/rules/
-    - assets/qizhengsiyu/ge_ju/content/
 
 dependency_overrides:
   qizhengsiyu:
