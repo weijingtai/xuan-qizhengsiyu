@@ -7,6 +7,7 @@ import 'package:sweph/sweph.dart' hide kIsWeb;
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:qizhengsiyu/di.dart' as qizhengsiyu_di;
 import 'package:qizhengsiyu/navigator.dart' as qizhengsiyu_nav;
+import 'package:qizhengsiyu/l10n/generated/app_localizations.dart';
 import 'package:http/http.dart' as http;
 import 'package:drift/drift.dart';
 import 'package:drift_flutter/drift_flutter.dart';
@@ -161,6 +162,8 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueGrey),
         useMaterial3: true,
       ),
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       initialRoute: '/',
       onGenerateRoute: qizhengsiyu_nav.NavigatorGenerator.generateRoute,
     );
