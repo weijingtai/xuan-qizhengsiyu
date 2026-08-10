@@ -1,0 +1,20 @@
+{
+  "project": "qizhengsiyu",
+  "icons": [
+    {
+      "name": "home",
+      "file": "home.png",
+      "size": 24
+    },
+    {
+      "name": "settings",
+      "file": "settings.png",
+      "size": 24
+    },
+    {
+      "name": "user",
+      "file": "user.png",
+      "size": 24
+    }
+  ]
+}
