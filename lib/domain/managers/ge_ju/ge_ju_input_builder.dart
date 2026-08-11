@@ -39,6 +39,12 @@ class GeJuInputBuilder {
     Enum28Constellations? currentXianConstellation,
     List<EnumStars>? xianPalaceStars,
   }) {
+    if (starStatusDataList == null) {
+      // ignore: avoid_print
+      print('GeJu: starGongStatusMapper not provided — '
+          'starGongStatus conditions will evaluate to false');
+    }
+
     // 1. 构建星曜关系模型
     final starRelationship = StarToStarRelationshipModel.create(starsSet);
 
@@ -101,9 +107,8 @@ class GeJuInputBuilder {
     required JiaZi yearJiaZi,
     CelestialCoordinateSystem coordinateSystem = CelestialCoordinateSystem.Ecliptic,
     Set<String> preferredSchools = const {'guo_lao'},
+    List<StarPositionStatusDatasetModel<EnumTwelveGong>>? starStatusDataList,
   }) {
-    print('GeJu: starGongStatusMapper not provided — '
-        'starGongStatus conditions will evaluate to false');
     return build(
       panelModel: panelModel,
       starsSet: starsSet,
@@ -111,6 +116,7 @@ class GeJuInputBuilder {
       yearJiaZi: yearJiaZi,
       coordinateSystem: coordinateSystem,
       preferredSchools: preferredSchools,
+      starStatusDataList: starStatusDataList,
     );
   }
 
@@ -124,6 +130,7 @@ class GeJuInputBuilder {
     required Enum28Constellations xianConstellation,
     CelestialCoordinateSystem coordinateSystem = CelestialCoordinateSystem.Ecliptic,
     Set<String> preferredSchools = const {'guo_lao'},
+    List<StarPositionStatusDatasetModel<EnumTwelveGong>>? starStatusDataList,
   }) {
     // 计算行限宫内的星曜
     final xianPalaceStars = starsSet
@@ -138,6 +145,7 @@ class GeJuInputBuilder {
       yearJiaZi: yearJiaZi,
       coordinateSystem: coordinateSystem,
       preferredSchools: preferredSchools,
+      starStatusDataList: starStatusDataList,
       currentXianGong: xianGong,
       currentXianConstellation: xianConstellation,
       xianPalaceStars: xianPalaceStars,

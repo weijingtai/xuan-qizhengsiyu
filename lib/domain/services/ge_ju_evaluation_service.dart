@@ -3,6 +3,7 @@ import 'package:qizhengsiyu/domain/entities/models/base_panel_model.dart';
 import 'package:qizhengsiyu/domain/entities/models/eleven_stars_info.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_input.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_result.dart';
+import 'package:qizhengsiyu/dataset/star_position_status_model.dart';
 import 'package:qizhengsiyu/domain/managers/ge_ju/ge_ju_evaluator.dart';
 import 'package:qizhengsiyu/domain/managers/ge_ju/ge_ju_input_builder.dart';
 import 'package:qizhengsiyu/domain/repositories/ge_ju_repository.dart';
@@ -49,6 +50,7 @@ class GeJuEvaluationService {
         CelestialCoordinateSystem.Ecliptic,
     Set<String> preferredSchools = const {'guo_lao'},
     bool onlyMatched = false,
+    List<StarPositionStatusDatasetModel<EnumTwelveGong>>? starStatusDataList,
   }) async {
     final input = GeJuInputBuilder.buildFromPanel(
       panelModel: panelModel,
@@ -57,6 +59,7 @@ class GeJuEvaluationService {
       yearJiaZi: yearJiaZi,
       coordinateSystem: coordinateSystem,
       preferredSchools: preferredSchools,
+      starStatusDataList: starStatusDataList,
     );
 
     final ruleData = await _assembleRuleData();
@@ -90,6 +93,7 @@ class GeJuEvaluationService {
         CelestialCoordinateSystem.Ecliptic,
     Set<String> preferredSchools = const {'guo_lao'},
     bool onlyMatched = false,
+    List<StarPositionStatusDatasetModel<EnumTwelveGong>>? starStatusDataList,
   }) async {
     final input = GeJuInputBuilder.buildForXingXian(
       panelModel: panelModel,
@@ -100,6 +104,7 @@ class GeJuEvaluationService {
       xianConstellation: xianConstellation,
       coordinateSystem: coordinateSystem,
       preferredSchools: preferredSchools,
+      starStatusDataList: starStatusDataList,
     );
 
     final ruleData = await _assembleRuleData();

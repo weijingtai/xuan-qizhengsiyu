@@ -202,6 +202,7 @@ List<SingleChildWidget> createProviders(QiZhengSiYuStorageDependencies deps) {
     Provider<EvaluateQiZhengGeJuUseCase>(
       create: (context) => EvaluateQiZhengGeJuUseCase(
         geJuEvaluationService: context.read<GeJuEvaluationService>(),
+        positionStatusRepo: deps.starPositionStatus,
       ),
     ),
     Provider<BuildQiZhengTimelineUseCase>(
