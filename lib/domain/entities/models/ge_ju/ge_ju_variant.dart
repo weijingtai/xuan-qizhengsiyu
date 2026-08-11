@@ -7,7 +7,7 @@ part 'ge_ju_variant.g.dart';
 
 /// 格局变体定义
 /// 代表同一个格局名称下，不同来源或流派的具体定义
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class GeJuVariant {
   /// 来源（具体篇章或作者）
   final String source;

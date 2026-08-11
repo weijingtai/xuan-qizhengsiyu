@@ -6,7 +6,7 @@ part 'ge_ju_condition_set.g.dart';
 
 /// 格局判断方案（逻辑层）
 /// 包含可执行的判断条件集合，独立于文字描述
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class GeJuConditionSet {
   // ══ 身份 ══
   final String id;

@@ -28,7 +28,7 @@ Map<String, dynamic> _$GeJuVariantToJson(GeJuVariant instance) =>
     <String, dynamic>{
       'source': instance.source,
       'description': instance.description,
-      'conditions': instance.conditions,
+      'conditions': instance.conditions?.toJson(),
       'books': instance.books,
       'className': instance.className,
       'jiXiong': _$JiXiongEnumEnumMap[instance.jiXiong]!,
