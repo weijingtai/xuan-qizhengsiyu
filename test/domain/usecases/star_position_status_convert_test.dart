@@ -39,4 +39,36 @@ void main() {
         EnumStarGongPositionStatusType.Wang);
     expect(models[1].positionList, [EnumTwelveGong.You, EnumTwelveGong.Xu]);
   });
+
+  test('宿级状态（殿/贵）映射到所在宫', () {
+    final contracts = [
+      QiZhengStarPositionStatusContract({
+        'id': 59,
+        'className': '果老',
+        'star': '土',
+        'starPositionStatusType': '殿',
+        'positionList': ['柳', '女', '胃', '氐'],
+      }),
+      QiZhengStarPositionStatusContract({
+        'id': 73,
+        'className': '果老',
+        'star': '土',
+        'starPositionStatusType': '贵',
+        'positionList': ['斗'],
+      }),
+    ];
+    final models = convertStarPositionStatusContracts(contracts);
+    // 柳=午、女=子、胃=酉、氐=卯；斗=丑
+    expect(models[0].positionList, [
+      EnumTwelveGong.Wu,
+      EnumTwelveGong.Zi,
+      EnumTwelveGong.You,
+      EnumTwelveGong.Mao,
+    ]);
+    expect(models[0].starPositionStatusType,
+        EnumStarGongPositionStatusType.Dian);
+    expect(models[1].positionList, [EnumTwelveGong.Chou]);
+    expect(models[1].starPositionStatusType,
+        EnumStarGongPositionStatusType.Gui);
+  });
 }
