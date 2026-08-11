@@ -78,37 +78,7 @@ class SwephEngine implements ICalculationEngine {
   @override
   Future<ZhouTianModel> getSystemDefinition(BasePanelConfig panelConfig) async {
     await _ensureSwephInitialized();
-    final String assertName;
-    if (panelConfig.celestialCoordinateSystem ==
-        CelestialCoordinateSystem.Ecliptic) {
-      if (panelConfig.panelSystemType == PanelSystemType.Tropical) {
-        switch (panelConfig.constellationSystemType) {
-          case ConstellationSystemType.Classical:
-            assertName = 'ecliptic_tropical_classical.json';
-            break;
-          case ConstellationSystemType.AdjustedClassical:
-            assertName = 'ecliptic_tropical_classical_adjested.json';
-            break;
-          case ConstellationSystemType.Modern:
-            assertName = 'ecplictic_tropical_morden.json';
-            break;
-        }
-      } else {
-        throw UnimplementedError(
-            'Unsupported panel system type: ${panelConfig.celestialCoordinateSystem.name} ${panelConfig.panelSystemType.name}');
-      }
-    } else if (panelConfig.celestialCoordinateSystem ==
-            CelestialCoordinateSystem.SkyEquatorial ||
-        panelConfig.celestialCoordinateSystem ==
-            CelestialCoordinateSystem.Equatorial ||
-        panelConfig.celestialCoordinateSystem ==
-            CelestialCoordinateSystem.PseudoEcliptic) {
-      // Equatorial/PseudoEcliptic 复用赤道基准资产；PseudoEcliptic 的投影由 config.projectionOverride 决定
-      assertName = 'yuan_shoushi_chidao_hengxin.json';
-    } else {
-      throw UnimplementedError(
-          'Unsupported coordinate system: ${panelConfig.celestialCoordinateSystem.name}');
-    }
+    final assertName = resolveEphemerisAssetName(panelConfig);
     final jsonString = await _ephemerisRes.loadEphemerisResource(assertName);
     return ZhouTianModel.fromJson(jsonDecode(jsonString)).applyOverrides(
         zhouTianModelOverride: panelConfig.zhouTianModelOverride,
@@ -348,5 +318,49 @@ class _RootBundleAssetLoader with AssetLoader {
   @override
   Future<Uint8List> load(String assetPath) async {
     return (await rootBundle.load(assetPath)).buffer.asUint8List();
+  }
+}
+
+/// 解析指定面板配置对应的星历资源文件名（黄道/赤道路由，纯函数）。
+///
+/// - Ecliptic×Tropical×Classical → `ecliptic_tropical_classical.json`
+/// - Ecliptic×Tropical×AdjustedClassical → `ecliptic_tropical_classical_adjusted.json`
+/// - Ecliptic×Tropical×Modern → `ecliptic_tropical_morden.json`
+/// - SkyEquatorial / Equatorial / PseudoEcliptic 复用赤道基准资产
+///   `yuan_shoushi_chidao_hengxin.json`（PseudoEcliptic 投影由
+///   config.projectionOverride 决定）。
+///
+/// 2026-08-10 修正：旧实现硬编码 `adjested`/`ecplictic` 两个拼写错误，
+/// 与源资产文件名（`adjusted`/`ecliptic`）不符，AdjustedClassical/Modern
+/// 模式运行时报资源不存在。文件名须与 ephemeris 数据集（ephemeris_document）
+/// 收录一致。
+String resolveEphemerisAssetName(BasePanelConfig panelConfig) {
+  if (panelConfig.celestialCoordinateSystem ==
+      CelestialCoordinateSystem.Ecliptic) {
+    if (panelConfig.panelSystemType == PanelSystemType.Tropical) {
+      switch (panelConfig.constellationSystemType) {
+        case ConstellationSystemType.Classical:
+          return 'ecliptic_tropical_classical.json';
+        case ConstellationSystemType.AdjustedClassical:
+          return 'ecliptic_tropical_classical_adjusted.json';
+        case ConstellationSystemType.Modern:
+          return 'ecliptic_tropical_morden.json';
+      }
+    } else {
+      throw UnimplementedError(
+          'Unsupported panel system type: ${panelConfig.celestialCoordinateSystem.name} ${panelConfig.panelSystemType.name}');
+    }
+  } else if (panelConfig.celestialCoordinateSystem ==
+          CelestialCoordinateSystem.SkyEquatorial ||
+      panelConfig.celestialCoordinateSystem ==
+          CelestialCoordinateSystem.Equatorial ||
+      panelConfig.celestialCoordinateSystem ==
+          CelestialCoordinateSystem.PseudoEcliptic) {
+    // Equatorial/PseudoEcliptic 复用赤道基准资产；PseudoEcliptic 的投影由
+    // config.projectionOverride 决定。
+    return 'yuan_shoushi_chidao_hengxin.json';
+  } else {
+    throw UnimplementedError(
+        'Unsupported coordinate system: ${panelConfig.celestialCoordinateSystem.name}');
   }
 }

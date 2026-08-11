@@ -52,6 +52,7 @@ String _minimalModelJson() {
 }
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
   test('Ecliptic×Tropical×Classical → ecliptic_tropical_classical.json', () async {
     final repo = _RecordingRepo();
     final engine = SwephEngine(ephemerisRes: repo);
