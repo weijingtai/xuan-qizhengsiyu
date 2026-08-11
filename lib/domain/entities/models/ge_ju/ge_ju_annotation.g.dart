@@ -46,7 +46,7 @@ Map<String, dynamic> _$GeJuAnnotationToJson(GeJuAnnotation instance) =>
       'id': instance.id,
       'ruleId': instance.ruleId,
       'schools': instance.schools,
-      'source': instance.source,
+      'source': instance.source?.toJson(),
       'authorType': instance.authorType,
       'version': instance.version,
       'description': instance.description,

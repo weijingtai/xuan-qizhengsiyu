@@ -7,7 +7,7 @@ part 'ge_ju_annotation.g.dart';
 
 /// 格局注解（文字层）
 /// 对格局含义的文字阐述，独立于判断逻辑
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class GeJuAnnotation {
   // ══ 身份 ══
   final String id;
