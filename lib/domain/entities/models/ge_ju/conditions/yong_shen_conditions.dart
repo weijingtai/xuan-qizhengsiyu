@@ -112,7 +112,8 @@ class StarFourTypeCondition extends GeJuCondition {
     final target = EnumStars.getBySingleName(json['target']) ??
         EnumStars.values.byName(json['target']);
     final types = (json['types'] as List)
-        .map((e) => EnumStarsFourType.values.byName(e.toString()))
+        .map((e) => EnumStarsFourType.values.firstWhere(
+            (v) => v.name == e || v.toString().split('.').last == e))
         .toList();
 
     return StarFourTypeCondition(star, target, types);
