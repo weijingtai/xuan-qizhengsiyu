@@ -33,7 +33,11 @@ class StarInGongCondition extends GeJuCondition {
   }
 
   factory StarInGongCondition.fromJson(Map<String, dynamic> json) {
-    final gongsList = (json['gongs'] as List).map((e) => e.toString()).toList();
+    // 数据兼容：部分规则用单数 `gong`（如 {"star":"Saturn","gong":"Life"}），
+    // 模型为 `gongs` 列表 —— 单值包装为列表；`degree` 字段模型暂不支持，忽略。
+    final gongsJson =
+        json['gongs'] ?? (json['gong'] != null ? [json['gong']] : const []);
+    final gongsList = (gongsJson as List).map((e) => e.toString()).toList();
     final star = EnumStars.getBySingleName(json['star']) ??
         EnumStars.values.byName(json['star']);
 

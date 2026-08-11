@@ -4,9 +4,18 @@ import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_input.dart';
 import 'package:metaphysics_core/utils/collections_utils.dart';
 
 /// 辅助方法：从 JSON 解析星曜列表
+/// 数据-枚举星名别名（数据为拼音/俗名，枚举成员名为英名）。
+/// 当前仅 `YueBo`（月孛）一例：数据用拼音，枚举成员名为 `Bei`。
+const Map<String, EnumStars> _kStarAliases = {
+  'YueBo': EnumStars.Bei,
+};
+
 List<EnumStars> _parseStars(List<dynamic> jsonList) {
   return jsonList
-      .map((e) => EnumStars.getBySingleName(e) ?? EnumStars.values.byName(e))
+      .map((e) =>
+          EnumStars.getBySingleName(e) ??
+          _kStarAliases[e] ??
+          EnumStars.values.byName(e))
       .toList();
 }
 
