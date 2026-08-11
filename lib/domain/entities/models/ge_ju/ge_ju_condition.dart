@@ -7,6 +7,7 @@ import 'conditions/time_conditions.dart';
 import 'conditions/gong_status_conditions.dart';
 import 'conditions/shen_sha_conditions.dart';
 import 'conditions/xian_conditions.dart';
+import 'conditions/advanced_conditions.dart';
 
 // 移除 part 引用，因为这是基类文件，子类可能很多，建议手动实现 fromJson 分发或使用 parser
 // 但为了简单起见，可以把逻辑条件放在这里
@@ -100,6 +101,27 @@ abstract class GeJuCondition {
         return XianAtConstellationCondition.fromJson(json);
       case 'xianMeetStar':
         return XianMeetStarCondition.fromJson(json);
+      // 2026-08-10 补全：数据超前于模型的条件类型（原 UnimplementedError）。
+      case 'yearBranch':
+        return YearBranchCondition.fromJson(json);
+      case 'jupiterSeasonPosition':
+        return JupiterSeasonPositionCondition.fromJson(json);
+      case 'gongDegree':
+        return GongDegreeCondition.fromJson(json);
+      case 'bodyLifeHarmony':
+        return BodyLifeHarmonyCondition.fromJson(json);
+      case 'sunMoonHarmony':
+        return SunMoonHarmonyCondition.fromJson(json);
+      case 'waterFireBalance':
+        return WaterFireBalanceCondition.fromJson(json);
+      case 'fivePlanetsAlignment':
+        return FivePlanetsAlignmentCondition.fromJson(json);
+      case 'sevenPlanetsInPalace':
+        return SevenPlanetsInPalaceCondition.fromJson(json);
+      case 'lifeLordInFavorablePlace':
+        return LifeLordInFavorablePlaceCondition.fromJson(json);
+      case 'officialStarPatterns':
+        return OfficialStarPatternsCondition.fromJson(json);
       // 其他具体条件将在各自文件中注册或在此扩展
       // 实际上，为了避免单文件过大，通常建议使用注册表模式，或者 Parser 负责实例化
       // 这里暂时抛出未实现，由 Parser 统一处理，或者后续补充完整 case
