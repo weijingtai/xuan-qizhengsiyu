@@ -239,6 +239,7 @@ List<SingleChildWidget> createProviders(QiZhengSiYuStorageDependencies deps) {
         shenShaService: context.read<ShenShaService>(),
         huaYaoService: context.read<HuaYaoService>(),
         pipelineExecutor: QizhengPipelineExecutor(),
+        saveCalculatedPanelUseCase: context.read<SaveCalculatedPanelUseCase>(),
       ),
     ),
     ChangeNotifierProvider<PanelConfigViewModel>(

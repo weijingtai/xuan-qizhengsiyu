@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:calendar/calendar.dart';
 import 'package:flutter/foundation.dart';
 import 'package:metaphysics_core/datamodel/datetime_divination_datamodel.dart';
+import 'package:metaphysics_core/datamodel/divination_request_info_datamodel.dart';
 import 'package:metaphysics_core/datamodel/location.dart';
 import 'package:metaphysics_core/enums.dart';
 import 'package:metaphysics_core/models/divination_datetime.dart';
@@ -23,6 +24,7 @@ import 'package:qizhengsiyu/domain/usecases/compute_gan_zhi_usecase.dart';
 import 'package:qizhengsiyu/domain/usecases/compute_rise_set_usecase.dart';
 import 'package:qizhengsiyu/domain/usecases/evaluate_qizheng_ge_ju_usecase.dart';
 import 'package:qizhengsiyu/domain/usecases/initialize_qizheng_official_data_usecase.dart';
+import 'package:qizhengsiyu/domain/usecases/save_calculated_panel_usecase.dart';
 import 'package:qizhengsiyu/domain/usecases/yun_liu_usecase.dart';
 import 'package:qizhengsiyu/enums/enum_qi_zheng.dart';
 import 'package:qizhengsiyu/presentation/models/lunar_date_info_v2_data.dart';
@@ -54,10 +56,15 @@ class QiZhengSiYuViewModel extends ChangeNotifier {
   final ShenShaService? _shenShaService;
   final HuaYaoService? _huaYaoService;
   final QizhengPipelineExecutor? _pipelineExecutor;
+  final SaveCalculatedPanelUseCase? _saveCalculatedPanelUseCase;
 
   ResolvedMoment? _resolvedMoment;
   String _divinationRequestInfoUuid = '';
   String _divinationDatetimeJson = '{}';
+  /// setLifeObserver 调用时保存的 DivinationDatetimeModel（落库所需）
+  DivinationDatetimeModel? _savedDatetimeModel;
+  /// setLifeObserver 调用时保存的 DivinationRequestInfoDataModel（落库所需）
+  DivinationRequestInfoDataModel? _savedRequestInfo;
 
   QiZhengSiYuViewModel({
     required InitializeQiZhengOfficialDataUseCase initializeOfficialDataUseCase,
@@ -71,6 +78,7 @@ class QiZhengSiYuViewModel extends ChangeNotifier {
     ShenShaService? shenShaService,
     HuaYaoService? huaYaoService,
     QizhengPipelineExecutor? pipelineExecutor,
+    SaveCalculatedPanelUseCase? saveCalculatedPanelUseCase,
   })  : _initUseCase = initializeOfficialDataUseCase,
         _calculateUseCase = calculateBasePanelUseCase,
         _evaluateGeJuUseCase = evaluateGeJuUseCase,
@@ -81,7 +89,8 @@ class QiZhengSiYuViewModel extends ChangeNotifier {
         _momentResolver = momentResolver,
         _shenShaService = shenShaService,
         _huaYaoService = huaYaoService,
-        _pipelineExecutor = pipelineExecutor;
+        _pipelineExecutor = pipelineExecutor,
+        _saveCalculatedPanelUseCase = saveCalculatedPanelUseCase;
 
   // ==================== 核心状态 (MVVM) ====================
   BasePanelModel? _basicLifePanel;
@@ -221,6 +230,10 @@ class QiZhengSiYuViewModel extends ChangeNotifier {
     final datetimeModel = datetimeData.timingInfoListJson!
         .firstWhere((t) => t.uuid == datetimeData.timingInfoUuid);
     _divinationDatetimeJson = jsonEncode(datetimeModel.toJson());
+
+    // 保存落库所需对象（pipeline 路径使用）
+    _savedDatetimeModel = datetimeModel;
+    _savedRequestInfo = divinationInfoModel.divination;
 
     if (_momentResolver != null) {
       _resolvedMoment = _momentResolver.resolve(DivinationMoment(
@@ -372,6 +385,8 @@ class QiZhengSiYuViewModel extends ChangeNotifier {
       _basicLifePanel = result.panelModel;
       _zhouTianModel = result.zhouTianModel;
       _lastStarAngleMapper = result.starAngleMapper;
+      // 异步落库：fire-and-forget，失败只记日志，不打断 UI
+      _savePanelAsync(result.panelModel, config);
     } else {
       final panelResult = await _calculateUseCase.execute(
         config: config,
@@ -429,6 +444,31 @@ class QiZhengSiYuViewModel extends ChangeNotifier {
     _birthYearJiaZi = observer.yearGanZhi;
     _birthMonthZhi = observer.monthGanZhi.zhi;
     await evaluateGeJu(onlyMatched: true);
+  }
+
+  // ==================== 落库 ====================
+  /// 异步落库（fire-and-forget）
+  ///
+  /// 保存失败只记录日志，不打断 UI 显示排盘结果。
+  /// 任一前置对象为 null 时直接跳过，不抛异常。
+  void _savePanelAsync(BasePanelModel panelModel, BasePanelConfig config) async {
+    // 用局部变量做 null 检查，保证 Dart 流分析可以正确收窄类型
+    final saveUseCase = _saveCalculatedPanelUseCase;
+    final datetimeModel = _savedDatetimeModel;
+    final requestInfo = _savedRequestInfo;
+    if (saveUseCase == null || datetimeModel == null || requestInfo == null) {
+      return;
+    }
+    try {
+      await saveUseCase.execute(
+        basicPanelModel: panelModel,
+        panelConfig: config,
+        divinationDatetimeModel: datetimeModel,
+        requestInfo: requestInfo,
+      );
+    } catch (error, stack) {
+      debugPrint('保存七政排盘记录失败，已忽略: $error\n$stack');
+    }
   }
 
   // ==================== UI兼容层: dispose ====================
