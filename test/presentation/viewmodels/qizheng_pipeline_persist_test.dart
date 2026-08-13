@@ -490,6 +490,7 @@ class _SpySaveUseCase extends SaveCalculatedPanelUseCase {
   int executeCallCount = 0;
   BasePanelModel? lastPanelModel;
   BasePanelConfig? lastPanelConfig;
+  String? lastUuid;
 
   _SpySaveUseCase()
       : super(
@@ -503,12 +504,14 @@ class _SpySaveUseCase extends SaveCalculatedPanelUseCase {
     required BasePanelConfig panelConfig,
     required DivinationDatetimeModel divinationDatetimeModel,
     required DivinationRequestInfoDataModel requestInfo,
+    String? uuid,
   }) async {
     executeCallCount++;
     lastPanelModel = basicPanelModel;
     lastPanelConfig = panelConfig;
+    lastUuid = uuid;
     return QiZhengSiYuPanEntity(
-      uuid: 'spy-${DateTime.now().millisecondsSinceEpoch}',
+      uuid: uuid ?? 'spy-${DateTime.now().millisecondsSinceEpoch}',
       createdAt: DateTime.now(),
       lastUpdatedAt: DateTime.now(),
       deletedAt: null,
@@ -579,6 +582,27 @@ void main() {
           spySave.lastPanelConfig?.panelSystemType,
           equals(_config.panelSystemType),
           reason: 'panelConfig 正确传递',
+        );
+        // ── 执行证据：executor 真实执行 + 落库 uuid 同源 ──
+        final evidence = vm.lastPipelineEvidence;
+        expect(evidence, isNotNull, reason: 'pipeline 路径必须产出执行证据');
+        expect(evidence!.callCount, 1, reason: 'executor 恰好执行一次');
+        expect(evidence.requestId, isNotEmpty, reason: 'requestId 取排盘 uuid');
+        expect(evidence.resultUuid, evidence.requestId,
+            reason: 'resultUuid 与排盘 uuid 同源');
+        expect(evidence.module, 'qizhengsiyu');
+        expect(evidence.error, isNull, reason: '成功执行无异常');
+        expect(evidence.keyResult, isNotNull, reason: '命宫是页面可观察结果');
+        // 落库 Record 的 uuid == 排盘 uuid（证据链锚点）
+        expect(
+          spySave.lastUuid,
+          evidence.requestId,
+          reason: '落库 Record uuid 必须与排盘 uuid 同源',
+        );
+        expect(
+          spySave.lastPanelModel,
+          same(vm.basicLifePanel),
+          reason: '落库对象与展示对象一致（零拷贝）',
         );
       },
     );

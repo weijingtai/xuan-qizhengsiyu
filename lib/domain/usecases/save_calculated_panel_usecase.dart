@@ -18,17 +18,21 @@ class SaveCalculatedPanelUseCase {
   });
 
   /// 保存计算得到的基础面板模型到本地数据库
+  ///
+  /// [uuid] 可选：传入则用该值作为 Record uuid（与 Pipeline 排盘 uuid 同源）；
+  /// 不传则内部生成 v4。
   Future<QiZhengSiYuPanEntity> execute({
     required BasePanelModel basicPanelModel,
     required BasePanelConfig panelConfig,
     required DivinationDatetimeModel divinationDatetimeModel,
     required DivinationRequestInfoDataModel requestInfo,
+    String? uuid,
   }) async {
     try {
-      final uuid = _uuid.v4();
+      final recordUuid = uuid ?? _uuid.v4();
       final now = DateTime.now();
       QiZhengSiYuPanEntity entity = QiZhengSiYuPanEntity(
-        uuid: uuid,
+        uuid: recordUuid,
         createdAt: now,
         lastUpdatedAt: now,
         deletedAt: null,

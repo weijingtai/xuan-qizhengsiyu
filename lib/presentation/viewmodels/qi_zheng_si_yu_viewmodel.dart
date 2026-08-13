@@ -33,6 +33,7 @@ import 'package:qizhengsiyu/presentation/pages/StarsResolver.dart';
 import 'package:timezone/timezone.dart' as tz;
 
 import 'package:qizhengsiyu/domain/pipeline/qizheng_pipeline_executor.dart';
+import 'package:qizhengsiyu/domain/pipeline/pipeline_evidence.dart';
 import 'package:qizhengsiyu/domain/services/shen_sha_service.dart';
 import 'package:qizhengsiyu/domain/services/hua_yao_service.dart';
 import 'package:repository_interface_divination_pipeline/repository_interface_divination_pipeline.dart';
@@ -57,6 +58,15 @@ class QiZhengSiYuViewModel extends ChangeNotifier {
   final HuaYaoService? _huaYaoService;
   final QizhengPipelineExecutor? _pipelineExecutor;
   final SaveCalculatedPanelUseCase? _saveCalculatedPanelUseCase;
+
+  /// 本次排盘执行证据（供壳侧 E2E 测试断言 executor 真实执行）。
+  /// 只读：不参与生产逻辑判断、不影响渲染。
+  PipelineEvidence? _lastPipelineEvidence;
+  int _pipelineCallCount = 0;
+
+  /// 最后一次走统一入参排盘的执行证据；未走 pipeline 路径时为 null。
+  @visibleForTesting
+  PipelineEvidence? get lastPipelineEvidence => _lastPipelineEvidence;
 
   ResolvedMoment? _resolvedMoment;
   String _divinationRequestInfoUuid = '';
@@ -371,22 +381,47 @@ class QiZhengSiYuViewModel extends ChangeNotifier {
         _shenShaService != null &&
         _huaYaoService != null &&
         _pipelineExecutor != null) {
-      final result = await _pipelineExecutor!.execute(
-        moment: _resolvedMoment!,
-        config: config,
-        observer: observer,
-        shenShaService: _shenShaService!,
-        huaYaoService: _huaYaoService!,
-        divinationRequestInfoUuid: _divinationRequestInfoUuid,
-        divinationDatetimeJson: _divinationDatetimeJson,
-        uuid: DateTime.now().millisecondsSinceEpoch.toString(),
-        createdAt: DateTime.now(),
-      );
-      _basicLifePanel = result.panelModel;
-      _zhouTianModel = result.zhouTianModel;
-      _lastStarAngleMapper = result.starAngleMapper;
-      // 异步落库：fire-and-forget，失败只记日志，不打断 UI
-      _savePanelAsync(result.panelModel, config);
+      // 统一 uuid：排盘 contract 与落库 Record 使用同一个值（证据链锚点）
+      final runUuid = DateTime.now().millisecondsSinceEpoch.toString();
+      _pipelineCallCount++;
+      try {
+        final result = await _pipelineExecutor!.execute(
+          moment: _resolvedMoment!,
+          config: config,
+          observer: observer,
+          shenShaService: _shenShaService!,
+          huaYaoService: _huaYaoService!,
+          divinationRequestInfoUuid: _divinationRequestInfoUuid,
+          divinationDatetimeJson: _divinationDatetimeJson,
+          uuid: runUuid,
+          createdAt: DateTime.now(),
+        );
+        _basicLifePanel = result.panelModel;
+        _zhouTianModel = result.zhouTianModel;
+        _lastStarAngleMapper = result.starAngleMapper;
+        _lastPipelineEvidence = PipelineEvidence(
+          callCount: _pipelineCallCount,
+          requestId: runUuid,
+          resultUuid: runUuid,
+          module: 'qizhengsiyu',
+          keyResult: _lifeGongDisplay(result.panelModel),
+          error: null,
+        );
+        // 异步落库：fire-and-forget，失败只记日志，不打断 UI
+        // 传入 runUuid 保证落库 Record uuid 与排盘 uuid 同源
+        _savePanelAsync(result.panelModel, config, uuid: runUuid);
+      } catch (error, stack) {
+        _lastPipelineEvidence = PipelineEvidence(
+          callCount: _pipelineCallCount,
+          requestId: runUuid,
+          resultUuid: null,
+          module: 'qizhengsiyu',
+          keyResult: null,
+          error: error,
+        );
+        debugPrint('七政 Pipeline 排盘失败: $error\n$stack');
+        rethrow;
+      }
     } else {
       final panelResult = await _calculateUseCase.execute(
         config: config,
@@ -447,11 +482,23 @@ class QiZhengSiYuViewModel extends ChangeNotifier {
   }
 
   // ==================== 落库 ====================
+  /// 提取命宫所在宫位（页面可观察的关键结果，用作执行证据的 keyResult）。
+  ///
+  /// 命宫由本次排盘决定（lifeGongInfo.gong），是盘面最醒目的展示元素之一，
+  /// 因此能代表「这次执行真的发生了」。
+  Object? _lifeGongDisplay(BasePanelModel panel) {
+    final gong = panel.bodyLifeModel.lifeGongInfo.gong;
+    return gong == null ? null : gong.name;
+  }
+
   /// 异步落库（fire-and-forget）
   ///
   /// 保存失败只记录日志，不打断 UI 显示排盘结果。
   /// 任一前置对象为 null 时直接跳过，不抛异常。
-  void _savePanelAsync(BasePanelModel panelModel, BasePanelConfig config) async {
+  ///
+  /// [uuid] 与排盘 uuid 同源，保证 Record 落库 uuid == Pipeline 结果 uuid。
+  void _savePanelAsync(BasePanelModel panelModel, BasePanelConfig config,
+      {String? uuid}) async {
     // 用局部变量做 null 检查，保证 Dart 流分析可以正确收窄类型
     final saveUseCase = _saveCalculatedPanelUseCase;
     final datetimeModel = _savedDatetimeModel;
@@ -465,6 +512,7 @@ class QiZhengSiYuViewModel extends ChangeNotifier {
         panelConfig: config,
         divinationDatetimeModel: datetimeModel,
         requestInfo: requestInfo,
+        uuid: uuid,
       );
     } catch (error, stack) {
       debugPrint('保存七政排盘记录失败，已忽略: $error\n$stack');
