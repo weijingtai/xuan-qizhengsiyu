@@ -9,6 +9,10 @@ import 'package:provider/provider.dart';
 import 'package:qizhengsiyu/enums/enum_qi_zheng.dart';
 import 'package:metaphysics_core/metaphysics_core.dart';
 import 'package:metaphysics_core/models/divination_info_model.dart';
+import 'package:metaphysics_core/datamodel/datetime_divination_datamodel.dart';
+import 'package:metaphysics_core/datamodel/divination_request_info_datamodel.dart';
+import 'package:metaphysics_core/datamodel/geo_location.dart';
+import 'package:metaphysics_core/models/divination_datetime.dart';
 import 'package:xuan_four_zhu_card/pages/dev_enter_page_view_model.dart';
 import 'package:qizhengsiyu/domain/entities/models/base_panel_model.dart';
 import 'package:qizhengsiyu/domain/entities/models/passage_year_panel_model.dart';
@@ -149,7 +153,8 @@ class _BeautyViewPageState extends State<BeautyViewPage>
     await vm.init();
 
     // 使用默认测试数据:直接设置 ObserverPosition
-    // TODO: 后续可以从数据库加载真实数据
+    // TODO: 后续可以从数据库加载真实数据（当前仍是硬编码 fixture，
+    // 对应 E2E 计划 §九 的 L1-HARDCODED 分级）
     final testDateTime = DateTime(1990, 1, 1, 12, 0);
     final testObserver = ObserverPosition(
       dateTime: testDateTime,
@@ -164,7 +169,85 @@ class _BeautyViewPageState extends State<BeautyViewPage>
       timeGanZhi: JiaZi.GENG_WU, // 庚午时
     );
 
+    // setLifeObserver 是 Pipeline 分支的前置条件：_resolvedMoment 只在其
+    // 内部被赋值（见 QiZhengSiYuViewModel.setLifeObserver /
+    // calculateWithConfig）。此前本方法从未调用它，导致真实页面排盘恒走
+    // legacy 分支、lastPipelineEvidence 恒为 null、不落 Record。
+    // fixture 的时间/经纬度/时区与上面的 testObserver 严格一致，
+    // 不引入第二套数据（同样是硬编码 fixture，仍待后续接入真实用户输入）。
+    vm.setLifeObserver(_buildDevInitDivinationInfo(testDateTime));
+
     await vm.calculate(testObserver);
+  }
+
+  /// 构造与 [testDateTime]（对应 devInit() 中硬编码的 testObserver：
+  /// 纬度 39.9042 / 经度 116.4074 / 时区 Asia/Beijing）严格一致的
+  /// [DivinationInfoModel] fixture，仅用于驱动 setLifeObserver()
+  /// 内部对 _resolvedMoment 赋值，从而接通 Pipeline 分支。
+  /// TODO: 后续可以从数据库加载真实数据，替换此硬编码 fixture。
+  DivinationInfoModel _buildDevInitDivinationInfo(DateTime testDateTime) {
+    const uuid = 'beauty-view-devinit-fixture';
+    final bazi = EightChars(
+      year: JiaZi.GENG_WU,
+      month: JiaZi.WU_ZI,
+      day: JiaZi.JIA_XU,
+      time: JiaZi.GENG_WU,
+    );
+    final dtModel = DivinationDatetimeModel.standard(
+      uuid: uuid,
+      queryUuid: uuid,
+      timezoneStr: 'Asia/Beijing',
+      datetime: testDateTime,
+      bazi: bazi,
+      lunarMonth: 1,
+      lunarDay: 1,
+      jieQiInfo: JieQiInfo(
+        jieQi: TwentyFourJieQi.XIAO_HAN,
+        startAt: DateTime(1989, 12, 22),
+        endAt: DateTime(1990, 1, 6),
+      ),
+      isLeapMonth: false,
+      isSeersLocation: false,
+      location: Location(
+        address: Address(
+          countryName: 'China',
+          countryId: 45,
+          regionId: 11,
+          province: GeoLocation(
+            name: 'Beijing',
+            latitude: 39.9042,
+            longitude: 116.4074,
+            level: GeoLevel.province,
+            code: '11',
+            parentCode: '0',
+          ),
+          timezone: 'Asia/Beijing',
+        ),
+      ),
+    );
+
+    return DivinationInfoModel(
+      divination: DivinationRequestInfoDataModel(
+        uuid: uuid,
+        createdAt: testDateTime,
+        divinationTypeUuid: 'qizhengsiyu-devinit',
+      ),
+      divinationDatetime: DatatimeDivinationDetailsDataModel(
+        uuid: uuid,
+        createdAt: testDateTime,
+        timingType: DateTimeType.solar,
+        datetime: testDateTime,
+        lunarMonth: 1,
+        isLeapMonth: false,
+        lunarDay: 1,
+        yearGanZhi: JiaZi.GENG_WU,
+        monthGanZhi: JiaZi.WU_ZI,
+        dayGanZhi: JiaZi.JIA_XU,
+        timeGanZhi: JiaZi.GENG_WU,
+        timingInfoUuid: uuid,
+        timingInfoListJson: [dtModel],
+      ),
+    );
   }
 
   // Future<DivinationInfoModel> loadDiviniation() async {
