@@ -531,6 +531,10 @@ void main() {
   group('T-Q7-PERSIST: 七政 Pipeline 落库', () {
     setUpAll(() {
       tz_data.initializeTimeZones();
+      // T-Q7-P3 复刻 devInit() 用 'Asia/Beijing' 构造 ObserverPosition，
+      // 该字符串不是 IANA 标准时区名，需与生产 di.dart 一样显式注册别名，
+      // 否则 ObserverPosition.toUtcTime() 会抛 LocationNotFoundException。
+      ensureChinaTimeZoneAlias();
     });
 
     setUp(() {
@@ -651,6 +655,79 @@ void main() {
           vm.basicLifePanel!.starAngleMapper,
           isEmpty,
           reason: 'FakeCalcUseCase 返回的 starAngleMapper 应为空 Map',
+        );
+      },
+    );
+
+    // ----------------------------------------------------------
+    // T-Q7-P3: BeautyViewPage.devInit() 现有调用序列必须接通 Pipeline
+    // ----------------------------------------------------------
+    //
+    // 背景（ORDER-QIZHENG-BEAUTY-VIEW-WIRING-FIX.md 一）：
+    // lib/presentation/pages/beauty_view_page.dart 的 devInit() 构造硬编码
+    // testObserver 后直接 await vm.calculate(testObserver)，从未调用
+    // vm.setLifeObserver(...)。而 Pipeline 分支的前置条件 _resolvedMoment
+    // 只在 setLifeObserver() 内部赋值（见 T-Q7-P2 的注释），导致真实页面
+    // 排盘恒不进入 Pipeline 分支，lastPipelineEvidence 恒为 null，也不落
+    // Record。
+    //
+    // 本用例在 ViewModel 层原样复刻 devInit() 现有调用序列的全部字面量
+    // （DateTime(1990,1,1,12,0) / 纬度 39.9042 / 经度 116.4074 / 时区
+    // Asia/Beijing / 干支 GENG_WU-WU_ZI-JIA_XU-GENG_WU），断言排盘完成后
+    // lastPipelineEvidence 不应为 null —— 这是 devInit() 修复后的期望行为。
+    //
+    // 【红态说明】本提交刻意不调用 setLifeObserver，与 devInit() 现状保持
+    // 同步缺失，用以证明接线缺口；修复 devInit() 的同一个提交会同步在此处
+    // 补上与生产代码等价的 setLifeObserver 调用（两处 fixture 的时间/经
+    // 纬度/时区严格一致，不引入第二套数据）。
+    test(
+      'T-Q7-P3: 复刻 BeautyViewPage.devInit() 调用序列 → '
+      'lastPipelineEvidence 不应为 null（接线缺口修复前必然失败）',
+      () async {
+        final spySave = _SpySaveUseCase();
+
+        final vm = QiZhengSiYuViewModel(
+          initializeOfficialDataUseCase: _SpyInitUseCase(),
+          calculateBasePanelUseCase: _FakeCalcUseCase(),
+          evaluateGeJuUseCase: _SpyEvalUseCase(),
+          buildTimelineUseCase: _SpyTimelineUseCase(),
+          computeRiseSetUseCase: ComputeRiseSetUseCase(),
+          yunLiuUseCase: YunLiuUseCase(),
+          computeGanZhiUseCase: ComputeGanZhiUseCase(),
+          momentResolver: const DefaultMomentResolver(),
+          shenShaService: ShenShaService(repository: _FakeShenShaRepo()),
+          huaYaoService: HuaYaoService(repository: _FakeHuaYaoRepo()),
+          pipelineExecutor: QizhengPipelineExecutor(),
+          saveCalculatedPanelUseCase: spySave,
+        );
+
+        await vm.init();
+
+        // —— 以下与 beauty_view_page.dart devInit() 现有调用序列逐字对应 ——
+        final testDateTime = DateTime(1990, 1, 1, 12, 0);
+        final testObserver = ObserverPosition(
+          dateTime: testDateTime,
+          latitude: 39.9042, // 北京纬度
+          longitude: 116.4074, // 北京经度
+          altitude: 0,
+          timezone: 'Asia/Beijing',
+          isDayBirth: true,
+          yearGanZhi: JiaZi.GENG_WU, // 庚午年 (1990)
+          monthGanZhi: JiaZi.WU_ZI, // 戊子月
+          dayGanZhi: JiaZi.JIA_XU, // 甲戌日
+          timeGanZhi: JiaZi.GENG_WU, // 庚午时
+        );
+
+        // 当前 devInit() 现状：不调用 setLifeObserver，直接 calculate。
+        await vm.calculate(testObserver);
+        await Future<void>.delayed(Duration.zero);
+
+        expect(
+          vm.lastPipelineEvidence,
+          isNotNull,
+          reason:
+              'devInit() 必须先 setLifeObserver() 再 calculate()，否则 '
+              '_resolvedMoment 恒为 null，Pipeline 分支不会进入',
         );
       },
     );
