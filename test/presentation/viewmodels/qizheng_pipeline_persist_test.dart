@@ -160,6 +160,74 @@ DivinationInfoModel _buildDivInfo(DateTime now) {
   );
 }
 
+/// T-Q7-P3 专用：与 beauty_view_page.dart::_buildDevInitDivinationInfo()
+/// 逐字段对应的 fixture 构造函数（时间/经纬度/时区严格一致，不引入第二
+/// 套数据），用于复刻 devInit() 修复后的 setLifeObserver 调用。
+DivinationInfoModel _buildDevInitDivinationInfo(DateTime testDateTime) {
+  const uuid = 'beauty-view-devinit-fixture';
+  final bazi = EightChars(
+    year: JiaZi.GENG_WU,
+    month: JiaZi.WU_ZI,
+    day: JiaZi.JIA_XU,
+    time: JiaZi.GENG_WU,
+  );
+  final dtModel = DivinationDatetimeModel.standard(
+    uuid: uuid,
+    queryUuid: uuid,
+    timezoneStr: 'Asia/Beijing',
+    datetime: testDateTime,
+    bazi: bazi,
+    lunarMonth: 1,
+    lunarDay: 1,
+    jieQiInfo: JieQiInfo(
+      jieQi: TwentyFourJieQi.XIAO_HAN,
+      startAt: DateTime(1989, 12, 22),
+      endAt: DateTime(1990, 1, 6),
+    ),
+    isLeapMonth: false,
+    isSeersLocation: false,
+    location: Location(
+      address: Address(
+        countryName: 'China',
+        countryId: 45,
+        regionId: 11,
+        province: GeoLocation(
+          name: 'Beijing',
+          latitude: 39.9042,
+          longitude: 116.4074,
+          level: GeoLevel.province,
+          code: '11',
+          parentCode: '0',
+        ),
+        timezone: 'Asia/Beijing',
+      ),
+    ),
+  );
+
+  return DivinationInfoModel(
+    divination: DivinationRequestInfoDataModel(
+      uuid: uuid,
+      createdAt: testDateTime,
+      divinationTypeUuid: 'qizhengsiyu-devinit',
+    ),
+    divinationDatetime: DatatimeDivinationDetailsDataModel(
+      uuid: uuid,
+      createdAt: testDateTime,
+      timingType: DateTimeType.solar,
+      datetime: testDateTime,
+      lunarMonth: 1,
+      isLeapMonth: false,
+      lunarDay: 1,
+      yearGanZhi: JiaZi.GENG_WU,
+      monthGanZhi: JiaZi.WU_ZI,
+      dayGanZhi: JiaZi.JIA_XU,
+      timeGanZhi: JiaZi.GENG_WU,
+      timingInfoUuid: uuid,
+      timingInfoListJson: [dtModel],
+    ),
+  );
+}
+
 /// 构造最小化的合法 ZhouTianModel（供 calculateUIStars 使用）
 ZhouTianModel _fakeZhouTianModel() => ZhouTianModel(
       systemType: CelestialCoordinateSystem.Ecliptic,
@@ -664,25 +732,27 @@ void main() {
     // ----------------------------------------------------------
     //
     // 背景（ORDER-QIZHENG-BEAUTY-VIEW-WIRING-FIX.md 一）：
-    // lib/presentation/pages/beauty_view_page.dart 的 devInit() 构造硬编码
-    // testObserver 后直接 await vm.calculate(testObserver)，从未调用
-    // vm.setLifeObserver(...)。而 Pipeline 分支的前置条件 _resolvedMoment
-    // 只在 setLifeObserver() 内部赋值（见 T-Q7-P2 的注释），导致真实页面
-    // 排盘恒不进入 Pipeline 分支，lastPipelineEvidence 恒为 null，也不落
-    // Record。
+    // lib/presentation/pages/beauty_view_page.dart 的 devInit() 此前构造
+    // 硬编码 testObserver 后直接 await vm.calculate(testObserver)，从未
+    // 调用 vm.setLifeObserver(...)。而 Pipeline 分支的前置条件
+    // _resolvedMoment 只在 setLifeObserver() 内部赋值（见 T-Q7-P2 的注
+    // 释），导致真实页面排盘恒不进入 Pipeline 分支，lastPipelineEvidence
+    // 恒为 null，也不落 Record。
     //
     // 本用例在 ViewModel 层原样复刻 devInit() 现有调用序列的全部字面量
     // （DateTime(1990,1,1,12,0) / 纬度 39.9042 / 经度 116.4074 / 时区
     // Asia/Beijing / 干支 GENG_WU-WU_ZI-JIA_XU-GENG_WU），断言排盘完成后
-    // lastPipelineEvidence 不应为 null —— 这是 devInit() 修复后的期望行为。
+    // lastPipelineEvidence 不应为 null。
     //
-    // 【红态说明】本提交刻意不调用 setLifeObserver，与 devInit() 现状保持
-    // 同步缺失，用以证明接线缺口；修复 devInit() 的同一个提交会同步在此处
-    // 补上与生产代码等价的 setLifeObserver 调用（两处 fixture 的时间/经
-    // 纬度/时区严格一致，不引入第二套数据）。
+    // 【绿态说明】本提交与 devInit() 的修复（补上 setLifeObserver 调用）
+    // 同步：下面的 setLifeObserver fixture 与
+    // beauty_view_page.dart::_buildDevInitDivinationInfo() 逐字段对应，
+    // 时间/经纬度/时区严格一致，不引入第二套数据。修复前（上一个提交）
+    // 本用例故意不调用 setLifeObserver，跑出红态：
+    // Expected: not null / Actual: <null>。
     test(
       'T-Q7-P3: 复刻 BeautyViewPage.devInit() 调用序列 → '
-      'lastPipelineEvidence 不应为 null（接线缺口修复前必然失败）',
+      'lastPipelineEvidence 不应为 null',
       () async {
         final spySave = _SpySaveUseCase();
 
@@ -718,7 +788,8 @@ void main() {
           timeGanZhi: JiaZi.GENG_WU, // 庚午时
         );
 
-        // 当前 devInit() 现状：不调用 setLifeObserver，直接 calculate。
+        // 与生产代码 devInit() 修复后一致：calculate 前先 setLifeObserver。
+        vm.setLifeObserver(_buildDevInitDivinationInfo(testDateTime));
         await vm.calculate(testObserver);
         await Future<void>.delayed(Duration.zero);
 
