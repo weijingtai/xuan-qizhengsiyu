@@ -10,9 +10,11 @@ import 'package:ai_core/services/ai_service_impl.dart';
 import 'package:ai_core/services/chat/chat_persistence_service.dart';
 import 'package:ai_core/services/llm/llm_service.dart' as ai_llm;
 import 'package:drift/drift.dart';
+import 'package:drift_flutter/drift_flutter.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_ai_toolkit/flutter_ai_toolkit.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'settings_provider.dart';
@@ -29,7 +31,14 @@ const _kChatSessionKey = 'companion_chat_session_uuid';
 /// 2. 创建或恢复一个持久化的 Chat Session
 /// 3. 提供 [recognizeCondition] 通过 xuan-ai Session LLM 将自然语言转换为格局条件 JSON
 class AiChatController extends ChangeNotifier {
-  final AiDatabase aiDb = AiDatabase();
+  final AiDatabase aiDb = AiDatabase(
+    driftDatabase(
+      name: 'companion_ai',
+      native: const DriftNativeOptions(
+        databaseDirectory: getApplicationSupportDirectory,
+      ),
+    ),
+  );
   late ai_llm.LlmService _llmService;
   late AiServiceImpl _aiService;
   late ChatPersistenceService _persistence;
