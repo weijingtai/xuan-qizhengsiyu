@@ -1,9 +1,9 @@
-import 'dart:io';
 import 'package:drift/drift.dart';
-import 'package:drift/native.dart';
+import 'package:drift_flutter/drift_flutter.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as p;
+import 'dart:io';
 import 'tables.dart';
 
 part 'drift_database.g.dart';
@@ -16,7 +16,23 @@ part 'drift_database.g.dart';
   GeJuCategories,
 ])
 class AppDatabase extends _$AppDatabase {
-  AppDatabase([QueryExecutor? e]) : super(e ?? _openDatabase());
+  AppDatabase([QueryExecutor? e])
+      : super(
+          e ??
+              driftDatabase(
+                name: 'ge_ju_database',
+                native: DriftNativeOptions(
+                  databaseDirectory: () async {
+                    final docsDir = await getApplicationDocumentsDirectory();
+                    final dbFile = File(p.join(docsDir.path, 'ge_ju_database.sqlite'));
+                    // 每次启动从 assets 覆盖，保持初始数据完整
+                    final data = await rootBundle.load('assets/ge_ju_database.sqlite');
+                    await dbFile.writeAsBytes(data.buffer.asUint8List());
+                    return docsDir;
+                  },
+                ),
+              ),
+        );
 
   @override
   int get schemaVersion => 3;
@@ -105,15 +121,3 @@ class AppDatabase extends _$AppDatabase {
       );
 }
 
-QueryExecutor _openDatabase() {
-  return LazyDatabase(() async {
-    final docsDir = await getApplicationDocumentsDirectory();
-    final dbFile = File(p.join(docsDir.path, 'ge_ju_database.sqlite'));
-
-    // 每次启动都从 assets 覆盖，以 assets 版本为唯一数据源
-    final data = await rootBundle.load('assets/ge_ju_database.sqlite');
-    await dbFile.writeAsBytes(data.buffer.asUint8List());
-
-    return NativeDatabase(dbFile);
-  });
-}

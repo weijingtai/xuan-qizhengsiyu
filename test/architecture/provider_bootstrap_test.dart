@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Page;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
 import 'package:drift/native.dart';
+import 'package:repository_contract_kernel/repository_contract_kernel.dart';
 import 'package:qizhengsiyu/di.dart';
 import 'package:qizhengsiyu/qizhengsiyu_storage_dependencies.dart';
 import 'package:qizhengsiyu/data/datasources/local/app_database.dart';
@@ -161,6 +162,28 @@ class FakeQiZhengSiYuPanRepository implements IQiZhengSiYuPanRepository {
 
   @override
   Future<int> cleanupExpiredData({int daysOld = 30}) async => 0;
+
+  // L0 Kernel Slice methods
+  @override
+  Future<Result<QiZhengSiYuPanContract?>> get(String id, RequestContext ctx) async => const Ok(null);
+  @override
+  Future<Result<bool>> exists(String id, RequestContext ctx) async => const Ok(false);
+  @override
+  Future<Result<Rev>> put(QiZhengSiYuPanContract entity, RequestContext ctx, {Precondition pre = const Unconditional()}) async => Ok(Rev(entity.uuid));
+  @override
+  Future<Result<Page<QiZhengSiYuPanContract>>> query(Map<String, Object?> spec, PageRequest page, RequestContext ctx) async => const Ok(Page(items: []));
+  @override
+  Future<Result<int>> count(Map<String, Object?> spec, RequestContext ctx) async => const Ok(0);
+  @override
+  Future<Result<void>> softDelete(String id, RequestContext ctx, {Precondition pre = const Unconditional()}) async => const Ok(null);
+  @override
+  Future<Result<void>> restore(String id, RequestContext ctx) async => const Ok(null);
+  @override
+  Future<Result<QiZhengSiYuPanContract?>> getIncludingDeleted(String id, RequestContext ctx) async => const Ok(null);
+  @override
+  Future<Result<BatchOutcome<String>>> putAll(List<QiZhengSiYuPanContract> entities, RequestContext ctx) async => const Ok(BatchOutcome([]));
+  @override
+  Future<Result<R>> inTransaction<R>(Future<R> Function() body) async => Ok(await body());
 }
 
 class FakeGeJuRepository implements IGeJuRepository {
@@ -235,6 +258,12 @@ class FakeGeJuRepository implements IGeJuRepository {
 
   @override
   Future<List<GeJuRuleContract>> loadUserRules() async => const [];
+
+  // L0 Kernel Slice methods
+  @override
+  Future<Result<Page<GeJuRuleContract>>> query(Map<String, Object?> spec, PageRequest page, RequestContext ctx) async => const Ok(Page(items: []));
+  @override
+  Future<Result<int>> count(Map<String, Object?> spec, RequestContext ctx) async => const Ok(0);
 }
 
 class FakeGeJuBuiltInDataSource implements GeJuBuiltInDataSource {
@@ -343,4 +372,28 @@ class FakeQiZhengRecordRepository implements QiZhengRecordRepository {
 
   @override
   Stream<List<QiZhengSiYuPanContract>> watchAllRecords() => Stream.value(const []);
+
+  // L0 Kernel Slice methods
+  @override
+  Future<Result<QiZhengSiYuPanContract?>> get(String id, RequestContext ctx) async => const Ok(null);
+  @override
+  Future<Result<bool>> exists(String id, RequestContext ctx) async => const Ok(false);
+  @override
+  Future<Result<Rev>> put(QiZhengSiYuPanContract entity, RequestContext ctx, {Precondition pre = const Unconditional()}) async => Ok(Rev(entity.uuid));
+  @override
+  Future<Result<Page<QiZhengSiYuPanContract>>> query(Map<String, Object?> spec, PageRequest page, RequestContext ctx) async => const Ok(Page(items: []));
+  @override
+  Future<Result<int>> count(Map<String, Object?> spec, RequestContext ctx) async => const Ok(0);
+  @override
+  Future<Result<void>> softDelete(String id, RequestContext ctx, {Precondition pre = const Unconditional()}) async => const Ok(null);
+  @override
+  Future<Result<void>> restore(String id, RequestContext ctx) async => const Ok(null);
+  @override
+  Future<Result<QiZhengSiYuPanContract?>> getIncludingDeleted(String id, RequestContext ctx) async => const Ok(null);
+  @override
+  Stream<Result<List<QiZhengSiYuPanContract>>> watch(Map<String, Object?> spec, RequestContext ctx) => Stream.value(const Ok([]));
+  @override
+  Future<Result<BatchOutcome<String>>> putAll(List<QiZhengSiYuPanContract> entities, RequestContext ctx) async => const Ok(BatchOutcome([]));
+  @override
+  Future<Result<R>> inTransaction<R>(Future<R> Function() body) async => Ok(await body());
 }

@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:metaphysics_core/enums.dart';
+import 'package:repository_contract_kernel/repository_contract_kernel.dart';
 import 'package:qizhengsiyu/domain/repositories/ge_ju_repository_adapter.dart';
 import 'package:qizhengsiyu/domain/entities/models/base_panel_model.dart';
 import 'package:qizhengsiyu/domain/entities/models/body_life_model.dart';
@@ -37,6 +38,9 @@ class FakeGeJuRepo implements IGeJuRepository {
   @override Future<Map<String, List<GeJuAnnotationContract>>> loadAllAnnotationsGrouped() async => const {};
   @override Future<List<GeJuRuleContract>> loadBuiltInRules() async => const [];
   @override Future<List<GeJuRuleContract>> loadUserRules() async => const [];
+  // L0 Kernel Slice methods
+  @override Future<Result<Page<GeJuRuleContract>>> query(Map<String, Object?> spec, PageRequest page, RequestContext ctx) async => const Ok(Page(items: []));
+  @override Future<Result<int>> count(Map<String, Object?> spec, RequestContext ctx) async => const Ok(0);
 }
 
 BasePanelModel _emptyPanel() {

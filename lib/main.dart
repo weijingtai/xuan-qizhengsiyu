@@ -73,10 +73,13 @@ void main() async {
   
   final bootstrapStore = DriftScopeBootstrapStore(newDb);
   final ledger = DriftScopeLedger(db: newDb, bootstrapStore: bootstrapStore);
+  // No-op handover service for example app (qizhengsiyu has no scoped databases).
+  final handoverService = _NoOpScopeHandoverService();
   final resolver = ScopeResolver(
     sessionRepository: sessionRepo,
     identityLinkRepository: identityLinkRepo,
     ledger: ledger,
+    handoverService: handoverService,
   );
   final resolvedScope = await resolver.resolve();
   final scopeUid = resolvedScope.scopeUid;
@@ -570,4 +573,13 @@ class _TempLayoutDelegate extends MultiChildLayoutDelegate {
       oldDelegate.itemCount != itemCount ||
       oldDelegate.radius != radius ||
       oldDelegate.itemSize != itemSize;
+}
+
+/// No-op scope handover service for the example app.
+class _NoOpScopeHandoverService implements ScopeHandoverService {
+  @override
+  Future<void> handover({
+    required String fromScope,
+    required String toScope,
+  }) async {}
 }

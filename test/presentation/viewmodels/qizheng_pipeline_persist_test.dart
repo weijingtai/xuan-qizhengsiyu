@@ -59,6 +59,7 @@ import 'package:qizhengsiyu/enums/enum_twelve_gong.dart';
 import 'package:qizhengsiyu/presentation/viewmodels/qi_zheng_si_yu_viewmodel.dart';
 import 'package:repository_interface_divination_pipeline/repository_interface_divination_pipeline.dart';
 import 'package:repository_interface_qizhengsiyu/repository_interface_qizhengsiyu.dart';
+import 'package:repository_contract_kernel/repository_contract_kernel.dart';
 import 'package:xuan_time_location/xuan_time_location.dart';
 import 'package:timezone/data/latest_all.dart' as tz_data;
 
@@ -536,6 +537,30 @@ class _NoOpPanRepo implements IQiZhengSiYuPanRepository {
   Future<void> saveBatch(List<QiZhengSiYuPanContract> contracts) async {}
   @override
   Future<int> cleanupExpiredData({int daysOld = 30}) async => 0;
+
+  // L0 Kernel methods
+  @override
+  Future<Result<QiZhengSiYuPanContract?>> get(String id, RequestContext ctx) async => const Ok(null);
+  @override
+  Future<Result<bool>> exists(String id, RequestContext ctx) async => const Ok(false);
+  @override
+  Future<Result<Rev>> put(QiZhengSiYuPanContract entity, RequestContext ctx, {Precondition pre = const Unconditional()}) async => const Ok(Rev('v1'));
+  @override
+  Future<Result<Page<QiZhengSiYuPanContract>>> query(Map<String, Object?> spec, PageRequest page, RequestContext ctx) async => const Ok(Page(items: []));
+  @override
+  Future<Result<int>> count(Map<String, Object?> spec, RequestContext ctx) async => const Ok(0);
+  @override
+  Stream<Result<List<QiZhengSiYuPanContract>>> watch(Map<String, Object?> spec, RequestContext ctx) => const Stream.empty();
+  @override
+  Future<Result<BatchOutcome<String>>> putAll(List<QiZhengSiYuPanContract> entities, RequestContext ctx) async => const Ok(BatchOutcome([]));
+  @override
+  Future<Result<R>> inTransaction<R>(Future<R> Function() body) async => Ok(await body());
+  @override
+  Future<Result<void>> softDelete(String id, RequestContext ctx, {Precondition pre = const Unconditional()}) async => const Ok(null);
+  @override
+  Future<Result<void>> restore(String id, RequestContext ctx) async => const Ok(null);
+  @override
+  Future<Result<QiZhengSiYuPanContract?>> getIncludingDeleted(String id, RequestContext ctx) async => const Ok(null);
 }
 
 /// 空实现的 Record 仓储
@@ -549,8 +574,31 @@ class _NoOpRecordRepo implements QiZhengRecordRepository {
   @override
   Future<bool> softDeleteRecord(String uuid) async => false;
   @override
-  Stream<List<QiZhengSiYuPanContract>> watchAllRecords() =>
-      const Stream.empty();
+  Stream<List<QiZhengSiYuPanContract>> watchAllRecords() => const Stream.empty();
+
+  // L0 Kernel methods
+  @override
+  Future<Result<QiZhengSiYuPanContract?>> get(String id, RequestContext ctx) async => const Ok(null);
+  @override
+  Future<Result<bool>> exists(String id, RequestContext ctx) async => const Ok(false);
+  @override
+  Future<Result<Rev>> put(QiZhengSiYuPanContract entity, RequestContext ctx, {Precondition pre = const Unconditional()}) async => const Ok(Rev('v1'));
+  @override
+  Future<Result<Page<QiZhengSiYuPanContract>>> query(Map<String, Object?> spec, PageRequest page, RequestContext ctx) async => const Ok(Page(items: []));
+  @override
+  Future<Result<int>> count(Map<String, Object?> spec, RequestContext ctx) async => const Ok(0);
+  @override
+  Stream<Result<List<QiZhengSiYuPanContract>>> watch(Map<String, Object?> spec, RequestContext ctx) => const Stream.empty();
+  @override
+  Future<Result<BatchOutcome<String>>> putAll(List<QiZhengSiYuPanContract> entities, RequestContext ctx) async => const Ok(BatchOutcome([]));
+  @override
+  Future<Result<R>> inTransaction<R>(Future<R> Function() body) async => Ok(await body());
+  @override
+  Future<Result<void>> softDelete(String id, RequestContext ctx, {Precondition pre = const Unconditional()}) async => const Ok(null);
+  @override
+  Future<Result<void>> restore(String id, RequestContext ctx) async => const Ok(null);
+  @override
+  Future<Result<QiZhengSiYuPanContract?>> getIncludingDeleted(String id, RequestContext ctx) async => const Ok(null);
 }
 
 /// 落库 Spy：记录调用次数和最后一次 panelModel

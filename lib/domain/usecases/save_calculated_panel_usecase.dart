@@ -1,5 +1,6 @@
 import 'package:metaphysics_core/datamodel/divination_request_info_datamodel.dart';
 import 'package:metaphysics_core/models/divination_datetime.dart';
+import 'package:repository_contract_kernel/repository_contract_kernel.dart';
 import 'package:uuid/uuid.dart';
 
 import 'package:repository_interface_qizhengsiyu/repository_interface_qizhengsiyu.dart';
@@ -9,6 +10,7 @@ import '../entities/models/panel_config.dart';
 
 class SaveCalculatedPanelUseCase {
   final Uuid _uuid = const Uuid();
+  final RequestContext _ctx = RequestContext(scopeUid: 'local-anonymous');
   IQiZhengSiYuPanRepository qiZhengSiYuPanRepository;
   QiZhengRecordRepository recordRepository;
 
@@ -41,8 +43,16 @@ class SaveCalculatedPanelUseCase {
         panelModel: basicPanelModel,
         divinationDatetimeModel: divinationDatetimeModel,
       );
-      await qiZhengSiYuPanRepository.save(entity.toContract());
-      await recordRepository.saveRecord(entity.toContract());
+      final panResult = await qiZhengSiYuPanRepository.put(entity.toContract(), _ctx);
+      switch (panResult) {
+        case Ok(): break;
+        case Err(:final error): throw error;
+      }
+      final recResult = await recordRepository.put(entity.toContract(), _ctx);
+      switch (recResult) {
+        case Ok(): break;
+        case Err(:final error): throw error;
+      }
       return entity;
     } catch (e) {
       throw SavePanelException('保存面板数据失败: $e');
@@ -59,8 +69,11 @@ class SaveCalculatedPanelUseCase {
   }) async {
     try {
       final now = DateTime.now();
-      QiZhengSiYuPanContract? oldContract =
-          await qiZhengSiYuPanRepository.findByUuid(uuid);
+      final getResult = await qiZhengSiYuPanRepository.get(uuid, _ctx);
+      final oldContract = switch (getResult) {
+        Ok(:final value) => value,
+        Err(:final error) => throw error,
+      };
       if (oldContract == null) {
         return false;
       }
@@ -71,7 +84,11 @@ class SaveCalculatedPanelUseCase {
         divinationDatetimeModel: divinationDatetimeModel,
         lastUpdatedAt: now,
       );
-      await qiZhengSiYuPanRepository.update(updatedEntity.toContract());
+      final putResult = await qiZhengSiYuPanRepository.put(updatedEntity.toContract(), _ctx);
+      switch (putResult) {
+        case Ok(): break;
+        case Err(:final error): throw error;
+      }
       return true;
     } catch (e) {
       throw SavePanelException('更新面板数据失败: $e');
@@ -81,7 +98,11 @@ class SaveCalculatedPanelUseCase {
   /// 根据UUID获取面板数据
   Future<QiZhengSiYuPanEntity?> getByUuid(String uuid) async {
     try {
-      final contract = await qiZhengSiYuPanRepository.findByUuid(uuid);
+      final getResult = await qiZhengSiYuPanRepository.get(uuid, _ctx);
+      final contract = switch (getResult) {
+        Ok(:final value) => value,
+        Err(:final error) => throw error,
+      };
       if (contract == null) return null;
       return QiZhengSiYuPanEntity.fromContract(contract);
     } catch (e) {
@@ -93,8 +114,14 @@ class SaveCalculatedPanelUseCase {
   Future<List<QiZhengSiYuPanEntity>> getByDivinationUuid(
       String divinationUuid) async {
     try {
-      final contracts =
-          await qiZhengSiYuPanRepository.findByDivinationUuid(divinationUuid);
+      final queryResult = await qiZhengSiYuPanRepository.query(
+          {'divination_uuid': divinationUuid},
+          PageRequest(limit: 100),
+          _ctx);
+      final contracts = switch (queryResult) {
+        Ok(:final value) => value.items,
+        Err(:final error) => throw error,
+      };
       return contracts.map(QiZhengSiYuPanEntity.fromContract).toList();
     } catch (e) {
       throw SavePanelException('根据占卜UUID获取面板数据失败: $e');
@@ -104,11 +131,19 @@ class SaveCalculatedPanelUseCase {
   /// 删除面板数据
   Future<int> delete(String uuid) async {
     try {
-      final isExist = await qiZhengSiYuPanRepository.existsByUuid(uuid);
+      final existResult = await qiZhengSiYuPanRepository.exists(uuid, _ctx);
+      final isExist = switch (existResult) {
+        Ok(:final value) => value,
+        Err(:final error) => throw error,
+      };
       if (!isExist) {
         return 0;
       }
-      await qiZhengSiYuPanRepository.delete(uuid);
+      final delResult = await qiZhengSiYuPanRepository.softDelete(uuid, _ctx);
+      switch (delResult) {
+        case Ok(): break;
+        case Err(:final error): throw error;
+      }
       return 1;
     } catch (e) {
       throw SavePanelException('删除面板数据失败: $e');

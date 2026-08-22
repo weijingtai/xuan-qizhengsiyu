@@ -1,3 +1,4 @@
+import 'package:repository_contract_kernel/repository_contract_kernel.dart';
 import 'package:repository_interface_qizhengsiyu/repository_interface_qizhengsiyu.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_annotation.dart';
 import 'package:qizhengsiyu/domain/entities/models/ge_ju/ge_ju_condition_set.dart';
@@ -156,15 +157,25 @@ class GeJuRepositoryAdapter implements GeJuProductRepository {
         MapEntry(key, value.map(geJuAnnotationFromContract).toList()));
   }
 
+  static final _ctx = RequestContext(scopeUid: 'local-anonymous');
+
   @override
   Future<List<GeJuRule>> loadBuiltInRules() async {
-    final contracts = await _port.loadBuiltInRules();
-    return contracts.map(geJuRuleFromContract).toList();
+    final result = await _port.query(
+        {"type": "builtin"}, PageRequest(limit: 100), _ctx);
+    return switch (result) {
+      Ok(:final value) => value.items.map(geJuRuleFromContract).toList(),
+      Err(:final error) => throw error,
+    };
   }
 
   @override
   Future<List<GeJuRule>> loadUserRules() async {
-    final contracts = await _port.loadUserRules();
-    return contracts.map(geJuRuleFromContract).toList();
+    final result = await _port.query(
+        {"type": "user"}, PageRequest(limit: 100), _ctx);
+    return switch (result) {
+      Ok(:final value) => value.items.map(geJuRuleFromContract).toList(),
+      Err(:final error) => throw error,
+    };
   }
 }

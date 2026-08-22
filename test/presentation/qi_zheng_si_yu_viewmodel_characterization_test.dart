@@ -4,6 +4,7 @@
 // initial state, UseCase delegation, notifier state, disposal, calculation.
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:repository_contract_kernel/repository_contract_kernel.dart';
 import 'package:metaphysics_core/datamodel/datetime_divination_datamodel.dart';
 import 'package:metaphysics_core/datamodel/divination_request_info_datamodel.dart';
 import 'package:metaphysics_core/datamodel/geo_location.dart';
@@ -227,6 +228,9 @@ class _FakeGeJuRepo implements IGeJuRepository {
   @override Future<Map<String, List<GeJuAnnotationContract>>> loadAllAnnotationsGrouped() async => const {};
   @override Future<List<GeJuRuleContract>> loadBuiltInRules() async => const [];
   @override Future<List<GeJuRuleContract>> loadUserRules() async => const [];
+  // L0 Kernel Slice methods
+  @override Future<Result<Page<GeJuRuleContract>>> query(Map<String, Object?> spec, PageRequest page, RequestContext ctx) async => const Ok(Page(items: []));
+  @override Future<Result<int>> count(Map<String, Object?> spec, RequestContext ctx) async => const Ok(0);
 }
 
 QiZhengSiYuViewModel _createViewModel() {

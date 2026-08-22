@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:repository_contract_kernel/repository_contract_kernel.dart';
 import 'package:repository_interface_qizhengsiyu/repository_interface_qizhengsiyu.dart'
     hide GeJuBuiltInDataSource;
 import 'package:qizhengsiyu/data/datasources/local/daos/ge_ju_dao.dart';
@@ -45,6 +46,35 @@ class GeJuRepositoryImpl implements IGeJuRepository {
   })  : _builtInDataSource = builtInDataSource,
         _dao = dao,
         _migrator = GeJuLegacyMigrator(dao: dao);
+
+  // ══════════════════════════════════════════
+  // Queryable 实现 (L0 切片)
+  // ══════════════════════════════════════════
+
+  @override
+  Future<Result<Page<GeJuRuleContract>>> query(
+      Map<String, Object?> spec, PageRequest page, RequestContext ctx) async {
+    await _ensureMigrated();
+    final type = spec['type'] as String?;
+    List<GeJuRuleContract> items;
+    if (type == 'builtin') {
+      items = await loadBuiltInRules();
+    } else if (type == 'user') {
+      items = await loadUserRules();
+    } else {
+      items = await loadAllRules();
+    }
+    return Ok(Page(items: items));
+  }
+
+  @override
+  Future<Result<int>> count(Map<String, Object?> spec, RequestContext ctx) async {
+    final result = await query(spec, PageRequest(limit: 1000), ctx);
+    return switch (result) {
+      Ok(:final value) => Ok(value.items.length),
+      Err(:final error) => Err(error),
+    };
+  }
 
   // ══════════════════════════════════════════
   // Rule 操作

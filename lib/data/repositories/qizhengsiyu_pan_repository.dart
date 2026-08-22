@@ -1,3 +1,4 @@
+import 'package:repository_contract_kernel/repository_contract_kernel.dart';
 import 'package:repository_interface_qizhengsiyu/repository_interface_qizhengsiyu.dart';
 import '../../domain/entities/models/pan_entity.dart';
 import '../datasources/local/app_database.dart';
@@ -243,6 +244,153 @@ class QiZhengSiYuPanRepository implements IQiZhengSiYuPanRepository {
       return deletedCount;
     } catch (e) {
       throw RepositoryException('清理过期数据失败: $e');
+    }
+  }
+
+  // ══════════════════════════════════════════
+  // L0 Kernel Slice 实现
+  // ══════════════════════════════════════════
+
+  @override
+  Future<Result<QiZhengSiYuPanContract?>> get(String id, RequestContext ctx) async {
+    try {
+      final entity = await _localStorage.getPanByUuid(id);
+      return Ok(entity?.toContract());
+    } catch (e) {
+      return Err(XuanError(code: ErrorCode.internal, message: '获取盘数据失败: $e'));
+    }
+  }
+
+  @override
+  Future<Result<bool>> exists(String id, RequestContext ctx) async {
+    try {
+      final entity = await _localStorage.getPanByUuid(id);
+      return Ok(entity != null);
+    } catch (e) {
+      return Err(XuanError(code: ErrorCode.internal, message: '检查存在性失败: $e'));
+    }
+  }
+
+  @override
+  Future<Result<Rev>> put(QiZhengSiYuPanContract entity, RequestContext ctx,
+      {Precondition pre = const Unconditional()}) async {
+    try {
+      final e = QiZhengSiYuPanEntity.fromContract(entity);
+      // Check if exists for conditional writes
+      if (pre is! Unconditional) {
+        final existing = await _localStorage.getPanByUuid(entity.uuid);
+        final state = existing == null
+            ? EntityState.absent
+            : (existing.deletedAt != null ? EntityState.softDeleted : EntityState.live);
+        final currentRev = existing?.uuid;
+        final check = evaluatePrecondition(pre, state, currentRev: currentRev);
+        if (check is Err) return check.map((_) => Rev(''));
+      }
+      final existing = await _localStorage.getPanByUuid(entity.uuid);
+      if (existing == null) {
+        await _localStorage.insertPan(e);
+      } else {
+        await _localStorage.updatePan(e);
+      }
+      return Ok(Rev(entity.uuid));
+    } catch (e) {
+      return Err(XuanError(code: ErrorCode.internal, message: '保存盘数据失败: $e'));
+    }
+  }
+
+  @override
+  Future<Result<Page<QiZhengSiYuPanContract>>> query(
+      Map<String, Object?> spec, PageRequest page, RequestContext ctx) async {
+    try {
+      final isDeleted = spec['is_deleted'] as bool?;
+      List<dynamic> entities;
+      if (isDeleted == false) {
+        entities = await _localStorage.getAllActivePans();
+      } else {
+        entities = await _localStorage.getAllActivePans();
+      }
+      final items = entities.map((e) => (e as dynamic).toContract() as QiZhengSiYuPanContract).toList();
+      return Ok(Page(items: items));
+    } catch (e) {
+      return Err(XuanError(code: ErrorCode.internal, message: '查询失败: $e'));
+    }
+  }
+
+  @override
+  Future<Result<int>> count(Map<String, Object?> spec, RequestContext ctx) async {
+    try {
+      final total = await _localStorage.getPansCount();
+      return Ok(total);
+    } catch (e) {
+      return Err(XuanError(code: ErrorCode.internal, message: '计数失败: $e'));
+    }
+  }
+
+  @override
+  Future<Result<void>> softDelete(String id, RequestContext ctx,
+      {Precondition pre = const Unconditional()}) async {
+    try {
+      final existing = await _localStorage.getPanByUuid(id);
+      if (pre is! Unconditional) {
+        final state = existing == null
+            ? EntityState.absent
+            : (existing.deletedAt != null ? EntityState.softDeleted : EntityState.live);
+        final currentRev = existing?.uuid;
+        final check = evaluatePrecondition(pre, state, currentRev: currentRev);
+        if (check is Err) return check;
+      }
+      await _localStorage.softDeletePan(id);
+      return const Ok(null);
+    } catch (e) {
+      return Err(XuanError(code: ErrorCode.internal, message: '删除盘数据失败: $e'));
+    }
+  }
+
+  @override
+  Future<Result<void>> restore(String id, RequestContext ctx) async {
+    try {
+      final entity = await _localStorage.getPanByUuid(id);
+      if (entity == null) {
+        return Err(XuanError(code: ErrorCode.notFound, message: '记录不存在: $id'));
+      }
+      // restore = clear deletedAt
+      final restored = entity.copyWith(deletedAt: null as DateTime?);
+      await _localStorage.updatePan(restored);
+      return const Ok(null);
+    } catch (e) {
+      return Err(XuanError(code: ErrorCode.internal, message: '恢复失败: $e'));
+    }
+  }
+
+  @override
+  Future<Result<QiZhengSiYuPanContract?>> getIncludingDeleted(
+      String id, RequestContext ctx) async {
+    try {
+      final entity = await _localStorage.getPanByUuid(id);
+      return Ok(entity?.toContract());
+    } catch (e) {
+      return Err(XuanError(code: ErrorCode.internal, message: '查询失败: $e'));
+    }
+  }
+
+  @override
+  Future<Result<BatchOutcome<String>>> putAll(
+      List<QiZhengSiYuPanContract> entities, RequestContext ctx) async {
+    final results = <({String id, Result<Rev> result})>[];
+    for (final entity in entities) {
+      final r = await put(entity, ctx);
+      results.add((id: entity.uuid, result: r));
+    }
+    return Ok(BatchOutcome(results));
+  }
+
+  @override
+  Future<Result<R>> inTransaction<R>(Future<R> Function() body) async {
+    try {
+      final result = await body();
+      return Ok(result);
+    } catch (e) {
+      return Err(XuanError(code: ErrorCode.internal, message: '事务失败: $e'));
     }
   }
 }

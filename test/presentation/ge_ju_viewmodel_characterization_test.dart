@@ -4,6 +4,7 @@
 // initial state, loadRules, filtering, error handling.
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:repository_contract_kernel/repository_contract_kernel.dart';
 import 'package:qizhengsiyu/domain/repositories/ge_ju_repository_adapter.dart';
 import 'package:qizhengsiyu/domain/services/ge_ju_crud_service.dart';
 import 'package:qizhengsiyu/presentation/viewmodels/ge_ju_list_viewmodel.dart';
@@ -67,6 +68,9 @@ class _FakeGeJuRepo implements IGeJuRepository {
   @override
   Future<List<GeJuRuleContract>> loadUserRules() async =>
       rules.where((r) => !r.id.startsWith('builtin_')).toList();
+  // L0 Kernel Slice methods
+  @override Future<Result<Page<GeJuRuleContract>>> query(Map<String, Object?> spec, PageRequest page, RequestContext ctx) async => Ok(Page(items: rules));
+  @override Future<Result<int>> count(Map<String, Object?> spec, RequestContext ctx) async => Ok(rules.length);
 }
 
 /// Repo that throws on loadAllRules for error path testing.
@@ -120,6 +124,9 @@ class _ThrowingGeJuRepo implements IGeJuRepository {
   Future<List<GeJuRuleContract>> loadBuiltInRules() async => const [];
   @override
   Future<List<GeJuRuleContract>> loadUserRules() async => const [];
+  // L0 Kernel Slice methods
+  @override Future<Result<Page<GeJuRuleContract>>> query(Map<String, Object?> spec, PageRequest page, RequestContext ctx) async => const Ok(Page(items: []));
+  @override Future<Result<int>> count(Map<String, Object?> spec, RequestContext ctx) async => const Ok(0);
 }
 
 GeJuRuleContract _makeRule(String id, String name) =>
